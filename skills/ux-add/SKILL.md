@@ -72,6 +72,12 @@ What to avoid copying.
 
 Rating: 5 best-in-class · 4 strong · 3 solid reference. Don't add anything below 3.
 
+- `captured_by`: the person who supplied the reference (ask if unknown), not "Claude".
+- Add `needs_capture: true` whenever the images are not a live capture of the site
+  (a user screenshot, a photo of a screen, a crop from a video). Remove it after a live capture.
+- Split one source into several entries, one per pattern, and list the siblings under a
+  `## Related entries` heading in each.
+
 ## 6. Publish
 ```bash
 npm run catalog            # regenerates catalog.json, CATALOG.md, gallery/data.js

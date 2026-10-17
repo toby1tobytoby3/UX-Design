@@ -121,7 +121,7 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const stars = (n) => '★'.repeat(n || 0);
   const tagsOf = (e) => Array.isArray(e.tags) ? e.tags : [];
-  const isCaptured = (e) => e.images.some((i) => !/\/preview\.\w+$/.test(i));
+  const isCaptured = (e) => !e.needs_capture && e.images.some((i) => !/\/preview\.\w+$/.test(i));
 
   const activeTags = new Set();
   const uniq = (arr) => [...new Set(arr)].filter(Boolean).sort();
@@ -171,7 +171,7 @@
         <div class="body">
           <h3>${esc(e.title)}</h3>
           <div class="meta"><span class="pill">${esc(e.pattern)}</span><span>${esc(e.source_site)}</span><span class="stars" aria-label="${e.rating} stars">${stars(e.rating)}</span>
-          ${isCaptured(e) ? '' : '<span class="pill warn">preview only</span>'}${e.has_example ? '<span class="pill ok">code</span>' : ''}</div>
+          ${isCaptured(e) ? '' : `<span class="pill warn">${e.images.every((i) => /\/preview\.\w+$/.test(i)) ? 'preview only' : 'needs capture'}</span>`}${e.has_example ? '<span class="pill ok">code</span>' : ''}</div>
         </div>`;
       card.onclick = () => open(e);
       $('grid').append(card);

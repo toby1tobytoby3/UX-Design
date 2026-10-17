@@ -11,6 +11,7 @@ more entries would use it.
 | navigation | Top nav, sticky headers, mobile menus |
 | mega-menu | Large dropdown navigation with grouped links/previews |
 | feature-grid | Feature sections, bento grids, alternating feature rows |
+| content-grid | Galleries and collections of browsable items: thumbnail grids, card lists, featured item + grid |
 | social-proof | Logo clouds, testimonials, stats, case-study strips |
 | pricing-table | Plan comparison, billing toggles, feature matrices |
 | cta-section | Closing call-to-action blocks, newsletter capture |
