@@ -1305,6 +1305,73 @@
     "body": "## Verdict\n**Good-looking and accessible, but heavy and open-core.** The community edition is MIT, but zoom, the\nnavigator and several series types are Enterprise (paid), so it isn't a full free option. Pick it mainly if\nyou already use AG Grid. Otherwise ECharts or Recharts cover the same ground more cheaply.\n\n## Benchmark\nAll 4 charts drawn. **412.8 KB gz**, the heaviest in the benchmark, even registering only the 7 modules\nneeded (v14 requires `ModuleRegistry.registerModules`, and charts fail with \"No modules have been\nregistered\" otherwise). Canvas. Time series has no zoom in the community edition. Code: `bench/libs/ag.js`.\n\nFound in the benchmark:\n- Keyboard-focusable chart region and legend on every chart, plus ARIA (\"chart, 1 series\", legend items). This is among the best built-in accessibility tested.\n- Default number axis shows \"10000\", not \"10k\". Set `label.formatter`.\n- Default palette fails lightness and chroma (includes a pure grey, `#b5b5b5`) and is only borderline for colour-blind separation. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished labels, callouts and legends |\n| Interactivity | 3 | Tooltips and legend toggling; zoom and navigator are Enterprise |\n| Coverage | 3 | Community series cover bar, line, area, scatter, bubble, pie, donut, histogram; more are Enterprise |\n| Accessibility | 4 | Built-in keyboard focus and ARIA (screen-reader output not tested here) |\n| Performance | 4 | Canvas renderer |\n| React/Next fit | 4 | Official `ag-charts-react` wrapper, declarative options |\n| Bundle size | 1 | 412.8 KB gz |\n| Licence & health | 3 | Actively released (v14.2, Sept 2026), but key features paywalled |"
   },
   {
+    "id": "sources/ai-sdk-ui",
+    "kind": "source",
+    "title": "Vercel AI SDK UI (useChat)",
+    "pattern": "ai-chat",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "chat",
+      "streaming",
+      "open-source",
+      "headless",
+      "agents"
+    ],
+    "source_url": "https://ai-sdk.dev/docs/ai-sdk-ui",
+    "source_site": "ai-sdk.dev",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "ai 7.0.143 + @ai-sdk/react 4.0.147",
+    "licence": "Apache-2.0",
+    "s_look": 2,
+    "s_interact": 3,
+    "s_coverage": 4,
+    "s_a11y": 2,
+    "s_perf": 3,
+    "s_react": 5,
+    "s_bundle": 2,
+    "s_licence": 5,
+    "why_it_works": "The de facto streaming protocol and state hook for chat in React. Typed message parts carry text, tool calls with lifecycle states, approvals, sources and data, so every agent pattern has a home in the data model, and the UI stays entirely ours.",
+    "use_when": "The default foundation for any chat or agent UI in our Next app. Pair it with Streamdown for markdown and our own Tailwind components (or assistant-ui primitives) for the UI.",
+    "avoid_when": "You want finished chat UI out of the box; it ships none, so budget for building the message list, composer, controls and scroll behaviour.",
+    "alternatives": [
+      "assistant-ui",
+      "streamdown",
+      "copilotkit"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "kind": "ai-chat",
+      "bundle_gz_kb": 172.2,
+      "lib_only_gz_kb": 104.5,
+      "react_baseline_kb": 67.7,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "stream_script_ms": 22692,
+      "layout_shift": 0.001,
+      "raw_markdown_seen": [
+        "bold",
+        "link"
+      ],
+      "controls_built_in": [],
+      "live_region": false,
+      "evidence": "22.7 s script; raw bold/link seen mid-stream; controls: none"
+    },
+    "path": "sources/ai-sdk-ui",
+    "images": [
+      "sources/ai-sdk-ui/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The foundation to build on, not a chat UI.** `useChat` handles the stream, message state, stop, regenerate and tool\napprovals; you write every pixel. That suits our stack (Tailwind, no shadcn). Don't render with plain react-markdown:\nin our benchmark it was the slowest part of the chat. Use **Streamdown** (`sources/streamdown`), which is the same chat\nwith one component swapped.\n\n## Benchmark (same scripted turn as every other kit)\n4/4 tasks supported at the data level. Code: `benchai/libs/_aisdk-chat.jsx` + `benchai/libs/ai-sdk-ui.jsx`. Driven\noffline by a mock `ChatTransport` emitting the SDK's own UI message chunks (`text-delta`, `tool-input-available`,\n`tool-approval-request`, `source-url`…), so no API key. The server-side `needsApproval` path was not exercised.\n\n| Measure (4× CPU throttle) | Result |\n|---|---|\n| JS, library only | **104.5 KB gz** with react-markdown + remark-gfm (hook alone 52.8, react-markdown 46.5) |\n| Script time while streaming | 22.7 s, 3 long tasks (208 ms) |\n| Stream finished | 32.8 s for a turn the mock paces at ~11 s: rendering fell behind |\n| Layout shift | 0.001 |\n| Raw markdown seen mid-stream | yes: unclosed `**` in 5 of 213 samples, half-typed `[link](…` in 8 |\n| Follows the stream | no (nothing built in) |\n\nFound in the benchmark:\n- **Re-rendering the whole message through react-markdown on every chunk is the bottleneck**, not the SDK. The same\n  chat with Streamdown used 9.0 s of script and finished in 18.8 s. `experimental_throttle` on `useChat` is the other lever.\n- Tool approval works end to end in the hook: `addToolApprovalResponse` plus\n  `sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses` resumed the run after Approve.\n- Stop (`stop()`) halted the stream within one chunk (25 characters after the click); `regenerate()` replaces the\n  answer, it doesn't keep the old one as a branch.\n- No live region, scroll anchoring or composer label come with it: the accessibility result is whatever you write.\n  Our minimal chat passed axe with 0 violations but has no `aria-live`, and its composer is named only by its placeholder.\n\n## Coverage\n| Capability | Support |\n|---|---|\n| Streaming text | ✓ data (`text` parts, `status`) |\n| Stop / retry | ✓ functions (`stop`, `regenerate`); buttons are yours |\n| Edit / branch | ✗ (edit = `setMessages` + resend by hand; no branches) |\n| Attachments | ✓ data (`file` parts, `sendMessage({ files })`) |\n| Tool steps | ✓ typed `tool-<name>` parts with states (`input-streaming` → `output-available`) |\n| Approvals | ✓ `approval-requested` state + `addToolApprovalResponse` |\n| Citations | ✓ `source-url` / `source-document` parts |\n| Generative UI | ✓ render components from tool parts or `data-*` parts |\n| Scroll behaviour | ✗ (add `use-stick-to-bottom` or a turn-anchoring scroller) |\n\n## Styling with Tailwind\nNothing to override: it renders nothing. Vercel's own UI layer, **AI Elements**, is a shadcn registry and is being\nfolded into shadcn/ui (the ai-sdk.dev/elements banner says the project is deprecated at the end of November 2026;\nsee `research/E-agentic-ui.md`). Read its source for patterns; don't adopt it, since we don't use shadcn.\n\n## Weaknesses\n- No UI, no scroll model, no accessibility defaults: every chat built on it starts from zero.\n- No branching; regenerate overwrites.\n- Major versions move fast (v7 in 2026); pin and read the migration guides.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Hook only: no UI (rubric: hook-only kits score 2) |\n| Interactivity | 3 | Stop, regenerate and approvals as functions; no edit or branch |\n| Coverage | 4 | Data model covers all four bench tasks plus files and data parts; UI is yours |\n| Accessibility | 2 | Provides nothing; live region and labels are on you |\n| Performance | 3 | Hook is light; with react-markdown the stream fell 3× behind (fix: Streamdown or throttle) |\n| React/Next fit | 5 | Idiomatic hook, typed parts, built for Next route handlers |\n| Bundle size | 2 | 104.5 KB gz as benchmarked with react-markdown (52.8 hook alone) |\n| Licence & health | 5 | Apache-2.0, Vercel, released 2026-10-16 |"
+  },
+  {
     "id": "sources/animejs",
     "kind": "source",
     "title": "anime.js",
@@ -1427,6 +1494,79 @@
       "source.md"
     ],
     "body": "## Verdict\n**The most flexible toolkit for custom widgets, not the default.** It passed every check with zero axe violations\nand keeps the combobox name while open. But it covers few of the hard components, is still pre-1.0, and is largely\none maintainer's project.\n\n## Benchmark (same four components as every other library)\n4/4 components. **29/29 keyboard and ARIA checks**, **0 axe violations**. **53.3 KB gz** for the four components\n(React subtracted). Code: `benchui/libs/ariakit.jsx`, 49 lines.\n\nFound in the benchmark:\n- The modal dialog does **not** wrap Tab: after the last control, focus leaves to the browser UI (like native\n  `<dialog>`), while the page behind stays inert. That deviates from the APG on purpose; it passed our \"page behind\n  is unreachable\" check.\n- Combobox filtering is yours to write (a `setValue` callback plus `useMemo`), which is flexible but more code.\n- Tabs activate on arrow keys; menus have typeahead and Home/End.\n\n## Coverage of the hard components\n| Component | Available |\n|---|---|\n| Combobox / autocomplete | ✓ `Combobox` (also inside menus and selects) |\n| Date and time pickers | ✗ |\n| Toast | ✗ |\n| Tree | ✗ |\n| Table | ✗ |\n| Drag and drop | ✗ |\n| Also | Select, menubar, toolbar, hovercard, tooltip, composite and focus-trap building blocks |\n\n## Styling with Tailwind\nState is exposed through `aria-*` and `data-active-item`, `data-focus-visible`, `data-enter`/`data-leave`. The\n`render` prop composes your own element. Workable with Tailwind, but less uniform than Headless UI or Base UI.\n\n## Weaknesses\n- Pre-1.0 (0.4.x) and largely maintained by one person.\n- Few ready-made hard components; you build filtering and lists yourself.\n- Tab leaving the dialog surprises people who expect APG wrapping.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 4 | `data-active-item`, `data-focus-visible`, `render` prop |\n| Interactivity | 4 | Positioning, typeahead, nested menus, enter/leave states |\n| Coverage | 2 | 1 of 6 hard components (combobox) |\n| Accessibility | 5 | 29/29 checks, 0 axe violations, keeps the combobox name while open |\n| Performance | 3 | No virtualisation (not benchmarked) |\n| React/Next fit | 4 | Typed; store hooks are more verbose than part-based APIs |\n| Bundle size | 2 | 53.3 KB gz for the four components |\n| Licence & health | 4 | MIT, frequent releases (14 October 2026), but pre-1.0 and one main maintainer; ~1.4M weekly downloads |"
+  },
+  {
+    "id": "sources/assistant-ui",
+    "kind": "source",
+    "title": "assistant-ui",
+    "pattern": "ai-chat",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "chat",
+      "streaming",
+      "open-source",
+      "headless",
+      "agents",
+      "keyboard"
+    ],
+    "source_url": "https://www.assistant-ui.com",
+    "source_site": "assistant-ui.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.15.29",
+    "licence": "MIT",
+    "s_look": 2,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 3,
+    "s_perf": 2,
+    "s_react": 4,
+    "s_bundle": 1,
+    "s_licence": 5,
+    "why_it_works": "Unstyled, composable chat primitives (thread, composer, action bar, branch picker, tool and source slots) that already know the hard behaviours, including stop, retry as a new branch, edit, scroll-follow that lets go when you scroll up, and pause-for-approval, so you style them in Tailwind instead of rebuilding them.",
+    "use_when": "A real chat or agent surface in our app where we want branching, editing and tool/approval UI without writing the state machine, and we're happy to style primitives ourselves.",
+    "avoid_when": "A small embedded assistant where bundle size matters, or a team that only wants the shadcn-styled version (its styled layer is a shadcn registry).",
+    "alternatives": [
+      "ai-sdk-ui",
+      "copilotkit",
+      "llamaindex-chat-ui"
+    ],
+    "has_example": false,
+    "score": 6.8,
+    "rating": 3,
+    "bench": {
+      "kind": "ai-chat",
+      "bundle_gz_kb": 260.1,
+      "lib_only_gz_kb": 192.4,
+      "react_baseline_kb": 67.7,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "stream_script_ms": 37838,
+      "layout_shift": 0.001,
+      "raw_markdown_seen": [
+        "bold",
+        "link"
+      ],
+      "controls_built_in": [
+        "stop",
+        "retry",
+        "edit",
+        "branch"
+      ],
+      "live_region": false,
+      "evidence": "37.8 s script; raw bold/link seen mid-stream; controls: stop, retry, edit, branch"
+    },
+    "path": "sources/assistant-ui",
+    "images": [
+      "sources/assistant-ui/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The most complete chat behaviour, if you style it yourself.** It was the only kit to pass every control in the\nbenchmark: stop, retry that keeps the old answer as a branch (`‹ 2/2 ›`), edit, and a scroll that follows the stream\nbut stays put when you scroll up. Two costs: it's heavy (192 KB gz with its markdown), and its default markdown path\nwas the slowest renderer we measured. Swap in Streamdown for the text part.\n\n## Benchmark (same scripted turn as every other kit)\n4/4 tasks. Code: `benchai/libs/assistant-ui.jsx` (local runtime with a `ChatModelAdapter` streaming from the mock).\n\n| Measure (4× CPU throttle) | Result |\n|---|---|\n| JS, library only | **192.4 KB gz** including `@assistant-ui/react-markdown` |\n| Script time while streaming | 37.8 s, 59 long tasks (3.4 s) |\n| Stream finished | 53.8 s for a turn the mock paces at ~11 s |\n| Layout shift | 0.001 |\n| Raw markdown seen mid-stream | yes: unclosed `**` in 6 of 312 samples, half-typed links in 9 |\n| Follows the stream / lets go on scroll-up | yes / yes |\n\nFound in the benchmark:\n- **Controls all work out of the box:** `ComposerPrimitive.Cancel` stopped the run (130 characters still appeared from\n  its text-smoothing buffer before it settled); `ActionBarPrimitive.Reload` re-ran and kept the stopped answer as\n  branch 1 of 2; `ActionBarPrimitive.Edit` is there on user messages.\n- **Approval works, but on experimental options in the local runtime:** the tool must be listed in\n  `unstable_humanToolNames`, the adapter must end with `status: requires-action`, and the continuation reads the\n  paused message via `unstable_getMessage()`. With the AI SDK integration (`@assistant-ui/react-ai-sdk` 1.4.18) this\n  maps onto the SDK's own approvals instead (not benchmarked).\n- Tool calls and sources render through typed slots (`tools.by_name`, `Fallback`, `Source`): the kit decides when, you write the markup.\n- Main-thread cost was the highest of the five: markdown re-rendering plus smoothing. Use Streamdown as the `Text` component.\n- No live region by default; axe found 0 violations; Enter sends and Shift+Enter adds a line.\n\n## Coverage\n| Capability | Support |\n|---|---|\n| Streaming text | ✓ with optional smoothing |\n| Stop / retry / edit / branch | ✓ primitives for all four (retry creates a branch) |\n| Attachments | ✓ `AttachmentPrimitive`, `ComposerPrimitive.AddAttachment` |\n| Tool steps | ✓ per-tool render slots, `ChainOfThoughtPrimitive` |\n| Approvals | ✓ `addResult` / `respondToApproval` in tool UIs (local runtime: experimental options) |\n| Citations | ✓ `Source` part slot |\n| Generative UI | ✓ `GenerativeUI`, tool UIs, MCP Apps renderer |\n| Queued follow-ups | ✓ `QueueItemPrimitive` (not benchmarked) |\n| Scroll behaviour | ✓ follows, releases on user scroll, `ScrollToBottom` primitive |\n\n## Styling with Tailwind\nPrimitives are unstyled Radix-style components that take `className`, so Tailwind works directly; our bench used\nplain CSS. The ready-made styled thread (`npx assistant-ui add thread`) is a **shadcn registry**, which we don't use.\nDepends on zustand and `assistant-cloud` (the client for its optional paid cloud).\n\n## Weaknesses\n- Heaviest of the headless options (192 KB gz) and slowest default markdown path.\n- Pre-1.0 (0.15) with frequent releases and many APIs marked `unstable_`/experimental.\n- You build every visual yourself.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Unstyled primitives; styled layer is shadcn-only |\n| Interactivity | 5 | Stop, retry-as-branch, edit, copy, attachments, queue |\n| Coverage | 5 | All four bench tasks plus generative UI and chain of thought |\n| Accessibility | 3 | axe clean, keyboard send/stop, focusable controls; no live region by default |\n| Performance | 2 | 37.8 s script and 59 long tasks streaming the same answer; stream finished 5× behind pace |\n| React/Next fit | 4 | Idiomatic composable primitives; HITL on the local runtime relies on unstable options |\n| Bundle size | 1 | 192.4 KB gz |\n| Licence & health | 5 | MIT, released 2026-10-15, very active |"
   },
   {
     "id": "sources/auto-animate",
@@ -1615,6 +1755,75 @@
       "source.md"
     ],
     "body": "## Verdict\n**The strongest Radix successor, with a combobox caveat.** Clean API, excellent styling hooks, monthly releases since\n1.0 (December 2025). It passed 28 of 29 checks; the combobox loses its name while open, and it was the heaviest\nlibrary tested.\n\n## Benchmark (same four components as every other library)\n4/4 components. **28/29 keyboard and ARIA checks**, **1 axe violation**. **84.2 KB gz** for the four components\n(React subtracted), imported per component (`@base-ui/react/dialog` etc.). Code: `benchui/libs/base-ui.jsx`, 59 lines.\n\nFound in the benchmark:\n- **The combobox loses its accessible name while the list is open**, the same issue as Headless UI: the visible\n  `<label>` is `aria-hidden` while open, so Chrome reports an empty name.\n- `Combobox.Label` only labels a `Combobox.Trigger`. With `Combobox.Input` you need a native `<label>`; the\n  development build warns about this, but the wrong version looks fine.\n- Tabs use **manual activation** by default (arrows move focus, Enter or Space selects). The APG allows both.\n- The dialog moves focus back inside one tick after Tab (Floating UI focus guards); users won't notice.\n- The combobox filters `items` for you.\n\n## Coverage of the hard components\n| Component | Available |\n|---|---|\n| Combobox / autocomplete | ✓ `Combobox`, `Autocomplete` |\n| Date and time pickers | ✗ (temporal internals are present; no picker exported yet) |\n| Toast | ✓ `Toast` |\n| Tree | ✗ |\n| Table | ✗ |\n| Drag and drop | ✗ |\n| Also | Drawer, number field, OTP field, menubar, navigation menu, context menu, select, slider, meter, scroll area |\n\n## Styling with Tailwind\nState as `data-*` (`data-highlighted`, `data-selected`, `data-open`, `data-starting-style`/`data-ending-style` for\ntransitions), plus a `className` function that receives state and a `render` prop. As easy as Headless UI.\n\n## Weaknesses\n- Heaviest tested: 84.2 KB gz for four components.\n- The combobox name issue and the `Combobox.Label` pitfall above.\n- No date picker, table or tree yet.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 5 | `data-*` state, `className` functions, `render` prop |\n| Interactivity | 5 | Floating UI positioning, typeahead, transition states, submenus |\n| Coverage | 3 | 2 of 6 hard components (combobox, toast) |\n| Accessibility | 4 | 28/29 checks; combobox loses its name while open (1 axe violation) |\n| Performance | 3 | No built-in virtualisation (not benchmarked) |\n| React/Next fit | 5 | Typed part-based components, `render` prop |\n| Bundle size | 1 | 84.2 KB gz for the four components |\n| Licence & health | 5 | MIT, MUI team, 1.0 in December 2025, 1.9.0 on 9 October 2026; ~17M weekly downloads |"
+  },
+  {
+    "id": "sources/copilotkit",
+    "kind": "source",
+    "title": "CopilotKit",
+    "pattern": "ai-chat",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "chat",
+      "streaming",
+      "open-source",
+      "agents",
+      "copilot"
+    ],
+    "source_url": "https://www.copilotkit.ai",
+    "source_site": "copilotkit.ai",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.79.1",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 3,
+    "s_coverage": 3,
+    "s_a11y": 2,
+    "s_perf": 3,
+    "s_react": 3,
+    "s_bundle": 1,
+    "s_licence": 3,
+    "why_it_works": "A polished drop-in copilot chat over the AG-UI agent protocol, with tool-call cards, human-in-the-loop hooks and shared agent state, so an in-app assistant that acts on the page can be wired up quickly.",
+    "use_when": "An in-app copilot (sidebar or popup) that reads and changes app state through frontend tools, where a finished look matters more than bundle size.",
+    "avoid_when": "Bundle size matters (681 KB gz up front), you need citations, branching or edit out of the box, or install analytics are unacceptable.",
+    "alternatives": [
+      "assistant-ui",
+      "ai-sdk-ui"
+    ],
+    "has_example": false,
+    "score": 5.5,
+    "rating": 3,
+    "bench": {
+      "kind": "ai-chat",
+      "bundle_gz_kb": 748.7,
+      "lib_only_gz_kb": 681,
+      "react_baseline_kb": 67.7,
+      "tasks_supported": 3,
+      "tasks_total": 4,
+      "unsupported": [
+        "citations: 0/2 source links rendered"
+      ],
+      "stream_script_ms": 10600,
+      "layout_shift": 0.053,
+      "raw_markdown_seen": [
+        "table"
+      ],
+      "controls_built_in": [
+        "stop"
+      ],
+      "live_region": false,
+      "evidence": "10.6 s script; raw table seen mid-stream; controls: stop"
+    },
+    "path": "sources/copilotkit",
+    "images": [
+      "sources/copilotkit/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Fastest route to a finished-looking copilot, at a large cost in weight.** The default chat looks the most complete\nof the five and its tool cards and approval hook work. But it ships 681 KB gz before anything lazy-loads, renders\ncitations nowhere, hides regenerate/edit/branch unless you implement them, and its bundled markdown renderer added\nstray characters to our text.\n\n## Benchmark (same scripted turn as every other kit)\n3/4 tasks. Code: `benchai/libs/copilotkit.jsx`. Ran **offline** via `selfManagedAgents`: a client-side AG-UI agent\nreplays the mock as AG-UI events, so no `CopilotRuntime` server was needed (production use normally has one).\n\n| Measure (4× CPU throttle) | Result |\n|---|---|\n| JS, library only | **681 KB gz** initial, +2,956 KB lazy chunks, 30.2 KB CSS |\n| Script time while streaming | 10.6 s, 25 long tasks (2.6 s) |\n| Stream finished | 26.0 s for a turn the mock paces at ~11 s |\n| Layout shift | **0.053**, the highest of the five |\n| Raw markdown seen mid-stream | only a table header before its `---` row (1 of 181 samples) |\n| Follows the stream | no (a scroll-to-bottom button instead) |\n\nFound in the benchmark:\n- **Stray asterisks in the final text.** Its bundled Streamdown **1.6.11** rendered `release/*` cells as `Yes*`,\n  `No*`, `Never*` and appended `*` to the follow-up message. Standalone Streamdown 2.7.0 rendered the same text correctly.\n- Tool calls render as collapsible cards with name and status by default (`useDefaultRenderTool`); arguments and\n  result appear when expanded.\n- `useHumanInTheLoop` rendered our Approve/Deny and `respond()` resumed the run.\n- Stop works once the agent implements `abortRun()`: the base AG-UI `AbstractAgent.abortRun()` is a no-op, so a\n  custom agent must abort its own stream (HttpAgent does this for you).\n- Regenerate, edit and branch buttons exist but **only render when you pass handlers** (`onRegenerate`,\n  `onEditMessage`, `onSwitchToBranch`) and implement the logic.\n- AG-UI has no citation/source event, so the two sources had nowhere to go: **citations unsupported**.\n- axe: `button-name` (critical, 2 icon-only buttons) and `scrollable-region-focusable` (serious). No live region.\n- Adds a \"AI can make mistakes. Please verify important information.\" disclaimer under the composer by default.\n\n## Coverage\n| Capability | Support |\n|---|---|\n| Streaming text | ✓ (Streamdown 1.x inside) |\n| Stop | ✓ (needs `abortRun` in custom agents) |\n| Retry / edit / branch | Handlers only: buttons appear when you implement them |\n| Attachments | ✓ add-menu and attachment queue (not benchmarked) |\n| Tool steps | ✓ default tool cards |\n| Approvals | ✓ `useHumanInTheLoop` render |\n| Citations | ✗ no source event in AG-UI |\n| Generative UI | ✓ tool renders, A2UI, sandboxed \"OpenGenerativeUI\" |\n\n## Styling with Tailwind\nShips its own prefixed Tailwind build (`cpk:` classes, 30 KB gz CSS) using shadcn-style tokens. Overridable via slots\nand CSS variables, but it's its own design system rather than our Tailwind classes.\n\n## Weaknesses\n- 681 KB gz initial plus ~3 MB of lazy chunks (KaTeX, Mermaid, Shiki and more).\n- Installs `@scarf/scarf` install analytics (opt out with `SCARF_ANALYTICS=false`) and upsells a paid\n  \"Intelligence/Cloud\" tier.\n- Highest layout shift of the five while streaming.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Most finished default chat; marred by the stray-asterisk rendering bug |\n| Interactivity | 3 | Stop works; regenerate/edit/branch need your handlers |\n| Coverage | 3 | Tool steps and approvals yes, citations no; generative UI yes |\n| Accessibility | 2 | 2 critical axe `button-name` failures, unfocusable scroll region, no live region |\n| Performance | 3 | Lowest script time (10.6 s) but 25 long tasks and the highest layout shift (0.053) |\n| React/Next fit | 3 | Provider + agent protocol; production needs a runtime endpoint; own CSS system |\n| Bundle size | 1 | 681 KB gz initial |\n| Licence & health | 3 | MIT and very active, but install analytics and a paid-cloud upsell |"
   },
   {
     "id": "sources/d3",
@@ -1923,6 +2132,77 @@
       "source.md"
     ],
     "body": "## Verdict\n**The best-feeling time-series interaction tested, for financial data only.** Choose it for price and balance\ncharts. It can't draw anything that isn't plotted against time.\n\n## Benchmark\n**1 of 4 charts.** Only the time series; no categorical bars, stacking or pies. **54.3 KB gz**. Canvas. Pan\nand zoom built in. Code: `bench/libs/lightweight.js`.\n\nFound in the benchmark:\n- Shows the TradingView logo by default. The licence requires attribution (a link or notice) if you hide it.\n- Finance defaults: price scale on the right and two-decimal values (\"1200.00\"). Set `priceFormat` for counts.\n- Keyboard-focusable but no ARIA text; canvas only.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished for finance; finance-specific defaults elsewhere |\n| Interactivity | 5 | Pan, zoom, crosshair with price and time labels |\n| Coverage | 1 | Time series only (candlestick, bar, line, area, baseline, histogram) |\n| Accessibility | 1 | No ARIA |\n| Performance | 5 | Canvas, built for long series and live updates |\n| React/Next fit | 2 | Imperative API; wrap in an effect |\n| Bundle size | 4 | 54.3 KB gz |\n| Licence & health | 4 | Apache-2.0 with attribution; active (v5.2, Aug 2026) |"
+  },
+  {
+    "id": "sources/llamaindex-chat-ui",
+    "kind": "source",
+    "title": "LlamaIndex chat-ui",
+    "pattern": "ai-chat",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "chat",
+      "streaming",
+      "open-source",
+      "rag"
+    ],
+    "source_url": "https://github.com/run-llama/chat-ui",
+    "source_site": "github.com/run-llama/chat-ui",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.6.1",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 2,
+    "s_coverage": 3,
+    "s_a11y": 1,
+    "s_perf": 2,
+    "s_react": 3,
+    "s_bundle": 1,
+    "s_licence": 2,
+    "why_it_works": "A complete RAG-style chat section (messages, composer, event steps, source document cards, artifact canvas, PDF viewer) that plugs into any useChat-compatible handler with one component.",
+    "use_when": "An internal RAG prototype over documents where source cards and a PDF viewer matter more than polish, weight or accessibility.",
+    "avoid_when": "Anything customer-facing or accessibility-sensitive; anything where bundle size matters (1 MB gz up front); anything needing approvals, edit or branching.",
+    "alternatives": [
+      "assistant-ui",
+      "ai-sdk-ui",
+      "copilotkit"
+    ],
+    "has_example": false,
+    "score": 4.3,
+    "rating": 2,
+    "bench": {
+      "kind": "ai-chat",
+      "bundle_gz_kb": 1076.7,
+      "lib_only_gz_kb": 1009,
+      "react_baseline_kb": 67.7,
+      "tasks_supported": 3,
+      "tasks_total": 4,
+      "unsupported": [
+        "approval: no approval UI or mechanism"
+      ],
+      "stream_script_ms": 28761,
+      "layout_shift": 0.035,
+      "raw_markdown_seen": [
+        "bold",
+        "table",
+        "link"
+      ],
+      "controls_built_in": [
+        "retry"
+      ],
+      "live_region": false,
+      "evidence": "28.8 s script; raw bold/table/link seen mid-stream; controls: retry"
+    },
+    "path": "sources/llamaindex-chat-ui",
+    "images": [
+      "sources/llamaindex-chat-ui/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Not recommended for our product.** It renders a usable chat in one line and its event steps and source cards work,\nbut it was the heaviest kit by far (1 MB gz initial), had the worst accessibility, has no approval mechanism, and\nhasn't had a release since August 2025.\n\n## Benchmark (same scripted turn as every other kit)\n3/4 tasks. Code: `benchai/libs/llamaindex-chat-ui.jsx` (`<ChatSection>` over the AI SDK's `useChat`). The tool step and\nsources were sent as its own `data-event` and `data-sources` parts.\n\n| Measure (4× CPU throttle) | Result |\n|---|---|\n| JS, library only | **1,009 KB gz** initial, +571 KB lazy, 9.9 KB CSS |\n| Script time while streaming | 28.8 s; layout 6.2 s and style 2.0 s, both the highest of the five |\n| Stream finished | 51.6 s for a turn the mock paces at ~11 s |\n| Layout shift | 0.035 |\n| Raw markdown seen mid-stream | yes: `**` in 7 of 275 samples, half-typed links in 9 (react-markdown **8**) |\n| Follows the stream / lets go on scroll-up | yes / **no**: it pulled the view back down after we scrolled up |\n\nFound in the benchmark:\n- CodeMirror, the PDF viewer, KaTeX and highlight.js load up front, hence the 1 MB.\n- The default `ChatSection` has **no Stop button** while streaming (a `ChatMessages.Actions` component with\n  \"Stop generating\" exists but isn't in the default layout). Regenerate appears after the answer finishes and replaces it.\n- Event steps (`data-event`) render with title, arguments and status; the result is behind a \"Show data\" toggle.\n- Source cards show a file name derived from the URL (\"branching\", \"retention\"), not the title we sent, and are\n  clickable `div`s with **no focusable element**: keyboard users can't open them.\n- The package's own markup sets no `aria-*` attributes (the only ARIA comes from its Radix dependencies, e.g. the\n  \"Show data\" collapsible). axe: `button-name` (critical, the icon-only send button) and\n  `scrollable-region-focusable` (serious).\n- No approval or human-in-the-loop mechanism.\n\n## Coverage\n| Capability | Support |\n|---|---|\n| Streaming text | ✓ (react-markdown 8) |\n| Stop / retry | Stop not in the default layout; retry replaces |\n| Edit / branch | ✗ |\n| Attachments | ✓ upload input (not benchmarked) |\n| Tool steps | ✓ `data-event` parts |\n| Approvals | ✗ |\n| Citations | ✓ as source cards, not links, not keyboard-reachable |\n| Generative UI | ◐ artifacts canvas (code, document) |\n\n## Styling with Tailwind\nBuilt from shadcn components: you add an `@source` line for the package and shadcn theme variables (we mapped them in\n`benchai/libs/_shadcn-theme.css`). The recommended install is a shadcn registry (`npx shadcn add …/chat.json`).\n\n## Weaknesses\n- 1 MB gz initial, slowest layout and style work.\n- No release since 0.6.1 on 2025-08-28; pins react-markdown 8.\n- Accessibility gaps throughout.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Finished but dated shadcn look |\n| Interactivity | 2 | Retry only by default; no stop, edit or branch |\n| Coverage | 3 | Steps and source cards yes, approvals no; artifact canvas |\n| Accessibility | 1 | No ARIA of its own, critical axe failure, unreachable source cards, forced scroll |\n| Performance | 2 | 28.8 s script, 6.2 s layout, stream 5× behind pace |\n| React/Next fit | 3 | One component over useChat, but needs Tailwind scanning, shadcn variables and old react-markdown |\n| Bundle size | 1 | 1,009 KB gz initial |\n| Licence & health | 2 | MIT, but no release in over a year |"
   },
   {
     "id": "sources/model-viewer",
@@ -2548,6 +2828,70 @@
       "source.md"
     ],
     "body": "## Verdict\n**Our default for everyday charts in the React/Next app.** It's the most idiomatic fit for our stack:\ncomposable JSX, React 19 support, keyboard navigation out of the box, and a very active project. It's also\nthe foundation of shadcn/ui charts and Tremor. Choose ECharts instead when you need zoom, morphs, specialist\ntypes or big data.\n\n## Benchmark\nAll 4 charts drawn natively. **125 KB gz for the library** (182.5 KB including React 19's 57 KB, which our\napp already ships). SVG. Zoom is a `<Brush>` range slider, not wheel or drag on the plot. Code: `bench/libs/recharts.jsx`.\n\nFound in the benchmark:\n- `accessibilityLayer` makes charts keyboard-focusable (1–3 focusable elements per chart). The best result among the React libraries.\n- The Brush slider's accessible name reads **\"Min value: undefined, Max value: undefined\"**, which is a bug. Label it yourself.\n- The legend sorts series **alphabetically** by default, so it doesn't match the stack order. Set `itemSorter` or pass a `payload`.\n- Pie labels inherit the slice colour, which is low contrast. Pass `label` with a text colour.\n- No default categorical palette (you set every colour), so ours drops straight in.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Clean, balanced spacing; legend order and label colours need fixes |\n| Interactivity | 4 | Tooltips, legend, Brush range slider, animations; no wheel/drag zoom or chart-type morphs |\n| Coverage | 3 | Line, area, bar, composed, pie, radar, radial bar, scatter, funnel, treemap, sankey; no heatmap, candlestick, geo |\n| Accessibility | 4 | Keyboard layer and ARIA, with a broken Brush label |\n| Performance | 2 | SVG DOM per point; fine to low thousands, not 100k |\n| React/Next fit | 5 | Native components, typed, React 19, works with Tailwind tokens via props/CSS vars |\n| Bundle size | 3 | 125 KB gz library cost for four charts |\n| Licence & health | 5 | MIT; v3.10 released Oct 2026 |\n\n## Using it in our stack\n`npm i recharts`; use `\"use client\"` components; wrap each chart in `ResponsiveContainer`; pass our validated\ncolours; add `accessibilityLayer`; set legend `itemSorter`; give Brush handles proper labels."
+  },
+  {
+    "id": "sources/streamdown",
+    "kind": "source",
+    "title": "Streamdown",
+    "pattern": "ai-chat",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "chat",
+      "streaming",
+      "markdown",
+      "open-source"
+    ],
+    "source_url": "https://streamdown.ai",
+    "source_site": "streamdown.ai",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "2.7.0",
+    "licence": "Apache-2.0",
+    "s_look": 4,
+    "s_interact": 3,
+    "s_coverage": 2,
+    "s_a11y": 3,
+    "s_perf": 5,
+    "s_react": 4,
+    "s_bundle": 1,
+    "s_licence": 5,
+    "why_it_works": "A drop-in replacement for react-markdown built for streaming. It repairs half-typed markdown (unclosed bold, links, code) before rendering and memoises finished blocks, so a long answer streams without raw syntax and with a fraction of the main-thread work.",
+    "use_when": "Rendering any streamed model output as markdown, in a useChat chat or anywhere else. It is the markdown layer we recommend under the AI SDK.",
+    "avoid_when": "Bundle size is critical and answers are short or plain text (react-markdown is 46.5 KB gz against 154.6), or you need real links by default (it renders them as buttons behind a confirmation).",
+    "alternatives": [
+      "ai-sdk-ui",
+      "assistant-ui"
+    ],
+    "has_example": false,
+    "score": 6.8,
+    "rating": 3,
+    "bench": {
+      "kind": "ai-chat",
+      "bundle_gz_kb": 279.9,
+      "lib_only_gz_kb": 212.2,
+      "react_baseline_kb": 67.7,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "stream_script_ms": 9040,
+      "layout_shift": 0.005,
+      "raw_markdown_seen": [
+        "table"
+      ],
+      "controls_built_in": [],
+      "live_region": false,
+      "evidence": "9.0 s script; raw table seen mid-stream; controls: none"
+    },
+    "path": "sources/streamdown",
+    "images": [
+      "sources/streamdown/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The markdown renderer to use for streamed answers.** It isn't a chat kit (coverage scores low for that reason);\nit's the piece that fixes the slowest, glitchiest part of a hand-built chat. In the same `useChat` chat, swapping\nreact-markdown for Streamdown cut script time by 60% and removed the visible raw syntax.\n\n## Benchmark (same scripted turn; only the renderer differs from ai-sdk-ui)\n4/4 tasks (the chat around it is `benchai/libs/_aisdk-chat.jsx`). Code: `benchai/libs/streamdown.jsx`.\n\n| Measure (4× CPU throttle) | Streamdown | react-markdown (ai-sdk-ui) |\n|---|---|---|\n| Script time while streaming | **9.0 s** | 22.7 s |\n| Long tasks | 1 (73 ms) | 3 (208 ms) |\n| Stream finished (mock paced at ~11 s) | **18.8 s** | 32.8 s |\n| Layout shift | 0.005 | 0.001 |\n| Raw `**` / half-typed links seen | **never** | 5 and 8 of ~200 samples |\n| Raw table pipes seen | once (header row before its `---` row arrives) | never sampled |\n| JS, renderer alone | 154.6 KB gz (+0.5 lazy) | 46.5 KB gz |\n\nFound in the benchmark:\n- The repair step (remend) worked as advertised: no unbalanced `**` or `[text](https://…` ever reached the screen.\n  A table header shows as raw pipes for a moment until the delimiter row arrives; no renderer can avoid that.\n- **Markdown links render as `<button>`s**, not `<a>`s: its link-safety feature opens a confirmation before leaving.\n  Good for untrusted model output, but it loses real link behaviour (open in new tab, copy link address). Configure\n  `linkSafety` if you want anchors.\n- Code blocks come with syntax highlighting, line numbers, copy and download; tables get copy/download menus.\n- The final table rendered correctly. The older Streamdown 1.6.11 bundled inside CopilotKit appended stray `*`\n  to table cells on the same text (see `sources/copilotkit`), so pin 2.x.\n- It's heavy for a markdown renderer: 154.6 KB gz initial.\n\n## Coverage\n| Capability | Support |\n|---|---|\n| Streaming markdown | ✓ self-healing (remend), block memoisation |\n| Code / tables / math / Mermaid | ✓ code and tables built in; math, Mermaid, CJK as plugins |\n| Sanitising | ✓ `rehype-harden` |\n| Stop / retry / edit / branch | – not its job (comes from the chat layer) |\n| Tool steps / approvals / citations | – not its job |\n\n## Styling with Tailwind\nNeeds a Tailwind v4 `@source \"../node_modules/streamdown/dist/*.js\"` line and shadcn-style CSS variables\n(`--background`, `--muted`, `--border`…), which we defined ourselves in `benchai/libs/_shadcn-theme.css`. No shadcn\ncomponents are required.\n\n## Weaknesses\n- 154.6 KB gz on its own, three times react-markdown.\n- Links-as-buttons by default changes link semantics.\n- Expects shadcn token names, so our tokens must map onto them.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Finished code blocks, tables, controls with no work |\n| Interactivity | 3 | Copy/download for code and tables, link safety; no chat controls (not its job) |\n| Coverage | 2 | Covers 1 of the 4 chat tasks (streaming markdown) by design |\n| Accessibility | 3 | axe clean in our chat; links become buttons; no live-region handling of its own |\n| Performance | 5 | 9.0 s script vs 22.7 s for react-markdown, 1 long task, no raw syntax |\n| React/Next fit | 4 | Drop-in component; needs the Tailwind @source line and token variables |\n| Bundle size | 1 | 154.6 KB gz |\n| Licence & health | 5 | Apache-2.0, Vercel, released 2026-09-30 |"
   },
   {
     "id": "sources/threejs",

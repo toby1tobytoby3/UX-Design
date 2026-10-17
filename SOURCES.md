@@ -85,3 +85,21 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **TradingView Lightweight Charts**: Prices, balances, portfolio or any financial time series where pan/zoom feel matters.
 - **uPlot**: Monitoring, metrics and real-time or very long time series where speed and size beat everything else.
 - **Tremor**: Reference for the Tailwind dashboard look. To build that look, use Recharts with our tokens rather than the npm package.
+
+## ai-chat
+
+| Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| [assistant-ui](sources/assistant-ui/source.md) | **6.8** | 2 | 5 | 5 | 3 | 2 | 4 | 1 | 5 | 4/4 | 192.4 | 37.8 s script; raw bold/link seen mid-stream; controls: stop, retry, edit, branch | MIT |
+| [Streamdown](sources/streamdown/source.md) | **6.8** | 4 | 3 | 2 | 3 | 5 | 4 | 1 | 5 | 4/4 | 212.2 | 9.0 s script; raw table seen mid-stream; controls: none | Apache-2.0 |
+| [Vercel AI SDK UI (useChat)](sources/ai-sdk-ui/source.md) | **6.5** | 2 | 3 | 4 | 2 | 3 | 5 | 2 | 5 | 4/4 | 104.5 | 22.7 s script; raw bold/link seen mid-stream; controls: none | Apache-2.0 |
+| [CopilotKit](sources/copilotkit/source.md) | **5.5** | 4 | 3 | 3 | 2 | 3 | 3 | 1 | 3 | 3/4 | 681 | 10.6 s script; raw table seen mid-stream; controls: stop | MIT |
+| [LlamaIndex chat-ui](sources/llamaindex-chat-ui/source.md) | **4.3** | 3 | 2 | 3 | 1 | 2 | 3 | 1 | 2 | 3/4 | 1009 | 28.8 s script; raw bold/table/link seen mid-stream; controls: retry | MIT |
+
+**Pick it for**
+
+- **assistant-ui**: A real chat or agent surface in our app where we want branching, editing and tool/approval UI without writing the state machine, and we're happy to style primitives ourselves.
+- **Streamdown**: Rendering any streamed model output as markdown, in a useChat chat or anywhere else. It is the markdown layer we recommend under the AI SDK.
+- **Vercel AI SDK UI (useChat)**: The default foundation for any chat or agent UI in our Next app. Pair it with Streamdown for markdown and our own Tailwind components (or assistant-ui primitives) for the UI.
+- **CopilotKit**: An in-app copilot (sidebar or popup) that reads and changes app state through frontend tools, where a finished look matters more than bundle size.
+- **LlamaIndex chat-ui**: An internal RAG prototype over documents where source cards and a PDF viewer matter more than polish, weight or accessibility.

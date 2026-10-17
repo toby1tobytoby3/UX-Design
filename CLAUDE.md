@@ -10,7 +10,9 @@ via `.claude/skills`) define the workflows.
 - Use `pattern` / `page_type` values from `taxonomy.md`.
 - Source profiles live in `sources/<slug>/source.md` (`kind: source`), scored with `guides/source-rubric.md`;
   scores are computed by the catalog build. `SOURCES.md` is generated too.
-- Chart libraries are benchmarked in `bench/` and 3D libraries in `bench3d/`
-  (`cd bench3d && npm install && (cd model-viewer && npm install) && node run.mjs [lib]`).
+- Libraries are benchmarked per category, same tasks for every library: charts in `bench/`, 3D in `bench3d/`
+  (`cd bench3d && npm install && (cd model-viewer && npm install) && node run.mjs [lib]`), animation in
+  `benchmotion/` (`node run.mjs [lib] && node chart.mjs`), headless UI primitives in `benchui/`, AI chat kits in
+  `benchai/` (about 15 minutes). Each writes `results.json`, which the catalog build attaches to the profile.
 - Agents answering with this library start at `guides/README.md`.
 - Commit straight to `main`.

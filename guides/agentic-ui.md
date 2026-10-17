@@ -8,7 +8,23 @@ Research behind this guide, with sources and the evidence key: `research/E-agent
 `agent-activity`, `ai-review`, `ai-provenance` in `catalog.json`.
 
 ## 1. Stack
-STACK_TABLE
+Every kit streamed the same 900-word scripted turn (markdown, code, a table, a tool call, an approval and two citations)
+from a mock, offline, at 4× CPU throttle (`benchai/`). Scores in `SOURCES.md` (ai-chat section); **fit beats score**.
+
+| Layer | Use | Why (evidence) | Instead, if… |
+|---|---|---|---|
+| State and transport | **AI SDK `useChat`** (`ai-sdk-ui`, 6.5) | Headless, so it fits Tailwind without shadcn; stop, regenerate, resumable streams and **tool approval** (`addToolApprovalResponse`) all worked offline in the bench | You want the controls built for you: assistant-ui on top of it |
+| Message text | **Streamdown** (6.8) | Same chat, renderer swapped: script time **22.7 s → 9.0 s**, stream finished in 18.8 s vs 32.8 s, and no raw `**` or half-typed links (only a table header before its divider row). Pin 2.x; needs a Tailwind `@source` line and ~11 CSS variables; links render as buttons unless you configure `linkSafety` | Bundle matters more than polish (154.6 KB gz): react-markdown + `remend` + `useChat` throttle |
+| Thread controls (stop, retry as branch, edit, follow-and-release scroll) | **assistant-ui primitives** (6.8), styled ourselves | The only kit where all four controls worked out of the box; retry kept the old answer as branch `‹ 2/2 ›`. Heavy (192 KB gz) and the slowest default markdown, so use Streamdown as its `Text` | A simple chat: build the four controls on `useChat` (it gives `stop` and `regenerate`; branches are yours) |
+| Scroll model | **Turn anchoring** (`@shadcn/react` MessageScroller, unstyled) | See E1 defaults; captured in `ai-chat/shadcn-message-scroller-turn-anchoring` (not benchmarked) | Log-like agents: `use-stick-to-bottom` |
+| Diff review | **jsdiff** (engine) + **`@pierre/diffs`** (renderer) | No library ships per-hunk accept/reject; `@pierre/diffs` has Keep/Undo hunks and annotations (`ai-review/pierre-diffs-keep-undo-hunks`, not benchmarked) | Lighter, widget-based: `@git-diff-view/react` |
+
+Not recommended: **CopilotKit** (5.5: 681 KB gz plus 2.9 MB lazy, highest layout shift 0.053, two critical axe failures,
+bundles an old Streamdown that corrupts tables, `@scarf/scarf` install analytics) and **LlamaIndex chat-ui** (4.3: 1 MB,
+critical axe failure, source cards unreachable by keyboard, no release since August 2025). Vercel's **AI Elements** is being
+folded into shadcn/ui (package deprecated end of November 2026): read it for patterns, don't depend on it.
+
+What every kit got wrong: **none provides a live region** for the answer. Add the status-region announcement from E1 yourself.
 
 ## 2. Chat and streaming (E1)
 | Default | Why | When to depart |

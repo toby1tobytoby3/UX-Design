@@ -14,8 +14,9 @@ const IMAGE = /\.(jpe?g|png|webp)$/i;
 // Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat) shares one shape: per-task probes plus
 // bundle size, with a few category-specific measurements on top.
 const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai'];
-const bench = Object.assign({}, ...BENCHES.map((d) => join(ROOT, d, 'results.json'))
-  .filter(existsSync).map((f) => JSON.parse(readFileSync(f, 'utf8'))));
+// Keys starting with `_` are bench-internal (e.g. size probes), not sources.
+const readBench = (f) => Object.fromEntries(Object.entries(JSON.parse(readFileSync(f, 'utf8'))).filter(([k]) => !k.startsWith('_')));
+const bench = Object.assign({}, ...BENCHES.map((d) => join(ROOT, d, 'results.json')).filter(existsSync).map(readBench));
 
 // Source scores are computed, never hand-typed: mean of the eight rubric criteria (guides/source-rubric.md) × 2.
 export const CRITERIA = { s_look: 'Default look', s_interact: 'Interactivity', s_coverage: 'Coverage', s_a11y: 'Accessibility',
@@ -97,8 +98,13 @@ function summariseBench(b) {
   } else if (kind === 'ui-primitives') {
     Object.assign(out, { keyboard_passed: b.keyboard_passed, keyboard_total: b.keyboard_total, axe_violations: b.axe_violations,
       evidence: `${b.keyboard_passed}/${b.keyboard_total} keyboard checks, ${b.axe_violations} axe` });
-  } else {
-    Object.assign(out, { summary: b.summary ?? null, evidence: b.summary?.evidence ?? '' });
+  } else if (kind === 'ai-chat') {
+    const st = b.probe?.stream ?? {};
+    const controls = Object.entries(st.controls ?? {}).filter(([k, v]) => k !== 'follows_stream' && v === 'ui').map(([k]) => k);
+    const raw = Object.entries(st.raw_markdown_samples ?? {}).filter(([, n]) => n > 0).map(([k]) => k);
+    Object.assign(out, { stream_script_ms: st.script_ms ?? null, layout_shift: st.cls ?? null, raw_markdown_seen: raw,
+      controls_built_in: controls, live_region: (b.a11y?.live_regions ?? []).length > 0,
+      evidence: st.script_ms ? `${(st.script_ms / 1000).toFixed(1)} s script; ${raw.length ? `raw ${raw.join('/')} seen mid-stream` : 'no raw markdown'}; controls: ${controls.join(', ') || 'none'}` : '' });
   }
   return out;
 }

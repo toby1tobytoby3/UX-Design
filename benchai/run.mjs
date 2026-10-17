@@ -273,7 +273,7 @@ for (const lib of libs) {
       ['JS (initial)', `${Math.round((size.initial - reactBase) * 10) / 10} KB gz + React`], ['Lazy chunks', `${size.lazy} KB gz`], ['CSS', `${Math.round((size.css + twCss) * 10) / 10} KB gz`],
       ['Layout shift', s.cls], ['Script time', `${s.script_ms} ms`], ['Long tasks', `${s.long_tasks} (${s.long_task_ms} ms)`],
       ['Raw markdown', s.raw_markdown_seen ? `<span class="bad">seen (${Object.entries(s.raw_markdown_samples).filter(([, n]) => n).map(([k]) => k).join(', ')})</span>` : '<span class="ok">never</span>'],
-      ['Stream time', `${(s.stream_wall_ms / 1000).toFixed(1)} s (script paced at 10 s)`],
+      ['Stream time', `${(s.stream_wall_ms / 1000).toFixed(1)} s (mock paced at ~11 s)`],
       ['Follows the stream', s.sticks ? 'yes' : 'no'], ['Stays put if you scroll up', s.unsticks === null ? '–' : s.unsticks ? 'yes' : '<span class="bad">no</span>'],
       ['Stop / retry', `${yes(s.controls.stop)} / ${yes(s.controls.retry)}`], ['Edit / branch', `${yes(s.controls.edit)} / ${yes(s.controls.branch)}`]]);
     document.querySelector('#steps .view').innerHTML = `${yes(probe.steps.supported, 'supported', 'not supported')} · ${probe.steps.note}`;
@@ -299,6 +299,12 @@ for (const lib of libs) {
   console.log(slug.padEnd(20), `${lib_only} KB gz (+${size.lazy} lazy, ${results[slug].css_gz_kb} css)`, `${results[slug].tasks_supported}/4`,
     `cls ${stream.cls} script ${stream.script_ms}ms raw ${stream.raw_markdown_seen} stick ${stream.sticks}/${stream.unsticks}`,
     JSON.stringify(probe.stream.controls), errors.length ? `errors: ${errors.length}` : '');
+}
+// Size probes for the profiles: the hook alone, and the two markdown renderers alone (library only, React subtracted).
+results._size_probes = {};
+for (const probe of ['_aisdk-only', '_md-react-markdown', '_md-streamdown']) {
+  const s = await bundle(probe, join(HERE, 'libs', `${probe}.jsx`));
+  results._size_probes[probe.slice(1)] = { initial_gz_kb: Math.round((s.initial - reactBase) * 10) / 10, lazy_gz_kb: s.lazy };
 }
 await browser.close(); server.close();
 writeFileSync(join(HERE, "results.json"), JSON.stringify(results, null, 2) + '\n');
