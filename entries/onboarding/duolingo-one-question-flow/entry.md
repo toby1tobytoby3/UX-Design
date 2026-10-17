@@ -1,37 +1,38 @@
 ---
-title: One-question-per-screen onboarding with progress bar
+title: One-question-per-screen onboarding with mascot and progress bar
 pattern: onboarding
 page_type: onboarding
 tags: [b2c, consumer-app, playful, illustrative, progressive-disclosure]
 source_url: https://www.duolingo.com
 source_site: duolingo.com
 captured_at: 2026-10-17
-captured_by: base-pack
-input: base-pack
+captured_by: toby
+input: url
 rating: 5
-why_it_works: Asking one easy question per screen, with a mascot speaking it and a progress bar filling up, makes a long setup feel like a short conversation — and users invest in personalisation before being asked to sign up.
-use_when: Consumer products that need several preferences before first value, especially pre-signup.
+why_it_works: Each screen asks one easy question, spoken by the mascot, with big icon options and a progress bar, so a long setup feels like a short conversation and users invest before they're asked to sign up.
+use_when: Consumer products that need several preferences before first value, especially before account creation.
 has_example: false
-needs_capture: true
 ---
 
 ## What it is
-Top: close button and a thick rounded progress bar. Middle: a mascot with a speech bubble asking
-the question. Below: large tappable option cards (icon + label), single select. Bottom: full-width
-"Continue" button that is disabled until a choice is made. Account creation comes after the user
-has answered and seen their personalised plan.
+"Get started" leads to "I want to learn…": a grid of large tiles with flags and learner counts (Spanish 41.9M,
+French 22.6M, Chess, English, Japanese, German, Math, Hindi…). After picking one, the mascot introduces itself
+("Hi there! I'm Duo!", "Let's get this party started!"), then asks questions one at a time. The first,
+"How did you hear about Duolingo?", offers eight icon options in a 2×4 grid (News/article/blog, Friends/family,
+Facebook/Instagram, TV, YouTube, Google Search, TikTok, Other). A thin green progress bar runs along the top, and
+**Continue** stays disabled until an option is chosen. Selecting one tints it blue. No account is needed for any of this.
 
 ## Key techniques
-- Chunky, tactile buttons: thick bottom border as a "3D" shadow that collapses on press.
-- Progress bar animates forward with a slight overshoot on each step.
-- Option cards have a clear selected state (accent border + tinted fill).
-- Signup deferred until after investment ("Create a profile to save your progress").
+- **Choose what you want before anything else**: the subject grid comes first, with learner counts as social proof.
+- **Mascot speech bubble** turns form questions into dialogue.
+- **Disabled Continue until answered**, then it turns solid green (step captured in `crop-answer-selected.jpg`).
+- **Single-column options on mobile**, two columns on desktop.
+- **Signup deferred**: no account requested in the steps we captured.
 
 ## Accessibility
-Options as a radio group; announce step changes; ensure the disabled Continue state is explained
-(e.g. "Choose an option to continue").
+The options should be a radio group, and the progress bar should expose its value. Explain why Continue is disabled.
 
 ## Weaknesses
-Playful style doesn't suit all brands; too many steps still cause drop-off — measure each step.
+The playful style doesn't suit every brand, and long flows still lose people, so measure each step.
 
-> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots.
+> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference.

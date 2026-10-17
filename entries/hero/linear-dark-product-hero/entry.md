@@ -1,39 +1,36 @@
 ---
-title: Dark product hero with glowing app screenshot
+title: Dark product hero with a live-looking app screenshot
 pattern: hero
 page_type: landing
-tags: [saas, devtools, dark, gradient, minimal, animated]
+tags: [saas, devtools, dark, minimal]
 source_url: https://linear.app
 source_site: linear.app
 captured_at: 2026-10-17
-captured_by: base-pack
-input: base-pack
+captured_by: toby
+input: url
 rating: 5
-why_it_works: A short, confident headline plus a large real product screenshot sells the product faster than any illustration; the dark canvas and soft glow make the UI the brightest thing on the page.
-use_when: Product-led SaaS where the interface itself is the selling point.
+why_it_works: A short, confident headline over a near-black page, then a large, realistic product UI right below the fold line, so the interface itself does the selling and invites the scroll.
+use_when: Product-led SaaS where the interface is the selling point.
 has_example: false
-needs_capture: true
 ---
 
 ## What it is
-Near-black page, centred tight headline (two lines, large, slightly negative letter-spacing),
-one-sentence subhead in muted grey, a pair of CTAs (solid primary, ghost secondary), then a
-wide, slightly perspective-tilted product screenshot that bleeds off the bottom of the fold
-with a subtle radial glow behind it.
+Near-black page with a slim nav (Product, Resources, Customers, Pricing, Now, Contact · Log in · Sign up pill). A
+large left-aligned two-line headline ("The product development system for teams and agents"), a one-line muted
+subhead, and a small "New · Loops →" announcement link on the right. Below, a wide screenshot of the real app
+(sidebar, an issue titled "Faster app launch", activity feed and a floating AI chat panel) is cut off by the fold.
 
 ## Key techniques
-- Headline 56–72px, `letter-spacing: -0.02em`, gradient text fading white → grey.
-- Subhead in ~60% opacity text, max ~560px wide for an easy line length.
-- Screenshot framed with 1px translucent border + large soft shadow, cropped by the fold to invite scrolling.
-- Restrained entrance motion: fade/translate-up 8–16px, staggered ~80ms.
-- Tiny "announcement" pill above the headline linking to the latest release.
+- **Left-aligned headline**, not centred: reads like an editorial statement and lines up with the app's sidebar below.
+- **Real content in the screenshot**: a plausible issue, activity log and an AI agent panel ("Thinking…"), which sells the current feature set.
+- **Announcement as a quiet text link** ("New · Loops →") rather than a pill above the headline.
+- **The fold crops the product**, inviting a scroll. The mobile layout keeps the headline first and the UI below.
+- Very low-contrast chrome so the product screenshot is the brightest thing on the page.
 
 ## Accessibility
-Muted grey subhead on near-black needs checking for 4.5:1; gradient text must keep the
-darkest stop above contrast threshold. Respect `prefers-reduced-motion` for entrance animations.
+The muted subhead and nav are low contrast on black; check them for 4.5:1. The screenshot is an image of UI, so it needs alt text that says what it shows.
 
 ## Weaknesses
-Relies on a beautiful product UI — with a less polished app it exposes you. Dark-only can feel
-cold for consumer audiences.
+It depends on a beautiful product UI. Dark-only can feel cold for consumer audiences.
 
-> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots.
+> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference.

@@ -328,6 +328,7 @@ window.CATALOG = [
     "use_when": "Apps with many actions or objects where users repeat tasks — dashboards, editors, admin tools.",
     "has_example": false,
     "needs_capture": true,
+    "capture_blocker": "login required",
     "path": "entries/command-palette/linear-cmdk-menu",
     "images": [
       "entries/command-palette/linear-cmdk-menu/preview.jpg"
@@ -336,12 +337,12 @@ window.CATALOG = [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nCentred modal (~640px) over a dimmed app. Large search input at the top, results grouped under\nsmall uppercase headings (e.g. Issues, Navigation, Actions), each row with icon, label and right-aligned\nkeyboard shortcut chips. Context-aware: actions for the selected item appear first.\n\n## Key techniques\n- Opens on Cmd/Ctrl+K, closes on Esc; arrow keys move a highlighted row; Enter runs it.\n- Fuzzy matching with highlighted matched characters.\n- Sub-pages: choosing \"Change status…\" swaps the list in place with a breadcrumb chip in the input.\n- Fast motion: ~120ms scale-from-98% + fade.\n\n## Accessibility\nUse the ARIA combobox + listbox pattern (`aria-activedescendant`), trap focus, return focus on close.\nShortcut chips need `aria-hidden` or readable labels.\n\n## Weaknesses\nUndiscoverable without a visible hint — pair it with a \"⌘K\" affordance in the UI.\n\n> Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nCentred modal (~640px) over a dimmed app. Large search input at the top, results grouped under\nsmall uppercase headings (e.g. Issues, Navigation, Actions), each row with icon, label and right-aligned\nkeyboard shortcut chips. Context-aware: actions for the selected item appear first.\n\n## Key techniques\n- Opens on Cmd/Ctrl+K, closes on Esc; arrow keys move a highlighted row; Enter runs it.\n- Fuzzy matching with highlighted matched characters.\n- Sub-pages: choosing \"Change status…\" swaps the list in place with a breadcrumb chip in the input.\n- Fast motion: ~120ms scale-from-98% + fade.\n\n## Accessibility\nUse the ARIA combobox + listbox pattern (`aria-activedescendant`), trap focus, return focus on close.\nShortcut chips need `aria-hidden` or readable labels.\n\n## Weaknesses\nUndiscoverable without a visible hint — pair it with a \"⌘K\" affordance in the UI.\n\n> Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots.\n\n> Recapture attempted 2026-10-17: this pattern is only visible when signed in, so it can't be captured automatically. Send a screenshot (or a screen recording) from your own account and run `ux-add` to replace the base-pack description."
   },
   {
     "id": "content-grid/unsection-captioned-thumbnail-grid",
     "kind": "pattern",
-    "title": "Featured preview over a captioned thumbnail grid",
+    "title": "Captioned thumbnail grid with type prefix, save and a soft sign-up gate",
     "pattern": "content-grid",
     "page_type": "search-results",
     "tags": [
@@ -354,20 +355,20 @@ window.CATALOG = [
     "source_site": "unsection.com",
     "captured_at": "2026-10-17",
     "captured_by": "toby",
-    "input": "screenshot",
+    "input": "url",
     "rating": 4,
-    "why_it_works": "Every thumbnail is a uniform crop of one section with a \"Category · Title\" caption, so a dense grid of very different designs stays scannable, and the caption doubles as searchable, linkable metadata.",
-    "use_when": "Galleries, template libraries, portfolios or any collection of visual items users browse and compare.",
+    "why_it_works": "Uniform screenshots of single sections in a 3-column grid, each captioned \"Type | Site description\" with a save heart, keep thousands of very different designs scannable, and the caption doubles as searchable metadata.",
+    "use_when": "Galleries, template libraries and portfolios of visual items people browse, compare and save.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/content-grid/unsection-captioned-thumbnail-grid",
     "images": [
-      "entries/content-grid/unsection-captioned-thumbnail-grid/desktop.jpg"
+      "entries/content-grid/unsection-captioned-thumbnail-grid/desktop.jpg",
+      "entries/content-grid/unsection-captioned-thumbnail-grid/mobile.jpg"
     ],
     "files": [
       "entry.md"
     ],
-    "body": "## What it is\nThe results area of Unsection's browse screen. A large featured preview sits at the top (a big hero\nscreenshot with a small caption, `Hero · Bunsen Studio Home Page Section Hero`). Below it is a 4-column\ngrid of fixed-ratio thumbnails on near-black. Under each thumbnail is a single caption line:\na muted category prefix, then a brighter descriptive title, e.g. `Feature · The Grid Cost Benefit Process\nOverview Design`, `Footer · The Grid Marketing Call Footer Navigation Design`.\n\n## Key techniques\n- **Uniform crops:** every thumbnail shows one section at the same aspect ratio, never a full page. That keeps rows aligned and comparisons fair.\n- **Two-tone caption:** a dim category prefix plus a bright title. The prefix says what kind of thing it is at a glance, and the title names it.\n- **Descriptive titles carry search terms:** \"<Site> <what it does> <section type> Design\" reads like keywords, which helps both SEO and in-app search.\n- **No card chrome:** no borders, backgrounds or shadows around cards. The screenshots themselves are the cards, with tight gaps (~16px) and captions directly beneath.\n- **Native ad slot:** a sponsored item uses the same card and caption format with an `Ad` prefix. It's clearly labelled and doesn't break the grid rhythm.\n- **The content provides the colour:** the near-black page lets light and dark screenshots sit side by side without either dominating.\n\n## Accessibility\nCaptions are small grey-on-black text, which is probably below 4.5:1 for the prefix. Each card should be\none link with the full caption as its accessible name, and thumbnails need `alt` text or `alt=\"\"` with the\ncaption as the label.\n\n## Weaknesses\nAt 4 columns the thumbnails are too small to judge detail, so the user has to click in. A hover zoom or\nquick-look would help. The featured preview takes a lot of space before the first result.\n\n## Relevance to us\nOur gallery cards could adopt the `pattern · site` two-tone caption and drop the card borders.\n\n> Cropped from a phone screenshot of an Instagram reel (ferdie.dev) showing the desktop site, so the\n> image is low resolution. Re-capture with `npm run capture -- https://www.unsection.com <dir> --selector \"<grid css>\"`\n> for a sharp image and the grid's code."
+    "body": "## What it is\nBelow the filter bar, a 3-column grid of light section screenshots on black. Each card's caption is a dim type\nprefix plus a title (\"Feature | For You Data Privacy Feature Section\", \"Testimonial | Composio Customer Results\nTestimonial\") with a **heart** to save on the right. A native ad card fits the same format (\"Ad | Your AI can code.\nGive it taste.\"). Above the grid, a \"Trending this week\" carousel (\"02 / 03 · Base Blockchain Finance Hero\nSection · 89 views this week\") and a \"Latest\" list. Scrolling further hits a soft gate: \"Join for free to keep\nbrowsing and save the sections you like.\"\n\n## Key techniques\n- **Type | title captions** carry the taxonomy and search terms.\n- **Save on every card** (heart), which motivates sign-up.\n- **Soft gate after free browsing**, rather than at the door.\n- **Trending + Latest** modules show freshness and popularity above the grid.\n- **Native ad** in the same card format, clearly labelled.\n\n## Accessibility\nEach card should be a single link with the caption as its name; the heart needs a label (\"Save …\").\n\n## Weaknesses\nAt three columns the thumbnails are still small; detail needs a click.\n\n## Related entries\n- `filters/unsection-category-tabs-style-chips`\n\n> Recaptured live on 2026-10-17 (desktop, mobile, Style dropdown opened). Unsection was redesigned after the Instagram reel this entry was first built from, so the description now follows the live site; the reel crop has been replaced."
   },
   {
     "id": "dashboard/stripe-home-kpi-overview",
@@ -391,6 +392,7 @@ window.CATALOG = [
     "use_when": "Admin or analytics home screens summarising 4–8 business metrics.",
     "has_example": false,
     "needs_capture": true,
+    "capture_blocker": "login required",
     "path": "entries/dashboard/stripe-home-kpi-overview",
     "images": [
       "entries/dashboard/stripe-home-kpi-overview/preview.jpg"
@@ -399,7 +401,7 @@ window.CATALOG = [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nHeader with date-range and \"compare to previous period\" controls. A main chart (today vs yesterday\nline, current value large) then a grid of metric cards: label, big value, coloured delta pill\n(+12.4%), small line chart with the comparison period as a dashed/grey line.\n\n## Key techniques\n- Tabular numerals (`font-variant-numeric: tabular-nums`) so values don't jitter.\n- Comparison line in grey, current in brand colour; no gridline clutter.\n- Delta pills use colour + sign (not colour alone).\n- Cards are borderless, separated by whitespace and hairlines.\n\n## Accessibility\nCharts need text equivalents (value + delta in text already helps). Don't rely on red/green alone.\n\n## Weaknesses\nToo many cards dilute focus; pick the metrics that drive decisions.\n\n> Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nHeader with date-range and \"compare to previous period\" controls. A main chart (today vs yesterday\nline, current value large) then a grid of metric cards: label, big value, coloured delta pill\n(+12.4%), small line chart with the comparison period as a dashed/grey line.\n\n## Key techniques\n- Tabular numerals (`font-variant-numeric: tabular-nums`) so values don't jitter.\n- Comparison line in grey, current in brand colour; no gridline clutter.\n- Delta pills use colour + sign (not colour alone).\n- Cards are borderless, separated by whitespace and hairlines.\n\n## Accessibility\nCharts need text equivalents (value + delta in text already helps). Don't rely on red/green alone.\n\n## Weaknesses\nToo many cards dilute focus; pick the metrics that drive decisions.\n\n> Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots.\n\n> Recapture attempted 2026-10-17: this pattern is only visible when signed in, so it can't be captured automatically. Send a screenshot (or a screen recording) from your own account and run `ux-add` to replace the base-pack description."
   },
   {
     "id": "empty-state/github-empty-repo-quick-setup",
@@ -422,6 +424,7 @@ window.CATALOG = [
     "use_when": "Any object (project, workspace, integration) that starts empty and needs setup before it's useful.",
     "has_example": false,
     "needs_capture": true,
+    "capture_blocker": "login required",
     "path": "entries/empty-state/github-empty-repo-quick-setup",
     "images": [
       "entries/empty-state/github-empty-repo-quick-setup/preview.jpg"
@@ -430,44 +433,45 @@ window.CATALOG = [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nA new empty repository shows a \"Quick setup\" box with the clone URL (HTTPS/SSH toggle + copy\nbutton), then several titled sections — \"create a new repository on the command line\", \"push an\nexisting repository\" — each with a code block and a copy button.\n\n## Key techniques\n- Branches by user situation (starting fresh vs. bringing existing work).\n- Copy buttons on every command; values (URL, names) pre-filled with the user's own data.\n- Calm visual weight: bordered panels, monospace blocks, no illustration needed.\n\n## Accessibility\nCopy buttons need labels (\"Copy clone URL\") and a polite announcement when copied.\n\n## Weaknesses\nText-heavy for non-technical audiences — for consumer apps pair with a single primary action.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nA new empty repository shows a \"Quick setup\" box with the clone URL (HTTPS/SSH toggle + copy\nbutton), then several titled sections — \"create a new repository on the command line\", \"push an\nexisting repository\" — each with a code block and a copy button.\n\n## Key techniques\n- Branches by user situation (starting fresh vs. bringing existing work).\n- Copy buttons on every command; values (URL, names) pre-filled with the user's own data.\n- Calm visual weight: bordered panels, monospace blocks, no illustration needed.\n\n## Accessibility\nCopy buttons need labels (\"Copy clone URL\") and a polite announcement when copied.\n\n## Weaknesses\nText-heavy for non-technical audiences — for consumer apps pair with a single primary action.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots.\n\n> Recapture attempted 2026-10-17: this pattern is only visible when signed in, so it can't be captured automatically. Send a screenshot (or a screen recording) from your own account and run `ux-add` to replace the base-pack description."
   },
   {
-    "id": "feature-grid/apple-bento-highlights",
+    "id": "feature-grid/apple-highlights-media-gallery",
     "kind": "pattern",
-    "title": "Bento grid of product highlights",
+    "title": "Highlights media gallery with pause control and progress dots",
     "pattern": "feature-grid",
     "page_type": "product",
     "tags": [
       "b2c",
       "minimal",
-      "responsive",
-      "editorial"
+      "video",
+      "responsive"
     ],
-    "source_url": "https://www.apple.com",
+    "source_url": "https://www.apple.com/iphone-17/",
     "source_site": "apple.com",
     "captured_at": "2026-10-17",
-    "captured_by": "base-pack",
-    "input": "base-pack",
+    "captured_by": "toby",
+    "input": "url",
     "rating": 5,
-    "why_it_works": "Mixed tile sizes create hierarchy without headings — the biggest tile is the biggest claim — and each tile carries one stat or one idea, so the section is scannable in seconds.",
-    "use_when": "Summarising 5–9 features or specs where a few deserve more weight than others.",
+    "why_it_works": "Each key feature gets one full-width card with a short claim and a film or image, auto-advancing like a story, with a visible pause button and progress dots, so the highlights land in seconds without overwhelming the page.",
+    "use_when": "Summarising 4–8 headline features of a product where each deserves its own visual.",
     "has_example": false,
-    "needs_capture": true,
-    "path": "entries/feature-grid/apple-bento-highlights",
+    "path": "entries/feature-grid/apple-highlights-media-gallery",
     "images": [
-      "entries/feature-grid/apple-bento-highlights/preview.jpg"
+      "entries/feature-grid/apple-highlights-media-gallery/mobile.jpg",
+      "entries/feature-grid/apple-highlights-media-gallery/crop-desktop-video-not-decoded.jpg"
     ],
     "files": [
-      "preview.html",
+      "source.html",
+      "styles.json",
       "entry.md"
     ],
-    "body": "## What it is\nA CSS grid of rounded tiles of varying spans (2×2, 2×1, 1×1) on a light grey page. Each tile\nhas one big number or short claim, a one-line explanation, and sometimes an image or icon.\n\n## Key techniques\n- `grid-template-columns: repeat(4, 1fr)` with `grid-auto-flow: dense`; tiles span 1–2 columns/rows.\n- Large radius (~24–28px), no borders, white or dark tiles on `#f5f5f7` background.\n- Huge stat typography (48–80px, semibold) with small supporting text.\n- Collapses to 2 columns on tablet and a single stack on mobile.\n\n## Accessibility\nOrder the DOM by importance, not by visual position, since `dense` packing can reorder visually.\n\n## Weaknesses\nEasy to overdo — more than ~9 tiles turns into noise. Needs real imagery or strong stats to land.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\n\"Get the highlights.\" on the iPhone 17 page: a horizontal gallery of 12 large rounded cards. Each card pairs one\nsentence (\"Brighter display, now with ProMotion up to 120Hz. Durable Ceramic Shield 2 front…\") with a film or\nimage. Below, a progress pill shows the current card and a **Pause Highlights Gallery** button controls autoplay.\nOn mobile the card becomes a tall image with the same dots and play control. A sticky \"iPhone 17 · Explore · Buy\"\nbar follows the page.\n\n## Key techniques\n- **One claim per card**, short enough to read before it advances.\n- **Autoplay with an explicit pause button** (labelled \"Pause Highlights Gallery\") and progress dots that show position and time.\n- **Peeking next card** at the right edge signals there's more.\n- **A sticky product bar** keeps \"Buy\" one tap away throughout.\n\n## Accessibility\nThe labelled pause control is the key detail, and auto-advancing content without it would fail. Make sure each card's text is real HTML (it is here).\n\n## Weaknesses\nAutoplaying media is heavy and distracting if overused.\n\n> Retargeted on recapture: Apple no longer shows the bento grid the base-pack entry described; Apple now uses this highlights gallery. The desktop films did not decode in our headless browser (proprietary codecs), so the desktop frame is kept as `crop-desktop-video-not-decoded.jpg` and the mobile capture is the main image.\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` and a scroll-into-view step."
   },
   {
     "id": "filters/unsection-category-tabs-style-chips",
     "kind": "pattern",
-    "title": "Two-axis browse with category tabs and style chips",
+    "title": "Category rail plus source tabs and style dropdown with counts",
     "pattern": "filters",
     "page_type": "search-results",
     "tags": [
@@ -480,121 +484,123 @@ window.CATALOG = [
     "source_site": "unsection.com",
     "captured_at": "2026-10-17",
     "captured_by": "toby",
-    "input": "screenshot",
+    "input": "url",
     "rating": 4,
-    "why_it_works": "Browsing splits into two independent axes, what the section is (category tabs) and how it looks (style chips), so you can ask for something like \"dark bento feature sections\" in two clicks without a search box.",
-    "use_when": "Any gallery or catalogue where items have one primary type plus several visual or attribute traits, including our own UX library gallery.",
+    "why_it_works": "Browsing splits into independent axes: what the section is (a big category rail), where it comes from (Website / Community tabs with counts) and how it looks (a Style dropdown listing every style with its count), so people can narrow 5,000+ items in a couple of clicks.",
+    "use_when": "Large galleries or catalogues where items have one primary type plus several visual or attribute traits, including our own gallery.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/filters/unsection-category-tabs-style-chips",
     "images": [
-      "entries/filters/unsection-category-tabs-style-chips/desktop.jpg"
+      "entries/filters/unsection-category-tabs-style-chips/desktop.jpg",
+      "entries/filters/unsection-category-tabs-style-chips/mobile.jpg",
+      "entries/filters/unsection-category-tabs-style-chips/crop-style-open.jpg"
     ],
     "files": [
       "entry.md"
     ],
-    "body": "## What it is\nUnsection is a curated library of 1,500+ individual website sections (not full pages), plus hover\neffects and an SVG library. The browse screen is dark and stacks three bands:\n\n1. **Top nav:** wordmark, then `Sections · Community · Hover Effects · SVG`; on the right `Deals`,\n   `More ▾`, a yellow **Submit** pill and the avatar.\n2. **Category tab row:** pill tabs for section types, which scroll sideways: `Feature Section Design`,\n   `Hero Section Design`, `CTA Section Design`, `Footer…`, `Testimonial…`, `Blog…`, `Logo…`,\n   `Pricing…`, `Navbar…`, `FAQ…`, `Team…`.\n3. **Style chip row:** compact text chips for visual traits, with a `RESET` at the far right:\n   `UI Mockup, Flat Color, Light, Text Heavy, Table View, Video, Black & White, Card, Bento,\n   Visible Border, Image, Vector, Minimal, Colorful, Dark, Large Type, 3D, Uncommon, Gradient, Pastel`.\n\nBelow the chips sits the results grid; see the related entries for the grid and the nav.\n\n## Key techniques\n- **Two orthogonal filter rows:** categories are mutually exclusive tabs, while style chips stack as AND filters. One `RESET` clears the chips.\n- **Different visual weights per axis:** the category tabs are bordered pills (primary choice) and the style chips are plain small text (secondary refinement), so the hierarchy of the two filters reads instantly.\n- **Paid tier gates depth, not the first look:** the free tier gives homepage inspiration, and Pro (about $3/month billed yearly, or $99 lifetime) unlocks the full section library and categories.\n\n## Accessibility\nThe chip labels are very small, low-contrast grey on near-black, which likely fails 4.5:1. The active\nstate of tabs and chips needs more than a subtle colour change (use fill plus `aria-pressed`). The tab row\nscrolls sideways, so it needs visible overflow cues and keyboard reachability.\n\n## Weaknesses\nTwenty-odd style chips in one undifferentiated row is a lot to scan. Grouping them (colour · layout ·\nmedia) would help. Thumbnails are small, so the detail of a section only shows on click.\n\n## Related entries\n- `content-grid/unsection-captioned-thumbnail-grid`: the results grid below these filters.\n- `navigation/unsection-dark-nav-submit-pill`: the top nav.\n\n## Relevance to us\nThis is a direct model for our gallery, `gallery/index.html`. Our `pattern` corresponds to their category tabs and our\n`tags` to their style chips. Worth adopting: a tab row for patterns instead of a dropdown, and\n`<pattern> · <site>` captions on cards.\n\n> Captured from a phone screenshot of an Instagram reel (ferdie.dev) showing the desktop site, so\n> image quality is low. Site details come from that screenshot plus public search results; the\n> site itself couldn't be fetched from this session. Re-capture locally with `npm run capture -- https://www.unsection.com <dir>` for a sharp screenshot and code."
+    "body": "## What it is\nUnsection's homepage on a black canvas. On the left, a **large-type category rail** (Hero, Testimonials, Feature,\nCTA, Footer, Blog, Navbar, Pricing, Logo, FAQs, Team, Contact…). Above the results, a filter bar: segmented tabs\n**Website 5,228 / Community 90**, then **Style** and **Type** dropdowns and **Sort: Latest**. Opening Style\nshows each style with how many items it has (3D 314, Bento 320, Black & White 534, Card 1,446, Colorful 468…).\n\n## Key techniques\n- **Counts everywhere**: tabs and style options show result counts, so you know before you click whether a filter is worth it.\n- **Category as navigation, style as a filter**: the rail is big and permanent, while style lives in a dropdown and stays out of the way.\n- **Source tabs** separate curated website sections from community submissions.\n- **Sort as a separate control** (\"Latest\") instead of mixing it with filters.\n\n## Accessibility\nDropdowns need proper listbox semantics and keyboard support. The grey rail text on black is borderline for contrast.\n\n## Weaknesses\nStyle options are hidden until opened, so visual browsing by style is less discoverable than the old chip row.\n\n## Related entries\n- `content-grid/unsection-captioned-thumbnail-grid` (the results)\n- `navigation/unsection-dark-nav-submit-pill` (the top bar)\n\n> Recaptured live on 2026-10-17 (desktop, mobile, Style dropdown opened). Unsection was redesigned after the Instagram reel this entry was first built from, so the description now follows the live site; the reel crop has been replaced."
   },
   {
     "id": "hero/linear-dark-product-hero",
     "kind": "pattern",
-    "title": "Dark product hero with glowing app screenshot",
+    "title": "Dark product hero with a live-looking app screenshot",
     "pattern": "hero",
     "page_type": "landing",
     "tags": [
       "saas",
       "devtools",
       "dark",
-      "gradient",
-      "minimal",
-      "animated"
+      "minimal"
     ],
     "source_url": "https://linear.app",
     "source_site": "linear.app",
     "captured_at": "2026-10-17",
-    "captured_by": "base-pack",
-    "input": "base-pack",
+    "captured_by": "toby",
+    "input": "url",
     "rating": 5,
-    "why_it_works": "A short, confident headline plus a large real product screenshot sells the product faster than any illustration; the dark canvas and soft glow make the UI the brightest thing on the page.",
-    "use_when": "Product-led SaaS where the interface itself is the selling point.",
+    "why_it_works": "A short, confident headline over a near-black page, then a large, realistic product UI right below the fold line, so the interface itself does the selling and invites the scroll.",
+    "use_when": "Product-led SaaS where the interface is the selling point.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/hero/linear-dark-product-hero",
     "images": [
+      "entries/hero/linear-dark-product-hero/desktop.jpg",
+      "entries/hero/linear-dark-product-hero/mobile.jpg",
       "entries/hero/linear-dark-product-hero/preview.jpg"
     ],
     "files": [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nNear-black page, centred tight headline (two lines, large, slightly negative letter-spacing),\none-sentence subhead in muted grey, a pair of CTAs (solid primary, ghost secondary), then a\nwide, slightly perspective-tilted product screenshot that bleeds off the bottom of the fold\nwith a subtle radial glow behind it.\n\n## Key techniques\n- Headline 56–72px, `letter-spacing: -0.02em`, gradient text fading white → grey.\n- Subhead in ~60% opacity text, max ~560px wide for an easy line length.\n- Screenshot framed with 1px translucent border + large soft shadow, cropped by the fold to invite scrolling.\n- Restrained entrance motion: fade/translate-up 8–16px, staggered ~80ms.\n- Tiny \"announcement\" pill above the headline linking to the latest release.\n\n## Accessibility\nMuted grey subhead on near-black needs checking for 4.5:1; gradient text must keep the\ndarkest stop above contrast threshold. Respect `prefers-reduced-motion` for entrance animations.\n\n## Weaknesses\nRelies on a beautiful product UI — with a less polished app it exposes you. Dark-only can feel\ncold for consumer audiences.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nNear-black page with a slim nav (Product, Resources, Customers, Pricing, Now, Contact · Log in · Sign up pill). A\nlarge left-aligned two-line headline (\"The product development system for teams and agents\"), a one-line muted\nsubhead, and a small \"New · Loops →\" announcement link on the right. Below, a wide screenshot of the real app\n(sidebar, an issue titled \"Faster app launch\", activity feed and a floating AI chat panel) is cut off by the fold.\n\n## Key techniques\n- **Left-aligned headline**, not centred: reads like an editorial statement and lines up with the app's sidebar below.\n- **Real content in the screenshot**: a plausible issue, activity log and an AI agent panel (\"Thinking…\"), which sells the current feature set.\n- **Announcement as a quiet text link** (\"New · Loops →\") rather than a pill above the headline.\n- **The fold crops the product**, inviting a scroll. The mobile layout keeps the headline first and the UI below.\n- Very low-contrast chrome so the product screenshot is the brightest thing on the page.\n\n## Accessibility\nThe muted subhead and nav are low contrast on black; check them for 4.5:1. The screenshot is an image of UI, so it needs alt text that says what it shows.\n\n## Weaknesses\nIt depends on a beautiful product UI. Dark-only can feel cold for consumer audiences.\n\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference."
   },
   {
     "id": "mega-menu/stripe-products-menu",
     "kind": "pattern",
-    "title": "Grouped products mega menu with icons and one-line descriptions",
+    "title": "Five-column products mega menu with a featured promo",
     "pattern": "mega-menu",
     "page_type": "landing",
     "tags": [
       "saas",
       "b2b",
-      "animated",
       "progressive-disclosure"
     ],
     "source_url": "https://stripe.com",
     "source_site": "stripe.com",
     "captured_at": "2026-10-17",
-    "captured_by": "base-pack",
-    "input": "base-pack",
+    "captured_by": "toby",
+    "input": "url",
     "rating": 5,
-    "why_it_works": "A large product suite becomes navigable because items are grouped by job-to-be-done, each with an icon and a short description, and the panel morphs smoothly between top-level menus instead of flashing.",
-    "use_when": "Sites with 8+ products or solution areas that need to be navigable from the header.",
+    "why_it_works": "A large product suite becomes navigable because products are grouped by job (Payments, Revenue, Money Management, Embedded Finance), each with a one-line description, plus routes for people who don't know what they need.",
+    "use_when": "Sites with 8+ products that need to be reachable from the header.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/mega-menu/stripe-products-menu",
     "images": [
+      "entries/mega-menu/stripe-products-menu/desktop.jpg",
+      "entries/mega-menu/stripe-products-menu/mobile.jpg",
       "entries/mega-menu/stripe-products-menu/preview.jpg"
     ],
     "files": [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nHovering a top-nav item opens a white floating panel with a small caret, containing columns of\ngrouped links (e.g. Payments, Revenue, Banking-as-a-service). Each link: coloured icon, bold name,\none-line grey description. Moving between nav items animates the panel's size and position.\n\n## Key techniques\n- Single shared panel whose width/height transition between menus (~250ms) — no close/reopen flicker.\n- Hover intent delay (~100–150ms) so diagonal mouse movements don't switch menus.\n- Columns with small uppercase group headings; generous 16–24px padding.\n- Panel has large soft shadow and 8–12px radius.\n\n## Accessibility\nMust also open on click/Enter with `aria-expanded`; Esc closes and returns focus. On mobile\ncollapse to an accordion inside a full-screen sheet.\n\n## Weaknesses\nHover-only menus fail on touch; the morphing animation is complex to build well.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nHovering **Products** opens a full-width white panel under the nav with five columns: **Payments**, **Revenue**,\n**Money Management**, **Embedded Finance** and **More**. Each item is a blue product name with a short grey\ndescription (e.g. \"Payment links · No-code payments\", \"Billing · Recurring revenue\"). On the right sits a featured\ncard (Stripe Sessions, with an image and \"Watch now →\"). A footer row offers \"Not sure where to start? · Get\nrecommendations · See all products\".\n\n## Key techniques\n- **Grouped by job, not alphabetically**: the column headings are the buying intents.\n- **Name + one-line description** for every item, so scanning works without knowing product names.\n- **Escape hatches** for undecided visitors (\"Get recommendations\", \"See all products\").\n- **One promotional slot** inside the menu, visually separate from navigation.\n- Clean typographic hierarchy: no icons, so dozens of items still read calmly.\n\n## Accessibility\nMust also open on click or Enter with `aria-expanded`, close on Esc and return focus. On mobile the nav\ncollapses into a menu button (captured); keep the same groups as accordions.\n\n## Weaknesses\nIt's a lot of choice in one panel; the promo competes slightly with navigation.\n\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference."
   },
   {
     "id": "navigation/unsection-dark-nav-submit-pill",
     "kind": "pattern",
-    "title": "Dark utility nav with a single bright Submit pill",
+    "title": "Dark utility nav with central search and one bright join button",
     "pattern": "navigation",
     "page_type": "search-results",
     "tags": [
       "dark",
       "minimal",
-      "saas"
+      "saas",
+      "keyboard"
     ],
     "source_url": "https://www.unsection.com",
     "source_site": "unsection.com",
     "captured_at": "2026-10-17",
     "captured_by": "toby",
-    "input": "screenshot",
+    "input": "url",
     "rating": 3,
-    "why_it_works": "All navigation is quiet small-caps grey text except one high-contrast yellow pill, so the community action (submit a design) is impossible to miss without competing with the content below.",
-    "use_when": "Content-heavy products (galleries, directories, marketplaces) with one contribution or conversion action to promote.",
+    "why_it_works": "Everything in the bar is quiet except one white \"Join for free +\" pill, so the conversion action is unmistakable, while a wide search field with a \"/\" shortcut hint makes the library feel instantly searchable.",
+    "use_when": "Content-heavy products (galleries, directories, docs) with one sign-up action and search as the main navigation.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/navigation/unsection-dark-nav-submit-pill",
     "images": [
-      "entries/navigation/unsection-dark-nav-submit-pill/desktop.jpg"
+      "entries/navigation/unsection-dark-nav-submit-pill/desktop.jpg",
+      "entries/navigation/unsection-dark-nav-submit-pill/mobile.jpg",
+      "entries/navigation/unsection-dark-nav-submit-pill/crop-nav-bar.jpg"
     ],
     "files": [
       "entry.md"
     ],
-    "body": "## What it is\nA thin near-black top bar. On the left: the `UNSECTION` wordmark, then small uppercase links\n`Sections · Community · Hover Effects · SVG`, with the active one underlined. On the right: `Deals`\n(tinted red), `More ▾`, a solid yellow **Submit** pill and the avatar. The category tab row sits\ndirectly underneath (see `filters/unsection-category-tabs-style-chips`).\n\n## Key techniques\n- **Uppercase micro-labels** (~10–11px, letter-spaced) keep the bar short so more of the grid shows above the fold.\n- **One saturated accent:** the yellow Submit pill is the only bright element in the chrome.\n- **Secondary promo in colour, not shape:** `Deals` uses a tinted text colour instead of a second button, so it doesn't compete with Submit.\n- **Overflow into `More ▾`** keeps the bar to four primary links.\n\n## Accessibility\nTiny uppercase grey text on black is hard to read and probably fails contrast. The active-state\nunderline needs `aria-current=\"page\"`. Yellow with dark text on the pill is fine.\n\n## Weaknesses\nThe labels are too small for comfortable reading, and `More ▾` hides items people may look for.\n\n> Cropped from a phone screenshot of an Instagram reel, so the image is low resolution and the labels were read from a blurry image. Re-capture to confirm."
+    "body": "## What it is\nA black top bar: the unsection wordmark, two small tabs (**Sections**, **Templates**), a wide central **Search**\nfield showing a \"/\" keyboard-shortcut hint, then **Login** as plain text and **Join for free +** as a white pill,\nplus an overflow menu with a red notification dot. A \"What's new\" card appears bottom-right on first visit.\n\n## Key techniques\n- **Search-first**: the widest element in the bar, with a visible keyboard shortcut.\n- **One bright action** (the white pill); Login stays as text.\n- **Tabs for the two content types** rather than a dropdown menu.\n- A small dot on the overflow menu signals news without a banner.\n\n## Accessibility\nAnnounce the \"/\" shortcut and make sure it doesn't hijack typing in other fields. The notification dot needs a text alternative.\n\n## Weaknesses\nThe \"What's new\" popup covers content on first load.\n\n## Related entries\n- `filters/unsection-category-tabs-style-chips`\n\n> Recaptured live on 2026-10-17 (desktop, mobile, Style dropdown opened). Unsection was redesigned after the Instagram reel this entry was first built from, so the description now follows the live site; the reel crop has been replaced."
   },
   {
     "id": "onboarding/duolingo-one-question-flow",
     "kind": "pattern",
-    "title": "One-question-per-screen onboarding with progress bar",
+    "title": "One-question-per-screen onboarding with mascot and progress bar",
     "pattern": "onboarding",
     "page_type": "onboarding",
     "tags": [
@@ -607,27 +613,30 @@ window.CATALOG = [
     "source_url": "https://www.duolingo.com",
     "source_site": "duolingo.com",
     "captured_at": "2026-10-17",
-    "captured_by": "base-pack",
-    "input": "base-pack",
+    "captured_by": "toby",
+    "input": "url",
     "rating": 5,
-    "why_it_works": "Asking one easy question per screen, with a mascot speaking it and a progress bar filling up, makes a long setup feel like a short conversation — and users invest in personalisation before being asked to sign up.",
-    "use_when": "Consumer products that need several preferences before first value, especially pre-signup.",
+    "why_it_works": "Each screen asks one easy question, spoken by the mascot, with big icon options and a progress bar, so a long setup feels like a short conversation and users invest before they're asked to sign up.",
+    "use_when": "Consumer products that need several preferences before first value, especially before account creation.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/onboarding/duolingo-one-question-flow",
     "images": [
+      "entries/onboarding/duolingo-one-question-flow/desktop.jpg",
+      "entries/onboarding/duolingo-one-question-flow/mobile.jpg",
+      "entries/onboarding/duolingo-one-question-flow/crop-answer-selected.jpg",
+      "entries/onboarding/duolingo-one-question-flow/crop-step-1-language.jpg",
       "entries/onboarding/duolingo-one-question-flow/preview.jpg"
     ],
     "files": [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nTop: close button and a thick rounded progress bar. Middle: a mascot with a speech bubble asking\nthe question. Below: large tappable option cards (icon + label), single select. Bottom: full-width\n\"Continue\" button that is disabled until a choice is made. Account creation comes after the user\nhas answered and seen their personalised plan.\n\n## Key techniques\n- Chunky, tactile buttons: thick bottom border as a \"3D\" shadow that collapses on press.\n- Progress bar animates forward with a slight overshoot on each step.\n- Option cards have a clear selected state (accent border + tinted fill).\n- Signup deferred until after investment (\"Create a profile to save your progress\").\n\n## Accessibility\nOptions as a radio group; announce step changes; ensure the disabled Continue state is explained\n(e.g. \"Choose an option to continue\").\n\n## Weaknesses\nPlayful style doesn't suit all brands; too many steps still cause drop-off — measure each step.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\n\"Get started\" leads to \"I want to learn…\": a grid of large tiles with flags and learner counts (Spanish 41.9M,\nFrench 22.6M, Chess, English, Japanese, German, Math, Hindi…). After picking one, the mascot introduces itself\n(\"Hi there! I'm Duo!\", \"Let's get this party started!\"), then asks questions one at a time. The first,\n\"How did you hear about Duolingo?\", offers eight icon options in a 2×4 grid (News/article/blog, Friends/family,\nFacebook/Instagram, TV, YouTube, Google Search, TikTok, Other). A thin green progress bar runs along the top, and\n**Continue** stays disabled until an option is chosen. Selecting one tints it blue. No account is needed for any of this.\n\n## Key techniques\n- **Choose what you want before anything else**: the subject grid comes first, with learner counts as social proof.\n- **Mascot speech bubble** turns form questions into dialogue.\n- **Disabled Continue until answered**, then it turns solid green (step captured in `crop-answer-selected.jpg`).\n- **Single-column options on mobile**, two columns on desktop.\n- **Signup deferred**: no account requested in the steps we captured.\n\n## Accessibility\nThe options should be a radio group, and the progress bar should expose its value. Explain why Continue is disabled.\n\n## Weaknesses\nThe playful style doesn't suit every brand, and long flows still lose people, so measure each step.\n\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference."
   },
   {
     "id": "pricing-table/notion-billing-toggle",
     "kind": "pattern",
-    "title": "Plan cards with monthly/yearly toggle and highlighted plan",
+    "title": "Plan cards with a billing toggle and a recommended plan",
     "pattern": "pricing-table",
     "page_type": "pricing",
     "tags": [
@@ -639,27 +648,28 @@ window.CATALOG = [
     "source_url": "https://www.notion.com/pricing",
     "source_site": "notion.com",
     "captured_at": "2026-10-17",
-    "captured_by": "base-pack",
-    "input": "base-pack",
+    "captured_by": "toby",
+    "input": "url",
     "rating": 4,
-    "why_it_works": "A billing toggle that shows the yearly saving nudges annual plans, and one visually highlighted plan gives undecided buyers a default; the full feature matrix is deferred below the cards.",
+    "why_it_works": "A monthly/yearly toggle with \"Save up to 20%\" nudges annual billing, plans are grouped into two audience panels, and one plan is flagged \"Recommended\", so the default choice is obvious.",
     "use_when": "Subscription products with 3–4 tiers and a monthly/annual choice.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/pricing-table/notion-billing-toggle",
     "images": [
+      "entries/pricing-table/notion-billing-toggle/desktop.jpg",
+      "entries/pricing-table/notion-billing-toggle/mobile.jpg",
       "entries/pricing-table/notion-billing-toggle/preview.jpg"
     ],
     "files": [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nRow of 4 plan cards (Free → Enterprise) under a segmented Monthly/Yearly toggle with a\n\"save X%\" label. The recommended plan has a coloured border and a badge. Each card: name,\nprice per seat, one-line audience description, CTA, then a short \"Everything in X, plus\" list.\nA detailed comparison table follows further down.\n\n## Key techniques\n- Segmented control toggle; prices swap in place without layout shift (fixed-width price block).\n- \"Everything in Free, plus…\" lists avoid repeating features across cards.\n- Enterprise card uses \"Contact sales\" instead of a price.\n- Sticky plan header row in the comparison table.\n\n## Accessibility\nToggle should be a radio group (`role=\"radiogroup\"`) and announce the price change\n(`aria-live=\"polite\"` on the price).\n\n## Weaknesses\nPer-seat pricing math can confuse; show an example total when possible.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nHeadline \"One tool to run your company.\" with a customer logo row (OpenAI, Figma, Volvo, Ramp, Cursor). Below,\na segmented **Pay monthly / Pay yearly** toggle with \"Save up to 20% with yearly\" and \"Price in USD\" on the\nright. The four plans sit in **two grouped panels**: \"Essentials for staying organized.\" (Free $0, Plus $10) and\n\"The AI workspace for work that matters.\" (Business $20 with a **Recommended** tag, Enterprise custom pricing).\nEach plan has a CTA and an \"Everything in X, and:\" feature list.\n\n## Key techniques\n- **Plans grouped by audience** in two tinted panels, a step beyond four equal cards.\n- **\"Everything in Plus, and:\"** lists avoid repeating features.\n- **A single solid-blue CTA** on the recommended plan; others are lighter.\n- **Logos above the price** reassure before the cost appears.\n\n## Accessibility\nThe toggle should be a radio group, and the price change should be announced (`aria-live=\"polite\"`).\n\n## Weaknesses\nPer-member pricing needs an example total for larger teams.\n\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference."
   },
   {
     "id": "search/airbnb-segmented-search-bar",
     "kind": "pattern",
-    "title": "Segmented search bar (Where · When · Who)",
+    "title": "Segmented search bar (Where · When · Who) with focused pickers",
     "pattern": "search",
     "page_type": "landing",
     "tags": [
@@ -671,27 +681,28 @@ window.CATALOG = [
     "source_url": "https://www.airbnb.com",
     "source_site": "airbnb.com",
     "captured_at": "2026-10-17",
-    "captured_by": "base-pack",
-    "input": "base-pack",
+    "captured_by": "toby",
+    "input": "url",
     "rating": 5,
-    "why_it_works": "Splitting one complex query into labelled segments inside a single pill makes a multi-field form feel like one simple search, and each segment opens its own focused picker.",
-    "use_when": "Search with 2–4 structured parameters (location, dates, guests, category, budget).",
+    "why_it_works": "Splitting a complex query into labelled segments inside one pill makes a multi-field form feel like a single search, and each segment opens its own focused picker with smart suggestions.",
+    "use_when": "Search with 2–4 structured parameters (place, dates, people, category).",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/search/airbnb-segmented-search-bar",
     "images": [
+      "entries/search/airbnb-segmented-search-bar/desktop.jpg",
+      "entries/search/airbnb-segmented-search-bar/mobile.jpg",
       "entries/search/airbnb-segmented-search-bar/preview.jpg"
     ],
     "files": [
       "preview.html",
       "entry.md"
     ],
-    "body": "## What it is\nA large rounded pill containing segments separated by thin dividers. Each segment has a bold\nsmall label and a grey placeholder (\"Search destinations\", \"Add dates\", \"Add guests\"). The search\nbutton is a round accent-coloured icon at the end that expands to show \"Search\" when active.\nClicking a segment highlights it (white raised pill on a grey bar) and opens a dropdown panel\n(map suggestions, calendar, guest steppers).\n\n## Key techniques\n- Active segment gets a raised white background while the rest of the bar greys out.\n- Dividers hide next to the active/hovered segment for a cleaner look.\n- On scroll it collapses to a compact one-line summary pill; on mobile it becomes a full-screen stepped flow.\n\n## Accessibility\nEach segment is a button with a visible label; panels need focus management and Esc to close.\nCalendar must be keyboard navigable.\n\n## Weaknesses\nComplex to implement well; overkill for single-field search.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nUnder the category tabs (All, Homes, Experiences, Services), a rounded pill with **Where / When / Who** segments\nand a round red search button. Clicking **Where** raises that segment and opens a dropdown of **suggested\ndestinations** with icons and reasons (\"Nearby · Find what's around you\", \"Dallas, TX · For sights like Dallas\nArboretum\"). Above it all, a dark banner promotes an \"AI search\" toggle. Captured with the Where panel open.\n\n## Key techniques\n- **Active segment lifts** (white, shadow) while the bar recedes.\n- **Suggestions with a reason**, not just place names.\n- **Search button grows to show its label** when a segment is active.\n- A new **AI search toggle** sits above the classic structured search, offering both modes side by side.\n\n## Accessibility\nEach segment needs to be a labelled button; panels need focus management and Esc to close.\n\n## Weaknesses\nComplex to build well; overkill for single-field search.\n\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference."
   },
   {
     "id": "social-proof/vercel-logo-wall-stats",
     "kind": "pattern",
-    "title": "Customer logo wall paired with outcome stats",
+    "title": "Logo strip plus one-stat customer proof sections",
     "pattern": "social-proof",
     "page_type": "landing",
     "tags": [
@@ -699,27 +710,31 @@ window.CATALOG = [
       "devtools",
       "b2b",
       "minimal",
-      "dark"
+      "animated"
     ],
     "source_url": "https://vercel.com",
     "source_site": "vercel.com",
     "captured_at": "2026-10-17",
-    "captured_by": "base-pack",
-    "input": "base-pack",
+    "captured_by": "toby",
+    "input": "url",
     "rating": 4,
-    "why_it_works": "Monochrome logos read as one calm band rather than a noisy collage, and pairing a recognisable customer with a concrete metric turns \"who uses it\" into \"what it did for them\".",
-    "use_when": "B2B products with recognisable customers and at least a few quantified results.",
+    "why_it_works": "A monochrome logo strip gives instant credibility, then each product section is anchored by one named customer and one concrete claim, which turns \"who uses it\" into \"what it did for them\".",
+    "use_when": "B2B products with recognisable customers and a few quantified results per use case.",
     "has_example": false,
-    "needs_capture": true,
     "path": "entries/social-proof/vercel-logo-wall-stats",
     "images": [
+      "entries/social-proof/vercel-logo-wall-stats/desktop.jpg",
+      "entries/social-proof/vercel-logo-wall-stats/mobile.jpg",
+      "entries/social-proof/vercel-logo-wall-stats/crop-customer-section.jpg",
       "entries/social-proof/vercel-logo-wall-stats/preview.jpg"
     ],
     "files": [
       "preview.html",
+      "source.html",
+      "styles.json",
       "entry.md"
     ],
-    "body": "## What it is\nA grid of customer logos rendered in a single neutral tone, separated by hairline borders, followed\nby a row of case-study cards each showing a logo, a large metric (e.g. \"−95% build time\") and a link\nto the story.\n\n## Key techniques\n- All logos forced to one colour (`filter: grayscale(1) brightness(…)` or mono SVGs), equal optical height.\n- Grid with 1px borders between cells instead of gaps — feels like a spec sheet.\n- Metric typography much larger than the supporting copy.\n- Logo hover reveals \"Read story →\".\n\n## Accessibility\nLogos need `alt` text with the company name; metric cards should be links with descriptive text, not \"Read more\".\n\n## Weaknesses\nUnverifiable or vague metrics undermine trust — use real numbers only.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+    "body": "## What it is\nUnder the \"Agentic Infrastructure\" hero, a single row of monochrome logos (Meta, Blackbox.ai, DoorDash, OpenAI,\nSpaceX, The Weather Company, Polymarket). Further down, each section pairs a product UI with one customer\nstatement: \"**Notion powers millions** of agent conversations daily on Vercel\", \"**Zapier serves over 100\nmillion** monthly website visits on Vercel\", \"**Mintlify powers documentation for over 20,000** companies on\nVercel\", plus a short feature list.\n\n## Key techniques\n- **One customer, one number, one sentence** per section, with the name and number set in a darker weight.\n- **Logos in one tone** and evenly spaced, as a calm band.\n- **Proof sits next to the product UI** it relates to, not in a separate testimonials block.\n- **Scroll-linked hero object**: the \"Ship SF\" container from the hero follows the scroll and overlaps the next section mid-scroll (see `crop-customer-section.jpg`).\n\n## Accessibility\nLogos need `alt` text with company names. The floating hero object should stop or simplify under reduced motion.\n\n## Weaknesses\nClaims are self-reported; link to the case studies so they can be verified.\n\n> Retargeted on recapture: the base-pack \"logo wall with stats cards\" no longer matches the site, so this entry now describes what Vercel actually does.\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference."
   },
   {
     "id": "sources/ag-charts",

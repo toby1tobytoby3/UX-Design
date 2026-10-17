@@ -13,6 +13,7 @@ why_it_works: Every metric is shown with its change versus a selectable comparis
 use_when: Admin or analytics home screens summarising 4–8 business metrics.
 has_example: false
 needs_capture: true
+capture_blocker: login required
 ---
 
 ## What it is
@@ -33,3 +34,5 @@ Charts need text equivalents (value + delta in text already helps). Don't rely o
 Too many cards dilute focus; pick the metrics that drive decisions.
 
 > Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots.
+
+> Recapture attempted 2026-10-17: this pattern is only visible when signed in, so it can't be captured automatically. Send a screenshot (or a screen recording) from your own account and run `ux-add` to replace the base-pack description.

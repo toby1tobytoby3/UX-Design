@@ -2,6 +2,10 @@
 // Capture a page (URL or local HTML file) into an entry folder.
 //
 //   node scripts/capture.mjs <url|file> <outDir> [--selector "<css>"] [--only desktop|mobile] [--name <basename>]
+//                            [--hover "<css>"] [--click "<css>"] [--wait <ms>] [--dismiss "<css>"]
+// --hover / --click open menus, panels and pickers before the screenshot (--click takes several selectors
+// separated by ' || ' for multi-step flows); --dismiss clicks a cookie banner first; --viewport shoots only
+// the first screen instead of the page top.
 //
 // Writes <outDir>/desktop.jpg and mobile.jpg (or <name>.jpg with --only),
 // and with --selector also source.html + styles.json for that element.
@@ -15,6 +19,11 @@ const flag = (k) => { const i = args.indexOf(k); return i >= 0 ? args.splice(i, 
 const selector = flag('--selector');
 const only = flag('--only');
 const name = flag('--name');
+const hover = flag('--hover');
+const click = flag('--click');
+const dismiss = flag('--dismiss');
+const extraWait = Number(flag('--wait') ?? 0);
+const viewportOnly = args.includes('--viewport') && args.splice(args.indexOf('--viewport'), 1);
 const [target, outDir] = args;
 if (!target || !outDir) {
   console.error('usage: capture.mjs <url|file> <outDir> [--selector css] [--only desktop|mobile] [--name base]');
@@ -41,7 +50,11 @@ try {
       throw new Error(`Could not load ${url}: ${err.message.split('\n')[0]}`);
     });
     if (res && !res.ok() && !url.startsWith('file:')) throw new Error(`Could not load ${url}: HTTP ${res.status()}`);
-    await page.waitForTimeout(1200); // let entrance animations settle
+    await page.waitForTimeout(1200 + extraWait); // let entrance animations settle
+    if (dismiss) await page.locator(dismiss).first().click({ timeout: 3000 }).catch(() => {});
+    // Interactions only on desktop: mobile layouts usually hide hover menus behind a toggle.
+    if (vp === 'desktop' && hover) { await page.locator(hover).first().hover({ timeout: 8000 }); await page.waitForTimeout(900); }
+    if (vp === 'desktop' && click) for (const step of click.split(' || ')) { await page.locator(step).first().click({ timeout: 10000 }); await page.waitForTimeout(1500); }
     const file = `${outDir}/${name ?? vp}.jpg`;
 
     if (selector) {
@@ -65,7 +78,7 @@ try {
       }
     } else {
       const height = await page.evaluate(() => document.documentElement.scrollHeight);
-      await page.screenshot({
+      await page.screenshot(viewportOnly ? { path: file, type: 'jpeg', quality: 80 } : {
         path: file, type: 'jpeg', quality: 80, fullPage: true,
         clip: { x: 0, y: 0, width: viewport.width, height: Math.min(height, MAX_HEIGHT) },
       });

@@ -13,6 +13,7 @@ why_it_works: Instead of saying "nothing here", the empty screen hands users the
 use_when: Any object (project, workspace, integration) that starts empty and needs setup before it's useful.
 has_example: false
 needs_capture: true
+capture_blocker: login required
 ---
 
 ## What it is
@@ -32,3 +33,5 @@ Copy buttons need labels ("Copy clone URL") and a polite announcement when copie
 Text-heavy for non-technical audiences — for consumer apps pair with a single primary action.
 
 > Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots.
+
+> Recapture attempted 2026-10-17: this pattern is only visible when signed in, so it can't be captured automatically. Send a screenshot (or a screen recording) from your own account and run `ux-add` to replace the base-pack description.

@@ -1,37 +1,35 @@
 ---
-title: Segmented search bar (Where · When · Who)
+title: Segmented search bar (Where · When · Who) with focused pickers
 pattern: search
 page_type: landing
 tags: [b2c, consumer-app, progressive-disclosure, responsive]
 source_url: https://www.airbnb.com
 source_site: airbnb.com
 captured_at: 2026-10-17
-captured_by: base-pack
-input: base-pack
+captured_by: toby
+input: url
 rating: 5
-why_it_works: Splitting one complex query into labelled segments inside a single pill makes a multi-field form feel like one simple search, and each segment opens its own focused picker.
-use_when: Search with 2–4 structured parameters (location, dates, guests, category, budget).
+why_it_works: Splitting a complex query into labelled segments inside one pill makes a multi-field form feel like a single search, and each segment opens its own focused picker with smart suggestions.
+use_when: Search with 2–4 structured parameters (place, dates, people, category).
 has_example: false
-needs_capture: true
 ---
 
 ## What it is
-A large rounded pill containing segments separated by thin dividers. Each segment has a bold
-small label and a grey placeholder ("Search destinations", "Add dates", "Add guests"). The search
-button is a round accent-coloured icon at the end that expands to show "Search" when active.
-Clicking a segment highlights it (white raised pill on a grey bar) and opens a dropdown panel
-(map suggestions, calendar, guest steppers).
+Under the category tabs (All, Homes, Experiences, Services), a rounded pill with **Where / When / Who** segments
+and a round red search button. Clicking **Where** raises that segment and opens a dropdown of **suggested
+destinations** with icons and reasons ("Nearby · Find what's around you", "Dallas, TX · For sights like Dallas
+Arboretum"). Above it all, a dark banner promotes an "AI search" toggle. Captured with the Where panel open.
 
 ## Key techniques
-- Active segment gets a raised white background while the rest of the bar greys out.
-- Dividers hide next to the active/hovered segment for a cleaner look.
-- On scroll it collapses to a compact one-line summary pill; on mobile it becomes a full-screen stepped flow.
+- **Active segment lifts** (white, shadow) while the bar recedes.
+- **Suggestions with a reason**, not just place names.
+- **Search button grows to show its label** when a segment is active.
+- A new **AI search toggle** sits above the classic structured search, offering both modes side by side.
 
 ## Accessibility
-Each segment is a button with a visible label; panels need focus management and Esc to close.
-Calendar must be keyboard navigable.
+Each segment needs to be a labelled button; panels need focus management and Esc to close.
 
 ## Weaknesses
-Complex to implement well; overkill for single-field search.
+Complex to build well; overkill for single-field search.
 
-> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots.
+> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference.

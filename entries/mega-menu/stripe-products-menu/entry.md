@@ -1,36 +1,38 @@
 ---
-title: Grouped products mega menu with icons and one-line descriptions
+title: Five-column products mega menu with a featured promo
 pattern: mega-menu
 page_type: landing
-tags: [saas, b2b, animated, progressive-disclosure]
+tags: [saas, b2b, progressive-disclosure]
 source_url: https://stripe.com
 source_site: stripe.com
 captured_at: 2026-10-17
-captured_by: base-pack
-input: base-pack
+captured_by: toby
+input: url
 rating: 5
-why_it_works: A large product suite becomes navigable because items are grouped by job-to-be-done, each with an icon and a short description, and the panel morphs smoothly between top-level menus instead of flashing.
-use_when: Sites with 8+ products or solution areas that need to be navigable from the header.
+why_it_works: A large product suite becomes navigable because products are grouped by job (Payments, Revenue, Money Management, Embedded Finance), each with a one-line description, plus routes for people who don't know what they need.
+use_when: Sites with 8+ products that need to be reachable from the header.
 has_example: false
-needs_capture: true
 ---
 
 ## What it is
-Hovering a top-nav item opens a white floating panel with a small caret, containing columns of
-grouped links (e.g. Payments, Revenue, Banking-as-a-service). Each link: coloured icon, bold name,
-one-line grey description. Moving between nav items animates the panel's size and position.
+Hovering **Products** opens a full-width white panel under the nav with five columns: **Payments**, **Revenue**,
+**Money Management**, **Embedded Finance** and **More**. Each item is a blue product name with a short grey
+description (e.g. "Payment links · No-code payments", "Billing · Recurring revenue"). On the right sits a featured
+card (Stripe Sessions, with an image and "Watch now →"). A footer row offers "Not sure where to start? · Get
+recommendations · See all products".
 
 ## Key techniques
-- Single shared panel whose width/height transition between menus (~250ms) — no close/reopen flicker.
-- Hover intent delay (~100–150ms) so diagonal mouse movements don't switch menus.
-- Columns with small uppercase group headings; generous 16–24px padding.
-- Panel has large soft shadow and 8–12px radius.
+- **Grouped by job, not alphabetically**: the column headings are the buying intents.
+- **Name + one-line description** for every item, so scanning works without knowing product names.
+- **Escape hatches** for undecided visitors ("Get recommendations", "See all products").
+- **One promotional slot** inside the menu, visually separate from navigation.
+- Clean typographic hierarchy: no icons, so dozens of items still read calmly.
 
 ## Accessibility
-Must also open on click/Enter with `aria-expanded`; Esc closes and returns focus. On mobile
-collapse to an accordion inside a full-screen sheet.
+Must also open on click or Enter with `aria-expanded`, close on Esc and return focus. On mobile the nav
+collapses into a menu button (captured); keep the same groups as accordions.
 
 ## Weaknesses
-Hover-only menus fail on touch; the morphing animation is complex to build well.
+It's a lot of choice in one panel; the promo competes slightly with navigation.
 
-> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots.
+> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference.

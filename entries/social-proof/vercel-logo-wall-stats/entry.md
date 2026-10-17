@@ -1,35 +1,37 @@
 ---
-title: Customer logo wall paired with outcome stats
+title: Logo strip plus one-stat customer proof sections
 pattern: social-proof
 page_type: landing
-tags: [saas, devtools, b2b, minimal, dark]
+tags: [saas, devtools, b2b, minimal, animated]
 source_url: https://vercel.com
 source_site: vercel.com
 captured_at: 2026-10-17
-captured_by: base-pack
-input: base-pack
+captured_by: toby
+input: url
 rating: 4
-why_it_works: Monochrome logos read as one calm band rather than a noisy collage, and pairing a recognisable customer with a concrete metric turns "who uses it" into "what it did for them".
-use_when: B2B products with recognisable customers and at least a few quantified results.
+why_it_works: A monochrome logo strip gives instant credibility, then each product section is anchored by one named customer and one concrete claim, which turns "who uses it" into "what it did for them".
+use_when: B2B products with recognisable customers and a few quantified results per use case.
 has_example: false
-needs_capture: true
 ---
 
 ## What it is
-A grid of customer logos rendered in a single neutral tone, separated by hairline borders, followed
-by a row of case-study cards each showing a logo, a large metric (e.g. "−95% build time") and a link
-to the story.
+Under the "Agentic Infrastructure" hero, a single row of monochrome logos (Meta, Blackbox.ai, DoorDash, OpenAI,
+SpaceX, The Weather Company, Polymarket). Further down, each section pairs a product UI with one customer
+statement: "**Notion powers millions** of agent conversations daily on Vercel", "**Zapier serves over 100
+million** monthly website visits on Vercel", "**Mintlify powers documentation for over 20,000** companies on
+Vercel", plus a short feature list.
 
 ## Key techniques
-- All logos forced to one colour (`filter: grayscale(1) brightness(…)` or mono SVGs), equal optical height.
-- Grid with 1px borders between cells instead of gaps — feels like a spec sheet.
-- Metric typography much larger than the supporting copy.
-- Logo hover reveals "Read story →".
+- **One customer, one number, one sentence** per section, with the name and number set in a darker weight.
+- **Logos in one tone** and evenly spaced, as a calm band.
+- **Proof sits next to the product UI** it relates to, not in a separate testimonials block.
+- **Scroll-linked hero object**: the "Ship SF" container from the hero follows the scroll and overlaps the next section mid-scroll (see `crop-customer-section.jpg`).
 
 ## Accessibility
-Logos need `alt` text with the company name; metric cards should be links with descriptive text, not "Read more".
+Logos need `alt` text with company names. The floating hero object should stop or simplify under reduced motion.
 
 ## Weaknesses
-Unverifiable or vague metrics undermine trust — use real numbers only.
+Claims are self-reported; link to the case studies so they can be verified.
 
-> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots.
+> Retargeted on recapture: the base-pack "logo wall with stats cards" no longer matches the site, so this entry now describes what Vercel actually does.
+> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference.

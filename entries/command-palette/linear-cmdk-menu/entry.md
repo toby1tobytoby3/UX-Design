@@ -13,6 +13,7 @@ why_it_works: Every action in the app becomes reachable from one shortcut; showi
 use_when: Apps with many actions or objects where users repeat tasks — dashboards, editors, admin tools.
 has_example: false
 needs_capture: true
+capture_blocker: login required
 ---
 
 ## What it is
@@ -34,3 +35,5 @@ Shortcut chips need `aria-hidden` or readable labels.
 Undiscoverable without a visible hint — pair it with a "⌘K" affordance in the UI.
 
 > Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots.
+
+> Recapture attempted 2026-10-17: this pattern is only visible when signed in, so it can't be captured automatically. Send a screenshot (or a screen recording) from your own account and run `ux-add` to replace the base-pack description.
