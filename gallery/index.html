@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Library</title>
+<style>
+  :root {
+    --bg: #fafaf9; --panel: #ffffff; --text: #1c1917; --muted: #78716c; --line: #e7e5e4;
+    --chip: #f5f5f4; --accent: #4f46e5; --accent-soft: #eef2ff; --warn: #b45309; --warn-soft: #fef3c7;
+    --shadow: 0 1px 2px #0000000d, 0 8px 24px #0000000a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c0a09; --panel: #1c1917; --text: #f5f5f4; --muted: #a8a29e; --line: #292524;
+      --chip: #292524; --accent: #818cf8; --accent-soft: #1e1b4b; --warn: #fbbf24; --warn-soft: #422006;
+      --shadow: 0 1px 2px #0006, 0 8px 24px #0004;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  a { color: var(--accent); }
+  button { font: inherit; color: inherit; }
+
+  header { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 1400px; margin: 0 auto; padding: 14px 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  h1 { font-size: 16px; margin: 0 12px 0 0; letter-spacing: -0.01em; }
+  h1 span { color: var(--muted); font-weight: 400; }
+  input[type=search], select { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; font: inherit; color: var(--text); }
+  input[type=search] { flex: 1 1 260px; min-width: 0; }
+  label.chk { display: flex; gap: 6px; align-items: center; color: var(--muted); white-space: nowrap; }
+  .tags { max-width: 1400px; margin: 0 auto; padding: 0 24px 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { border: 1px solid var(--line); background: var(--chip); border-radius: 99px; padding: 2px 10px; font-size: 12px; cursor: pointer; color: var(--muted); }
+  .tag[aria-pressed=true] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 20px 24px 64px; }
+  .count { color: var(--muted); margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; cursor: pointer; text-align: left; padding: 0; display: flex; flex-direction: column; justify-content: flex-start; box-shadow: var(--shadow); transition: transform .15s ease, border-color .15s ease; }
+  .card:hover, .card:focus-visible { transform: translateY(-2px); border-color: var(--accent); outline: none; }
+  .thumb { aspect-ratio: 16 / 10; background: var(--chip); display: block; width: 100%; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
+  .card .body { padding: 12px 14px 14px; }
+  .card h3 { margin: 0 0 4px; font-size: 14px; line-height: 1.35; }
+  .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; color: var(--muted); font-size: 12px; }
+  .pill { background: var(--chip); border-radius: 6px; padding: 1px 7px; font-size: 12px; color: var(--muted); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+  .pill.ok { background: var(--accent-soft); color: var(--accent); }
+  .stars { color: #f59e0b; letter-spacing: 1px; }
+  .empty { text-align: center; padding: 80px 0; color: var(--muted); }
+
+  dialog { border: 0; padding: 0; width: min(1100px, 100vw - 32px); max-height: calc(100vh - 32px); border-radius: 14px; background: var(--panel); color: var(--text); box-shadow: 0 30px 80px #0005; }
+  dialog::backdrop { background: #0008; }
+  .d { display: grid; grid-template-columns: 1.4fr 1fr; max-height: calc(100vh - 32px); }
+  .d .media { background: var(--chip); overflow: auto; }
+  .d .media img { display: block; width: 100%; }
+  .views { display: flex; gap: 6px; padding: 10px; position: sticky; top: 0; background: var(--chip); border-bottom: 1px solid var(--line); }
+  .views button { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 3px 10px; font-size: 12px; cursor: pointer; }
+  .views button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
+  .d .info { padding: 20px 22px; overflow: auto; }
+  .d h2 { margin: 0 0 6px; font-size: 20px; letter-spacing: -0.01em; }
+  .why { background: var(--accent-soft); border-radius: 8px; padding: 10px 12px; margin: 14px 0; }
+  .why b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); }
+  .links { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; font-size: 13px; }
+  .md h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 6px; }
+  .md p, .md ul { margin: 6px 0; } .md ul { padding-left: 18px; }
+  .md blockquote { margin: 14px 0; padding: 8px 12px; border-left: 3px solid var(--line); color: var(--muted); }
+  code { background: var(--chip); border-radius: 4px; padding: 1px 4px; font-size: 12px; }
+  .close { position: absolute; top: 10px; right: 12px; border: 0; background: var(--panel); border-radius: 99px; width: 30px; height: 30px; cursor: pointer; box-shadow: var(--shadow); }
+  @media (max-width: 760px) {
+    .d { grid-template-columns: 1fr; overflow: auto; }
+    .d .media, .d .info { overflow: visible; }
+    .bar, .tags, main { padding-left: 16px; padding-right: 16px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <h1>UX Library <span id="total"></span></h1>
+    <input type="search" id="q" placeholder="Search titles, techniques, sites…" aria-label="Search">
+    <select id="pattern" aria-label="Pattern"><option value="">All patterns</option></select>
+    <select id="page" aria-label="Page type"><option value="">All page types</option></select>
+    <select id="rating" aria-label="Minimum rating">
+      <option value="0">Any rating</option><option value="3">★★★+</option><option value="4">★★★★+</option><option value="5">★★★★★</option>
+    </select>
+    <label class="chk"><input type="checkbox" id="captured"> Real captures only</label>
+    <label class="chk"><input type="checkbox" id="example"> Has code example</label>
+  </div>
+  <div class="tags" id="tags" aria-label="Filter by tag"></div>
+</header>
+
+<main>
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <button class="close" id="close" aria-label="Close">✕</button>
+  <div class="d">
+    <div class="media"><div class="views" id="views"></div><img id="dlg-img" alt=""></div>
+    <div class="info" id="dlg-info"></div>
+  </div>
+</dialog>
+
+<script src="data.js"></script>
+<script>
+  const REPO = 'https://github.com/toby1tobytoby3/UX-Design/blob/main/';
+  const data = window.CATALOG || [];
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const stars = (n) => '★'.repeat(n || 0);
+  const tagsOf = (e) => Array.isArray(e.tags) ? e.tags : [];
+  const isCaptured = (e) => e.images.some((i) => !/\/preview\.\w+$/.test(i));
+
+  const activeTags = new Set();
+  const uniq = (arr) => [...new Set(arr)].filter(Boolean).sort();
+
+  function fill(select, values) {
+    for (const v of values) select.add(new Option(v, v));
+  }
+  fill($('pattern'), uniq(data.map((e) => e.pattern)));
+  fill($('page'), uniq(data.map((e) => e.page_type)));
+  $('total').textContent = `· ${data.length} entries`;
+
+  for (const t of uniq(data.flatMap(tagsOf))) {
+    const b = document.createElement('button');
+    b.className = 'tag'; b.textContent = t; b.setAttribute('aria-pressed', 'false');
+    b.onclick = () => {
+      activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t);
+      b.setAttribute('aria-pressed', activeTags.has(t));
+      render();
+    };
+    $('tags').append(b);
+  }
+
+  function matches(e) {
+    const q = $('q').value.trim().toLowerCase();
+    if (q) {
+      const hay = [e.title, e.pattern, e.page_type, e.source_site, e.why_it_works, e.use_when, e.body, tagsOf(e).join(' ')].join(' ').toLowerCase();
+      if (!q.split(/\s+/).every((w) => hay.includes(w))) return false;
+    }
+    if ($('pattern').value && e.pattern !== $('pattern').value) return false;
+    if ($('page').value && e.page_type !== $('page').value) return false;
+    if ((e.rating || 0) < Number($('rating').value)) return false;
+    if ($('captured').checked && !isCaptured(e)) return false;
+    if ($('example').checked && !e.has_example) return false;
+    for (const t of activeTags) if (!tagsOf(e).includes(t)) return false;
+    return true;
+  }
+
+  function render() {
+    const list = data.filter(matches).sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    $('count').textContent = `${list.length} of ${data.length} shown`;
+    $('grid').innerHTML = list.length ? '' : '<div class="empty">No entries match. Clear a filter, or add a reference with ux-add.</div>';
+    for (const e of list) {
+      const card = document.createElement('button');
+      card.className = 'card';
+      card.innerHTML = `
+        ${e.images[0] ? `<img class="thumb" loading="lazy" src="../${esc(e.images[0])}" alt="">` : '<div class="thumb"></div>'}
+        <div class="body">
+          <h3>${esc(e.title)}</h3>
+          <div class="meta"><span class="pill">${esc(e.pattern)}</span><span>${esc(e.source_site)}</span><span class="stars" aria-label="${e.rating} stars">${stars(e.rating)}</span>
+          ${isCaptured(e) ? '' : '<span class="pill warn">preview only</span>'}${e.has_example ? '<span class="pill ok">code</span>' : ''}</div>
+        </div>`;
+      card.onclick = () => open(e);
+      $('grid').append(card);
+    }
+  }
+
+  // Tiny markdown: ## headings, - lists, > quotes, **bold**, `code`, paragraphs.
+  function md(src) {
+    const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`([^`]+)`/g, '<code>$1</code>');
+    let html = '', list = false, para = [];
+    const flush = () => { if (para.length) html += `<p>${inline(para.join(' '))}</p>`; para = []; };
+    for (const raw of src.split('\n')) {
+      const line = raw.trim();
+      if (list && !line.startsWith('- ')) { html += '</ul>'; list = false; }
+      if (!line || /^(## |- |> )/.test(line)) flush();
+      if (!line) continue;
+      if (line.startsWith('## ')) html += `<h2>${inline(line.slice(3))}</h2>`;
+      else if (line.startsWith('- ')) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inline(line.slice(2))}</li>`; }
+      else if (line.startsWith('> ')) html += `<blockquote>${inline(line.slice(2))}</blockquote>`;
+      else para.push(line);
+    }
+    flush();
+    return html + (list ? '</ul>' : '');
+  }
+
+  function open(e) {
+    const views = $('views');
+    views.innerHTML = '';
+    e.images.forEach((src, i) => {
+      const b = document.createElement('button');
+      b.textContent = src.split('/').pop().replace(/\.\w+$/, '');
+      b.onclick = () => {
+        $('dlg-img').src = '../' + src;
+        views.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+      };
+      views.append(b);
+      if (i === 0) b.click();
+    });
+    if (!e.images.length) $('dlg-img').removeAttribute('src');
+
+    const file = (f) => e.files.includes(f);
+    $('dlg-info').innerHTML = `
+      <h2 id="dlg-title">${esc(e.title)}</h2>
+      <div class="meta"><span class="pill">${esc(e.pattern)}</span><span class="pill">${esc(e.page_type)}</span>
+        <span class="stars">${stars(e.rating)}</span>${tagsOf(e).map((t) => `<span class="pill">${esc(t)}</span>`).join('')}</div>
+      <div class="why"><b>Why it works</b>${esc(e.why_it_works)}</div>
+      <div><b>Use when:</b> ${esc(e.use_when)}</div>
+      <div class="links">
+        ${e.source_url && e.source_url !== 'unknown' ? `<a href="${esc(e.source_url)}" target="_blank" rel="noopener">Source: ${esc(e.source_site)} ↗</a>` : ''}
+        ${file('preview.html') ? `<a href="../${esc(e.path)}/preview.html" target="_blank">Open rebuild preview ↗</a>` : ''}
+        ${file('example.tsx') ? `<a href="${REPO}${esc(e.path)}/example.tsx" target="_blank" rel="noopener">example.tsx ↗</a>` : ''}
+        ${file('source.html') ? `<a href="${REPO}${esc(e.path)}/source.html" target="_blank" rel="noopener">Captured source ↗</a>` : ''}
+        <a href="${REPO}${esc(e.path)}/entry.md" target="_blank" rel="noopener">Entry on GitHub ↗</a>
+      </div>
+      <div class="md">${md(e.body)}</div>
+      <p class="meta">Path: <code>${esc(e.path)}</code> · captured ${esc(e.captured_at)} by ${esc(e.captured_by)}</p>`;
+    $('dlg').showModal();
+    $('dlg').scrollTop = 0;
+  }
+
+  $('close').onclick = () => $('dlg').close();
+  $('dlg').addEventListener('click', (ev) => { if (ev.target === $('dlg')) $('dlg').close(); });
+  ['q', 'pattern', 'page', 'rating', 'captured', 'example'].forEach((id) => $(id).addEventListener('input', render));
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "ux-design",
+  "owner": { "name": "toby1tobytoby3" },
+  "plugins": [
+    {
+      "name": "ux-library",
+      "source": "./",
+      "description": "Capture leading UX patterns from URLs or screenshots and look them up during builds."
+    }
+  ]
+}

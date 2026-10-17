@@ -1,0 +1,6 @@
+{
+  "name": "ux-library",
+  "version": "0.1.0",
+  "description": "Capture leading UX patterns from URLs or screenshots and look them up during builds.",
+  "repository": "https://github.com/toby1tobytoby3/UX-Design"
+}
