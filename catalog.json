@@ -1,6 +1,7 @@
 [
   {
     "id": "chart/echarts-aria-decal-patterns",
+    "kind": "pattern",
     "title": "Stacked bars with built-in accessibility textures",
     "pattern": "chart",
     "page_type": "dashboard",
@@ -24,14 +25,15 @@
       "entries/chart/echarts-aria-decal-patterns/desktop.jpg"
     ],
     "files": [
-      "entry.md",
       "option.js",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
-    "body": "## What it is\nMonthly support tickets stacked by four channels, with `aria: { enabled: true, decal: { show: true } }`.\nECharts assigns a distinct pattern per series (diagonal lines, dots, stripes, checks). The patterns also\nappear in the legend swatches, so the legend maps by texture as well as colour. Rendered from `option.js`\nwith ECharts 5.5.1 on sample data.\n\n## Key techniques\n- `aria.decal.show: true` auto-assigns patterns. Customise per series with `itemStyle.decal` (symbol, dash array, rotation).\n- Validated 4-colour order (`#2a78d6, #eb6834, #1baf7a, #eda100`) instead of the failing default palette.\n- A 1px surface-colour border separates stacked segments.\n- `emphasis.focus: 'series'` dims the other series on hover, and `axisPointer: 'shadow'` highlights the whole month.\n- Legend at the top right for 4 series. Labels and axes use text colours, never the series colours.\n\n## Accessibility\nThis *is* the accessibility pattern. It still needs a table view for exact values. The auto-generated aria description is\ngeneric (\"This is a chart about…\"); set `aria.label.description` to say what the chart actually shows.\n\n## Weaknesses\nDefault patterns are fairly busy on large areas. Tone them down with `decal.color` (lower alpha) or show decals only\nwhen the user turns on a \"patterns\" toggle.\n\n## Using it in our stack\n- Install: `npm i echarts` (Apache-2.0, free to use and modify in commercial products). Import only what you need with `echarts/core` plus the chart and component modules, to keep the bundle small.\n- In Next.js, render client-side: `\"use client\"`, `echarts.init(ref.current, null, { renderer: \"svg\" })` in a `useEffect`, call `chart.dispose()` on unmount, and `chart.resize()` from a `ResizeObserver`.\n- Our recommended palette: swap ECharts' default colours for the validated order in `option.js`. The default 9-colour palette **fails** colour-blind and contrast checks (see below).\n\n## ECharts default palette check\nRun through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. So always override `color` (or enable decals).\n\n## Related entries\n- `chart/echarts-datazoom-time-series`\n- `chart/echarts-universal-transition-morph`"
+    "body": "## What it is\nMonthly support tickets stacked by four channels, with `aria: { enabled: true, decal: { show: true } }`.\nECharts assigns a distinct pattern per series (diagonal lines, dots, stripes, checks). The patterns also\nappear in the legend swatches, so the legend maps by texture as well as colour. Rendered from `option.js`\nwith ECharts 5.5.1 on sample data.\n\n## Key techniques\n- `aria.decal.show: true` auto-assigns patterns. Customise per series with `itemStyle.decal` (symbol, dash array, rotation).\n- Validated 4-colour order (`#2a78d6, #eb6834, #1baf7a, #eda100`) instead of the failing default palette.\n- A 1px surface-colour border separates stacked segments.\n- `emphasis.focus: 'series'` dims the other series on hover, and `axisPointer: 'shadow'` highlights the whole month.\n- Legend at the top right for 4 series. Labels and axes use text colours, never the series colours.\n\n## Accessibility\nThis *is* the accessibility pattern. It still needs a table view for exact values. The auto-generated aria description is\ngeneric (\"This is a chart about…\"); set `aria.label.description` to say what the chart actually shows.\n\n## Weaknesses\nDefault patterns are fairly busy on large areas. Tone them down with `decal.color` (lower alpha) or show decals only\nwhen the user turns on a \"patterns\" toggle.\n\n## Using it in our stack\n- Install: `npm i echarts` (Apache-2.0, free to use and modify in commercial products). Import only what you need with `echarts/core` plus the chart and component modules, to keep the bundle small.\n- In Next.js, render client-side: `\"use client\"`, `echarts.init(ref.current, null, { renderer: \"svg\" })` in a `useEffect`, call `chart.dispose()` on unmount, and `chart.resize()` from a `ResizeObserver`.\n- Our recommended palette: swap ECharts' default colours for the validated order in `option.js` (see the palette check below). Demos are written against 5.5.1 and run unchanged on 6.x.\n\n## ECharts default palette check\n**ECharts 5.x** default, run through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. **ECharts 6.x** (current, 6.1.0) ships a new default (`#5070dd, #b6d634, #505372, …`) that **passes** CVD and normal-vision separation but still fails the lightness band, has a near-grey slot (`#505372`) and six colours below 3:1 contrast. Either way, override `color` with our validated order (or enable decals).\n\n## Related entries\n- `chart/echarts-datazoom-time-series`\n- `chart/echarts-universal-transition-morph`\n- Source profile: `sources/echarts`"
   },
   {
     "id": "chart/echarts-datazoom-time-series",
+    "kind": "pattern",
     "title": "Time series with inside zoom and a slider overview",
     "pattern": "chart",
     "page_type": "dashboard",
@@ -58,14 +60,15 @@
       "entries/chart/echarts-datazoom-time-series/mobile.jpg"
     ],
     "files": [
-      "entry.md",
       "option.js",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
-    "body": "## What it is\nA single-series area line chart from Apache ECharts with two `dataZoom` components sharing one\nrange: `inside` (wheel, pinch, drag on the plot) and `slider` (a draggable window over a\nminiature of the whole series). It has an axis tooltip with a crosshair, a peak marker, and ECharts' own\n`media` queries for a narrow-screen layout. Images are real renders of `option.js` with ECharts 5.5.1\non sample data.\n\n## Key techniques\n- `dataZoom: [{ type: 'inside' }, { type: 'slider' }]` with the same `start`/`end`. Both control one window.\n- Open at the most recent half (`start: 50`), so the default view is the latest data and history is one drag away.\n- `tooltip.trigger: 'axis'` + `axisPointer.type: 'cross'`, with formatted axis labels (date as \"Wed, 26 Aug\", value rounded).\n- 2px line, faint vertical gradient fill, recessive grid (`#ecebe7`), no symbols until hover.\n- `markPoint: { type: 'max' }` labels the peak automatically.\n- `baseOption` + `media: [{ query: { maxWidth: 500 } }]` adapts the layout on phones (fewer ticks, compact axis labels, no marker).\n- `renderer: 'svg'` gives crisp text and a smaller memory footprint for small to medium datasets. Use `canvas` for 10k+ points.\n\n## Accessibility\n`aria: { enabled: true }` generates a text description of the chart for screen readers. The slider\nhandles aren't keyboard-operable by default, so provide preset range buttons (7d / 30d / 90d) as an\naccessible alternative, plus a table view.\n\n## Weaknesses\nThe slider is fiddly on touch screens. Pair it with preset range buttons. The default tooltip and axis-pointer labels\nshow raw timestamps and decimals unless you add formatters (done here).\n\n## Using it in our stack\n- Install: `npm i echarts` (Apache-2.0, free to use and modify in commercial products). Import only what you need with `echarts/core` plus the chart and component modules, to keep the bundle small.\n- In Next.js, render client-side: `\"use client\"`, `echarts.init(ref.current, null, { renderer: \"svg\" })` in a `useEffect`, call `chart.dispose()` on unmount, and `chart.resize()` from a `ResizeObserver`.\n- Our recommended palette: swap ECharts' default colours for the validated order in `option.js`. The default 9-colour palette **fails** colour-blind and contrast checks (see below).\n\n## ECharts default palette check\nRun through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. So always override `color` (or enable decals).\n\n## Related entries\n- `chart/echarts-universal-transition-morph`\n- `chart/echarts-aria-decal-patterns`\n- `dashboard/stripe-home-kpi-overview`"
+    "body": "## What it is\nA single-series area line chart from Apache ECharts with two `dataZoom` components sharing one\nrange: `inside` (wheel, pinch, drag on the plot) and `slider` (a draggable window over a\nminiature of the whole series). It has an axis tooltip with a crosshair, a peak marker, and ECharts' own\n`media` queries for a narrow-screen layout. Images are real renders of `option.js` with ECharts 5.5.1\non sample data.\n\n## Key techniques\n- `dataZoom: [{ type: 'inside' }, { type: 'slider' }]` with the same `start`/`end`. Both control one window.\n- Open at the most recent half (`start: 50`), so the default view is the latest data and history is one drag away.\n- `tooltip.trigger: 'axis'` + `axisPointer.type: 'cross'`, with formatted axis labels (date as \"Wed, 26 Aug\", value rounded).\n- 2px line, faint vertical gradient fill, recessive grid (`#ecebe7`), no symbols until hover.\n- `markPoint: { type: 'max' }` labels the peak automatically.\n- `baseOption` + `media: [{ query: { maxWidth: 500 } }]` adapts the layout on phones (fewer ticks, compact axis labels, no marker).\n- `renderer: 'svg'` gives crisp text and a smaller memory footprint for small to medium datasets. Use `canvas` for 10k+ points.\n\n## Accessibility\n`aria: { enabled: true }` generates a text description of the chart for screen readers. The slider\nhandles aren't keyboard-operable by default, so provide preset range buttons (7d / 30d / 90d) as an\naccessible alternative, plus a table view.\n\n## Weaknesses\nThe slider is fiddly on touch screens. Pair it with preset range buttons. The default tooltip and axis-pointer labels\nshow raw timestamps and decimals unless you add formatters (done here).\n\n## Using it in our stack\n- Install: `npm i echarts` (Apache-2.0, free to use and modify in commercial products). Import only what you need with `echarts/core` plus the chart and component modules, to keep the bundle small.\n- In Next.js, render client-side: `\"use client\"`, `echarts.init(ref.current, null, { renderer: \"svg\" })` in a `useEffect`, call `chart.dispose()` on unmount, and `chart.resize()` from a `ResizeObserver`.\n- Our recommended palette: swap ECharts' default colours for the validated order in `option.js` (see the palette check below). Demos are written against 5.5.1 and run unchanged on 6.x.\n\n## ECharts default palette check\n**ECharts 5.x** default, run through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. **ECharts 6.x** (current, 6.1.0) ships a new default (`#5070dd, #b6d634, #505372, …`) that **passes** CVD and normal-vision separation but still fails the lightness band, has a near-grey slot (`#505372`) and six colours below 3:1 contrast. Either way, override `color` with our validated order (or enable decals).\n\n## Related entries\n- `chart/echarts-universal-transition-morph`\n- `chart/echarts-aria-decal-patterns`\n- Source profile: `sources/echarts`\n- `dashboard/stripe-home-kpi-overview`"
   },
   {
     "id": "chart/echarts-universal-transition-morph",
+    "kind": "pattern",
     "title": "Bar-to-share morph with universal transition",
     "pattern": "chart",
     "page_type": "dashboard",
@@ -91,14 +94,15 @@
       "entries/chart/echarts-universal-transition-morph/crop-share.jpg"
     ],
     "files": [
-      "entry.md",
       "option.js",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
-    "body": "## What it is\nRevenue by five channels shown as a horizontal bar chart with value labels. A segmented **Bar / Share**\ntoggle switches to a donut with percentage labels. ECharts' `universalTransition` morphs each bar into\nits slice. The images show both states (`desktop.jpg` = bar, `crop-share.jpg` = share), rendered\nfrom `option.js` with ECharts 5.5.1 on sample data.\n\n## Key techniques\n- Same series `id` in both options plus `universalTransition: true`. That's all it takes for ECharts to animate between chart types.\n- `setOption(next, { replaceMerge: ['xAxis', 'yAxis', 'grid'] })` cleanly removes the axes when going to the donut.\n- Colour is set per data item, so each channel keeps its colour in both views (colour follows the entity).\n- Bars are sorted descending with direct value labels, so no legend is needed. The donut has a 2px surface border between slices.\n- The toggle is a real segmented control with `aria-pressed`.\n- `animationDurationUpdate: 700` is slow enough to follow, fast enough not to annoy.\n\n## Accessibility\nRespect `prefers-reduced-motion` by setting `animation: false` when it's on. The toggle buttons are keyboard-reachable;\nannounce the view change or keep a table view.\n\n## Weaknesses\nA donut is only readable for about five categories. Beyond that, keep the bar view only. The morph is decorative\nif users never switch views.\n\n## Using it in our stack\n- Install: `npm i echarts` (Apache-2.0, free to use and modify in commercial products). Import only what you need with `echarts/core` plus the chart and component modules, to keep the bundle small.\n- In Next.js, render client-side: `\"use client\"`, `echarts.init(ref.current, null, { renderer: \"svg\" })` in a `useEffect`, call `chart.dispose()` on unmount, and `chart.resize()` from a `ResizeObserver`.\n- Our recommended palette: swap ECharts' default colours for the validated order in `option.js`. The default 9-colour palette **fails** colour-blind and contrast checks (see below).\n\n## ECharts default palette check\nRun through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. So always override `color` (or enable decals).\n\n## Related entries\n- `chart/echarts-datazoom-time-series`\n- `chart/echarts-aria-decal-patterns`"
+    "body": "## What it is\nRevenue by five channels shown as a horizontal bar chart with value labels. A segmented **Bar / Share**\ntoggle switches to a donut with percentage labels. ECharts' `universalTransition` morphs each bar into\nits slice. The images show both states (`desktop.jpg` = bar, `crop-share.jpg` = share), rendered\nfrom `option.js` with ECharts 5.5.1 on sample data.\n\n## Key techniques\n- Same series `id` in both options plus `universalTransition: true`. That's all it takes for ECharts to animate between chart types.\n- `setOption(next, { replaceMerge: ['xAxis', 'yAxis', 'grid'] })` cleanly removes the axes when going to the donut.\n- Colour is set per data item, so each channel keeps its colour in both views (colour follows the entity).\n- Bars are sorted descending with direct value labels, so no legend is needed. The donut has a 2px surface border between slices.\n- The toggle is a real segmented control with `aria-pressed`.\n- `animationDurationUpdate: 700` is slow enough to follow, fast enough not to annoy.\n\n## Accessibility\nRespect `prefers-reduced-motion` by setting `animation: false` when it's on. The toggle buttons are keyboard-reachable;\nannounce the view change or keep a table view.\n\n## Weaknesses\nA donut is only readable for about five categories. Beyond that, keep the bar view only. The morph is decorative\nif users never switch views.\n\n## Using it in our stack\n- Install: `npm i echarts` (Apache-2.0, free to use and modify in commercial products). Import only what you need with `echarts/core` plus the chart and component modules, to keep the bundle small.\n- In Next.js, render client-side: `\"use client\"`, `echarts.init(ref.current, null, { renderer: \"svg\" })` in a `useEffect`, call `chart.dispose()` on unmount, and `chart.resize()` from a `ResizeObserver`.\n- Our recommended palette: swap ECharts' default colours for the validated order in `option.js` (see the palette check below). Demos are written against 5.5.1 and run unchanged on 6.x.\n\n## ECharts default palette check\n**ECharts 5.x** default, run through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. **ECharts 6.x** (current, 6.1.0) ships a new default (`#5070dd, #b6d634, #505372, …`) that **passes** CVD and normal-vision separation but still fails the lightness band, has a near-grey slot (`#505372`) and six colours below 3:1 contrast. Either way, override `color` with our validated order (or enable decals).\n\n## Related entries\n- `chart/echarts-datazoom-time-series`\n- `chart/echarts-aria-decal-patterns`\n- Source profile: `sources/echarts`"
   },
   {
     "id": "command-palette/linear-cmdk-menu",
+    "kind": "pattern",
     "title": "Cmd+K command menu with grouped actions and shortcuts",
     "pattern": "command-palette",
     "page_type": "app",
@@ -124,13 +128,14 @@
       "entries/command-palette/linear-cmdk-menu/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nCentred modal (~640px) over a dimmed app. Large search input at the top, results grouped under\nsmall uppercase headings (e.g. Issues, Navigation, Actions), each row with icon, label and right-aligned\nkeyboard shortcut chips. Context-aware: actions for the selected item appear first.\n\n## Key techniques\n- Opens on Cmd/Ctrl+K, closes on Esc; arrow keys move a highlighted row; Enter runs it.\n- Fuzzy matching with highlighted matched characters.\n- Sub-pages: choosing \"Change status…\" swaps the list in place with a breadcrumb chip in the input.\n- Fast motion: ~120ms scale-from-98% + fade.\n\n## Accessibility\nUse the ARIA combobox + listbox pattern (`aria-activedescendant`), trap focus, return focus on close.\nShortcut chips need `aria-hidden` or readable labels.\n\n## Weaknesses\nUndiscoverable without a visible hint — pair it with a \"⌘K\" affordance in the UI.\n\n> Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "content-grid/unsection-captioned-thumbnail-grid",
+    "kind": "pattern",
     "title": "Featured preview over a captioned thumbnail grid",
     "pattern": "content-grid",
     "page_type": "search-results",
@@ -161,6 +166,7 @@
   },
   {
     "id": "dashboard/stripe-home-kpi-overview",
+    "kind": "pattern",
     "title": "KPI overview with comparison period and sparkline charts",
     "pattern": "dashboard",
     "page_type": "dashboard",
@@ -185,13 +191,14 @@
       "entries/dashboard/stripe-home-kpi-overview/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nHeader with date-range and \"compare to previous period\" controls. A main chart (today vs yesterday\nline, current value large) then a grid of metric cards: label, big value, coloured delta pill\n(+12.4%), small line chart with the comparison period as a dashed/grey line.\n\n## Key techniques\n- Tabular numerals (`font-variant-numeric: tabular-nums`) so values don't jitter.\n- Comparison line in grey, current in brand colour; no gridline clutter.\n- Delta pills use colour + sign (not colour alone).\n- Cards are borderless, separated by whitespace and hairlines.\n\n## Accessibility\nCharts need text equivalents (value + delta in text already helps). Don't rely on red/green alone.\n\n## Weaknesses\nToo many cards dilute focus; pick the metrics that drive decisions.\n\n> Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "empty-state/github-empty-repo-quick-setup",
+    "kind": "pattern",
     "title": "Empty state as a quick-setup guide with copyable commands",
     "pattern": "empty-state",
     "page_type": "app",
@@ -215,13 +222,14 @@
       "entries/empty-state/github-empty-repo-quick-setup/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nA new empty repository shows a \"Quick setup\" box with the clone URL (HTTPS/SSH toggle + copy\nbutton), then several titled sections — \"create a new repository on the command line\", \"push an\nexisting repository\" — each with a code block and a copy button.\n\n## Key techniques\n- Branches by user situation (starting fresh vs. bringing existing work).\n- Copy buttons on every command; values (URL, names) pre-filled with the user's own data.\n- Calm visual weight: bordered panels, monospace blocks, no illustration needed.\n\n## Accessibility\nCopy buttons need labels (\"Copy clone URL\") and a polite announcement when copied.\n\n## Weaknesses\nText-heavy for non-technical audiences — for consumer apps pair with a single primary action.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "feature-grid/apple-bento-highlights",
+    "kind": "pattern",
     "title": "Bento grid of product highlights",
     "pattern": "feature-grid",
     "page_type": "product",
@@ -246,13 +254,14 @@
       "entries/feature-grid/apple-bento-highlights/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nA CSS grid of rounded tiles of varying spans (2×2, 2×1, 1×1) on a light grey page. Each tile\nhas one big number or short claim, a one-line explanation, and sometimes an image or icon.\n\n## Key techniques\n- `grid-template-columns: repeat(4, 1fr)` with `grid-auto-flow: dense`; tiles span 1–2 columns/rows.\n- Large radius (~24–28px), no borders, white or dark tiles on `#f5f5f7` background.\n- Huge stat typography (48–80px, semibold) with small supporting text.\n- Collapses to 2 columns on tablet and a single stack on mobile.\n\n## Accessibility\nOrder the DOM by importance, not by visual position, since `dense` packing can reorder visually.\n\n## Weaknesses\nEasy to overdo — more than ~9 tiles turns into noise. Needs real imagery or strong stats to land.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "filters/unsection-category-tabs-style-chips",
+    "kind": "pattern",
     "title": "Two-axis browse with category tabs and style chips",
     "pattern": "filters",
     "page_type": "search-results",
@@ -283,6 +292,7 @@
   },
   {
     "id": "hero/linear-dark-product-hero",
+    "kind": "pattern",
     "title": "Dark product hero with glowing app screenshot",
     "pattern": "hero",
     "page_type": "landing",
@@ -309,13 +319,14 @@
       "entries/hero/linear-dark-product-hero/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nNear-black page, centred tight headline (two lines, large, slightly negative letter-spacing),\none-sentence subhead in muted grey, a pair of CTAs (solid primary, ghost secondary), then a\nwide, slightly perspective-tilted product screenshot that bleeds off the bottom of the fold\nwith a subtle radial glow behind it.\n\n## Key techniques\n- Headline 56–72px, `letter-spacing: -0.02em`, gradient text fading white → grey.\n- Subhead in ~60% opacity text, max ~560px wide for an easy line length.\n- Screenshot framed with 1px translucent border + large soft shadow, cropped by the fold to invite scrolling.\n- Restrained entrance motion: fade/translate-up 8–16px, staggered ~80ms.\n- Tiny \"announcement\" pill above the headline linking to the latest release.\n\n## Accessibility\nMuted grey subhead on near-black needs checking for 4.5:1; gradient text must keep the\ndarkest stop above contrast threshold. Respect `prefers-reduced-motion` for entrance animations.\n\n## Weaknesses\nRelies on a beautiful product UI — with a less polished app it exposes you. Dark-only can feel\ncold for consumer audiences.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "mega-menu/stripe-products-menu",
+    "kind": "pattern",
     "title": "Grouped products mega menu with icons and one-line descriptions",
     "pattern": "mega-menu",
     "page_type": "landing",
@@ -340,13 +351,14 @@
       "entries/mega-menu/stripe-products-menu/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nHovering a top-nav item opens a white floating panel with a small caret, containing columns of\ngrouped links (e.g. Payments, Revenue, Banking-as-a-service). Each link: coloured icon, bold name,\none-line grey description. Moving between nav items animates the panel's size and position.\n\n## Key techniques\n- Single shared panel whose width/height transition between menus (~250ms) — no close/reopen flicker.\n- Hover intent delay (~100–150ms) so diagonal mouse movements don't switch menus.\n- Columns with small uppercase group headings; generous 16–24px padding.\n- Panel has large soft shadow and 8–12px radius.\n\n## Accessibility\nMust also open on click/Enter with `aria-expanded`; Esc closes and returns focus. On mobile\ncollapse to an accordion inside a full-screen sheet.\n\n## Weaknesses\nHover-only menus fail on touch; the morphing animation is complex to build well.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "navigation/unsection-dark-nav-submit-pill",
+    "kind": "pattern",
     "title": "Dark utility nav with a single bright Submit pill",
     "pattern": "navigation",
     "page_type": "search-results",
@@ -376,6 +388,7 @@
   },
   {
     "id": "onboarding/duolingo-one-question-flow",
+    "kind": "pattern",
     "title": "One-question-per-screen onboarding with progress bar",
     "pattern": "onboarding",
     "page_type": "onboarding",
@@ -401,13 +414,14 @@
       "entries/onboarding/duolingo-one-question-flow/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nTop: close button and a thick rounded progress bar. Middle: a mascot with a speech bubble asking\nthe question. Below: large tappable option cards (icon + label), single select. Bottom: full-width\n\"Continue\" button that is disabled until a choice is made. Account creation comes after the user\nhas answered and seen their personalised plan.\n\n## Key techniques\n- Chunky, tactile buttons: thick bottom border as a \"3D\" shadow that collapses on press.\n- Progress bar animates forward with a slight overshoot on each step.\n- Option cards have a clear selected state (accent border + tinted fill).\n- Signup deferred until after investment (\"Create a profile to save your progress\").\n\n## Accessibility\nOptions as a radio group; announce step changes; ensure the disabled Continue state is explained\n(e.g. \"Choose an option to continue\").\n\n## Weaknesses\nPlayful style doesn't suit all brands; too many steps still cause drop-off — measure each step.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "pricing-table/notion-billing-toggle",
+    "kind": "pattern",
     "title": "Plan cards with monthly/yearly toggle and highlighted plan",
     "pattern": "pricing-table",
     "page_type": "pricing",
@@ -432,13 +446,14 @@
       "entries/pricing-table/notion-billing-toggle/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nRow of 4 plan cards (Free → Enterprise) under a segmented Monthly/Yearly toggle with a\n\"save X%\" label. The recommended plan has a coloured border and a badge. Each card: name,\nprice per seat, one-line audience description, CTA, then a short \"Everything in X, plus\" list.\nA detailed comparison table follows further down.\n\n## Key techniques\n- Segmented control toggle; prices swap in place without layout shift (fixed-width price block).\n- \"Everything in Free, plus…\" lists avoid repeating features across cards.\n- Enterprise card uses \"Contact sales\" instead of a price.\n- Sticky plan header row in the comparison table.\n\n## Accessibility\nToggle should be a radio group (`role=\"radiogroup\"`) and announce the price change\n(`aria-live=\"polite\"` on the price).\n\n## Weaknesses\nPer-seat pricing math can confuse; show an example total when possible.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "search/airbnb-segmented-search-bar",
+    "kind": "pattern",
     "title": "Segmented search bar (Where · When · Who)",
     "pattern": "search",
     "page_type": "landing",
@@ -463,13 +478,14 @@
       "entries/search/airbnb-segmented-search-bar/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nA large rounded pill containing segments separated by thin dividers. Each segment has a bold\nsmall label and a grey placeholder (\"Search destinations\", \"Add dates\", \"Add guests\"). The search\nbutton is a round accent-coloured icon at the end that expands to show \"Search\" when active.\nClicking a segment highlights it (white raised pill on a grey bar) and opens a dropdown panel\n(map suggestions, calendar, guest steppers).\n\n## Key techniques\n- Active segment gets a raised white background while the rest of the bar greys out.\n- Dividers hide next to the active/hovered segment for a cleaner look.\n- On scroll it collapses to a compact one-line summary pill; on mobile it becomes a full-screen stepped flow.\n\n## Accessibility\nEach segment is a button with a visible label; panels need focus management and Esc to close.\nCalendar must be keyboard navigable.\n\n## Weaknesses\nComplex to implement well; overkill for single-field search.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
     "id": "social-proof/vercel-logo-wall-stats",
+    "kind": "pattern",
     "title": "Customer logo wall paired with outcome stats",
     "pattern": "social-proof",
     "page_type": "landing",
@@ -495,9 +511,52 @@
       "entries/social-proof/vercel-logo-wall-stats/preview.jpg"
     ],
     "files": [
-      "entry.md",
-      "preview.html"
+      "preview.html",
+      "entry.md"
     ],
     "body": "## What it is\nA grid of customer logos rendered in a single neutral tone, separated by hairline borders, followed\nby a row of case-study cards each showing a logo, a large metric (e.g. \"−95% build time\") and a link\nto the story.\n\n## Key techniques\n- All logos forced to one colour (`filter: grayscale(1) brightness(…)` or mono SVGs), equal optical height.\n- Grid with 1px borders between cells instead of gaps — feels like a spec sheet.\n- Metric typography much larger than the supporting copy.\n- Logo hover reveals \"Read story →\".\n\n## Accessibility\nLogos need `alt` text with the company name; metric cards should be links with descriptive text, not \"Read more\".\n\n## Weaknesses\nUnverifiable or vague metrics undermine trust — use real numbers only.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
+  },
+  {
+    "id": "sources/echarts",
+    "kind": "source",
+    "title": "Apache ECharts",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "interactive",
+      "accessible",
+      "dashboard"
+    ],
+    "source_url": "https://echarts.apache.org",
+    "source_site": "echarts.apache.org",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "6.1.0",
+    "licence": "Apache-2.0",
+    "score": 8,
+    "rating": 4,
+    "why_it_works": "The broadest free charting engine available: about 23 chart families, zoom, morphing transitions, built-in accessibility textures and smooth rendering of very large datasets, all from one declarative options object.",
+    "use_when": "Interactive dashboards and data-heavy screens that need specialist charts (sankey, heatmap, candlestick, treemap) or 10k+ points.",
+    "avoid_when": "A page needs only one or two simple charts (it's heavy), or you want charts written as idiomatic React components.",
+    "alternatives": [
+      "recharts",
+      "visx",
+      "observable-plot",
+      "highcharts",
+      "ag-charts",
+      "uplot"
+    ],
+    "has_example": false,
+    "path": "sources/echarts",
+    "images": [
+      "sources/echarts/cover.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**8 / 10. The default pick for rich, interactive dashboards on a free licence.** Nothing else free\nmatches its combination of breadth, interactivity and large-data performance. The costs are bundle\nweight, an imperative (not React-native) API, and default colours you should replace.\n\n## Scorecard\nScored against `guides/source-rubric.md`. Measured or rendered here unless marked.\n\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | v6 default palette passes colour-blind separation but fails contrast (6 of 9 colours below 3:1) and has a near-grey slot. The chart chrome is clean. |\n| Interactivity | 5 | dataZoom (inside + slider), axis crosshair tooltips, legend toggling, `universalTransition` morphs. All rendered in our pattern entries. |\n| Coverage | 5 | 23 chart modules in the npm package (list below), plus geo maps and an extension for 3D. |\n| Accessibility | 4 | `aria.enabled` writes a description; `aria.decal` adds textures. No keyboard navigation of individual data points (unverified in v6). |\n| Performance | 5 | Canvas renderer, progressive rendering and sampling for large series. 100k+ points is widely reported (not benchmarked here yet). |\n| React/Next fit | 3 | Imperative `init`/`setOption` in a `useEffect`, client-only. Needs a small wrapper (or `echarts-for-react`). Types included. |\n| Bundle size | 2 | Full build 360 KB gz, \"common\" 234 KB gz, \"simple\" 165 KB gz (measured, 6.1.0). Tree-shaking via `echarts/core` can cut this substantially. |\n| Licence & health | 5 | Apache-2.0, Apache Software Foundation project, v6.1.0 released 2026. |\n| **Score** | **8.0** | Mean 4.0 × 2 |\n\n## Coverage\nChart modules shipped in `echarts@6.1.0` (`lib/chart/`):\n\n| Family | Types |\n|---|---|\n| Basic | line, bar, pie, scatter, effectScatter, pictorialBar |\n| Statistical | boxplot, heatmap, candlestick, parallel, radar |\n| Relationship | graph, chord, sankey, lines |\n| Hierarchy | tree, treemap, sunburst |\n| Other | funnel, gauge, themeRiver, map (geo), custom (draw anything) |\n\nIt also ships 37 bundled themes (`echarts/theme/`), e.g. dark variants. None of them is validated by us.\n\n## Patterns in our library from this source\n- `chart/echarts-datazoom-time-series`: time series with zoom (★★★★★)\n- `chart/echarts-universal-transition-morph`: bar ↔ donut morph (★★★★)\n- `chart/echarts-aria-decal-patterns`: accessibility textures (★★★★)\n\n## When to pick it\n- Dashboards with several chart types, drill-down, zoom or live updates.\n- Specialist charts: sankey, heatmap, candlestick, treemap, geo.\n- Large or streaming data.\n\n## When not to\n- One or two simple charts on a marketing page: use a lighter library.\n- A team that wants charts as composable JSX: use Recharts or visx (profiles pending).\n- Server-rendered static charts: it's client-side by default. SSR to SVG is possible but not set up here.\n\n## Using it in our stack\n`npm i echarts`, import from `echarts/core` plus only the charts and components you use, init in a\nclient component, `dispose()` on unmount, resize with `ResizeObserver`, and always pass our validated `color` array.\n\n> Profile built from the npm package (installed and measured), our own renders and search results. The\n> official site and examples gallery couldn't be reached from this session, so coverage comes from the package itself."
   }
 ]

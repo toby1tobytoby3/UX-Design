@@ -42,12 +42,13 @@ show raw timestamps and decimals unless you add formatters (done here).
 ## Using it in our stack
 - Install: `npm i echarts` (Apache-2.0, free to use and modify in commercial products). Import only what you need with `echarts/core` plus the chart and component modules, to keep the bundle small.
 - In Next.js, render client-side: `"use client"`, `echarts.init(ref.current, null, { renderer: "svg" })` in a `useEffect`, call `chart.dispose()` on unmount, and `chart.resize()` from a `ResizeObserver`.
-- Our recommended palette: swap ECharts' default colours for the validated order in `option.js`. The default 9-colour palette **fails** colour-blind and contrast checks (see below).
+- Our recommended palette: swap ECharts' default colours for the validated order in `option.js` (see the palette check below). Demos are written against 5.5.1 and run unchanged on 6.x.
 
 ## ECharts default palette check
-Run through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. So always override `color` (or enable decals).
+**ECharts 5.x** default, run through our palette validator (light surface): CVD separation **fails** (`#fc8452` vs `#3ba272` ΔE 4.0 for protanopia), `#fac858` vs `#91cc75` is only ΔE 13.9 even for normal vision, `#73c0de` reads grey, and five colours are below 3:1 contrast. **ECharts 6.x** (current, 6.1.0) ships a new default (`#5070dd, #b6d634, #505372, …`) that **passes** CVD and normal-vision separation but still fails the lightness band, has a near-grey slot (`#505372`) and six colours below 3:1 contrast. Either way, override `color` with our validated order (or enable decals).
 
 ## Related entries
 - `chart/echarts-universal-transition-morph`
 - `chart/echarts-aria-decal-patterns`
+- Source profile: `sources/echarts`
 - `dashboard/stripe-home-kpi-overview`

@@ -15,14 +15,36 @@ If none exist, `git clone --depth 1 https://github.com/toby1tobytoby3/UX-Design 
 `git pull` if it's a clone you didn't just create.
 
 ## 2. Search
-Read `catalog.json` (one object per entry: `title, pattern, page_type, tags,
-source_site, rating, why_it_works, use_when, has_example, path, images, files, body`).
+Read `catalog.json`. Each object has `kind`: `pattern` (one UX pattern) or `source` (a scored
+profile of a library or site: `score`/10, `licence`, `version`, `use_when`, `avoid_when`,
+`alternatives`, a scorecard and coverage table in `body`). Common fields: `title, pattern,
+page_type, tags, source_site, rating, why_it_works, use_when, has_example, path, images, files, body`.
+
+**Category questions come first.** If the request is "I need a chart / a date picker / an
+animation library…", or names a kind of component rather than a specific look:
+1. Read the category guide in `guides/` if one exists (e.g. `guides/charts.md`): pick the
+   form from the data's job.
+2. Read every `kind: source` with that `pattern` and compare their scorecards against
+   the task's constraints (bundle size, React fit, licence, data size, accessibility).
+3. Recommend **one** source with its score and the reason it wins *for this task*, name the
+   runner-up and when you'd switch, and flag gaps (e.g. "only 1 of 6 shortlisted libraries
+   profiled so far").
+4. Then return the matching patterns from that source as below.
+
+For a specific look ("a dark hero", "a pricing toggle"), search patterns directly:
 - Map the request to `pattern` / `page_type` values from `taxonomy.md`, then
   match `tags`, `title`, `why_it_works`, `use_when` and `body` text.
 - Rank by fit to the task first, then `rating`.
 - If nothing fits, say so plainly and suggest the user add a reference with **ux-add**.
 
-## 3. Return the top 3
+## 3. Return the answer
+For a category question, lead with:
+> **Use <source> (<score>/10)** for this, because… For <data job>, use a <form>; ready code: `<pattern path>`.
+> Change one thing: … Runner-up: <source>, if …
+
+Then the top patterns.
+
+### Top 3 patterns
 For each:
 - **Title** — site · pattern · ★ rating
 - Why it works / when to use (from the entry)

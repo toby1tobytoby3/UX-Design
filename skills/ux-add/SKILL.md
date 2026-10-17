@@ -36,6 +36,11 @@ that entry instead of creating a new one, and tell the user.
   version and licence, and add the `open-source` tag. These renders are real captures,
   so no `needs_capture`. Check the library's default colours with the dataviz palette
   validator when relevant.
+  **Also create or update its source profile** at `sources/<slug>/source.md`
+  (`kind: source`, `pattern` = the category, `score`, `licence`, `version`, `avoid_when`,
+  `alternatives`), scored with `guides/source-rubric.md`, including a coverage table and
+  links to its pattern entries. Add a row to the category guide (e.g. `guides/charts.md`).
+  Use `sources/echarts/source.md` as the model.
 - **Screenshot:** save the image into the entry folder as `desktop.jpg` (or
   `mobile.jpg` if it is a phone screenshot). Ask for the source URL if not given;
   use `source_url: unknown` if they don't have it.
