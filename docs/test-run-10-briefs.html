@@ -1,0 +1,360 @@
+<title>Ten-Brief Stress Test</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: verdict and scorecard first, then one card per brief (library said / design view / assessment), then fixes. */
+  :root {
+    --paper: #f7f8fa; --sheet: #ffffff; --ink: #1b1f27; --muted: #5b6372; --rule: #dfe3ea;
+    --accent: #2a78d6; --accent-soft: #e6effb; --code: #eef1f5;
+    --good: #1a7f4e; --good-soft: #e3f4ea; --mid: #9a6400; --mid-soft: #fbf0dc; --bad: #b42335; --bad-soft: #fbe7ea;
+    --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12151b; --sheet: #191d25; --ink: #e8ebf1; --muted: #9aa3b2; --rule: #2a303b;
+      --accent: #6aa6ec; --accent-soft: #1d2b40; --code: #222834;
+      --good: #5fd39a; --good-soft: #17301f; --mid: #e2b061; --mid-soft: #33281a; --bad: #ff8a99; --bad-soft: #3a1c22; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12151b; --sheet: #191d25; --ink: #e8ebf1; --muted: #9aa3b2; --rule: #2a303b;
+    --accent: #6aa6ec; --accent-soft: #1d2b40; --code: #222834;
+    --good: #5fd39a; --good-soft: #17301f; --mid: #e2b061; --mid-soft: #33281a; --bad: #ff8a99; --bad-soft: #3a1c22; color-scheme: dark;
+  }
+  body { background: var(--paper); color: var(--ink); font: 16.5px/1.6 var(--body); }
+  .wrap { max-width: 900px; margin: 0 auto; padding-block: 44px 96px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3, h4 { font-family: var(--display); line-height: 1.15; text-wrap: balance; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(30px, 5.5vw, 44px); margin: 0 0 12px; }
+  h2 { font-size: 25px; margin: 56px 0 14px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  h3 { font-size: 21px; margin: 0; }
+  h4 { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 18px 0 6px; }
+  p, li { max-width: 72ch; }
+  a { color: var(--accent); }
+  code { font-family: var(--mono); font-size: .84em; background: var(--code); padding: 1px 5px; border-radius: 4px; }
+  .eyebrow { font: 600 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .lede { font-size: 19px; color: var(--muted); margin: 0 0 18px; }
+  .verdict { background: var(--sheet); border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 8px; padding: 16px 18px; margin: 20px 0; }
+  .verdict p { margin: 0 0 8px; } .verdict p:last-child { margin: 0; }
+  .scroll { overflow-x: auto; margin: 14px 0; }
+  table { border-collapse: collapse; width: 100%; font: 14px/1.45 var(--display); background: var(--sheet); font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 11px; border-bottom: 1px solid var(--rule); }
+  th { font-weight: 700; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .pill { display: inline-block; min-width: 2.4em; text-align: center; font: 700 13px/1 var(--display); padding: 5px 7px; border-radius: 99px; }
+  .g { background: var(--good-soft); color: var(--good); } .m { background: var(--mid-soft); color: var(--mid); } .b { background: var(--bad-soft); color: var(--bad); }
+  .case { background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px; padding: 20px 22px; margin: 18px 0; }
+  .case-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; justify-content: space-between; }
+  .case-head .meta { font: 13px/1.4 var(--display); color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .refs { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
+  .refs li { font: 12.5px/1.3 var(--mono); background: var(--code); border-radius: 6px; padding: 4px 7px; }
+  .refs li.weak { opacity: .7; text-decoration: underline dotted; }
+  .refs li.none { background: var(--bad-soft); color: var(--bad); font-family: var(--display); }
+  .case ul { margin: 6px 0; padding-left: 20px; }
+  .case li { margin: 3px 0; }
+  .push { background: var(--mid-soft); border-radius: 8px; padding: 10px 14px; margin: 12px 0 0; font-size: 15.5px; }
+  .push b { color: var(--mid); font-family: var(--display); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid2 > div { min-width: 0; }
+  @media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+  nav.index { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 500 14px/1.4 var(--display); }
+  nav.index a { text-decoration: none; }
+  ol.fix > li { margin: 0 0 10px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">/ux-find · test run · 17 Oct 2026</div>
+  <h1>Ten-brief stress test</h1>
+  <p class="lede">I ran <code>/ux-find</code> as written against the ten desktop briefs, wrote the design I'd actually build for each, then judged how far the library got us toward the brief's bar and toward what I think is genuinely good.</p>
+
+  <div class="verdict">
+    <p><b>Verdict: the method works, the library doesn't yet cover desktop apps.</b> Where a category has a guide and scored sources (charts and 3D), the skill gives a decisive, evidence-backed answer that's better than general knowledge. That covers parts of briefs 1, 2, 3, 5 and 6.</p>
+    <p>Six of the ten briefs are dense desktop applications (terminal, control room, whiteboard, video editor, graph explorer, agent workspace) and the library has almost nothing for them. It also has nothing for the foundations the brief asks of <em>every</em> case: motion system, springs, materials and elevation, OKLCH tokens, dark themes, optimistic UI and skeletons. The library leans towards marketing pages (12 of 22 patterns) while the test is about apps.</p>
+    <p>The skill handled this honestly: it says where coverage ends and falls back to general knowledge, flagged as such. But on its own, an agent using it would score about <b>2.5 / 5</b> on the brief's rubric. The designs below get to 4+ only because I filled the gaps myself.</p>
+  </div>
+
+  <nav class="index" aria-label="Sections"><a href="#scores">Scorecard</a><a href="#cases">The ten briefs</a><a href="#doc">Where I disagree with the brief</a><a href="#skill">How the skill behaved</a><a href="#fix">What to add next</a></nav>
+
+  <h2 id="scores">Scorecard</h2>
+  <p><b>Library coverage</b>: how much of the brief the library's references and guides actually answer (0–5). <b>Rubric with library only</b>: my estimate of the brief's 1–5 rubric for an agent that used only the library plus defaults. <b>Rubric with my design</b>: the same estimate for the designs below.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>#</th><th>Brief</th><th>Library coverage</th><th>Rubric, library only</th><th>Rubric, my design</th><th>Best things the library gave</th><th>Biggest gap</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Pocketwise budgeting</td><td><span class="pill m">3</span></td><td><span class="pill m">3.3</span></td><td><span class="pill g">4.4</span></td><td>Duolingo onboarding (live), chart guide, Recharts profile, ECharts morph</td><td>Budget reference line, odometer numbers, sheets, GBP microcopy</td></tr>
+      <tr><td>2</td><td>Northstar RevOps</td><td><span class="pill m">2.5</span></td><td><span class="pill m">3.0</span></td><td><span class="pill g">4.3</span></td><td>ECharts (funnel, heatmap, morph), chart guide's "one y-axis" and colour defaults</td><td>Cross-filtering, drill-down slide-over, AI answer with citations</td></tr>
+      <tr><td>3</td><td>Meridian trading</td><td><span class="pill m">2</span></td><td><span class="pill b">2.4</span></td><td><span class="pill g">4.2</span></td><td>Lightweight Charts and uPlot profiles with evidence</td><td>Docking panels, order book, order ticket safety, density system</td></tr>
+      <tr><td>4</td><td>Relay fleet control</td><td><span class="pill b">0.5</span></td><td><span class="pill b">1.8</span></td><td><span class="pill g">4.0</span></td><td>Only the defaults (reduced motion, poster/lazy-load ideas)</td><td>No maps category at all (MapLibre, deck.gl)</td></tr>
+      <tr><td>5</td><td>Lumen landing page</td><td><span class="pill g">4</span></td><td><span class="pill m">3.8</span></td><td><span class="pill g">4.5</span></td><td>Linear hero, Notion pricing, Vercel proof, Stripe ribbon, Apple scroll story</td><td>Security block, FAQ, condensing nav, scripted live demo</td></tr>
+      <tr><td>6</td><td>Forma configurator</td><td><span class="pill m">3</span></td><td><span class="pill m">3.4</span></td><td><span class="pill g">4.3</span></td><td>3D guide, R3F + drei (8.5), model-viewer AR + hotspots, benchmark code</td><td>No configurator reference, swatch picker, room fit, snap-in-3D</td></tr>
+      <tr><td>7</td><td>Tandem whiteboard</td><td><span class="pill b">0</span></td><td><span class="pill b">1.7</span></td><td><span class="pill g">4.1</span></td><td>Nothing relevant (keyword search returned uPlot for "cursor")</td><td>Canvas engines, CRDT sync, presence, AI preview</td></tr>
+      <tr><td>8</td><td>Cutline video editor</td><td><span class="pill b">0</span></td><td><span class="pill b">1.6</span></td><td><span class="pill m">3.9</span></td><td>Nothing relevant</td><td>Timeline, waveforms, WebCodecs, transcript editing</td></tr>
+      <tr><td>9</td><td>Sentinel fraud graph</td><td><span class="pill b">1</span></td><td><span class="pill b">2.0</span></td><td><span class="pill g">4.1</span></td><td>ECharts sankey; D3 profile (force layout); "keep data still" default</td><td>No graph-visualisation sources (sigma.js, Cytoscape, G6)</td></tr>
+      <tr><td>10</td><td>Atlas agent workspace</td><td><span class="pill b">0.5</span></td><td><span class="pill b">2.0</span></td><td><span class="pill g">4.3</span></td><td>Incidental: Linear's hero shows an agent panel</td><td>No agentic UI patterns: plans, approvals, diffs, provenance</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font:13px/1.5 var(--display);color:var(--muted)">These rubric numbers are my judgement of designs on paper, not measured builds. The brief's smoothness criteria (60–120 fps, INP under 100 ms) can only be scored on a real build and device.</p>
+
+  <h2 id="cases">The ten briefs</h2>
+  <p>Each card shows what the skill returned (dotted = base-pack or weak match), the design I'd build, and the assessment.</p>
+
+  <!-- 1 -->
+  <article class="case" id="c1">
+    <div class="case-head"><h3>1 · Pocketwise: personal budgeting</h3><div class="meta">Coverage <span class="pill m">3</span> Library-only <span class="pill m">3.3</span> My design <span class="pill g">4.4</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li>onboarding/duolingo-one-question-flow ★5</li><li>guides/charts.md</li><li>sources/recharts 7.5</li><li>chart/echarts-universal-transition-morph</li><li class="weak">empty-state/github-empty-repo (base pack)</li><li class="weak">dashboard/stripe-home-kpi-overview (base pack)</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Material:</b> soft, solid surfaces on a warm off-white, with a defined dark theme. No glass: money needs to feel calm and certain. Three elevation levels: page, card, sheet.</li>
+        <li><b>Onboarding:</b> Duolingo-style, one question per screen with a progress bar and a "Skip for now" on every step: connect bank, confirm income (pre-filled from transactions), pick 3 categories from suggested tiles with their real 3-month averages.</li>
+        <li><b>Home:</b> one sentence leads ("You've got £212 left for food this month"), then the donut with direct labels (≤5 categories plus "Other"), upcoming bills, and one suggested action card.</li>
+        <li><b>Category detail:</b> 6-month bars with a dashed budget reference line, a list with sparklines, and the budget figure editable inline (Enter saves optimistically, toast with Undo).</li>
+        <li><b>Stack:</b> Recharts (our default) for bars and sparklines; donut morph via Motion springs on SVG arcs. ECharts' morph is the reference, but too heavy here.</li>
+        <li><b>Empty state:</b> an illustrated "connect your first account" with a privacy line and a demo-data option.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The chart guide's defaults (≤6 colours, direct labels, validated palette, GBP via <code>Intl.NumberFormat('en-GB')</code>) map straight onto the "what good looks like" list. This is the library at its best.</li>
+        <li>Duolingo is a strong onboarding reference and was live-captured.</li>
+        <li>Missing: a reference line, odometer numbers, sheets, undo toasts, any finance-app reference (Monzo, Copilot, YNAB). The empty-state and KPI references are base-pack only and behind logins.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> odometer-rolling the total on <em>every</em> save gets tiring by the third edit. Roll it only for the headline "left to spend" figure, and fade elsewhere.</p>
+  </article>
+
+  <!-- 2 -->
+  <article class="case" id="c2">
+    <div class="case-head"><h3>2 · Northstar: revenue operations dashboard</h3><div class="meta">Coverage <span class="pill m">2.5</span> Library-only <span class="pill m">3.0</span> My design <span class="pill g">4.3</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li>guides/charts.md</li><li>sources/echarts 7.8</li><li>sources/recharts 7.5</li><li>chart/echarts-universal-transition-morph</li><li class="weak">dashboard/stripe-home-kpi-overview (base pack)</li><li class="weak">command-palette/linear-cmdk-menu (base pack)</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Hierarchy:</b> one answer line at the top ("Q3 ARR £48.2M, 6% behind plan, driven by EMEA churn"), then 5 KPI tiles with delta vs last period <em>and</em> target. NRR is the visual lead for this audience.</li>
+        <li><b>Global bar:</b> date range, segment filter chips and a "stale 4 min" indicator, sticky. Filters are global, as the brief requires.</li>
+        <li><b>Charts:</b> ECharts, because this is exactly its profile's "pick it for" (heatmap, funnel, morph, cross-filter via <code>dispatchAction</code>). Waterfall built as stacked bars with a transparent base.</li>
+        <li><b>Drill-down:</b> the tile expands into a right slide-over via the View Transitions API (shared element), with closing reversing it.</li>
+        <li><b>AI query:</b> a floating pill that expands into a panel. The answer streams in, labelled "AI", with numbered citations that highlight the cells used and a "Show query" toggle with the SQL.</li>
+        <li><b>Bento grid:</b> react-grid-layout for drag and snap, but I'd allow reorder only, not resize. Leadership dashboards shouldn't drift between meetings.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The library chooses the right chart engine with evidence and gives a real colour fix. That alone saves a wrong turn (Recharts struggles here).</li>
+        <li>No reference for cross-filtering, slide-over drill-downs, hover comparison cards, AI answers with citations, or a strong analytics product (Amplitude, Hex, Mode). Stripe's KPI entry is a base-pack description, not a capture.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> a resizable bento grid sounds modern but fights the brief's goal of "answer in 30 seconds". Fix the layout for executives and let analysts save their own views.</p>
+  </article>
+
+  <!-- 3 -->
+  <article class="case" id="c3">
+    <div class="case-head"><h3>3 · Meridian Pro: trading terminal</h3><div class="meta">Coverage <span class="pill m">2</span> Library-only <span class="pill b">2.4</span> My design <span class="pill g">4.2</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li>guides/charts.md ("financial price charts")</li><li>sources/lightweight-charts 6.5</li><li>sources/uplot 6.0</li><li class="weak">command-palette/linear-cmdk-menu (base pack)</li><li class="none">nothing for docking, order book, order entry</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Material:</b> flat, solid, near-black graphite with one-pixel separators. No blur, no gradients, no motion on data except the tick flash. Compact and comfortable density toggle; tabular numerals throughout.</li>
+        <li><b>Shell:</b> dockview (MIT) for VS Code-style split, tab and drag with ghost drop zones, plus pop-out to a second window. Layouts saved as JSON.</li>
+        <li><b>Chart:</b> Lightweight Charts for candles, volume and RSI sub-pane (its benchmark: best pan and zoom feel, 54 KB). Drawing tools as a plug-in layer. Depth chart and correlation heatmap in canvas.</li>
+        <li><b>Order book:</b> virtualised canvas rows with a 300ms flash-and-fade on change, coalesced to one paint per frame.</li>
+        <li><b>Order safety:</b> Buy and Sell differ in colour, position (Buy left), label and shape, plus a risk preview and a confirm step that names side, size, price and value in words.</li>
+        <li><b>Command palette:</b> parses "buy 100 AAPL limit 182.50" into a live order preview; Enter opens the confirm step, never sends directly.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The library got the chart choice right and honestly (the profile says time series only, plus the attribution requirement).</li>
+        <li>Everything that makes a terminal a terminal (docking, order book, ticket, density) is missing. The command palette reference is a base-pack description from memory.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> "GPU-rendered (WebGL/WebGPU)" is a means, not a goal. Canvas 2D charts (Lightweight Charts) hit 60 fps for this load. WebGPU adds risk for no visible gain, so I'd set a frame budget instead of mandating a renderer.</p>
+  </article>
+
+  <!-- 4 -->
+  <article class="case" id="c4">
+    <div class="case-head"><h3>4 · Relay: fleet logistics control room</h3><div class="meta">Coverage <span class="pill b">0.5</span> Library-only <span class="pill b">1.8</span> My design <span class="pill g">4.0</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li class="none">no maps category, no geospatial sources</li><li class="weak">sources/echarts (has a geo "map" module, wrong tool here)</li><li>3D guide defaults (reduced motion)</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Map:</b> MapLibre GL base map in a muted custom style (so status colours own the screen), with deck.gl layers: icon layer for 1,200 vans, path layer for routes, heatmap for failures. Clustering below zoom 11.</li>
+        <li><b>Exceptions queue</b> docked left, sorted by severity × time-to-impact; the top item is pre-selected on open, so it's visible within 2 seconds. Severity is shown by icon and label as well as colour.</li>
+        <li><b>Movement:</b> vans interpolate between pings, and their outline fades after 60 seconds without a ping. Smooth gliding must never hide stale data.</li>
+        <li><b>Reassign:</b> drag a stop onto another route, which shows a ghost route and an ETA delta list before "Apply", with Undo for 30 seconds afterwards.</li>
+        <li><b>Time scrubber</b> with event ticks that snap; the map replays at 1×–60×.</li>
+        <li><b>Panels:</b> solid with a hairline border and shadow, not glass, so they stay legible on any map style.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The library has nothing for maps. Keyword search surfaced ECharts' geo module, which an uncritical agent might wrongly pick.</li>
+        <li>The guides' defaults (reduced motion, state colour plus label) still applied usefully.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> "vehicles glide, never teleport" is right only if staleness is shown. Over-smoothed positions in a dispatch room are a safety problem.</p>
+  </article>
+
+  <!-- 5 -->
+  <article class="case" id="c5">
+    <div class="case-head"><h3>5 · Lumen: AI product landing page</h3><div class="meta">Coverage <span class="pill g">4</span> Library-only <span class="pill m">3.8</span> My design <span class="pill g">4.5</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li>hero/linear-dark-product-hero ★5</li><li>pricing-table/notion-billing-toggle ★4</li><li>social-proof/vercel-logo-wall-stats ★4</li><li>3d/stripe-webgl-ribbon-hero ★5</li><li>3d/apple-airpods-scroll-story ★5</li><li>feature-grid/apple-highlights-media-gallery ★5</li><li>mega-menu/stripe-products-menu ★5</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Hero:</b> Linear's structure: a left-aligned, confident headline ("Every meeting, written up before you've left the room"), one CTA plus "Book a demo" for 50+ seats, and the real product UI below the fold line, playing a scripted 12-second run: transcript streaming, then an action item being created.</li>
+        <li><b>How it works:</b> three pinned steps using CSS <code>animation-timeline: view()</code> on native scroll. UI assembles; the text stays HTML.</li>
+        <li><b>Features:</b> a bento of 5 tiles with one claim each (Apple's highlights rule).</li>
+        <li><b>Proof:</b> Vercel's pattern: a logo strip, then two case-study rows with one number each.</li>
+        <li><b>Security block:</b> a quiet, factual grid (SOC 2 Type II, GDPR, UK data residency, SSO, retention controls) with a link to the trust centre. IT buyers want facts, not animation.</li>
+        <li><b>Pricing:</b> Notion's grouped plans with a monthly/annual radio toggle and "Save 20%".</li>
+        <li>A sticky nav condenses on scroll, keeping the CTA in reach.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The library is strongest here: almost every section has a live, analysed best-in-class reference, and the 3D guide correctly steers away from real-time 3D for a hero.</li>
+        <li>Missing: FAQ, security and compliance block, condensing nav, an AI-product reference.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> the cursor-following 3D tilt, moving sheen and magnetic CTA are the most common "AI landing page" tropes of the last two years. They work against the brief's own "doesn't look like a generic template". I'd spend that budget on the scripted live demo, which is genuinely distinctive.</p>
+  </article>
+
+  <!-- 6 -->
+  <article class="case" id="c6">
+    <div class="case-head"><h3>6 · Forma Studio: 3D furniture configurator</h3><div class="meta">Coverage <span class="pill m">3</span> Library-only <span class="pill m">3.4</span> My design <span class="pill g">4.3</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li>guides/3d.md</li><li>sources/react-three-fiber 8.5</li><li>sources/model-viewer 7.5</li><li>3d/modelviewer-hotspot-annotations ★4</li><li>bench3d/libs/r3f.jsx</li><li class="none">no configurator reference</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Layout:</b> the viewport takes about 70%, with a right configurator rail (Modules, Fabric, Legs, Fill) and a persistent price and lead-time bar. Large targets that work on showroom touchscreens.</li>
+        <li><b>Rendering:</b> R3F + drei (guide pick), self-hosted HDRI, ContactShadows, fabric with a normal map and sheen. Progressive loading: a Draco-compressed low-detail model first, then full detail, with the poster image never leaving an empty viewport.</li>
+        <li><b>Modules:</b> drag in 3D with snap guides at valid joints; invalid joins turn the ghost red and explain why ("Corner unit needs an arm on one side").</li>
+        <li><b>Fabric:</b> swatch grid with zoomable close-ups; switching crossfades the material in about 180ms.</li>
+        <li><b>Room fit:</b> dimensions plus a doorway width check ("Fits through an 80cm door if delivered in 3 parts").</li>
+        <li><b>AR handoff:</b> QR to a page using model-viewer's AR (Scene Viewer / Quick Look, which needs USDZ export).</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>Real value: the right engine with measured reasons, a weight warning (R3F pulls all of three.js), and lazy-load and poster defaults.</li>
+        <li>model-viewer for AR is a sharp pick.</li>
+        <li>Missing: any live configurator (IKEA, Article, Nike By You), swatch pickers and price-update patterns. The guide's own table says "configurator: none yet".</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> agreed on almost all of it. Add one thing the brief misses: a saved, shareable configuration link. Sofas are decided with a partner, not alone.</p>
+  </article>
+
+  <!-- 7 -->
+  <article class="case" id="c7">
+    <div class="case-head"><h3>7 · Tandem: multiplayer whiteboard</h3><div class="meta">Coverage <span class="pill b">0</span> Library-only <span class="pill b">1.7</span> My design <span class="pill g">4.1</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li class="none">nothing relevant</li><li class="weak">sources/uplot (false match on "cursor")</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Engine:</b> build on an existing canvas engine rather than from scratch. Excalidraw is MIT; tldraw is excellent but its SDK licence needs checking for production use (unverified here). Sync with Yjs (CRDT) for the local-first feel the brief asks for.</li>
+        <li><b>Presence:</b> interpolated cursors with name tags that fade after 3 seconds idle, avatar stack in the header, click an avatar to follow.</li>
+        <li><b>Toolbar:</b> a bottom dock for tools plus a floating context bar near the selection. Sticky creation on double-click, so a first-timer adds one in seconds.</li>
+        <li><b>Facilitation:</b> timer, dot voting and "hide others' notes until reveal" live in a facilitator menu, not in everyone's toolbar.</li>
+        <li><b>AI cluster:</b> a preview shows ghosted "before" positions and labelled groups, with Accept / Reject and one-step undo, and an "AI" attribution on created labels.</li>
+        <li>Minimap and zoom-to-fit with frames as landmarks.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The library gives nothing here. Worse, naive keyword search returns a chart library for "cursor", so the agent must recognise the miss and say so.</li>
+        <li>The skill's instruction to "be honest about gaps" did the right thing.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> the brief is good. I'd add a rule that sticky lift and tilt are skipped when 20+ people are active: physics on every remote move becomes noise.</p>
+  </article>
+
+  <!-- 8 -->
+  <article class="case" id="c8">
+    <div class="case-head"><h3>8 · Cutline: video editor</h3><div class="meta">Coverage <span class="pill b">0</span> Library-only <span class="pill b">1.6</span> My design <span class="pill m">3.9</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li class="none">nothing relevant</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Material:</b> neutral greys (no colour cast, important for grading), solid panels, focus rings in a non-hue accent. Media bin, preview, inspector and timeline in a resizable four-pane layout.</li>
+        <li><b>Engine:</b> WebCodecs for decode, a WebGL compositor for preview, and waveform peaks precomputed in a worker and drawn to canvas. The timeline is virtualised and canvas-rendered, so 8+ tracks stay at 60 fps.</li>
+        <li><b>Editing:</b> J/K/L, I/O, magnetic snap with a visible snap line, ripple edits that slide clips with a short spring, and a numeric timecode field on every clip.</li>
+        <li><b>Transcript:</b> words highlight in sync with playback; deleting a word strikes it through, then the timeline gap closes visibly. Filler words and silences show as reviewable markers, never auto-deleted.</li>
+        <li>An undo history panel with named steps.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The library has no timeline, media or editing references, and no sources for waveforms or decoding. This answer is general knowledge only, which is why my own score is lower: I can't point to evidence.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> springs on ripple edits are fine at normal zoom, but at frame-level zoom any animation fights precision. Disable them below a zoom threshold.</p>
+  </article>
+
+  <!-- 9 -->
+  <article class="case" id="c9">
+    <div class="case-head"><h3>9 · Sentinel: fraud investigation graph</h3><div class="meta">Coverage <span class="pill b">1</span> Library-only <span class="pill b">2.0</span> My design <span class="pill g">4.1</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li>sources/echarts 7.8 (sankey, graph modules)</li><li>sources/d3 6.5 (force layout)</li><li>chart guide: "Flow → Sankey"</li><li class="none">no graph-visualisation sources or investigation UI</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Graph:</b> sigma.js (WebGL, built on graphology) for 5,000+ nodes, with incremental layout so existing nodes keep their positions when a node is expanded. Shape encodes entity type (person, account, device, address) and colour encodes risk only.</li>
+        <li><b>Focus + context:</b> selecting a node dims the rest to 20%, keeping it flat. "Find path" animates a highlight along the edges once, then holds it.</li>
+        <li><b>Investigator safety:</b> breadcrumbs of expansions, saved views, and a pinned evidence board where each card links to source records.</li>
+        <li><b>Sensitive data:</b> masked by default, with reveal-on-permission logged in the audit trail.</li>
+        <li><b>AI summary:</b> every sentence has a citation chip to its evidence, plus a model and version label for FCA review.</li>
+        <li>Sankey for money flows (ECharts), and a timeline with burst markers.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>The library contributes the sankey choice and the "keep data surfaces still" judgement. It has no graph-visualisation benchmark: ECharts' graph and D3 force layouts don't scale to 5k nodes the way sigma.js or Cytoscape do.</li>
+        <li>No audit or provenance UI patterns either.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> "brings its neighbourhood forward in depth" introduces 3D parallax into an evidential tool. I'd refuse it: the brief's own judgement section says data surfaces stay still, and depth cues distort perceived connection strength.</p>
+  </article>
+
+  <!-- 10 -->
+  <article class="case" id="c10">
+    <div class="case-head"><h3>10 · Atlas: AI agent workspace</h3><div class="meta">Coverage <span class="pill b">0.5</span> Library-only <span class="pill b">2.0</span> My design <span class="pill g">4.3</span></div></div>
+    <h4>What /ux-find returned</h4>
+    <ul class="refs"><li class="weak">hero/linear-dark-product-hero (screenshot shows an agent panel)</li><li class="weak">social-proof/vercel (an AI chat UI in a screenshot)</li><li class="none">no agentic UI category</li></ul>
+    <div class="grid2">
+      <div><h4>Design view</h4><ul>
+        <li><b>Home:</b> three lanes: "Needs you" first (with counts in the dock icon), then Running, then Done today. Each task card shows its current step in words ("Comparing 14 supplier quotes").</li>
+        <li><b>Task view:</b> chat on the left, live plan in the middle (steps tick off; the active step shows elapsed time rather than a decorative shimmer), outputs on the right as real components: tables you can sort and charts you can filter.</li>
+        <li><b>Tool log</b> collapsed under each step, with each external call listed.</li>
+        <li><b>Approvals:</b> a sheet that dims the task, saying exactly what will happen ("Send email to 3 people at Acme from you@…") with the payload visible. Irreversible actions need a typed confirmation or a hold-to-confirm.</li>
+        <li><b>Diff review:</b> side by side, accept or reject per hunk, "Accept all" disabled until scrolled.</li>
+        <li><b>Authorship:</b> agent text gets a subtle tint and an "Atlas" byline, which stays until a human edits it.</li>
+        <li><b>Connectors:</b> scopes in plain words (read calendar, send email) with last-used times.</li>
+      </ul></div>
+      <div><h4>Assessment</h4><ul>
+        <li>Nothing usable. This is also the category we, as Claude users, know best: Claude, Cursor and ChatGPT Canvas are obvious references we haven't captured.</li>
+      </ul></div>
+    </div>
+    <p class="push"><b>My view vs the brief:</b> "notifications only when input is needed" is right; I'd add a daily digest for the rest. Silence also makes people distrust agents.</p>
+  </article>
+
+  <h2 id="doc">Where I disagree with the brief</h2>
+  <p>The brief's bar is mostly right, and its "judgement over effects" section is the best part. Where I'd depart:</p>
+  <ul>
+    <li><b>Some effects contradict its own "not a template" test:</b> cursor-tracking tilt, sheen and magnetic CTAs (brief 5), and "neighbourhood forward in depth" on an evidential graph (brief 9).</li>
+    <li><b>It specifies mechanisms instead of outcomes:</b> "WebGL/WebGPU charts" and "OKLCH preferred" are fine choices but should be outcomes ("60 fps at 10k points", "perceptually even ramps that pass contrast").</li>
+    <li><b>Springs everywhere:</b> fixed stiffness and damping values are good for direct manipulation. Precision tools (timeline at frame zoom, order entry) need motion off, not tuned.</li>
+    <li><b>Interpolation can lie:</b> gliding vans and cursors need staleness cues.</li>
+    <li><b>It never mentions trust signals for money and AI</b> beyond labels: shareable configurations, confirmation in words, staleness and provenance. I've added them above.</li>
+  </ul>
+
+  <h2 id="skill">How the skill behaved</h2>
+  <div class="grid2">
+    <div><h4>Worked</h4><ul>
+      <li>Guide → sources → patterns gave decisive, evidence-backed picks for charts and 3D, with specific "change these defaults" advice (palette, Brush label, weight).</li>
+      <li>The 3D guide's "should this be 3D at all?" correctly pushed briefs 5 and 6 towards pre-rendered media and model-viewer where appropriate.</li>
+      <li>Gaps were stated, not papered over, and <code>needs_capture</code> entries were treated as lower confidence.</li>
+    </ul></div>
+    <div><h4>Didn't</h4><ul>
+      <li><b>Retrieval is keyword-shallow:</b> "cursor" matched uPlot and "ai" matched half the catalog. Taxonomy has no app-UI terms (map, graph, canvas, timeline, agent, panel layout).</li>
+      <li><b>No foundations layer:</b> motion, materials, tokens, dark mode, states. These are the brief's baseline for every case, and an agent gets nothing from the library for them.</li>
+      <li><b>The library skews to marketing:</b> 12 of 22 patterns. The brief's "experience bar" names Linear, Arc, Figma and Vercel's dashboard, all logged-in app UIs that we haven't captured.</li>
+      <li><b>No brand:</b> <code>our-design/</code> is still empty, so every design here invents its own tokens.</li>
+    </ul></div>
+  </div>
+
+  <h2 id="fix">What to add next</h2>
+  <p>In order of impact on this test, each item following our existing method (guide + scored sources + live patterns):</p>
+  <ol class="fix">
+    <li><b>A foundations layer:</b> <code>guides/foundations.md</code> covering motion tokens and springs, elevation and materials (including glass done properly), OKLCH token ramps for light and dark, and state coverage. Benchmark animation libraries the same way we did charts: Motion, React Spring, GSAP (now free), plus the native View Transitions and scroll-driven animations. This lifts every one of the ten briefs.</li>
+    <li><b>App-shell references from logged-in products:</b> Linear app, Vercel dashboard, Figma, Arc. They need screenshots or recordings from your accounts, through <code>/ux-add</code>. This also clears the three remaining <code>needs_capture</code> entries.</li>
+    <li><b>Agentic UI category:</b> Claude, ChatGPT Canvas, Cursor, v0. Plans, approvals, diffs, citations, authorship. That's high value for us and easy to capture.</li>
+    <li><b>Four new source categories, benchmarked:</b> maps (MapLibre, deck.gl), graphs (sigma.js, Cytoscape, G6), canvas and collaboration (Excalidraw, tldraw with licence check, Yjs), and panel layout (dockview, FlexLayout).</li>
+    <li><b>Smarter retrieval:</b> add <code>aliases</code> to entries and taxonomy terms (e.g. "cursor" → presence), match whole words, and have the skill print a coverage line ("charts: covered · maps: no sources") before answering.</li>
+    <li><b>Fill <code>our-design/</code></b> with our tokens so rebuilds stop inventing a brand.</li>
+  </ol>
+  <p style="font:13px/1.5 var(--display);color:var(--muted)">Method: <code>/ux-find</code> run as written (map, then category guides, <code>SOURCES.md</code> and catalog search per brief), a coverage grep for each brief's specific requirements, then design and scoring by me. No designs were built or measured, so the rubric numbers are judgement, and smoothness criteria need a real build to verify.</p>
+</div>
