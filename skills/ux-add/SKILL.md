@@ -44,7 +44,8 @@ that entry instead of creating a new one, and tell the user.
   `bench/libs/<slug>.js(x)` drawing the same four charts from `bench/data.js` and run
   `cd bench && node run.mjs <slug>`: that renders `sources/<slug>/bench.jpg` and records
   bundle size, chart support and accessibility probes in `bench/results.json`, which the
-  catalog attaches to the profile. Score from that evidence; `npm run catalog` computes the total.
+  catalog attaches to the profile. For a 3D library, do the same in `bench3d/` (same model, same four
+  tasks in `bench3d/scene.js`). Score from that evidence; `npm run catalog` computes the total.
 - **Screenshot:** save the image into the entry folder as `desktop.jpg` (or
   `mobile.jpg` if it is a phone screenshot). Ask for the source URL if not given;
   use `source_url: unknown` if they don't have it.

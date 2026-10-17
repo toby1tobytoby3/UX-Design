@@ -84,7 +84,7 @@ All profiled and benchmarked (scores computed; see `SOURCES.md` for the full mat
 | Recharts | Everyday React charts (our default) | 7.5 | 4/4, 125 KB |
 | visx | Bespoke charts in React | 7.0 | 4/4, 38.5 KB |
 | D3 | Editorial / fully custom; maths under React | 6.5 | 4/4, 31.9 KB |
-| Observable Plot | Static, report and server-rendered charts | 6.5 | 3/4, 93 KB |
+| Observable Plot | Static, report and server-rendered charts | 6.8 | 3/4, 93 KB |
 | AG Charts Community | Accessible business charts (if on AG Grid) | 6.5 | 4/4, 413 KB |
 | Lightweight Charts | Financial time series | 6.5 | 1/4, 54 KB |
 | uPlot | Real-time / huge time series | 6.0 | 2/4, 24 KB |
@@ -102,3 +102,10 @@ ApexCharts (licence changed; check before use), Plotly and Vega-Lite (scientific
 3. Measured gzipped bundle size for those charts (esbuild), and its default palette run through the validator.
 4. A keyboard and screen-reader check of each library's accessibility features.
 5. A score against the rubric, with every number traceable to evidence in the profile.
+
+### 3D libraries (added v0.5)
+Benchmarked in `bench3d/` with one shared glTF model and four tasks (product viewer, 2,000 instances,
+annotation hotspot, poster and loading) on a software GPU. Profiles: React Three Fiber + drei (8.5, our default
+for custom scenes), model-viewer (7.5, product viewers), three.js (7.3), Babylon.js (7.0, applications), OGL
+(5.8, shader effects). Guide: `guides/3d.md`. Paid tools (Spline runtime) excluded. Pattern entries from live
+3D sites need network access.

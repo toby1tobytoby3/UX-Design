@@ -26,6 +26,7 @@ more entries would use it.
 | empty-state | Zero-data screens, first-use prompts |
 | dashboard | KPI cards, overview screens (the whole screen) |
 | chart | Individual data visualisations: chart types, zoom, tooltips, legends, transitions |
+| 3d | WebGL/3D: product viewers, configurators, hero scenes, scroll-driven scenes, shader backgrounds |
 | data-table | Tables, lists with bulk actions |
 | modal | Dialogs, sheets, drawers, popovers |
 | feedback | Toasts, inline alerts, loading/skeleton states |
@@ -41,3 +42,4 @@ Style: `minimal` `dark` `editorial` `playful` `glass` `gradient` `brutalist` `il
 Audience: `saas` `b2b` `b2c` `ecommerce` `devtools` `consumer-app`
 Behaviour: `animated` `sticky` `keyboard` `progressive-disclosure` `responsive` `interactive`
 Other: `data-viz` `accessible` `open-source` (code is licensed for reuse)
+3D: `webgl` `product-viewer` `configurator` `hero-3d` `scroll-scene` `shaders` `ar`

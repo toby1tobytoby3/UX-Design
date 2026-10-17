@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>3D benchmark</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#fcfcfb;color:#1f1f1e;font:13px/1.4 system-ui,sans-serif}
+  header{display:flex;justify-content:space-between;align-items:baseline;padding:14px 24px 0} header b{font-size:18px} header span{color:#52514e}
+  main{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px 24px 24px}
+  section{background:#fff;border:1px solid #ecebe7;border-radius:10px;padding:10px 12px 10px}
+  h2{margin:0 0 6px;font-size:13px;font-weight:600} h2 small{color:#52514e;font-weight:400}
+  .view{position:relative;height:330px;width:100%;border-radius:8px;overflow:hidden;background:#f4f3ef}
+  .view canvas{display:block;width:100%!important;height:100%!important;outline:none}
+  .na{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#52514e;background:repeating-linear-gradient(135deg,#fff 0 8px,#f6f5f2 8px 16px);text-align:center;padding:24px}
+  .na b{color:#1f1f1e}
+  .hotspot{position:absolute;left:0;top:0;transform:translate(-8px,-50%);display:flex;align-items:center;gap:6px;background:#fff;color:#1f1f1e;padding:3px 9px 3px 4px;border-radius:99px;font-size:12px;box-shadow:0 2px 8px #0002;pointer-events:none;white-space:nowrap}
+  .hotspot span{width:10px;height:10px;border-radius:50%;background:#2a78d6;box-shadow:0 0 0 3px #2a78d633}
+  .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#f4f3ef;transition:opacity .4s;z-index:2}
+  .poster.gone{opacity:0;pointer-events:none}
+  model-viewer{width:100%;height:100%;--poster-color:#f4f3ef}
+</style></head><body>
+<header><b id="lib">Library</b><span>Same model, same look, same four tasks · software GPU (SwiftShader)</span></header>
+<main>
+  <section id="product"><h2>Product viewer <small>· glTF, PBR, environment light, ground shadow, orbit controls</small></h2><div class="view"></div></section>
+  <section id="instances"><h2>2,000 objects <small>· instanced rendering</small></h2><div class="view"></div></section>
+  <section id="hotspot"><h2>Annotation hotspot <small>· HTML label pinned to a point on the model</small></h2><div class="view"></div></section>
+  <section id="fallback"><h2>Poster and loading <small>· poster until ready, no auto-rotate with reduced motion</small></h2><div class="view"></div></section>
+</main>
+<script src="LIB.js"></script>
+</body></html>

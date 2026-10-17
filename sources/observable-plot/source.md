@@ -17,7 +17,7 @@ s_coverage: 3
 s_a11y: 3
 s_perf: 3
 s_react: 3
-s_bundle: 3
+s_bundle: 4
 s_licence: 5
 why_it_works: A concise grammar of graphics from D3's creators: a few lines produce well-typeset, correctly scaled charts with sensible axes and tips, and it renders plain SVG that can be generated on the server.
 use_when: Report, documentation and analysis charts; server-rendered or static charts; quick exploration.
@@ -48,5 +48,5 @@ Found in the benchmark:
 | Accessibility | 3 | ARIA hooks on every mark; generic labels by default; no keyboard navigation |
 | Performance | 3 | SVG; fine for thousands of marks |
 | React/Next fit | 3 | Not React: returns an SVG element to append in an effect, or render on the server |
-| Bundle size | 3 | 93.3 KB gz |
+| Bundle size | 4 | 93.3 KB gz |
 | Licence & health | 5 | ISC; Observable-maintained, v0.6.17 April 2026 |

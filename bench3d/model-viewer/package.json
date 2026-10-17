@@ -1,0 +1,6 @@
+{
+  "name": "bench3d-model-viewer",
+  "private": true,
+  "description": "<model-viewer> pins its own three.js (peer ^0.183), so it is benchmarked in isolation.",
+  "dependencies": { "@google/model-viewer": "4.4.0", "three": "0.183.2" }
+}

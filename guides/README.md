@@ -8,7 +8,7 @@ Read this first. It's the map for any agent using this repo to help build UI.
 | **Guides** | `guides/<category>.md` | "What should I use for this job?" Decision tables plus house rules |
 | **Source profiles** | `sources/<slug>/source.md`, compared in `SOURCES.md` | "Which library or site is best, and why?" Scored on 8 criteria with evidence |
 | **Patterns** | `entries/<pattern>/<slug>/` | "What does a great version look like?" Screenshots, analysis, code |
-| **Evidence** | `bench/` (`results.json`, `libs/`) | Same-task benchmarks behind the scores: renders, bundle sizes, a11y probes |
+| **Evidence** | `bench/` (charts), `bench3d/` (3D) | Same-task benchmarks behind the scores: renders, bundle sizes, a11y probes |
 | **Index** | `catalog.json` (`kind: pattern` or `source`) | Everything above, machine-readable |
 | **Conventions** | `taxonomy.md`, `guides/source-rubric.md`, `our-design/` | Vocabulary, scoring, our stack's rules |
 
@@ -31,6 +31,7 @@ Read this first. It's the map for any agent using this repo to help build UI.
 | Category | Guide | Sources profiled | Patterns |
 |---|---|---|---|
 | chart | `guides/charts.md` | 9 (see `SOURCES.md`) | `chart/*`, `dashboard/*` |
+| 3d | `guides/3d.md` | 5 (see `SOURCES.md`) | none yet (`3d/*` once live sites can be captured) |
 | Everything else in `taxonomy.md` | – (patterns only) | – | see `CATALOG.md` |
 
 When a new category gets 3+ sources, add a guide using `guides/charts.md` as the template and add a row here.

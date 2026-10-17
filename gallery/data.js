@@ -559,7 +559,8 @@ window.CATALOG = [
       "bundle_gz_kb": 412.8,
       "lib_only_gz_kb": 412.8,
       "react_baseline_kb": 0,
-      "charts_supported": 4,
+      "tasks_supported": 4,
+      "tasks_total": 4,
       "renderer": "canvas",
       "keyboard_focusable": true,
       "unsupported": []
@@ -572,6 +573,65 @@ window.CATALOG = [
       "source.md"
     ],
     "body": "## Verdict\n**Good-looking and accessible, but heavy and open-core.** The community edition is MIT, but zoom, the\nnavigator and several series types are Enterprise (paid), so it isn't a full free option. Pick it mainly if\nyou already use AG Grid. Otherwise ECharts or Recharts cover the same ground more cheaply.\n\n## Benchmark\nAll 4 charts drawn. **412.8 KB gz**, the heaviest in the benchmark, even registering only the 7 modules\nneeded (v14 requires `ModuleRegistry.registerModules`, and charts fail with \"No modules have been\nregistered\" otherwise). Canvas. Time series has no zoom in the community edition. Code: `bench/libs/ag.js`.\n\nFound in the benchmark:\n- Keyboard-focusable chart region and legend on every chart, plus ARIA (\"chart, 1 series\", legend items). This is among the best built-in accessibility tested.\n- Default number axis shows \"10000\", not \"10k\". Set `label.formatter`.\n- Default palette fails lightness and chroma (includes a pure grey, `#b5b5b5`) and is only borderline for colour-blind separation. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished labels, callouts and legends |\n| Interactivity | 3 | Tooltips and legend toggling; zoom and navigator are Enterprise |\n| Coverage | 3 | Community series cover bar, line, area, scatter, bubble, pie, donut, histogram; more are Enterprise |\n| Accessibility | 4 | Built-in keyboard focus and ARIA (screen-reader output not tested here) |\n| Performance | 4 | Canvas renderer |\n| React/Next fit | 4 | Official `ag-charts-react` wrapper, declarative options |\n| Bundle size | 1 | 412.8 KB gz |\n| Licence & health | 3 | Actively released (v14.2, Sept 2026), but key features paywalled |"
+  },
+  {
+    "id": "sources/babylonjs",
+    "kind": "source",
+    "title": "Babylon.js",
+    "pattern": "3d",
+    "page_type": "app",
+    "tags": [
+      "3d",
+      "webgl",
+      "open-source",
+      "interactive",
+      "engine"
+    ],
+    "source_url": "https://www.babylonjs.com",
+    "source_site": "babylonjs.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "9.31.0",
+    "licence": "Apache-2.0",
+    "s_look": 3,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 3,
+    "s_perf": 4,
+    "s_react": 2,
+    "s_bundle": 1,
+    "s_licence": 5,
+    "why_it_works": "A complete real-time 3D engine (physics, GUI, XR, node-based materials, a visual inspector and editor tooling) maintained by Microsoft, so complex interactive applications have batteries included.",
+    "use_when": "Game-like or tool-like 3D applications (simulators, digital twins, XR, editors) where engine features matter more than page weight.",
+    "avoid_when": "Marketing pages and product viewers, where its weight is hard to justify.",
+    "alternatives": [
+      "threejs",
+      "react-three-fiber"
+    ],
+    "has_example": false,
+    "score": 7,
+    "rating": 4,
+    "bench": {
+      "bundle_gz_kb": 846,
+      "lib_only_gz_kb": 846,
+      "react_baseline_kb": 0,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "tasks_native": 2,
+      "first_frame_ms_swiftshader": 417,
+      "renderer": "webgl",
+      "keyboard_focusable": true,
+      "unsupported": []
+    },
+    "path": "sources/babylonjs",
+    "images": [
+      "sources/babylonjs/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**A full engine, not a website component.** Pick it for complex interactive 3D applications. For our site's\nheroes, viewers and scroll scenes, it's far heavier than the alternatives for the same result.\n\n## Benchmark\n4/4 tasks (2 with built-in features). **846 KB gz** even with deep, tree-shaken imports, the heaviest tested by\na wide margin. Code: `bench3d/libs/babylon.js`.\n\nFound in the benchmark:\n- The default environment and skybox load assets from Babylon's CDN; without them (as here) metals look flat.\n- The shadow-only ground lives in a separate package (`@babylonjs/materials`); `BackgroundMaterial` was the\n  core-only workaround.\n- `ArcRotateCamera.attachControl` makes the canvas **keyboard-focusable with arrow-key orbit**, which beats\n  three.js and React Three Fiber out of the box.\n- Thin instances drew 2,000 cubes in one draw call. Built-in auto-rotation behaviour.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Good PBR, but nice lighting depends on fetched environment assets |\n| Interactivity | 5 | Cameras with keyboard, GUI, behaviours, picking, inspector |\n| Coverage | 5 | Physics, GUI, XR, node materials, animation, editor tooling |\n| Accessibility | 3 | Keyboard-operable camera by default; labels by hand |\n| Performance | 4 | Thin instances, scene optimisers |\n| React/Next fit | 2 | Imperative; community React bindings only |\n| Bundle size | 1 | 846 KB gz |\n| Licence & health | 5 | Apache-2.0, Microsoft-backed, released October 2026 |"
   },
   {
     "id": "sources/d3",
@@ -614,7 +674,8 @@ window.CATALOG = [
       "bundle_gz_kb": 31.9,
       "lib_only_gz_kb": 31.9,
       "react_baseline_kb": 0,
-      "charts_supported": 4,
+      "tasks_supported": 4,
+      "tasks_total": 4,
       "renderer": "svg",
       "keyboard_focusable": false,
       "unsupported": []
@@ -672,7 +733,8 @@ window.CATALOG = [
       "bundle_gz_kb": 205.1,
       "lib_only_gz_kb": 205.1,
       "react_baseline_kb": 0,
-      "charts_supported": 4,
+      "tasks_supported": 4,
+      "tasks_total": 4,
       "renderer": "svg",
       "keyboard_focusable": false,
       "unsupported": []
@@ -728,7 +790,8 @@ window.CATALOG = [
       "bundle_gz_kb": 54.3,
       "lib_only_gz_kb": 54.3,
       "react_baseline_kb": 0,
-      "charts_supported": 1,
+      "tasks_supported": 1,
+      "tasks_total": 4,
       "renderer": "canvas",
       "keyboard_focusable": true,
       "unsupported": [
@@ -745,6 +808,68 @@ window.CATALOG = [
       "source.md"
     ],
     "body": "## Verdict\n**The best-feeling time-series interaction tested, for financial data only.** Choose it for price and balance\ncharts. It can't draw anything that isn't plotted against time.\n\n## Benchmark\n**1 of 4 charts.** Only the time series; no categorical bars, stacking or pies. **54.3 KB gz**. Canvas. Pan\nand zoom built in. Code: `bench/libs/lightweight.js`.\n\nFound in the benchmark:\n- Shows the TradingView logo by default. The licence requires attribution (a link or notice) if you hide it.\n- Finance defaults: price scale on the right and two-decimal values (\"1200.00\"). Set `priceFormat` for counts.\n- Keyboard-focusable but no ARIA text; canvas only.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished for finance; finance-specific defaults elsewhere |\n| Interactivity | 5 | Pan, zoom, crosshair with price and time labels |\n| Coverage | 1 | Time series only (candlestick, bar, line, area, baseline, histogram) |\n| Accessibility | 1 | No ARIA |\n| Performance | 5 | Canvas, built for long series and live updates |\n| React/Next fit | 2 | Imperative API; wrap in an effect |\n| Bundle size | 4 | 54.3 KB gz |\n| Licence & health | 4 | Apache-2.0 with attribution; active (v5.2, Aug 2026) |"
+  },
+  {
+    "id": "sources/model-viewer",
+    "kind": "source",
+    "title": "model-viewer",
+    "pattern": "3d",
+    "page_type": "product",
+    "tags": [
+      "3d",
+      "webgl",
+      "open-source",
+      "accessible",
+      "ecommerce",
+      "ar"
+    ],
+    "source_url": "https://modelviewer.dev",
+    "source_site": "modelviewer.dev",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "4.4.0",
+    "licence": "Apache-2.0",
+    "s_look": 5,
+    "s_interact": 4,
+    "s_coverage": 2,
+    "s_a11y": 4,
+    "s_perf": 4,
+    "s_react": 3,
+    "s_bundle": 3,
+    "s_licence": 5,
+    "why_it_works": "One HTML element turns a glTF file into a polished, accessible product viewer, with studio lighting, soft shadow, orbit, keyboard control, poster, hotspots and phone AR, all as attributes and no 3D code.",
+    "use_when": "Showing a single product or object in 3D (product pages, launches, docs), especially when AR on phones is useful.",
+    "avoid_when": "You need a custom scene, multiple objects, instancing, shaders or scroll-driven choreography.",
+    "alternatives": [
+      "react-three-fiber",
+      "threejs"
+    ],
+    "has_example": false,
+    "score": 7.5,
+    "rating": 4,
+    "bench": {
+      "bundle_gz_kb": 291.2,
+      "lib_only_gz_kb": 291.2,
+      "react_baseline_kb": 0,
+      "tasks_supported": 3,
+      "tasks_total": 4,
+      "tasks_native": 3,
+      "first_frame_ms_swiftshader": 449,
+      "renderer": "webgl",
+      "keyboard_focusable": true,
+      "unsupported": [
+        "instances: unsupported: &lt;model-viewer&gt; shows one model; there is no scene graph or instancing API."
+      ]
+    },
+    "path": "sources/model-viewer",
+    "images": [
+      "sources/model-viewer/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The fastest, most accessible way to put a product in 3D.** It's the right first answer to \"can we show\nthis product in 3D?\". Move to React Three Fiber only when you need a custom scene.\n\n## Benchmark\n3/4 tasks, all three with built-in features. No instancing or scene graph: it shows one model. **291 KB gz**\n(includes its own three.js). Code: `bench3d/libs/modelviewer.js`, just HTML attributes.\n\nFound in the benchmark:\n- The best out-of-the-box look tested: `environment-image=\"neutral\"` and `shadow-intensity` give studio\n  lighting and a soft shadow without any assets.\n- **Keyboard-focusable** viewer with an `alt` description; hotspots are real focusable `<button>`s placed with `data-position`.\n- `poster` and `reveal` attributes handle loading. Auto-rotate is opt-in, so reduced motion is easy to respect.\n- It auto-frames the model: our camera distance was clamped closer than in the other libraries until we set `max-camera-orbit`.\n- Pins its own three.js (peer `^0.183`), so in an app that also uses three.js you may ship two copies.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 5 | Best result with zero setup |\n| Interactivity | 4 | Orbit, hotspots, animations, AR; no custom scenes |\n| Coverage | 2 | Single model only |\n| Accessibility | 4 | Focusable, alt text, keyboard orbit, button hotspots (screen-reader output not tested) |\n| Performance | 4 | Renders on demand; one model |\n| React/Next fit | 3 | Web component: works in React 19 but needs JSX type declarations and client-side loading |\n| Bundle size | 3 | 291 KB gz |\n| Licence & health | 5 | Apache-2.0, Google, released October 2026 |"
   },
   {
     "id": "sources/observable-plot",
@@ -771,7 +896,7 @@ window.CATALOG = [
     "s_a11y": 3,
     "s_perf": 3,
     "s_react": 3,
-    "s_bundle": 3,
+    "s_bundle": 4,
     "s_licence": 5,
     "why_it_works": "A concise grammar of graphics from D3's creators: a few lines produce well-typeset, correctly scaled charts with sensible axes and tips, and it renders plain SVG that can be generated on the server.",
     "use_when": "Report, documentation and analysis charts; server-rendered or static charts; quick exploration.",
@@ -781,13 +906,14 @@ window.CATALOG = [
       "recharts"
     ],
     "has_example": false,
-    "score": 6.5,
+    "score": 6.8,
     "rating": 3,
     "bench": {
       "bundle_gz_kb": 93.3,
       "lib_only_gz_kb": 93.3,
       "react_baseline_kb": 0,
-      "charts_supported": 3,
+      "tasks_supported": 3,
+      "tasks_total": 4,
       "renderer": "svg",
       "keyboard_focusable": false,
       "unsupported": [
@@ -801,7 +927,124 @@ window.CATALOG = [
     "files": [
       "source.md"
     ],
-    "body": "## Verdict\n**The pick for static, report-style and server-rendered charts.** It has the best defaults-per-line of code\nin the benchmark, with excellent axes and typography. It's deliberately not an interactive dashboard library.\n\n## Benchmark\n**3 of 4 charts.** Plot has no pie or donut mark by design. **93.3 KB gz** (includes the D3 modules it uses).\nSVG. No zoom. Code: `bench/libs/plot.js`, the shortest code in the benchmark.\n\nFound in the benchmark:\n- Without zoom it shows the full 180 days. That's correct for a static chart, but there's no way to focus a range.\n- ARIA labels are structural (\"y-axis tick\", \"area\", \"line\"), not data descriptions. Use `ariaLabel`/`ariaDescription` options.\n- The default `observable10` palette passes colour-blind separation but has four near-grey slots and fails contrast. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Best typographic defaults; default palette needs replacing |\n| Interactivity | 2 | Tips (tooltips) only; no zoom or legend toggling |\n| Coverage | 3 | Strong statistical marks (density, hexbin, contour, geo, box, waffle); no pie or donut |\n| Accessibility | 3 | ARIA hooks on every mark; generic labels by default; no keyboard navigation |\n| Performance | 3 | SVG; fine for thousands of marks |\n| React/Next fit | 3 | Not React: returns an SVG element to append in an effect, or render on the server |\n| Bundle size | 3 | 93.3 KB gz |\n| Licence & health | 5 | ISC; Observable-maintained, v0.6.17 April 2026 |"
+    "body": "## Verdict\n**The pick for static, report-style and server-rendered charts.** It has the best defaults-per-line of code\nin the benchmark, with excellent axes and typography. It's deliberately not an interactive dashboard library.\n\n## Benchmark\n**3 of 4 charts.** Plot has no pie or donut mark by design. **93.3 KB gz** (includes the D3 modules it uses).\nSVG. No zoom. Code: `bench/libs/plot.js`, the shortest code in the benchmark.\n\nFound in the benchmark:\n- Without zoom it shows the full 180 days. That's correct for a static chart, but there's no way to focus a range.\n- ARIA labels are structural (\"y-axis tick\", \"area\", \"line\"), not data descriptions. Use `ariaLabel`/`ariaDescription` options.\n- The default `observable10` palette passes colour-blind separation but has four near-grey slots and fails contrast. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Best typographic defaults; default palette needs replacing |\n| Interactivity | 2 | Tips (tooltips) only; no zoom or legend toggling |\n| Coverage | 3 | Strong statistical marks (density, hexbin, contour, geo, box, waffle); no pie or donut |\n| Accessibility | 3 | ARIA hooks on every mark; generic labels by default; no keyboard navigation |\n| Performance | 3 | SVG; fine for thousands of marks |\n| React/Next fit | 3 | Not React: returns an SVG element to append in an effect, or render on the server |\n| Bundle size | 4 | 93.3 KB gz |\n| Licence & health | 5 | ISC; Observable-maintained, v0.6.17 April 2026 |"
+  },
+  {
+    "id": "sources/ogl",
+    "kind": "source",
+    "title": "OGL",
+    "pattern": "3d",
+    "page_type": "landing",
+    "tags": [
+      "3d",
+      "webgl",
+      "open-source",
+      "minimal",
+      "shaders"
+    ],
+    "source_url": "https://github.com/oframe/ogl",
+    "source_site": "github.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.0.11",
+    "licence": "Unlicense",
+    "s_look": 1,
+    "s_interact": 3,
+    "s_coverage": 3,
+    "s_a11y": 1,
+    "s_perf": 5,
+    "s_react": 2,
+    "s_bundle": 5,
+    "s_licence": 3,
+    "why_it_works": "A tiny, readable WebGL layer (renderer, camera, geometry, glTF loader, orbit, instancing) that leaves shaders to you, ideal when every kilobyte counts and the visual is a custom shader effect.",
+    "use_when": "Lightweight WebGL effects such as shader backgrounds, image distortions and particle fields, written by someone comfortable with GLSL.",
+    "avoid_when": "You want realistic materials, lighting or shadows without writing shaders, or the team isn't fluent in GLSL.",
+    "alternatives": [
+      "threejs"
+    ],
+    "has_example": false,
+    "score": 5.8,
+    "rating": 3,
+    "bench": {
+      "bundle_gz_kb": 25.4,
+      "lib_only_gz_kb": 25.4,
+      "react_baseline_kb": 0,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "tasks_native": 1,
+      "first_frame_ms_swiftshader": 174,
+      "renderer": "webgl",
+      "keyboard_focusable": false,
+      "unsupported": []
+    },
+    "path": "sources/ogl",
+    "images": [
+      "sources/ogl/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The specialist for tiny shader effects.** It's 25 KB versus 160 KB for three.js, but realistic rendering is\nall your own shader work. Use it for decorative WebGL; use three.js or React Three Fiber for anything product-like.\n\n## Benchmark\n4/4 tasks, only 1 with built-in features. **25.4 KB gz**, the smallest tested, and the fastest first frame\n(174 ms on the software GPU). Code: `bench3d/libs/ogl.js`, which includes a hand-written lighting shader.\n\nFound in the benchmark:\n- The glTF loader assigns a debug \"normals\" shader; you write the material shader yourself.\n- Our first shader rendered the product **black**: glTF colours are linear, and converting to sRGB is your\n  job (fixed with a gamma step). This is typical of OGL: correct colour, lighting and shadows are manual.\n- No environment lighting or shadows unless you build them, so the metal ring looks matte.\n- Instanced attributes drew 2,000 cubes in one draw call.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | No PBR, environment or shadows; colour management manual |\n| Interactivity | 3 | Orbit and Raycast extras; hotspots manual |\n| Coverage | 3 | Core, glTF, instancing, post, text, shadow extras; no PBR |\n| Accessibility | 1 | Nothing built in |\n| Performance | 5 | Minimal overhead; fastest first frame |\n| React/Next fit | 2 | Imperative |\n| Bundle size | 5 | 25.4 KB gz |\n| Licence & health | 3 | Unlicense (public domain); small team, last release January 2025 |"
+  },
+  {
+    "id": "sources/react-three-fiber",
+    "kind": "source",
+    "title": "React Three Fiber + drei",
+    "pattern": "3d",
+    "page_type": "landing",
+    "tags": [
+      "3d",
+      "webgl",
+      "open-source",
+      "react",
+      "interactive"
+    ],
+    "source_url": "https://r3f.docs.pmnd.rs",
+    "source_site": "pmnd.rs",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "fiber 9.8.2 + drei 10.7.9",
+    "licence": "MIT",
+    "s_look": 5,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 2,
+    "s_perf": 4,
+    "s_react": 5,
+    "s_bundle": 3,
+    "s_licence": 5,
+    "why_it_works": "three.js as React components, so scenes compose, hold state and respond to props like the rest of the app, while drei supplies the hard parts (studio lighting, contact shadows, HTML hotspots, instancing, loading, performance scaling) as one-line components.",
+    "use_when": "Any custom 3D in our React/Next app, such as a hero scene, configurator, scroll-driven story or interactive data in 3D.",
+    "avoid_when": "You only need to show one product model (use model-viewer), or the page is weight-critical (it brings all of three.js).",
+    "alternatives": [
+      "threejs",
+      "model-viewer"
+    ],
+    "has_example": false,
+    "score": 8.5,
+    "rating": 4,
+    "bench": {
+      "bundle_gz_kb": 353.4,
+      "lib_only_gz_kb": 296.1,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "tasks_native": 3,
+      "first_frame_ms_swiftshader": 1263,
+      "renderer": "webgl",
+      "keyboard_focusable": false,
+      "unsupported": []
+    },
+    "path": "sources/react-three-fiber",
+    "images": [
+      "sources/react-three-fiber/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Our default for custom 3D in the React/Next app.** It got the best visual result with the least code:\ndrei's `ContactShadows` and `<Html>` hotspot are one line each, versus manual work in three.js. The costs are\nweight (it pulls in all of three.js) and accessibility you add yourself.\n\n## Benchmark\n4/4 tasks (3 with built-in features). **296 KB gz for the libraries** (353 KB with React 19's 57 KB, which our\napp already ships). Slowest first frame on the software GPU (1263 ms: React mount plus the full three.js).\nCode: `bench3d/libs/r3f.jsx`.\n\nFound in the benchmark:\n- **It imports all of three.js**: a single cube is 300 KB gz with React, versus 130 KB for tree-shaken vanilla\n  three.js. drei itself only adds ~29 KB. Lazy-load the canvas so this never blocks first paint.\n- drei `<Environment preset>` fetches HDR files from a CDN at runtime. Self-host the HDR or use a procedural\n  `RoomEnvironment` (as here) so the scene doesn't depend on a third-party host.\n- `frameloop=\"demand\"` (render only on change) and `dpr={[1, 2]}` are one prop each, which matters most on phones.\n- `<Instances>` lets you declare 2,000 items as JSX and still renders them in one draw call.\n- Peer dependency pins React to `>=19 <19.4`, so check before upgrading React.\n- No keyboard or screen-reader support by default (canvas not focusable).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 5 | Best result for least code (Environment + ContactShadows) |\n| Interactivity | 5 | Pointer events on meshes, `<Html>` hotspots, controls, drei helpers |\n| Coverage | 5 | All of three.js plus drei, postprocessing and physics ecosystems |\n| Accessibility | 2 | Only what you add; canvas not focusable |\n| Performance | 4 | On-demand frames, instancing, PerformanceMonitor/AdaptiveDpr; React overhead on mount |\n| React/Next fit | 5 | Native React 19 components, typed |\n| Bundle size | 3 | 296 KB gz library cost (all of three.js) |\n| Licence & health | 5 | MIT, pmndrs collective, released October 2026 |\n\n## Using it in our stack\nLoad with `next/dynamic(..., { ssr: false })` behind a poster image; mount when scrolled into view;\n`<Canvas frameloop=\"demand\" dpr={[1, 2]}>`; self-hosted environment; `useGLTF.preload`; compressed glTF\n(Draco or Meshopt, KTX2 textures) via `gltfjsx --transform`; respect `prefers-reduced-motion`; put the\nscene's meaning in page text as well."
   },
   {
     "id": "sources/recharts",
@@ -846,7 +1089,8 @@ window.CATALOG = [
       "bundle_gz_kb": 182.5,
       "lib_only_gz_kb": 125.2,
       "react_baseline_kb": 57.3,
-      "charts_supported": 4,
+      "tasks_supported": 4,
+      "tasks_total": 4,
       "renderer": "svg",
       "keyboard_focusable": true,
       "unsupported": []
@@ -859,6 +1103,66 @@ window.CATALOG = [
       "source.md"
     ],
     "body": "## Verdict\n**Our default for everyday charts in the React/Next app.** It's the most idiomatic fit for our stack:\ncomposable JSX, React 19 support, keyboard navigation out of the box, and a very active project. It's also\nthe foundation of shadcn/ui charts and Tremor. Choose ECharts instead when you need zoom, morphs, specialist\ntypes or big data.\n\n## Benchmark\nAll 4 charts drawn natively. **125 KB gz for the library** (182.5 KB including React 19's 57 KB, which our\napp already ships). SVG. Zoom is a `<Brush>` range slider, not wheel or drag on the plot. Code: `bench/libs/recharts.jsx`.\n\nFound in the benchmark:\n- `accessibilityLayer` makes charts keyboard-focusable (1–3 focusable elements per chart). The best result among the React libraries.\n- The Brush slider's accessible name reads **\"Min value: undefined, Max value: undefined\"**, which is a bug. Label it yourself.\n- The legend sorts series **alphabetically** by default, so it doesn't match the stack order. Set `itemSorter` or pass a `payload`.\n- Pie labels inherit the slice colour, which is low contrast. Pass `label` with a text colour.\n- No default categorical palette (you set every colour), so ours drops straight in.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Clean, balanced spacing; legend order and label colours need fixes |\n| Interactivity | 4 | Tooltips, legend, Brush range slider, animations; no wheel/drag zoom or chart-type morphs |\n| Coverage | 3 | Line, area, bar, composed, pie, radar, radial bar, scatter, funnel, treemap, sankey; no heatmap, candlestick, geo |\n| Accessibility | 4 | Keyboard layer and ARIA, with a broken Brush label |\n| Performance | 2 | SVG DOM per point; fine to low thousands, not 100k |\n| React/Next fit | 5 | Native components, typed, React 19, works with Tailwind tokens via props/CSS vars |\n| Bundle size | 3 | 125 KB gz library cost for four charts |\n| Licence & health | 5 | MIT; v3.10 released Oct 2026 |\n\n## Using it in our stack\n`npm i recharts`; use `\"use client\"` components; wrap each chart in `ResponsiveContainer`; pass our validated\ncolours; add `accessibilityLayer`; set legend `itemSorter`; give Brush handles proper labels."
+  },
+  {
+    "id": "sources/threejs",
+    "kind": "source",
+    "title": "three.js",
+    "pattern": "3d",
+    "page_type": "landing",
+    "tags": [
+      "3d",
+      "webgl",
+      "open-source",
+      "interactive"
+    ],
+    "source_url": "https://threejs.org",
+    "source_site": "threejs.org",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.186.1",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 4,
+    "s_coverage": 5,
+    "s_a11y": 1,
+    "s_perf": 4,
+    "s_react": 2,
+    "s_bundle": 4,
+    "s_licence": 5,
+    "why_it_works": "The standard 3D engine of the web, with a scene graph, physically based materials, loaders for every format, controls, post-processing and a WebGPU renderer, plus by far the largest ecosystem of examples, tools and people who know it.",
+    "use_when": "Custom 3D outside React, or when you need full control of the render loop; and as the engine underneath React Three Fiber and model-viewer.",
+    "avoid_when": "In our React app, where React Three Fiber is the better interface to the same engine; or for a simple product spin, where model-viewer is one tag.",
+    "alternatives": [
+      "react-three-fiber",
+      "model-viewer",
+      "babylonjs",
+      "ogl"
+    ],
+    "has_example": false,
+    "score": 7.3,
+    "rating": 4,
+    "bench": {
+      "bundle_gz_kb": 159.9,
+      "lib_only_gz_kb": 159.9,
+      "react_baseline_kb": 0,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "tasks_native": 2,
+      "first_frame_ms_swiftshader": 842,
+      "renderer": "webgl",
+      "keyboard_focusable": false,
+      "unsupported": []
+    },
+    "path": "sources/threejs",
+    "images": [
+      "sources/threejs/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The engine to bet on, and the one under our recommended React option.** In the React app, use it\n*through* React Three Fiber. Use it directly for non-React pages, tight render-loop control, or porting\nexamples from its huge example library.\n\n## Benchmark (same model and four tasks as every 3D library)\n4/4 tasks (2 with built-in features, 2 hand-wired). **159.9 KB gz** for all four tasks (tree-shaken; a\nbare scene is 130 KB). First frame 842 ms on a software GPU (relative only). Code: `bench3d/libs/three.js`.\n\nFound in the benchmark:\n- A good look takes explicit setup: tone mapping, a PMREM-processed `RoomEnvironment`, shadow maps and a\n  shadow-catcher ground (~40 lines before the model appears).\n- `InstancedMesh` drew 2,000 cubes in one draw call.\n- Hotspots are manual (project the node to screen space each frame); `CSS2DRenderer` is the add-on alternative.\n- Renders every frame unless you opt into on-demand rendering (we redraw only on camera change).\n- **No accessibility**: canvas only, not focusable, no keyboard orbit. Labels and keyboard support are yours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Excellent once set up (PBR, ACES tone mapping, environment); setup is manual |\n| Interactivity | 4 | OrbitControls and many add-ons; hotspots hand-wired |\n| Coverage | 5 | Loaders (glTF, Draco, KTX2), post-processing, WebGPU renderer, instancing, animation |\n| Accessibility | 1 | Nothing built in |\n| Performance | 4 | InstancedMesh, on-demand rendering possible, WebGPU path |\n| React/Next fit | 2 | Imperative; use React Three Fiber in React |\n| Bundle size | 4 | 160 KB gz for the four tasks |\n| Licence & health | 5 | MIT, monthly releases (r186) |"
   },
   {
     "id": "sources/tremor",
@@ -901,7 +1205,8 @@ window.CATALOG = [
       "bundle_gz_kb": 282.1,
       "lib_only_gz_kb": 237.2,
       "react_baseline_kb": 44.9,
-      "charts_supported": 4,
+      "tasks_supported": 4,
+      "tasks_total": 4,
       "renderer": "svg",
       "keyboard_focusable": true,
       "unsupported": []
@@ -957,7 +1262,8 @@ window.CATALOG = [
       "bundle_gz_kb": 24.4,
       "lib_only_gz_kb": 24.4,
       "react_baseline_kb": 0,
-      "charts_supported": 2,
+      "tasks_supported": 2,
+      "tasks_total": 4,
       "renderer": "canvas",
       "keyboard_focusable": false,
       "unsupported": [
@@ -1016,7 +1322,8 @@ window.CATALOG = [
       "bundle_gz_kb": 95.8,
       "lib_only_gz_kb": 38.5,
       "react_baseline_kb": 57.3,
-      "charts_supported": 4,
+      "tasks_supported": 4,
+      "tasks_total": 4,
       "renderer": "svg",
       "keyboard_focusable": false,
       "unsupported": []

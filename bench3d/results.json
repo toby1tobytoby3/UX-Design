@@ -1,0 +1,207 @@
+{
+  "babylonjs": {
+    "kind": "3d",
+    "bundle_gz_kb": 846,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 846,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "native": 2,
+    "product_ready_ms": 417,
+    "probe": {
+      "product": {
+        "supported": true,
+        "note": "native: SceneLoader glTF, ArcRotateCamera, ShadowGenerator (no procedural HDR environment)",
+        "ready_ms": 417,
+        "focusable": 1,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "instances": {
+        "supported": true,
+        "note": "native: thin instances (1 draw call)",
+        "ready_ms": 285,
+        "focusable": 1,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "hotspot": {
+        "supported": true,
+        "note": "manual: Vector3.Project + DOM label (Babylon GUI linkWithMesh is the native canvas-drawn option)",
+        "ready_ms": 457,
+        "focusable": 1,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "fallback": {
+        "supported": true,
+        "note": "semi-native: built-in loading screen + autoRotation behaviour; poster and reduced-motion by hand",
+        "ready_ms": 479,
+        "focusable": 1,
+        "described": "Speaker product preview | Interactive 3D view of the speaker. Drag to rotate."
+      }
+    },
+    "errors": []
+  },
+  "model-viewer": {
+    "kind": "3d",
+    "bundle_gz_kb": 291.2,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 291.2,
+    "tasks_total": 4,
+    "tasks_supported": 3,
+    "native": 3,
+    "product_ready_ms": 449,
+    "probe": {
+      "product": {
+        "supported": true,
+        "note": "native: one HTML element (glTF, PBR, neutral environment, soft shadow, orbit, keyboard)",
+        "ready_ms": 449,
+        "focusable": 1,
+        "described": "Speaker product, interactive 3D view"
+      },
+      "instances": {
+        "supported": false,
+        "note": "unsupported: &lt;model-viewer&gt; shows one model; there is no scene graph or instancing API.",
+        "ready_ms": 46,
+        "focusable": 0,
+        "described": ""
+      },
+      "hotspot": {
+        "supported": true,
+        "note": "native: slotted hotspot elements with data-position (focusable buttons)",
+        "ready_ms": 449,
+        "focusable": 2,
+        "described": "Speaker product, interactive 3D view"
+      },
+      "fallback": {
+        "supported": true,
+        "note": "native: poster + reveal attributes, built-in progress bar; reduced motion: auto-rotate is opt-in",
+        "ready_ms": 449,
+        "focusable": 1,
+        "described": "Speaker product, interactive 3D view"
+      }
+    },
+    "errors": []
+  },
+  "ogl": {
+    "kind": "3d",
+    "bundle_gz_kb": 25.4,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 25.4,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "native": 1,
+    "product_ready_ms": 174,
+    "probe": {
+      "product": {
+        "supported": true,
+        "note": "semi-native: GLTFLoader + Orbit; lighting/material shader hand-written, no shadow, no PBR",
+        "ready_ms": 174,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "instances": {
+        "supported": true,
+        "note": "native: instanced attributes (1 draw call), custom shader",
+        "ready_ms": 67,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "hotspot": {
+        "supported": true,
+        "note": "manual: camera.project + DOM label",
+        "ready_ms": 175,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "fallback": {
+        "supported": true,
+        "note": "manual: poster, loading state and reduced-motion check all hand-built",
+        "ready_ms": 175,
+        "focusable": 0,
+        "described": "Speaker product preview | Interactive 3D view of the speaker. Drag to rotate."
+      }
+    },
+    "errors": []
+  },
+  "react-three-fiber": {
+    "kind": "3d",
+    "bundle_gz_kb": 353.4,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 296.1,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "native": 3,
+    "product_ready_ms": 1263,
+    "probe": {
+      "product": {
+        "supported": true,
+        "note": "native: useGLTF, OrbitControls, Environment, ContactShadows, frameloop=demand",
+        "ready_ms": 1263,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "instances": {
+        "supported": true,
+        "note": "native: drei <Instances> (1 draw call, React-declared items)",
+        "ready_ms": 457,
+        "focusable": 0,
+        "described": "2,000 instanced cubes"
+      },
+      "hotspot": {
+        "supported": true,
+        "note": "native: drei <Html> pinned to a 3D position",
+        "ready_ms": 1263,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "fallback": {
+        "supported": true,
+        "note": "semi-native: React Suspense + drei useProgress for loading; poster and reduced-motion check by hand",
+        "ready_ms": 854,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      }
+    },
+    "errors": []
+  },
+  "threejs": {
+    "kind": "3d",
+    "bundle_gz_kb": 159.9,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 159.9,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "native": 2,
+    "product_ready_ms": 842,
+    "probe": {
+      "product": {
+        "supported": true,
+        "note": "native: GLTFLoader, OrbitControls, RoomEnvironment, shadow maps",
+        "ready_ms": 842,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "instances": {
+        "supported": true,
+        "note": "native: InstancedMesh (1 draw call)",
+        "ready_ms": 373,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "hotspot": {
+        "supported": true,
+        "note": "manual: project() + DOM label (CSS2DRenderer add-on also available)",
+        "ready_ms": 933,
+        "focusable": 0,
+        "described": "Interactive 3D view of the speaker. Drag to rotate."
+      },
+      "fallback": {
+        "supported": true,
+        "note": "manual: own poster element; LoadingManager for progress; reduced motion checked by hand",
+        "ready_ms": 933,
+        "focusable": 0,
+        "described": "Speaker product preview | Interactive 3D view of the speaker. Drag to rotate."
+      }
+    },
+    "errors": []
+  }
+}

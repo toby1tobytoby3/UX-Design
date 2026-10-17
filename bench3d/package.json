@@ -1,0 +1,17 @@
+{
+  "name": "ux-design-bench3d",
+  "private": true,
+  "type": "module",
+  "description": "Same four 3D tasks in every 3D library: renders, bundle sizes, load timing and accessibility probes for sources/",
+  "dependencies": {
+    "three": "0.186.1",
+    "@react-three/fiber": "9.8.2",
+    "@react-three/drei": "10.7.9",
+    "@babylonjs/core": "9.31.0",
+    "@babylonjs/loaders": "9.31.0",
+    "ogl": "1.0.11",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "esbuild": "0.25.10"
+  }
+}

@@ -11,8 +11,9 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const ENTRIES = join(ROOT, 'entries');
 const SOURCES = join(ROOT, 'sources');
 const IMAGE = /\.(jpe?g|png|webp)$/i;
-const BENCH = join(ROOT, 'bench/results.json');
-const bench = existsSync(BENCH) ? JSON.parse(readFileSync(BENCH, 'utf8')) : {};
+// Benchmark evidence: charts (bench/) and 3D (bench3d/) share one shape: per-task probes plus bundle size.
+const bench = Object.assign({}, ...['bench/results.json', 'bench3d/results.json'].map((f) => join(ROOT, f))
+  .filter(existsSync).map((f) => JSON.parse(readFileSync(f, 'utf8'))));
 
 // Source scores are computed, never hand-typed: mean of the eight rubric criteria (guides/source-rubric.md) × 2.
 export const CRITERIA = { s_look: 'Default look', s_interact: 'Interactivity', s_coverage: 'Coverage', s_a11y: 'Accessibility',
@@ -78,7 +79,9 @@ const entries = [
 // Benchmark evidence (bench/results.json) attached to each source, trimmed to what an agent needs.
 function summariseBench(b) {
   return { bundle_gz_kb: b.bundle_gz_kb, lib_only_gz_kb: b.lib_only_gz_kb, react_baseline_kb: b.react_baseline_kb,
-    charts_supported: b.charts_supported, renderer: [...new Set(Object.values(b.probe).map((p) => p.renderer).filter((x) => x !== 'none'))].join('/'),
+    tasks_supported: b.tasks_supported ?? b.charts_supported, tasks_total: b.tasks_total ?? 4,
+    ...(b.native !== undefined ? { tasks_native: b.native, first_frame_ms_swiftshader: b.product_ready_ms } : {}),
+    renderer: [...new Set(Object.values(b.probe).map((p) => p.renderer ?? 'webgl').filter((x) => x !== 'none'))].join('/'),
     keyboard_focusable: Object.values(b.probe).some((p) => p.focusable > 0),
     unsupported: Object.entries(b.probe).filter(([, p]) => !p.supported).map(([k, p]) => `${k}: ${p.note}`) };
 }
@@ -128,9 +131,9 @@ writeFileSync(join(ROOT, 'SOURCES.md'), [
   'the best fit: read the category guide in `guides/` to match a source to the job.',
   ...Object.entries(byCat).flatMap(([cat, list]) => [
     '', `## ${cat}`, '',
-    `| Source | Score | ${keys.map((k) => CRITERIA[k]).join(' | ')} | Bench charts | Lib KB gz | Renderer | Licence |`,
+    `| Source | Score | ${keys.map((k) => CRITERIA[k]).join(' | ')} | Bench tasks | Lib KB gz | Renderer | Licence |`,
     `|---|---|${keys.map(() => '---').join('|')}|---|---|---|---|`,
-    ...list.map((e) => `| [${cell(e.title)}](${e.path}/source.md) | **${e.score}** | ${keys.map((k) => e[k]).join(' | ')} | ${e.bench ? e.bench.charts_supported + '/4' : '–'} | ${e.bench ? e.bench.lib_only_gz_kb : '–'} | ${e.bench ? e.bench.renderer : '–'} | ${cell(e.licence)} |`),
+    ...list.map((e) => `| [${cell(e.title)}](${e.path}/source.md) | **${e.score}** | ${keys.map((k) => e[k]).join(' | ')} | ${e.bench ? `${e.bench.tasks_supported}/${e.bench.tasks_total}` : '–'} | ${e.bench ? e.bench.lib_only_gz_kb : '–'} | ${e.bench ? e.bench.renderer : '–'} | ${cell(e.licence)} |`),
     '', '**Pick it for**', '',
     ...list.map((e) => `- **${cell(e.title)}**: ${e.use_when}`),
   ]),
