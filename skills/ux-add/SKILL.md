@@ -25,6 +25,17 @@ that entry instead of creating a new one, and tell the user.
   This also saves `source.html` and `styles.json` for that element.
   If the site blocks capture or the network denies it, tell the user and ask for
   a screenshot instead. Never invent screenshots.
+- **Name only ("apache charts", "the Stripe pricing page"):** web-search to resolve the
+  canonical URL first, then treat it as a URL.
+- **Open-source library or component kit** (charts, UI kits, animation libs): the code
+  is the reference and is licensed for reuse, so don't just screenshot its docs site.
+  Install the exact version from npm into a scratch dir, write a small `option.js`/demo
+  per pattern worth keeping, add a `preview.html` that loads the library from cdnjs
+  (pinned version) and the demo, then render it locally with Playwright (route the CDN
+  URL to the local copy if the CDN is blocked). Set `input: library-render`, record the
+  version and licence, and add the `open-source` tag. These renders are real captures,
+  so no `needs_capture`. Check the library's default colours with the dataviz palette
+  validator when relevant.
 - **Screenshot:** save the image into the entry folder as `desktop.jpg` (or
   `mobile.jpg` if it is a phone screenshot). Ask for the source URL if not given;
   use `source_url: unknown` if they don't have it.

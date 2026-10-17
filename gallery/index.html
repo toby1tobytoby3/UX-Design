@@ -222,8 +222,7 @@
       <div class="links">
         ${e.source_url && e.source_url !== 'unknown' ? `<a href="${esc(e.source_url)}" target="_blank" rel="noopener">Source: ${esc(e.source_site)} ↗</a>` : ''}
         ${file('preview.html') ? `<a href="${BASE}${esc(e.path)}/preview.html" target="_blank">Open rebuild preview ↗</a>` : ''}
-        ${file('example.tsx') ? `<a href="${REPO}${esc(e.path)}/example.tsx" target="_blank" rel="noopener">example.tsx ↗</a>` : ''}
-        ${file('source.html') ? `<a href="${REPO}${esc(e.path)}/source.html" target="_blank" rel="noopener">Captured source ↗</a>` : ''}
+        ${e.files.filter((f) => !['entry.md', 'preview.html'].includes(f)).map((f) => `<a href="${REPO}${esc(e.path)}/${esc(f)}" target="_blank" rel="noopener">${esc(f)} ↗</a>`).join('')}
         <a href="${REPO}${esc(e.path)}/entry.md" target="_blank" rel="noopener">Entry on GitHub ↗</a>
       </div>
       <div class="md">${md(e.body)}</div>

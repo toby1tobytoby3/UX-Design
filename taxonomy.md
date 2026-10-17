@@ -24,7 +24,8 @@ more entries would use it.
 | auth | Sign-up, sign-in, passwordless, SSO |
 | form | Multi-field forms, validation, multi-step forms |
 | empty-state | Zero-data screens, first-use prompts |
-| dashboard | KPI cards, overview screens, charts |
+| dashboard | KPI cards, overview screens (the whole screen) |
+| chart | Individual data visualisations: chart types, zoom, tooltips, legends, transitions |
 | data-table | Tables, lists with bulk actions |
 | modal | Dialogs, sheets, drawers, popovers |
 | feedback | Toasts, inline alerts, loading/skeleton states |
@@ -38,4 +39,5 @@ landing · pricing · product · checkout · dashboard · onboarding · auth · 
 ## Tags (free-form, but prefer these)
 Style: `minimal` `dark` `editorial` `playful` `glass` `gradient` `brutalist` `illustrative`
 Audience: `saas` `b2b` `b2c` `ecommerce` `devtools` `consumer-app`
-Behaviour: `animated` `sticky` `keyboard` `progressive-disclosure` `responsive`
+Behaviour: `animated` `sticky` `keyboard` `progressive-disclosure` `responsive` `interactive`
+Other: `data-viz` `accessible` `open-source` (code is licensed for reuse)

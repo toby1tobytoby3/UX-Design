@@ -25,7 +25,10 @@ writeFileSync(join(out, 'data.js'), `${data}window.UX_BASE = '';\n`);
 
 const files = { 'data.js': 'data.js' };
 for (const e of JSON.parse(readFileSync(join(ROOT, 'catalog.json'), 'utf8'))) {
-  const extra = e.files.includes('preview.html') ? [`${e.path}/preview.html`] : [];
+  // preview.html plus any scripts it loads (e.g. option.js), so previews run inside the artifact.
+  const extra = e.files.includes('preview.html')
+    ? e.files.filter((f) => f === 'preview.html' || f.endsWith('.js')).map((f) => `${e.path}/${f}`)
+    : [];
   for (const rel of [...e.images, ...extra]) {
     mkdirSync(join(out, dirname(rel)), { recursive: true });
     copyFileSync(join(ROOT, rel), join(out, rel));
