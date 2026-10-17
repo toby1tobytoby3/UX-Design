@@ -11,7 +11,7 @@ Research behind this guide, with every source and measurement: `research/A1-A4-c
 |---|---|---|
 | Write tokens in **`oklch()`**; never generate ramps in HSL | Perceptually even: equal L reads as equal lightness across hues. Tailwind v4's palette is OKLCH; Linear rebuilt its themes on LCH for the same reason | Brand colours fixed in hex: keep the hex as the primitive, derive the rest |
 | Design in sRGB-safe chroma; add P3 boosts in `@media (color-gamut: p3)` | Vercel's Geist does this in production | Marketing and illustration, where vividness wins |
-| **12 steps per hue, each with a job** (Radix model): 1–2 app backgrounds, 3–5 component backgrounds (rest, hover, active), 6–8 borders (subtle, default, strong), 9–10 solid fills (rest, hover), 11–12 text (muted, default) | Components pick by role, not by shade; Radix tunes 11–12 for text contrast on step 2 | Marketing pages can use Tailwind's 50–950 directly; app UI maps them onto roles |
+| **12 steps per hue, each with a job** (Radix model): 1–2 app backgrounds, 3–5 component backgrounds (rest, hover, active), 6–8 borders (subtle, default, strong), 9–10 solid fills (rest, hover), 11–12 text (muted, default) | Components pick by role, not by shade; Radix tunes 11–12 for text contrast on step 2. But **step 9 is not automatically safe under white text**: white on blue-9 is 3.26:1 (checked, see `design-tokens/radix-12-step-colour-scale`) | Marketing pages can use Tailwind's 50–950 directly; app UI maps them onto roles |
 | **Two token layers**: primitives in `@theme` (`--color-gray-1…12`), then semantic tokens components use (below), wired with `@theme inline` | GitHub Primer and Atlassian use the same grammar; a component layer multiplies upkeep for one app | Add component tokens only when shipping a library to other apps |
 | Tailwind v4 `@theme` CSS is the source of truth; Style Dictionary/DTCG only if tokens must reach Figma, native apps or email | One app, one stack | Multi-platform products |
 | **Design dark mode; don't invert.** Page L ≈ 14–17% (not black), each raised surface +2–3 L, lower chroma on big fills, text L ≈ 93–98%. Follow `prefers-color-scheme`, allow a `[data-theme]` override, set `color-scheme: light dark` | Apple: dark colours "aren't necessarily inversions"; Linear's measured dark ladder is L 13.9 / 17.2 / 19.5 / 21.7 | Dark-only media apps |
@@ -29,7 +29,8 @@ Starter semantic tokens (names, not final values: values come from the brand whe
   --color-surface: var(--gray-1);       --color-surface-raised: var(--gray-2);   --color-surface-overlay: var(--gray-1);
   --color-fg: var(--gray-12);           --color-fg-muted: var(--gray-11);
   --color-border: var(--gray-6);        --color-border-strong: var(--gray-8);
-  --color-accent: var(--blue-9);        --color-accent-fg: white;                --color-accent-text: var(--blue-11);
+  /* Check every fg/bg pair: white on Radix blue-9 is only 3.26:1 (fails); indigo-9 gives 5.21:1, blue-11 4.77:1 */
+  --color-accent: var(--indigo-9);      --color-accent-fg: white;                --color-accent-text: var(--indigo-11);
   --color-danger: var(--red-9);         --color-danger-subtle: var(--red-3);     --color-danger-text: var(--red-11);
   --color-focus: var(--blue-8);
 }

@@ -87,6 +87,8 @@ async function controlsTest(lib, sel) {
       out.chars_after_stop = l1 - l0;
       out.stop = l2 - l1 < 20 && !(await page.evaluate(() => window.__bench.marks.stream_end));
     }
+    // No working Stop: let the turn finish so a retry control has a chance to appear.
+    if (!out.stop) await page.waitForFunction(() => window.__bench.marks.approval_requested || window.__bench.marks.stream_end, null, { timeout: 60000 }).catch(() => {});
     await page.waitForTimeout(800);
     if (sel.retry && await page.locator(sel.retry).count()) {
       out.retry = true;
@@ -180,7 +182,13 @@ for (const lib of libs) {
     const root = document.querySelector(s.transcript ?? '#app') ?? document.body;
     const text = root.textContent;
     const step = [...root.querySelectorAll('*')].filter((n) => /search_docs/.test(n.textContent)).pop();
-    const stepBox = step?.closest('[data-tool], details, [class*=tool], [class*=event], [class*=Tool]') ?? step?.parentElement;
+    const stepBox = step?.closest('[data-tool], [data-tool-name], details, [class*=tool], [class*=event], [class*=Tool]') ?? step?.parentElement;
+    stepBox?.setAttribute('data-bench-step', '');
+    // The expand control may sit just outside the matched box (e.g. a "Show data" button beside the header).
+    for (let n = stepBox, i = 0; n && i < 4; n = n.parentElement, i++) {
+      const t = n.matches?.('[aria-expanded=false]') ? n : n.querySelector?.('[aria-expanded=false], summary');
+      if (t) { t.setAttribute('data-bench-toggle', ''); break; }
+    }
     const hrefs = [...root.querySelectorAll('a[href]')].map((a) => a.href);
     return {
       step: { name: !!step, args_shown: /branching policy/.test(stepBox?.innerText ?? ''), result_in_dom: /Release process/.test(text),
@@ -196,6 +204,16 @@ for (const lib of libs) {
       approval_visible: !!(s.approve && document.querySelector(s.approve)), deny_visible: !!(s.deny && document.querySelector(s.deny)),
     };
   }, sel);
+  // Collapsed steps: expand once (as a user would) and look again for the arguments and the result.
+  if (dom.step.name && (!dom.step.result_in_dom || !dom.step.args_shown)) {
+    const toggle = page.locator('[data-bench-toggle]').first();
+    if (await toggle.count()) {
+      await toggle.click().catch(() => {}); await page.waitForTimeout(400);
+      const again = await page.evaluate((s) => ({ args: /branching policy/.test(document.querySelector('[data-bench-toggle]')?.closest('[data-bench-step]')?.innerText ?? document.querySelector('[data-bench-step]')?.innerText ?? ''),
+        result: /Release process/.test((document.querySelector(s.transcript ?? '#app') ?? document.body).innerText) }), sel);
+      dom.step.expanded_to_check = true; dom.step.args_shown ||= again.args; dom.step.result_in_dom ||= again.result;
+    }
+  }
   let resumed = false;
   if (dom.approval_visible) {
     await page.locator(sel.approve).first().click({ timeout: 5000 }).catch((e) => errors.push('approve click: ' + e.message.split('\n')[0]));

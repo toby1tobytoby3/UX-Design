@@ -295,6 +295,202 @@
     "body": "## What it is\nThe React Aria ComboBox docs demo (\"Favorite Animal\"). We tabbed to the input, typed \"a\" and pressed ArrowDown twice: the popover lists\nthe five matching animals (Aardvark, Cat, Kangaroo, Panda, Snake: a contains-match, not prefix) with \"Cat\" highlighted.\n\n## Key techniques\nRead from the live DOM:\n- The input has `role=\"combobox\"`, `aria-expanded=\"true\"` when open and `aria-activedescendant` pointing at the highlighted option;\n  `document.activeElement` stayed on the `<input>` throughout.\n- The highlighted option carries `data-focused` and `data-focus-visible` (plus `aria-selected=\"false\"` until chosen), so Tailwind can style it with\n  `data-[focused]:bg-…` without JavaScript state.\n- Focus ring on the input: `outline: 2px solid oklch(0.519 0.250 284.23)` with `outline-offset: -1px` (inset). That indigo is 6.2:1 against white (computed).\n- The highlighted option is a filled pill (indigo background, white text), different from the input's ring, so \"where focus is\" and \"which option\" don't get confused.\n- The demo panel offers Vanilla CSS / Tailwind variants and a theme switcher: the component is unstyled, the styles are yours.\n\n## Accessibility\nThis is the reference behaviour from the WAI-ARIA APG combobox pattern. Per React Aria's docs (see `research/A7-accessibility.md`), it also\nannounces the number of options and selection on VoiceOver, and works with touch screen readers.\n\n## Weaknesses\n- We didn't test the multiple-selection mode or async loading here.\n- Rounded pill highlight inside a tight popover can clip long labels; check truncation.\n\n## Related entries\n- `accessibility/govuk-two-tone-focus`: a louder focus style for links\n- Source: `sources/react-aria` (benchmark of headless primitives, if present)\n\n> Captured live on 2026-10-17 with a Playwright script (focus combobox, type \"a\", ArrowDown ×2). Attributes and outline read from the DOM."
   },
   {
+    "id": "agent-activity/ai-elements-plan-tool-steps",
+    "kind": "pattern",
+    "title": "Agent plan, tool calls and subagent steps as quiet collapsible rows",
+    "pattern": "agent-activity",
+    "page_type": "app",
+    "tags": [
+      "minimal",
+      "devtools",
+      "tool-calls",
+      "animated",
+      "saas"
+    ],
+    "source_url": "https://ui.shadcn.com/docs/ai-elements/base/plan",
+    "source_site": "ui.shadcn.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Agent work is shown as low-contrast one-line rows (\"Ran npm --version\", \"Plan: migrate to Base UI 1 of 4 done\") that expand on demand, with the final answer in normal text below, so progress is visible and inspectable without the log drowning the answer; failures switch to red and open automatically.",
+    "use_when": "Any agent or assistant that runs tools, follows a plan or delegates to subagents and must show progress and let users inspect what happened.",
+    "has_example": false,
+    "path": "entries/agent-activity/ai-elements-plan-tool-steps",
+    "images": [
+      "entries/agent-activity/ai-elements-plan-tool-steps/desktop.jpg",
+      "entries/agent-activity/ai-elements-plan-tool-steps/crop-plan-running.jpg",
+      "entries/agent-activity/ai-elements-plan-tool-steps/crop-subagent.jpg",
+      "entries/agent-activity/ai-elements-plan-tool-steps/crop-tool-failed.jpg",
+      "entries/agent-activity/ai-elements-plan-tool-steps/crop-tool-running.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nLive previews from shadcn/ui's **AI Elements** docs (Plan, Tool, Subagent, Queue, Checkpoint, Confirmation), each with a Replay button.\nCaptured states:\n- **Plan** (`crop-plan-running.jpg`): \"Plan: migrate to Base UI · 1 of 4 done\" with a check for the finished step, a half-filled circle and shimmering label for the current step, and empty circles for upcoming steps. Finished: \"4 of 4 done\", then a one-line summary (\"Migrated Dialog and AlertDialog. The type checker passes.\").\n- **Tool** (`crop-tool-running.jpg`, `crop-tool-failed.jpg`): rows prefixed with a terminal glyph, \"Ran node --version ›\", \"Running npm --version\" (shimmer while running) and, on failure, \"**Failed to run pnpm --version**\" in red, expanded to show `command not found: pnpm`.\n- **Subagent**: \"Ran the research subagent ⌄\" with nested tool rows and the subagent's own conclusion indented in muted text, then the main answer.\n- **Queue**: \"4 completed ⌄\" checklist of finished tasks.\n\n## Key techniques\n- **Past-tense, verb-first labels** (\"Ran\", \"Failed to run\", \"Running\"), one line each, with the command itself as the label.\n- **Collapsed by default, expanded on failure**: the red row opens to show the error; successful rows stay one line with a chevron.\n- Status by **icon shape plus colour** (check, half circle, empty circle, red prompt), and a text counter (\"1 of 4 done\").\n- Running state uses a text shimmer, not a spinner per row, which keeps the column calm.\n- Rows are `<button aria-expanded>` (seen in the DOM: \"Plan: migrate to Base UI … aria-expanded=true\").\n- A left rule groups the steps visually under their parent (plan, subagent).\n\n## Accessibility\nExpandable rows are buttons with `aria-expanded`, so they're keyboard operable. We found no live region announcing step progress in the\npreview; in a real app announce milestones (\"Step 2 of 4 done\", failures) politely rather than every row. Red failure text also has a\n\"Failed\" word, so it doesn't rely on colour.\n\n## Weaknesses\n- AI Elements is shadcn-registry code and the old package is being folded into shadcn/ui (per `research/E-agentic-ui.md`); our stack doesn't use shadcn, so treat it as a visual and interaction reference and rebuild with our primitives.\n- These are scripted previews: no real latency, long logs, parallel tasks or pause/redirect controls.\n- Grey-on-white row text is low contrast by design; check it still meets 4.5:1 for the labels.\n\n## Related entries\n- `ai-review/ai-elements-inline-approval-checkpoint`: the Confirmation and Checkpoint components from the same set\n- `ai-review/pierre-diffs-keep-undo-hunks`\n- `ai-chat/streamdown-streaming-markdown`\n\n> Captured live on 2026-10-17 with a Playwright script on each AI Elements docs page (preview element only, after Replay for running states)."
+  },
+  {
+    "id": "ai-chat/shadcn-message-scroller-turn-anchoring",
+    "kind": "pattern",
+    "title": "New turn anchors near the top; the answer streams below without yanking the view",
+    "pattern": "ai-chat",
+    "page_type": "docs",
+    "tags": [
+      "minimal",
+      "streaming",
+      "saas",
+      "interactive"
+    ],
+    "source_url": "https://ui.shadcn.com/docs/components/message-scroller",
+    "source_site": "ui.shadcn.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "When the user sends a message, that message settles near the top of the viewport (with a peek of the previous answer above it) and the reply streams in underneath, so the reader starts reading at the start of the answer; once the answer runs past the fold a small ↓ button appears instead of the view chasing every token.",
+    "use_when": "Any chat or agent transcript with streamed replies, especially long answers that users read while they stream.",
+    "has_example": false,
+    "path": "entries/ai-chat/shadcn-message-scroller-turn-anchoring",
+    "images": [
+      "entries/ai-chat/shadcn-message-scroller-turn-anchoring/desktop.jpg",
+      "entries/ai-chat/shadcn-message-scroller-turn-anchoring/crop-first-turn-frames.jpg",
+      "entries/ai-chat/shadcn-message-scroller-turn-anchoring/crop-turn-anchored.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe live preview on shadcn/ui's **Message Scroller** docs page: a read-only scripted chat (\"Demo is read only. Press send to send messages.\").\nPressing Send plays turns. Captured states:\n- Empty state with a greeting (\"Morning, shadcn!\") and a pre-filled composer.\n- Turn 1 streaming in below the user bubble (`crop-first-turn-frames.jpg`).\n- Turn 2 (`crop-turn-anchored.jpg`): the new user bubble (\"Okay, but when someone sends a new message…\") sits near the top, with\n  the last two lines of the previous answer visible above it; the reply begins under it.\n- As the reply overflows (`desktop.jpg`), text fades under the composer and a round **↓** button appears above the fade.\n\n## Key techniques\n- **Turn anchoring**: the docs describe setting `scrollAnchor` on the turn that should settle near the top \"instead of blindly snapping to the document bottom\".\n- **Follow only while at the bottom**: per the docs and the demo's own script, auto-scroll applies only while the reader is already at the bottom; scrolling up stops it and preserves position.\n- **A peek of the previous exchange** above the anchored turn keeps context.\n- **Bottom fade + jump button** signals \"more below\" without moving the reader.\n- The docs page also covers prepending history without jumping, opening saved transcripts at the right place, and jump-to-message.\n\n## Accessibility\nThe ↓ button is a real button; give it a label (\"Jump to latest message\"). Don't use the scroll container as the live region for streaming\ntext; announce reply start and completion instead (see `research/E-agentic-ui.md`).\n\n## Weaknesses\n- A scripted, read-only demo: no real latency, no stop button, no long code blocks.\n- It's a shadcn component; the behaviour is the reference, and we'd rebuild it with `use-stick-to-bottom`-style logic or our own hook.\n- In our automated run we couldn't reliably read the scroll container's position, so the \"follows only at bottom\" behaviour is from the docs, not measured.\n\n## Related entries\n- `ai-chat/streamdown-streaming-markdown`: what renders inside each answer\n- `agent-activity/ai-elements-plan-tool-steps`\n\n> Captured live on 2026-10-17 with a Playwright script on the docs preview (Send pressed twice; frames at about 0.3, 1.5, 4 s and later)."
+  },
+  {
+    "id": "ai-chat/streamdown-streaming-markdown",
+    "kind": "pattern",
+    "title": "Streaming markdown that never shows half-typed syntax",
+    "pattern": "ai-chat",
+    "page_type": "docs",
+    "tags": [
+      "minimal",
+      "open-source",
+      "streaming",
+      "devtools"
+    ],
+    "source_url": "https://streamdown.ai/playground",
+    "source_site": "streamdown.ai",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "An AI answer is rendered as formatted markdown while it is still arriving, and unfinished syntax (an open **, a half-written link, an unclosed code fence) is completed or hidden on each chunk, so the reader sees clean text growing smoothly instead of asterisks and brackets flickering into formatting.",
+    "use_when": "Any chat or agent surface that streams markdown answers with code, tables, maths or diagrams.",
+    "has_example": false,
+    "path": "entries/ai-chat/streamdown-streaming-markdown",
+    "images": [
+      "entries/ai-chat/streamdown-streaming-markdown/desktop.jpg",
+      "entries/ai-chat/streamdown-streaming-markdown/crop-stream-frames.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nVercel's Streamdown playground: markdown source on the left, the Streamdown output on the right. \"Simulate Stream\" replays the source\nchunk by chunk; the toolbar shows a red **Stop** button while streaming and a \"Streaming\" mode selector. Our frames show headings,\nbold/italic/strikethrough, links, blockquotes, nested lists, KaTeX maths and a Mermaid flowchart arriving in order, with a block cursor at the end.\n\n## Key techniques\n- **Measured:** over 126 samples (every 150 ms across a ~21 s simulated stream), the rendered output never contained a literal `**` or `](`.\n  Per the research, its `remend` preprocessor closes dangling emphasis and inline code and swaps half-typed link URLs for a placeholder (`research/E-agentic-ui.md`).\n- **Heavy blocks get placeholders**: the Mermaid diagram showed \"Loading diagram…\" until its block was complete, instead of re-rendering on every chunk.\n- Output elements carry `data-streamdown=\"heading-1\" | \"strong\" | \"inline-code\" | \"horizontal-rule\"…`, so styling targets semantic roles.\n- Stop is a prominent filled red button in the same place as the run control.\n\n## Accessibility\nThe playground doesn't show how the stream is announced. Don't put the whole growing answer in an `aria-live` region; announce\n\"Responding…\" and then the finished answer (or use `role=\"log\"` politely), per the research defaults.\n\n## Weaknesses\n- Stack flag: Streamdown needs a Tailwind `@source` line and about 11 shadcn-style CSS variables (research file).\n- A playground, not a chat: scroll-following, retry and editing aren't shown.\n- Code blocks and Mermaid add weight; load those plugins only where needed.\n\n## Related entries\n- `ai-review/pierre-diffs-keep-undo-hunks`\n- `feedback/sonner-stacked-toasts`\n\n> Captured live on 2026-10-17 with a Playwright script (Simulate Stream; frames at ~0.9, 1.8, 3.2 s and ~11 s; text sampled every 150 ms)."
+  },
+  {
+    "id": "ai-provenance/perplexity-inline-citations-sources-panel",
+    "kind": "pattern",
+    "title": "Inline source chips per paragraph plus a per-section sources panel",
+    "pattern": "ai-provenance",
+    "page_type": "app",
+    "tags": [
+      "editorial",
+      "citations",
+      "b2c",
+      "minimal"
+    ],
+    "source_url": "https://www.perplexity.ai/discover/tech/idc-smartphone-shipments-fall-LJNesH4OSbWFO7k0GStMEA",
+    "source_site": "perplexity.ai",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Every claim-bearing paragraph ends with a small monospace chip naming its source domain (\"idc +1\"), a strip of source cards sits under the lead, and \"5 sources\" opens a side panel listing each source by section, so a reader can check any claim at the point they read it without leaving the answer.",
+    "use_when": "AI answers, research summaries or generated reports where users need to verify claims: search, research assistants, internal knowledge Q&A.",
+    "has_example": false,
+    "path": "entries/ai-provenance/perplexity-inline-citations-sources-panel",
+    "images": [
+      "entries/ai-provenance/perplexity-inline-citations-sources-panel/desktop.jpg",
+      "entries/ai-provenance/perplexity-inline-citations-sources-panel/crop-inline-chips.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nA public Perplexity Discover article (an AI-written news summary; we picked a neutral tech story). Captured without logging in:\n- **Inline chips** at the end of paragraphs: `idc +1`, `finance.yahoo +2`, `theregister +1`, `9to5mac +1`. The label is the source's short domain; `+N` means more sources back the same paragraph.\n- **Source cards** under the lead: favicon, domain, and the source article's title, truncated to two lines.\n- **\"5 sources\" button** with stacked favicons under each section; clicking it opens a right-hand panel titled \"5 sources\", grouped under the section heading (\"Memory costs up about 350%\"), each row with favicon, domain and headline.\n- Hovering a chip shows a card with the domain and full headline (\"Global Smartphone Shipments Drop Record High of 22% in Q3 2026…\").\n\n## Key techniques\n- Chips are real links (`target=\"_blank\" rel=\"noopener\"`) to the source URL, so they work without the hover card.\n- **Domain, not number**, as the chip label: readers judge credibility from \"idc\" faster than from \"[3]\".\n- Citations are scoped per paragraph and per section, not one list at the end, which keeps claim-to-source distance short.\n- \"Published 16 Oct 2026\" date plus the follow-up composer (\"Ask follow-up\") under the article.\n\n## Accessibility\nChip links have no `aria-label`; the accessible name is just the domain (\"idc\"), which says nothing about what's being cited.\nAdd context, e.g. `aria-label=\"Source: IDC press release, Global smartphone shipments…\"`. The 11px monospace chip text is small; check contrast and target size (WCAG 2.5.8: 24×24px minimum; the chip was 28×23px).\n\n## Weaknesses\n- Paragraph-level, not claim-level: one chip covers several sentences, so you can't tell which source supports which number.\n- We saw no explicit \"AI-generated\" label on the article itself beyond the Perplexity branding; for disclosure rules see `research/E-agentic-ui.md` (EU AI Act Art. 50).\n- A sign-up popup covers part of the page for logged-out readers (visible at the edge of `crop-inline-chips.jpg`).\n\n## Related entries\n- `ai-chat/streamdown-streaming-markdown`\n- `ai-review/pierre-diffs-keep-undo-hunks`\n\n> Captured live on 2026-10-17 (logged out) with a Playwright script: closed the cookie banner and sign-up popup, hovered the first chip,\n> opened the sources panel. Chip attributes and size read from the DOM. The news photo was cropped out."
+  },
+  {
+    "id": "ai-review/ai-elements-inline-approval-checkpoint",
+    "kind": "pattern",
+    "title": "Inline approval card for a risky agent action, plus restore checkpoints",
+    "pattern": "ai-review",
+    "page_type": "app",
+    "tags": [
+      "minimal",
+      "devtools",
+      "human-in-the-loop",
+      "tool-calls"
+    ],
+    "source_url": "https://ui.shadcn.com/docs/ai-elements/base/confirmation",
+    "source_site": "ui.shadcn.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "The agent pauses inside the conversation with a small card stating exactly what it will do (\"Run rm -rf dist?\"), where it runs (\"The command runs in this project.\") and two buttons (Deny, Approve); once approved the card collapses into a past-tense row (\"Ran rm -rf dist\"), and checkpoints between turns offer a one-click Restore.",
+    "use_when": "Agents that take actions with side effects (commands, deletes, sends, payments, writes) and need per-action consent and an undo path.",
+    "has_example": false,
+    "path": "entries/ai-review/ai-elements-inline-approval-checkpoint",
+    "images": [
+      "entries/ai-review/ai-elements-inline-approval-checkpoint/desktop.jpg",
+      "entries/ai-review/ai-elements-inline-approval-checkpoint/crop-after-approve.jpg",
+      "entries/ai-review/ai-elements-inline-approval-checkpoint/crop-checkpoint-restore.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nTwo AI Elements previews from shadcn/ui:\n- **Confirmation**: user asks \"Clean up the build folder.\" The agent shows \"Thought ›\", then a bordered card with a terminal glyph,\n  the command as a question (\"Run rm -rf dist?\"), a scope line (\"The command runs in this project.\"), and **Deny** (outline) / **Approve** (solid black).\n  After Approve (`crop-after-approve.jpg`) the card becomes the row \"Ran rm -rf dist\" and the answer \"Removed the dist folder.\" follows.\n- **Checkpoint**: between turns, a centred divider \"Button renamed · Restore\" marks a point the user can roll back to.\n\n## Key techniques\n- **The exact action is the headline**, phrased as a question, with the scope underneath; no generic \"Allow tool call?\".\n- Approve is the primary (filled) button but Deny comes first, so a hasty Enter/Tab doesn't approve by habit (check focus order in your build).\n- **The card turns into history**: after a decision it collapses into the same one-line row style as other tool calls, so the log stays uniform.\n- **Checkpoints are inline dividers** with a short label of what changed and a small Restore button, so undo lives where the change happened.\n\n## Accessibility\nDeny/Approve are real buttons. Move focus to the card (or announce it) when it appears, since the agent is blocked waiting;\notherwise keyboard and screen-reader users may not notice the pause. Restore needs a confirmation or an undo of its own.\n\n## Weaknesses\n- No \"always allow this command\" / permission-mode option, which real agents need to avoid approval fatigue (see `research/E-agentic-ui.md` on permission modes).\n- No preview of consequences (e.g. what's in `dist`, how many files) for a destructive command.\n- shadcn-registry code: use as a pattern reference, rebuild with our primitives.\n\n## Related entries\n- `agent-activity/ai-elements-plan-tool-steps`\n- `ai-review/pierre-diffs-keep-undo-hunks`: per-change review for edits rather than commands\n\n> Captured live on 2026-10-17 with a Playwright script: clicked \"Send message\", waited for the card, clicked Approve; Checkpoint preview captured as rendered."
+  },
+  {
+    "id": "ai-review/pierre-diffs-keep-undo-hunks",
+    "kind": "pattern",
+    "title": "Per-hunk Keep / Undo on an AI edit, with a changed-files panel",
+    "pattern": "ai-review",
+    "page_type": "docs",
+    "tags": [
+      "dark",
+      "devtools",
+      "keyboard",
+      "open-source",
+      "human-in-the-loop"
+    ],
+    "source_url": "https://diffs.com/",
+    "source_site": "diffs.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "Each AI-proposed change sits inline in the file as a red/green hunk with its own Undo (⌘N) and Keep (⌘Y) buttons, so the person reviews and decides change by change in context; keeping a hunk folds it into normal code immediately, so what's left to review is always visible.",
+    "use_when": "Any agent that edits user content (code, documents, configs, data) and needs the person to approve changes before they land; especially multi-file agent runs.",
+    "has_example": false,
+    "path": "entries/ai-review/pierre-diffs-keep-undo-hunks",
+    "images": [
+      "entries/ai-review/pierre-diffs-keep-undo-hunks/desktop.jpg",
+      "entries/ai-review/pierre-diffs-keep-undo-hunks/crop-after-keep.jpg",
+      "entries/ai-review/pierre-diffs-keep-undo-hunks/crop-agent-changes-panel.jpg",
+      "entries/ai-review/pierre-diffs-keep-undo-hunks/crop-annotations.jpg",
+      "entries/ai-review/pierre-diffs-keep-undo-hunks/crop-merge-conflict.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe home page of `@pierre/diffs` (v1.5.2, Apache-2.0 per `research/E-agentic-ui.md`), an open-source diff renderer built on Shiki.\nThree live demos matter for agent review:\n1. **Accept/Reject Changes**: `index.html` with one hunk (−2 +3). Floating buttons at the hunk's end: **Undo ⌘N** and **Keep ⌘Y**.\n   Clicking Keep (captured in `crop-after-keep.jpg`) removes the red/green styling and the header counter drops to −0 +0.\n2. **Agent UI** at the top: a code pane with collapsed \"16 unmodified lines\" separators, a right-hand **Changes 5** tab listing\n   each touched file with +/− counts and A/M status, and an agent composer (\"Ask for changes, @mention files, or run commands…\").\n3. **Merge conflict resolution UI**: an inline bar \"Accept current change | Accept incoming change | Accept both\", and\n   **Comments & Annotations**: a threaded comment on a line with \"Add reply…\" and \"Resolve\".\n\n## Key techniques\n- Decisions are **per hunk, inline**, not a separate approval dialog; each control has a **keyboard shortcut** shown on the button.\n- **Unchanged code is collapsed** into \"N unmodified lines\" bars that expand on click, so long files stay reviewable.\n- File-level summary (Changes count, per-file +/−, added vs modified) lets the reviewer see the blast radius before reading code.\n- Line numbers show both old and new numbering in the hunk (9/10 removed, 9/10/11 added).\n- The same annotation slot powers keep/undo buttons, comments and lint markers, so review UI is one system.\n\n## Accessibility\nButtons are real `<button>`s with visible shortcut hints. Red/green is reinforced by the gutter bar and old/new line numbers, but\ncheck that added/removed lines are announced (e.g. visually hidden \"added\"/\"removed\" text) before relying on colour alone.\nThe demo is dark-only by default (Auto/Light/Dark toggle on some demos).\n\n## Weaknesses\n- A rendering library: the agent workflow (what happens after Keep, how undo reaches the agent) is yours to build.\n- ⌘N and ⌘Y clash with browser shortcuts (new window / history) on some platforms; choose app-scoped shortcuts.\n- No \"accept all in file\" control shown in the demo; long agent runs need bulk actions.\n\n## Related entries\n- `ai-chat/streamdown-streaming-markdown`: the chat side of an agent UI\n- `agent-activity/ai-elements-plan-tool-confirmation` (if present): plan and tool-call display\n\n> Captured live on 2026-10-17 with a Playwright script: scrolled to each demo, clicked Keep in the Accept/Reject demo.\n> Button labels read from the DOM."
+  },
+  {
     "id": "chart/echarts-aria-decal-patterns",
     "kind": "pattern",
     "title": "Stacked bars with built-in accessibility textures",

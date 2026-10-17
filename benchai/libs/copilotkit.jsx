@@ -7,14 +7,20 @@ import { CopilotKitProvider, CopilotChat, AbstractAgent, EventType, useHumanInTh
 import '@copilotkit/react-core/v2/styles.css';
 import { play, initBench } from '../mock.js';
 
-initBench('CopilotKit (CopilotChat + self-managed AG-UI agent)', window.__SEL ?? {});
-window.__bench.levels = { stop: 'ui', retry: 'ui', edit: 'ui', branch: false, stick: 'ui', steps: 'ui', approval: 'render-api',
+initBench('CopilotKit (CopilotChat + self-managed AG-UI agent)', {
+  composer: '[data-testid=copilot-chat-textarea]', send: '[data-testid=copilot-send-button]', stop: '[data-testid=copilot-send-button]:not([disabled])',
+  retry: '[data-testid=copilot-regenerate-button]', edit: '[data-testid=copilot-edit-button]', branch: '[data-testid=copilot-branch-navigation]',
+  scroller: '[data-testid=copilot-message-list]', transcript: '[data-testid=copilot-message-list]', approve: '[data-b=approve]', deny: '[data-b=deny]',
+});
+window.__bench.levels = { stop: 'ui', retry: 'render-api', edit: 'render-api', branch: 'render-api', stick: 'ui', steps: 'ui', approval: 'render-api',
   citations: false, markdown: 'built in (Streamdown)' };
 
 class MockAgent extends AbstractAgent {
+  // AbstractAgent.abortRun() is a no-op; custom agents implement it (HttpAgent aborts its fetch). The Stop button calls it.
+  abortRun() { this.ctrl?.abort(); super.abortRun(); }
   run(input) {
     return new Observable((sub) => {
-      const ctrl = new AbortController();
+      const ctrl = this.ctrl = new AbortController();
       const last = input.messages.at(-1);
       const afterApproval = last?.role === 'tool' ? (/"approved":\s*false/.test(last.content) ? 'denied' : 'approved') : undefined;
       const emit = (e) => sub.next(e);
