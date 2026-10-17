@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>AI chat UI benchmark</title>
+<script>
+  // Collected before the kit loads, so nothing is missed.
+  window.__perf = { shifts: [], longtasks: [] };
+  new PerformanceObserver((l) => l.getEntries().forEach((e) => !e.hadRecentInput && __perf.shifts.push({ t: e.startTime, v: e.value }))).observe({ type: 'layout-shift', buffered: true });
+  new PerformanceObserver((l) => l.getEntries().forEach((e) => __perf.longtasks.push({ t: e.startTime, d: e.duration }))).observe({ type: 'longtask', buffered: true });
+</script>
+<link rel="stylesheet" href="LIB.tw.css"><link rel="stylesheet" href="LIB.css">
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#fcfcfb;color:#1f1f1e;font:13px/1.45 system-ui,sans-serif}
+  header{display:flex;justify-content:space-between;align-items:baseline;padding:14px 24px 0} header b{font-size:18px} header span{color:#52514e}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;padding:12px 24px 24px}
+  section{background:#fff;border:1px solid #ecebe7;border-radius:10px;padding:10px 12px}
+  h2{margin:0 0 6px;font-size:13px;font-weight:600} h2 small{color:#52514e;font-weight:400}
+  aside{display:flex;flex-direction:column;gap:12px}
+  #stream .view{height:760px;border-radius:8px;overflow:hidden;border:1px solid #f0efeb;position:relative}
+  #app{height:100%}
+  aside .view{font-size:12px;color:#33322f} aside .view dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:0} aside dt{color:#6b6a66} aside dd{margin:0}
+  .ok{color:#14794f;font-weight:600} .bad{color:#b4321f;font-weight:600} .mid{color:#8a5a00;font-weight:600}
+  /* Neutral chat styling for hook-only and primitive kits (they ship no CSS). Same for each. */
+  .chat{display:flex;flex-direction:column;height:100%;background:#fff}
+  .scroller{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+  .msg{max-width:100%} .msg.user{align-self:flex-end;background:#eef3fb;border-radius:12px;padding:8px 12px;max-width:80%}
+  .msg.assistant{align-self:stretch}
+  .md :is(h2,h3){margin:14px 0 6px} .md p{margin:6px 0} .md pre{background:#f6f6f4;border-radius:8px;padding:10px;overflow:auto;font-size:12px}
+  .md table{border-collapse:collapse;margin:8px 0} .md :is(td,th){border:1px solid #e3e2de;padding:4px 8px;text-align:left}
+  .step{border:1px solid #e3e2de;border-radius:8px;padding:6px 10px;font-size:12px;background:#fafaf8} .step summary{cursor:pointer}
+  .approval{border:1px solid #e8c48a;background:#fff8ec;border-radius:8px;padding:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .sources{display:flex;gap:6px;flex-wrap:wrap} .sources a{border:1px solid #e3e2de;border-radius:99px;padding:2px 10px;font-size:12px;color:#1f5fae;text-decoration:none}
+  .actions{display:flex;gap:6px;margin-top:4px}
+  .composer{display:flex;gap:8px;border-top:1px solid #ecebe7;padding:10px 12px;align-items:flex-end}
+  .composer textarea{flex:1;resize:none;border:1px solid #d9d8d4;border-radius:8px;padding:8px;font:inherit;min-height:40px}
+  button{font:inherit;border:1px solid #d9d8d4;background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+</style></head><body>
+<header><b id="lib">Library</b><span>Same scripted turn (mock stream, 8 ms chunks, 4× CPU throttle) · four tasks</span></header>
+<main>
+  <section id="stream"><h2>Streaming chat <small>· ~900-word markdown answer with code and a table, tool step, sources, approval</small></h2><div class="view"><div id="app"></div></div></section>
+  <aside>
+    <section id="metrics"><h2>Stream</h2><div class="view">running…</div></section>
+    <section id="steps"><h2>Tool step <small>· search_docs</small></h2><div class="view">running…</div></section>
+    <section id="approval"><h2>Approval <small>· delete_branch</small></h2><div class="view">running…</div></section>
+    <section id="citations"><h2>Citations <small>· 2 source parts</small></h2><div class="view">running…</div></section>
+    <section id="a11y"><h2>Accessibility</h2><div class="view">running…</div></section>
+  </aside>
+</main>
+<script type="module" src="LIB.js"></script>
+</body></html>

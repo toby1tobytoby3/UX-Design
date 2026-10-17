@@ -1,0 +1,5 @@
+/* Tailwind v4 set-up the chat-ui README asks for: scan the package, shadcn theme variables, its markdown CSS. */
+@import "tailwindcss";
+@import "../node_modules/@llamaindex/chat-ui/dist/styles/markdown.css";
+@source "../node_modules/@llamaindex/chat-ui/dist/**/*.js";
+@import "./_shadcn-theme.css";

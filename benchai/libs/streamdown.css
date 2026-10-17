@@ -1,0 +1,5 @@
+/* Tailwind v4 set-up the Streamdown README asks for, plus the shadcn-style variables its classes use. */
+@import "tailwindcss";
+@import "../node_modules/streamdown/styles.css";
+@import "./_shadcn-theme.css";
+@source "../node_modules/streamdown/dist/*.js";

@@ -1,0 +1,24 @@
+{
+  "name": "ux-design-benchai",
+  "private": true,
+  "type": "module",
+  "description": "Same scripted assistant turn (mock stream) in every AI chat UI kit: streaming stability, controls, tool steps, approvals, citations, accessibility and bundle size for sources/",
+  "dependencies": {
+    "@ai-sdk/react": "4.0.147",
+    "@assistant-ui/react": "0.15.29",
+    "@assistant-ui/react-markdown": "0.14.23",
+    "@copilotkit/react-core": "1.79.1",
+    "@copilotkit/react-ui": "1.79.1",
+    "@llamaindex/chat-ui": "0.6.1",
+    "@tailwindcss/cli": "4.3.3",
+    "ai": "7.0.143",
+    "axe-core": "4.14.0",
+    "esbuild": "0.25.10",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-markdown": "10.1.0",
+    "remark-gfm": "4.0.1",
+    "streamdown": "2.7.0",
+    "tailwindcss": "4.3.3"
+  }
+}

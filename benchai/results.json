@@ -1,0 +1,270 @@
+{
+  "streamdown": {
+    "kind": "ai-chat",
+    "bundle_gz_kb": 279.9,
+    "react_baseline_kb": 67.7,
+    "lib_only_gz_kb": 212.2,
+    "lazy_gz_kb": 0.5,
+    "css_gz_kb": 5.4,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "probe": {
+      "stream": {
+        "supported": true,
+        "note": "markdown: streamdown",
+        "samples": 129,
+        "enter_sends": true,
+        "cls": 0.005,
+        "long_tasks": 1,
+        "long_task_ms": 71,
+        "script_ms": 8096,
+        "layout_ms": 1405,
+        "style_ms": 62,
+        "raw_markdown_seen": false,
+        "raw_markdown_samples": {
+          "fence": 0,
+          "bold": 0,
+          "heading": 0,
+          "table": 0,
+          "link": 0
+        },
+        "sticks": false,
+        "unsticks": null,
+        "stream_wall_ms": 17155,
+        "controls": {
+          "stop": "data",
+          "retry": "data",
+          "edit": false,
+          "branch": false,
+          "follows_stream": false
+        },
+        "stop_test": {
+          "edit": false,
+          "stop": true,
+          "stop_focusable": true,
+          "retry": true,
+          "branch": false,
+          "retry_restarted": true
+        }
+      },
+      "steps": {
+        "supported": true,
+        "level": "data",
+        "name": true,
+        "args_shown": false,
+        "result_in_dom": true,
+        "collapsible": true,
+        "note": "data: name shown, args hidden, result in DOM, collapsible"
+      },
+      "approval": {
+        "supported": true,
+        "level": "data",
+        "approve": true,
+        "deny": true,
+        "resumed": true,
+        "note": "data: approve resumed the run"
+      },
+      "citations": {
+        "supported": true,
+        "level": "data",
+        "found": 2,
+        "note": "data: both sources rendered as links"
+      }
+    },
+    "a11y": {
+      "live_regions": [],
+      "announces_whole_stream": false,
+      "composer": "- textbox \"Message\"",
+      "composer_name_from_placeholder_only": true,
+      "shift_enter_newline": true,
+      "shift_enter_did_not_send": true,
+      "axe_violations": [],
+      "stop_focusable": true
+    },
+    "errors": []
+  },
+  "assistant-ui": {
+    "kind": "ai-chat",
+    "bundle_gz_kb": 260.1,
+    "react_baseline_kb": 67.7,
+    "lib_only_gz_kb": 192.4,
+    "lazy_gz_kb": 0,
+    "css_gz_kb": 0,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "probe": {
+      "stream": {
+        "supported": true,
+        "note": "markdown: @assistant-ui/react-markdown",
+        "samples": 289,
+        "enter_sends": true,
+        "cls": 0.001,
+        "long_tasks": 13,
+        "long_task_ms": 696,
+        "script_ms": 31891,
+        "layout_ms": 2434,
+        "style_ms": 29,
+        "raw_markdown_seen": true,
+        "raw_markdown_samples": {
+          "fence": 0,
+          "bold": 6,
+          "heading": 0,
+          "table": 0,
+          "link": 8
+        },
+        "sticks": true,
+        "unsticks": true,
+        "stream_wall_ms": 45784,
+        "controls": {
+          "stop": "ui",
+          "retry": "ui",
+          "edit": "ui",
+          "branch": false,
+          "follows_stream": "ui"
+        },
+        "stop_test": {
+          "edit": true,
+          "stop": true,
+          "stop_focusable": true,
+          "retry": true,
+          "branch": false,
+          "chars_after_stop": 129,
+          "retry_restarted": true
+        }
+      },
+      "steps": {
+        "supported": true,
+        "level": "render-api",
+        "name": true,
+        "args_shown": false,
+        "result_in_dom": true,
+        "collapsible": true,
+        "note": "render-api: name shown, args hidden, result in DOM, collapsible"
+      },
+      "approval": {
+        "supported": true,
+        "level": "render-api",
+        "approve": true,
+        "deny": true,
+        "resumed": true,
+        "note": "render-api: approve resumed the run"
+      },
+      "citations": {
+        "supported": true,
+        "level": "render-api",
+        "found": 2,
+        "cards": null,
+        "note": "render-api: both sources rendered as links"
+      }
+    },
+    "a11y": {
+      "live_regions": [],
+      "announces_whole_stream": false,
+      "composer": "- textbox \"Message\"",
+      "composer_name_from_placeholder_only": true,
+      "shift_enter_newline": true,
+      "shift_enter_did_not_send": true,
+      "axe_violations": [],
+      "stop_focusable": true
+    },
+    "errors": []
+  },
+  "llamaindex-chat-ui": {
+    "kind": "ai-chat",
+    "bundle_gz_kb": 1076.7,
+    "react_baseline_kb": 67.7,
+    "lib_only_gz_kb": 1009,
+    "lazy_gz_kb": 570.9,
+    "css_gz_kb": 9.9,
+    "tasks_total": 4,
+    "tasks_supported": 2,
+    "probe": {
+      "stream": {
+        "supported": true,
+        "note": "markdown: built in (react-markdown 8 + highlight.js + katex)",
+        "samples": 262,
+        "enter_sends": true,
+        "cls": 0.034,
+        "long_tasks": 11,
+        "long_task_ms": 674,
+        "script_ms": 26030,
+        "layout_ms": 5708,
+        "style_ms": 1907,
+        "raw_markdown_seen": true,
+        "raw_markdown_samples": {
+          "fence": 0,
+          "bold": 6,
+          "heading": 0,
+          "table": 1,
+          "link": 10
+        },
+        "sticks": true,
+        "unsticks": false,
+        "stream_wall_ms": 46884,
+        "controls": {
+          "stop": false,
+          "retry": false,
+          "edit": false,
+          "branch": false,
+          "follows_stream": "ui"
+        },
+        "stop_test": {
+          "edit": false,
+          "stop": false,
+          "stop_focusable": null,
+          "retry": false,
+          "branch": false
+        }
+      },
+      "steps": {
+        "supported": false,
+        "level": "ui",
+        "name": true,
+        "args_shown": true,
+        "result_in_dom": false,
+        "collapsible": false,
+        "note": "ui: name shown, args shown, result missing"
+      },
+      "approval": {
+        "supported": false,
+        "level": false,
+        "approve": false,
+        "deny": false,
+        "resumed": false,
+        "note": "no approval UI or mechanism"
+      },
+      "citations": {
+        "supported": true,
+        "level": "ui",
+        "found": 0,
+        "cards": {
+          "both": true,
+          "focusable": 0
+        },
+        "note": "ui: both sources shown as cards, not links (0 focusable elements)"
+      }
+    },
+    "a11y": {
+      "live_regions": [],
+      "announces_whole_stream": false,
+      "composer": "- textbox \"Type a message...\"",
+      "composer_name_from_placeholder_only": true,
+      "shift_enter_newline": true,
+      "shift_enter_did_not_send": true,
+      "axe_violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2
+        }
+      ],
+      "stop_focusable": null
+    },
+    "errors": []
+  }
+}
