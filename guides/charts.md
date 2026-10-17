@@ -42,6 +42,7 @@ and say why in the code or PR.
 | Default | Why | When to depart |
 |---|---|---|
 | Replace the library's default palette with our validated order (`#2a78d6, #eb6834, #1baf7a, #eda100, #e87ba4`, see `bench/data.js`) | No default palette passed our colour checks | A brand or data convention already defines colours (e.g. party colours, red/green P&L with labels) |
+| On light backgrounds, give charts direct labels, a 1px darker outline on fills, or a table view | On white, green (2.82:1), amber (2.17:1) and pink (2.69:1) are below the 3:1 that WCAG 1.4.11 asks of chart marks; all five pass on dark (checked, see `guides/foundations.md`) | Purely decorative sparklines next to the number they show |
 | One y-axis | Two scales invite false comparisons | Two series share units but differ in scale and a combined view is the point; label both axes clearly |
 | Legend in stack order; text in ink colours, not series colours | Readability and contrast | Direct labels on the marks can replace a legend entirely |
 | Write the screen-reader description yourself | Auto descriptions were raw data (ECharts), structural (Plot) or broken (Recharts Brush) | Decorative sparklines can be `aria-hidden` when the number is in text next to them |

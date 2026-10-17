@@ -14,15 +14,15 @@ same way charts and 3D were built.
 
 | # | Category | Covers | Status | Priority | Example tools to assess | Example references |
 |---|---|---|---|---|---|---|
-| A1 | Colour and tokens | OKLCH palettes, light/dark themes, semantic tokens, contrast | ✗ | P1 | Radix Colors, Tailwind v4 theme, Style Dictionary, Leonardo | Linear, Vercel (Geist), GitHub Primer, Apple HIG |
+| A1 | Colour and tokens | OKLCH palettes, light/dark themes, semantic tokens, contrast (WCAG gate, APCA advisory), status and colour-blind variants, forced colors, chart-colour tier | ✅ `guides/foundations.md` | P1 | Tailwind v4 `@theme`, Radix Colors, culori / colorjs.io (scripts); Style Dictionary only if tokens leave the web app | Radix scale docs, Vercel Geist colours, Primer primitives, oklch.com, Linear's LCH theme post |
 | A2 | Typography | Variable fonts, optical sizing, type scales, numerals | ✗ | P2 | Fontsource, Utopia (fluid type), Capsize | Stripe, Vercel, iA Writer |
 | A3 | Layout, spacing and density | Grids, spacing scales, density modes, concentric radii | ✗ | P2 | Tailwind, Every Layout, CSS container queries | Linear, Bloomberg-lite tools, Notion |
-| A4 | Materials, depth and elevation | Elevation scales, solid vs glass vs tactile, translucency fallbacks | ✗ | P1 | CSS backdrop-filter, Apple Liquid Glass guidance | Apple (Liquid Glass), Arc, Raycast |
-| A5 | Motion and animation | Springs, motion tokens, shared-element and scroll-driven transitions, interruptibility, reduced motion | ✗ | P1 | Motion (Framer Motion), React Spring, GSAP, View Transitions API, CSS scroll-driven animations, Rive, Lottie | Linear, Apple, Vercel, Family (wallet) |
-| A6 | States and micro-interactions | Hover/press/focus/loading/success/error, optimistic UI, undo toasts, skeletons, number roll-ups | ◐ | P1 | Sonner (toasts), NumberFlow, TanStack Query (optimistic) | Linear, Superhuman, Things |
-| A7 | Accessibility | Focus management, keyboard models, ARIA patterns, reduced motion/transparency/contrast | ◐ | P1 | React Aria, Radix Primitives, Ariakit, axe-core | GOV.UK Design System, Adobe Spectrum |
+| A4 | Materials, depth and elevation | Elevation scale, dark-mode depth (surface ladder + ring), glass and fallbacks, radii and concentric corners, scrims | ✅ `guides/foundations.md` | P1 elevation · P3 glass | Tailwind v4 tokens + custom reduce-transparency variant, Primer primitives (values), Josh Comeau shadow generator | Geist Materials, Atlassian Elevation, Fluent 2, Apple HIG Materials, Raycast, Linear |
+| A5 | Motion and animation | Duration/easing tokens, when not to animate, springs, interruptibility, shared-element and scroll-driven transitions, reduced motion | ✅ `guides/motion.md` (6 benchmarked) | P1 | CSS + React `<ViewTransition>`, Motion, AutoAnimate, GSAP (storytelling), anime.js, React Spring | Emil Kowalski demos, Chrome View Transition demos, Next `<ViewTransition>` demo, scroll-driven-animations.style |
+| A6 | States and micro-interactions | State matrix, latency bands, show-delay and minimum time, button loading, optimistic UI, undo vs confirm, toasts, number transitions, hover intent | ✅ `guides/motion.md` §4 | P1 | Sonner, NumberFlow, React `useOptimistic`, TanStack Query | Vercel Geist (Button, Toast, Skeleton), Sonner, NumberFlow, Linear's invisible-details post |
+| A7 | Accessibility | Primitives-library choice, focus, keyboard models, live regions and streaming, WCAG 2.2 criteria, forced colors, testing, EAA | ✅ `guides/accessibility.md` (5 benchmarked) | P1 | React Aria, Base UI, Radix, Ariakit; `@axe-core/playwright` (with `wcag22aa`), Playwright ARIA snapshots | GOV.UK (error summary, focus), React Aria docs, W3C APG examples, Primer focus management |
 | A8 | Performance and smoothness | Virtualisation, INP, compositor-only animation, layout-shift-free loading | ✗ | P2 | TanStack Virtual, react-window, web-vitals | Linear, Figma |
-| A9 | Content and microcopy | Plain-English UI text, errors, empty states, AI disclosure wording | ◐ | P3 | (writing guides rather than tools) | Monzo, GOV.UK, Stripe |
+| A9 | Content and microcopy | Plain-English UI text, errors, empty states (AI disclosure wording moved to E4) | ◐ | P3 | (writing guides rather than tools) | Monzo, GOV.UK, Stripe |
 | A10 | Icons and imagery | Icon sets, illustration styles, image formats (AVIF), avatars | ✗ | P3 | Lucide, Phosphor, Heroicons | Linear, Duolingo |
 
 ## B. App shell and components
@@ -66,11 +66,12 @@ same way charts and 3D were built.
 
 | # | Category | Covers | Status | Priority | Example tools to assess | Example references |
 |---|---|---|---|---|---|---|
-| E1 | Chat and streaming | Message threads, streaming text, stop/retry, attachments | ✗ | P1 | Vercel AI SDK (UI), assistant-ui | Claude, ChatGPT, Perplexity |
-| E2 | Agent workflows | Plans, tool-use logs, parallel tasks, pause/redirect | ✗ | P1 | (patterns) | Claude Code, Cursor, Devin-style tools, Manus |
-| E3 | Human review and approvals | Approval prompts, diffs with per-change accept, irreversible-action guards | ✗ | P1 | diff libraries (react-diff-view), Monaco diff | Cursor, GitHub PR review, Claude artifacts |
-| E4 | Trust and provenance | Citations, AI labelling, authorship, model/version labels, audit trails | ✗ | P1 | (patterns) | Perplexity, Elicit, Notion AI |
-| E5 | Generative UI | Agents returning interactive components (tables, charts, forms) | ✗ | P2 | Vercel AI SDK RSC/UI, CopilotKit | v0, Claude artifacts, ChatGPT canvas |
+| E1 | Chat and streaming | Streaming markdown, scroll model (anchor vs follow), stop/retry/edit/branch, composer, attachments, accessible streaming | ✅ `guides/agentic-ui.md` (benchmarked in `benchai/`) | P1 | AI SDK UI, assistant-ui primitives, Streamdown / remend, MessageScroller or use-stick-to-bottom | Claude, ChatGPT, Perplexity (logged in); AI SDK chatbot demo, assistant-ui examples, Streamdown playground |
+| E2 | Agent workflows | Plans, step and tool logs, progress, stop vs steer, parallel and background runs, takeover, final report | ✅ `guides/agentic-ui.md` | P1 | AI SDK tool-part states, assistant-ui ChainOfThought/Queue, shadcn AI patterns (read, don't adopt) | Claude Code, Cursor, Codex, ChatGPT agent, Gemini Deep Research (logged in) |
+| E3 | Human review and approvals | Approval prompts, permission modes, always-ask floor, per-hunk diff review, irreversible guards, checkpoints | ✅ `guides/agentic-ui.md` | P1 | jsdiff (engine) + `@pierre/diffs` or `@git-diff-view/react`; Monaco only if already shipping an editor | Cursor review, Claude Code `/rewind` and permission prompts, GitHub PR review, diffs.com |
+| E4 | Trust and provenance | Citations, AI disclosure (EU AI Act Art. 50), AI labels in mixed content, confidence without percentages, model labels, audit trails, C2PA | ✅ `guides/agentic-ui.md` | P1 | (patterns); C2PA Content Credentials | Perplexity, Elicit, Google AI Mode, NotebookLM, IBM Carbon for AI label |
+| E5 | Generative UI | Agents returning interactive components (tables, charts, forms) | ◐ brief in `guides/agentic-ui.md` | P2 | AI SDK UI typed tool parts (not RSC: experimental), CopilotKit; protocols MCP Apps, A2UI, AG-UI | v0, Claude artifacts, ChatGPT canvas |
+| E6 | Inline AI assist | Ghost-text autocomplete, rewrite in place with Accept/Reject, AI form fill, ⌘K "edit with AI" | ✗ | P1 | (patterns; AI SDK) | Cursor Tab, Notion AI, Linear, Gmail |
 
 ## F. Marketing and storytelling
 

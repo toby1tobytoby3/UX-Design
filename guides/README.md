@@ -43,6 +43,10 @@ codebase (open-source code under its licence is fine).
 |---|---|---|---|
 | chart | `guides/charts.md` | 9 (see `SOURCES.md`) | `chart/*`, `dashboard/*` |
 | 3d | `guides/3d.md` | 5 (see `SOURCES.md`) | 6 live captures in `3d/*` |
+| Colour, tokens, materials, elevation (A1, A4) | `guides/foundations.md` | – (tools named in the guide) | `design-tokens/*` |
+| Motion and state feedback (A5, A6) | `guides/motion.md` | 6 `motion` (benchmarked in `benchmotion/`) | `motion/*`, `feedback/*` |
+| Accessibility and the component-library choice (A7) | `guides/accessibility.md` | 5 `ui-primitives` (benchmarked in `benchui/`) | `accessibility/*` |
+| AI chat, agents, oversight, provenance (E1–E5) | `guides/agentic-ui.md` | `ai-chat` (benchmarked in `benchai/`) | `ai-chat/*`, `agent-activity/*`, `ai-review/*`, `ai-provenance/*` |
 | Everything else in `taxonomy.md` | – (patterns only) | – | see `CATALOG.md` |
 
-When a new category gets 3+ sources, add a guide using `guides/charts.md` as the template and add a row here.
+Categories still to build, with priorities and starting research: `research/categories.md`.
