@@ -1,0 +1,17 @@
+{
+  "name": "ux-design-benchui",
+  "private": true,
+  "type": "module",
+  "description": "Same four accessible components (dialog, menu, combobox, tabs) in every headless primitives library: keyboard and ARIA checks, axe-core, bundle sizes for sources/",
+  "dependencies": {
+    "react-aria-components": "1.22.1",
+    "radix-ui": "1.8.1",
+    "@ariakit/react": "0.4.42",
+    "@headlessui/react": "2.2.10",
+    "@base-ui/react": "1.9.0",
+    "axe-core": "4.14.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "esbuild": "0.25.10"
+  }
+}

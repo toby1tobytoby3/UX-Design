@@ -1,0 +1,17 @@
+{
+  "name": "ux-design-benchmotion",
+  "private": true,
+  "type": "module",
+  "description": "Same four motion tasks in every animation library: bundle sizes, compositor use, interruption, reduced motion and frame timing for sources/",
+  "dependencies": {
+    "motion": "14.3.0",
+    "@react-spring/web": "10.1.2",
+    "gsap": "3.15.0",
+    "@gsap/react": "2.1.2",
+    "animejs": "4.5.0",
+    "@formkit/auto-animate": "0.10.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "esbuild": "0.25.10"
+  }
+}

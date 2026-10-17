@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>UI primitives benchmark</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#fcfcfb;color:#1f1f1e;font:13px/1.4 system-ui,sans-serif}
+  header{display:flex;justify-content:space-between;align-items:baseline;padding:14px 24px 0} header b{font-size:18px} header span{color:#52514e}
+  main{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px 24px 24px}
+  section{background:#fff;border:1px solid #ecebe7;border-radius:10px;padding:10px 12px 10px}
+  h2{margin:0 0 6px;font-size:13px;font-weight:600} h2 small{color:#52514e;font-weight:400}
+  .view{position:relative;height:300px;width:100%;border-radius:8px;background:#f4f3ef;padding:16px}
+  .na{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#52514e;background:repeating-linear-gradient(135deg,#fff 0 8px,#f6f5f2 8px 16px);text-align:center;padding:24px;border-radius:8px}
+  .na b{color:#1f1f1e}
+  /* One small stylesheet for all five libraries: each exposes state differently (data-* attributes or render props). */
+  .btn{font:inherit;font-weight:500;padding:7px 14px;border-radius:8px;border:1px solid #d6d4cd;background:#fff;color:#1f1f1e;cursor:pointer}
+  .btn.primary{background:#1d63b8;border-color:#1d63b8;color:#fff}
+  .btn:focus-visible,.btn[data-focus-visible],.input:focus-visible,.tab:focus-visible,.tab[data-focus-visible]{outline:2px solid #2a78d6;outline-offset:2px}
+  .backdrop{position:fixed;inset:0;background:#1f1f1e55;display:grid;place-items:center;z-index:50}
+  .dialog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:360px;background:#fff;border-radius:12px;padding:20px;box-shadow:0 20px 50px #0003;z-index:51;outline:none}
+  .backdrop .dialog{position:static;transform:none}
+  .dialog h3{margin:0 0 12px;font-size:16px} .dialog label{display:block;font-weight:500;margin-bottom:4px}
+  .dialog .row{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+  .input{font:inherit;width:100%;padding:7px 10px;border:1px solid #d6d4cd;border-radius:8px;background:#fff}
+  .popup{min-width:200px;max-height:320px;overflow:auto;background:#fff;border:1px solid #e3e1db;border-radius:10px;padding:4px;box-shadow:0 10px 30px #0002;z-index:40;outline:none;list-style:none;margin:4px 0}
+  .item{padding:6px 10px;border-radius:6px;cursor:default;outline:none}
+  .item[data-highlighted],.item[data-focused],.item[data-active-item],.item[data-focus],.item[data-focus-visible]{background:#e8f0fb;color:#1d5fae}
+  button.item{display:block;width:100%;text-align:left;border:0;background:none;font:inherit;color:inherit}
+  .item[aria-selected=true],.item[data-selected]{font-weight:600}
+  .field{width:260px} .field label{display:block;font-weight:500;margin-bottom:4px}
+  .tablist{display:flex;gap:4px;border-bottom:1px solid #e3e1db;margin-bottom:12px}
+  .tab{font:inherit;padding:8px 12px;background:none;border:0;border-bottom:2px solid transparent;color:#52514e;cursor:pointer;outline:none}
+  .tab[aria-selected=true]{color:#1f1f1e;border-bottom-color:#2a78d6;font-weight:600}
+  .panel{padding:4px 2px;outline:none}
+  .probe-start{position:absolute;width:1px;height:1px;opacity:0;border:0;padding:0}
+</style></head><body>
+<header><b id="lib">Library</b><span>Same four components · keyboard + ARIA checks from the WAI-ARIA APG · axe-core</span></header>
+<main>
+  <section id="dialog"><h2>Dialog <small>· modal with heading, labelled input, Cancel/Save</small></h2><div class="view"></div></section>
+  <section id="menu"><h2>Menu <small>· menu button with 8 actions</small></h2><div class="view"></div></section>
+  <section id="combobox"><h2>Combobox <small>· filterable single select, 50 countries</small></h2><div class="view"></div></section>
+  <section id="tabs"><h2>Tabs <small>· 4 tabs with panels</small></h2><button class="probe-start" aria-label="Start of tabs probe"></button><div class="view"></div></section>
+</main>
+<script src="LIB.js"></script>
+</body></html>

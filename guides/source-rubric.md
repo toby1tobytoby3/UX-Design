@@ -27,3 +27,18 @@ A licence that requires payment for commercial use caps **Licence & health** at 
 - **3D Coverage** means what you can build: scene graph, instancing, loaders, post-processing, physics, XR.
 - **3D Default look** means quality with minimal setup: PBR, tone mapping, environment lighting, soft shadows.
 - **3D Performance** timings come from a software GPU (SwiftShader) and are only compared relative to each other.
+- **Motion** (animation libraries, `pattern: motion`). Bundle: 5 ≤ 10 KB, 4 ≤ 20, 3 ≤ 35, 2 ≤ 50, 1 above (library only,
+  React subtracted). *Default look*: quality of the default easing/springs with no tuning. *Interactivity*: interruptible
+  animations that keep velocity, gestures and drag. *Coverage*: layout/shared-element, enter/exit, scroll-linked, SVG and
+  timelines. *Accessibility*: reduced-motion support (built in and on by default scores highest). *Performance*: runs on the
+  compositor (WAAPI/CSS) rather than per-frame JavaScript, measured in `benchmotion/`.
+- **UI primitives** (headless accessible components, `pattern: ui-primitives`). Bundle for the four bench components:
+  5 ≤ 20 KB, 4 ≤ 35, 3 ≤ 50, 2 ≤ 70, 1 above. *Default look* is styling ergonomics instead (unstyled is the point): state
+  exposed as data attributes or render props that Tailwind can target. *Interactivity*: positioning, typeahead, animation
+  hooks for exit. *Coverage*: the hard components (combobox, date picker, toast, tree, table, drag and drop). *Accessibility*:
+  share of the scripted keyboard and ARIA checks passed plus axe violations, measured in `benchui/`.
+- **AI chat UI** (chat and agent interface kits, `pattern: ai-chat`). Bundle: 5 ≤ 30 KB, 4 ≤ 60, 3 ≤ 100, 2 ≤ 150, 1 above.
+  *Default look*: finished chat UI out of the box (or none, for hook-only kits: score 2). *Interactivity*: stop, retry,
+  edit, branch, attachments without custom code. *Coverage*: native support for the four bench tasks (streaming markdown,
+  tool/step display, approvals, citations). *Accessibility*: streaming announced politely, labelled composer, keyboard send
+  and stop. *Performance*: stable layout and low main-thread time while streaming a long answer, measured in `benchai/`.

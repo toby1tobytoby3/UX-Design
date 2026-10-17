@@ -204,6 +204,97 @@
     "body": "## What it is\nStripe's homepage hero: a large ribbon of saturated colour (orange, pink, violet, blue) sweeps diagonally behind\nthe right half of the hero and bleeds off the edges. The headline (\"Financial infrastructure to grow your\nrevenue…\"), two CTAs and the customer logo row are ordinary HTML layered over it. On mobile the ribbon crops to\nthe top-right corner and the text stack stays fully readable.\n\n## Key techniques\n- **Real-time WebGL, not video**: three.js r178 on the page, two canvases (WebGL1 and WebGL2 contexts).\n- **Canvases are `aria-hidden`**: the effect is explicitly decorative, so screen readers skip it. This is the right call for a background.\n- **Content never depends on it**: headline, CTAs and logos are HTML, so search, translation and accessibility work as normal.\n- **Composition**: the ribbon fills the right and top-right, leaving the text column on the left clean. Contrast holds because the ribbon sits mostly outside the text block.\n- **Restraint**: one effect, one area, no interaction required.\n\n## Accessibility\nDecorative canvases are correctly hidden. However, **the ribbon kept animating with `prefers-reduced-motion: reduce`**\nin our capture. A reduced-motion user would be better served by a still frame.\n\n## Weaknesses\nThe page downloaded about 2.7 MB in the capture window, including ~2 MB of JavaScript (not all of it for the hero).\nThe effect needs a capable GPU, so test that it degrades gracefully on low-end phones.\n\n## Related entries\n- Engine: `sources/threejs` (or `sources/ogl` for a lighter shader-only version)\n- `3d/github-floating-characters-hero`: another 3D hero that does stop for reduced motion\n\n> Captured live on 2026-10-17 with `scripts/capture-motion.mjs` (desktop, mobile and a reduced-motion check on a software GPU). Numbers come from `evidence.json`; transfer sizes are what the browser downloaded in the capture window."
   },
   {
+    "id": "accessibility/govuk-error-summary",
+    "kind": "pattern",
+    "title": "Error summary at the top of a form that links to each failing field",
+    "pattern": "accessibility",
+    "page_type": "docs",
+    "tags": [
+      "accessible",
+      "keyboard",
+      "minimal"
+    ],
+    "source_url": "https://design-system.service.gov.uk/components/error-summary/default/index.html",
+    "source_site": "design-system.service.gov.uk",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "After a failed submit, one bordered box headed \"There is a problem\" lists every error as a link to the field, so keyboard and screen-reader users hear all problems at once and can jump straight to each one instead of hunting through the form.",
+    "use_when": "Any form with server or submit-time validation, especially long or multi-section forms (settings, checkout, onboarding).",
+    "has_example": false,
+    "path": "entries/accessibility/govuk-error-summary",
+    "images": [
+      "entries/accessibility/govuk-error-summary/desktop.jpg",
+      "entries/accessibility/govuk-error-summary/crop-summary-unfocused.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe GOV.UK Design System's default error summary example: a box with a 5px red border, the heading \"There is a problem\", and\nlinks such as \"Enter your full name\" and \"The date your passport was issued must be in the past\". Each link targets the input\nwith the error; the inline error message beside the field repeats the same wording.\n\n## Key techniques\n- `border: 5px solid rgb(202,53,53)` (red #ca3535, 5.2:1 against white): strong enough to see without relying on colour alone, because the heading says \"There is a problem\".\n- Links are written as **instructions** (\"Enter your full name\"), not field names or codes, and match the inline message word for word.\n- `data-module=\"govuk-error-summary\"`: the component script moves focus to the summary on page load and, when a link is used, focuses the input and scrolls so its **label** is visible (per `research/A7-accessibility.md`; in this standalone example page, focus stayed on `<body>` on load and the targets don't exist, so we couldn't observe those two behaviours here).\n- Focused links use the same two-tone focus style as the rest of GOV.UK (yellow fill, black 4px bar), visible in `desktop.jpg`.\n\n## Accessibility\nMoving focus to the summary means screen readers announce the heading and the list immediately after submit. Put \"Error: \" in the page\n`<title>` too. Inline messages should be associated with inputs via `aria-describedby`.\n\n## Weaknesses\n- The example page is the component in isolation; see it inside a real form (GOV.UK's \"Validation\" pattern page) before copying the flow.\n- For instant (as-you-type) validation, a summary is overkill; use it for submit-time errors.\n\n## Related entries\n- `accessibility/govuk-two-tone-focus`\n- `accessibility/react-aria-combobox`\n\n> Captured live on 2026-10-17 with a Playwright script (load, Tab once, Enter). Border and focus styles read from computed styles."
+  },
+  {
+    "id": "accessibility/govuk-two-tone-focus",
+    "kind": "pattern",
+    "title": "Two-tone focus indicator (yellow fill, thick black underline) that survives any background",
+    "pattern": "accessibility",
+    "page_type": "docs",
+    "tags": [
+      "accessible",
+      "keyboard",
+      "minimal"
+    ],
+    "source_url": "https://design-system.service.gov.uk/get-started/focus-states/",
+    "source_site": "design-system.service.gov.uk",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "The focused link gets a yellow background and a 4px black bar under it, so one of the two colours always contrasts with whatever is behind it; a transparent outline is kept underneath so the indicator still appears in Windows forced-colours mode, where backgrounds and box-shadows are stripped.",
+    "use_when": "Defining the focus-visible style for links, buttons and inputs in any product, especially one with both light and dark or coloured surfaces.",
+    "has_example": false,
+    "path": "entries/accessibility/govuk-two-tone-focus",
+    "images": [
+      "entries/accessibility/govuk-two-tone-focus/desktop.jpg",
+      "entries/accessibility/govuk-two-tone-focus/crop-forced-colors.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nGOV.UK Design System's \"Understanding focus state styles\" page, captured by tabbing through it. Every focused link gets the same\ntreatment: yellow highlight behind the text, black bar along the bottom edge, black text. The page explains why: yellow contrasts\nwith dark backgrounds and the black bar with light ones, meeting WCAG 2.2 1.4.11 (non-text contrast) on any background GOV.UK uses.\n\n## Key techniques\nComputed styles on a focused link (identical for all 14 tab stops we recorded, including footer links):\n- `background-color: rgb(255,221,0)` (#ffdd00) and `color: rgb(11,12,12)`.\n- `box-shadow: 0 -2px 0 #ffdd00, 0 4px 0 #0b0c0c`: the yellow extends 2px above the text and a **4px black bar** sits below it.\n- `outline: 3px solid transparent; outline-offset: 1px`: invisible normally, but **forced-colours mode replaces it with a system colour**.\n  Our forced-colours capture (`crop-forced-colors.jpg`) shows exactly that: the yellow and the bar are gone, and a 3px outline box appears.\n- Contrast we computed: black text on the yellow 14.6:1; black bar against white 19.6:1. The yellow against white is only 1.35:1, which is why the bar is needed.\n- `:focus-visible` behaviour: the focus style is applied on keyboard focus; text colour switches to black on focus so links stay readable on yellow.\n\n## Accessibility\nThis is the accessibility reference. It meets 2.4.7 (focus visible) and 1.4.11, and is designed with 2.4.13 (focus appearance, AAA) area in mind.\nFor components rather than links, GOV.UK uses the same yellow + black as an outline/box-shadow ring (per `research/A7-accessibility.md`).\n\n## Weaknesses\n- Very loud: ideal for public services, but a product UI may prefer a 2px ring at 2px offset (the research default) as long as it keeps 3:1 against adjacent colours.\n- Yellow fill on large focused areas (cards) is heavy; use the outline form there.\n- Don't copy the transparent-outline trick without also testing forced colours yourself; ring-only styles (box-shadow, Tailwind `ring-*`) disappear there.\n\n## Related entries\n- `accessibility/govuk-error-summary`: the same focus style on error links\n- `accessibility/react-aria-combobox`: focus ring and active option in a composite widget\n\n> Captured live on 2026-10-17 with a Playwright script: focus `main`, press Tab 14 times, record computed styles; second run with\n> `forcedColors: 'active'`. Contrast ratios computed from the computed colours."
+  },
+  {
+    "id": "accessibility/react-aria-combobox",
+    "kind": "pattern",
+    "title": "Filterable combobox where focus stays in the input and the active option is announced",
+    "pattern": "accessibility",
+    "page_type": "docs",
+    "tags": [
+      "accessible",
+      "keyboard",
+      "open-source",
+      "minimal"
+    ],
+    "source_url": "https://react-spectrum.adobe.com/react-aria/ComboBox.html",
+    "source_site": "react-spectrum.adobe.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "Typing filters the list and arrow keys move a highlighted option while real DOM focus never leaves the text input (aria-activedescendant), so the user can keep typing, screen readers announce each option, and the focus ring and highlight are distinct.",
+    "use_when": "Any select with more than about 10 options or where users know what they're looking for: assignees, countries, tags, projects.",
+    "has_example": false,
+    "path": "entries/accessibility/react-aria-combobox",
+    "images": [
+      "entries/accessibility/react-aria-combobox/desktop.jpg",
+      "entries/accessibility/react-aria-combobox/crop-open.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe React Aria ComboBox docs demo (\"Favorite Animal\"). We tabbed to the input, typed \"a\" and pressed ArrowDown twice: the popover lists\nthe five matching animals (Aardvark, Cat, Kangaroo, Panda, Snake: a contains-match, not prefix) with \"Cat\" highlighted.\n\n## Key techniques\nRead from the live DOM:\n- The input has `role=\"combobox\"`, `aria-expanded=\"true\"` when open and `aria-activedescendant` pointing at the highlighted option;\n  `document.activeElement` stayed on the `<input>` throughout.\n- The highlighted option carries `data-focused` and `data-focus-visible` (plus `aria-selected=\"false\"` until chosen), so Tailwind can style it with\n  `data-[focused]:bg-…` without JavaScript state.\n- Focus ring on the input: `outline: 2px solid oklch(0.519 0.250 284.23)` with `outline-offset: -1px` (inset). That indigo is 6.2:1 against white (computed).\n- The highlighted option is a filled pill (indigo background, white text), different from the input's ring, so \"where focus is\" and \"which option\" don't get confused.\n- The demo panel offers Vanilla CSS / Tailwind variants and a theme switcher: the component is unstyled, the styles are yours.\n\n## Accessibility\nThis is the reference behaviour from the WAI-ARIA APG combobox pattern. Per React Aria's docs (see `research/A7-accessibility.md`), it also\nannounces the number of options and selection on VoiceOver, and works with touch screen readers.\n\n## Weaknesses\n- We didn't test the multiple-selection mode or async loading here.\n- Rounded pill highlight inside a tight popover can clip long labels; check truncation.\n\n## Related entries\n- `accessibility/govuk-two-tone-focus`: a louder focus style for links\n- Source: `sources/react-aria` (benchmark of headless primitives, if present)\n\n> Captured live on 2026-10-17 with a Playwright script (focus combobox, type \"a\", ArrowDown ×2). Attributes and outline read from the DOM."
+  },
+  {
     "id": "chart/echarts-aria-decal-patterns",
     "kind": "pattern",
     "title": "Stacked bars with built-in accessibility textures",
@@ -403,6 +494,101 @@
     "body": "## What it is\nHeader with date-range and \"compare to previous period\" controls. A main chart (today vs yesterday\nline, current value large) then a grid of metric cards: label, big value, coloured delta pill\n(+12.4%), small line chart with the comparison period as a dashed/grey line.\n\n## Key techniques\n- Tabular numerals (`font-variant-numeric: tabular-nums`) so values don't jitter.\n- Comparison line in grey, current in brand colour; no gridline clutter.\n- Delta pills use colour + sign (not colour alone).\n- Cards are borderless, separated by whitespace and hairlines.\n\n## Accessibility\nCharts need text equivalents (value + delta in text already helps). Don't rely on red/green alone.\n\n## Weaknesses\nToo many cards dilute focus; pick the metrics that drive decisions.\n\n> Base-pack entry written from knowledge of the product; re-capture with **ux-add** to attach real screenshots.\n\n> Recapture attempted 2026-10-17: this pattern is only visible when signed in, so it can't be captured automatically. Send a screenshot (or a screen recording) from your own account and run `ux-add` to replace the base-pack description."
   },
   {
+    "id": "design-tokens/geist-colour-scales",
+    "kind": "pattern",
+    "title": "Ten-step colour scales with gray vs gray-alpha and translucent-shadow rules",
+    "pattern": "design-tokens",
+    "page_type": "docs",
+    "tags": [
+      "minimal",
+      "dark",
+      "saas",
+      "devtools",
+      "accessible"
+    ],
+    "source_url": "https://vercel.com/geist/colors",
+    "source_site": "vercel.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Ten 10-step scales with fixed roles per step, a separate gray-alpha scale for anything that must let the background show through, and small do/avoid panels that show exactly where colour systems go wrong (double alpha borders, opaque shadows).",
+    "use_when": "Defining the colour tokens for a product UI that ships light and dark themes, especially neutrals, borders and status colours.",
+    "has_example": false,
+    "path": "entries/design-tokens/geist-colour-scales",
+    "images": [
+      "entries/design-tokens/geist-colour-scales/desktop-dark.jpg",
+      "entries/design-tokens/geist-colour-scales/desktop.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nGeist's **Colors** page: two backgrounds plus ten scales (Gray, Gray alpha, Blue, Red, Amber, Green, Teal, Purple, Pink),\neach with 10 steps, swapped wholesale between light and dark via `prefers-color-scheme`. P3 values are used on supporting\ndisplays. Below the grid are rules with side-by-side do/avoid demos: \"Choose gray or gray-alpha\", \"Draw each border once\",\n\"Keep material shadows translucent\", and a two-backgrounds section (Background 1 default, Background 2 used sparingly).\n\n## Key techniques\n- **Tokens are CSS variables per step** (`--ds-gray-100` … `--ds-gray-1000`, `--ds-background-100/200`), redefined per theme rather than inverted.\n  Light: background-100 `hsl(0 0% 100%)`, gray-1000 `hsl(0 0% 9%)`. Dark: background-100 `hsl(0 0% 4%)`, gray-1000 `hsl(0 0% 93%)`.\n- **Contrast we computed from the live tokens** (WCAG 2.x):\n  | Pair | Light | Dark |\n  |---|---|---|\n  | gray-1000 on background-100 (primary text) | 17.9:1 | 16.9:1 |\n  | gray-900 on background-100 (secondary text) | 8.5:1 | 7.6:1 |\n  | gray-700 on background-100 | 3.2:1 | 6.1:1 |\n  | white on blue-700 (primary button) | 4.4:1 | 4.4:1 |\n  | blue-900 as text on background | 5.3:1 | 7.9:1 |\n  So gray-700 is not a text colour in light mode, and white-on-blue-700 sits just under 4.5:1 for small text.\n- **Gray vs gray-alpha:** solid gray for text, fills and dividers; alpha only for overlays and shadows. Alpha borders that overlap produce darker intersections (\"Draw each border once\").\n- **Translucent shadows** blend into any background; opaque grey shadows leave a halo (shown side by side).\n\n## Accessibility\nText steps (900, 1000) clear AA comfortably in both themes. Watch the mid steps: gray-700 fails as light-mode text, and\nthe blue primary button with white label is 4.44:1, which fails AA for text under 18.66px bold / 24px regular.\n\n## Weaknesses\n- HSL-defined scales: perceptual steps are uneven compared with an OKLCH-generated scale (see `research/A1-A4-colour-materials.md`).\n- Step roles are less explicit than Radix's (no published \"step 3 = hover background\" mapping on this page).\n\n## Related entries\n- `design-tokens/geist-materials-elevation`: the surface/elevation layer built on these colours\n- `design-tokens/radix-12-step-colour-scale`: 12-step scale with an explicit job per step\n\n> Captured live on 2026-10-17 (light via `scripts/capture.mjs`, dark via Playwright `colorScheme: 'dark'`). Token values\n> were read from the page's CSS custom properties; contrast ratios computed from those values."
+  },
+  {
+    "id": "design-tokens/geist-materials-elevation",
+    "kind": "pattern",
+    "title": "Named materials that bundle radius, fill, ring and shadow per elevation role",
+    "pattern": "design-tokens",
+    "page_type": "docs",
+    "tags": [
+      "minimal",
+      "dark",
+      "saas",
+      "devtools",
+      "accessible"
+    ],
+    "source_url": "https://vercel.com/geist/materials",
+    "source_site": "vercel.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "Elevation is one decision, not four. Each named material (base, small, medium, large, tooltip, menu, modal, fullscreen) sets radius, fill, hairline ring and a layered translucent shadow together, so surfaces stay consistent and dark mode gets its own ring instead of a darker shadow.",
+    "use_when": "Setting up the surface and elevation tokens for an app: cards, popovers, menus, dialogs and full-screen takeovers in light and dark themes.",
+    "has_example": false,
+    "path": "entries/design-tokens/geist-materials-elevation",
+    "images": [
+      "entries/design-tokens/geist-materials-elevation/desktop-dark.jpg",
+      "entries/design-tokens/geist-materials-elevation/desktop.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nVercel's Geist design system page for **Materials**: eight presets in two groups. *Surface* (on the page): `material-base`,\n`material-small`, `material-medium`, `material-large`. *Floating* (above the page): `material-tooltip`, `material-menu`,\n`material-modal`, `material-fullscreen`. The page ends with written rules: pick the type from where the element sits,\n\"Don't stack two Materials on the same element\", align the material with the element's z-index band, and \"Favor the lowest\nelevation that still reads as elevated\".\n\n## Key techniques\nValues read from the live page's computed styles (light / dark):\n- **Radius rises with elevation:** 6px (base, small, tooltip) → 12px (medium, large, menu, modal) → 16px (fullscreen).\n- **A hairline ring instead of a border**, drawn as the first box-shadow: `0 0 0 1px rgba(0,0,0,.08)` in light,\n  `0 0 0 1px rgba(255,255,255,.145)` in dark. Dark mode relies on the ring for separation because shadows barely show on black.\n- **Layered, translucent shadows.** Menu (light): `0 1px 1px rgba(0,0,0,.02), 0 4px 8px -4px rgba(0,0,0,.04), 0 16px 24px -8px rgba(0,0,0,.06)`.\n  Modal steps the offsets up to `0 8px 16px -4px` and `0 24px 32px -8px`. Negative spread keeps the shadow under the surface rather than a halo around it.\n- **Dark shadows are stronger, not just inverted:** medium goes from `rgba(0,0,0,.04) 0 2px 2px` (light) to `rgba(0,0,0,.32) 0 2px 2px` (dark).\n- Same fill for every material in each theme (`#fff` light, `rgb(10,10,10)` dark): elevation comes from ring + shadow, not from tinting the fill.\n  (Research note: Atlassian, Primer and Linear lighten raised dark surfaces by about 2–3 OKLCH L points instead; see `research/A1-A4-colour-materials.md`.)\n\n## Accessibility\nThe page states that materials are decorative chrome: semantics live on the wrapper (`role=\"dialog\"`, `role=\"tooltip\"`),\nand elevation must not be conveyed by shadow alone. Focusable children still need their own focus-visible ring.\nThe 1px ring at 8% black is about 1.2:1 against white, which is fine for decoration but not a boundary for interactive controls (WCAG 1.4.11).\n\n## Weaknesses\n- Eight named types is more than most apps need; collapse to base / raised / overlay / modal if your app has fewer layers.\n- Uniform dark fill makes stacked dark surfaces hard to tell apart without the ring; consider the lighter-surface approach for dense apps.\n- Shadow values are Vercel's; the structure is the reference, not the exact numbers.\n\n## Related entries\n- `design-tokens/geist-colour-scales`: the colour scales these materials sit on\n- `design-tokens/radix-12-step-colour-scale`: an alternative scale with step roles\n\n> Captured live on 2026-10-17 with `scripts/capture.mjs` (light) and a Playwright run with `colorScheme: 'dark'` (dark);\n> shadow and radius values come from computed styles on the page."
+  },
+  {
+    "id": "design-tokens/radix-12-step-colour-scale",
+    "kind": "pattern",
+    "title": "Twelve-step colour scales where each step has a job",
+    "pattern": "design-tokens",
+    "page_type": "docs",
+    "tags": [
+      "minimal",
+      "open-source",
+      "accessible",
+      "dark"
+    ],
+    "source_url": "https://www.radix-ui.com/colors",
+    "source_site": "radix-ui.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "Every scale has the same 12 steps with fixed roles (1–2 backgrounds, 3–5 component states, 6–8 borders, 9–10 solid fills, 11–12 text), and a matching dark scale with the same roles, so components pick a step by job and theming is a variable swap.",
+    "use_when": "Building the colour token layer for a React/Tailwind app that needs light and dark themes and consistent hover/active/border states across many hues.",
+    "has_example": false,
+    "path": "entries/design-tokens/radix-12-step-colour-scale",
+    "images": [
+      "entries/design-tokens/radix-12-step-colour-scale/desktop-dark.jpg",
+      "entries/design-tokens/radix-12-step-colour-scale/desktop.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe Radix Colors overview: 30 hue scales plus overlays (Black/White alpha), each with 12 steps grouped under column headers\n\"Backgrounds\", \"Interactive components\", \"Borders and separators\", \"Solid colors\" and \"Accessible text\". The page follows\n`prefers-color-scheme`, so the dark capture shows the dark scales, which are designed separately rather than inverted.\n\n## Key techniques\n- **Step roles** (from the column headers): 1 app background, 2 subtle background, 3 / 4 / 5 component background default / hover / pressed,\n  6 / 7 / 8 subtle border / border / strong border and focus ring, 9 / 10 solid fill and its hover, 11 low-contrast text, 12 high-contrast text.\n- Hover and press are **adjacent steps** of the same hue (3→4→5, 9→10), so state changes are small and consistent everywhere.\n- **Contrast we computed from `@radix-ui/colors` 3.0.0** (WCAG 2.x):\n  | Pair | Blue | Gray | Green | Red |\n  |---|---|---|---|---|\n  | step 11 on step 2 (light) | 4.53 | 5.62 | 4.49 | 4.94 |\n  | step 12 on step 2 (light) | 12.0 | 15.5 | 11.7 | 11.8 |\n  | white on step 9 (light) | 3.26 | 3.32 | 3.16 | 3.91 |\n  | step 11 on step 2 (dark) | 8.38 | 8.48 | 9.37 | 8.56 |\n  Step 12 is safe text everywhere; step 11 sits right at the 4.5:1 line in light mode (green just under).\n- Alpha variants of every scale (`blueA`) for overlays on unknown backgrounds.\n\n## Accessibility\nRadix designs steps 11–12 against APCA targets (per its docs; see `research/A1-A4-colour-materials.md`). Under WCAG 2.2,\nwhich is still the legal benchmark, **white text on step 9 fails 4.5:1** for every hue we checked (3.2–3.9:1), so use step 9\nfor large text or icons, or put step 12 text on step 9 for the bright hues (amber, yellow, lime, mint, sky) as Radix itself recommends.\n\n## Weaknesses\n- Hex/P3 values, not OKLCH: generating a brand hue that matches requires their custom-palette tool.\n- 30 hues is more than an app needs; pick one neutral plus accent and four status hues.\n\n## Related entries\n- `design-tokens/geist-colour-scales`: 10-step scales with gray-alpha rules\n- `design-tokens/geist-materials-elevation`: surfaces and elevation on top of a scale\n\n> Captured live on 2026-10-17 (light via `scripts/capture.mjs`, dark via Playwright `colorScheme: 'dark'`). Contrast ratios\n> computed from the published `@radix-ui/colors` 3.0.0 values."
+  },
+  {
     "id": "empty-state/github-empty-repo-quick-setup",
     "kind": "pattern",
     "title": "Empty state as a quick-setup guide with copyable commands",
@@ -466,6 +652,40 @@
       "entry.md"
     ],
     "body": "## What it is\n\"Get the highlights.\" on the iPhone 17 page: a horizontal gallery of 12 large rounded cards. Each card pairs one\nsentence (\"Brighter display, now with ProMotion up to 120Hz. Durable Ceramic Shield 2 front…\") with a film or\nimage. Below, a progress pill shows the current card and a **Pause Highlights Gallery** button controls autoplay.\nOn mobile the card becomes a tall image with the same dots and play control. A sticky \"iPhone 17 · Explore · Buy\"\nbar follows the page.\n\n## Key techniques\n- **One claim per card**, short enough to read before it advances.\n- **Autoplay with an explicit pause button** (labelled \"Pause Highlights Gallery\") and progress dots that show position and time.\n- **Peeking next card** at the right edge signals there's more.\n- **A sticky product bar** keeps \"Buy\" one tap away throughout.\n\n## Accessibility\nThe labelled pause control is the key detail, and auto-advancing content without it would fail. Make sure each card's text is real HTML (it is here).\n\n## Weaknesses\nAutoplaying media is heavy and distracting if overused.\n\n> Retargeted on recapture: Apple no longer shows the bento grid the base-pack entry described; Apple now uses this highlights gallery. The desktop films did not decode in our headless browser (proprietary codecs), so the desktop frame is kept as `crop-desktop-video-not-decoded.jpg` and the mobile capture is the main image.\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` and a scroll-into-view step."
+  },
+  {
+    "id": "feedback/sonner-stacked-toasts",
+    "kind": "pattern",
+    "title": "Stacked toasts that expand on hover, with promise loading → success",
+    "pattern": "feedback",
+    "page_type": "docs",
+    "tags": [
+      "minimal",
+      "animated",
+      "open-source",
+      "accessible",
+      "saas"
+    ],
+    "source_url": "https://sonner.emilkowal.ski",
+    "source_site": "sonner.emilkowal.ski",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "Several toasts collapse into a compact depth stack so they never cover the page, fan out on hover so each can be read, and a promise toast turns one async action into a single message that changes from loading to success or error instead of two separate toasts.",
+    "use_when": "Any React app that needs transient confirmation of background actions (saved, copied, deployed), especially async ones with a loading phase.",
+    "has_example": false,
+    "path": "entries/feedback/sonner-stacked-toasts",
+    "images": [
+      "entries/feedback/sonner-stacked-toasts/desktop.jpg",
+      "entries/feedback/sonner-stacked-toasts/crop-promise-loading.jpg",
+      "entries/feedback/sonner-stacked-toasts/crop-promise-success.jpg",
+      "entries/feedback/sonner-stacked-toasts/crop-stack-collapsed.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe Sonner demo site. \"Render a toast\" pushes toasts into a stack in the bottom-right corner. At rest only the front toast\nis fully visible and the older ones peek out behind it, slightly scaled. Hovering the stack expands it into a list\nwith gaps. The \"Promise\" button shows one toast that reads \"Loading…\" with a spinner, then becomes \"Sonner toast has been added\"\nwith a check icon when the promise resolves (about 2.3 s in our capture). Buttons demo types (success, info, warning, error,\naction, custom), positions and options.\n\n## Key techniques\nRead from the live DOM after four toasts:\n- **Stack geometry as CSS variables on the toaster:** `--width: 356px; --gap: 14px; --offset-*: 24px` (16px on mobile). Each toast carries\n  `data-index`, `data-front`, `data-expanded`, `--index`, `--toasts-before`, `--z-index`, `--offset`, so the stacked vs expanded layout is pure CSS driven by data attributes.\n- **Motion:** `transition: transform .4s, opacity .4s, height .4s, box-shadow .2s`. Only 3 toasts are visible; older ones are kept but hidden.\n- **Promise toast:** `toast.promise(p, { loading, success, error })` reuses one toast for the whole lifecycle, so the user sees one thing change state.\n- Defaults (from the package source, per `research/A5-A6-motion-states.md`): bottom-right, 4 s duration, timers pause on hover and when the tab is hidden, swipe to dismiss.\n\n## Accessibility\n- The toaster sits in a `<section aria-label=\"Notifications alt+T\" aria-live=\"polite\" aria-relevant=\"additions text\">`, so new toasts are announced politely without interrupting.\n- **Alt+T moves focus to the toasts**; each toast is `tabindex=0`, so actions inside are reachable by keyboard.\n- Timers pause on hover; check that toasts carrying actions (Undo) stay long enough (5–10 s guidance in the research file) and that nothing important lives only in a toast.\n- Per the research, Sonner removes motion entirely under reduced motion rather than reducing it.\n\n## Weaknesses\n- The stacked look hides older messages; don't use toasts for anything the user must read (errors that block work belong inline).\n- Bottom-right placement can cover content or chat composers in app layouts; pick the position per app.\n- The demo site is a showcase; real usage needs your own tokens (it ships its own styles unless `unstyled`).\n\n## Related entries\n- `motion/numberflow-digit-roll`: another small, state-change animation done well\n- `design-tokens/geist-materials-elevation`: the floating material a toast should use\n\n> Captured live on 2026-10-17 with a Playwright script (click \"Render a toast\" ×4, hover the stack, click \"Promise\");\n> attributes and transitions read from the DOM."
   },
   {
     "id": "filters/unsection-category-tabs-style-chips",
@@ -563,6 +783,100 @@
       "entry.md"
     ],
     "body": "## What it is\nHovering **Products** opens a full-width white panel under the nav with five columns: **Payments**, **Revenue**,\n**Money Management**, **Embedded Finance** and **More**. Each item is a blue product name with a short grey\ndescription (e.g. \"Payment links · No-code payments\", \"Billing · Recurring revenue\"). On the right sits a featured\ncard (Stripe Sessions, with an image and \"Watch now →\"). A footer row offers \"Not sure where to start? · Get\nrecommendations · See all products\".\n\n## Key techniques\n- **Grouped by job, not alphabetically**: the column headings are the buying intents.\n- **Name + one-line description** for every item, so scanning works without knowing product names.\n- **Escape hatches** for undecided visitors (\"Get recommendations\", \"See all products\").\n- **One promotional slot** inside the menu, visually separate from navigation.\n- Clean typographic hierarchy: no icons, so dozens of items still read calmly.\n\n## Accessibility\nMust also open on click or Enter with `aria-expanded`, close on Esc and return focus. On mobile the nav\ncollapses into a menu button (captured); keep the same groups as accordions.\n\n## Weaknesses\nIt's a lot of choice in one panel; the promo competes slightly with navigation.\n\n> Recaptured live on 2026-10-17 with `scripts/capture.mjs` (desktop + mobile, interactions where noted). The `preview.html` rebuild from the original base pack is kept as a code starting point; the screenshots are the reference."
+  },
+  {
+    "id": "motion/nextjs-viewtransition-photo-gallery",
+    "kind": "pattern",
+    "title": "Gallery-to-detail navigation with React's ViewTransition",
+    "pattern": "motion",
+    "page_type": "app",
+    "tags": [
+      "dark",
+      "animated",
+      "minimal"
+    ],
+    "source_url": "https://react-view-transitions-demo.labs.vercel.dev",
+    "source_site": "react-view-transitions-demo.labs.vercel.dev",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "The official Next.js demo of React's ViewTransition component: clicking a photo carries it into the detail page while the header and controls stay put and the text blurs in, so a route change feels like one continuous object rather than a page swap.",
+    "use_when": "Next.js App Router apps that move between a collection and an item (gallery → photo, list → record) and want shared-element continuity without an animation library.",
+    "has_example": false,
+    "path": "entries/motion/nextjs-viewtransition-photo-gallery",
+    "images": [
+      "entries/motion/nextjs-viewtransition-photo-gallery/desktop.jpg",
+      "entries/motion/nextjs-viewtransition-photo-gallery/crop-detail.jpg",
+      "entries/motion/nextjs-viewtransition-photo-gallery/crop-frames.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\n\"Frames\", a small photo gallery built by Vercel to show React's `<ViewTransition>` with the App Router. The grid page links to\n`/photo/<id>`. Our frame captures show the grid, then the detail page with the title \"Alpine Morning\" still blurred mid-transition,\nthen the settled detail page.\n\n## Key techniques\n- **Named elements persist across routes:** computed `view-transition-name` values on the detail page include `site-header`,\n  `gallery-back-link`, `gallery-nav-prev`, `gallery-nav-next` and `gallery-controls` (plus `root`). Naming the chrome stops it cross-fading, so only content moves.\n- **Text enters with blur + fade** rather than a slide: it reads as \"coming into focus\", which suits a shared image arriving.\n- React drives the transition from navigation (`startTransition`), so no hand-written `document.startViewTransition` calls are needed.\n  Per `research/A5-A6-motion-states.md`, `<ViewTransition>` is stable as of React 19.3 and works in Next 16 without configuration; `<Link transitionTypes>` sets forward/back variants.\n\n## Accessibility\nView transitions should be turned off under `prefers-reduced-motion` with a CSS rule on the `::view-transition-*` pseudo-elements;\ncheck the demo's CSS before reusing it. Focus moves with normal navigation, unaffected by the animation.\n\n## Weaknesses\n- Headless capture caught the text blur-in but not the image morph between frames; watch it in a real browser before copying timings.\n- Same-document view transitions work in Chrome, Safari 18+ and Firefox 144+; cross-document ones don't work in Firefox yet (research file).\n- Transitions are snapshot-based and can't be interrupted mid-flight the way springs can.\n\n## Related entries\n- `motion/scroll-driven-cover-to-header`: CSS-only scroll-linked motion\n- `motion/numberflow-digit-roll`\n\n> Captured live on 2026-10-17 with a Playwright script (gallery, click first photo, frames at ~60, ~140 and ~220 ms, settled).\n> `view-transition-name` values read from computed styles."
+  },
+  {
+    "id": "motion/numberflow-digit-roll",
+    "kind": "pattern",
+    "title": "Numbers that roll digit by digit when the value changes",
+    "pattern": "motion",
+    "page_type": "docs",
+    "tags": [
+      "minimal",
+      "animated",
+      "open-source",
+      "accessible",
+      "dashboard"
+    ],
+    "source_url": "https://number-flow.barvian.me",
+    "source_site": "number-flow.barvian.me",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "When a number changes, each digit rolls in the direction of change and characters that appear or disappear slide and fade, so the eye sees what changed (and whether it went up or down) instead of a flash of new text.",
+    "use_when": "Live counters, KPIs, prices, cart totals and pricing toggles where a value changes in place and the change itself is information.",
+    "has_example": false,
+    "path": "entries/motion/numberflow-digit-roll",
+    "images": [
+      "entries/motion/numberflow-digit-roll/desktop.jpg",
+      "entries/motion/numberflow-digit-roll/crop-frames.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe NumberFlow docs home page: a large formatted number (\"($3,243.60)\") above a Shuffle button. Pressing Shuffle changes\nthe value and format; the frames show digits mid-roll with outgoing characters fading at the edges, settling on \"42\".\nThe `<NumberFlow value={…} />` React component handles everything from the `value` prop.\n\n## Key techniques\n- **Formatting via `Intl.NumberFormat`** (`format`, `locales` props), so currency, compact and percent formats animate correctly per locale.\n- **`trend`** defaults to `Math.sign(value - oldValue)`: digits roll up for increases and down for decreases.\n- Edge **mask** (`--number-flow-mask-height/width`, default `.25em` / `.5em`) fades digits as they leave, which is what makes the roll read as smooth.\n- Timings are WAAPI `EffectTiming` objects (spin, transform and opacity timings are separate props), so springs can be supplied as CSS `linear()` easings.\n- `<NumberFlowGroup>` keeps several numbers in sync, so adjacent values don't jitter against each other.\n\n## Accessibility\n- **`respectMotionPreference` defaults to true**: under reduced motion it swaps instantly (per its props table).\n- The docs say it is accessible: the readable value is exposed as text, not as individual animated digits (verify with a screen reader in your app).\n- Don't animate numbers that update several times a second; the roll becomes noise. Use it for discrete changes.\n\n## Weaknesses\n- It's a custom element under the hood; SSR shows the final value and animation starts after hydration.\n- Its \"Limitations\" section notes constraints on certain formats; check before using with scientific or very long numbers.\n- Motion's own `AnimateNumber` is in the paid Motion+ tier, so this is the free option (`research/A5-A6-motion-states.md`).\n\n## Related entries\n- `feedback/sonner-stacked-toasts`: state-change feedback with restrained motion\n- `motion/nextjs-viewtransition-photo-gallery`: shared-element motion between pages\n\n> Captured live on 2026-10-17 with a Playwright script: four frames around a Shuffle click (0, ~120, ~370 ms and settled)\n> in `crop-frames.jpg`. Prop defaults read from the page's props table."
+  },
+  {
+    "id": "motion/scroll-driven-cover-to-header",
+    "kind": "pattern",
+    "title": "Full-height cover that shrinks into a fixed header, in CSS only",
+    "pattern": "motion",
+    "page_type": "landing",
+    "tags": [
+      "animated",
+      "sticky",
+      "editorial",
+      "open-source"
+    ],
+    "source_url": "https://scroll-driven-animations.style/demos/cover-to-fixed-header/css/",
+    "source_site": "scroll-driven-animations.style",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "A cover image with a big title shrinks, darkens and settles into a slim fixed header as you scroll, driven by the scroll position itself (CSS animation-timeline), so it tracks the finger exactly and runs off the main thread with no JavaScript.",
+    "use_when": "Article, case-study or profile pages with a hero image that should give way to a compact header; any reading-progress or reveal effect tied to scroll.",
+    "has_example": false,
+    "path": "entries/motion/scroll-driven-cover-to-header",
+    "images": [
+      "entries/motion/scroll-driven-cover-to-header/desktop.jpg",
+      "entries/motion/scroll-driven-cover-to-header/crop-scroll-frames.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nOne of Bramus Van Damme's demos on scroll-driven-animations.style. At scroll 0 a full-viewport photo with a large title fills the\nscreen. As you scroll (frames at 0, 8, 20 and 60% of the page), the cover shortens, a blue tint increases, the title shrinks and\nre-centres, and it ends as a slim fixed header bar (about 90px tall) over the article text.\n\n## Key techniques\n- **`animation-timeline: scroll()`**: in the live page, `document.getAnimations()` returned one `CSSAnimation` with a **ScrollTimeline**,\n  `linear` easing and `duration: auto`. The animation's progress *is* the scroll position, so there's no lag or easing to fight.\n- One keyframe set animates height, tint and font size together; `animation-range` limits it to the first part of the scroll.\n- The same site has a \"JS version\" of each demo using WAAPI with `ScrollTimeline`, which is the fallback route for libraries.\n\n## Accessibility\nScroll-linked motion follows the user's own input, which is gentler than autoplaying motion, but large size changes can\nstill bother vestibular-sensitive users: wrap it in `@media (prefers-reduced-motion: no-preference)` and keep a plain fixed header otherwise.\n\n## Weaknesses\n- Scroll-driven animations are in Chromium (115+) and Safari 26 only, not Firefox (research file), so it must be an enhancement over a static layout.\n- A demo, not a product: the type and tint are illustrative.\n- Animating `height` triggers layout each frame; for heavy pages, animate transform/scale on an inner element instead.\n\n## Related entries\n- `motion/nextjs-viewtransition-photo-gallery`: navigation transitions\n- `3d/apple-airpods-scroll-story`: the same idea done with scroll-scrubbed media\n\n> Captured live on 2026-10-17 with a Playwright script scrolling to 0/8/20/60% of the page; animation timeline type read from\n> `document.getAnimations()`."
   },
   {
     "id": "navigation/unsection-dark-nav-submit-pill",
@@ -774,14 +1088,16 @@
     "score": 6.5,
     "rating": 3,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 412.8,
       "lib_only_gz_kb": 412.8,
       "react_baseline_kb": 0,
       "tasks_supported": 4,
       "tasks_total": 4,
+      "unsupported": [],
       "renderer": "canvas",
       "keyboard_focusable": true,
-      "unsupported": []
+      "evidence": "canvas"
     },
     "path": "sources/ag-charts",
     "images": [
@@ -791,6 +1107,196 @@
       "source.md"
     ],
     "body": "## Verdict\n**Good-looking and accessible, but heavy and open-core.** The community edition is MIT, but zoom, the\nnavigator and several series types are Enterprise (paid), so it isn't a full free option. Pick it mainly if\nyou already use AG Grid. Otherwise ECharts or Recharts cover the same ground more cheaply.\n\n## Benchmark\nAll 4 charts drawn. **412.8 KB gz**, the heaviest in the benchmark, even registering only the 7 modules\nneeded (v14 requires `ModuleRegistry.registerModules`, and charts fail with \"No modules have been\nregistered\" otherwise). Canvas. Time series has no zoom in the community edition. Code: `bench/libs/ag.js`.\n\nFound in the benchmark:\n- Keyboard-focusable chart region and legend on every chart, plus ARIA (\"chart, 1 series\", legend items). This is among the best built-in accessibility tested.\n- Default number axis shows \"10000\", not \"10k\". Set `label.formatter`.\n- Default palette fails lightness and chroma (includes a pure grey, `#b5b5b5`) and is only borderline for colour-blind separation. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished labels, callouts and legends |\n| Interactivity | 3 | Tooltips and legend toggling; zoom and navigator are Enterprise |\n| Coverage | 3 | Community series cover bar, line, area, scatter, bubble, pie, donut, histogram; more are Enterprise |\n| Accessibility | 4 | Built-in keyboard focus and ARIA (screen-reader output not tested here) |\n| Performance | 4 | Canvas renderer |\n| React/Next fit | 4 | Official `ag-charts-react` wrapper, declarative options |\n| Bundle size | 1 | 412.8 KB gz |\n| Licence & health | 3 | Actively released (v14.2, Sept 2026), but key features paywalled |"
+  },
+  {
+    "id": "sources/animejs",
+    "kind": "source",
+    "title": "anime.js",
+    "pattern": "motion",
+    "page_type": "app",
+    "tags": [
+      "animated",
+      "open-source",
+      "timelines"
+    ],
+    "source_url": "https://animejs.com",
+    "source_site": "animejs.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "4.5.0",
+    "licence": "MIT",
+    "s_look": 2,
+    "s_interact": 4,
+    "s_coverage": 4,
+    "s_a11y": 2,
+    "s_perf": 4,
+    "s_react": 2,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "A small MIT animation engine with timelines, stagger, springs, layout animation (`createLayout`), scroll observers, SVG and text helpers, and an optional WAAPI mode.",
+    "use_when": "Framework-agnostic or vanilla pages that want GSAP-style timelines under MIT, or small interactive pieces outside React.",
+    "avoid_when": "React app UI (no bindings, exits hand-rolled, no reduced-motion support), or anywhere default timings will ship untuned.",
+    "alternatives": [
+      "gsap",
+      "motion"
+    ],
+    "has_example": false,
+    "score": 6.3,
+    "rating": 3,
+    "bench": {
+      "kind": "motion",
+      "bundle_gz_kb": 94.7,
+      "lib_only_gz_kb": 26.5,
+      "react_baseline_kb": 68.2,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "engines": {
+        "layout": "js-per-frame",
+        "presence": "js-per-frame",
+        "interrupt": "js-per-frame",
+        "scroll": "js-scroll-listener"
+      },
+      "stress_script_ms": 65,
+      "reduced_motion": "manual: no built-in support",
+      "evidence": "65 ms script; scroll: js-scroll-listener"
+    },
+    "path": "sources/animejs",
+    "images": [
+      "sources/animejs/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**A capable MIT alternative to GSAP, but not a React tool.** All four tasks passed, but exits and React wiring were hand-written,\nthere is no reduced-motion support, and its default timing (1 s) is far too slow for UI.\n\n## Benchmark (same four tasks as every other library)\n4/4 tasks passed, one partly hand-rolled. **26.5 KB gz** (React and shell subtracted). Code: `benchmotion/libs/anime.jsx`.\n\n| Task | Result |\n|---|---|\n| Shared element (`createLayout`: record → update → animate) | Animated open and close, ~400 ms |\n| Enter and exit | Enter animated; **exit hand-rolled** (items kept until their animation completes), `createLayout` for siblings |\n| Interrupted drawer (default `animate`) | No jump; but the default **1,000 ms** duration meant settling took 1,215 ms |\n| Scroll-linked (`onScroll`, `sync`) | Bar at 0.50, reveal fired; JavaScript scroll listener |\n| 60 boxes at 4× CPU throttle | 65 ms script (median of 5) |\n| Reduced motion | **No built-in support**: we checked `matchMedia` ourselves and set durations to 0 |\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | 1 s default duration: every UI animation needs tuning |\n| Interactivity | 4 | Draggable, springs, animatable values that retarget |\n| Coverage | 4 | Layout, scroll, SVG, text, timelines; no presence |\n| Accessibility | 2 | Nothing built in for reduced motion |\n| Performance | 4 | Low script time; per-frame JavaScript by default, WAAPI mode available |\n| React/Next fit | 2 | No React bindings: refs, effects and manual cleanup |\n| Bundle size | 3 | 26.5 KB gz |\n| Licence & health | 4 | MIT, v4.5.0 released Aug 2026; essentially a one-maintainer project |"
+  },
+  {
+    "id": "sources/ariakit",
+    "kind": "source",
+    "title": "Ariakit",
+    "pattern": "ui-primitives",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "keyboard",
+      "react",
+      "headless"
+    ],
+    "source_url": "https://ariakit.org",
+    "source_site": "ariakit.org",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.4.42",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 4,
+    "s_coverage": 2,
+    "s_a11y": 5,
+    "s_perf": 3,
+    "s_react": 4,
+    "s_bundle": 2,
+    "s_licence": 4,
+    "why_it_works": "Low-level, store-driven primitives with excellent keyboard behaviour, best when you want to compose unusual widgets (comboboxes inside menus, nested composites) rather than use ready-made parts.",
+    "use_when": "Custom composite widgets (command menus, comboboxes with tabs, toolbars) where you need fine control over focus and stores.",
+    "avoid_when": "You want a ready-made date picker, table, tree or toast, or a 1.0 API with a large team behind it.",
+    "alternatives": [
+      "react-aria",
+      "base-ui",
+      "radix-ui"
+    ],
+    "has_example": false,
+    "score": 7,
+    "rating": 4,
+    "bench": {
+      "kind": "ui-primitives",
+      "bundle_gz_kb": 111,
+      "lib_only_gz_kb": 53.3,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "keyboard_passed": 29,
+      "keyboard_total": 29,
+      "axe_violations": 0,
+      "evidence": "29/29 keyboard checks, 0 axe"
+    },
+    "path": "sources/ariakit",
+    "images": [
+      "sources/ariakit/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The most flexible toolkit for custom widgets, not the default.** It passed every check with zero axe violations\nand keeps the combobox name while open. But it covers few of the hard components, is still pre-1.0, and is largely\none maintainer's project.\n\n## Benchmark (same four components as every other library)\n4/4 components. **29/29 keyboard and ARIA checks**, **0 axe violations**. **53.3 KB gz** for the four components\n(React subtracted). Code: `benchui/libs/ariakit.jsx`, 49 lines.\n\nFound in the benchmark:\n- The modal dialog does **not** wrap Tab: after the last control, focus leaves to the browser UI (like native\n  `<dialog>`), while the page behind stays inert. That deviates from the APG on purpose; it passed our \"page behind\n  is unreachable\" check.\n- Combobox filtering is yours to write (a `setValue` callback plus `useMemo`), which is flexible but more code.\n- Tabs activate on arrow keys; menus have typeahead and Home/End.\n\n## Coverage of the hard components\n| Component | Available |\n|---|---|\n| Combobox / autocomplete | ✓ `Combobox` (also inside menus and selects) |\n| Date and time pickers | ✗ |\n| Toast | ✗ |\n| Tree | ✗ |\n| Table | ✗ |\n| Drag and drop | ✗ |\n| Also | Select, menubar, toolbar, hovercard, tooltip, composite and focus-trap building blocks |\n\n## Styling with Tailwind\nState is exposed through `aria-*` and `data-active-item`, `data-focus-visible`, `data-enter`/`data-leave`. The\n`render` prop composes your own element. Workable with Tailwind, but less uniform than Headless UI or Base UI.\n\n## Weaknesses\n- Pre-1.0 (0.4.x) and largely maintained by one person.\n- Few ready-made hard components; you build filtering and lists yourself.\n- Tab leaving the dialog surprises people who expect APG wrapping.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 4 | `data-active-item`, `data-focus-visible`, `render` prop |\n| Interactivity | 4 | Positioning, typeahead, nested menus, enter/leave states |\n| Coverage | 2 | 1 of 6 hard components (combobox) |\n| Accessibility | 5 | 29/29 checks, 0 axe violations, keeps the combobox name while open |\n| Performance | 3 | No virtualisation (not benchmarked) |\n| React/Next fit | 4 | Typed; store hooks are more verbose than part-based APIs |\n| Bundle size | 2 | 53.3 KB gz for the four components |\n| Licence & health | 4 | MIT, frequent releases (14 October 2026), but pre-1.0 and one main maintainer; ~1.4M weekly downloads |"
+  },
+  {
+    "id": "sources/auto-animate",
+    "kind": "source",
+    "title": "AutoAnimate",
+    "pattern": "motion",
+    "page_type": "app",
+    "tags": [
+      "animated",
+      "open-source",
+      "react",
+      "lists"
+    ],
+    "source_url": "https://auto-animate.formkit.com",
+    "source_site": "auto-animate.formkit.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.10.0",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 1,
+    "s_coverage": 1,
+    "s_a11y": 5,
+    "s_perf": 4,
+    "s_react": 5,
+    "s_bundle": 5,
+    "s_licence": 3,
+    "why_it_works": "One hook on a parent animates its children being added, removed or reordered, with sensible 250 ms defaults, WAAPI under the hood and reduced motion honoured by default.",
+    "use_when": "Lists, tables and stacks whose items come and go (notifications, filters, kanban columns) and you want motion with one line of code.",
+    "avoid_when": "Anything except child add, remove and move: in-place size changes, drawers, springs, scroll or gestures.",
+    "alternatives": [
+      "motion",
+      "native-css"
+    ],
+    "has_example": false,
+    "score": 7,
+    "rating": 4,
+    "bench": {
+      "kind": "motion",
+      "bundle_gz_kb": 71.6,
+      "lib_only_gz_kb": 3.4,
+      "react_baseline_kb": 68.2,
+      "tasks_supported": 1,
+      "tasks_total": 4,
+      "unsupported": [
+        "layout: native: animates size/position changes of children",
+        "interrupt: Not a tween/spring library: animates DOM additions, removals and moves only.",
+        "scroll: No scroll-linked animation."
+      ],
+      "engines": {
+        "layout": "js-per-frame",
+        "presence": "waapi"
+      },
+      "stress_script_ms": null,
+      "reduced_motion": "default: honours prefers-reduced-motion",
+      "evidence": "no stress run; scroll: n/a"
+    },
+    "path": "sources/auto-animate",
+    "images": [
+      "sources/auto-animate/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The best value for list motion and nothing else.** One hook gave enter, exit and sibling movement, with reduced motion on by\ndefault, in 3.4 KB. It does nothing else: in-place layout changes didn't animate, and it can't tween or spring.\n\n## Benchmark (same four tasks as every other library)\n1/4 tasks passed (enter and exit). **3.4 KB gz.** Code: `benchmotion/libs/auto-animate.jsx` (21 lines, the shortest).\n\n| Task | Result |\n|---|---|\n| Shared element | **Not animated.** It watches children being added, removed or moved; a card growing in place isn't one of those |\n| Enter and exit (`useAutoAnimate`) | Enter, exit and siblings gliding all animated, via WAAPI |\n| Interrupted drawer, scroll-linked | Out of scope: not a tween, spring or scroll library |\n| Reduced motion | **Honoured by default** (opt out with `disrespectUserMotionPreference`) |\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | 250 ms defaults look right for list changes |\n| Interactivity | 1 | No interruption control, gestures or springs |\n| Coverage | 1 | List add/remove/move only |\n| Accessibility | 5 | Reduced motion respected by default |\n| Performance | 4 | WAAPI animations |\n| React/Next fit | 5 | One hook |\n| Bundle size | 5 | 3.4 KB gz |\n| Licence & health | 3 | MIT, still 0.x, FormKit-maintained, released Jul 2026 |"
   },
   {
     "id": "sources/babylonjs",
@@ -831,16 +1337,18 @@
     "score": 7,
     "rating": 4,
     "bench": {
+      "kind": "3d",
       "bundle_gz_kb": 846,
       "lib_only_gz_kb": 846,
       "react_baseline_kb": 0,
       "tasks_supported": 4,
       "tasks_total": 4,
-      "tasks_native": 2,
-      "first_frame_ms_swiftshader": 417,
+      "unsupported": [],
       "renderer": "webgl",
       "keyboard_focusable": true,
-      "unsupported": []
+      "evidence": "webgl",
+      "tasks_native": 2,
+      "first_frame_ms_swiftshader": 417
     },
     "path": "sources/babylonjs",
     "images": [
@@ -850,6 +1358,67 @@
       "source.md"
     ],
     "body": "## Verdict\n**A full engine, not a website component.** Pick it for complex interactive 3D applications. For our site's\nheroes, viewers and scroll scenes, it's far heavier than the alternatives for the same result.\n\n## Benchmark\n4/4 tasks (2 with built-in features). **846 KB gz** even with deep, tree-shaken imports, the heaviest tested by\na wide margin. Code: `bench3d/libs/babylon.js`.\n\nFound in the benchmark:\n- The default environment and skybox load assets from Babylon's CDN; without them (as here) metals look flat.\n- The shadow-only ground lives in a separate package (`@babylonjs/materials`); `BackgroundMaterial` was the\n  core-only workaround.\n- `ArcRotateCamera.attachControl` makes the canvas **keyboard-focusable with arrow-key orbit**, which beats\n  three.js and React Three Fiber out of the box.\n- Thin instances drew 2,000 cubes in one draw call. Built-in auto-rotation behaviour.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Good PBR, but nice lighting depends on fetched environment assets |\n| Interactivity | 5 | Cameras with keyboard, GUI, behaviours, picking, inspector |\n| Coverage | 5 | Physics, GUI, XR, node materials, animation, editor tooling |\n| Accessibility | 3 | Keyboard-operable camera by default; labels by hand |\n| Performance | 4 | Thin instances, scene optimisers |\n| React/Next fit | 2 | Imperative; community React bindings only |\n| Bundle size | 1 | 846 KB gz |\n| Licence & health | 5 | Apache-2.0, Microsoft-backed, released October 2026 |"
+  },
+  {
+    "id": "sources/base-ui",
+    "kind": "source",
+    "title": "Base UI",
+    "pattern": "ui-primitives",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "keyboard",
+      "react",
+      "headless"
+    ],
+    "source_url": "https://base-ui.com",
+    "source_site": "base-ui.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.9.0",
+    "licence": "MIT",
+    "s_look": 5,
+    "s_interact": 5,
+    "s_coverage": 3,
+    "s_a11y": 4,
+    "s_perf": 3,
+    "s_react": 5,
+    "s_bundle": 1,
+    "s_licence": 5,
+    "why_it_works": "Unstyled components from the people behind Radix, Floating UI and Material UI, with a consistent part-based API, data-* state for Tailwind and a broader set than Radix (combobox, autocomplete, toast, drawer, number field).",
+    "use_when": "A Radix-style API that also needs a combobox, autocomplete or toast, maintained by a funded team (MUI).",
+    "avoid_when": "Bundle size matters most (heaviest tested), or you need date pickers, tables or trees today.",
+    "alternatives": [
+      "react-aria",
+      "radix-ui",
+      "ariakit"
+    ],
+    "has_example": false,
+    "score": 7.8,
+    "rating": 4,
+    "bench": {
+      "kind": "ui-primitives",
+      "bundle_gz_kb": 141.9,
+      "lib_only_gz_kb": 84.2,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "keyboard_passed": 28,
+      "keyboard_total": 29,
+      "axe_violations": 1,
+      "evidence": "28/29 keyboard checks, 1 axe"
+    },
+    "path": "sources/base-ui",
+    "images": [
+      "sources/base-ui/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The strongest Radix successor, with a combobox caveat.** Clean API, excellent styling hooks, monthly releases since\n1.0 (December 2025). It passed 28 of 29 checks; the combobox loses its name while open, and it was the heaviest\nlibrary tested.\n\n## Benchmark (same four components as every other library)\n4/4 components. **28/29 keyboard and ARIA checks**, **1 axe violation**. **84.2 KB gz** for the four components\n(React subtracted), imported per component (`@base-ui/react/dialog` etc.). Code: `benchui/libs/base-ui.jsx`, 59 lines.\n\nFound in the benchmark:\n- **The combobox loses its accessible name while the list is open**, the same issue as Headless UI: the visible\n  `<label>` is `aria-hidden` while open, so Chrome reports an empty name.\n- `Combobox.Label` only labels a `Combobox.Trigger`. With `Combobox.Input` you need a native `<label>`; the\n  development build warns about this, but the wrong version looks fine.\n- Tabs use **manual activation** by default (arrows move focus, Enter or Space selects). The APG allows both.\n- The dialog moves focus back inside one tick after Tab (Floating UI focus guards); users won't notice.\n- The combobox filters `items` for you.\n\n## Coverage of the hard components\n| Component | Available |\n|---|---|\n| Combobox / autocomplete | ✓ `Combobox`, `Autocomplete` |\n| Date and time pickers | ✗ (temporal internals are present; no picker exported yet) |\n| Toast | ✓ `Toast` |\n| Tree | ✗ |\n| Table | ✗ |\n| Drag and drop | ✗ |\n| Also | Drawer, number field, OTP field, menubar, navigation menu, context menu, select, slider, meter, scroll area |\n\n## Styling with Tailwind\nState as `data-*` (`data-highlighted`, `data-selected`, `data-open`, `data-starting-style`/`data-ending-style` for\ntransitions), plus a `className` function that receives state and a `render` prop. As easy as Headless UI.\n\n## Weaknesses\n- Heaviest tested: 84.2 KB gz for four components.\n- The combobox name issue and the `Combobox.Label` pitfall above.\n- No date picker, table or tree yet.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 5 | `data-*` state, `className` functions, `render` prop |\n| Interactivity | 5 | Floating UI positioning, typeahead, transition states, submenus |\n| Coverage | 3 | 2 of 6 hard components (combobox, toast) |\n| Accessibility | 4 | 28/29 checks; combobox loses its name while open (1 axe violation) |\n| Performance | 3 | No built-in virtualisation (not benchmarked) |\n| React/Next fit | 5 | Typed part-based components, `render` prop |\n| Bundle size | 1 | 84.2 KB gz for the four components |\n| Licence & health | 5 | MIT, MUI team, 1.0 in December 2025, 1.9.0 on 9 October 2026; ~17M weekly downloads |"
   },
   {
     "id": "sources/d3",
@@ -889,14 +1458,16 @@
     "score": 6.5,
     "rating": 3,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 31.9,
       "lib_only_gz_kb": 31.9,
       "react_baseline_kb": 0,
       "tasks_supported": 4,
       "tasks_total": 4,
+      "unsupported": [],
       "renderer": "svg",
       "keyboard_focusable": false,
-      "unsupported": []
+      "evidence": "svg"
     },
     "path": "sources/d3",
     "images": [
@@ -948,14 +1519,16 @@
     "score": 7.8,
     "rating": 4,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 205.1,
       "lib_only_gz_kb": 205.1,
       "react_baseline_kb": 0,
       "tasks_supported": 4,
       "tasks_total": 4,
+      "unsupported": [],
       "renderer": "svg",
       "keyboard_focusable": false,
-      "unsupported": []
+      "evidence": "svg"
     },
     "path": "sources/echarts",
     "images": [
@@ -965,6 +1538,132 @@
       "source.md"
     ],
     "body": "## Verdict\n**The pick for rich, interactive, data-heavy dashboards.** It's the highest-scoring library overall: nothing free matches its\nbreadth plus interactivity plus large-data performance. You pay for that in weight, in an imperative API, and in\ndefaults you must fix (colours, screen-reader text, time-axis labels).\n\n## Benchmark (same four charts as every other library)\nAll 4 charts drawn natively, including zoom. **205 KB gz** tree-shaken to just these charts via `echarts/core`\n(the full build is 360 KB gz). SVG renderer in the benchmark; canvas available. Code: `bench/libs/echarts.js`.\n\nFound in the benchmark:\n- Time-axis labels collide at default density (\"29Aug\" overlap). Set `axisLabel.hideOverlap` or fewer ticks.\n- `aria.enabled` writes a description, but it reads raw timestamps aloud (\"1782777600000, 1136…\"). Supply `aria.label.description`.\n- No keyboard focus on data points (0 focusable elements).\n- v6 default palette passes colour-blind separation but fails contrast (6 of 9 below 3:1). v5's failed both. Always pass `color`.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Clean chrome, but colliding time labels and a low-contrast default palette |\n| Interactivity | 5 | Inside + slider zoom, axis tooltips, legend toggling, `universalTransition` morphs (see pattern entries) |\n| Coverage | 5 | 23 chart modules in the package: line, bar, pie, scatter, boxplot, heatmap, candlestick, parallel, radar, graph, chord, sankey, lines, tree, treemap, sunburst, funnel, gauge, themeRiver, map, custom… |\n| Accessibility | 3 | Auto description and decal textures, but the description is raw data and there's no keyboard navigation |\n| Performance | 5 | Canvas renderer, progressive rendering and sampling for large series |\n| React/Next fit | 3 | Imperative `init`/`setOption` in an effect, client-only, needs a wrapper. Types included |\n| Bundle size | 2 | 205 KB gz for four charts, tree-shaken |\n| Licence & health | 5 | Apache-2.0, Apache Software Foundation, v6.1 in 2026 |\n\n## Patterns in our library from this source\n- `chart/echarts-datazoom-time-series`: zoom + slider overview (★★★★★)\n- `chart/echarts-universal-transition-morph`: bar ↔ donut morph (★★★★)\n- `chart/echarts-aria-decal-patterns`: accessibility textures (★★★★)\n\n## Using it in our stack\nImport from `echarts/core` plus only the charts and components you use (see the benchmark file), init in a\n`\"use client\"` component, `dispose()` on unmount, resize via `ResizeObserver`, pass our validated `color` array,\nand write `aria.label.description` yourself."
+  },
+  {
+    "id": "sources/gsap",
+    "kind": "source",
+    "title": "GSAP",
+    "pattern": "motion",
+    "page_type": "landing",
+    "tags": [
+      "animated",
+      "scroll-scene",
+      "timelines",
+      "free-licence"
+    ],
+    "source_url": "https://gsap.com",
+    "source_site": "gsap.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "3.15.0",
+    "licence": "GSAP Standard \"no charge\" licence (free, not OSI open source)",
+    "s_look": 4,
+    "s_interact": 4,
+    "s_coverage": 5,
+    "s_a11y": 3,
+    "s_perf": 4,
+    "s_react": 3,
+    "s_bundle": 1,
+    "s_licence": 3,
+    "why_it_works": "The most capable timeline engine on the web. Flip, ScrollTrigger, SVG morphing, text splitting and Draggable are all free since 3.13, with precise sequencing and cross-browser scroll choreography.",
+    "use_when": "Marketing and storytelling pages, where sequenced timelines, pinned scroll scenes and SVG/text effects must behave the same in every browser.",
+    "avoid_when": "Everyday app UI in React (exit animations are hand-rolled and it is the heaviest library here), or any product that is itself a no-code visual animation builder (licence restriction).",
+    "alternatives": [
+      "motion",
+      "animejs",
+      "native-css"
+    ],
+    "has_example": false,
+    "score": 6.8,
+    "rating": 3,
+    "bench": {
+      "kind": "motion",
+      "bundle_gz_kb": 122.8,
+      "lib_only_gz_kb": 54.6,
+      "react_baseline_kb": 68.2,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "engines": {
+        "layout": "js-per-frame",
+        "presence": "js-per-frame",
+        "interrupt": "js-per-frame",
+        "scroll": "js-scroll-listener"
+      },
+      "stress_script_ms": 47,
+      "reduced_motion": "opt-in: gsap.matchMedia()",
+      "evidence": "47 ms script; scroll: js-scroll-listener"
+    },
+    "path": "sources/gsap",
+    "images": [
+      "sources/gsap/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The specialist for storytelling, not the default for app UI.** All four tasks passed and it had the lowest main-thread\ncost, but exits in React must be hand-built, it is the heaviest bundle with Flip and ScrollTrigger, and its licence is free but **not\nopen source**: the GSAP Standard licence (from Webflow) bans use in no-code visual animation builders that compete with Webflow.\nThat's fine for our product but must be stated.\n\n## Benchmark (same four tasks as every other library)\n4/4 tasks passed, one partly hand-rolled. **54.6 KB gz** with `Flip`, `ScrollTrigger` and `@gsap/react` (React and shell subtracted).\nCode: `benchmotion/libs/gsap.jsx`.\n\n| Task | Result |\n|---|---|\n| Shared element (Flip plugin) | Animated open and close, ~470 ms |\n| Enter and exit | Enter via `gsap.from`; **exit hand-rolled**: removed items stay rendered until their tween ends, then Flip moves the siblings |\n| Interrupted drawer (`overwrite: 'auto'`) | No jump: the new tween starts from the current position; settled 651 ms after start, no overshoot |\n| Scroll-linked (ScrollTrigger, `scrub`) | Bar at 0.50, reveal fired; JavaScript scroll listener |\n| 60 boxes at 4× CPU throttle | **47 ms script** (median of 5), the lowest measured |\n| Reduced motion | Honoured with `gsap.matchMedia()` (we sped the global timeline up); opt-in |\n\nFound in the benchmark:\n- Default tween: 500 ms, `power1.out`, a sensible starting point. A retargeted tween restarts its easing curve, so it doesn't\n  keep momentum the way a spring does.\n- `useGSAP` handles cleanup well, but the API stays imperative: selectors and refs, not declarative props.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | 500 ms `power1.out` looks considered with no tuning |\n| Interactivity | 4 | Draggable and Inertia plugins (free); tweens retarget without velocity |\n| Coverage | 5 | Flip, ScrollTrigger, MorphSVG, SplitText, timelines: the widest set |\n| Accessibility | 3 | `gsap.matchMedia()` makes reduced motion straightforward but manual |\n| Performance | 4 | Lowest script time, though everything is per-frame JavaScript (no compositor hand-off) |\n| React/Next fit | 3 | `useGSAP` hook; imperative; no presence for exits |\n| Bundle size | 1 | 54.6 KB gz with the two plugins used here |\n| Licence & health | 3 | Free under a proprietary licence with a field-of-use restriction (not OSI); actively released (3.15.0, Apr 2026) |"
+  },
+  {
+    "id": "sources/headless-ui",
+    "kind": "source",
+    "title": "Headless UI",
+    "pattern": "ui-primitives",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "keyboard",
+      "react",
+      "headless"
+    ],
+    "source_url": "https://headlessui.com",
+    "source_site": "headlessui.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "2.2.10",
+    "licence": "MIT",
+    "s_look": 5,
+    "s_interact": 3,
+    "s_coverage": 2,
+    "s_a11y": 4,
+    "s_perf": 3,
+    "s_react": 4,
+    "s_bundle": 2,
+    "s_licence": 4,
+    "why_it_works": "Tailwind Labs' small set of unstyled components whose data-* state attributes map one-to-one onto Tailwind variants, so styling is the easiest of any library tested.",
+    "use_when": "Simple Tailwind apps that need a dialog, menu, listbox, combobox or tabs and nothing harder.",
+    "avoid_when": "You need date pickers, tables, trees, toasts, submenus or tooltips, or a combobox that keeps its accessible name while open.",
+    "alternatives": [
+      "react-aria",
+      "base-ui",
+      "radix-ui"
+    ],
+    "has_example": false,
+    "score": 6.8,
+    "rating": 3,
+    "bench": {
+      "kind": "ui-primitives",
+      "bundle_gz_kb": 115.2,
+      "lib_only_gz_kb": 57.5,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "keyboard_passed": 28,
+      "keyboard_total": 29,
+      "axe_violations": 1,
+      "evidence": "28/29 keyboard checks, 1 axe"
+    },
+    "path": "sources/headless-ui",
+    "images": [
+      "sources/headless-ui/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The easiest to style, but the smallest set and slower releases.** It passed 28 of 29 checks; the miss is real (see\nbelow). Good for a simple Tailwind app; for an app that will grow, React Aria or Base UI cover far more.\n\n## Benchmark (same four components as every other library)\n4/4 components. **28/29 keyboard and ARIA checks**, **1 axe violation**. **57.5 KB gz** for the four components\n(React subtracted). Code: `benchui/libs/headless-ui.jsx`, 57 lines.\n\nFound in the benchmark:\n- **The combobox loses its accessible name while the list is open.** Opening it marks everything outside the input\n  and list `inert` and `aria-hidden`, including the visible `<label>`. Chrome's accessibility tree then reports an\n  empty name for the input, and axe flags `label`. React Aria and Ariakit keep the name.\n- Typing in the combobox highlights the first match at once, so ArrowDown moves to the second.\n- Dialog, menu and tabs passed everything; tabs activate on arrow keys.\n\n## Coverage of the hard components\n| Component | Available |\n|---|---|\n| Combobox / autocomplete | ✓ `Combobox` (you filter the list yourself) |\n| Date and time pickers | ✗ |\n| Toast | ✗ |\n| Tree | ✗ |\n| Table | ✗ |\n| Drag and drop | ✗ |\n| Also | Listbox, popover, disclosure, radio group, switch, form fields. No submenus, tooltip or context menu |\n\n## Styling with Tailwind\nThe best fit: `data-focus`, `data-hover`, `data-active`, `data-selected`, `data-open`, `data-closed` are designed for\nTailwind's `data-*` variants, and `anchor=\"bottom start\"` handles positioning.\n\n## Weaknesses\n- The combobox name issue above.\n- Smallest component set; no submenus or tooltips.\n- Releases have slowed: 2.2.10 on 7 April 2026, the first in six months.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 5 | `data-*` states built for Tailwind variants |\n| Interactivity | 3 | Anchor positioning and transitions, but no submenus, tooltip or context menu |\n| Coverage | 2 | 1 of 6 hard components (combobox) |\n| Accessibility | 4 | 28/29 checks; combobox loses its name while open (1 axe violation) |\n| Performance | 3 | No virtualisation (not benchmarked) |\n| React/Next fit | 4 | Simple typed components; small API |\n| Bundle size | 2 | 57.5 KB gz for the four components |\n| Licence & health | 4 | MIT, Tailwind Labs; last release 7 April 2026; ~7.4M weekly downloads |"
   },
   {
     "id": "sources/lightweight-charts",
@@ -1005,18 +1704,20 @@
     "score": 6.5,
     "rating": 3,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 54.3,
       "lib_only_gz_kb": 54.3,
       "react_baseline_kb": 0,
       "tasks_supported": 1,
       "tasks_total": 4,
-      "renderer": "canvas",
-      "keyboard_focusable": true,
       "unsupported": [
         "bar: No categorical bar chart; every series is plotted against time.",
         "stack: No stacked bars; histograms are per time point, one series each.",
         "donut: No pie or donut; it is a financial time-series library."
-      ]
+      ],
+      "renderer": "canvas",
+      "keyboard_focusable": true,
+      "evidence": "canvas"
     },
     "path": "sources/lightweight-charts",
     "images": [
@@ -1067,18 +1768,20 @@
     "score": 7.5,
     "rating": 4,
     "bench": {
+      "kind": "3d",
       "bundle_gz_kb": 291.2,
       "lib_only_gz_kb": 291.2,
       "react_baseline_kb": 0,
       "tasks_supported": 3,
       "tasks_total": 4,
-      "tasks_native": 3,
-      "first_frame_ms_swiftshader": 449,
-      "renderer": "webgl",
-      "keyboard_focusable": true,
       "unsupported": [
         "instances: unsupported: &lt;model-viewer&gt; shows one model; there is no scene graph or instancing API."
-      ]
+      ],
+      "renderer": "webgl",
+      "keyboard_focusable": true,
+      "evidence": "webgl",
+      "tasks_native": 3,
+      "first_frame_ms_swiftshader": 449
     },
     "path": "sources/model-viewer",
     "images": [
@@ -1088,6 +1791,137 @@
       "source.md"
     ],
     "body": "## Verdict\n**The fastest, most accessible way to put a product in 3D.** It's the right first answer to \"can we show\nthis product in 3D?\". Move to React Three Fiber only when you need a custom scene.\n\n## Benchmark\n3/4 tasks, all three with built-in features. No instancing or scene graph: it shows one model. **291 KB gz**\n(includes its own three.js). Code: `bench3d/libs/modelviewer.js`, just HTML attributes.\n\nFound in the benchmark:\n- The best out-of-the-box look tested: `environment-image=\"neutral\"` and `shadow-intensity` give studio\n  lighting and a soft shadow without any assets.\n- **Keyboard-focusable** viewer with an `alt` description; hotspots are real focusable `<button>`s placed with `data-position`.\n- `poster` and `reveal` attributes handle loading. Auto-rotate is opt-in, so reduced motion is easy to respect.\n- It auto-frames the model: our camera distance was clamped closer than in the other libraries until we set `max-camera-orbit`.\n- Pins its own three.js (peer `^0.183`), so in an app that also uses three.js you may ship two copies.\n\n## Seen in the wild\nSeen in the wild (captured): the official annotations demo, `3d/modelviewer-hotspot-annotations`.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 5 | Best result with zero setup |\n| Interactivity | 4 | Orbit, hotspots, animations, AR; no custom scenes |\n| Coverage | 2 | Single model only |\n| Accessibility | 4 | Focusable, alt text, keyboard orbit, button hotspots (screen-reader output not tested) |\n| Performance | 4 | Renders on demand; one model |\n| React/Next fit | 3 | Web component: works in React 19 but needs JSX type declarations and client-side loading |\n| Bundle size | 3 | 291 KB gz |\n| Licence & health | 5 | Apache-2.0, Google, released October 2026 |"
+  },
+  {
+    "id": "sources/motion",
+    "kind": "source",
+    "title": "Motion (Motion for React)",
+    "pattern": "motion",
+    "page_type": "app",
+    "tags": [
+      "animated",
+      "open-source",
+      "react",
+      "springs",
+      "layout-animation"
+    ],
+    "source_url": "https://motion.dev",
+    "source_site": "motion.dev",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "14.3.0",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 4,
+    "s_perf": 4,
+    "s_react": 5,
+    "s_bundle": 2,
+    "s_licence": 5,
+    "why_it_works": "The most complete React animation library, with springs that keep velocity when interrupted, `layout` (FLIP) for size and position changes, `AnimatePresence` for exits, gestures and drag, and transforms and opacity handed to the browser's animation engine where it can.",
+    "use_when": "App motion that CSS can't do well, such as interruptible springs, drag and gestures, list reorder and exit animations, `layoutId` tab underlines, or orchestrated sequences.",
+    "avoid_when": "The motion is a hover, a popover fade or a route change (CSS transitions and React's `<ViewTransition>` do it with no JavaScript), or a marketing page needs a lighter bundle.",
+    "alternatives": [
+      "native-css",
+      "react-spring",
+      "gsap"
+    ],
+    "has_example": false,
+    "score": 8.3,
+    "rating": 4,
+    "bench": {
+      "kind": "motion",
+      "bundle_gz_kb": 117.7,
+      "lib_only_gz_kb": 49.5,
+      "react_baseline_kb": 68.2,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "engines": {
+        "layout": "js-per-frame",
+        "presence": "waapi",
+        "interrupt": "waapi",
+        "scroll": "js-scroll-listener"
+      },
+      "stress_script_ms": 81,
+      "reduced_motion": "one-line opt-in: MotionConfig reducedMotion=\"user\"",
+      "evidence": "81 ms script; scroll: js-scroll-listener"
+    },
+    "path": "sources/motion",
+    "images": [
+      "sources/motion/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The pick when an app needs real motion, not just transitions.** It passed all four bench tasks with its built-in features\nand ran presence and drawer animations through the browser's animation engine (WAAPI). It is also the only library tested\nwhose springs are documented to keep velocity when retargeted. Two defaults must change: the default spring\n**overshoots by 12%**, and **reduced motion is off by default**.\n\n## Benchmark (same four tasks as every other library)\n4/4 tasks passed with built-in features. **49.5 KB gz** for the library with `motion.*`, `AnimatePresence`, `layout` and `useScroll`\n(React and the shared shell subtracted). Code: `benchmotion/libs/motion.jsx`. Trajectories: `guides/img/motion-curves.png`.\n\n| Task | Result |\n|---|---|\n| Shared element (`layout`) | Animated open and close, ~440 ms, measured and applied per frame in JavaScript (layout projection) |\n| Enter and exit (`AnimatePresence` + `layout`) | Enter, exit and siblings closing the gap all animated, via WAAPI |\n| Interrupted drawer (default spring) | No jump on reversal; settled 548 ms after start, swinging 25 px past the start point on the way back |\n| Scroll-linked (`useScroll` + `whileInView`) | Bar at 0.50 at half scroll, reveal fired; driven by a JavaScript scroll listener in this setup, not a scroll timeline |\n| 60 boxes at 4× CPU throttle | 81 ms script (median of 5); native CSS took 57 ms, GSAP 47 ms, React Spring 150 ms |\n| Reduced motion | Honoured with `<MotionConfig reducedMotion=\"user\">` (drops transforms, keeps opacity). **Default is `\"never\"`** |\n\nFound in the benchmark:\n- **The default spring is bouncy for UI.** An `x` move of 300 px overshot by 35 px (12%) and took 517 ms to settle. Set an app default:\n  `<MotionConfig transition={{ type: 'spring', visualDuration: 0.25, bounce: 0 }}>`.\n- **Lazy loading roughly halves the first load.** `LazyMotion` with async `domAnimation` features: **~10 KB gz** initial plus a\n  **32 KB** chunk loaded afterwards (measured; the docs say \"as low as 5 KB\"). Loading the features synchronously saves nothing (~42 KB).\n- Scroll animations through `useScroll` motion values ran on a JavaScript listener. Motion's docs describe hardware-accelerated scroll for\n  some cases; for a progress bar, a CSS `animation-timeline` does it off the main thread with no library.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Default tween is fine; the default `x`/`y` spring (500/25) overshoots 12%, too bouncy for UI chrome |\n| Interactivity | 5 | Springs keep velocity when interrupted (docs), drag, gestures, `whileHover`/`whileTap` |\n| Coverage | 5 | Layout and shared element (`layoutId`), presence, scroll, SVG paths, sequences |\n| Accessibility | 4 | Built-in `reducedMotion=\"user\"` that reduces rather than removes; off by default |\n| Performance | 4 | WAAPI for transforms and opacity; layout projection is per-frame JavaScript |\n| React/Next fit | 5 | `motion/react`, typed, works in client components; the de facto React standard |\n| Bundle size | 2 | 49.5 KB gz as used; ~10 KB initial with `LazyMotion` + async features |\n| Licence & health | 5 | MIT, released 15 Oct 2026. Some extras (`AnimateNumber`, premium examples) are in the paid Motion+ tier |"
+  },
+  {
+    "id": "sources/native-css",
+    "kind": "source",
+    "title": "CSS + View Transitions (the platform)",
+    "pattern": "motion",
+    "page_type": "app",
+    "tags": [
+      "animated",
+      "open-source",
+      "native",
+      "view-transitions",
+      "scroll-driven"
+    ],
+    "source_url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
+    "source_site": "developer.mozilla.org",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "React 19.3.1 + Chromium (Playwright)",
+    "licence": "Web platform (no library)",
+    "s_look": 3,
+    "s_interact": 2,
+    "s_coverage": 4,
+    "s_a11y": 3,
+    "s_perf": 5,
+    "s_react": 5,
+    "s_bundle": 5,
+    "s_licence": 5,
+    "why_it_works": "CSS transitions, `@starting-style`, CSS scroll-driven animations and View Transitions (through React 19.3's stable `<ViewTransition>`) cover most app motion with no animation library, and they run on the compositor.",
+    "use_when": "The default for app motion, such as hover, press, popover and dialog enter/exit, route and shared-element transitions in Next, scroll progress bars and condensing headers.",
+    "avoid_when": "Motion must follow a gesture or be retargeted mid-flight with momentum (drag, swipe, interruptible layout), or must look identical in Firefox today (no scroll-driven animations; no cross-document View Transitions).",
+    "alternatives": [
+      "motion",
+      "auto-animate"
+    ],
+    "has_example": false,
+    "score": 8,
+    "rating": 4,
+    "bench": {
+      "kind": "motion",
+      "bundle_gz_kb": 69.2,
+      "lib_only_gz_kb": 1,
+      "react_baseline_kb": 68.2,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "engines": {
+        "layout": "view-transition",
+        "presence": "view-transition",
+        "interrupt": "css-transition",
+        "scroll": "scroll-timeline (compositor)"
+      },
+      "stress_script_ms": 57,
+      "reduced_motion": "manual: @media (prefers-reduced-motion) rules",
+      "evidence": "57 ms script; scroll: scroll-timeline (compositor)"
+    },
+    "path": "sources/native-css",
+    "images": [
+      "sources/native-css/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Start here.** All four bench tasks passed with no animation library: React's `<ViewTransition>` for the shared element and for\nenter and exit, a CSS transition for the drawer, and `animation-timeline` for scroll. It had the lowest bundle and the only\nscroll animation that ran off the main thread. Reach for Motion when you need springs, gestures or interruptible layout.\n\n## Benchmark (same four tasks as every other library)\n4/4 tasks passed. **~1 KB** of our own code (React 19.3.1 subtracted, which includes `<ViewTransition>`). Code: `benchmotion/libs/native.jsx`.\n\n| Task | Result |\n|---|---|\n| Shared element (`<ViewTransition name>` + `startTransition`) | Animated open and close as View Transition snapshots, ~300 ms |\n| Enter and exit (`<ViewTransition>` per item) | Enter, exit and siblings gliding all animated (default cross-fade plus group move) |\n| Interrupted drawer (CSS `transition`, 300 ms, our ease-out curve) | No jump: the transition retargets from the current position; settled 216 ms after start |\n| Scroll-linked (`scroll-timeline` + `view()`) | Bar at 0.50, reveal fired; **runs on a scroll timeline (compositor)**, the only one tested that did |\n| 60 boxes at 4× CPU throttle | 57 ms script (median of 5): React's own render cost, the animations run as CSS transitions |\n| Reduced motion | Honoured with our `@media (prefers-reduced-motion)` rules; nothing happens automatically |\n\nFound in the benchmark:\n- **View Transitions can't be retargeted.** Starting a new one skips the running one, and the page is a snapshot while it runs (docs).\n  Use them for navigation and one-shot changes, not for anything the user can interrupt mid-flight.\n- CSS has no default timing: we chose 300 ms and `cubic-bezier(0.22, 1, 0.36, 1)`. Put durations and easings in tokens (`guides/motion.md`).\n- Reduced motion for View Transitions needs explicit CSS for `::view-transition-group(*)`, `-old(*)` and `-new(*)`.\n\n## Browser support (MDN browser-compat-data, via `research/A5-A6-motion-states.md`)\n| Feature | Support |\n|---|---|\n| Same-document View Transitions | Chrome 111, Safari 18, Firefox 144 (Baseline) |\n| Cross-document (`@view-transition`) | Chrome 126, Safari 18.2; **not Firefox** |\n| Scroll-driven animations | Chrome 115, Safari 26; **Firefox behind a flag**: wrap in `@supports (animation-timeline: view())` |\n| `@starting-style`, `transition-behavior` | Chrome 117, Firefox 129, Safari 17.4–17.5 (Baseline) |\n| `interpolate-size` (animate to `height: auto`) | **Chrome only** |\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | View Transitions default to a tidy 250 ms cross-fade; everything else needs your own durations and curves |\n| Interactivity | 2 | Transitions retarget position but not velocity; no gestures; View Transitions can't be interrupted |\n| Coverage | 4 | Shared element, presence, scroll-driven, enter/exit; no springs with momentum, browser gaps |\n| Accessibility | 3 | Easy with Tailwind's `motion-safe:`/`motion-reduce:`, but never automatic |\n| Performance | 5 | Compositor transitions and scroll timelines; no per-frame JavaScript |\n| React/Next fit | 5 | `<ViewTransition>` stable in React 19.3; Next 16 App Router supports it with no config; CSS works in Server Components |\n| Bundle size | 5 | ~1 KB |\n| Licence & health | 5 | Web standards |"
   },
   {
     "id": "sources/observable-plot",
@@ -1127,16 +1961,18 @@
     "score": 6.8,
     "rating": 3,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 93.3,
       "lib_only_gz_kb": 93.3,
       "react_baseline_kb": 0,
       "tasks_supported": 3,
       "tasks_total": 4,
-      "renderer": "svg",
-      "keyboard_focusable": false,
       "unsupported": [
         "donut: Plot has no pie or donut mark by design (it steers you to bars). A donut needs D3 shapes or a custom mark."
-      ]
+      ],
+      "renderer": "svg",
+      "keyboard_focusable": false,
+      "evidence": "svg"
     },
     "path": "sources/observable-plot",
     "images": [
@@ -1185,16 +2021,18 @@
     "score": 5.8,
     "rating": 3,
     "bench": {
+      "kind": "3d",
       "bundle_gz_kb": 25.4,
       "lib_only_gz_kb": 25.4,
       "react_baseline_kb": 0,
       "tasks_supported": 4,
       "tasks_total": 4,
-      "tasks_native": 1,
-      "first_frame_ms_swiftshader": 174,
+      "unsupported": [],
       "renderer": "webgl",
       "keyboard_focusable": false,
-      "unsupported": []
+      "evidence": "webgl",
+      "tasks_native": 1,
+      "first_frame_ms_swiftshader": 174
     },
     "path": "sources/ogl",
     "images": [
@@ -1204,6 +2042,195 @@
       "source.md"
     ],
     "body": "## Verdict\n**The specialist for tiny shader effects.** It's 25 KB versus 160 KB for three.js, but realistic rendering is\nall your own shader work. Use it for decorative WebGL; use three.js or React Three Fiber for anything product-like.\n\n## Benchmark\n4/4 tasks, only 1 with built-in features. **25.4 KB gz**, the smallest tested, and the fastest first frame\n(174 ms on the software GPU). Code: `bench3d/libs/ogl.js`, which includes a hand-written lighting shader.\n\nFound in the benchmark:\n- The glTF loader assigns a debug \"normals\" shader; you write the material shader yourself.\n- Our first shader rendered the product **black**: glTF colours are linear, and converting to sRGB is your\n  job (fixed with a gamma step). This is typical of OGL: correct colour, lighting and shadows are manual.\n- No environment lighting or shadows unless you build them, so the metal ring looks matte.\n- Instanced attributes drew 2,000 cubes in one draw call.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | No PBR, environment or shadows; colour management manual |\n| Interactivity | 3 | Orbit and Raycast extras; hotspots manual |\n| Coverage | 3 | Core, glTF, instancing, post, text, shadow extras; no PBR |\n| Accessibility | 1 | Nothing built in |\n| Performance | 5 | Minimal overhead; fastest first frame |\n| React/Next fit | 2 | Imperative |\n| Bundle size | 5 | 25.4 KB gz |\n| Licence & health | 3 | Unlicense (public domain); small team, last release January 2025 |"
+  },
+  {
+    "id": "sources/radix-ui",
+    "kind": "source",
+    "title": "Radix Primitives",
+    "pattern": "ui-primitives",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "keyboard",
+      "react",
+      "headless"
+    ],
+    "source_url": "https://www.radix-ui.com/primitives",
+    "source_site": "radix-ui.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.8.1",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 5,
+    "s_coverage": 2,
+    "s_a11y": 5,
+    "s_perf": 3,
+    "s_react": 5,
+    "s_bundle": 4,
+    "s_licence": 5,
+    "why_it_works": "The most widely used headless primitives, with clean asChild composition and solid keyboard behaviour for overlays, menus and tabs at the lowest weight tested.",
+    "use_when": "Overlays, menus, tabs, tooltips and toasts where you don't need a combobox, date picker, table or tree, and small bundle matters.",
+    "avoid_when": "You need a combobox, date picker, data table, tree or drag and drop: Radix has none of them, so you'd mix libraries.",
+    "alternatives": [
+      "react-aria",
+      "base-ui",
+      "ariakit"
+    ],
+    "has_example": false,
+    "score": 8.3,
+    "rating": 4,
+    "bench": {
+      "kind": "ui-primitives",
+      "bundle_gz_kb": 91.5,
+      "lib_only_gz_kb": 33.8,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 3,
+      "tasks_total": 4,
+      "unsupported": [
+        "combobox: Radix has no combobox: Select has no text filtering. Pair it with cmdk or another library."
+      ],
+      "keyboard_passed": 23,
+      "keyboard_total": 23,
+      "axe_violations": 0,
+      "evidence": "23/23 keyboard checks, 0 axe"
+    },
+    "path": "sources/radix-ui",
+    "images": [
+      "sources/radix-ui/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Best for the common overlays at the lowest weight.** Every check it could run passed, and it's the lightest tested.\nBut it has no combobox, date picker, table or tree, so a data-heavy app ends up mixing libraries. For a new app\nthat needs those, React Aria or Base UI cover more with one API.\n\n## Benchmark (same four components as every other library)\n3/4 components: **no combobox** (Select has no text filtering). **23/23 keyboard and ARIA checks** for the three it has,\n**0 axe violations**. **33.8 KB gz** for three components (React subtracted), so not directly comparable with the\nfour-component totals. Code: `benchui/libs/radix-ui.jsx`, 40 lines.\n\nFound in the benchmark:\n- Tabs use a roving tab stop on the tab list: Tab lands on the selected tab, the next Tab leaves. Arrow keys move\n  focus one tick later (in a timeout), which a test must wait for but a user won't notice.\n- The dialog warns in development if `Description` is missing, a useful nudge toward described dialogs.\n- Menus support typeahead, Home/End and return focus to the trigger on Escape.\n\n## Coverage of the hard components\n| Component | Available |\n|---|---|\n| Combobox / autocomplete | ✗ (pair with cmdk or another library) |\n| Date and time pickers | ✗ |\n| Toast | ✓ `Toast` |\n| Tree | ✗ |\n| Table | ✗ |\n| Drag and drop | ✗ |\n| Also | Select, slider, navigation menu, menubar, context menu, toolbar, tooltip, hover card; OTP and password fields (unstable) |\n\n## Styling with Tailwind\nState is exposed as `data-state` (`open`/`closed`, `active`/`inactive`) and `data-highlighted`, which Tailwind's\n`data-[state=open]:` variants target directly. `asChild` lets you render your own element. One attribute carries\nseveral states, so selectors are a little more verbose than Headless UI's.\n\n## Weaknesses\n- No combobox, date picker, table, tree or drag and drop.\n- One `data-state` attribute holds several states, so Tailwind selectors are wordier.\n- Screen-reader output was not tested, only Chrome's accessibility tree.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 4 | `data-state` / `data-highlighted`, `asChild` |\n| Interactivity | 5 | Floating positioning, typeahead, presence for exit animations, submenus |\n| Coverage | 2 | 1 of 6 hard components (toast) |\n| Accessibility | 5 | 23/23 checks, 0 axe violations (combobox not available to test) |\n| Performance | 3 | No virtualisation (not benchmarked) |\n| React/Next fit | 5 | Typed React components, `asChild` composition, the most widely adopted |\n| Bundle size | 4 | 33.8 KB gz for three components |\n| Licence & health | 5 | MIT, WorkOS, release on 14 October 2026; ~17M weekly downloads (`radix-ui`) |"
+  },
+  {
+    "id": "sources/react-aria",
+    "kind": "source",
+    "title": "React Aria Components",
+    "pattern": "ui-primitives",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "keyboard",
+      "react",
+      "headless"
+    ],
+    "source_url": "https://react-spectrum.adobe.com/react-aria/",
+    "source_site": "react-spectrum.adobe.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.22.1",
+    "licence": "Apache-2.0",
+    "s_look": 5,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 5,
+    "s_perf": 4,
+    "s_react": 5,
+    "s_bundle": 2,
+    "s_licence": 5,
+    "why_it_works": "Adobe's unstyled components with the most complete accessibility behaviour available, covering the hard components (combobox, date picker, table, tree, drag and drop) that other libraries leave out.",
+    "use_when": "Default for an app UI in our stack, and the only free choice when you need accessible date pickers, data tables, trees or drag and drop.",
+    "avoid_when": "A marketing site that needs one dialog and a menu (it is the heaviest per component after Base UI), or a team already standardised on Radix-style asChild composition.",
+    "alternatives": [
+      "radix-ui",
+      "base-ui",
+      "ariakit",
+      "headless-ui"
+    ],
+    "has_example": false,
+    "score": 9,
+    "rating": 5,
+    "bench": {
+      "kind": "ui-primitives",
+      "bundle_gz_kb": 126.5,
+      "lib_only_gz_kb": 68.8,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "keyboard_passed": 29,
+      "keyboard_total": 29,
+      "axe_violations": 0,
+      "evidence": "29/29 keyboard checks, 0 axe"
+    },
+    "path": "sources/react-aria",
+    "images": [
+      "sources/react-aria/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The default for app UI.** It passed every keyboard and ARIA check with zero axe violations, it is the only library\nwith the hard components (date picker, table, tree, drag and drop, colour picker), and its state is easy to style\nwith Tailwind. The price is weight: 69 KB gz for these four components.\n\n## Benchmark (same four components as every other library)\n4/4 components built from the library. **29/29 keyboard and ARIA checks**, **0 axe violations** with each component\nopen. **68.8 KB gz** for the four components (React subtracted). Code: `benchui/libs/react-aria.jsx`, 47 lines.\n\nFound in the benchmark:\n- The combobox keeps its accessible name (\"Country\") while the list is open: it labels the input with\n  `aria-labelledby`, so hiding the rest of the page doesn't remove the name (Headless UI and Base UI lose it).\n- The combobox filters `defaultItems` for you; the other libraries make you filter the list yourself (Base UI excepted).\n- Tabs activate on arrow keys (automatic activation); the dialog wraps Tab inside it, as the APG describes.\n- Menu popovers size themselves to the available space, so a long menu scrolls instead of overflowing.\n\n## Coverage of the hard components\n| Component | Available |\n|---|---|\n| Combobox / autocomplete | ✓ `ComboBox`, `Autocomplete` |\n| Date and time pickers | ✓ `DatePicker`, `DateRangePicker`, `Calendar`, `TimeField` |\n| Toast | ◐ `UNSTABLE_Toast` (marked unstable) |\n| Tree | ✓ `Tree` |\n| Table | ✓ `Table` with column resizing, `Virtualizer` for long lists |\n| Drag and drop | ✓ `useDragAndDrop` for lists, grids, tables and trees |\n| Also | Color picker, number field, tag group, slider, sheet, file drop zone, i18n for 30+ locales (docs) |\n\n## Styling with Tailwind\nEvery component exposes state as `data-*` attributes (`data-focused`, `data-focus-visible`, `data-selected`,\n`data-entering`, `data-exiting`) and accepts a `className` function with render-prop state. Our single stylesheet\nstyled it as easily as the others. Adobe publishes a Tailwind plugin for the state variants (docs, not tested here).\n\n## Weaknesses\n- Weight: 68.8 KB gz for four components, the second heaviest tested.\n- Large API surface and its own vocabulary (`onPress`, slots, collections); expect a learning curve.\n- Toast is still marked unstable. Screen-reader output was not tested, only Chrome's accessibility tree.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 5 | `data-*` state plus `className` functions; styled by the same CSS as every library |\n| Interactivity | 5 | Positioning, typeahead, entering/exiting states, scroll-aware popovers |\n| Coverage | 5 | All six hard components (toast unstable) |\n| Accessibility | 5 | 29/29 checks, 0 axe violations, keeps the combobox name while open |\n| Performance | 4 | Built-in `Virtualizer` (exported; not benchmarked) |\n| React/Next fit | 5 | Typed React components; client components in Next |\n| Bundle size | 2 | 68.8 KB gz for the four components |\n| Licence & health | 5 | Apache-2.0, Adobe, release on 9 October 2026; ~4.9M weekly downloads |"
+  },
+  {
+    "id": "sources/react-spring",
+    "kind": "source",
+    "title": "React Spring",
+    "pattern": "motion",
+    "page_type": "app",
+    "tags": [
+      "animated",
+      "open-source",
+      "react",
+      "springs"
+    ],
+    "source_url": "https://www.react-spring.dev",
+    "source_site": "react-spring.dev",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "10.1.2",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 4,
+    "s_coverage": 3,
+    "s_a11y": 3,
+    "s_perf": 2,
+    "s_react": 4,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "Physics-first animation for React, where every value is a spring (`useSpring`, `useTransition`, `useTrail`), so motion stays continuous when targets change.",
+    "use_when": "Physics-driven values in an existing React Spring codebase, or data visualisations interpolating many values with springs.",
+    "avoid_when": "New app work (Motion covers more with better performance), shared-element or layout animation (no FLIP primitive), or many simultaneous animations.",
+    "alternatives": [
+      "motion",
+      "native-css"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "kind": "motion",
+      "bundle_gz_kb": 88.8,
+      "lib_only_gz_kb": 20.6,
+      "react_baseline_kb": 68.2,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "engines": {
+        "layout": "js-per-frame",
+        "presence": "js-per-frame",
+        "interrupt": "js-per-frame",
+        "scroll": "js-scroll-listener"
+      },
+      "stress_script_ms": 150,
+      "reduced_motion": "opt-in: useReducedMotion + Globals.skipAnimation",
+      "evidence": "150 ms script; scroll: js-scroll-listener"
+    },
+    "path": "sources/react-spring",
+    "images": [
+      "sources/react-spring/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Capable, but Motion does more for less work.** All four tasks passed, but the shared element had to be hand-written (FLIP\nwith `useSpring`), every animation ran as per-frame JavaScript, and it had the **highest main-thread cost** in the bench.\n\n## Benchmark (same four tasks as every other library)\n4/4 tasks passed, one hand-rolled. **20.6 KB gz** (React and the shared shell subtracted). Code: `benchmotion/libs/react-spring.jsx`.\n\n| Task | Result |\n|---|---|\n| Shared element | **No layout primitive**: we measured before/after and sprang the inverse transform (20 lines). Animated, ~680 ms |\n| Enter and exit (`useTransition`) | Enter, exit and siblings closing the gap all animated (height spring) |\n| Interrupted drawer (default spring 170/26) | No jump; no overshoot; settled 652 ms after start |\n| Scroll-linked (`useScroll` + `useInView`) | Bar at 0.50, reveal fired; JavaScript scroll listener |\n| 60 boxes at 4× CPU throttle | **150 ms script** (median of 5), about 3× GSAP and 2.6× native CSS |\n| Reduced motion | Honoured with `useReducedMotion()` + `Globals.assign({ skipAnimation })`; this removes all motion and is off by default |\n\nFound in the benchmark:\n- The default spring is smooth (no overshoot) but slow for UI: **683 ms** to open a 300 px drawer. Set `config={{ tension: 300, friction: 30 }}` or similar.\n- Combining several animated values into one `transform` needs the `to([a, b, c], fn)` helper; using `.get()` inside an interpolation silently stops updating.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Smooth, no overshoot, but ~680 ms is sluggish for interface chrome |\n| Interactivity | 4 | Springs retarget with velocity (docs); gestures through the separate `@use-gesture` package |\n| Coverage | 3 | Presence, trails, scroll; no layout/shared-element primitive |\n| Accessibility | 3 | `useReducedMotion` + global skip; opt-in and all-or-nothing |\n| Performance | 2 | Everything per-frame JavaScript; highest script time in the bench |\n| React/Next fit | 4 | Hooks API, typed; interpolation syntax is clumsier than Motion's |\n| Bundle size | 3 | 20.6 KB gz |\n| Licence & health | 4 | MIT; v10.1.2 released 1 Oct 2026, v11 in beta; smaller community than Motion |"
   },
   {
     "id": "sources/react-three-fiber",
@@ -1244,16 +2271,18 @@
     "score": 8.5,
     "rating": 4,
     "bench": {
+      "kind": "3d",
       "bundle_gz_kb": 353.4,
       "lib_only_gz_kb": 296.1,
       "react_baseline_kb": 57.3,
       "tasks_supported": 4,
       "tasks_total": 4,
-      "tasks_native": 3,
-      "first_frame_ms_swiftshader": 1263,
+      "unsupported": [],
       "renderer": "webgl",
       "keyboard_focusable": false,
-      "unsupported": []
+      "evidence": "webgl",
+      "tasks_native": 3,
+      "first_frame_ms_swiftshader": 1263
     },
     "path": "sources/react-three-fiber",
     "images": [
@@ -1304,14 +2333,16 @@
     "score": 7.5,
     "rating": 4,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 182.5,
       "lib_only_gz_kb": 125.2,
       "react_baseline_kb": 57.3,
       "tasks_supported": 4,
       "tasks_total": 4,
+      "unsupported": [],
       "renderer": "svg",
       "keyboard_focusable": true,
-      "unsupported": []
+      "evidence": "svg"
     },
     "path": "sources/recharts",
     "images": [
@@ -1362,16 +2393,18 @@
     "score": 7.3,
     "rating": 4,
     "bench": {
+      "kind": "3d",
       "bundle_gz_kb": 159.9,
       "lib_only_gz_kb": 159.9,
       "react_baseline_kb": 0,
       "tasks_supported": 4,
       "tasks_total": 4,
-      "tasks_native": 2,
-      "first_frame_ms_swiftshader": 842,
+      "unsupported": [],
       "renderer": "webgl",
       "keyboard_focusable": false,
-      "unsupported": []
+      "evidence": "webgl",
+      "tasks_native": 2,
+      "first_frame_ms_swiftshader": 842
     },
     "path": "sources/threejs",
     "images": [
@@ -1420,14 +2453,16 @@
     "score": 5.3,
     "rating": 3,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 282.1,
       "lib_only_gz_kb": 237.2,
       "react_baseline_kb": 44.9,
       "tasks_supported": 4,
       "tasks_total": 4,
+      "unsupported": [],
       "renderer": "svg",
       "keyboard_focusable": true,
-      "unsupported": []
+      "evidence": "svg"
     },
     "path": "sources/tremor",
     "images": [
@@ -1477,17 +2512,19 @@
     "score": 6,
     "rating": 3,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 24.4,
       "lib_only_gz_kb": 24.4,
       "react_baseline_kb": 0,
       "tasks_supported": 2,
       "tasks_total": 4,
-      "renderer": "canvas",
-      "keyboard_focusable": false,
       "unsupported": [
         "bar: No categorical/horizontal bar chart; uPlot is built for x/y numeric series.",
         "donut: No pie or donut. uPlot only draws x/y series."
-      ]
+      ],
+      "renderer": "canvas",
+      "keyboard_focusable": false,
+      "evidence": "canvas"
     },
     "path": "sources/uplot",
     "images": [
@@ -1537,14 +2574,16 @@
     "score": 7,
     "rating": 4,
     "bench": {
+      "kind": "chart",
       "bundle_gz_kb": 95.8,
       "lib_only_gz_kb": 38.5,
       "react_baseline_kb": 57.3,
       "tasks_supported": 4,
       "tasks_total": 4,
+      "unsupported": [],
       "renderer": "svg",
       "keyboard_focusable": false,
-      "unsupported": []
+      "evidence": "svg"
     },
     "path": "sources/visx",
     "images": [

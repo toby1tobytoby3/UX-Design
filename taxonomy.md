@@ -33,6 +33,14 @@ more entries would use it.
 | checkout | Cart, payment, order summary |
 | product-detail | Product pages, galleries, variant pickers |
 | settings | Preferences, account and billing pages |
+| design-tokens | Foundations: colour scales and themes, surfaces, elevation and materials, radii, type scales |
+| motion | Transitions, springs, shared-element and scroll-driven motion, micro-interactions |
+| accessibility | Focus indicators, keyboard models, error summaries, reduced-motion/contrast handling |
+| ui-primitives | (sources only) headless accessible component libraries |
+| ai-chat | AI conversation UI: threads, streaming answers, composer, stop/retry/edit/branch |
+| agent-activity | Agent plans, step and tool-call logs, progress of long or background runs, interrupt/redirect |
+| ai-review | Human oversight of AI actions: approval prompts, permission modes, diffs with accept/reject, checkpoints |
+| ai-provenance | Citations and sources, AI labelling and disclosure, model/version labels, audit trails |
 
 ## Page types
 landing · pricing · product · checkout · dashboard · onboarding · auth · settings · docs · search-results · app
@@ -43,3 +51,4 @@ Audience: `saas` `b2b` `b2c` `ecommerce` `devtools` `consumer-app`
 Behaviour: `animated` `sticky` `keyboard` `progressive-disclosure` `responsive` `interactive`
 Other: `data-viz` `accessible` `open-source` (code is licensed for reuse)
 3D: `webgl` `product-viewer` `configurator` `hero-3d` `scroll-scene` `shaders` `ar`
+AI: `streaming` `tool-calls` `human-in-the-loop` `citations` `generative-ui`

@@ -1,0 +1,354 @@
+{
+  "ariakit": {
+    "kind": "ui-primitives",
+    "bundle_gz_kb": 111,
+    "react_baseline_kb": 57.3,
+    "shared_baseline_kb": 57.7,
+    "lib_only_gz_kb": 53.3,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "keyboard_passed": 29,
+    "keyboard_total": 29,
+    "axe_violations": 0,
+    "probe": {
+      "dialog": {
+        "supported": true,
+        "checks": {
+          "opens_with_enter": true,
+          "focus_moves_inside": true,
+          "tab_never_reaches_page_behind": true,
+          "modal_semantics": true,
+          "has_accessible_name": true,
+          "escape_closes": true,
+          "focus_returns_to_trigger": true
+        },
+        "axe": [],
+        "note": "Tab leaves to the browser UI after the last control (page behind is inert)"
+      },
+      "menu": {
+        "supported": true,
+        "checks": {
+          "haspopup_on_trigger": true,
+          "opens_with_enter": true,
+          "first_item_focused": true,
+          "aria_expanded_true": true,
+          "roles_menu_menuitem": true,
+          "arrow_keys_move": true,
+          "typeahead": true,
+          "home_end": true,
+          "escape_closes_and_returns_focus": true,
+          "opens_with_arrow_down": true
+        },
+        "axe": []
+      },
+      "combobox": {
+        "supported": true,
+        "checks": {
+          "typing_filters": true,
+          "combobox_roles": true,
+          "keeps_name_while_open": true,
+          "arrow_highlights_option": true,
+          "enter_selects_and_closes": true,
+          "escape_closes": true
+        },
+        "axe": [],
+        "note": "highlighted \"Tunisia\", input \"Tunisia\""
+      },
+      "tabs": {
+        "supported": true,
+        "checks": {
+          "roles": true,
+          "aria_selected": true,
+          "single_tab_stop": true,
+          "panel_labelled_by_tab": true,
+          "arrow_keys_move": true,
+          "home_end": true
+        },
+        "axe": [],
+        "note": "automatic activation"
+      }
+    },
+    "errors": []
+  },
+  "base-ui": {
+    "kind": "ui-primitives",
+    "bundle_gz_kb": 141.9,
+    "react_baseline_kb": 57.3,
+    "shared_baseline_kb": 57.7,
+    "lib_only_gz_kb": 84.2,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "keyboard_passed": 28,
+    "keyboard_total": 29,
+    "axe_violations": 1,
+    "probe": {
+      "dialog": {
+        "supported": true,
+        "checks": {
+          "opens_with_enter": true,
+          "focus_moves_inside": true,
+          "tab_never_reaches_page_behind": true,
+          "modal_semantics": true,
+          "has_accessible_name": true,
+          "escape_closes": true,
+          "focus_returns_to_trigger": true
+        },
+        "axe": [],
+        "note": "Tab wraps inside the dialog"
+      },
+      "menu": {
+        "supported": true,
+        "checks": {
+          "haspopup_on_trigger": true,
+          "opens_with_enter": true,
+          "first_item_focused": true,
+          "aria_expanded_true": true,
+          "roles_menu_menuitem": true,
+          "arrow_keys_move": true,
+          "typeahead": true,
+          "home_end": true,
+          "escape_closes_and_returns_focus": true,
+          "opens_with_arrow_down": true
+        },
+        "axe": []
+      },
+      "combobox": {
+        "supported": true,
+        "checks": {
+          "typing_filters": true,
+          "combobox_roles": true,
+          "keeps_name_while_open": false,
+          "arrow_highlights_option": true,
+          "enter_selects_and_closes": true,
+          "escape_closes": true
+        },
+        "axe": [
+          "label (1): #bu-country"
+        ],
+        "note": "highlighted \"Tunisia\", input \"Tunisia\""
+      },
+      "tabs": {
+        "supported": true,
+        "checks": {
+          "roles": true,
+          "aria_selected": true,
+          "single_tab_stop": true,
+          "panel_labelled_by_tab": true,
+          "arrow_keys_move": true,
+          "home_end": true
+        },
+        "axe": [],
+        "note": "manual activation"
+      }
+    },
+    "errors": []
+  },
+  "headless-ui": {
+    "kind": "ui-primitives",
+    "bundle_gz_kb": 115.2,
+    "react_baseline_kb": 57.3,
+    "shared_baseline_kb": 57.7,
+    "lib_only_gz_kb": 57.5,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "keyboard_passed": 28,
+    "keyboard_total": 29,
+    "axe_violations": 1,
+    "probe": {
+      "dialog": {
+        "supported": true,
+        "checks": {
+          "opens_with_enter": true,
+          "focus_moves_inside": true,
+          "tab_never_reaches_page_behind": true,
+          "modal_semantics": true,
+          "has_accessible_name": true,
+          "escape_closes": true,
+          "focus_returns_to_trigger": true
+        },
+        "axe": [],
+        "note": "Tab wraps inside the dialog"
+      },
+      "menu": {
+        "supported": true,
+        "checks": {
+          "haspopup_on_trigger": true,
+          "opens_with_enter": true,
+          "first_item_focused": true,
+          "aria_expanded_true": true,
+          "roles_menu_menuitem": true,
+          "arrow_keys_move": true,
+          "typeahead": true,
+          "home_end": true,
+          "escape_closes_and_returns_focus": true,
+          "opens_with_arrow_down": true
+        },
+        "axe": []
+      },
+      "combobox": {
+        "supported": true,
+        "checks": {
+          "typing_filters": true,
+          "combobox_roles": true,
+          "keeps_name_while_open": false,
+          "arrow_highlights_option": true,
+          "enter_selects_and_closes": true,
+          "escape_closes": true
+        },
+        "axe": [
+          "label (1): #headlessui-control-«r6»"
+        ],
+        "note": "highlighted \"United Arab Emirates\", input \"United Arab Emirates\""
+      },
+      "tabs": {
+        "supported": true,
+        "checks": {
+          "roles": true,
+          "aria_selected": true,
+          "single_tab_stop": true,
+          "panel_labelled_by_tab": true,
+          "arrow_keys_move": true,
+          "home_end": true
+        },
+        "axe": [],
+        "note": "automatic activation"
+      }
+    },
+    "errors": []
+  },
+  "radix-ui": {
+    "kind": "ui-primitives",
+    "bundle_gz_kb": 91.5,
+    "react_baseline_kb": 57.3,
+    "shared_baseline_kb": 57.7,
+    "lib_only_gz_kb": 33.8,
+    "tasks_total": 4,
+    "tasks_supported": 3,
+    "keyboard_passed": 23,
+    "keyboard_total": 23,
+    "axe_violations": 0,
+    "probe": {
+      "dialog": {
+        "supported": true,
+        "checks": {
+          "opens_with_enter": true,
+          "focus_moves_inside": true,
+          "tab_never_reaches_page_behind": true,
+          "modal_semantics": true,
+          "has_accessible_name": true,
+          "escape_closes": true,
+          "focus_returns_to_trigger": true
+        },
+        "axe": [],
+        "note": "Tab wraps inside the dialog"
+      },
+      "menu": {
+        "supported": true,
+        "checks": {
+          "haspopup_on_trigger": true,
+          "opens_with_enter": true,
+          "first_item_focused": true,
+          "aria_expanded_true": true,
+          "roles_menu_menuitem": true,
+          "arrow_keys_move": true,
+          "typeahead": true,
+          "home_end": true,
+          "escape_closes_and_returns_focus": true,
+          "opens_with_arrow_down": true
+        },
+        "axe": []
+      },
+      "combobox": {
+        "supported": false,
+        "note": "Radix has no combobox: Select has no text filtering. Pair it with cmdk or another library.",
+        "checks": {},
+        "axe": []
+      },
+      "tabs": {
+        "supported": true,
+        "checks": {
+          "roles": true,
+          "aria_selected": true,
+          "single_tab_stop": true,
+          "panel_labelled_by_tab": true,
+          "arrow_keys_move": true,
+          "home_end": true
+        },
+        "axe": [],
+        "note": "automatic activation"
+      }
+    },
+    "errors": []
+  },
+  "react-aria": {
+    "kind": "ui-primitives",
+    "bundle_gz_kb": 126.5,
+    "react_baseline_kb": 57.3,
+    "shared_baseline_kb": 57.7,
+    "lib_only_gz_kb": 68.8,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "keyboard_passed": 29,
+    "keyboard_total": 29,
+    "axe_violations": 0,
+    "probe": {
+      "dialog": {
+        "supported": true,
+        "checks": {
+          "opens_with_enter": true,
+          "focus_moves_inside": true,
+          "tab_never_reaches_page_behind": true,
+          "modal_semantics": true,
+          "has_accessible_name": true,
+          "escape_closes": true,
+          "focus_returns_to_trigger": true
+        },
+        "axe": [],
+        "note": "Tab wraps inside the dialog"
+      },
+      "menu": {
+        "supported": true,
+        "checks": {
+          "haspopup_on_trigger": true,
+          "opens_with_enter": true,
+          "first_item_focused": true,
+          "aria_expanded_true": true,
+          "roles_menu_menuitem": true,
+          "arrow_keys_move": true,
+          "typeahead": true,
+          "home_end": true,
+          "escape_closes_and_returns_focus": true,
+          "opens_with_arrow_down": true
+        },
+        "axe": []
+      },
+      "combobox": {
+        "supported": true,
+        "checks": {
+          "typing_filters": true,
+          "combobox_roles": true,
+          "keeps_name_while_open": true,
+          "arrow_highlights_option": true,
+          "enter_selects_and_closes": true,
+          "escape_closes": true
+        },
+        "axe": [],
+        "note": "highlighted \"Tunisia\", input \"Tunisia\""
+      },
+      "tabs": {
+        "supported": true,
+        "checks": {
+          "roles": true,
+          "aria_selected": true,
+          "single_tab_stop": true,
+          "panel_labelled_by_tab": true,
+          "arrow_keys_move": true,
+          "home_end": true
+        },
+        "axe": [],
+        "note": "automatic activation"
+      }
+    },
+    "errors": []
+  }
+}
