@@ -120,7 +120,8 @@ flowchart LR
     <li><b>Read the map.</b> <code>guides/README.md</code> explains the layers and how to answer.</li>
     <li><b>Classify the request.</b> A <em>category</em> question ("I need a chart", "should this be 3D?") goes to the category guide and the scored sources. A <em>look</em> question ("a dark hero", "a pricing toggle") goes straight to patterns.</li>
     <li><b>Decide with evidence.</b> The guide picks the form from the job; <code>SOURCES.md</code> and the profiles pick the library by fit, not just score.</li>
-    <li><b>Return references.</b> One recommendation with its score, a runner-up, the defaults to change, then the top patterns with screenshots (it views them first) and the techniques that apply.</li>
+    <li><b>Check coverage, then explore if needed.</b> The library is curated recommendations, not a closed list. When it's thin for the request (or something outside it is clearly better), the agent researches the gap itself: web search, licence and maintenance checks, a live capture of the best products, and a rough score against the rubric.</li>
+    <li><b>Return references.</b> A coverage line first (strong, partial or none), then one recommendation with its score, a runner-up, the defaults to change, then the top patterns with screenshots (it views them first) and the techniques that apply. Each is labelled <em>Curated</em> (in the library) or <em>Explored</em> (found this session), with an offer to add good finds through <code>/ux-add</code>.</li>
     <li><b>Hand over code.</b> Runnable benchmark code or <code>option.js</code> for libraries; a clean-room <code>example.tsx</code> in our React/Tailwind stack for site patterns, committed back so the next session reuses it.</li>
   </ol>
 

@@ -1,12 +1,17 @@
 ---
 name: ux-find
-description: Look up leading UX patterns in the team's UX library and return references with screenshots, analysis and code — optionally rebuilding one as a React + Tailwind component for our site. Use while designing or building UI ("how should the pricing page look?", "find a good empty state", "show me hero references", "build this like the library's command palette").
+description: Look up leading UX patterns in the team's curated UX library, explore beyond it when coverage is thin, and return references with screenshots, analysis and code — optionally rebuilding one as a React + Tailwind component for our site. Use while designing or building UI ("how should the pricing page look?", "find a good empty state", "show me hero references", "build this like the library's command palette").
 ---
 
 # ux-find
 
 Search the UX library (`toby1tobytoby3/UX-Design`) and bring the best references
 into the current task.
+
+**The library is curated recommendations, not a mandatory list.** It holds references the team has checked
+and scored, so start there. But it is incomplete, and the best answer for a task may not be in it. When
+coverage is thin or something outside it is clearly better, explore (step 4) and say so. Never bend a weak
+library match to fit the task just because it's in the library.
 
 ## 1. Find the library clone
 Use the first that exists: `$UX_LIBRARY_DIR`, the current repo if it contains
@@ -39,9 +44,38 @@ For a specific look ("a dark hero", "a pricing toggle"), search patterns directl
 - Map the request to `pattern` / `page_type` values from `taxonomy.md`, then
   match `tags`, `title`, `why_it_works`, `use_when` and `body` text.
 - Rank by fit to the task first, then `rating`.
-- If nothing fits, say so plainly and suggest the user add a reference with **ux-add**.
+- Match whole words and meaning, not substrings ("ai" is not a hit for "detail"; "cursor" in a uPlot
+  crosshair note is not a collaboration cursor). Discard hits that only match incidentally.
 
-## 4. Return the answer
+Then judge **coverage** for this request:
+- **Strong**: a guide plus scored sources, or 2+ patterns that fit the task itself (not just the keyword).
+- **Partial**: some fitting patterns, but no guide/sources, or key parts of the request uncovered.
+- **None**: nothing that fits.
+
+Partial or none → step 4. Strong → you may still explore if you know of something clearly better.
+
+## 4. Explore (beyond the library)
+Research the gap yourself, the way a designer would, rather than stopping at "not in the library":
+1. **Find candidates.** Web-search for the leading tools and best-in-class products for the job
+   (`research/categories.md` lists starting points per category). Prefer open-source; flag anything paid.
+2. **Check tools quickly.** For each library: `npm view <pkg> version license time.modified` (licence and
+   maintenance), weekly downloads if useful, React/Next fit, and gzip size from bundlephobia or a quick
+   esbuild. Score roughly against `guides/source-rubric.md` and mark it **rough**, not benchmarked.
+3. **Look at real products.** Capture the best references live with `node scripts/capture.mjs <url> <scratch-dir>`
+   (or `capture-motion.mjs` for 3D/motion) and view the images before citing them. Logged-in products you
+   can't reach: describe from public docs/videos and say so.
+4. **Decide.** Form your own view of the best approach; the library's defaults and your findings are both input.
+5. **Label provenance** in the answer: **Curated** (in the library, checked and scored) vs **Explored**
+   (found this session, rough check only). Never present explored findings as captured or benchmarked.
+6. **Offer to keep it.** End with "Add to the library?" listing the explored tools and references worth
+   keeping; on yes, run **ux-add** for each (that benchmarks, profiles and republishes the gallery).
+
+Keep exploring proportionate: a few minutes and 2–4 candidates for a quick question, deeper for a build decision.
+
+## 5. Return the answer
+Start with one coverage line, so the user knows how much is curated:
+> **Library coverage:** strong / partial / none — <what's in it, what's missing>. <Explored: X, Y.>
+
 For a category question, lead with:
 > **Use <source> (<score>/10)** for this, because… For <data job>, use a <form>; ready code: `<pattern path>`.
 > Change one thing: … Runner-up: <source>, if …
@@ -57,9 +91,10 @@ For each:
 - Code available: `example.tsx` (our rebuild), `preview.html` (rebuild preview),
   `source.html` / `styles.json` (captured reference only — never paste verbatim into our code)
 
-End with a one-line recommendation of which to use and why.
+Mark each pattern or source **Curated** or **Explored**. End with a one-line recommendation of which to use
+and why, and, if you explored, the "Add to the library?" offer.
 
-## 5. Rebuild for our site (when asked, or when the task is to build it)
+## 6. Rebuild for our site (when asked, or when the task is to build it)
 1. If the entry already has `example.tsx`, use it as the starting point.
 2. Otherwise write one in the entry folder following `our-design/README.md`:
    React function component, Tailwind classes, no shadcn, accessible, placeholder

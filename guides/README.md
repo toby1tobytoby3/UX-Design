@@ -13,7 +13,8 @@ Read this first. It's the map for any agent using this repo to help build UI.
 | **Conventions** | `taxonomy.md`, `guides/source-rubric.md`, `our-design/` | Vocabulary, scoring, our stack's rules |
 
 ## Guidance, not rules
-Guides, scores and defaults are evidence-based starting points, not law. Real projects have edge cases: when a
+Guides, scores and defaults are evidence-based starting points, not law, and the library is a curated set of
+recommendations rather than a closed list. Real projects have edge cases: when a
 default doesn't fit, depart from it and say why in the answer. The few hard limits are integrity and legal ones:
 don't present invented screenshots or results as captured, and don't paste captured third-party code into our
 codebase (open-source code under its licence is fine).
@@ -30,8 +31,12 @@ codebase (open-source code under its licence is fine).
    the first image before recommending. Return the top 3 with techniques that apply to this task.
 4. **Code.** Prefer, in order: `example.tsx` (our rebuild), runnable `option.js` / `bench/libs/*`, `preview.html`.
    `source.html` / `styles.json` are reference only (see the hard limits above). Open-source code can be reused under its licence.
-5. **Be honest about gaps.** If no guide or source covers the category, say so, answer from general knowledge,
-   flagged as unverified, and suggest adding references with `ux-add`. Mention `needs_capture` entries as lower confidence.
+5. **Coverage, then explore.** Open the answer with a coverage line (strong / partial / none). The library is curated
+   recommendations, not the only allowed answer: when coverage is partial or none, or something outside it is clearly
+   better, research it yourself (web search, `npm view` for licence and maintenance, live capture with `scripts/capture.mjs`,
+   a rough rubric score) as described in `skills/ux-find/SKILL.md` step 4. Label each recommendation **Curated** or
+   **Explored**, and offer to add good finds with `ux-add`. Mention `needs_capture` entries as lower confidence.
+   `research/categories.md` maps the categories still to be built.
 
 ## Categories covered
 | Category | Guide | Sources profiled | Patterns |
