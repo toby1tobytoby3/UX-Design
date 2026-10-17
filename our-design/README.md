@@ -12,7 +12,7 @@ No design tokens captured yet. Until they are, examples use Tailwind defaults:
 When tokens exist, put the site's `tailwind.config.*` (or a `tokens.md`) in this folder
 and examples should use those names instead.
 
-## Example rules
+## Example conventions (defaults)
 - One file, default export, no dependencies beyond React and Tailwind.
 - Accessible by default: semantic elements, labelled controls, visible focus, keyboard support.
 - Placeholder copy and data inline at the top of the file so it is easy to swap.

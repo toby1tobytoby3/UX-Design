@@ -109,3 +109,9 @@ annotation hotspot, poster and loading) on a software GPU. Profiles: React Three
 for custom scenes), model-viewer (7.5, product viewers), three.js (7.3), Babylon.js (7.0, applications), OGL
 (5.8, shader effects). Guide: `guides/3d.md`. Paid tools (Spline runtime) excluded. Pattern entries from live
 3D sites need network access.
+
+### Guidance over rules (v0.6)
+Guides present defaults as a table of *default → why → when to depart*. Agents should follow them unless the
+situation is an edge case, and say why when they depart. Hard limits are only integrity and legal ones (no
+invented captures; no pasting captured third-party code). 3D example sites are captured live with
+`scripts/capture-motion.mjs`, which records evidence (weight, engine, reduced-motion behaviour, canvas labels).

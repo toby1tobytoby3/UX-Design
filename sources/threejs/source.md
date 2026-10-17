@@ -43,6 +43,9 @@ Found in the benchmark:
 - Renders every frame unless you opt into on-demand rendering (we redraw only on camera change).
 - **No accessibility**: canvas only, not focusable, no keyboard orbit. Labels and keyboard support are yours.
 
+## Seen in the wild
+Seen in the wild (captured): Stripe's homepage ribbon (r178), GitHub's hero characters (r148), Bruno Simon's drivable portfolio (r183), Igloo's scroll story (r165). See `entries/3d/`.
+
 ## Scorecard
 | Criterion | Score | Evidence |
 |---|---|---|

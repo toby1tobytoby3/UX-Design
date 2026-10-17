@@ -2,7 +2,7 @@
 
 `ux-find` reads this for any chart request. **Step 1** picks the form from what the data has to show.
 **Step 2** picks the library from the job's constraints, using the evidence in `SOURCES.md` and
-`sources/*/source.md` (every library drew the same four charts; see `bench/`). **Step 3** applies the house rules.
+`sources/*/source.md` (every library drew the same four charts; see `bench/`). **Step 3** lists sensible defaults: start from them, and depart when the situation calls for it.
 
 ## 1. Form: what is the data's job?
 | Job | Use | Avoid | Ready pattern |
@@ -13,7 +13,7 @@
 | Share of a whole | Donut ≤ 5 parts, else sorted bar | Several pies side by side | `chart/echarts-universal-transition-morph` |
 | Composition over time | Stacked bar/area, ≤ 6 series, with textures if accessibility matters | Stacked lines | `chart/echarts-aria-decal-patterns` |
 | Distribution | Histogram, box plot, density | Line through categories | Observable Plot marks |
-| Relationship | Scatter (+ size for a third value) | Two y-axes, ever | |
+| Relationship | Scatter (+ size for a third value) | Two y-axes, usually (see defaults) | |
 | Flow / hierarchy | Sankey; treemap or sunburst | Nested pies | ECharts |
 | Price / financial time series | Candlestick or area with crosshair, pan and zoom | Generic line charts | Lightweight Charts |
 | Live metrics, 10k+ points | Canvas line with drag-zoom | SVG libraries | uPlot |
@@ -32,15 +32,19 @@ Overall scores are in `SOURCES.md`; **fit beats score**. Start from the first ro
 | Financial price charts | **Lightweight Charts** | 6.5 | Best pan/zoom/crosshair feel; time series only; attribution required | uPlot |
 | "Make it look like a Tailwind dashboard" | **Recharts + our tokens**, using Tremor as the visual reference | – | Tremor npm is stale and blocks React 19 | – |
 
-Not recommended as dependencies: **Tremor (npm)**, which is stale and React 18 only, and **AG Charts Community** unless
+Usually not worth it as dependencies: **Tremor (npm)**, which is stale and React 18 only, and **AG Charts Community** unless
 already on AG Grid (413 KB gz; zoom is paid). Commercial-only libraries (Highcharts, etc.) are out of scope by decision.
 
-## 3. House rules (apply whichever library you pick)
-- **Replace the default palette.** No library's default passed our validator. Use the validated order
-  `#2a78d6, #eb6834, #1baf7a, #eda100, #e87ba4` (from `bench/data.js`) and keep colour bound to the entity.
-- One y-axis. Legend for ≥ 2 series in stack order. Text in ink colours, never series colours.
-- Write the screen-reader description yourself. Auto-generated ones were raw data (ECharts), structural (Plot)
-  or broken (Recharts Brush: "Min value: undefined").
-- Area charts start at zero (uPlot doesn't by default).
-- Client components only for canvas or imperative libraries (`"use client"`, dispose on unmount, resize observer).
-- Offer a table view for exact values.
+## 3. Defaults (guidance, not rules)
+Good starting points drawn from the benchmark. Each has a reason; when the reason doesn't apply, depart from it
+and say why in the code or PR.
+
+| Default | Why | When to depart |
+|---|---|---|
+| Replace the library's default palette with our validated order (`#2a78d6, #eb6834, #1baf7a, #eda100, #e87ba4`, see `bench/data.js`) | No default palette passed our colour checks | A brand or data convention already defines colours (e.g. party colours, red/green P&L with labels) |
+| One y-axis | Two scales invite false comparisons | Two series share units but differ in scale and a combined view is the point; label both axes clearly |
+| Legend in stack order; text in ink colours, not series colours | Readability and contrast | Direct labels on the marks can replace a legend entirely |
+| Write the screen-reader description yourself | Auto descriptions were raw data (ECharts), structural (Plot) or broken (Recharts Brush) | Decorative sparklines can be `aria-hidden` when the number is in text next to them |
+| Area charts start at zero | A raised baseline exaggerates change | Line charts (no fill) can zoom the y-axis to show variation |
+| Client components for canvas or imperative libraries | They need the DOM | Observable Plot and D3 can render SVG on the server |
+| Offer a table view for exact values | Charts show shape, tables show numbers | Small charts where the exact values are already printed |

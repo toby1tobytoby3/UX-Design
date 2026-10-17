@@ -1,0 +1,25 @@
+{
+  "url": "https://bruno-simon.com",
+  "captured_at": "2026-10-17",
+  "gpu": "software (SwiftShader); timings relative only",
+  "transfer_kb": 7552,
+  "js_kb": 1199,
+  "requests": 148,
+  "title": "Bruno's",
+  "webgl": [
+    "webgl2"
+  ],
+  "three_version": "183",
+  "canvases": [
+    {
+      "w": 1440,
+      "h": 900,
+      "label": null,
+      "focusable": false
+    }
+  ],
+  "videos": 0,
+  "model_viewer": 0,
+  "h1": null,
+  "still_animating_with_reduced_motion": true
+}

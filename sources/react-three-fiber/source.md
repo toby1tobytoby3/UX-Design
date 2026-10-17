@@ -46,6 +46,9 @@ Found in the benchmark:
 - Peer dependency pins React to `>=19 <19.4`, so check before upgrading React.
 - No keyboard or screen-reader support by default (canvas not focusable).
 
+## Seen in the wild
+Seen in the wild: none of the six captured sites expose R3F directly (it renders through three.js, so it looks the same from outside). The three.js examples in `entries/3d/` are all reproducible with R3F + drei.
+
 ## Scorecard
 | Criterion | Score | Evidence |
 |---|---|---|

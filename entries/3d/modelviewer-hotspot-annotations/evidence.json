@@ -1,0 +1,19 @@
+{
+  "url": "https://modelviewer.dev/examples/annotations/",
+  "captured_at": "2026-10-17",
+  "gpu": "software (SwiftShader); timings relative only",
+  "transfer_kb": 3260,
+  "js_kb": 337,
+  "requests": 19,
+  "title": "<model-viewer> Annotations",
+  "webgl": [
+    "webgl2",
+    "webgl"
+  ],
+  "three_version": "183",
+  "canvases": [],
+  "videos": 0,
+  "model_viewer": 4,
+  "h1": null,
+  "still_animating_with_reduced_motion": true
+}

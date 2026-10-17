@@ -25,6 +25,10 @@ that entry instead of creating a new one, and tell the user.
   This also saves `source.html` and `styles.json` for that element.
   If the site blocks capture or the network denies it, tell the user and ask for
   a screenshot instead. Never invent screenshots.
+- **3D, WebGL or motion-heavy page:** use `node scripts/capture-motion.mjs <url> <entry-dir> [--wait 30]
+  [--scroll 3] [--selector css]`. It waits for heavy scenes, captures scroll frames and writes
+  `evidence.json` (transfer size, engine and version, canvas labels, reduced-motion behaviour). Cite those
+  numbers in the entry.
 - **Name only ("apache charts", "the Stripe pricing page"):** web-search to resolve the
   canonical URL first, then treat it as a URL.
 - **Open-source library or component kit** (charts, UI kits, animation libs): the code

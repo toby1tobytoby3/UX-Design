@@ -1,0 +1,55 @@
+{
+  "url": "https://github.com/home",
+  "captured_at": "2026-10-17",
+  "gpu": "software (SwiftShader); timings relative only",
+  "transfer_kb": 4701,
+  "js_kb": 1858,
+  "requests": 169,
+  "title": "GitHub · Change is constant. GitHub keeps you ahead. · GitHub · GitHub",
+  "webgl": [
+    "webgl"
+  ],
+  "three_version": "148",
+  "canvases": [
+    {
+      "w": 1000,
+      "h": 950,
+      "label": null,
+      "focusable": false
+    },
+    {
+      "w": 300,
+      "h": 150,
+      "label": null,
+      "focusable": false
+    },
+    {
+      "w": 300,
+      "h": 150,
+      "label": null,
+      "focusable": false
+    },
+    {
+      "w": 300,
+      "h": 150,
+      "label": null,
+      "focusable": false
+    },
+    {
+      "w": 300,
+      "h": 150,
+      "label": null,
+      "focusable": false
+    },
+    {
+      "w": 300,
+      "h": 150,
+      "label": null,
+      "focusable": false
+    }
+  ],
+  "videos": 2,
+  "model_viewer": 0,
+  "h1": "The future of building happens together",
+  "still_animating_with_reduced_motion": false
+}

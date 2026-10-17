@@ -42,6 +42,9 @@ Found in the benchmark:
 - It auto-frames the model: our camera distance was clamped closer than in the other libraries until we set `max-camera-orbit`.
 - Pins its own three.js (peer `^0.183`), so in an app that also uses three.js you may ship two copies.
 
+## Seen in the wild
+Seen in the wild (captured): the official annotations demo, `3d/modelviewer-hotspot-annotations`.
+
 ## Scorecard
 | Criterion | Score | Evidence |
 |---|---|---|

@@ -1,0 +1,32 @@
+{
+  "url": "https://stripe.com",
+  "captured_at": "2026-10-17",
+  "gpu": "software (SwiftShader); timings relative only",
+  "transfer_kb": 2762,
+  "js_kb": 2022,
+  "requests": 169,
+  "title": "Stripe | Financial Infrastructure to Grow Your Revenue",
+  "webgl": [
+    "webgl",
+    "webgl2"
+  ],
+  "three_version": "178",
+  "canvases": [
+    {
+      "w": 1392,
+      "h": 761,
+      "label": "aria-hidden",
+      "focusable": false
+    },
+    {
+      "w": 300,
+      "h": 150,
+      "label": "aria-hidden",
+      "focusable": false
+    }
+  ],
+  "videos": 0,
+  "model_viewer": 0,
+  "h1": "Financial infrastructure to grow your revenue. Accept payments, handle business banking,1 and implement custom revenue m",
+  "still_animating_with_reduced_motion": true
+}
