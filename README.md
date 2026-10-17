@@ -4,7 +4,7 @@ The team's library of leading UX patterns: screenshots, analysis and code we can
 
 - **Browse:** [published gallery](https://claude.ai/artifact/NRvM6i9bYjZeVUGWY9wQfL), or locally with `npm run gallery`
 - **Table:** [CATALOG.md](CATALOG.md)
-- **How it works:** [SPEC.md](SPEC.md)
+- **How it works:** [handbook](https://claude.ai/artifact/Qgprmg98mR26eXVZzxvVRA) (source: `docs/how-it-works.html`) · design: [SPEC.md](SPEC.md)
 
 ## Use it from Claude Code
 The repo is a plugin marketplace containing the `ux-library` plugin (skills `ux-add` and `ux-find`).

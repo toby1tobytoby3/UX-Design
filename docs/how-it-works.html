@@ -1,0 +1,235 @@
+<title>UX Library Handbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: one readable column with a compact section index; tables and diagrams scroll inside their own boxes. */
+  :root {
+    --paper: #f7f8fa; --sheet: #ffffff; --ink: #1b1f27; --muted: #5b6372; --rule: #dfe3ea;
+    --accent: #2a78d6; --accent-soft: #e6effb; --code: #eef1f5; --warn: #9a5b00; --warn-soft: #fbf0dc;
+    --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12151b; --sheet: #191d25; --ink: #e8ebf1; --muted: #9aa3b2; --rule: #2a303b;
+      --accent: #6aa6ec; --accent-soft: #1d2b40; --code: #222834; --warn: #e2b061; --warn-soft: #33281a; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12151b; --sheet: #191d25; --ink: #e8ebf1; --muted: #9aa3b2; --rule: #2a303b;
+    --accent: #6aa6ec; --accent-soft: #1d2b40; --code: #222834; --warn: #e2b061; --warn-soft: #33281a; color-scheme: dark;
+  }
+  body { background: var(--paper); color: var(--ink); font: 17px/1.62 var(--body); }
+  .wrap { max-width: 760px; margin: 0 auto; padding-block: 48px 96px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(32px, 6vw, 46px); margin: 0 0 12px; }
+  h2 { font-size: 26px; margin: 56px 0 12px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  h3 { font-size: 18px; margin: 28px 0 6px; }
+  p, li { max-width: 65ch; }
+  a { color: var(--accent); }
+  .lede { font-size: 19px; color: var(--muted); margin: 0 0 20px; }
+  .eyebrow { font: 600 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  code, pre, kbd { font-family: var(--mono); font-size: .86em; }
+  code { background: var(--code); padding: 1px 5px; border-radius: 4px; }
+  pre.snippet { background: var(--code); padding: 14px 16px; border-radius: 8px; overflow-x: auto; line-height: 1.5; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin: 24px 0 8px; }
+  .facts div { background: var(--sheet); padding: 14px 16px; }
+  .facts b { display: block; font: 700 28px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+  .facts span { font: 13px/1.35 var(--display); color: var(--muted); }
+  nav.index { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 500 14px/1.4 var(--display); margin: 8px 0 0; }
+  nav.index a { text-decoration: none; }
+  .scroll { overflow-x: auto; margin: 16px 0; }
+  table { border-collapse: collapse; width: 100%; font: 14.5px/1.45 var(--display); background: var(--sheet); }
+  th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--rule); }
+  th { font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .figure { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; overflow-x: auto; margin: 18px 0; }
+  .figure figcaption { font: 13px/1.4 var(--display); color: var(--muted); margin-top: 8px; }
+  ol.steps { padding-left: 0; list-style: none; counter-reset: s; }
+  ol.steps > li { counter-increment: s; position: relative; padding-left: 40px; margin: 0 0 14px; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: 1px; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent); font: 700 13px/26px var(--display); text-align: center; }
+  .transcript { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin: 16px 0; }
+  .transcript .ask { padding: 12px 16px; font: 15px/1.5 var(--display); background: var(--accent-soft); }
+  .transcript .ask b { color: var(--accent); }
+  .transcript .answer { padding: 14px 16px; font-size: 15.5px; }
+  .transcript .answer p { margin: 0 0 8px; }
+  .transcript .trail { padding: 10px 16px; font: 12.5px/1.5 var(--mono); color: var(--muted); border-top: 1px dashed var(--rule); }
+  .note { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; margin: 16px 0; }
+  .note b { color: var(--warn); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .two > div { min-width: 0; background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
+  .two h3 { margin-top: 0; }
+  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } body { font-size: 16px; } }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">toby1tobytoby3/UX-Design · handbook</div>
+  <h1>How the UX library works</h1>
+  <p class="lede">A shared memory of the best UX on the web, which any Claude session can search while building. You feed it links, screenshots and names; it captures, analyses, scores and files them; agents pull the right reference, the evidence and working code into whatever they're building.</p>
+
+  <div class="facts">
+    <div><b>22</b><span>UX patterns (19 live captures)</span></div>
+    <div><b>14</b><span>scored libraries (9 chart, 5 3D)</span></div>
+    <div><b>2</b><span>decision guides (charts, 3D)</span></div>
+    <div><b>2</b><span>skills: <code>/ux-add</code>, <code>/ux-find</code></span></div>
+  </div>
+  <nav class="index" aria-label="Sections">
+    <a href="#map">The map</a><a href="#find">Agents finding</a><a href="#add">Agents adding</a><a href="#us">How we use it</a><a href="#setup">Setup</a><a href="#guidance">Guidance, not rules</a><a href="#upkeep">Upkeep</a>
+  </nav>
+
+  <h2 id="map">The map</h2>
+  <p>Everything lives in one Git repo. There's no database or server: entries are folders of Markdown, images and code, and a build step turns them into a searchable index and the gallery.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Layer</th><th>Where</th><th>Answers</th></tr></thead>
+    <tbody>
+      <tr><td>Guides</td><td><code>guides/</code></td><td>"What should I use for this job?" Decision tables plus defaults. Start at <code>guides/README.md</code>.</td></tr>
+      <tr><td>Sources</td><td><code>sources/</code>, compared in <code>SOURCES.md</code></td><td>"Which library or site is best, and why?" Scored on 8 criteria from benchmark evidence.</td></tr>
+      <tr><td>Patterns</td><td><code>entries/&lt;pattern&gt;/&lt;site&gt;/</code></td><td>"What does a great version look like?" Screenshots, analysis, techniques, code.</td></tr>
+      <tr><td>Evidence</td><td><code>bench/</code>, <code>bench3d/</code>, <code>evidence.json</code></td><td>Same-task benchmarks and capture measurements behind every score and claim.</td></tr>
+      <tr><td>Index and gallery</td><td><code>catalog.json</code>, <code>CATALOG.md</code>, published gallery</td><td>Everything above, for agents (JSON) and people (table, gallery).</td></tr>
+    </tbody>
+  </table></div>
+
+  <figure class="figure">
+<pre class="mermaid">
+flowchart LR
+  A["You: link, screenshot or name"] --> B["/ux-add"]
+  B --> C["Capture: screenshots, code, evidence"]
+  C --> D["Entry or source profile in the repo"]
+  D --> E["npm run catalog"]
+  E --> F["catalog.json + CATALOG.md + SOURCES.md"]
+  E --> G["Published gallery"]
+  H["Agent building UI"] --> I["/ux-find"]
+  I --> J["guides/README.md"]
+  J --> K["Category guide"]
+  K --> L["Source scores"]
+  L --> M["Patterns + code"]
+  F -.-> I
+</pre>
+    <figcaption>Two loops share one store: <code>/ux-add</code> writes to it, <code>/ux-find</code> reads from it.</figcaption>
+  </figure>
+
+  <h2 id="find">How an agent finds a reference (<code>/ux-find</code>)</h2>
+  <p>Any Claude session with the skill installed calls it when it's designing or building UI, or when you ask directly. It works through the layers from general to specific:</p>
+  <ol class="steps">
+    <li><b>Locate the library.</b> It uses a local clone (sibling folder or <code>~/ux-design</code>), or clones it, then pulls the latest.</li>
+    <li><b>Read the map.</b> <code>guides/README.md</code> explains the layers and how to answer.</li>
+    <li><b>Classify the request.</b> A <em>category</em> question ("I need a chart", "should this be 3D?") goes to the category guide and the scored sources. A <em>look</em> question ("a dark hero", "a pricing toggle") goes straight to patterns.</li>
+    <li><b>Decide with evidence.</b> The guide picks the form from the job; <code>SOURCES.md</code> and the profiles pick the library by fit, not just score.</li>
+    <li><b>Return references.</b> One recommendation with its score, a runner-up, the defaults to change, then the top patterns with screenshots (it views them first) and the techniques that apply.</li>
+    <li><b>Hand over code.</b> Runnable benchmark code or <code>option.js</code> for libraries; a clean-room <code>example.tsx</code> in our React/Tailwind stack for site patterns, committed back so the next session reuses it.</li>
+  </ol>
+
+  <h3>Example: a chart</h3>
+  <div class="transcript">
+    <div class="ask"><b>Build task:</b> "Add a 6-month daily active users chart to the admin dashboard."</div>
+    <div class="answer">
+      <p><b>Use Recharts (7.5/10)</b> for this: it's our default for everyday charts in the Next app, it's native JSX, and its keyboard layer gave the best accessibility of the React libraries. For 180 days of data, use an area chart with a range slider (<code>&lt;Brush&gt;</code>).</p>
+      <p>Change these defaults: pass our validated palette, set the legend order, and label the Brush yourself (its built-in label reads "Min value: undefined").</p>
+      <p>Runner-up: <b>ECharts (7.8)</b> if you need wheel zoom, drill-down or 10k+ points. Ready code: <code>chart/echarts-datazoom-time-series</code> and <code>bench/libs/recharts.jsx</code>.</p>
+    </div>
+    <div class="trail">read: guides/README.md → guides/charts.md → SOURCES.md → sources/recharts → bench/libs/recharts.jsx</div>
+  </div>
+
+  <h3>Example: a premium product page</h3>
+  <div class="transcript">
+    <div class="ask"><b>Build task:</b> "Make the product page hero feel premium. Should we use 3D?"</div>
+    <div class="answer">
+      <p>Probably not real-time 3D. The guide's first question is whether 3D shows something 2D can't. For an art-directed hero, <b>pre-rendered media</b> like Apple's AirPods page (★★★★★) looks better and costs less.</p>
+      <p>If customers need to inspect the product, use <b>model-viewer (7.5)</b>: one tag, built-in hotspots and keyboard access. See <code>3d/modelviewer-hotspot-annotations</code>.</p>
+      <p>Defaults to keep: a poster first, lazy loading, and stopping motion under reduced motion. Most reference sites skip that last one, so it's a place to beat them.</p>
+    </div>
+    <div class="trail">read: guides/3d.md (step 0) → entries/3d/apple-airpods-scroll-story → sources/model-viewer</div>
+  </div>
+
+  <h2 id="add">How an agent adds a reference (<code>/ux-add</code>)</h2>
+  <p>The skill picks a capture route from what you give it, then files the result the same way every time.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>You give it</th><th>What it does</th><th>What gets saved</th></tr></thead>
+    <tbody>
+      <tr><td>A URL</td><td>Live capture at desktop and phone widths; opens menus or panels when needed (hover, click)</td><td><code>desktop.jpg</code>, <code>mobile.jpg</code>, crops, and <code>source.html</code> + <code>styles.json</code> for a focused element</td></tr>
+      <tr><td>A 3D or motion-heavy URL</td><td>Waits for heavy scenes, captures scroll frames, checks reduced motion</td><td>Images plus <code>evidence.json</code> (weight, engine, canvas labels, motion behaviour)</td></tr>
+      <tr><td>A screenshot</td><td>Saves and analyses it; asks for the source URL</td><td>The image, flagged <code>needs_capture</code> until a live capture replaces it</td></tr>
+      <tr><td>Just a name ("apache charts")</td><td>Searches to find the real site first</td><td>As for a URL</td></tr>
+      <tr><td>An open-source library</td><td>Installs it, runs the shared benchmark, scores it</td><td>A source profile, benchmark render and code, plus patterns for anything best-in-class</td></tr>
+    </tbody>
+  </table></div>
+  <p>Then, every time: one entry per pattern (a page can yield several), a rating of 3 to 5 stars (anything weaker isn't kept), duplicate check, <code>npm run catalog</code>, commit to <code>main</code>, and republish the gallery. If the gallery can't be republished, the skill says so instead of skipping it.</p>
+
+  <h2 id="us">How we use it</h2>
+  <div class="two">
+    <div>
+      <h3>Feeding it</h3>
+      <ul>
+        <li>Paste a link or screenshot into any Claude session and say "add this to the UX library", or type <code>/ux-add</code>.</li>
+        <li>Say what caught your eye ("the pricing toggle") so the capture focuses on it.</li>
+        <li>For signed-in screens (dashboards, apps), send a screenshot or recording. Those can't be captured automatically.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Using it</h3>
+      <ul>
+        <li>While building, just describe the UI; sessions with the skill installed consult it. Or ask: "find a good empty state in the UX library".</li>
+        <li>Browse the <a href="https://claude.ai/artifact/NRvM6i9bYjZeVUGWY9wQfL">published gallery</a>: filter by pattern, tags or rating; switch to the Sources tab for library scorecards.</li>
+        <li>On GitHub, <code>CATALOG.md</code> and <code>SOURCES.md</code> are the tables.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="two" style="margin-top:16px">
+    <div>
+      <h3>Reviewing</h3>
+      <ul>
+        <li>Entries land on <code>main</code> straight away. Skim new ones in the gallery and fix tags or ratings in <code>entry.md</code>.</li>
+        <li>Delete what doesn't earn its place. Fewer, better references beat a big pile.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Deciding</h3>
+      <ul>
+        <li>Use scores to compare, and the guides to choose. A lower-scoring library can be the right fit.</li>
+        <li>When a session departs from a default, it should say why. Push back if the reason is weak.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="setup">Setup</h2>
+  <h3>In a project repo (local and cloud)</h3>
+  <p>Add the library's plugin to the project's <code>.claude/settings.json</code>:</p>
+<pre class="snippet">{
+  "extraKnownMarketplaces": {
+    "ux-design": { "source": { "source": "github", "repo": "toby1tobytoby3/UX-Design" } }
+  },
+  "enabledPlugins": { "ux-library@ux-design": true }
+}</pre>
+  <h3>Locally, once</h3>
+<pre class="snippet">/plugin marketplace add toby1tobytoby3/UX-Design
+/plugin install ux-library@ux-design</pre>
+  <h3>Cloud sessions</h3>
+  <ul>
+    <li>Attach the UX-Design repo to the session or environment so skills can read and push entries.</li>
+    <li>Live capture needs network access to the sites you add. The environment used to build this has open access; a restricted environment can still use screenshots and search.</li>
+  </ul>
+
+  <h2 id="guidance">Guidance, not rules</h2>
+  <p>Guides give <b>defaults</b> as <em>default → why → when to depart</em>. Real projects have edge cases; sessions should depart when the reason doesn't apply, and say so. Only two limits are hard:</p>
+  <ul>
+    <li><b>No invented evidence.</b> Screenshots and numbers are captured or measured, never made up. Anything not live-captured is flagged.</li>
+    <li><b>No pasting captured third-party code</b> into our codebase. It's reference only. Open-source code under its licence is fine, and that's why library benchmarks ship runnable code.</li>
+  </ul>
+
+  <h2 id="upkeep">Upkeep</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>When</th><th>Do</th></tr></thead>
+    <tbody>
+      <tr><td>A site redesigns</td><td>Re-run <code>/ux-add</code> on its URL. Recapture already caught Unsection's redesign and Apple swapping its bento grid for a gallery.</td></tr>
+      <tr><td>A library ships a major version</td><td>Bump it in <code>bench/</code> or <code>bench3d/</code>, rerun <code>node run.mjs &lt;lib&gt;</code>, revisit the scores.</td></tr>
+      <tr><td>A category gets 3+ sources</td><td>Write a guide for it, using <code>guides/charts.md</code> as the template.</td></tr>
+      <tr><td>Our design tokens exist</td><td>Put them in <code>our-design/</code> so rebuilt examples use our real colours and type.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Open items.</b> Three entries are only visible when signed in (Linear's command menu, the Stripe dashboard, GitHub's empty repo) and need screenshots from you. Benchmark timings come from a software GPU, so 3D performance still needs a real-phone check.</div>
+</div>
