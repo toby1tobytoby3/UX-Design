@@ -2,7 +2,7 @@
 
 The team's library of leading UX patterns: screenshots, analysis and code we can look up while building.
 
-- **Browse:** `npm run gallery` (or open `gallery/index.html` directly)
+- **Browse:** [published gallery](https://claude.ai/artifact/NRvM6i9bYjZeVUGWY9wQfL), or locally with `npm run gallery`
 - **Table:** [CATALOG.md](CATALOG.md)
 - **How it works:** [SPEC.md](SPEC.md)
 

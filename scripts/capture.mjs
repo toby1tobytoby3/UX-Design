@@ -35,7 +35,12 @@ try {
     if (only && only !== vp) continue;
     const { isMobile, deviceScaleFactor, ...viewport } = size;
     const page = await browser.newPage({ viewport, isMobile, deviceScaleFactor });
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => {});
+    // A slow 'networkidle' is fine (busy analytics); a failed load is not — never save an error page.
+    const res = await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 }).catch((err) => {
+      if (err.name === 'TimeoutError') return null;
+      throw new Error(`Could not load ${url}: ${err.message.split('\n')[0]}`);
+    });
+    if (res && !res.ok() && !url.startsWith('file:')) throw new Error(`Could not load ${url}: HTTP ${res.status()}`);
     await page.waitForTimeout(1200); // let entrance animations settle
     const file = `${outDir}/${name ?? vp}.jpg`;
 

@@ -9,7 +9,7 @@ builds through a skill.
 |---|---|
 | Store | This git repo. Markdown entries + JPEG images. No database. |
 | Central lookup table | `catalog.json` (machine) + `CATALOG.md` (GitHub view), both generated from entry frontmatter by `npm run catalog`. Entries are the source of truth. |
-| Browsing | Static `gallery/` page with search and filters. No server, no build step. |
+| Browsing | Static `gallery/` page with search and filters, also published at https://claude.ai/artifact/NRvM6i9bYjZeVUGWY9wQfL. `ux-add` republishes it on every add. |
 | Granularity | One entry per **pattern**, not per page. |
 | Review | Commit straight to `main`; prune afterwards. |
 | Our stack | React/Next + Tailwind, no shadcn/ui. |
@@ -26,6 +26,7 @@ builds through a skill.
 | Capture script | `scripts/capture.mjs` | Playwright: desktop/mobile screenshots; with `--selector`, element crop + `source.html` + `styles.json` |
 | Catalog build | `scripts/build-catalog.mjs` | Frontmatter → `catalog.json`, `CATALOG.md`, `gallery/data.js` |
 | Gallery | `gallery/index.html` | Filter by search text, pattern, page type, rating, tags, captured/has-code |
+| Gallery bundle | `scripts/build-gallery-artifact.mjs` | Self-contained folder + `files.json` for publishing the gallery as an Artifact |
 | Taxonomy | `taxonomy.md` | ~20 pattern terms, page types, preferred tags |
 | Our design | `our-design/` | Conventions/tokens rebuilt examples must follow |
 

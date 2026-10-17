@@ -125,6 +125,35 @@ window.CATALOG = [
     "body": "## What it is\nA CSS grid of rounded tiles of varying spans (2×2, 2×1, 1×1) on a light grey page. Each tile\nhas one big number or short claim, a one-line explanation, and sometimes an image or icon.\n\n## Key techniques\n- `grid-template-columns: repeat(4, 1fr)` with `grid-auto-flow: dense`; tiles span 1–2 columns/rows.\n- Large radius (~24–28px), no borders, white or dark tiles on `#f5f5f7` background.\n- Huge stat typography (48–80px, semibold) with small supporting text.\n- Collapses to 2 columns on tablet and a single stack on mobile.\n\n## Accessibility\nOrder the DOM by importance, not by visual position, since `dense` packing can reorder visually.\n\n## Weaknesses\nEasy to overdo — more than ~9 tiles turns into noise. Needs real imagery or strong stats to land.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
+    "id": "filters/unsection-category-tabs-style-chips",
+    "title": "Two-axis browse with category tabs and style chips",
+    "pattern": "filters",
+    "page_type": "search-results",
+    "tags": [
+      "dark",
+      "minimal",
+      "saas",
+      "progressive-disclosure"
+    ],
+    "source_url": "https://www.unsection.com",
+    "source_site": "unsection.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "Claude",
+    "input": "screenshot",
+    "rating": 4,
+    "why_it_works": "Browsing splits into two independent axes, what the section is (category tabs) and how it looks (style chips), so you can ask for something like \"dark bento feature sections\" in two clicks without a search box.",
+    "use_when": "Any gallery or catalogue where items have one primary type plus several visual or attribute traits, including our own UX library gallery.",
+    "has_example": false,
+    "path": "entries/filters/unsection-category-tabs-style-chips",
+    "images": [
+      "entries/filters/unsection-category-tabs-style-chips/desktop.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nUnsection is a curated library of 1,500+ individual website sections (not full pages), plus hover\neffects and an SVG library. The browse screen is dark and stacks three bands:\n\n1. **Top nav:** wordmark, then `Sections · Community · Hover Effects · SVG`; on the right `Deals`,\n   `More ▾`, a yellow **Submit** pill and the avatar.\n2. **Category tab row:** pill tabs for section types, which scroll sideways: `Feature Section Design`,\n   `Hero Section Design`, `CTA Section Design`, `Footer…`, `Testimonial…`, `Blog…`, `Logo…`,\n   `Pricing…`, `Navbar…`, `FAQ…`, `Team…`.\n3. **Style chip row:** compact text chips for visual traits, with a `RESET` at the far right:\n   `UI Mockup, Flat Color, Light, Text Heavy, Table View, Video, Black & White, Card, Bento,\n   Visible Border, Image, Vector, Minimal, Colorful, Dark, Large Type, 3D, Uncommon, Gradient, Pastel`.\n\nBelow the chips is a large featured preview with a caption (`Hero · Bunsen Studio Home Page Section Hero`),\nthen a 4-column grid of thumbnails. Each card has a caption of the form `<Category> · <Site> <descriptive title>`,\ne.g. `Feature · The Grid Cost Benefit Process Overview Design`.\n\n## Key techniques\n- **Two orthogonal filter rows:** categories are mutually exclusive tabs, while style chips stack as AND filters. One `RESET` clears the chips.\n- **Captions carry the taxonomy:** a category prefix plus a descriptive title makes every thumbnail self-explaining, so it can be searched and linked.\n- **The content is the colour:** a near-black UI with low-contrast chrome lets very different screenshots sit side by side without clashing. The one bright accent is the yellow Submit button.\n- **Sponsored cards match the grid:** an `Ad` card uses the same card format with an `Ad` prefix. It's clearly labelled and doesn't break the rhythm.\n- **Paid tier gates depth, not the first look:** the free tier gives homepage inspiration, and Pro (about $3/month billed yearly, or $99 lifetime) unlocks the full section library and categories.\n- **Uniform thumbnails:** fixed-ratio crops of a single section, not whole pages, are what make the grid easy to scan.\n\n## Accessibility\nThe chip labels are very small, low-contrast grey on near-black, which likely fails 4.5:1. The active\nstate of tabs and chips needs more than a subtle colour change (use fill plus `aria-pressed`). The tab row\nscrolls sideways, so it needs visible overflow cues and keyboard reachability.\n\n## Weaknesses\nTwenty-odd style chips in one undifferentiated row is a lot to scan. Grouping them (colour · layout ·\nmedia) would help. Thumbnails are small, so the detail of a section only shows on click.\n\n## Relevance to us\nThis is a direct model for our gallery, `gallery/index.html`. Our `pattern` corresponds to their category tabs and our\n`tags` to their style chips. Worth adopting: a tab row for patterns instead of a dropdown, and\n`<pattern> · <site>` captions on cards.\n\n> Captured from a phone screenshot of an Instagram reel (ferdie.dev) showing the desktop site, so\n> image quality is low. Site details come from that screenshot plus public search results; the\n> site itself couldn't be fetched from this session. Re-capture locally with `npm run capture -- https://www.unsection.com <dir>` for a sharp screenshot and code."
+  },
+  {
     "id": "hero/linear-dark-product-hero",
     "title": "Dark product hero with glowing app screenshot",
     "pattern": "hero",

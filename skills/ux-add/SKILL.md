@@ -79,6 +79,20 @@ git add -A && git commit -m "Add <pattern>: <title>" && git push origin main
 ```
 If the push is rejected, `git pull --rebase` and retry.
 
-## 7. Report
-List each entry added (title, pattern, rating, one-line why) and its path.
-Optionally offer to create a rebuilt example with **ux-find**.
+## 7. Update the published gallery (always)
+The team browses the library at **https://claude.ai/artifact/NRvM6i9bYjZeVUGWY9wQfL**.
+Every add must republish it so it never goes stale:
+1. `node scripts/build-gallery-artifact.mjs <out-dir>`. Use your scratchpad directory as
+   `<out-dir>` when the library clone is outside your working directory (the Artifact
+   tool only publishes files under the working directory or scratchpad); otherwise the
+   default `.artifact/` is fine.
+2. Publish with the Artifact tool: `url` = the gallery URL above,
+   `file_path` = `<out-dir>/ux-library.html`, `root` = `<out-dir>`, and `files` = the
+   map in `<out-dir>/files.json`. If this conversation hasn't read the artifact yet,
+   do `action: "read"` on the URL first.
+3. If the Artifact tool isn't available or the publish is refused, say so plainly in
+   the report ("gallery not updated"). Never skip this step silently.
+
+## 8. Report
+List each entry added (title, pattern, rating, one-line why) and its path, and confirm
+the gallery was republished. Optionally offer to create a rebuilt example with **ux-find**.
