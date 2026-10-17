@@ -1,0 +1,6 @@
+{
+  "name": "bench-tremor",
+  "private": true,
+  "description": "Tremor's npm package needs React 18, so it is benchmarked in isolation.",
+  "dependencies": { "@tremor/react": "3.18.7", "react": "18.3.1", "react-dom": "18.3.1", "tailwindcss": "3.4.17" }
+}

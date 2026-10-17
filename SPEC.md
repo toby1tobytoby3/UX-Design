@@ -76,20 +76,22 @@ the best reference for X, and why?".
 Goal: a separate, scored profile for each library that is genuinely **best at something** for a
 React/Next + Tailwind team, not just the popular defaults.
 
-| Library | Why it's on the list (best at) | Licence | Status |
-|---|---|---|---|
-| ECharts | Breadth + interactivity + large data, free | Apache-2.0 | ✅ profiled (8/10) |
-| Recharts | The React default; composable JSX; base of shadcn charts and Tremor | MIT | planned |
-| visx | Low-level React + D3 primitives for bespoke charts | MIT | planned |
-| Observable Plot | Best defaults and most concise grammar (from D3's creator); SVG, SSR-friendly | ISC | planned |
-| D3 | The reference for fully bespoke/editorial visualisation | ISC | planned |
-| Highcharts | Strongest accessibility (keyboard navigation, sonification) and polish | Commercial | planned |
-| AG Charts | Enterprise and financial dashboards; free community edition | MIT | planned |
-| uPlot | Fastest, smallest time-series charts | MIT | planned |
-| Lightweight Charts (TradingView) | Best-in-class financial / price charts | Apache-2.0 | planned |
-| Tremor | Best Tailwind dashboard look (built on Recharts) | Apache-2.0 | planned (npm package idle since Jan 2025; check current distribution) |
+All profiled and benchmarked (scores computed; see `SOURCES.md` for the full matrix):
 
-Considered and not shortlisted: Nivo (releases slowed, last May 2025), Chart.js (solid canvas
+| Library | Best at | Score | Bench |
+|---|---|---|---|
+| ECharts | Rich dashboards, big data, specialist charts | 7.8 | 4/4, 205 KB |
+| Recharts | Everyday React charts (our default) | 7.5 | 4/4, 125 KB |
+| visx | Bespoke charts in React | 7.0 | 4/4, 38.5 KB |
+| D3 | Editorial / fully custom; maths under React | 6.5 | 4/4, 31.9 KB |
+| Observable Plot | Static, report and server-rendered charts | 6.5 | 3/4, 93 KB |
+| AG Charts Community | Accessible business charts (if on AG Grid) | 6.5 | 4/4, 413 KB |
+| Lightweight Charts | Financial time series | 6.5 | 1/4, 54 KB |
+| uPlot | Real-time / huge time series | 6.0 | 2/4, 24 KB |
+| Tremor (npm) | Tailwind dashboard look (reference only) | 5.3 | 4/4, 237 KB, React 18 only |
+
+Commercial-only libraries (e.g. Highcharts) are excluded by decision.
+Also considered and not shortlisted: Nivo (releases slowed, last May 2025), Chart.js (solid canvas
 all-rounder, best at nothing for us), Victory (React Native parity), MUI X Charts (only if on MUI),
 ApexCharts (licence changed; check before use), Plotly and Vega-Lite (scientific and notebook use).
 

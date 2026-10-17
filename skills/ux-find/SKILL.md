@@ -14,7 +14,11 @@ Use the first that exists: `$UX_LIBRARY_DIR`, the current repo if it contains
 If none exist, `git clone --depth 1 https://github.com/toby1tobytoby3/UX-Design ~/ux-design`.
 `git pull` if it's a clone you didn't just create.
 
-## 2. Search
+## 2. Read the map
+Read `guides/README.md` first: it explains the layers (guides → sources → patterns → evidence)
+and how to answer. For "which library/site?" questions, `SOURCES.md` has the scored comparison per category.
+
+## 3. Search
 Read `catalog.json`. Each object has `kind`: `pattern` (one UX pattern) or `source` (a scored
 profile of a library or site: `score`/10, `licence`, `version`, `use_when`, `avoid_when`,
 `alternatives`, a scorecard and coverage table in `body`). Common fields: `title, pattern,
@@ -37,7 +41,7 @@ For a specific look ("a dark hero", "a pricing toggle"), search patterns directl
 - Rank by fit to the task first, then `rating`.
 - If nothing fits, say so plainly and suggest the user add a reference with **ux-add**.
 
-## 3. Return the answer
+## 4. Return the answer
 For a category question, lead with:
 > **Use <source> (<score>/10)** for this, because… For <data job>, use a <form>; ready code: `<pattern path>`.
 > Change one thing: … Runner-up: <source>, if …
@@ -55,7 +59,7 @@ For each:
 
 End with a one-line recommendation of which to use and why.
 
-## 4. Rebuild for our site (when asked, or when the task is to build it)
+## 5. Rebuild for our site (when asked, or when the task is to build it)
 1. If the entry already has `example.tsx`, use it as the starting point.
 2. Otherwise write one in the entry folder following `our-design/README.md`:
    React function component, Tailwind classes, no shadcn, accessible, placeholder

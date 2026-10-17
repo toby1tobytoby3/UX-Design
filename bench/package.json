@@ -1,0 +1,19 @@
+{
+  "name": "ux-design-bench",
+  "private": true,
+  "type": "module",
+  "description": "Same four charts in every chart library: renders, bundle sizes and accessibility probes for sources/",
+  "dependencies": {
+    "echarts": "6.1.0",
+    "recharts": "3.10.1",
+    "@visx/visx": "4.0.0",
+    "@observablehq/plot": "0.6.17",
+    "d3": "7.9.0",
+    "ag-charts-community": "14.2.0",
+    "uplot": "1.6.32",
+    "lightweight-charts": "5.2.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "esbuild": "0.25.10"
+  }
+}

@@ -40,7 +40,11 @@ that entry instead of creating a new one, and tell the user.
   (`kind: source`, `pattern` = the category, `score`, `licence`, `version`, `avoid_when`,
   `alternatives`), scored with `guides/source-rubric.md`, including a coverage table and
   links to its pattern entries. Add a row to the category guide (e.g. `guides/charts.md`).
-  Use `sources/echarts/source.md` as the model.
+  Use `sources/echarts/source.md` as the model. For a chart library, first add
+  `bench/libs/<slug>.js(x)` drawing the same four charts from `bench/data.js` and run
+  `cd bench && node run.mjs <slug>`: that renders `sources/<slug>/bench.jpg` and records
+  bundle size, chart support and accessibility probes in `bench/results.json`, which the
+  catalog attaches to the profile. Score from that evidence; `npm run catalog` computes the total.
 - **Screenshot:** save the image into the entry folder as `desktop.jpg` (or
   `mobile.jpg` if it is a phone screenshot). Ask for the source URL if not given;
   use `source_url: unknown` if they don't have it.

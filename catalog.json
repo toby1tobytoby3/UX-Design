@@ -517,6 +517,117 @@
     "body": "## What it is\nA grid of customer logos rendered in a single neutral tone, separated by hairline borders, followed\nby a row of case-study cards each showing a logo, a large metric (e.g. \"−95% build time\") and a link\nto the story.\n\n## Key techniques\n- All logos forced to one colour (`filter: grayscale(1) brightness(…)` or mono SVGs), equal optical height.\n- Grid with 1px borders between cells instead of gaps — feels like a spec sheet.\n- Metric typography much larger than the supporting copy.\n- Logo hover reveals \"Read story →\".\n\n## Accessibility\nLogos need `alt` text with the company name; metric cards should be links with descriptive text, not \"Read more\".\n\n## Weaknesses\nUnverifiable or vague metrics undermine trust — use real numbers only.\n\n> Base-pack entry written from knowledge of the site; re-capture with **ux-add** to attach real screenshots."
   },
   {
+    "id": "sources/ag-charts",
+    "kind": "source",
+    "title": "AG Charts Community",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "dashboard",
+      "accessible",
+      "enterprise"
+    ],
+    "source_url": "https://www.ag-grid.com/charts",
+    "source_site": "ag-grid.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "14.2.0",
+    "licence": "MIT (community edition)",
+    "s_look": 4,
+    "s_interact": 3,
+    "s_coverage": 3,
+    "s_a11y": 4,
+    "s_perf": 4,
+    "s_react": 4,
+    "s_bundle": 1,
+    "s_licence": 3,
+    "why_it_works": "Polished business-chart defaults on canvas, with keyboard navigation and ARIA built in, and an official React wrapper with declarative options.",
+    "use_when": "Teams already using AG Grid, or business dashboards where built-in keyboard accessibility matters and bundle size does not.",
+    "avoid_when": "Bundle size matters (413 KB gz for four charts), or you need zoom, navigator or crosshairs, which are paid Enterprise features.",
+    "alternatives": [
+      "echarts",
+      "recharts"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "bundle_gz_kb": 412.8,
+      "lib_only_gz_kb": 412.8,
+      "react_baseline_kb": 0,
+      "charts_supported": 4,
+      "renderer": "canvas",
+      "keyboard_focusable": true,
+      "unsupported": []
+    },
+    "path": "sources/ag-charts",
+    "images": [
+      "sources/ag-charts/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Good-looking and accessible, but heavy and open-core.** The community edition is MIT, but zoom, the\nnavigator and several series types are Enterprise (paid), so it isn't a full free option. Pick it mainly if\nyou already use AG Grid. Otherwise ECharts or Recharts cover the same ground more cheaply.\n\n## Benchmark\nAll 4 charts drawn. **412.8 KB gz**, the heaviest in the benchmark, even registering only the 7 modules\nneeded (v14 requires `ModuleRegistry.registerModules`, and charts fail with \"No modules have been\nregistered\" otherwise). Canvas. Time series has no zoom in the community edition. Code: `bench/libs/ag.js`.\n\nFound in the benchmark:\n- Keyboard-focusable chart region and legend on every chart, plus ARIA (\"chart, 1 series\", legend items). This is among the best built-in accessibility tested.\n- Default number axis shows \"10000\", not \"10k\". Set `label.formatter`.\n- Default palette fails lightness and chroma (includes a pure grey, `#b5b5b5`) and is only borderline for colour-blind separation. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished labels, callouts and legends |\n| Interactivity | 3 | Tooltips and legend toggling; zoom and navigator are Enterprise |\n| Coverage | 3 | Community series cover bar, line, area, scatter, bubble, pie, donut, histogram; more are Enterprise |\n| Accessibility | 4 | Built-in keyboard focus and ARIA (screen-reader output not tested here) |\n| Performance | 4 | Canvas renderer |\n| React/Next fit | 4 | Official `ag-charts-react` wrapper, declarative options |\n| Bundle size | 1 | 412.8 KB gz |\n| Licence & health | 3 | Actively released (v14.2, Sept 2026), but key features paywalled |"
+  },
+  {
+    "id": "sources/d3",
+    "kind": "source",
+    "title": "D3",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "bespoke",
+      "editorial"
+    ],
+    "source_url": "https://d3js.org",
+    "source_site": "d3js.org",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "7.9.0",
+    "licence": "ISC",
+    "s_look": 1,
+    "s_interact": 4,
+    "s_coverage": 5,
+    "s_a11y": 2,
+    "s_perf": 3,
+    "s_react": 2,
+    "s_bundle": 5,
+    "s_licence": 4,
+    "why_it_works": "The low-level toolkit the rest of the field is built on (scales, shapes, layouts, zoom, brush, geo), so anything you can imagine can be drawn exactly as designed.",
+    "use_when": "Editorial, one-off or highly custom visualisations; or use its maths modules (scales, shapes, formats) under React rendering.",
+    "avoid_when": "Standard product charts on a deadline, or when D3 would own DOM that React also renders.",
+    "alternatives": [
+      "visx",
+      "observable-plot"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "bundle_gz_kb": 31.9,
+      "lib_only_gz_kb": 31.9,
+      "react_baseline_kb": 0,
+      "charts_supported": 4,
+      "renderer": "svg",
+      "keyboard_focusable": false,
+      "unsupported": []
+    },
+    "path": "sources/d3",
+    "images": [
+      "sources/d3/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The reference for fully bespoke and editorial visualisation, and the engine under visx and Plot.** In a\nReact app, prefer **visx** for rendering and use D3 for the maths (`d3-scale`, `d3-shape`, `d3-format`).\nReach for D3's DOM APIs (zoom, brush, transitions) when you need behaviour no wrapper gives you.\n\n## Benchmark\nAll 4 charts hand-built, including wheel and drag zoom via `d3-zoom`. **31.9 KB gz** (tree-shaken), which is\nthe smallest full set in the benchmark. SVG. Code: `bench/libs/d3.js`, the most code of any library.\n\nFound in the benchmark:\n- `d3-zoom` gives smooth wheel and drag zoom on a time axis in about 10 lines, a better interaction than most wrappers.\n- Every axis colour, label and legend is manual. The y-domain followed the full series, not the visible window, until changed.\n- Accessibility is only what you add (we added `role`, `aria-label` and `<title>` per bar).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | No defaults: a blank canvas |\n| Interactivity | 4 | Zoom, brush, drag, transitions: powerful but hand-wired |\n| Coverage | 5 | Anything, including layouts (force, tree, pack), geo projections and contours |\n| Accessibility | 2 | Manual |\n| Performance | 3 | SVG by default; canvas rendering is possible but manual |\n| React/Next fit | 2 | DOM ownership conflicts with React; use its maths modules with React rendering |\n| Bundle size | 5 | 31.9 KB gz tree-shaken |\n| Licence & health | 4 | ISC; mature and stable (last release May 2025) |"
+  },
+  {
     "id": "sources/echarts",
     "kind": "source",
     "title": "Apache ECharts",
@@ -526,8 +637,8 @@
       "data-viz",
       "open-source",
       "interactive",
-      "accessible",
-      "dashboard"
+      "dashboard",
+      "large-data"
     ],
     "source_url": "https://echarts.apache.org",
     "source_site": "echarts.apache.org",
@@ -536,27 +647,386 @@
     "input": "library-render",
     "version": "6.1.0",
     "licence": "Apache-2.0",
-    "score": 8,
-    "rating": 4,
-    "why_it_works": "The broadest free charting engine available: about 23 chart families, zoom, morphing transitions, built-in accessibility textures and smooth rendering of very large datasets, all from one declarative options object.",
-    "use_when": "Interactive dashboards and data-heavy screens that need specialist charts (sankey, heatmap, candlestick, treemap) or 10k+ points.",
-    "avoid_when": "A page needs only one or two simple charts (it's heavy), or you want charts written as idiomatic React components.",
+    "s_look": 3,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 3,
+    "s_perf": 5,
+    "s_react": 3,
+    "s_bundle": 2,
+    "s_licence": 5,
+    "why_it_works": "The broadest free charting engine: 23 chart families, wheel and slider zoom, morphing transitions, decal textures and canvas rendering for very large data, all from one declarative options object.",
+    "use_when": "Data-heavy dashboards that need zoom, drill-down, live updates, large datasets or specialist charts (sankey, heatmap, candlestick, treemap, geo).",
+    "avoid_when": "A page needs only a few simple charts (205 KB gz even tree-shaken), or the team wants charts as composable JSX.",
     "alternatives": [
       "recharts",
-      "visx",
-      "observable-plot",
-      "highcharts",
       "ag-charts",
-      "uplot"
+      "uplot",
+      "visx"
     ],
     "has_example": false,
+    "score": 7.8,
+    "rating": 4,
+    "bench": {
+      "bundle_gz_kb": 205.1,
+      "lib_only_gz_kb": 205.1,
+      "react_baseline_kb": 0,
+      "charts_supported": 4,
+      "renderer": "svg",
+      "keyboard_focusable": false,
+      "unsupported": []
+    },
     "path": "sources/echarts",
     "images": [
-      "sources/echarts/cover.jpg"
+      "sources/echarts/bench.jpg"
     ],
     "files": [
       "source.md"
     ],
-    "body": "## Verdict\n**8 / 10. The default pick for rich, interactive dashboards on a free licence.** Nothing else free\nmatches its combination of breadth, interactivity and large-data performance. The costs are bundle\nweight, an imperative (not React-native) API, and default colours you should replace.\n\n## Scorecard\nScored against `guides/source-rubric.md`. Measured or rendered here unless marked.\n\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | v6 default palette passes colour-blind separation but fails contrast (6 of 9 colours below 3:1) and has a near-grey slot. The chart chrome is clean. |\n| Interactivity | 5 | dataZoom (inside + slider), axis crosshair tooltips, legend toggling, `universalTransition` morphs. All rendered in our pattern entries. |\n| Coverage | 5 | 23 chart modules in the npm package (list below), plus geo maps and an extension for 3D. |\n| Accessibility | 4 | `aria.enabled` writes a description; `aria.decal` adds textures. No keyboard navigation of individual data points (unverified in v6). |\n| Performance | 5 | Canvas renderer, progressive rendering and sampling for large series. 100k+ points is widely reported (not benchmarked here yet). |\n| React/Next fit | 3 | Imperative `init`/`setOption` in a `useEffect`, client-only. Needs a small wrapper (or `echarts-for-react`). Types included. |\n| Bundle size | 2 | Full build 360 KB gz, \"common\" 234 KB gz, \"simple\" 165 KB gz (measured, 6.1.0). Tree-shaking via `echarts/core` can cut this substantially. |\n| Licence & health | 5 | Apache-2.0, Apache Software Foundation project, v6.1.0 released 2026. |\n| **Score** | **8.0** | Mean 4.0 × 2 |\n\n## Coverage\nChart modules shipped in `echarts@6.1.0` (`lib/chart/`):\n\n| Family | Types |\n|---|---|\n| Basic | line, bar, pie, scatter, effectScatter, pictorialBar |\n| Statistical | boxplot, heatmap, candlestick, parallel, radar |\n| Relationship | graph, chord, sankey, lines |\n| Hierarchy | tree, treemap, sunburst |\n| Other | funnel, gauge, themeRiver, map (geo), custom (draw anything) |\n\nIt also ships 37 bundled themes (`echarts/theme/`), e.g. dark variants. None of them is validated by us.\n\n## Patterns in our library from this source\n- `chart/echarts-datazoom-time-series`: time series with zoom (★★★★★)\n- `chart/echarts-universal-transition-morph`: bar ↔ donut morph (★★★★)\n- `chart/echarts-aria-decal-patterns`: accessibility textures (★★★★)\n\n## When to pick it\n- Dashboards with several chart types, drill-down, zoom or live updates.\n- Specialist charts: sankey, heatmap, candlestick, treemap, geo.\n- Large or streaming data.\n\n## When not to\n- One or two simple charts on a marketing page: use a lighter library.\n- A team that wants charts as composable JSX: use Recharts or visx (profiles pending).\n- Server-rendered static charts: it's client-side by default. SSR to SVG is possible but not set up here.\n\n## Using it in our stack\n`npm i echarts`, import from `echarts/core` plus only the charts and components you use, init in a\nclient component, `dispose()` on unmount, resize with `ResizeObserver`, and always pass our validated `color` array.\n\n> Profile built from the npm package (installed and measured), our own renders and search results. The\n> official site and examples gallery couldn't be reached from this session, so coverage comes from the package itself."
+    "body": "## Verdict\n**The pick for rich, interactive, data-heavy dashboards.** It's the highest-scoring library overall: nothing free matches its\nbreadth plus interactivity plus large-data performance. You pay for that in weight, in an imperative API, and in\ndefaults you must fix (colours, screen-reader text, time-axis labels).\n\n## Benchmark (same four charts as every other library)\nAll 4 charts drawn natively, including zoom. **205 KB gz** tree-shaken to just these charts via `echarts/core`\n(the full build is 360 KB gz). SVG renderer in the benchmark; canvas available. Code: `bench/libs/echarts.js`.\n\nFound in the benchmark:\n- Time-axis labels collide at default density (\"29Aug\" overlap). Set `axisLabel.hideOverlap` or fewer ticks.\n- `aria.enabled` writes a description, but it reads raw timestamps aloud (\"1782777600000, 1136…\"). Supply `aria.label.description`.\n- No keyboard focus on data points (0 focusable elements).\n- v6 default palette passes colour-blind separation but fails contrast (6 of 9 below 3:1). v5's failed both. Always pass `color`.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Clean chrome, but colliding time labels and a low-contrast default palette |\n| Interactivity | 5 | Inside + slider zoom, axis tooltips, legend toggling, `universalTransition` morphs (see pattern entries) |\n| Coverage | 5 | 23 chart modules in the package: line, bar, pie, scatter, boxplot, heatmap, candlestick, parallel, radar, graph, chord, sankey, lines, tree, treemap, sunburst, funnel, gauge, themeRiver, map, custom… |\n| Accessibility | 3 | Auto description and decal textures, but the description is raw data and there's no keyboard navigation |\n| Performance | 5 | Canvas renderer, progressive rendering and sampling for large series |\n| React/Next fit | 3 | Imperative `init`/`setOption` in an effect, client-only, needs a wrapper. Types included |\n| Bundle size | 2 | 205 KB gz for four charts, tree-shaken |\n| Licence & health | 5 | Apache-2.0, Apache Software Foundation, v6.1 in 2026 |\n\n## Patterns in our library from this source\n- `chart/echarts-datazoom-time-series`: zoom + slider overview (★★★★★)\n- `chart/echarts-universal-transition-morph`: bar ↔ donut morph (★★★★)\n- `chart/echarts-aria-decal-patterns`: accessibility textures (★★★★)\n\n## Using it in our stack\nImport from `echarts/core` plus only the charts and components you use (see the benchmark file), init in a\n`\"use client\"` component, `dispose()` on unmount, resize via `ResizeObserver`, pass our validated `color` array,\nand write `aria.label.description` yourself."
+  },
+  {
+    "id": "sources/lightweight-charts",
+    "kind": "source",
+    "title": "TradingView Lightweight Charts",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "time-series",
+      "finance",
+      "large-data"
+    ],
+    "source_url": "https://tradingview.github.io/lightweight-charts",
+    "source_site": "tradingview.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "5.2.1",
+    "licence": "Apache-2.0 (attribution required)",
+    "s_look": 4,
+    "s_interact": 5,
+    "s_coverage": 1,
+    "s_a11y": 1,
+    "s_perf": 5,
+    "s_react": 2,
+    "s_bundle": 4,
+    "s_licence": 4,
+    "why_it_works": "The trading-terminal interaction model in a small canvas library, with buttery pan and zoom, a crosshair with price labels, and candlestick, bar, area and histogram series built for financial time data.",
+    "use_when": "Prices, balances, portfolio or any financial time series where pan/zoom feel matters.",
+    "avoid_when": "Non-time data (categorical bars, pies), or accessibility-critical views.",
+    "alternatives": [
+      "uplot",
+      "echarts"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "bundle_gz_kb": 54.3,
+      "lib_only_gz_kb": 54.3,
+      "react_baseline_kb": 0,
+      "charts_supported": 1,
+      "renderer": "canvas",
+      "keyboard_focusable": true,
+      "unsupported": [
+        "bar: No categorical bar chart; every series is plotted against time.",
+        "stack: No stacked bars; histograms are per time point, one series each.",
+        "donut: No pie or donut; it is a financial time-series library."
+      ]
+    },
+    "path": "sources/lightweight-charts",
+    "images": [
+      "sources/lightweight-charts/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The best-feeling time-series interaction tested, for financial data only.** Choose it for price and balance\ncharts. It can't draw anything that isn't plotted against time.\n\n## Benchmark\n**1 of 4 charts.** Only the time series; no categorical bars, stacking or pies. **54.3 KB gz**. Canvas. Pan\nand zoom built in. Code: `bench/libs/lightweight.js`.\n\nFound in the benchmark:\n- Shows the TradingView logo by default. The licence requires attribution (a link or notice) if you hide it.\n- Finance defaults: price scale on the right and two-decimal values (\"1200.00\"). Set `priceFormat` for counts.\n- Keyboard-focusable but no ARIA text; canvas only.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished for finance; finance-specific defaults elsewhere |\n| Interactivity | 5 | Pan, zoom, crosshair with price and time labels |\n| Coverage | 1 | Time series only (candlestick, bar, line, area, baseline, histogram) |\n| Accessibility | 1 | No ARIA |\n| Performance | 5 | Canvas, built for long series and live updates |\n| React/Next fit | 2 | Imperative API; wrap in an effect |\n| Bundle size | 4 | 54.3 KB gz |\n| Licence & health | 4 | Apache-2.0 with attribution; active (v5.2, Aug 2026) |"
+  },
+  {
+    "id": "sources/observable-plot",
+    "kind": "source",
+    "title": "Observable Plot",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "editorial",
+      "static"
+    ],
+    "source_url": "https://observablehq.com/plot",
+    "source_site": "observablehq.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.6.17",
+    "licence": "ISC",
+    "s_look": 4,
+    "s_interact": 2,
+    "s_coverage": 3,
+    "s_a11y": 3,
+    "s_perf": 3,
+    "s_react": 3,
+    "s_bundle": 3,
+    "s_licence": 5,
+    "why_it_works": "A concise grammar of graphics from D3's creators: a few lines produce well-typeset, correctly scaled charts with sensible axes and tips, and it renders plain SVG that can be generated on the server.",
+    "use_when": "Report, documentation and analysis charts; server-rendered or static charts; quick exploration.",
+    "avoid_when": "You need pies or donuts (no mark by design), zoom, or rich dashboard interaction.",
+    "alternatives": [
+      "d3",
+      "recharts"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "bundle_gz_kb": 93.3,
+      "lib_only_gz_kb": 93.3,
+      "react_baseline_kb": 0,
+      "charts_supported": 3,
+      "renderer": "svg",
+      "keyboard_focusable": false,
+      "unsupported": [
+        "donut: Plot has no pie or donut mark by design (it steers you to bars). A donut needs D3 shapes or a custom mark."
+      ]
+    },
+    "path": "sources/observable-plot",
+    "images": [
+      "sources/observable-plot/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The pick for static, report-style and server-rendered charts.** It has the best defaults-per-line of code\nin the benchmark, with excellent axes and typography. It's deliberately not an interactive dashboard library.\n\n## Benchmark\n**3 of 4 charts.** Plot has no pie or donut mark by design. **93.3 KB gz** (includes the D3 modules it uses).\nSVG. No zoom. Code: `bench/libs/plot.js`, the shortest code in the benchmark.\n\nFound in the benchmark:\n- Without zoom it shows the full 180 days. That's correct for a static chart, but there's no way to focus a range.\n- ARIA labels are structural (\"y-axis tick\", \"area\", \"line\"), not data descriptions. Use `ariaLabel`/`ariaDescription` options.\n- The default `observable10` palette passes colour-blind separation but has four near-grey slots and fails contrast. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Best typographic defaults; default palette needs replacing |\n| Interactivity | 2 | Tips (tooltips) only; no zoom or legend toggling |\n| Coverage | 3 | Strong statistical marks (density, hexbin, contour, geo, box, waffle); no pie or donut |\n| Accessibility | 3 | ARIA hooks on every mark; generic labels by default; no keyboard navigation |\n| Performance | 3 | SVG; fine for thousands of marks |\n| React/Next fit | 3 | Not React: returns an SVG element to append in an effect, or render on the server |\n| Bundle size | 3 | 93.3 KB gz |\n| Licence & health | 5 | ISC; Observable-maintained, v0.6.17 April 2026 |"
+  },
+  {
+    "id": "sources/recharts",
+    "kind": "source",
+    "title": "Recharts",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "react",
+      "dashboard",
+      "accessible"
+    ],
+    "source_url": "https://recharts.org",
+    "source_site": "recharts.org",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "3.10.1",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 4,
+    "s_coverage": 3,
+    "s_a11y": 4,
+    "s_perf": 2,
+    "s_react": 5,
+    "s_bundle": 3,
+    "s_licence": 5,
+    "why_it_works": "Charts are plain React components (<BarChart><Bar/></BarChart>), so they compose, theme and type like the rest of a Next app, with sensible defaults and a built-in keyboard accessibility layer.",
+    "use_when": "Everyday product and dashboard charts in our React/Next app (lines, bars, areas, donuts) with up to a few thousand points.",
+    "avoid_when": "Very large or streaming data (SVG slows down), or specialist charts such as heatmaps, candlesticks or geo maps.",
+    "alternatives": [
+      "echarts",
+      "visx",
+      "tremor"
+    ],
+    "has_example": false,
+    "score": 7.5,
+    "rating": 4,
+    "bench": {
+      "bundle_gz_kb": 182.5,
+      "lib_only_gz_kb": 125.2,
+      "react_baseline_kb": 57.3,
+      "charts_supported": 4,
+      "renderer": "svg",
+      "keyboard_focusable": true,
+      "unsupported": []
+    },
+    "path": "sources/recharts",
+    "images": [
+      "sources/recharts/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Our default for everyday charts in the React/Next app.** It's the most idiomatic fit for our stack:\ncomposable JSX, React 19 support, keyboard navigation out of the box, and a very active project. It's also\nthe foundation of shadcn/ui charts and Tremor. Choose ECharts instead when you need zoom, morphs, specialist\ntypes or big data.\n\n## Benchmark\nAll 4 charts drawn natively. **125 KB gz for the library** (182.5 KB including React 19's 57 KB, which our\napp already ships). SVG. Zoom is a `<Brush>` range slider, not wheel or drag on the plot. Code: `bench/libs/recharts.jsx`.\n\nFound in the benchmark:\n- `accessibilityLayer` makes charts keyboard-focusable (1–3 focusable elements per chart). The best result among the React libraries.\n- The Brush slider's accessible name reads **\"Min value: undefined, Max value: undefined\"**, which is a bug. Label it yourself.\n- The legend sorts series **alphabetically** by default, so it doesn't match the stack order. Set `itemSorter` or pass a `payload`.\n- Pie labels inherit the slice colour, which is low contrast. Pass `label` with a text colour.\n- No default categorical palette (you set every colour), so ours drops straight in.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Clean, balanced spacing; legend order and label colours need fixes |\n| Interactivity | 4 | Tooltips, legend, Brush range slider, animations; no wheel/drag zoom or chart-type morphs |\n| Coverage | 3 | Line, area, bar, composed, pie, radar, radial bar, scatter, funnel, treemap, sankey; no heatmap, candlestick, geo |\n| Accessibility | 4 | Keyboard layer and ARIA, with a broken Brush label |\n| Performance | 2 | SVG DOM per point; fine to low thousands, not 100k |\n| React/Next fit | 5 | Native components, typed, React 19, works with Tailwind tokens via props/CSS vars |\n| Bundle size | 3 | 125 KB gz library cost for four charts |\n| Licence & health | 5 | MIT; v3.10 released Oct 2026 |\n\n## Using it in our stack\n`npm i recharts`; use `\"use client\"` components; wrap each chart in `ResponsiveContainer`; pass our validated\ncolours; add `accessibilityLayer`; set legend `itemSorter`; give Brush handles proper labels."
+  },
+  {
+    "id": "sources/tremor",
+    "kind": "source",
+    "title": "Tremor",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "react",
+      "tailwind",
+      "dashboard"
+    ],
+    "source_url": "https://tremor.so",
+    "source_site": "tremor.so",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "3.18.7 (npm)",
+    "licence": "Apache-2.0",
+    "s_look": 4,
+    "s_interact": 3,
+    "s_coverage": 2,
+    "s_a11y": 3,
+    "s_perf": 2,
+    "s_react": 3,
+    "s_bundle": 2,
+    "s_licence": 2,
+    "why_it_works": "Tailwind-styled dashboard charts (on Recharts) with a polished, consistent look in very little code, such as a donut with its total in the centre and tidy legends.",
+    "use_when": "Reference for the Tailwind dashboard look. To build that look, use Recharts with our tokens rather than the npm package.",
+    "avoid_when": "New work on React 19 / current Next. The npm package needs React 18 and hasn't been released since January 2025.",
+    "alternatives": [
+      "recharts"
+    ],
+    "has_example": false,
+    "score": 5.3,
+    "rating": 3,
+    "bench": {
+      "bundle_gz_kb": 282.1,
+      "lib_only_gz_kb": 237.2,
+      "react_baseline_kb": 44.9,
+      "charts_supported": 4,
+      "renderer": "svg",
+      "keyboard_focusable": true,
+      "unsupported": []
+    },
+    "path": "sources/tremor",
+    "images": [
+      "sources/tremor/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**A design reference, not a dependency.** The look is the best \"Tailwind dashboard\" style tested. But the npm\npackage is stale (last release January 2025) and **won't install with React 19** (peer dependency\n`react@^18`), which current Next.js uses. Tremor appears to have moved to copy-paste components on its\nsite (unverified: the site couldn't be reached from this session). Recommended route: get the look with\nRecharts plus our Tailwind tokens.\n\n## Benchmark\nAll 4 charts (benchmarked in isolation on React 18). **237 KB gz for the library** (it bundles Recharts and\nheadless UI) plus a Tailwind build with Tremor-specific tokens. SVG. No zoom. Code: `bench/libs/tremor.jsx`,\n`bench/tremor/tailwind.config.cjs`.\n\nFound in the benchmark:\n- `npm install` fails alongside React 19 (ERESOLVE). This was the first finding of the whole benchmark.\n- Colours must be Tailwind colour **names**, so our validated hex palette can only be approximated.\n- The **default palette fails colour-blind checks badly**: indigo and violet sit next to each other and\n  are nearly identical for protanopia (ΔE 0.8).\n- Bar charts colour by series, not by bar. No value labels on bars.\n- Needs a specific Tailwind config (tremor-* colour tokens and a safelist). Its preflight also restyled the host page.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Best dashboard polish tested; default palette fails |\n| Interactivity | 3 | Recharts tooltips and legends; no zoom |\n| Coverage | 2 | Area, bar, line, donut, scatter, funnel, sparkline |\n| Accessibility | 3 | Partial Recharts behaviour |\n| Performance | 2 | SVG via Recharts |\n| React/Next fit | 3 | Idiomatic components, but React 18 only |\n| Bundle size | 2 | 237 KB gz library cost + CSS |\n| Licence & health | 2 | Apache-2.0; npm package idle since Jan 2025, blocks React 19 |"
+  },
+  {
+    "id": "sources/uplot",
+    "kind": "source",
+    "title": "uPlot",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "time-series",
+      "large-data",
+      "real-time"
+    ],
+    "source_url": "https://github.com/leeoniya/uPlot",
+    "source_site": "github.com",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.6.32",
+    "licence": "MIT",
+    "s_look": 2,
+    "s_interact": 4,
+    "s_coverage": 1,
+    "s_a11y": 1,
+    "s_perf": 5,
+    "s_react": 2,
+    "s_bundle": 5,
+    "s_licence": 4,
+    "why_it_works": "A tiny canvas engine built only for x/y time series, so it draws hundreds of thousands of points and live streams smoothly, with drag-to-zoom and synced cursors built in.",
+    "use_when": "Monitoring, metrics and real-time or very long time series where speed and size beat everything else.",
+    "avoid_when": "Anything categorical (bars by name, pies), or where accessibility is required.",
+    "alternatives": [
+      "echarts",
+      "lightweight-charts"
+    ],
+    "has_example": false,
+    "score": 6,
+    "rating": 3,
+    "bench": {
+      "bundle_gz_kb": 24.4,
+      "lib_only_gz_kb": 24.4,
+      "react_baseline_kb": 0,
+      "charts_supported": 2,
+      "renderer": "canvas",
+      "keyboard_focusable": false,
+      "unsupported": [
+        "bar: No categorical/horizontal bar chart; uPlot is built for x/y numeric series.",
+        "donut: No pie or donut. uPlot only draws x/y series."
+      ]
+    },
+    "path": "sources/uplot",
+    "images": [
+      "sources/uplot/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The specialist for fast, huge time series.** It's the smallest library tested (24.4 KB gz) and built for\nspeed. It does one job: use it for metrics panels and live data, and use something else for everything else.\n\n## Benchmark\n**2 of 4 charts.** No categorical or horizontal bars and no pie or donut. Stacked bars only work by drawing\ncumulative totals yourself. **24.4 KB gz**. Canvas. Drag-to-zoom built in. Code: `bench/libs/uplot.js`.\n\nFound in the benchmark:\n- The y-axis auto-ranges away from zero (the area fill started at 250, which is misleading for an area chart).\n  Set `scales.y.range` to include zero.\n- No accessibility: canvas with no ARIA and no keyboard focus. Pair it with a data table.\n- The live legend (values under the cursor) is useful for monitoring but looks dated by default.\n- Needs the locale set correctly; in our headless run an odd system locale threw \"Invalid language tag\".\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Functional, dated legend; auto-ranged y-axis |\n| Interactivity | 4 | Drag-zoom, cursor sync, live legend |\n| Coverage | 1 | x/y series only |\n| Accessibility | 1 | None |\n| Performance | 5 | Built for 100k+ points and streaming |\n| React/Next fit | 2 | Imperative; community wrappers only |\n| Bundle size | 5 | 24.4 KB gz |\n| Licence & health | 4 | MIT; mature, single maintainer, last release March 2025 |"
+  },
+  {
+    "id": "sources/visx",
+    "kind": "source",
+    "title": "visx",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "react",
+      "bespoke"
+    ],
+    "source_url": "https://airbnb.io/visx",
+    "source_site": "airbnb.io",
+    "captured_at": "2026-10-17",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "4.0.0",
+    "licence": "MIT",
+    "s_look": 2,
+    "s_interact": 3,
+    "s_coverage": 4,
+    "s_a11y": 2,
+    "s_perf": 3,
+    "s_react": 5,
+    "s_bundle": 5,
+    "s_licence": 4,
+    "why_it_works": "D3's maths as small, unstyled React components (scales, shapes, axes, brush), so you can build a fully custom, on-brand chart in idiomatic React and ship only the pieces you use.",
+    "use_when": "Signature or bespoke charts where design control matters more than speed of build, inside the React app.",
+    "avoid_when": "You want finished charts quickly; everything (tooltips, legends, a11y) is assembled by hand.",
+    "alternatives": [
+      "d3",
+      "recharts",
+      "observable-plot"
+    ],
+    "has_example": false,
+    "score": 7,
+    "rating": 4,
+    "bench": {
+      "bundle_gz_kb": 95.8,
+      "lib_only_gz_kb": 38.5,
+      "react_baseline_kb": 57.3,
+      "charts_supported": 4,
+      "renderer": "svg",
+      "keyboard_focusable": false,
+      "unsupported": []
+    },
+    "path": "sources/visx",
+    "images": [
+      "sources/visx/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The pick for bespoke charts in React.** It's the lightest React option by far: 38.5 KB gz for four charts\n(Recharts is 125 KB). It gives complete design freedom without fighting React for the DOM. The cost is time:\nit's a kit of parts, not a charting library.\n\n## Benchmark\nAll 4 charts built, including a brush-to-zoom overview. **38.5 KB gz for the library** (95.8 KB with React).\nSVG. Code: `bench/libs/visx.jsx`, roughly 3× the code of Recharts for the same four charts.\n\nFound in the benchmark:\n- Nothing is automatic. Axis domains, label placement and legend layout are all yours, and so are your bugs.\n  Our first pass clipped the line and placed donut labels off-canvas.\n- No keyboard focus or data descriptions. Accessibility is entirely up to you.\n- The `Brush` primitive works well once wired, with a mini overview chart plus a draggable window.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Unstyled by design; quality depends on your design work |\n| Interactivity | 3 | Brush, tooltip, zoom and drag primitives, all wired by hand |\n| Coverage | 4 | Shapes for almost anything (heatmap, hierarchy, network, geo); you compose them |\n| Accessibility | 2 | Only what you add (we added `role=\"img\"` + `aria-label`) |\n| Performance | 3 | SVG; canvas is possible but manual |\n| React/Next fit | 5 | Pure React components; SSR-friendly SVG |\n| Bundle size | 5 | 38.5 KB gz library cost |\n| Licence & health | 4 | MIT; v4.0 June 2026; slower release cadence |"
   }
 ]

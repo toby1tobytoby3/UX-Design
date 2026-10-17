@@ -1,7 +1,10 @@
 # Source rubric
 
 Every source profile (`sources/<slug>/source.md`) is scored on the same eight criteria, 1–5 each,
-so `ux-find` can compare sources fairly. `score` (out of 10) = mean of the eight × 2, rounded to one decimal.
+so `ux-find` can compare sources fairly. Put each criterion in the profile's frontmatter as `s_look, s_interact,
+s_coverage, s_a11y, s_perf, s_react, s_bundle, s_licence` (1–5). `npm run catalog` computes `score` (mean × 2) and
+refuses to build if any is missing, so never type a score by hand. For libraries, add a `bench/libs/<slug>` run so
+the profile's numbers come from the shared benchmark.
 Score only what you have checked (installed, rendered, measured or read in official docs). Mark anything
 else as unverified in the profile.
 

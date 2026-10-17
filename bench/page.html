@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Chart benchmark</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#fcfcfb;color:#1f1f1e;font:13px/1.4 system-ui,sans-serif}
+  header{display:flex;justify-content:space-between;align-items:baseline;padding:14px 24px 0}
+  header b{font-size:18px} header span{color:#52514e}
+  main{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px 24px 24px}
+  section{background:#fff;border:1px solid #ecebe7;border-radius:10px;padding:10px 12px 8px;display:flex;flex-direction:column}
+  h2{margin:0 0 6px;font-size:13px;font-weight:600} h2 small{color:#52514e;font-weight:400}
+  .plot{position:relative;height:330px;width:100%}
+  .na{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#52514e;background:repeating-linear-gradient(135deg,#fff 0 8px,#f6f5f2 8px 16px);border-radius:8px;text-align:center;padding:24px}
+  .na b{color:#1f1f1e}
+</style></head><body>
+<header><b id="lib">Library</b><span>Same data, same palette, same four charts · sample data</span></header>
+<main>
+  <section id="ts"><h2>Daily active users <small>· 180 days, zoomable if the library supports it</small></h2><div class="plot"></div></section>
+  <section id="bar"><h2>Revenue by channel <small>· sorted bars</small></h2><div class="plot"></div></section>
+  <section id="stack"><h2>Support tickets by channel <small>· stacked composition</small></h2><div class="plot"></div></section>
+  <section id="donut"><h2>Revenue share <small>· donut</small></h2><div class="plot"></div></section>
+</main>
+<script src="dist/LIB.js"></script>
+</body></html>

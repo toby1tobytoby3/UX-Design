@@ -1,0 +1,371 @@
+{
+  "echarts": {
+    "bundle_gz_kb": 205.1,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 205.1,
+    "charts_supported": 4,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "This is a chart with type Line chart.The first 10 items are: 1782777600000, 1136, 1782864000000, 1134, 1782950400000, 1119, 1783036800000, 1115, 1783123200000, "
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "This is a chart with type Bar chart.The data is as follows: the data for Organic search is 48200, 0, the data for Paid search is 31900, 1, the data for Email is"
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "This is a chart. It consists of 4 series count. The 0 series is a Bar chart representing Email.The data is as follows: the data for May is 0, 420, 420, NaN, the"
+      },
+      "donut": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "This is a chart with type Pie chart.The data is as follows: the data for Organic search is 48200, the data for Paid search is 31900, the data for Email is 22400"
+      }
+    },
+    "errors": []
+  },
+  "recharts": {
+    "bundle_gz_kb": 182.5,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 125.2,
+    "charts_supported": 4,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 3,
+        "aria": 6,
+        "described": "Min value: undefined, Max value: undefined Min value: undefined, Max value: undefined"
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 1,
+        "aria": 4,
+        "described": ""
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 1,
+        "aria": 16,
+        "described": "Chat legend icon Email legend icon In-app legend icon Phone legend icon"
+      },
+      "donut": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 2,
+        "aria": 4,
+        "described": ""
+      }
+    },
+    "errors": []
+  },
+  "d3": {
+    "bundle_gz_kb": 31.9,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 31.9,
+    "charts_supported": 4,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "Daily active users, last 180 days"
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 6,
+        "described": "Revenue by channel"
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "Support tickets by channel per month"
+      },
+      "donut": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "Revenue share by channel"
+      }
+    },
+    "errors": []
+  },
+  "observable-plot": {
+    "bundle_gz_kb": 93.3,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 93.3,
+    "charts_supported": 3,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 9,
+        "described": "y-grid y-axis tick y-axis tick label x-axis tick x-axis tick label area line rule tip"
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 8,
+        "described": "y-axis tick y-axis tick label x-grid x-axis tick x-axis tick label bar text tip"
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 8,
+        "described": "y-grid y-axis tick y-axis tick label x-axis tick x-axis tick label bar rule tip"
+      },
+      "donut": {
+        "supported": false,
+        "note": "Plot has no pie or donut mark by design (it steers you to bars). A donut needs D3 shapes or a custom mark.",
+        "renderer": "none",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      }
+    },
+    "errors": []
+  },
+  "visx": {
+    "bundle_gz_kb": 95.8,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 38.5,
+    "charts_supported": 4,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "Daily active users"
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "Revenue by channel"
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "Support tickets by channel"
+      },
+      "donut": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "Revenue share"
+      }
+    },
+    "errors": []
+  },
+  "ag-charts": {
+    "bundle_gz_kb": 412.8,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 412.8,
+    "charts_supported": 4,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "canvas",
+        "focusable": 1,
+        "aria": 13,
+        "described": "chart, 1 series Legend Legend Pagination"
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "canvas",
+        "focusable": 1,
+        "aria": 13,
+        "described": "chart, 1 series Legend Legend Pagination"
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "canvas",
+        "focusable": 5,
+        "aria": 21,
+        "described": "chart, 4 series Legend Legend Pagination"
+      },
+      "donut": {
+        "supported": true,
+        "note": "",
+        "renderer": "canvas",
+        "focusable": 1,
+        "aria": 13,
+        "described": "chart, 1 series Legend Legend Pagination"
+      }
+    },
+    "errors": []
+  },
+  "lightweight-charts": {
+    "bundle_gz_kb": 54.3,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 54.3,
+    "charts_supported": 1,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "canvas",
+        "focusable": 1,
+        "aria": 0,
+        "described": ""
+      },
+      "bar": {
+        "supported": false,
+        "note": "No categorical bar chart; every series is plotted against time.",
+        "renderer": "none",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "stack": {
+        "supported": false,
+        "note": "No stacked bars; histograms are per time point, one series each.",
+        "renderer": "none",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "donut": {
+        "supported": false,
+        "note": "No pie or donut; it is a financial time-series library.",
+        "renderer": "none",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      }
+    },
+    "errors": []
+  },
+  "uplot": {
+    "bundle_gz_kb": 24.4,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 24.4,
+    "charts_supported": 2,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "canvas",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "bar": {
+        "supported": false,
+        "note": "No categorical/horizontal bar chart; uPlot is built for x/y numeric series.",
+        "renderer": "none",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "canvas",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "donut": {
+        "supported": false,
+        "note": "No pie or donut. uPlot only draws x/y series.",
+        "renderer": "none",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      }
+    },
+    "errors": []
+  },
+  "tremor": {
+    "bundle_gz_kb": 282.1,
+    "react_baseline_kb": 44.9,
+    "lib_only_gz_kb": 237.2,
+    "charts_supported": 4,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 2,
+        "described": ""
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 2,
+        "described": ""
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 1,
+        "aria": 2,
+        "described": ""
+      },
+      "donut": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 2,
+        "aria": 7,
+        "described": ""
+      }
+    },
+    "errors": []
+  }
+}
