@@ -23,7 +23,12 @@
   .tbl .num{justify-content:flex-end;font-variant-numeric:tabular-nums}
   .tbl input.cell-edit{font:inherit;width:100%;padding:3px 6px;border:1px solid #2a78d6;border-radius:4px}
   .tbl [data-focus-visible]{outline:2px solid #2a78d6;outline-offset:-2px}
-  .rac-table{width:100%}
+  .rac-table{width:100%;position:relative}
+  .rac-table [role=grid]{outline:none}
+  .rac-table [role=columnheader],.rac-table [role=gridcell],.rac-table [role=rowheader]{display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #f0f0f2;background:#fff;white-space:nowrap;overflow:hidden;box-sizing:border-box;outline:none}
+  .rac-table [role=columnheader]{font-weight:500;color:#52525b;background:#fafafa;position:relative;cursor:default}
+  .rac-table [role=row][data-selected] [role=gridcell],.rac-table [role=row][data-selected] [role=rowheader]{background:#eef4fd}
+  .rac-table [data-focus-visible]{outline:2px solid #2a78d6;outline-offset:-2px}
 </style></head><body>
 <header><b id="lib">Library</b><span>Same 10,000 rows · same four tasks · keyboard + ARIA checks · axe-core</span></header>
 <main><section><h2>Task</h2>
