@@ -403,6 +403,11 @@ for (const kit of kits) {
     tasks_total: 4, tasks_supported: Object.values(probe).filter((p) => p?.supported).length, notes, probe,
     keyboard_passed: probe.select?.keyboard_passed ?? 0, keyboard_total: probe.select?.keyboard_total ?? 5,
     axe_violations: [probe.big, probe.layout, probe.select, probe.edit].reduce((n, p) => n + (p?.axe?.length ?? 0), 0),
+    // Headline numbers for the catalog (timings at 4x CPU throttling, medians of 3).
+    render_ms: probe.big?.render_ms ?? null, sort_ms: probe.big?.sort_ms ?? null, filter_ms: probe.big?.filter_ms ?? null,
+    scroll_p95_ms: probe.big?.scroll_p95_ms ?? null, dom_rows: probe.big?.dom_rows ?? null,
+    native_edit: probe.edit?.supported === true && !/hand-built/i.test(notes?.edit ?? ''),
+    multi_sort: !!probe.layout?.multi_sort, pinned_column: !!probe.layout?.pinned_first_column,
   };
   console.log(kit, `${results[kit].lib_only_gz_kb} KB`);
 }

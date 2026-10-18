@@ -77,7 +77,7 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
 | Accessibility and the component-library choice (A7) | `guides/accessibility.md` | 5 `ui-primitives` (benchmarked in `benchui/`) | `accessibility/*` |
 | AI chat, agents, oversight, provenance (E1–E5) | `guides/agentic-ui.md` | `ai-chat` (benchmarked in `benchai/`) | `ai-chat/*`, `agent-activity/*`, `ai-review/*`, `ai-provenance/*` |
 | Inline AI assist: ghost text, rewrite, AI fill (E6) | `guides/agentic-ui.md` §7 | `ai-assist` (benchmarked in `benchinline/`) | `ai-assist/*` |
-| Tables and data grids (B6) | `guides/tables.md` | `data-table` (benchmarked in `benchtable/`) | `data-table/*` |
+| Tables and data grids (B6) | `guides/tables.md` | 6 `data-table` (benchmarked in `benchtable/`) | `data-table/*` |
 | Maps and live positions (C3, map side of C6) | `guides/maps.md` | `map` (benchmarked in `benchmap/`) | `map/*` |
 | App shell, panels and docking, dashboards (B1, B3, C2) | `guides/shell-panels.md` | `panels` (benchmarked in `benchpanels/`) | `navigation/*`, `panels/*`, `dashboard/*` |
 | Whole briefs (ten scenarios) | `guides/scenarios.md` | – (links to the category guides) | – |

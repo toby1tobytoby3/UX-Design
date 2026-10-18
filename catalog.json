@@ -964,6 +964,55 @@
     "body": "## Verdict\n**Polished to look at, hard to recommend.** It ran fully offline and produced a clear tracked-changes review, but it has no\nghost text and no form fill, its agent animation made a 272-word rewrite take **18.6 s** to review (the model finished in about\n1.5 s), **undo after Accept walked back into garbled intermediate text** instead of the original, and the AI package is\n**GPL-3.0 or paid** for closed-source use. It also still depends on AI SDK v6, a major version behind.\n\n## Benchmark (same four tasks and mock as every kit)\n2/4 tasks (no ghost text, no form fill). **473.7 KB gz** initial plus 107.9 KB lazy and 38.9 KB CSS (React subtracted), with\nMantine as the default UI. Code: `benchinline/libs/blocknote-ai.jsx`, wired as its docs show (AIExtension, AIMenuController,\nthe AI toolbar button and slash items). Offline through `ClientSideTransport` and a mock model from xl-ai's own bundled AI SDK\nv6, answering with an `applyDocumentOperations` tool call.\n\n| Probe | Result |\n|---|---|\n| Ghost text | ✗ not offered by `@blocknote/xl-ai` 0.56 |\n| Rewrite (272 words, Improve Writing) | Tracked insert/strike-through diff before applying; **Accept** and **Revert** (Revert restores the original cleanly); no Try again in the review state; applied 3/3 |\n| Review time | **18.6 s** in a normal run: `delayAgentStep` adds 10–200 ms of artificial delay per edit step to animate the agent cursor (source comment: \"this can take longer due to artificial delays\") |\n| Undo after Accept | **Never returned to the original within 40 presses** (3/3 trials): the first Ctrl+Z gives a half-reverted mix (\"confusingnfus or that felt…\") |\n| AI command menu (slash `/ai` → Ask AI) | Opens with focus in the input; presets; arrow keys; free text; Esc closes and returns focus |\n| Rewrite stream at 4× CPU throttle (median of 3) | 3.5 s script, review after 27.8 s (mostly the animation) |\n| axe-core (WCAG 2.2 AA) | Menu closed: 1 critical `aria-allowed-attr`, 2 serious `aria-input-field-name`. Menu open: also 3 serious `aria-hidden-focus` |\n\n## Coverage\n| Need | Support |\n|---|---|\n| Ghost text | ✗ |\n| Rewrite with tracked changes, Accept / Revert | ✓ (no Try again while reviewing; Retry appears on errors) |\n| Slash and toolbar AI menu with presets and free text | ✓ |\n| AI form fill | ✗ editor blocks only |\n| Agent cursor animation | ✓ (on by default; it's what makes reviews slow) |\n\n## Styling with Tailwind\nDefault UI is Mantine (38.9 KB CSS). A shadcn variant (`@blocknote/shadcn`) needs Tailwind 4; either way you're inside\nBlockNote's design system rather than ours.\n\n## Weaknesses\n- Licence: closed-source use of the AI package needs a paid BlockNote Business subscription; its server helper is AGPL.\n- No ghost text or form fill.\n- Slow, animated rewrites; undo after Accept doesn't restore the original.\n- Depends on AI SDK v6 while the rest of our stack is on v7 (two copies in the bundle).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Notion-like menu, tracked changes, agent cursor |\n| Interactivity | 2 | Accept and Revert only; no Try again in review; undo after Accept broken |\n| Coverage | 2 | 2/4 tasks |\n| Accessibility | 2 | 1 critical and 2–5 serious axe violations |\n| Performance | 2 | Modest script (3.5 s) but 18.6 s to review a rewrite by design |\n| React/Next fit | 3 | React 19 works; Mantine by default; AI SDK v6 alongside our v7 |\n| Bundle size | 1 | 473.7 KB gz (+107.9 lazy) |\n| Licence & health | 2 | GPL-3.0 or paid (capped at 2 by the rubric); actively released (0.56.0, Oct 2026) |"
   },
   {
+    "id": "sources/deck-gl",
+    "kind": "source",
+    "title": "deck.gl",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "maps",
+      "webgl",
+      "open-source",
+      "large-data",
+      "react",
+      "aggregation"
+    ],
+    "source_url": "https://deck.gl",
+    "source_site": "deck.gl",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "9.4.0",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 4,
+    "s_coverage": 5,
+    "s_a11y": 3,
+    "s_perf": 5,
+    "s_react": 4,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "GPU data layers (scatter, icon, path, trips, hexagon, heatmap, H3) that update thousands of moving points with almost no main-thread cost, with picking and attribute transitions, drawn over a MapLibre basemap.",
+    "use_when": "Large or fast-changing data on a map, such as thousands of live vehicles, trails and replays, or hexbin and heatmap aggregation, layered over MapLibre with `MapboxOverlay`.",
+    "avoid_when": "A few hundred markers with clusters (MapLibre's own layers are enough and save ~230 KB), or you need clustering only.",
+    "alternatives": [
+      "maplibre",
+      "openlayers"
+    ],
+    "has_example": false,
+    "score": 7.8,
+    "rating": 4,
+    "bench": null,
+    "path": "sources/deck-gl",
+    "images": [
+      "sources/deck-gl/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The add-on for heavy map data.** Updating 5,000 vehicles at 1 Hz caused **no long tasks** even with the CPU throttled\n4× (MapLibre's own layers: ~32 ms per update). It adds **~228 KB gz** to MapLibre. One trap stands out: on\n**MapLibre 6.15, `MapboxOverlay({ interleaved: true })` crashes** with deck.gl 9.4.0, so the bench ran the overlaid mode.\n\n## Benchmark (same basemap, 5,000 vehicles and tasks as every other stack, `benchmap/`)\nCode: `benchmap/libs/maplibre-deckgl.jsx` (react-maplibre `<Map>` + `MapboxOverlay` through `useControl`, two\n`ScatterplotLayer`s, supercluster below z12). Software GPU (SwiftShader): timings are relative only.\n\n| Task | Result |\n|---|---|\n| First render | 742 ms |\n| 30 s of 1 Hz updates (4× CPU throttle, z12) | p50/p95 frame 16.7/16.8 ms, 12 dropped frames, **0 ms long tasks** (`updateTriggers`) |\n| Click-pick at z13 and z16 | 2/2 correct (`pickable` + `onClick`) |\n| Cluster click | **No clustering built in**; supercluster + `easeTo`, z10 → z11 |\n| `flyTo` with reduced motion | Jumped (MapLibre owns the camera) |\n| Keyboard, attribution, axe | Same as MapLibre: named focusable canvas, arrows and +, attribution shown, 1 axe issue |\n| Bundle | 672.2 KB gz for MapLibre + deck.gl + supercluster, so deck.gl adds ~228 KB |\n\nFound in the benchmark:\n- **Interleaved mode crashes on MapLibre 6.** `@deck.gl/mapbox` 9.4.0 reads `map.transform`, which MapLibre 6 removed:\n  \"Cannot read properties of undefined (reading 'height')\" on every frame. Overlaid mode (`interleaved: false`) works,\n  but deck layers then sit above all basemap labels and use a second WebGL context. Until a fix ships, pin MapLibre 5\n  if you need `beforeId` layer slotting, or accept overlaid mode.\n- deck.gl transitions don't check `prefers-reduced-motion`. Turn `transitions` off yourself when it is set.\n\n## Weaknesses\n- No basemap, no clustering, no keyboard model of its own: it relies on MapLibre for all three.\n- Interleaved with MapLibre 6 is broken in 9.4.0 (above).\n- Canvas output; the accessible path is a synced list.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Layers need explicit colours and sizes; no basemap |\n| Interactivity | 4 | Picking, hover, transitions, controller; clustering needs supercluster |\n| Coverage | 5 | Scatter, icon, path, trips, hexagon, grid, heatmap, H3, 3D; ~1M points at 60 fps (docs) |\n| Accessibility | 3 | Inherits MapLibre's keyboard and camera; transitions ignore reduced motion; canvas only |\n| Performance | 5 | 0 ms long tasks for 5,000 live vehicles at 4× throttle, 12 dropped frames in 30 s |\n| React/Next fit | 4 | `useControl` + `MapboxOverlay` in react-maplibre, or `<DeckGL>`; client-only |\n| Bundle size | 3 | ~228 KB gz on top of MapLibre |\n| Licence & health | 4 | MIT; 9.4.0 released 5 Sep 2026; interleaved mode incompatible with MapLibre 6 |"
+  },
+  {
     "id": "sources/dockview",
     "kind": "source",
     "title": "Dockview (free core)",
@@ -1088,6 +1137,56 @@
       "source.md"
     ],
     "body": "## Verdict\n**The free docking engine to pick when keyboard access matters.** It's the only docking library here whose\nsplitters take focus, expose `separator` semantics and resize with the arrow keys. It also docks, splits and pops out\nas well as Dockview. It still falls short of the APG splitter (no Home/End, no Enter to collapse), its splitters share\none generic name, and moving a tab needs a drag.\n\n## Benchmark (same three-pane workspace as every other library, `benchpanels/`)\n**12/17 checks**, 1 axe violation, **53.7 KB gz** (49.9 KB JS + 3.8 KB CSS). Code: `benchpanels/libs/flexlayout-react.jsx`,\n19 lines.\n\nFound in the benchmark:\n- Keyboard: splitters are reached with Tab, have `role=\"separator\"`, `aria-valuenow/min/max` and `aria-valuetext`\n  (\"16%\"), and ArrowRight moved them **10 px**. Home, End and Enter did nothing. Every splitter is named just \"Resize\",\n  and there's no `aria-controls`.\n- Grab area **8 px** (−4 to +3), the visible 8 px splitter.\n- Docking: Terminal dropped on Inspector joined that tabset; dropped on the Editor's bottom edge it made a new tabset.\n  The built-in pop-out icon (`enablePopout` + `enablePopoutIcon`) opened a real window with the pane inside.\n- No double-click reset.\n- `model.toJson()` / `Model.fromJson` restored the layout on the first painted frame (CLS 0).\n- No built-in non-drag way to move a tab to another tabset (the context menu is yours to build with `onContextMenu`\n  and its exported `PopupMenu`).\n- axe: `color-contrast` on the inactive tab label in the light theme.\n- Drag with heavy panes: p95 frame 16.8 ms. Geometry is applied imperatively, so tab content doesn't re-render on resize.\n\n## Weaknesses\n- Sizes are weights, not pixels: a 240 px sidebar is \"weight 240 of 1440\".\n- 0.x versioning and a JSON model with actions (`Actions.moveNode`) rather than React-style props.\n- Fix the inactive-tab contrast and name each splitter yourself.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 4 | Light, dark, rounded and other themes; CSS variables |\n| Interactivity | 5 | Dock to centre and edge, pop out, maximise, borders, save/restore; no double-click reset |\n| Coverage | 4 | Docking, borders, pop-outs, tab groups; split panes through tabsets; no tiles |\n| Accessibility | 3 | Focusable separators with values and arrow keys; no Home/End/collapse; generic names; contrast failure; drag-only docking |\n| Performance | 4 | Restores on the first frame; 60 fps drag; client-only |\n| React/Next fit | 3 | React component over a JSON model and action API; client-only |\n| Bundle size | 3 | 53.7 KB gz |\n| Licence & health | 4 | MIT; Caplin; release 26 Sep 2026; ~80k weekly downloads; 0.x |"
+  },
+  {
+    "id": "sources/maplibre",
+    "kind": "source",
+    "title": "MapLibre GL JS",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "maps",
+      "webgl",
+      "open-source",
+      "vector-tiles",
+      "clustering",
+      "react"
+    ],
+    "source_url": "https://maplibre.org/maplibre-gl-js/docs/",
+    "source_site": "maplibre.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "6.15.0",
+    "licence": "BSD-3-Clause",
+    "s_look": 3,
+    "s_interact": 5,
+    "s_coverage": 4,
+    "s_a11y": 4,
+    "s_perf": 4,
+    "s_react": 4,
+    "s_bundle": 2,
+    "s_licence": 5,
+    "why_it_works": "The open WebGL vector map (the BSD fork of Mapbox GL) with GPU circle and symbol layers, built-in GeoJSON clustering with expansion zoom, a focusable named map surface with keyboard pan and zoom, and a fly-to that jumps under reduced motion without any setup.",
+    "use_when": "Default for any product map, such as fleet and asset tracking, store finders, delivery zones and ops dashboards, through `@vis.gl/react-maplibre`, with a self-hosted Protomaps or OpenFreeMap style.",
+    "avoid_when": "Heavy GIS work (projections, WMS/WMTS, editing formats; use OpenLayers), or more than ~100k moving points or aggregations (add deck.gl).",
+    "alternatives": [
+      "deck-gl",
+      "openlayers",
+      "leaflet"
+    ],
+    "has_example": false,
+    "score": 7.8,
+    "rating": 4,
+    "bench": null,
+    "path": "sources/maplibre",
+    "images": [
+      "sources/maplibre/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The default map renderer.** It passed every task in the benchmark (pick 2/2, cluster expand, keyboard pan and zoom,\nreduced-motion jump, attribution visible) with built-in features and was the only stack whose camera respected\nreduced motion with default options. It costs **444 KB gz**, including a 145 KB worker. Under 4× CPU throttle, 1 Hz\nupdates to 5,000 clustered vehicles cost ~32 ms of main thread per update, against ~0 ms for deck.gl.\n\n## Benchmark (same basemap, 5,000 vehicles and tasks as every other stack, `benchmap/`)\nCode: `benchmap/libs/maplibre.jsx` (react-maplibre `<Map>`, `<Source cluster>`, two circle layers). Software GPU\n(SwiftShader): timings are relative only.\n\n| Task | Result |\n|---|---|\n| First render | 530 ms to the first `idle` with vehicles drawn |\n| 30 s of 1 Hz updates (4× CPU throttle, z12) | p50/p95 frame 16.7/16.8 ms, 57 dropped frames, 954 ms of long tasks (React state → `setData`, clustering on) |\n| Click-pick at z13 and z16 | 2/2 correct (`interactiveLayerIds`) |\n| Cluster click | Built in: `getClusterExpansionZoom` + `easeTo`, z10 → z11 |\n| `flyTo` with reduced motion | **Jumped** in one frame (6 ms). Without reduced motion: 1.7 s animation |\n| Keyboard | First Tab lands on the canvas (`role=\"region\"`, `aria-label=\"Map\"`); arrows pan, + zooms |\n| Attribution | Shown by default at 1280 px (compact \"i\" button below 640 px) |\n| axe | 1: `link-in-text-block` on the \"MapLibre\" link in the attribution |\n| Bundle | 444.1 KB gz: 299.4 main thread + 144.7 worker (React and the harness subtracted); CSS 9.9 KB |\n\nFound in the benchmark:\n- **v6 has no default export.** `import maplibregl from 'maplibre-gl'` fails to build; use named imports or `import * as`.\n- **v6 is ES modules only and loads its worker as a module from next to the bundle.** It works with ESM bundlers.\n  Next.js needs `'use client'`, and older setups or IIFE bundles need `setWorkerUrl()`.\n- **Cluster count labels need a glyphs URL.** Text needs self-hosted font PBFs; the bench drew size-stepped circles only.\n- **deck.gl's interleaved mode crashes on v6** (see `deck-gl`). Check that before upgrading a deck.gl app.\n- For live data, `GeoJSONSource.updateData` (diffs) is cheaper than re-sending the whole collection, which is what the\n  bench did, through React state, as most apps do.\n\n## Weaknesses\n- No basemap of its own: pick a tile source (self-hosted PMTiles, OpenFreeMap, or a paid one with an SLA).\n- The map content is a canvas. Pair it with a synced list that carries every fact the map shows.\n- Biggest bundle of the plain renderers; lazy-load the map route.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Clean controls and attribution; no basemap until you choose a style |\n| Interactivity | 5 | Pan, zoom, rotate, pick, built-in clusters with expansion zoom, fly-to, `updateData` |\n| Coverage | 4 | Circles, symbols, lines, fills, heatmap, extrusions, terrain, globe; drawing needs terra-draw |\n| Accessibility | 4 | Named focusable surface, keyboard pan/zoom, reduced-motion jump by default, attribution visible; 1 axe issue |\n| Performance | 4 | Smooth frames; ~32 ms main thread per 5,000-vehicle update at 4× throttle (deck.gl ~0) |\n| React/Next fit | 4 | `@vis.gl/react-maplibre` 8.1.3 works on v6; v6 is ESM-only, client-only in Next |\n| Bundle size | 2 | 444.1 KB gz including the 144.7 KB worker |\n| Licence & health | 5 | BSD-3-Clause; 6.15.0 released 18 Oct 2026 |"
   },
   {
     "id": "sources/mui-x-data-grid",

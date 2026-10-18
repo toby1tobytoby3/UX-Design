@@ -89,7 +89,15 @@
     },
     "keyboard_passed": 4,
     "keyboard_total": 5,
-    "axe_violations": 0
+    "axe_violations": 0,
+    "render_ms": 988,
+    "sort_ms": 591,
+    "filter_ms": 589,
+    "scroll_p95_ms": 183,
+    "dom_rows": 33,
+    "native_edit": true,
+    "multi_sort": true,
+    "pinned_column": true
   },
   "mui-x-data-grid": {
     "kind": "data-table",
@@ -182,7 +190,15 @@
     },
     "keyboard_passed": 5,
     "keyboard_total": 5,
-    "axe_violations": 0
+    "axe_violations": 0,
+    "render_ms": 660,
+    "sort_ms": 481,
+    "filter_ms": 381,
+    "scroll_p95_ms": 100,
+    "dom_rows": 16,
+    "native_edit": true,
+    "multi_sort": false,
+    "pinned_column": false
   },
   "react-aria-table": {
     "kind": "data-table",
@@ -275,7 +291,15 @@
     },
     "keyboard_passed": 5,
     "keyboard_total": 5,
-    "axe_violations": 0
+    "axe_violations": 0,
+    "render_ms": 3220,
+    "sort_ms": 2917,
+    "filter_ms": 1762,
+    "scroll_p95_ms": 417,
+    "dom_rows": 19,
+    "native_edit": false,
+    "multi_sort": false,
+    "pinned_column": false
   },
   "react-data-grid": {
     "kind": "data-table",
@@ -367,7 +391,15 @@
     },
     "keyboard_passed": 4,
     "keyboard_total": 5,
-    "axe_violations": 0
+    "axe_violations": 0,
+    "render_ms": 194,
+    "sort_ms": 99,
+    "filter_ms": 26,
+    "scroll_p95_ms": 83,
+    "dom_rows": 21,
+    "native_edit": true,
+    "multi_sort": true,
+    "pinned_column": true
   },
   "tanstack-table": {
     "kind": "data-table",
@@ -458,7 +490,15 @@
     },
     "keyboard_passed": 1,
     "keyboard_total": 5,
-    "axe_violations": 0
+    "axe_violations": 0,
+    "render_ms": 292,
+    "sort_ms": 234,
+    "filter_ms": 67,
+    "scroll_p95_ms": 67,
+    "dom_rows": 30,
+    "native_edit": false,
+    "multi_sort": true,
+    "pinned_column": true
   },
   "vtable": {
     "kind": "data-table",
@@ -557,6 +597,14 @@
     },
     "keyboard_passed": 1,
     "keyboard_total": 5,
-    "axe_violations": 4
+    "axe_violations": 4,
+    "render_ms": 2085,
+    "sort_ms": 639,
+    "filter_ms": 326,
+    "scroll_p95_ms": 217,
+    "dom_rows": 0,
+    "native_edit": true,
+    "multi_sort": true,
+    "pinned_column": true
   }
 }

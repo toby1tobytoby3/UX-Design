@@ -112,6 +112,18 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **React Spring**: Physics-driven values in an existing React Spring codebase, or data visualisations interpolating many values with springs.
 - **anime.js**: Framework-agnostic or vanilla pages that want GSAP-style timelines under MIT, or small interactive pieces outside React.
 
+## map
+
+| Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| [deck.gl](sources/deck-gl/source.md) | **7.8** | 3 | 4 | 5 | 3 | 5 | 4 | 3 | 4 | – | – | – | MIT |
+| [MapLibre GL JS](sources/maplibre/source.md) | **7.8** | 3 | 5 | 4 | 4 | 4 | 4 | 2 | 5 | – | – | – | BSD-3-Clause |
+
+**Pick it for**
+
+- **deck.gl**: Large or fast-changing data on a map, such as thousands of live vehicles, trails and replays, or hexbin and heatmap aggregation, layered over MapLibre with `MapboxOverlay`.
+- **MapLibre GL JS**: Default for any product map, such as fleet and asset tracking, store finders, delivery zones and ops dashboards, through `@vis.gl/react-maplibre`, with a self-hosted Protomaps or OpenFreeMap style.
+
 ## chart
 
 | Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |

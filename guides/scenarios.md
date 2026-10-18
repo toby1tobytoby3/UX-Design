@@ -28,8 +28,8 @@ allowed, Base UI flavour, see `our-design/README.md`).
   rearrange their own dashboard.
 - **Must get right:** one answer line, then KPI hierarchy; a shared time range; saved filters; partial-failure states per tile.
 - **Test:** realistic row counts and cross-filtering; input latency; fixed headers while scrolling.
-- **In the library:** `guides/charts.md`, `dashboard/stripe-home-kpi-overview` (needs capture), `chart/echarts-datazoom-time-series`.
-- **Thin:** tables (B6, P1) and dashboard layout (C2, P1): next to be built. Use the catalogue shortlist meanwhile.
+- **In the library:** `guides/charts.md`, `guides/tables.md` (TanStack 7.8, react-data-grid 8.3 for editable grids), `guides/shell-panels.md` §3 (dashboards), `dashboard/stripe-home-kpi-overview` (needs capture), `dashboard/grafana-per-panel-failure-time-range`, `chart/echarts-datazoom-time-series`, `data-table/*`.
+- **Thin:** logged-in dashboard screens (Stripe, Datadog, Amplitude) need user screenshots.
 
 ## 3. Real-time trading terminal (Meridian Pro)
 - **Start with:** Lightweight Charts (6.5) for price charts (uPlot 5.5 or ECharts canvas for telemetry-style series);

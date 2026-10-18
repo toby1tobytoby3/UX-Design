@@ -15,15 +15,28 @@ table's toolbar.
 | Edit cells, select ranges, copy and paste, or each row holds several widgets | **A grid** (`role="grid"`: one tab stop, arrow keys between cells) | APG: grids are for editable or interactive tabular data; saves dozens of tab stops |
 
 ## 2. Library
-TABLE_STACK
+Measured in `benchtable/` (10,000 rows, 4× CPU throttle, medians of 3; compare the numbers with each other, not with
+real devices). Scores from `SOURCES.md`.
+
+| Job | Use | Score | What the bench showed | Watch for |
+|---|---|---|---|---|
+| **Record table** (read, sort, select, paginate) | **TanStack Table** + TanStack Virtual, rendered as a semantic `<table>` (shadcn `Table` markup) | 7.8 | 30 KB; sort 234 ms, filter 67 ms at 10k rows; 30 DOM rows virtualised | Headless: `aria-sort`, `aria-rowcount`, the batch bar, editing and any grid keyboard model are ours to write |
+| **Editable grid**, free and small | **react-data-grid** | 8.3 | 17 KB; fastest (sort 99 ms, filter 26 ms); arrow keys, Enter/Esc editing; the only kit with keyboard column resize (Ctrl+Arrow on a header) | No validation (it stored "abc" in a number column): validate in `onRowsChange`. Multi-sort is Ctrl/⌘+click and drops `aria-sort` from every header once two columns are sorted: set it yourself |
+| **Full-featured grid** (column menus, filters, pinning, validation built in) | **AG Grid Community** | 7.5 | Everything native; invalid edits blocked with `aria-invalid` and an announcement; **multi-column sort is free** (Shift+click with only Community modules: no watermark, no warning) | 322 KB. The invalid message shows only on hover: add visible text. Range selection, grouping, Excel export are Enterprise (paid) |
+| **Accessible table with selection** under ~1,000 rows | **React Aria Table** | 6.5 | 5/5 keyboard, 0 axe; correct row/cell focus and selection announcements | Slowest at 10k rows (sort 2.9 s): it rebuilds every row. No pinning, filtering or editing |
+| Already on MUI | **MUI X DataGrid** (MIT) | 6.8 | 5/5 keyboard, 0 axe; the only kit with a visible "rows selected" count | **The MIT edition caps pages at 100 rows** (throws above it): no scrolling 10k rows, single-column sort, single filter, no pinning or reorder (Pro) |
+| Watch only | **VTable** (canvas) | 6.3 | Fast at very large data, rich features | **No grid semantics**: no roles, an unlabelled hidden input (4 axe violations), arrow keys only after a mouse click. Not for anything that must be accessible |
+
+Every kit missed something: only react-data-grid resized columns by keyboard, and only MUI showed a selection count. Plan
+to build those two yourself whichever you pick.
 
 **Check the edition boundary before you commit** (checked 18 Oct 2026; recheck when upgrading):
 
 | Feature people expect | TanStack Table | AG Grid Community | MUI X Community |
 |---|---|---|---|
 | Sort, column filters, pagination, selection | ✓ | ✓ | ✓ (single-column sort) |
-| Multi-column sort | ✓ | see bench note | Pro (paid) |
-| Virtualised rows beyond 100 | ✓ (with TanStack Virtual) | ✓ | **capped at 100** |
+| Multi-column sort | ✓ | ✓ (measured: Shift+click, Community modules only) | Pro (paid) |
+| Virtualised rows beyond 100 | ✓ (with TanStack Virtual) | ✓ | **capped at 100 per page** (measured) |
 | Pinned columns, column reorder | ✓ | ✓ | Pro (paid) |
 | Row grouping, aggregation, tree data | ✓ | **Enterprise (paid)** | Pro/Premium (paid) |
 | Cell range selection, clipboard copy/paste | ✓ (v9 cell selection) | **Enterprise** | Premium |
