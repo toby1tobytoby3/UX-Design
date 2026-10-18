@@ -18,7 +18,7 @@ s_a11y: 3
 s_perf: 3
 s_react: 3
 s_bundle: 4
-s_licence: 5
+s_licence: 2
 why_it_works: A concise grammar of graphics from D3's creators: a few lines produce well-typeset, correctly scaled charts with sensible axes and tips, and it renders plain SVG that can be generated on the server.
 use_when: Report, documentation and analysis charts; server-rendered or static charts; quick exploration.
 avoid_when: You need pies or donuts (no mark by design), zoom, or rich dashboard interaction.
@@ -29,6 +29,8 @@ has_example: false
 ## Verdict
 **The pick for static, report-style and server-rendered charts.** It has the best defaults-per-line of code
 in the benchmark, with excellent axes and typography. It's deliberately not an interactive dashboard library.
+
+**Maintenance check (18 Oct 2026):** last npm release 0.6.17 on 2025-02-14, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.
 
 ## Benchmark
 **3 of 4 charts.** Plot has no pie or donut mark by design. **93.3 KB gz** (includes the D3 modules it uses).

@@ -44,7 +44,7 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 | [model-viewer](sources/model-viewer/source.md) | **7.5** | 5 | 4 | 2 | 4 | 4 | 3 | 3 | 5 | 3/4 | 291.2 | webgl | Apache-2.0 |
 | [three.js](sources/threejs/source.md) | **7.3** | 4 | 4 | 5 | 1 | 4 | 2 | 4 | 5 | 4/4 | 159.9 | webgl | MIT |
 | [Babylon.js](sources/babylonjs/source.md) | **7** | 3 | 5 | 5 | 3 | 4 | 2 | 1 | 5 | 4/4 | 846 | webgl | Apache-2.0 |
-| [OGL](sources/ogl/source.md) | **5.8** | 1 | 3 | 3 | 1 | 5 | 2 | 5 | 3 | 4/4 | 25.4 | webgl | Unlicense |
+| [OGL](sources/ogl/source.md) | **5.5** | 1 | 3 | 3 | 1 | 5 | 2 | 5 | 2 | 4/4 | 25.4 | webgl | Unlicense |
 
 **Pick it for**
 
@@ -81,11 +81,11 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 | [Apache ECharts](sources/echarts/source.md) | **7.8** | 3 | 5 | 5 | 3 | 5 | 3 | 2 | 5 | 4/4 | 205.1 | svg | Apache-2.0 |
 | [Recharts](sources/recharts/source.md) | **7.5** | 4 | 4 | 3 | 4 | 2 | 5 | 3 | 5 | 4/4 | 125.2 | svg | MIT |
 | [visx](sources/visx/source.md) | **7** | 2 | 3 | 4 | 2 | 3 | 5 | 5 | 4 | 4/4 | 38.5 | svg | MIT |
-| [Observable Plot](sources/observable-plot/source.md) | **6.8** | 4 | 2 | 3 | 3 | 3 | 3 | 4 | 5 | 3/4 | 93.3 | svg | ISC |
 | [AG Charts Community](sources/ag-charts/source.md) | **6.5** | 4 | 3 | 3 | 4 | 4 | 4 | 1 | 3 | 4/4 | 412.8 | canvas | MIT (community edition) |
-| [D3](sources/d3/source.md) | **6.5** | 1 | 4 | 5 | 2 | 3 | 2 | 5 | 4 | 4/4 | 31.9 | svg | ISC |
 | [TradingView Lightweight Charts](sources/lightweight-charts/source.md) | **6.5** | 4 | 5 | 1 | 1 | 5 | 2 | 4 | 4 | 1/4 | 54.3 | canvas | Apache-2.0 (attribution required) |
-| [uPlot](sources/uplot/source.md) | **6** | 2 | 4 | 1 | 1 | 5 | 2 | 5 | 4 | 2/4 | 24.4 | canvas | MIT |
+| [D3](sources/d3/source.md) | **6** | 1 | 4 | 5 | 2 | 3 | 2 | 5 | 2 | 4/4 | 31.9 | svg | ISC |
+| [Observable Plot](sources/observable-plot/source.md) | **6** | 4 | 2 | 3 | 3 | 3 | 3 | 4 | 2 | 3/4 | 93.3 | svg | ISC |
+| [uPlot](sources/uplot/source.md) | **5.5** | 2 | 4 | 1 | 1 | 5 | 2 | 5 | 2 | 2/4 | 24.4 | canvas | MIT |
 | [Tremor](sources/tremor/source.md) | **5.3** | 4 | 3 | 2 | 3 | 2 | 3 | 2 | 2 | 4/4 | 237.2 | svg | Apache-2.0 |
 
 **Pick it for**
@@ -93,10 +93,10 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **Apache ECharts**: Data-heavy dashboards that need zoom, drill-down, live updates, large datasets or specialist charts (sankey, heatmap, candlestick, treemap, geo).
 - **Recharts**: Everyday product and dashboard charts in our React/Next app (lines, bars, areas, donuts) with up to a few thousand points.
 - **visx**: Signature or bespoke charts where design control matters more than speed of build, inside the React app.
-- **Observable Plot**: Report, documentation and analysis charts; server-rendered or static charts; quick exploration.
 - **AG Charts Community**: Teams already using AG Grid, or business dashboards where built-in keyboard accessibility matters and bundle size does not.
-- **D3**: Editorial, one-off or highly custom visualisations; or use its maths modules (scales, shapes, formats) under React rendering.
 - **TradingView Lightweight Charts**: Prices, balances, portfolio or any financial time series where pan/zoom feel matters.
+- **D3**: Editorial, one-off or highly custom visualisations; or use its maths modules (scales, shapes, formats) under React rendering.
+- **Observable Plot**: Report, documentation and analysis charts; server-rendered or static charts; quick exploration.
 - **uPlot**: Monitoring, metrics and real-time or very long time series where speed and size beat everything else.
 - **Tremor**: Reference for the Tailwind dashboard look. To build that look, use Recharts with our tokens rather than the npm package.
 

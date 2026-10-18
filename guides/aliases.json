@@ -1,83 +1,957 @@
 {
   "_about": "Hand-maintained search vocabulary for scripts/find.mjs (used by ux-find). Each concept maps the words people use to taxonomy patterns, a guide and a category id from research/categories.md (status and priority are read from there). terms are whole words or phrases; weak_terms only count when no ordinary term from any concept matched. npm run catalog checks that patterns and guides exist.",
   "concepts": {
-    "A1": { "patterns": ["design-tokens"], "guide": "guides/foundations.md",
-      "terms": ["colour", "color", "colours", "colors", "palette", "token", "tokens", "design tokens", "theme", "theming", "dark mode", "light mode", "dark theme", "oklch", "contrast", "brand colour", "brand color", "accent", "semantic colours"] },
-    "A2": { "patterns": [], "guide": null, "terms": ["typography", "type scale", "font", "fonts", "typeface", "variable font", "tabular numerals"] },
-    "A3": { "patterns": [], "guide": null, "terms": ["layout", "spacing", "density", "dense", "compact mode", "grid system", "whitespace"] },
-    "A4": { "patterns": ["design-tokens"], "guide": "guides/foundations.md",
-      "terms": ["material", "materials", "elevation", "shadow", "shadows", "depth", "glass", "glassmorphism", "liquid glass", "translucent", "blur", "frosted", "radius", "radii", "rounded corners", "surface", "surfaces", "scrim"] },
-    "A5": { "patterns": ["motion"], "guide": "guides/motion.md",
-      "terms": ["animation", "animations", "animate", "animated", "motion", "transition", "transitions", "spring", "springs", "easing", "view transition", "view transitions", "shared element", "page transition", "framer motion", "gsap", "parallax", "scroll animation", "reduced motion", "smooth"] },
-    "A6": { "patterns": ["feedback"], "guide": "guides/motion.md",
-      "terms": ["toast", "toasts", "snackbar", "notification toast", "skeleton", "skeletons", "spinner", "loading state", "loading states", "loading skeleton", "loading indicator", "optimistic", "optimistic ui", "undo", "micro-interaction", "micro-interactions", "microinteraction", "hover state", "button states", "state feedback", "success state", "error state", "number animation", "counter"] },
-    "A7": { "patterns": ["accessibility", "ui-primitives"], "guide": "guides/accessibility.md",
-      "terms": ["accessibility", "accessible", "a11y", "wcag", "screen reader", "keyboard", "keyboard navigation", "focus", "focus ring", "focus state", "aria", "headless", "component library", "primitives", "combobox", "date picker", "datepicker", "dropdown menu", "tabs", "forced colors", "high contrast", "eaa"] },
-    "A8": { "patterns": [], "guide": null, "terms": ["performance", "virtualisation", "virtualization", "virtualised", "inp", "jank", "60fps", "60 fps", "frame rate"] },
-    "A9": { "patterns": [], "guide": null, "terms": ["microcopy", "copywriting", "ux writing", "error message", "error messages", "tone of voice"] },
-    "A10": { "patterns": [], "guide": null, "terms": ["icon", "icons", "illustration", "illustrations", "imagery", "avatar", "avatars"] },
-    "B1": { "patterns": ["navigation"], "guide": null,
-      "terms": ["app shell", "sidebar", "side nav", "sidenav", "workspace", "workspaces", "breadcrumb", "breadcrumbs", "navigation", "nav", "top bar", "header"] },
-    "B2": { "patterns": ["command-palette"], "guide": null,
-      "terms": ["command palette", "cmd k", "cmdk", "command menu", "launcher", "keyboard shortcuts", "shortcuts", "hotkeys", "quick actions"] },
-    "B3": { "patterns": [], "guide": null,
-      "terms": ["panels", "panel", "docking", "dockable", "dock", "split view", "split pane", "split panes", "resizable", "pane", "panes", "multi-pane", "tiling", "pop-out", "workspace layout"] },
-    "B4": { "patterns": ["modal"], "guide": "guides/accessibility.md",
-      "terms": ["modal", "modals", "dialog", "dialogs", "sheet", "drawer", "popover", "popovers", "tooltip", "tooltips", "overlay", "overlays", "hover card"] },
-    "B5": { "patterns": ["form", "settings"], "guide": null,
-      "terms": ["form", "forms", "settings", "settings page", "preferences", "account settings", "input", "inputs", "validation", "inline editing", "inline edit", "field", "fields", "order entry", "wizard", "multi-step form"] },
-    "B6": { "patterns": ["data-table"], "guide": null,
-      "terms": ["table", "tables", "data table", "data grid", "datagrid", "spreadsheet", "grid view", "rows", "columns", "sortable", "bulk actions"] },
-    "B7": { "patterns": ["search", "filters", "content-grid"], "guide": null,
-      "terms": ["search", "search bar", "filter", "filters", "facets", "faceted", "chips", "saved views", "query builder", "browse", "gallery", "card grid", "thumbnail grid", "grid of cards", "collection", "results grid", "search results"] },
-    "B8": { "patterns": ["empty-state", "feedback"], "guide": null,
-      "terms": ["empty state", "empty states", "zero state", "first use", "error page", "offline", "404"] },
-    "B9": { "patterns": ["onboarding"], "guide": null,
-      "terms": ["onboarding", "first run", "first-run", "setup flow", "welcome flow", "checklist", "sign-up flow"] },
-    "B10": { "patterns": [], "guide": null,
-      "terms": ["notifications", "notification centre", "notification center", "inbox", "activity feed", "activity", "alerts", "digest"] },
-    "C1": { "patterns": ["chart"], "guide": "guides/charts.md",
-      "terms": ["chart", "charts", "charting", "graph chart", "line chart", "bar chart", "pie", "donut", "sparkline", "sparklines", "time series", "candlestick", "sankey", "heatmap", "treemap", "histogram", "scatter", "data viz", "data visualisation", "data visualization", "plot", "recharts", "echarts", "d3", "visx"] },
-    "C2": { "patterns": ["dashboard", "chart"], "guide": "guides/charts.md",
-      "terms": ["dashboard", "dashboards", "analytics", "kpi", "kpis", "metrics", "reporting", "bento", "drill-down", "drill down", "overview screen"] },
-    "C3": { "patterns": [], "guide": null,
-      "terms": ["map", "maps", "mapping", "geospatial", "gis", "geo", "geofence", "geofences", "location", "locations", "routes", "routing", "fleet", "vehicles", "tracking", "maplibre", "mapbox", "deck.gl", "leaflet"] },
-    "C4": { "patterns": [], "guide": null,
-      "terms": ["network graph", "graph visualisation", "graph visualization", "node graph", "nodes", "edges", "force layout", "force-directed", "relationship graph", "link analysis", "knowledge graph", "investigation graph", "entity graph"] },
-    "C5": { "patterns": [], "guide": null,
-      "terms": ["timeline", "timelines", "gantt", "calendar", "calendars", "scheduling", "schedule", "roadmap", "booking"] },
-    "C6": { "patterns": [], "guide": null,
-      "terms": ["real-time", "realtime", "live data", "streaming data", "ticker", "tick", "ticks", "order book", "live updates", "websocket", "price feed"] },
-    "D1": { "patterns": ["3d"], "guide": "guides/3d.md",
-      "terms": ["3d", "webgl", "three.js", "threejs", "react three fiber", "r3f", "product viewer", "model viewer", "gltf", "shader", "shaders", "webgpu", "ar"] },
-    "D2": { "patterns": [], "guide": null,
-      "terms": ["whiteboard", "whiteboards", "infinite canvas", "canvas", "diagram", "diagrams", "diagramming", "flowchart", "sticky notes", "excalidraw", "tldraw", "figjam", "miro"] },
-    "D3": { "patterns": [], "guide": null,
-      "terms": ["multiplayer", "collaboration", "collaborative", "co-editing", "presence", "live cursors", "cursors", "comments", "crdt", "yjs", "real-time collaboration", "local-first"] },
-    "D4": { "patterns": [], "guide": null,
-      "terms": ["video editor", "video editing", "audio editing", "waveform", "waveforms", "timeline editor", "media editing", "trim", "keyframes", "transcript editing", "webcodecs"] },
-    "D5": { "patterns": [], "guide": null,
-      "terms": ["rich text", "text editor", "document editor", "wysiwyg", "editor", "block editor", "markdown editor", "tiptap", "lexical", "prosemirror"] },
-    "D6": { "patterns": ["product-detail", "checkout", "3d"], "guide": "guides/3d.md",
-      "terms": ["configurator", "configurators", "product page", "product detail", "variant picker", "checkout", "cart", "ecommerce", "e-commerce", "shop"] },
-    "E1": { "patterns": ["ai-chat"], "guide": "guides/agentic-ui.md",
-      "terms": ["chat", "chatbot", "chat ui", "assistant", "ai assistant", "copilot", "conversation", "streaming", "stream", "prompt", "composer", "llm", "branching", "regenerate"],
-      "weak_terms": ["ai", "gpt", "claude"] },
-    "E2": { "patterns": ["agent-activity"], "guide": "guides/agentic-ui.md",
-      "terms": ["agent", "agents", "agentic", "ai agent", "ai agents", "tool calls", "tool call", "task list", "background agent", "subagent", "subagents", "autonomous", "workflow automation", "agent plan", "action plan", "plan mode", "task card", "task cards"] },
-    "E3": { "patterns": ["ai-review"], "guide": "guides/agentic-ui.md",
-      "terms": ["approval", "approvals", "approve", "human in the loop", "human-in-the-loop", "permission", "permissions", "permission mode", "diff", "diffs", "code review", "review changes", "accept reject", "checkpoint", "checkpoints", "rollback", "guardrails"] },
-    "E4": { "patterns": ["ai-provenance"], "guide": "guides/agentic-ui.md",
-      "terms": ["citation", "citations", "sources", "provenance", "ai label", "ai disclosure", "disclosure", "trust", "confidence", "hallucination", "audit trail", "audit log", "explainability", "ai act"] },
-    "E5": { "patterns": [], "guide": "guides/agentic-ui.md",
-      "terms": ["generative ui", "gen ui", "artifacts", "artifact", "canvas mode", "ai-generated components"] },
-    "E6": { "patterns": ["ai-assist"], "guide": "guides/agentic-ui.md",
-      "terms": ["inline ai", "ghost text", "autocomplete", "autocompletion", "ai autocomplete", "rewrite", "rewrite in place", "ai rewrite", "help me write", "ai fill", "smart compose", "suggested replies", "ai summary", "summarise", "summarize", "edit with ai", "writing assistant"] },
-    "F1": { "patterns": ["hero", "feature-grid", "social-proof", "pricing-table", "cta-section", "faq", "footer"], "guide": null,
-      "terms": ["landing page", "landing", "homepage", "home page", "marketing site", "marketing page", "hero", "pricing", "pricing page", "testimonials", "logo wall", "social proof", "features section", "cta", "faq", "footer"] },
-    "F2": { "patterns": ["3d", "motion"], "guide": "guides/3d.md",
-      "terms": ["scrollytelling", "scroll story", "storytelling", "scroll-driven", "pinned section", "product story", "launch page", "scroll reveal", "reveal on scroll", "scroll reveals"] },
-    "F3": { "patterns": ["navigation", "mega-menu"], "guide": null,
-      "terms": ["mega menu", "megamenu", "site navigation", "sticky nav", "mobile menu"] }
+    "A1": {
+      "patterns": [
+        "design-tokens"
+      ],
+      "guide": "guides/foundations.md",
+      "terms": [
+        "colour",
+        "color",
+        "colours",
+        "colors",
+        "palette",
+        "token",
+        "tokens",
+        "design tokens",
+        "theme",
+        "theming",
+        "dark mode",
+        "light mode",
+        "dark theme",
+        "oklch",
+        "contrast",
+        "brand colour",
+        "brand color",
+        "accent",
+        "semantic colours",
+        "tailwind",
+        "tailwind css",
+        "style dictionary",
+        "open props",
+        "radix colors",
+        "shadcn",
+        "shadcn/ui"
+      ]
+    },
+    "A2": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "typography",
+        "type scale",
+        "font",
+        "fonts",
+        "typeface",
+        "variable font",
+        "tabular numerals",
+        "fontsource"
+      ]
+    },
+    "A3": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "layout",
+        "spacing",
+        "density",
+        "dense",
+        "compact mode",
+        "grid system",
+        "whitespace"
+      ]
+    },
+    "A4": {
+      "patterns": [
+        "design-tokens"
+      ],
+      "guide": "guides/foundations.md",
+      "terms": [
+        "material",
+        "materials",
+        "elevation",
+        "shadow",
+        "shadows",
+        "depth",
+        "glass",
+        "glassmorphism",
+        "liquid glass",
+        "translucent",
+        "blur",
+        "frosted",
+        "radius",
+        "radii",
+        "rounded corners",
+        "surface",
+        "surfaces",
+        "scrim"
+      ]
+    },
+    "A5": {
+      "patterns": [
+        "motion"
+      ],
+      "guide": "guides/motion.md",
+      "terms": [
+        "animation",
+        "animations",
+        "animate",
+        "animated",
+        "motion",
+        "transition",
+        "transitions",
+        "spring",
+        "springs",
+        "easing",
+        "view transition",
+        "view transitions",
+        "shared element",
+        "page transition",
+        "framer motion",
+        "gsap",
+        "parallax",
+        "scroll animation",
+        "reduced motion",
+        "smooth",
+        "anime.js",
+        "animejs",
+        "lenis",
+        "rive",
+        "react spring",
+        "auto-animate"
+      ]
+    },
+    "A6": {
+      "patterns": [
+        "feedback"
+      ],
+      "guide": "guides/motion.md",
+      "terms": [
+        "toast",
+        "toasts",
+        "snackbar",
+        "notification toast",
+        "skeleton",
+        "skeletons",
+        "spinner",
+        "loading state",
+        "loading states",
+        "loading skeleton",
+        "loading indicator",
+        "optimistic",
+        "optimistic ui",
+        "undo",
+        "micro-interaction",
+        "micro-interactions",
+        "microinteraction",
+        "hover state",
+        "button states",
+        "state feedback",
+        "success state",
+        "error state",
+        "number animation",
+        "counter",
+        "sonner",
+        "numberflow",
+        "number flow",
+        "tanstack query",
+        "react query"
+      ]
+    },
+    "A7": {
+      "patterns": [
+        "accessibility",
+        "ui-primitives"
+      ],
+      "guide": "guides/accessibility.md",
+      "terms": [
+        "accessibility",
+        "accessible",
+        "a11y",
+        "wcag",
+        "screen reader",
+        "keyboard",
+        "keyboard navigation",
+        "focus",
+        "focus ring",
+        "focus state",
+        "aria",
+        "headless",
+        "component library",
+        "primitives",
+        "combobox",
+        "date picker",
+        "datepicker",
+        "dropdown menu",
+        "tabs",
+        "forced colors",
+        "high contrast",
+        "eaa",
+        "base ui",
+        "react aria",
+        "radix",
+        "radix primitives",
+        "ark ui",
+        "mantine",
+        "ariakit",
+        "headless ui",
+        "axe",
+        "axe-core"
+      ]
+    },
+    "A8": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "performance",
+        "virtualisation",
+        "virtualization",
+        "virtualised",
+        "inp",
+        "jank",
+        "60fps",
+        "60 fps",
+        "frame rate",
+        "tanstack virtual"
+      ]
+    },
+    "A9": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "microcopy",
+        "copywriting",
+        "ux writing",
+        "error message",
+        "error messages",
+        "tone of voice"
+      ]
+    },
+    "A10": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "icon",
+        "icons",
+        "illustration",
+        "illustrations",
+        "imagery",
+        "avatar",
+        "avatars",
+        "lucide"
+      ]
+    },
+    "B1": {
+      "patterns": [
+        "navigation"
+      ],
+      "guide": null,
+      "terms": [
+        "app shell",
+        "sidebar",
+        "side nav",
+        "sidenav",
+        "workspace",
+        "workspaces",
+        "breadcrumb",
+        "breadcrumbs",
+        "navigation",
+        "nav",
+        "top bar",
+        "header"
+      ]
+    },
+    "B2": {
+      "patterns": [
+        "command-palette"
+      ],
+      "guide": null,
+      "terms": [
+        "command palette",
+        "cmd k",
+        "cmdk",
+        "command menu",
+        "launcher",
+        "keyboard shortcuts",
+        "shortcuts",
+        "hotkeys",
+        "quick actions",
+        "spotlight",
+        "mantine spotlight"
+      ]
+    },
+    "B3": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "panels",
+        "panel",
+        "docking",
+        "dockable",
+        "dock",
+        "split view",
+        "split pane",
+        "split panes",
+        "resizable",
+        "pane",
+        "panes",
+        "multi-pane",
+        "tiling",
+        "pop-out",
+        "workspace layout",
+        "dockview",
+        "react-resizable-panels",
+        "resizable panels",
+        "react grid layout",
+        "react-grid-layout",
+        "docked",
+        "dock panels",
+        "workbench"
+      ]
+    },
+    "B4": {
+      "patterns": [
+        "modal"
+      ],
+      "guide": "guides/accessibility.md",
+      "terms": [
+        "modal",
+        "modals",
+        "dialog",
+        "dialogs",
+        "sheet",
+        "drawer",
+        "popover",
+        "popovers",
+        "tooltip",
+        "tooltips",
+        "overlay",
+        "overlays",
+        "hover card"
+      ]
+    },
+    "B5": {
+      "patterns": [
+        "form",
+        "settings"
+      ],
+      "guide": null,
+      "terms": [
+        "form",
+        "forms",
+        "settings",
+        "settings page",
+        "preferences",
+        "account settings",
+        "input",
+        "inputs",
+        "validation",
+        "inline editing",
+        "inline edit",
+        "field",
+        "fields",
+        "order entry",
+        "wizard",
+        "multi-step form",
+        "react hook form",
+        "react-hook-form"
+      ]
+    },
+    "B6": {
+      "patterns": [
+        "data-table"
+      ],
+      "guide": null,
+      "terms": [
+        "table",
+        "tables",
+        "data table",
+        "data grid",
+        "datagrid",
+        "spreadsheet",
+        "grid view",
+        "rows",
+        "columns",
+        "sortable",
+        "bulk actions",
+        "tanstack table",
+        "ag grid",
+        "ag-grid",
+        "vtable",
+        "visactor"
+      ]
+    },
+    "B7": {
+      "patterns": [
+        "search",
+        "filters",
+        "content-grid"
+      ],
+      "guide": null,
+      "terms": [
+        "search",
+        "search bar",
+        "filter",
+        "filters",
+        "facets",
+        "faceted",
+        "chips",
+        "saved views",
+        "query builder",
+        "browse",
+        "gallery",
+        "card grid",
+        "thumbnail grid",
+        "grid of cards",
+        "collection",
+        "results grid",
+        "search results",
+        "nuqs",
+        "url state",
+        "react query builder",
+        "react-querybuilder"
+      ]
+    },
+    "B8": {
+      "patterns": [
+        "empty-state",
+        "feedback"
+      ],
+      "guide": null,
+      "terms": [
+        "empty state",
+        "empty states",
+        "zero state",
+        "first use",
+        "error page",
+        "offline",
+        "404"
+      ]
+    },
+    "B9": {
+      "patterns": [
+        "onboarding"
+      ],
+      "guide": null,
+      "terms": [
+        "onboarding",
+        "first run",
+        "first-run",
+        "setup flow",
+        "welcome flow",
+        "checklist",
+        "sign-up flow",
+        "driver.js",
+        "product tour",
+        "tour"
+      ]
+    },
+    "B10": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "notifications",
+        "notification centre",
+        "notification center",
+        "inbox",
+        "activity feed",
+        "activity",
+        "alerts",
+        "digest",
+        "novu"
+      ]
+    },
+    "C1": {
+      "patterns": [
+        "chart"
+      ],
+      "guide": "guides/charts.md",
+      "terms": [
+        "chart",
+        "charts",
+        "charting",
+        "graph chart",
+        "line chart",
+        "bar chart",
+        "pie",
+        "donut",
+        "sparkline",
+        "sparklines",
+        "time series",
+        "candlestick",
+        "sankey",
+        "heatmap",
+        "treemap",
+        "histogram",
+        "scatter",
+        "data viz",
+        "data visualisation",
+        "data visualization",
+        "plot",
+        "recharts",
+        "echarts",
+        "d3",
+        "visx",
+        "lightweight charts",
+        "uplot",
+        "observable plot"
+      ]
+    },
+    "C2": {
+      "patterns": [
+        "dashboard",
+        "chart"
+      ],
+      "guide": "guides/charts.md",
+      "terms": [
+        "dashboard",
+        "dashboards",
+        "analytics",
+        "kpi",
+        "kpis",
+        "metrics",
+        "reporting",
+        "bento",
+        "drill-down",
+        "drill down",
+        "overview screen"
+      ]
+    },
+    "C3": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "map",
+        "maps",
+        "mapping",
+        "geospatial",
+        "gis",
+        "geo",
+        "geofence",
+        "geofences",
+        "location",
+        "locations",
+        "routes",
+        "routing",
+        "fleet",
+        "vehicles",
+        "tracking",
+        "maplibre",
+        "mapbox",
+        "deck.gl",
+        "leaflet",
+        "kepler.gl",
+        "kepler"
+      ]
+    },
+    "C4": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "network graph",
+        "graph visualisation",
+        "graph visualization",
+        "node graph",
+        "nodes",
+        "edges",
+        "force layout",
+        "force-directed",
+        "relationship graph",
+        "link analysis",
+        "knowledge graph",
+        "investigation graph",
+        "entity graph",
+        "sigma",
+        "sigma.js",
+        "graphology",
+        "react flow",
+        "xyflow",
+        "g6",
+        "antv g6",
+        "cytoscape"
+      ]
+    },
+    "C5": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "timeline",
+        "timelines",
+        "gantt",
+        "calendar",
+        "calendars",
+        "scheduling",
+        "schedule",
+        "roadmap",
+        "booking",
+        "fullcalendar",
+        "schedule-x",
+        "schedule x"
+      ]
+    },
+    "C6": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "real-time",
+        "realtime",
+        "live data",
+        "streaming data",
+        "ticker",
+        "tick",
+        "ticks",
+        "order book",
+        "live updates",
+        "websocket",
+        "price feed"
+      ]
+    },
+    "D1": {
+      "patterns": [
+        "3d"
+      ],
+      "guide": "guides/3d.md",
+      "terms": [
+        "3d",
+        "webgl",
+        "three.js",
+        "threejs",
+        "react three fiber",
+        "r3f",
+        "product viewer",
+        "model viewer",
+        "gltf",
+        "shader",
+        "shaders",
+        "webgpu",
+        "ar",
+        "model-viewer",
+        "babylon",
+        "babylon.js",
+        "ogl"
+      ]
+    },
+    "D2": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "whiteboard",
+        "whiteboards",
+        "infinite canvas",
+        "canvas",
+        "diagram",
+        "diagrams",
+        "diagramming",
+        "flowchart",
+        "sticky notes",
+        "excalidraw",
+        "tldraw",
+        "figjam",
+        "miro",
+        "konva",
+        "pixijs",
+        "pixi.js",
+        "pixi"
+      ]
+    },
+    "D3": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "multiplayer",
+        "collaboration",
+        "collaborative",
+        "co-editing",
+        "presence",
+        "live cursors",
+        "cursors",
+        "comments",
+        "crdt",
+        "yjs",
+        "real-time collaboration",
+        "local-first",
+        "automerge",
+        "loro",
+        "liveblocks"
+      ]
+    },
+    "D4": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "video editor",
+        "video editing",
+        "audio editing",
+        "waveform",
+        "waveforms",
+        "timeline editor",
+        "media editing",
+        "trim",
+        "keyframes",
+        "transcript editing",
+        "webcodecs",
+        "wavesurfer",
+        "wavesurfer.js",
+        "openreel",
+        "video timeline"
+      ]
+    },
+    "D5": {
+      "patterns": [],
+      "guide": null,
+      "terms": [
+        "rich text",
+        "text editor",
+        "document editor",
+        "wysiwyg",
+        "editor",
+        "block editor",
+        "markdown editor",
+        "tiptap",
+        "lexical",
+        "prosemirror"
+      ]
+    },
+    "D6": {
+      "patterns": [
+        "product-detail",
+        "checkout",
+        "3d"
+      ],
+      "guide": "guides/3d.md",
+      "terms": [
+        "configurator",
+        "configurators",
+        "product page",
+        "product detail",
+        "variant picker",
+        "checkout",
+        "cart",
+        "ecommerce",
+        "e-commerce",
+        "shop"
+      ]
+    },
+    "E1": {
+      "patterns": [
+        "ai-chat"
+      ],
+      "guide": "guides/agentic-ui.md",
+      "terms": [
+        "chat",
+        "chatbot",
+        "chat ui",
+        "assistant",
+        "ai assistant",
+        "copilot",
+        "conversation",
+        "streaming",
+        "stream",
+        "prompt",
+        "composer",
+        "llm",
+        "branching",
+        "regenerate",
+        "assistant-ui",
+        "ai sdk",
+        "vercel ai sdk",
+        "usechat",
+        "streamdown",
+        "copilotkit"
+      ],
+      "weak_terms": [
+        "ai",
+        "gpt",
+        "claude"
+      ]
+    },
+    "E2": {
+      "patterns": [
+        "agent-activity"
+      ],
+      "guide": "guides/agentic-ui.md",
+      "terms": [
+        "agent",
+        "agents",
+        "agentic",
+        "ai agent",
+        "ai agents",
+        "tool calls",
+        "tool call",
+        "task list",
+        "background agent",
+        "subagent",
+        "subagents",
+        "autonomous",
+        "workflow automation",
+        "agent plan",
+        "action plan",
+        "plan mode",
+        "task card",
+        "task cards"
+      ]
+    },
+    "E3": {
+      "patterns": [
+        "ai-review"
+      ],
+      "guide": "guides/agentic-ui.md",
+      "terms": [
+        "approval",
+        "approvals",
+        "approve",
+        "human in the loop",
+        "human-in-the-loop",
+        "permission",
+        "permissions",
+        "permission mode",
+        "diff",
+        "diffs",
+        "code review",
+        "review changes",
+        "accept reject",
+        "checkpoint",
+        "checkpoints",
+        "rollback",
+        "guardrails",
+        "monaco",
+        "monaco editor",
+        "pierre diffs",
+        "jsdiff"
+      ]
+    },
+    "E4": {
+      "patterns": [
+        "ai-provenance"
+      ],
+      "guide": "guides/agentic-ui.md",
+      "terms": [
+        "citation",
+        "citations",
+        "sources",
+        "provenance",
+        "ai label",
+        "ai disclosure",
+        "disclosure",
+        "trust",
+        "confidence",
+        "hallucination",
+        "audit trail",
+        "audit log",
+        "explainability",
+        "ai act"
+      ]
+    },
+    "E5": {
+      "patterns": [],
+      "guide": "guides/agentic-ui.md",
+      "terms": [
+        "generative ui",
+        "gen ui",
+        "artifacts",
+        "artifact",
+        "canvas mode",
+        "ai-generated components",
+        "json-render",
+        "openui",
+        "thesys"
+      ]
+    },
+    "E6": {
+      "patterns": [
+        "ai-assist"
+      ],
+      "guide": "guides/agentic-ui.md",
+      "terms": [
+        "inline ai",
+        "ghost text",
+        "autocomplete",
+        "autocompletion",
+        "ai autocomplete",
+        "rewrite",
+        "rewrite in place",
+        "ai rewrite",
+        "help me write",
+        "ai fill",
+        "smart compose",
+        "suggested replies",
+        "ai summary",
+        "summarise",
+        "summarize",
+        "edit with ai",
+        "writing assistant",
+        "plate",
+        "platejs",
+        "blocknote",
+        "rich-textarea",
+        "usecompletion"
+      ]
+    },
+    "F1": {
+      "patterns": [
+        "hero",
+        "feature-grid",
+        "social-proof",
+        "pricing-table",
+        "cta-section",
+        "faq",
+        "footer"
+      ],
+      "guide": null,
+      "terms": [
+        "landing page",
+        "landing",
+        "homepage",
+        "home page",
+        "marketing site",
+        "marketing page",
+        "hero",
+        "pricing",
+        "pricing page",
+        "testimonials",
+        "logo wall",
+        "social proof",
+        "features section",
+        "cta",
+        "faq",
+        "footer",
+        "magic ui",
+        "kokonut"
+      ]
+    },
+    "F2": {
+      "patterns": [
+        "3d",
+        "motion"
+      ],
+      "guide": "guides/3d.md",
+      "terms": [
+        "scrollytelling",
+        "scroll story",
+        "storytelling",
+        "scroll-driven",
+        "pinned section",
+        "product story",
+        "launch page",
+        "scroll reveal",
+        "reveal on scroll",
+        "scroll reveals"
+      ]
+    },
+    "F3": {
+      "patterns": [
+        "navigation",
+        "mega-menu"
+      ],
+      "guide": null,
+      "terms": [
+        "mega menu",
+        "megamenu",
+        "site navigation",
+        "sticky nav",
+        "mobile menu"
+      ]
+    }
   }
 }

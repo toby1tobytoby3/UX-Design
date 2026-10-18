@@ -2200,7 +2200,7 @@
     "s_perf": 3,
     "s_react": 2,
     "s_bundle": 5,
-    "s_licence": 4,
+    "s_licence": 2,
     "why_it_works": "The low-level toolkit the rest of the field is built on (scales, shapes, layouts, zoom, brush, geo), so anything you can imagine can be drawn exactly as designed.",
     "use_when": "Editorial, one-off or highly custom visualisations; or use its maths modules (scales, shapes, formats) under React rendering.",
     "avoid_when": "Standard product charts on a deadline, or when D3 would own DOM that React also renders.",
@@ -2209,7 +2209,7 @@
       "observable-plot"
     ],
     "has_example": false,
-    "score": 6.5,
+    "score": 6,
     "rating": 3,
     "bench": {
       "kind": "chart",
@@ -2230,7 +2230,7 @@
     "files": [
       "source.md"
     ],
-    "body": "## Verdict\n**The reference for fully bespoke and editorial visualisation, and the engine under visx and Plot.** In a\nReact app, prefer **visx** for rendering and use D3 for the maths (`d3-scale`, `d3-shape`, `d3-format`).\nReach for D3's DOM APIs (zoom, brush, transitions) when you need behaviour no wrapper gives you.\n\n## Benchmark\nAll 4 charts hand-built, including wheel and drag zoom via `d3-zoom`. **31.9 KB gz** (tree-shaken), which is\nthe smallest full set in the benchmark. SVG. Code: `bench/libs/d3.js`, the most code of any library.\n\nFound in the benchmark:\n- `d3-zoom` gives smooth wheel and drag zoom on a time axis in about 10 lines, a better interaction than most wrappers.\n- Every axis colour, label and legend is manual. The y-domain followed the full series, not the visible window, until changed.\n- Accessibility is only what you add (we added `role`, `aria-label` and `<title>` per bar).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | No defaults: a blank canvas |\n| Interactivity | 4 | Zoom, brush, drag, transitions: powerful but hand-wired |\n| Coverage | 5 | Anything, including layouts (force, tree, pack), geo projections and contours |\n| Accessibility | 2 | Manual |\n| Performance | 3 | SVG by default; canvas rendering is possible but manual |\n| React/Next fit | 2 | DOM ownership conflicts with React; use its maths modules with React rendering |\n| Bundle size | 5 | 31.9 KB gz tree-shaken |\n| Licence & health | 4 | ISC; mature and stable (last release May 2025) |"
+    "body": "## Verdict\n**The reference for fully bespoke and editorial visualisation, and the engine under visx and Plot.** In a\nReact app, prefer **visx** for rendering and use D3 for the maths (`d3-scale`, `d3-shape`, `d3-format`).\nReach for D3's DOM APIs (zoom, brush, transitions) when you need behaviour no wrapper gives you.\n\n**Maintenance check (18 Oct 2026):** last npm release 7.9.0 on 2024-03-12, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.\n\n## Benchmark\nAll 4 charts hand-built, including wheel and drag zoom via `d3-zoom`. **31.9 KB gz** (tree-shaken), which is\nthe smallest full set in the benchmark. SVG. Code: `bench/libs/d3.js`, the most code of any library.\n\nFound in the benchmark:\n- `d3-zoom` gives smooth wheel and drag zoom on a time axis in about 10 lines, a better interaction than most wrappers.\n- Every axis colour, label and legend is manual. The y-domain followed the full series, not the visible window, until changed.\n- Accessibility is only what you add (we added `role`, `aria-label` and `<title>` per bar).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | No defaults: a blank canvas |\n| Interactivity | 4 | Zoom, brush, drag, transitions: powerful but hand-wired |\n| Coverage | 5 | Anything, including layouts (force, tree, pack), geo projections and contours |\n| Accessibility | 2 | Manual |\n| Performance | 3 | SVG by default; canvas rendering is possible but manual |\n| React/Next fit | 2 | DOM ownership conflicts with React; use its maths modules with React rendering |\n| Bundle size | 5 | 31.9 KB gz tree-shaken |\n| Licence & health | 4 | ISC; mature and stable (last release May 2025) |"
   },
   {
     "id": "sources/echarts",
@@ -2774,7 +2774,7 @@
     "s_perf": 3,
     "s_react": 3,
     "s_bundle": 4,
-    "s_licence": 5,
+    "s_licence": 2,
     "why_it_works": "A concise grammar of graphics from D3's creators: a few lines produce well-typeset, correctly scaled charts with sensible axes and tips, and it renders plain SVG that can be generated on the server.",
     "use_when": "Report, documentation and analysis charts; server-rendered or static charts; quick exploration.",
     "avoid_when": "You need pies or donuts (no mark by design), zoom, or rich dashboard interaction.",
@@ -2783,7 +2783,7 @@
       "recharts"
     ],
     "has_example": false,
-    "score": 6.8,
+    "score": 6,
     "rating": 3,
     "bench": {
       "kind": "chart",
@@ -2806,7 +2806,7 @@
     "files": [
       "source.md"
     ],
-    "body": "## Verdict\n**The pick for static, report-style and server-rendered charts.** It has the best defaults-per-line of code\nin the benchmark, with excellent axes and typography. It's deliberately not an interactive dashboard library.\n\n## Benchmark\n**3 of 4 charts.** Plot has no pie or donut mark by design. **93.3 KB gz** (includes the D3 modules it uses).\nSVG. No zoom. Code: `bench/libs/plot.js`, the shortest code in the benchmark.\n\nFound in the benchmark:\n- Without zoom it shows the full 180 days. That's correct for a static chart, but there's no way to focus a range.\n- ARIA labels are structural (\"y-axis tick\", \"area\", \"line\"), not data descriptions. Use `ariaLabel`/`ariaDescription` options.\n- The default `observable10` palette passes colour-blind separation but has four near-grey slots and fails contrast. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Best typographic defaults; default palette needs replacing |\n| Interactivity | 2 | Tips (tooltips) only; no zoom or legend toggling |\n| Coverage | 3 | Strong statistical marks (density, hexbin, contour, geo, box, waffle); no pie or donut |\n| Accessibility | 3 | ARIA hooks on every mark; generic labels by default; no keyboard navigation |\n| Performance | 3 | SVG; fine for thousands of marks |\n| React/Next fit | 3 | Not React: returns an SVG element to append in an effect, or render on the server |\n| Bundle size | 4 | 93.3 KB gz |\n| Licence & health | 5 | ISC; Observable-maintained, v0.6.17 April 2026 |"
+    "body": "## Verdict\n**The pick for static, report-style and server-rendered charts.** It has the best defaults-per-line of code\nin the benchmark, with excellent axes and typography. It's deliberately not an interactive dashboard library.\n\n**Maintenance check (18 Oct 2026):** last npm release 0.6.17 on 2025-02-14, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.\n\n## Benchmark\n**3 of 4 charts.** Plot has no pie or donut mark by design. **93.3 KB gz** (includes the D3 modules it uses).\nSVG. No zoom. Code: `bench/libs/plot.js`, the shortest code in the benchmark.\n\nFound in the benchmark:\n- Without zoom it shows the full 180 days. That's correct for a static chart, but there's no way to focus a range.\n- ARIA labels are structural (\"y-axis tick\", \"area\", \"line\"), not data descriptions. Use `ariaLabel`/`ariaDescription` options.\n- The default `observable10` palette passes colour-blind separation but has four near-grey slots and fails contrast. Pass our colours.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Best typographic defaults; default palette needs replacing |\n| Interactivity | 2 | Tips (tooltips) only; no zoom or legend toggling |\n| Coverage | 3 | Strong statistical marks (density, hexbin, contour, geo, box, waffle); no pie or donut |\n| Accessibility | 3 | ARIA hooks on every mark; generic labels by default; no keyboard navigation |\n| Performance | 3 | SVG; fine for thousands of marks |\n| React/Next fit | 3 | Not React: returns an SVG element to append in an effect, or render on the server |\n| Bundle size | 4 | 93.3 KB gz |\n| Licence & health | 5 | ISC; Observable-maintained, v0.6.17 April 2026 |"
   },
   {
     "id": "sources/ogl",
@@ -2835,7 +2835,7 @@
     "s_perf": 5,
     "s_react": 2,
     "s_bundle": 5,
-    "s_licence": 3,
+    "s_licence": 2,
     "why_it_works": "A tiny, readable WebGL layer (renderer, camera, geometry, glTF loader, orbit, instancing) that leaves shaders to you, ideal when every kilobyte counts and the visual is a custom shader effect.",
     "use_when": "Lightweight WebGL effects such as shader backgrounds, image distortions and particle fields, written by someone comfortable with GLSL.",
     "avoid_when": "You want realistic materials, lighting or shadows without writing shaders, or the team isn't fluent in GLSL.",
@@ -2843,7 +2843,7 @@
       "threejs"
     ],
     "has_example": false,
-    "score": 5.8,
+    "score": 5.5,
     "rating": 3,
     "bench": {
       "kind": "3d",
@@ -2866,7 +2866,7 @@
     "files": [
       "source.md"
     ],
-    "body": "## Verdict\n**The specialist for tiny shader effects.** It's 25 KB versus 160 KB for three.js, but realistic rendering is\nall your own shader work. Use it for decorative WebGL; use three.js or React Three Fiber for anything product-like.\n\n## Benchmark\n4/4 tasks, only 1 with built-in features. **25.4 KB gz**, the smallest tested, and the fastest first frame\n(174 ms on the software GPU). Code: `bench3d/libs/ogl.js`, which includes a hand-written lighting shader.\n\nFound in the benchmark:\n- The glTF loader assigns a debug \"normals\" shader; you write the material shader yourself.\n- Our first shader rendered the product **black**: glTF colours are linear, and converting to sRGB is your\n  job (fixed with a gamma step). This is typical of OGL: correct colour, lighting and shadows are manual.\n- No environment lighting or shadows unless you build them, so the metal ring looks matte.\n- Instanced attributes drew 2,000 cubes in one draw call.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | No PBR, environment or shadows; colour management manual |\n| Interactivity | 3 | Orbit and Raycast extras; hotspots manual |\n| Coverage | 3 | Core, glTF, instancing, post, text, shadow extras; no PBR |\n| Accessibility | 1 | Nothing built in |\n| Performance | 5 | Minimal overhead; fastest first frame |\n| React/Next fit | 2 | Imperative |\n| Bundle size | 5 | 25.4 KB gz |\n| Licence & health | 3 | Unlicense (public domain); small team, last release January 2025 |"
+    "body": "## Verdict\n**The specialist for tiny shader effects.** It's 25 KB versus 160 KB for three.js, but realistic rendering is\nall your own shader work. Use it for decorative WebGL; use three.js or React Three Fiber for anything product-like.\n\n**Maintenance check (18 Oct 2026):** last npm release 1.0.11 on 2025-01-27, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.\n\n## Benchmark\n4/4 tasks, only 1 with built-in features. **25.4 KB gz**, the smallest tested, and the fastest first frame\n(174 ms on the software GPU). Code: `bench3d/libs/ogl.js`, which includes a hand-written lighting shader.\n\nFound in the benchmark:\n- The glTF loader assigns a debug \"normals\" shader; you write the material shader yourself.\n- Our first shader rendered the product **black**: glTF colours are linear, and converting to sRGB is your\n  job (fixed with a gamma step). This is typical of OGL: correct colour, lighting and shadows are manual.\n- No environment lighting or shadows unless you build them, so the metal ring looks matte.\n- Instanced attributes drew 2,000 cubes in one draw call.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | No PBR, environment or shadows; colour management manual |\n| Interactivity | 3 | Orbit and Raycast extras; hotspots manual |\n| Coverage | 3 | Core, glTF, instancing, post, text, shadow extras; no PBR |\n| Accessibility | 1 | Nothing built in |\n| Performance | 5 | Minimal overhead; fastest first frame |\n| React/Next fit | 2 | Imperative |\n| Bundle size | 5 | 25.4 KB gz |\n| Licence & health | 3 | Unlicense (public domain); small team, last release January 2025 |"
   },
   {
     "id": "sources/radix-ui",
@@ -3389,7 +3389,7 @@
     "s_perf": 5,
     "s_react": 2,
     "s_bundle": 5,
-    "s_licence": 4,
+    "s_licence": 2,
     "why_it_works": "A tiny canvas engine built only for x/y time series, so it draws hundreds of thousands of points and live streams smoothly, with drag-to-zoom and synced cursors built in.",
     "use_when": "Monitoring, metrics and real-time or very long time series where speed and size beat everything else.",
     "avoid_when": "Anything categorical (bars by name, pies), or where accessibility is required.",
@@ -3398,7 +3398,7 @@
       "lightweight-charts"
     ],
     "has_example": false,
-    "score": 6,
+    "score": 5.5,
     "rating": 3,
     "bench": {
       "kind": "chart",
@@ -3422,7 +3422,7 @@
     "files": [
       "source.md"
     ],
-    "body": "## Verdict\n**The specialist for fast, huge time series.** It's the smallest library tested (24.4 KB gz) and built for\nspeed. It does one job: use it for metrics panels and live data, and use something else for everything else.\n\n## Benchmark\n**2 of 4 charts.** No categorical or horizontal bars and no pie or donut. Stacked bars only work by drawing\ncumulative totals yourself. **24.4 KB gz**. Canvas. Drag-to-zoom built in. Code: `bench/libs/uplot.js`.\n\nFound in the benchmark:\n- The y-axis auto-ranges away from zero (the area fill started at 250, which is misleading for an area chart).\n  Set `scales.y.range` to include zero.\n- No accessibility: canvas with no ARIA and no keyboard focus. Pair it with a data table.\n- The live legend (values under the cursor) is useful for monitoring but looks dated by default.\n- Needs the locale set correctly; in our headless run an odd system locale threw \"Invalid language tag\".\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Functional, dated legend; auto-ranged y-axis |\n| Interactivity | 4 | Drag-zoom, cursor sync, live legend |\n| Coverage | 1 | x/y series only |\n| Accessibility | 1 | None |\n| Performance | 5 | Built for 100k+ points and streaming |\n| React/Next fit | 2 | Imperative; community wrappers only |\n| Bundle size | 5 | 24.4 KB gz |\n| Licence & health | 4 | MIT; mature, single maintainer, last release March 2025 |"
+    "body": "## Verdict\n**The specialist for fast, huge time series.** It's the smallest library tested (24.4 KB gz) and built for\nspeed. It does one job: use it for metrics panels and live data, and use something else for everything else.\n\n**Maintenance check (18 Oct 2026):** last npm release 1.6.32 on 2025-03-14, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.\n\n## Benchmark\n**2 of 4 charts.** No categorical or horizontal bars and no pie or donut. Stacked bars only work by drawing\ncumulative totals yourself. **24.4 KB gz**. Canvas. Drag-to-zoom built in. Code: `bench/libs/uplot.js`.\n\nFound in the benchmark:\n- The y-axis auto-ranges away from zero (the area fill started at 250, which is misleading for an area chart).\n  Set `scales.y.range` to include zero.\n- No accessibility: canvas with no ARIA and no keyboard focus. Pair it with a data table.\n- The live legend (values under the cursor) is useful for monitoring but looks dated by default.\n- Needs the locale set correctly; in our headless run an odd system locale threw \"Invalid language tag\".\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Functional, dated legend; auto-ranged y-axis |\n| Interactivity | 4 | Drag-zoom, cursor sync, live legend |\n| Coverage | 1 | x/y series only |\n| Accessibility | 1 | None |\n| Performance | 5 | Built for 100k+ points and streaming |\n| React/Next fit | 2 | Imperative; community wrappers only |\n| Bundle size | 5 | 24.4 KB gz |\n| Licence & health | 4 | MIT; mature, single maintainer, last release March 2025 |"
   },
   {
     "id": "sources/visx",

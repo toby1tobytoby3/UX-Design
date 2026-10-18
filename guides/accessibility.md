@@ -18,6 +18,10 @@ only for leaf widgets the first lacks. Scores in `SOURCES.md` (ui-primitives sec
 | Already uses Radix | **Radix** (stay) | 8.3 | 23/23 checks, 0 axe; **no combobox, date picker, tree or table**, so add React Aria for those | – |
 | Needs a bespoke composite (custom grid, chip multi-select, command menu) | **Ariakit** primitives | 7.0 | 29/29 checks; cleanest low-level `Composite`/`Combobox`; still 0.x | React Aria hooks |
 
+**Using shadcn/ui** (allowed as copy-in code, `our-design/README.md`): its components are built on Base UI or Radix, so
+choosing shadcn means choosing that primitives layer. Take the **Base UI** flavour, keep React Aria for date pickers, trees,
+tables and drag and drop, and avoid shadcn's Command (built on the unmaintained cmdk).
+
 Avoid for new work: **Headless UI** (6.8: about ten components, one release in 2026, combobox loses its accessible name
 while open) and **Reach UI** (unmaintained, React 17 only). Toasts: React Aria's is still `UNSTABLE_Toast`, so pair it with
 **Sonner** (`guides/motion.md`).

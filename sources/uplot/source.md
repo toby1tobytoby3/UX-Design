@@ -18,7 +18,7 @@ s_a11y: 1
 s_perf: 5
 s_react: 2
 s_bundle: 5
-s_licence: 4
+s_licence: 2
 why_it_works: A tiny canvas engine built only for x/y time series, so it draws hundreds of thousands of points and live streams smoothly, with drag-to-zoom and synced cursors built in.
 use_when: Monitoring, metrics and real-time or very long time series where speed and size beat everything else.
 avoid_when: Anything categorical (bars by name, pies), or where accessibility is required.
@@ -29,6 +29,8 @@ has_example: false
 ## Verdict
 **The specialist for fast, huge time series.** It's the smallest library tested (24.4 KB gz) and built for
 speed. It does one job: use it for metrics panels and live data, and use something else for everything else.
+
+**Maintenance check (18 Oct 2026):** last npm release 1.6.32 on 2025-03-14, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.
 
 ## Benchmark
 **2 of 4 charts.** No categorical or horizontal bars and no pie or donut. Stacked bars only work by drawing

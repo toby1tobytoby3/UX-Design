@@ -12,7 +12,7 @@ builds through a skill.
 | Browsing | Static `gallery/` page with search and filters, also published at https://claude.ai/artifact/NRvM6i9bYjZeVUGWY9wQfL. `ux-add` republishes it on every add. |
 | Granularity | One entry per **pattern**, not per page. |
 | Review | Commit straight to `main`; prune afterwards. |
-| Our stack | React/Next + Tailwind, no shadcn/ui. |
+| Our stack | React/Next + Tailwind; shadcn/ui allowed as copy-in code we own (Base UI flavour), not as a dependency. |
 | Examples | Built lazily — only when a pattern is used — then committed back. |
 | Consumers | Claude Code local + cloud, via the `ux-library` plugin (two skills). |
 | Scale | Small team, hundreds of entries. Grep + Claude reranking is enough. |

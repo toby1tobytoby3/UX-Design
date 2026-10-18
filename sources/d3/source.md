@@ -18,7 +18,7 @@ s_a11y: 2
 s_perf: 3
 s_react: 2
 s_bundle: 5
-s_licence: 4
+s_licence: 2
 why_it_works: The low-level toolkit the rest of the field is built on (scales, shapes, layouts, zoom, brush, geo), so anything you can imagine can be drawn exactly as designed.
 use_when: Editorial, one-off or highly custom visualisations; or use its maths modules (scales, shapes, formats) under React rendering.
 avoid_when: Standard product charts on a deadline, or when D3 would own DOM that React also renders.
@@ -30,6 +30,8 @@ has_example: false
 **The reference for fully bespoke and editorial visualisation, and the engine under visx and Plot.** In a
 React app, prefer **visx** for rendering and use D3 for the maths (`d3-scale`, `d3-shape`, `d3-format`).
 Reach for D3's DOM APIs (zoom, brush, transitions) when you need behaviour no wrapper gives you.
+
+**Maintenance check (18 Oct 2026):** last npm release 7.9.0 on 2024-03-12, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.
 
 ## Benchmark
 All 4 charts hand-built, including wheel and drag zoom via `d3-zoom`. **31.9 KB gz** (tree-shaken), which is

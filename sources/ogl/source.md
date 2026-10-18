@@ -18,7 +18,7 @@ s_a11y: 1
 s_perf: 5
 s_react: 2
 s_bundle: 5
-s_licence: 3
+s_licence: 2
 why_it_works: A tiny, readable WebGL layer (renderer, camera, geometry, glTF loader, orbit, instancing) that leaves shaders to you, ideal when every kilobyte counts and the visual is a custom shader effect.
 use_when: Lightweight WebGL effects such as shader backgrounds, image distortions and particle fields, written by someone comfortable with GLSL.
 avoid_when: You want realistic materials, lighting or shadows without writing shaders, or the team isn't fluent in GLSL.
@@ -29,6 +29,8 @@ has_example: false
 ## Verdict
 **The specialist for tiny shader effects.** It's 25 KB versus 160 KB for three.js, but realistic rendering is
 all your own shader work. Use it for decorative WebGL; use three.js or React Three Fiber for anything product-like.
+
+**Maintenance check (18 Oct 2026):** last npm release 1.0.11 on 2025-01-27, outside the six-month window, and recent commits could not be verified from here (GitHub not reachable). Under the rubric's maintenance gate this caps Licence & health at 2; raise it again once a meaningful commit in the window is confirmed.
 
 ## Benchmark
 4/4 tasks, only 1 with built-in features. **25.4 KB gz**, the smallest tested, and the fastest first frame

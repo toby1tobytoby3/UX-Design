@@ -19,6 +19,29 @@ default doesn't fit, depart from it and say why in the answer. The few hard limi
 don't present invented screenshots or results as captured, and don't paste captured third-party code into our
 codebase (open-source code under its licence is fine).
 
+## Avoid (checked 18 Oct 2026)
+Don't recommend these as defaults. Source: `research/catalogue/excluded.csv` (with evidence links); maintenance means no
+meaningful release or commit in the last six months.
+
+| Tool | Why | Use instead |
+|---|---|---|
+| cmdk | Unmaintained (last release Mar 2025). shadcn/ui's Command component is built on it | Base UI or React Aria combobox/menu; Mantine Spotlight |
+| Vaul | Its README says unmaintained | Base UI Drawer |
+| Lottie Web | Unmaintained (last release May 2025) | Rive runtime, or CSS/Motion |
+| tldraw SDK | Production use needs a paid licence key | Excalidraw, React Flow, Konva |
+| Remotion | Licence limits companies over three people | wavesurfer.js + Konva for timelines |
+| React Bits, Animate UI | MIT + Commons Clause (not open source) | Magic UI free components, Motion |
+| Mapbox GL JS | Proprietary terms | MapLibre GL JS (+ deck.gl) |
+| AI SDK RSC | Experimental; not for production (its own docs) | AI SDK UI typed tool parts |
+| AI Elements (legacy package) | Deprecated end of Nov 2026; moved into shadcn/ui | shadcn/ui AI components (copy-in) |
+| Tiptap AI, BlockNote AI, CopilotTextarea | Paid; GPL or paid; deprecated (`guides/agentic-ui.md` §7) | Our AI SDK inline build |
+| ffmpeg.wasm, Theatre.js, WebAV, TimeChart, webgl-plot, prompt-kit, Park UI | Fail the six-month maintenance gate | See the category's shortlist in `research/categories.md` |
+
+**Free core, paid edges.** These are fine, but only their free scope: AG Grid Community (not Enterprise), Dockview core
+(not dockview-enterprise), FullCalendar Standard (not Premium resource timelines), Schedule-X core (not premium plugins),
+CopilotKit SDKs (not Showcase or Intelligence). Check the exact feature against the edition matrix before relying on it.
+GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine as a test-only tool.
+
 ## Answering a request
 0. **Search first:** `node scripts/find.mjs "<request>"` maps the request's words to categories, guides and
    entries, and prints the coverage line (vocabulary in `guides/aliases.json`, tests in `scripts/find.test.mjs`).

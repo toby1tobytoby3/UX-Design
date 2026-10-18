@@ -26,9 +26,9 @@ Overall scores are in `SOURCES.md`; **fit beats score**. Start from the first ro
 | Everyday charts in our React/Next app | **Recharts** | 7.5 | Native JSX, React 19, keyboard layer, 125 KB gz, 4/4 bench charts | ECharts |
 | A dashboard needing zoom, drill-down, morphs, big data or specialist charts | **ECharts** | 7.8 | Highest score; only free library with zoom + morph + 23 chart types natively; 205 KB gz tree-shaken | AG Charts (if already on AG Grid) |
 | A signature or bespoke chart in React | **visx** | 7.0 | Full design control, 38.5 KB gz | D3 |
-| Editorial or one-off visualisation, custom interaction | **D3** (maths) + visx (rendering) | 6.5 | Anything is possible; `d3-zoom` beat most wrappers | Observable Plot |
-| Static, report or server-rendered charts | **Observable Plot** | 6.8 | Best defaults per line of code; SVG on the server; no pies | D3 |
-| Real-time or very long time series | **uPlot** | 6.0 | 24.4 KB gz canvas, drag-zoom; time series only | ECharts (canvas) |
+| Editorial or one-off visualisation, custom interaction | **D3** (maths) + visx (rendering) | 6.0 | Anything is possible; `d3-zoom` beat most wrappers | Observable Plot |
+| Static, report or server-rendered charts | **Observable Plot** | 6.0 | Best defaults per line of code; SVG on the server; no pies; no release since Feb 2025 | D3 |
+| Real-time or very long time series | **uPlot** | 5.5 | 24.4 KB gz canvas, drag-zoom; time series only; no release since Mar 2025 | ECharts (canvas) |
 | Financial price charts | **Lightweight Charts** | 6.5 | Best pan/zoom/crosshair feel; time series only; attribution required | uPlot |
 | "Make it look like a Tailwind dashboard" | **Recharts + our tokens**, using Tremor as the visual reference | – | Tremor npm is stale and blocks React 19 | – |
 

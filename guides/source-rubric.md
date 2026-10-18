@@ -20,6 +20,8 @@ else as unverified in the profile.
 | **Licence & health** | Permissive licence for commercial use; active releases and maintainers |
 
 A licence that requires payment for commercial use caps **Licence & health** at 2 and must be named in `verdict`.
+**Six-month maintenance gate:** no meaningful release or code/docs commit in the last six months also caps **Licence & health**
+at 2 (star counts, bot commits, badge edits and `pushed_at` don't count). Record the date of the evidence in the profile.
 
 ## Category notes
 - **Bundle size** is relative to the category. Charts: 5 ≤ 50 KB, 4 ≤ 100, 3 ≤ 150, 2 ≤ 250, 1 above.

@@ -62,8 +62,9 @@ Partial or none → step 4. Strong → you may still explore if you know of some
 
 ## 4. Explore (beyond the library)
 Research the gap yourself, the way a designer would, rather than stopping at "not in the library":
-1. **Find candidates.** Web-search for the leading tools and best-in-class products for the job
-   (`research/categories.md` lists starting points per category). Prefer open-source; flag anything paid.
+1. **Find candidates.** Start from the team catalogue: `find.mjs` prints its licence- and maintenance-checked shortlist
+   and a reference moment for each missing category (full data in `research/catalogue/`). Then web-search for anything newer.
+   Prefer open-source; flag anything paid; check the Avoid list in `guides/README.md`.
 2. **Check tools quickly.** For each library: `npm view <pkg> version license time.modified` (licence and
    maintenance), weekly downloads if useful, React/Next fit, and gzip size from bundlephobia or a quick
    esbuild. Score roughly against `guides/source-rubric.md` and mark it **rough**, not benchmarked.
@@ -103,7 +104,8 @@ and why, and, if you explored, the "Add to the library?" offer.
 ## 6. Rebuild for our site (when asked, or when the task is to build it)
 1. If the entry already has `example.tsx`, use it as the starting point.
 2. Otherwise write one in the entry folder following `our-design/README.md`:
-   React function component, Tailwind classes, no shadcn, accessible, placeholder
+   React function component, Tailwind classes (shadcn/ui copy-in components allowed, see
+   `our-design/README.md`), accessible, placeholder
    data at the top. Re-implement from the screenshot and analysis — clean-room,
    not copied from `source.html`.
 3. Set `has_example: true` in the entry frontmatter, run `npm run catalog`,

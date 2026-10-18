@@ -33,7 +33,31 @@ export function loadLibrary() {
     const c = l.split('|').map((x) => x.trim());
     return [c[1], { name: c[2], status: c[4].split(' ')[0], priority: c[5] }];
   }));
-  return { catalog, concepts, categories };
+  return { catalog, concepts, categories, shortlist: loadShortlist() };
+}
+
+// The team's catalogue (research/catalogue/) gives a vetted starting point for categories the library hasn't built:
+// licence- and maintenance-checked tools plus one reference moment, so explore mode doesn't start from scratch.
+function loadShortlist() {
+  const dir = join(ROOT, 'research/catalogue');
+  if (!existsSync(join(dir, 'categories.csv'))) return {};
+  const rows = (f) => parseCsv(readFileSync(join(dir, f), 'utf8'));
+  const out = {};
+  for (const r of rows('categories.csv')) out[r.ID] = { tools: r['Curated tools (3-6)'], references: [] };
+  for (const r of rows('references.csv')) out[r['Category ID']]?.references.push({ url: r['Reference URL'], moment: r['Specific screen or moment'] });
+  return out;
+}
+function parseCsv(text) {
+  const rows = []; let row = [], cell = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) { if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; } else if (ch === '"') q = false; else cell += ch; }
+    else if (ch === '"') q = true; else if (ch === ',') { row.push(cell); cell = ''; }
+    else if (ch === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; } else if (ch !== '\r') cell += ch;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  const [head, ...body] = rows;
+  return body.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ''])));
 }
 
 // Greedy longest-phrase match of the query against every concept term.
@@ -63,7 +87,7 @@ function matchConcepts(tokens, concepts) {
 }
 
 export function find(query, { limit = 8 } = {}) {
-  const { catalog, concepts, categories } = loadLibrary();
+  const { catalog, concepts, categories, shortlist } = loadLibrary();
   const { byConcept, free } = matchConcepts(tokenize(query), concepts);
   const conceptIds = Object.keys(byConcept);
   const patterns = new Set(conceptIds.flatMap((id) => concepts[id].patterns));
@@ -121,6 +145,8 @@ export function find(query, { limit = 8 } = {}) {
     patterns: strongHits.filter((s) => s.e.kind === 'pattern').slice(0, limit).map(brief),
     weak: weakHits.slice(0, 5).map(brief),
     missing: conceptReport.filter((c) => c.level === 'none').map((c) => `${c.id} ${c.name} (${c.priority ?? 'unprioritised'})`),
+    shortlist: Object.fromEntries(conceptReport.filter((c) => c.level !== 'strong' && shortlist[c.id]?.tools)
+      .map((c) => [c.id, { tools: shortlist[c.id].tools, reference: shortlist[c.id].references[0] ?? null }])),
   };
 }
 const brief = (s) => ({ id: s.e.id, kind: s.e.kind, title: s.e.title, pattern: s.e.pattern, score: s.score,
@@ -139,6 +165,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   console.log(`Library coverage: ${r.coverage}${covered.length ? ` — covered: ${covered.join('; ')}` : ''}${r.missing.length ? ` — not in library yet: ${r.missing.join('; ')} → explore` : ''}`);
   for (const c of r.concepts) console.log(`  ${c.id.padEnd(4)} ${c.name.padEnd(36)} ${c.level.padEnd(7)} guide: ${c.guide ?? '–'} · sources ${c.sources} · patterns ${c.patterns} · matched "${c.matched.join('", "')}"`);
   if (r.free_terms.length) console.log(`  other terms searched: ${r.free_terms.join(', ')}`);
+  const sl = Object.entries(r.shortlist);
+  if (sl.length) {
+    console.log('\nStart exploring from the team catalogue (research/catalogue/, licence and maintenance checked; not benchmarked)');
+    for (const [id, x] of sl) console.log(`  ${id}: ${x.tools}${x.reference ? `\n      see ${x.reference.url} (${x.reference.moment.slice(0, 90)})` : ''}`);
+  }
   if (r.sources.length) { console.log('\nSources'); for (const s of r.sources) console.log(`  ${s.source_score}/10  ${s.title}  (${s.path})`); }
   if (r.patterns.length) { console.log('\nPatterns'); for (const p of r.patterns) console.log(`  ${'★'.repeat(p.rating ?? 0).padEnd(5)} ${p.title}  (${p.path})`); }
   if (r.weak.length) { console.log('\nWeak (incidental matches; check before using)'); for (const w of r.weak) console.log(`  ${w.title}  (${w.path}): ${w.why.join(', ')}`); }
