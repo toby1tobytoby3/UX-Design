@@ -22,6 +22,20 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **Ariakit**: Custom composite widgets (command menus, comboboxes with tabs, toolbars) where you need fine control over focus and stores.
 - **Headless UI**: Simple Tailwind apps that need a dialog, menu, listbox, combobox or tabs and nothing harder.
 
+## ai-assist
+
+| Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| [AI SDK + rich-textarea (our reference build)](sources/ai-sdk-inline/source.md) | **8.8** | 3 | 5 | 5 | 5 | 5 | 5 | 3 | 4 | 4/4 | 96.8 | ghost 671 ms; accept 3/3; rewrite 1.5 s script | Apache-2.0 / MIT / BSD-3-Clause (our code in benchinline/libs/ai-sdk-inline.jsx) |
+| [Plate AI (@platejs/ai)](sources/plate-ai/source.md) | **6** | 4 | 3 | 4 | 2 | 1 | 4 | 1 | 5 | 3/4 | 486.9 | ghost 914 ms, not IME-safe; accept 2/3; rewrite 20.9 s script | MIT |
+| [BlockNote AI (@blocknote/xl-ai)](sources/blocknote-ai/source.md) | **4.5** | 4 | 2 | 2 | 2 | 2 | 3 | 1 | 2 | 2/4 | 473.7 | no ghost text; accept 3/3; rewrite 3.5 s script | GPL-3.0 OR proprietary (BlockNote Business subscription for closed source); core MPL-2.0 |
+
+**Pick it for**
+
+- **AI SDK + rich-textarea (our reference build)**: Plain fields and forms (descriptions, comments, tickets, notes, settings), which is most of what product briefs ask for, or as the pattern to follow when adding inline AI to any component.
+- **Plate AI (@platejs/ai)**: You need inline AI inside a rich document editor (headings, lists, tables) and have chosen Slate/Plate as that editor.
+- **BlockNote AI (@blocknote/xl-ai)**: An open-source (GPL-compatible) product already built on BlockNote that wants a Notion-like "Ask AI" menu.
+
 ## 3d
 
 | Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |

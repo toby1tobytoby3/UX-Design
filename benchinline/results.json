@@ -1,0 +1,334 @@
+{
+  "ai-sdk-inline": {
+    "kind": "ai-assist",
+    "bundle_gz_kb": 154.1,
+    "initial_gz_kb": 154.1,
+    "lazy_gz_kb": 0,
+    "css_gz_kb": 0,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 96.8,
+    "tasks_total": 4,
+    "tasks_supported": 4,
+    "probe": {
+      "ghost": {
+        "supported": true,
+        "keystrokes": 42,
+        "appeared": true,
+        "latency_ms": 671,
+        "requests": 1,
+        "aborted": 0,
+        "ghost_in_accessibility_tree": false,
+        "ghost_aria_hidden": true,
+        "announced": "Suggestion available. Tab to accept, Escape to dismiss.",
+        "tab_accepts": true,
+        "tab_keeps_focus": true,
+        "tab_moves_focus_without_suggestion": true,
+        "esc_dismisses": true,
+        "word_accept": true,
+        "ime_composition_reached_field": true,
+        "ime_requests_while_composing": 0,
+        "ime_ghost_shown_while_composing": false,
+        "ime_safe": true
+      },
+      "rewrite": {
+        "supported": true,
+        "started": true,
+        "review_ms": 2384,
+        "focus_in_editor_or_menu": true,
+        "diff_markup": 85,
+        "preview_before_apply": true,
+        "controls": {
+          "accept": true,
+          "discard": true,
+          "try_again": true
+        },
+        "applied": true,
+        "after_first_undo_head": "Our team has been working hard on the new onboardi",
+        "undo_presses_to_original": 1,
+        "applied_trials": [
+          true,
+          true,
+          true
+        ],
+        "undo_trials": [
+          1,
+          1,
+          1
+        ],
+        "failed_trials": []
+      },
+      "fill": {
+        "supported": true,
+        "requests": 1,
+        "filled": true,
+        "user_value_kept": true,
+        "ai_marked": 3,
+        "edit_clears_mark": true,
+        "revert_restores": true,
+        "auto_submitted": false
+      },
+      "command": {
+        "supported": true,
+        "opens_with_focus": true,
+        "presets": 4,
+        "arrow_keys_move": true,
+        "free_text": true,
+        "axe_menu_open": [],
+        "esc_presses": 1,
+        "esc_closes": true,
+        "focus_returns": true
+      }
+    },
+    "rewrite_cost": {
+      "script_ms": 1545,
+      "wall_ms": 4636,
+      "words": 272,
+      "cpu_throttle": 4
+    },
+    "axe": {
+      "closed": [],
+      "menu_open": []
+    },
+    "errors": []
+  },
+  "blocknote-ai": {
+    "kind": "ai-assist",
+    "bundle_gz_kb": 638.9,
+    "initial_gz_kb": 531,
+    "lazy_gz_kb": 107.9,
+    "css_gz_kb": 38.9,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 473.7,
+    "tasks_total": 4,
+    "tasks_supported": 2,
+    "probe": {
+      "ghost": {
+        "supported": false,
+        "note": "No ghost-text autocomplete in @blocknote/xl-ai 0.56: its AI works through the AI menu."
+      },
+      "rewrite": {
+        "supported": true,
+        "started": true,
+        "review_ms": 18650,
+        "focus_in_editor_or_menu": true,
+        "diff_markup": 79,
+        "preview_before_apply": true,
+        "controls": {
+          "accept": true,
+          "discard": true,
+          "try_again": false
+        },
+        "applied": true,
+        "after_first_undo_head": "Our team has been working hard on the new onboardi",
+        "undo_presses_to_original": null,
+        "undo_mismatch": {
+          "at": 420,
+          "got": "nfus or that felt like a waste of time and we also",
+          "want": " or that felt like a waste of time and we also mad"
+        },
+        "applied_trials": [
+          true,
+          true,
+          true
+        ],
+        "undo_trials": [
+          null,
+          null,
+          null
+        ],
+        "failed_trials": []
+      },
+      "fill": {
+        "supported": false,
+        "note": "No structured form fill: BlockNote AI edits document blocks only."
+      },
+      "command": {
+        "supported": true,
+        "opens_with_focus": true,
+        "presets": 2,
+        "arrow_keys_move": true,
+        "free_text": true,
+        "axe_menu_open": [
+          {
+            "id": "aria-allowed-attr",
+            "impact": "critical",
+            "nodes": 1
+          },
+          {
+            "id": "aria-hidden-focus",
+            "impact": "serious",
+            "nodes": 3
+          },
+          {
+            "id": "aria-input-field-name",
+            "impact": "serious",
+            "nodes": 1
+          }
+        ],
+        "esc_presses": 1,
+        "esc_closes": true,
+        "focus_returns": true
+      }
+    },
+    "rewrite_cost": {
+      "script_ms": 3517,
+      "wall_ms": 27839,
+      "words": 272,
+      "cpu_throttle": 4
+    },
+    "axe": {
+      "closed": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1
+        },
+        {
+          "id": "aria-input-field-name",
+          "impact": "serious",
+          "nodes": 2
+        }
+      ],
+      "menu_open": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1
+        },
+        {
+          "id": "aria-hidden-focus",
+          "impact": "serious",
+          "nodes": 3
+        },
+        {
+          "id": "aria-input-field-name",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ]
+    },
+    "errors": []
+  },
+  "plate-ai": {
+    "kind": "ai-assist",
+    "bundle_gz_kb": 604.8,
+    "initial_gz_kb": 544.2,
+    "lazy_gz_kb": 60.6,
+    "css_gz_kb": 4.7,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 486.9,
+    "tasks_total": 4,
+    "tasks_supported": 3,
+    "probe": {
+      "ghost": {
+        "supported": true,
+        "keystrokes": 42,
+        "appeared": true,
+        "latency_ms": 914,
+        "requests": 2,
+        "aborted": 0,
+        "ghost_in_accessibility_tree": true,
+        "ghost_aria_hidden": false,
+        "announced": null,
+        "tab_accepts": true,
+        "tab_keeps_focus": true,
+        "tab_moves_focus_without_suggestion": true,
+        "esc_dismisses": true,
+        "word_accept": true,
+        "ime_composition_reached_field": true,
+        "ime_requests_while_composing": 0,
+        "ime_ghost_shown_while_composing": true,
+        "ime_safe": false
+      },
+      "rewrite": {
+        "supported": true,
+        "started": true,
+        "review_ms": 6421,
+        "focus_in_editor_or_menu": true,
+        "diff_markup": 58,
+        "preview_before_apply": true,
+        "controls": {
+          "accept": true,
+          "discard": true,
+          "try_again": true
+        },
+        "applied": true,
+        "after_first_undo_head": "Our team has been working hard on the new onboardi",
+        "undo_presses_to_original": 1,
+        "applied_trials": [
+          true,
+          true,
+          false
+        ],
+        "undo_trials": [
+          1,
+          1,
+          1
+        ],
+        "failed_trials": [
+          {
+            "mismatch": {
+              "at": 1,
+              "got": "ur team has been working hard on the new",
+              "want": "ver the past few weeks, the team has reb"
+            }
+          }
+        ]
+      },
+      "fill": {
+        "supported": false,
+        "note": "No structured form fill: Plate AI works on editor content. Use the AI SDK useObject (see ai-sdk-inline)."
+      },
+      "command": {
+        "supported": true,
+        "opens_with_focus": true,
+        "presets": 3,
+        "arrow_keys_move": true,
+        "free_text": true,
+        "axe_menu_open": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1
+          },
+          {
+            "id": "label",
+            "impact": "critical",
+            "nodes": 2
+          }
+        ],
+        "esc_presses": 1,
+        "esc_closes": true,
+        "focus_returns": true
+      }
+    },
+    "rewrite_cost": {
+      "script_ms": 20866,
+      "wall_ms": 24642,
+      "words": 272,
+      "cpu_throttle": 4
+    },
+    "axe": {
+      "closed": [
+        {
+          "id": "label",
+          "impact": "critical",
+          "nodes": 2
+        }
+      ],
+      "menu_open": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        },
+        {
+          "id": "label",
+          "impact": "critical",
+          "nodes": 2
+        }
+      ]
+    },
+    "errors": []
+  }
+}

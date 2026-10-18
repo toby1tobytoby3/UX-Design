@@ -199,13 +199,14 @@ export function AiFillForm({ api = '/api/fill', initial = {} }) {
   const [live, announce] = useAnnouncer();
   const filling = useRef(null); // keys the current fill may write (empty or previously AI-filled when it started)
   const { submit, object, isLoading, stop } = useObject({ api, schema: ticketSchema,
-    onFinish: () => { announce(`Filled ${filling.current.length} fields with AI. Review them before saving.`); filling.current = null; } });
+    onFinish: () => { announce(`Filled ${filling.current?.length ?? 0} fields with AI. Review them before saving.`); } });
 
   useEffect(() => {
-    if (!object || !filling.current) return;
+    const keys = filling.current;
+    if (!object || !keys) return;
     setFields((f) => {
       const next = { ...f };
-      for (const k of filling.current) {
+      for (const k of keys) {
         const v = object[k];
         if (v == null) continue;
         next[k] = { value: Array.isArray(v) ? v.filter(Boolean).join(', ') : String(v), ai: true, before: f[k].ai ? f[k].before : f[k].value };

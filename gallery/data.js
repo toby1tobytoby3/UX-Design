@@ -162,6 +162,194 @@ window.CATALOG = [
     "body": "## What it is\nThe VS Code documentation for GitHub Copilot inline suggestions. The two crops are Microsoft's own product\nscreenshots on that public page (captured live from the page, not by us running Copilot):\n- `crop-hover-toolbar.jpg`: dimmed italic ghost text with a hover toolbar: **‹ 1/3 ›** to cycle alternatives,\n  **Accept (Tab)**, **Accept Word (Ctrl + RightArrow)**, and an overflow menu.\n- `crop-nes-gutter.jpg`: a **Next Edit Suggestion**: a gutter marker on line 21 opens \"Copilot Next Edit Suggestion\"\n  with **Go To / Accept (Tab)**, **Reject (Escape)**, Show Collapsed, Settings. The proposed change is drawn inline.\n\n## Key techniques\n- Shortcuts are printed inside the UI (key caps in the toolbar and menu), which teaches the model without docs.\n- Partial accept: ⌘→ / Ctrl+→ accepts the next word or line.\n- Alternatives are numbered (\"1/3\") so the user knows there are more without asking.\n- Suggestions away from the caret are announced by a gutter marker, not by moving the cursor.\n- Restraint (from the page text): a **Snooze** button in the status-bar menu pauses suggestions for five minutes at a time,\n  inline suggestions can be turned off on metered connections, and `editor.inlineSuggest.minShowDelay` sets a show delay\n  (default 0 ms).\n\n## Accessibility\n- The page doesn't show the screen-reader path here; VS Code documents an Accessible View for suggestions\n  (`research/E6-inline-ai.md`). Ghost text is dimmed and italic, i.e. low contrast by design, the same trade-off as Plate.\n\n## Weaknesses\n- Code-editor context: dense prose UIs need a lighter version (no gutter).\n- Screenshots on a docs page can lag the shipping product.\n\n## Related entries\n- `ai-assist/plate-copilot-ghost-text` (the same model in a rich-text editor)"
   },
   {
+    "id": "sources/ai-sdk-inline",
+    "kind": "source",
+    "title": "AI SDK + rich-textarea (our reference build)",
+    "pattern": "ai-assist",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "ghost-text",
+      "ai-fill",
+      "open-source",
+      "accessible",
+      "keyboard"
+    ],
+    "source_url": "https://ai-sdk.dev/docs/ai-sdk-ui/completion",
+    "source_site": "ai-sdk.dev",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "ai 7.0.143 + @ai-sdk/react 4.0.147 + rich-textarea 0.28.0 + diff 9.0.0 + zod 4.1.12",
+    "licence": "Apache-2.0 / MIT / BSD-3-Clause (our code in benchinline/libs/ai-sdk-inline.jsx)",
+    "s_look": 3,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 5,
+    "s_perf": 5,
+    "s_react": 5,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "Inline AI on ordinary form fields with no editor framework. Ghost text drawn behind a real textarea (so IME, autofill and undo stay native), a ⌘J menu with a word-diff review before anything changes, and AI form fill that only touches empty fields and labels every AI value with a revert.",
+    "use_when": "Plain fields and forms (descriptions, comments, tickets, notes, settings), which is most of what product briefs ask for, or as the pattern to follow when adding inline AI to any component.",
+    "avoid_when": "Rich documents with headings, lists and tables (use a rich editor's AI layer instead), or you want a finished visual design out of the box (this is deliberately plain).",
+    "alternatives": [
+      "plate-ai",
+      "blocknote-ai"
+    ],
+    "has_example": false,
+    "score": 8.8,
+    "rating": 4,
+    "bench": {
+      "kind": "ai-assist",
+      "bundle_gz_kb": 154.1,
+      "lib_only_gz_kb": 96.8,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "ghost_latency_ms": 671,
+      "ime_safe": true,
+      "ghost_hidden_from_sr": true,
+      "rewrite_script_ms": 1545,
+      "evidence": "ghost 671 ms; accept 3/3; rewrite 1.5 s script"
+    },
+    "path": "sources/ai-sdk-inline",
+    "images": [
+      "sources/ai-sdk-inline/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The default for inline AI on plain fields, and the code to copy.** It's our own small build on the AI SDK, written to the\ndefaults in `research/E6-inline-ai.md`, and it passed every probe in the bench: 4/4 tasks, every keyboard and IME check, zero\naxe violations, and the lowest main-thread cost. **Read the scores with that in mind:** the bench checks the same defaults the\nbuild was written to, so its lead on keyboard and accessibility is partly by construction. Its job is to show those defaults\nare cheap to meet; the third-party kits are judged against them.\n\n## Benchmark (same four tasks and mock as every kit)\n4/4 tasks. **96.8 KB gz** for the library code (React subtracted); zod is a large share, so `zod/mini` or a JSON-schema helper\nwould shrink it (not measured). Code: `benchinline/libs/ai-sdk-inline.jsx` (`AiTextField`, `AiRewriteField`, `AiFillForm`).\n\n| Probe | Result |\n|---|---|\n| Ghost text latency (last keystroke → suggestion) | 671 ms = 300 ms debounce + 300 ms mock model + render |\n| Requests while typing 42 characters | **1** (debounce, trigger only after a space at the end) |\n| Screen readers | Ghost `aria-hidden`, **not** in Chrome's accessibility tree; one polite announcement: \"Suggestion available. Tab to accept, Escape to dismiss.\" |\n| Tab / Esc / Ctrl+→ | Tab accepts and keeps focus; **Tab moves focus on when no suggestion shows**; Esc dismisses; Ctrl+→ accepts one word |\n| IME (Chrome's own composition API) | No request and no ghost while composing (composition text reached the field) |\n| Rewrite (272 words, Improve writing) | Word diff (`<ins>`/`<del>` with hidden \"added/removed\" labels) before anything changes; Accept · Discard · Try again; applied 3/3; **one Ctrl+Z restores the original** 3/3 (edits go through the native undo stack) |\n| AI form fill | 3 empty fields filled; the user's \"Billing\" category left alone; each AI value marked \"AI\" with Revert; editing clears the mark; nothing submitted |\n| AI command menu (Ctrl/⌘+J) | Opens with focus in the input; 4 presets; arrow keys move; free text; Esc closes and returns focus |\n| Rewrite stream at 4× CPU throttle (median of 3) | **1.5 s script**, review after 4.6 s |\n| axe-core (WCAG 2.2 AA tags), menu closed and open | 0 violations |\n\n## Coverage\n| Need | Support |\n|---|---|\n| Ghost text in a textarea | ✓ `AiTextField` (rich-textarea draws the suggestion) |\n| Partial accept, Esc, IME safety, single announcement | ✓ |\n| Rewrite with diff, Accept / Discard / Try again, native undo | ✓ `AiRewriteField` (jsdiff `diffWords`) |\n| AI form fill with labels and revert | ✓ `AiFillForm` (`useObject` + zod schema) |\n| Slash or ⌘J menu with presets and free text | ✓ (⌘J; a slash trigger would be a small addition) |\n| Rich text (headings, lists, tables) | ✗ plain text only |\n| Inline summaries, suggested replies | Not built; the same `useCompletion` pattern applies |\n\n## Styling with Tailwind\nPlain elements with a dozen class names; restyle freely. No shadcn or registry dependency. `rich-textarea` needs the textarea\nto keep a fixed font and padding so the mirrored ghost layer lines up.\n\n## Weaknesses\n- It's a reference build, not a maintained library: we own its bugs and its upgrades.\n- `document.execCommand('insertText')` is how edits land on the native undo stack; it's deprecated but still the only way that\n  works in Chrome, Safari and Firefox (with a `setRangeText` fallback that loses undo).\n- Ghost text needs the caret at the end of the text; mid-text suggestions (next-edit prediction) are out of scope.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Clean but plain: a grey suggestion, a diff panel and a list menu |\n| Interactivity | 5 | Accept, dismiss, word accept, try again, revert and native undo all passed |\n| Coverage | 5 | 4/4 tasks |\n| Accessibility | 5 | Ghost hidden from screen readers with one announcement, Tab only while a suggestion shows, IME-safe, 0 axe |\n| Performance | 5 | 1 request while typing; 1.5 s script for the 272-word rewrite (Plate 20.9 s) |\n| React/Next fit | 5 | Hooks and plain components; client components only |\n| Bundle size | 3 | 96.8 KB gz, mostly zod and the AI SDK |\n| Licence & health | 4 | Permissive dependencies, all released in 2026; the glue code is ours to maintain |"
+  },
+  {
+    "id": "sources/blocknote-ai",
+    "kind": "source",
+    "title": "BlockNote AI (@blocknote/xl-ai)",
+    "pattern": "ai-assist",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "rich-text",
+      "editor",
+      "gpl"
+    ],
+    "source_url": "https://www.blocknotejs.org/docs/features/ai",
+    "source_site": "blocknotejs.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.56.0",
+    "licence": "GPL-3.0 OR proprietary (BlockNote Business subscription for closed source); core MPL-2.0",
+    "s_look": 4,
+    "s_interact": 2,
+    "s_coverage": 2,
+    "s_a11y": 2,
+    "s_perf": 2,
+    "s_react": 3,
+    "s_bundle": 1,
+    "s_licence": 2,
+    "why_it_works": "A Notion-style AI menu for the BlockNote editor, where the model edits blocks through a tool call and the changes appear as tracked insertions and deletions with an animated agent cursor, then Accept or Revert.",
+    "use_when": "An open-source (GPL-compatible) product already built on BlockNote that wants a Notion-like \"Ask AI\" menu.",
+    "avoid_when": "Closed-source products without a BlockNote Business licence, plain fields, or anywhere a rewrite must be quick and undoable (an 18 s animated rewrite in our run, and undo after Accept left garbled text).",
+    "alternatives": [
+      "plate-ai",
+      "ai-sdk-inline"
+    ],
+    "has_example": false,
+    "score": 4.5,
+    "rating": 2,
+    "bench": {
+      "kind": "ai-assist",
+      "bundle_gz_kb": 638.9,
+      "lib_only_gz_kb": 473.7,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 2,
+      "tasks_total": 4,
+      "unsupported": [
+        "ghost: No ghost-text autocomplete in @blocknote/xl-ai 0.56: its AI works through the AI menu.",
+        "fill: No structured form fill: BlockNote AI edits document blocks only."
+      ],
+      "ghost_latency_ms": null,
+      "ime_safe": null,
+      "ghost_hidden_from_sr": null,
+      "rewrite_script_ms": 3517,
+      "evidence": "no ghost text; accept 3/3; rewrite 3.5 s script"
+    },
+    "path": "sources/blocknote-ai",
+    "images": [
+      "sources/blocknote-ai/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Polished to look at, hard to recommend.** It ran fully offline and produced a clear tracked-changes review, but it has no\nghost text and no form fill, its agent animation made a 272-word rewrite take **18.6 s** to review (the model finished in about\n1.5 s), **undo after Accept walked back into garbled intermediate text** instead of the original, and the AI package is\n**GPL-3.0 or paid** for closed-source use. It also still depends on AI SDK v6, a major version behind.\n\n## Benchmark (same four tasks and mock as every kit)\n2/4 tasks (no ghost text, no form fill). **473.7 KB gz** initial plus 107.9 KB lazy and 38.9 KB CSS (React subtracted), with\nMantine as the default UI. Code: `benchinline/libs/blocknote-ai.jsx`, wired as its docs show (AIExtension, AIMenuController,\nthe AI toolbar button and slash items). Offline through `ClientSideTransport` and a mock model from xl-ai's own bundled AI SDK\nv6, answering with an `applyDocumentOperations` tool call.\n\n| Probe | Result |\n|---|---|\n| Ghost text | ✗ not offered by `@blocknote/xl-ai` 0.56 |\n| Rewrite (272 words, Improve Writing) | Tracked insert/strike-through diff before applying; **Accept** and **Revert** (Revert restores the original cleanly); no Try again in the review state; applied 3/3 |\n| Review time | **18.6 s** in a normal run: `delayAgentStep` adds 10–200 ms of artificial delay per edit step to animate the agent cursor (source comment: \"this can take longer due to artificial delays\") |\n| Undo after Accept | **Never returned to the original within 40 presses** (3/3 trials): the first Ctrl+Z gives a half-reverted mix (\"confusingnfus or that felt…\") |\n| AI command menu (slash `/ai` → Ask AI) | Opens with focus in the input; presets; arrow keys; free text; Esc closes and returns focus |\n| Rewrite stream at 4× CPU throttle (median of 3) | 3.5 s script, review after 27.8 s (mostly the animation) |\n| axe-core (WCAG 2.2 AA) | Menu closed: 1 critical `aria-allowed-attr`, 2 serious `aria-input-field-name`. Menu open: also 3 serious `aria-hidden-focus` |\n\n## Coverage\n| Need | Support |\n|---|---|\n| Ghost text | ✗ |\n| Rewrite with tracked changes, Accept / Revert | ✓ (no Try again while reviewing; Retry appears on errors) |\n| Slash and toolbar AI menu with presets and free text | ✓ |\n| AI form fill | ✗ editor blocks only |\n| Agent cursor animation | ✓ (on by default; it's what makes reviews slow) |\n\n## Styling with Tailwind\nDefault UI is Mantine (38.9 KB CSS). A shadcn variant (`@blocknote/shadcn`) needs Tailwind 4; either way you're inside\nBlockNote's design system rather than ours.\n\n## Weaknesses\n- Licence: closed-source use of the AI package needs a paid BlockNote Business subscription; its server helper is AGPL.\n- No ghost text or form fill.\n- Slow, animated rewrites; undo after Accept doesn't restore the original.\n- Depends on AI SDK v6 while the rest of our stack is on v7 (two copies in the bundle).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Notion-like menu, tracked changes, agent cursor |\n| Interactivity | 2 | Accept and Revert only; no Try again in review; undo after Accept broken |\n| Coverage | 2 | 2/4 tasks |\n| Accessibility | 2 | 1 critical and 2–5 serious axe violations |\n| Performance | 2 | Modest script (3.5 s) but 18.6 s to review a rewrite by design |\n| React/Next fit | 3 | React 19 works; Mantine by default; AI SDK v6 alongside our v7 |\n| Bundle size | 1 | 473.7 KB gz (+107.9 lazy) |\n| Licence & health | 2 | GPL-3.0 or paid (capped at 2 by the rubric); actively released (0.56.0, Oct 2026) |"
+  },
+  {
+    "id": "sources/plate-ai",
+    "kind": "source",
+    "title": "Plate AI (@platejs/ai)",
+    "pattern": "ai-assist",
+    "page_type": "app",
+    "tags": [
+      "ai",
+      "ghost-text",
+      "rich-text",
+      "editor",
+      "open-source"
+    ],
+    "source_url": "https://platejs.org/docs/ai",
+    "source_site": "platejs.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "platejs 53.3.15 + @platejs/ai 53.3.17",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 3,
+    "s_coverage": 4,
+    "s_a11y": 2,
+    "s_perf": 1,
+    "s_react": 4,
+    "s_bundle": 1,
+    "s_licence": 5,
+    "why_it_works": "The most complete open-source AI layer for a rich-text editor. Copilot ghost text with Tab, Esc and word accept, a ⌘J AI menu with presets and free text, and rewrites shown as inline red/green suggestions with Accept, Discard, Insert below and Try again, built on the AI SDK v7 we already use.",
+    "use_when": "You need inline AI inside a rich document editor (headings, lists, tables) and have chosen Slate/Plate as that editor.",
+    "avoid_when": "Plain form fields (far too heavy: 487 KB gz), screen-reader or IME-heavy audiences until the ghost text is fixed, or you can't adopt its shadcn-registry UI.",
+    "alternatives": [
+      "ai-sdk-inline",
+      "blocknote-ai"
+    ],
+    "has_example": false,
+    "score": 6,
+    "rating": 3,
+    "bench": {
+      "kind": "ai-assist",
+      "bundle_gz_kb": 604.8,
+      "lib_only_gz_kb": 486.9,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 3,
+      "tasks_total": 4,
+      "unsupported": [
+        "fill: No structured form fill: Plate AI works on editor content. Use the AI SDK useObject (see ai-sdk-inline)."
+      ],
+      "ghost_latency_ms": 914,
+      "ime_safe": false,
+      "ghost_hidden_from_sr": false,
+      "rewrite_script_ms": 20866,
+      "evidence": "ghost 914 ms, not IME-safe; accept 2/3; rewrite 20.9 s script"
+    },
+    "path": "sources/plate-ai",
+    "images": [
+      "sources/plate-ai/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Capable and MIT, but not ready to drop in.** It covered three of the four tasks natively and its keyboard model is right\n(Tab, Esc, Ctrl+→, Try again). But in our runs the ghost text was read by screen readers and appeared mid-IME composition,\nthe rewrite stream cost **20.9 s of main-thread script** for a 272-word paragraph, and **Accept intermittently left the original\ntext**. Use it only if Plate is already your rich editor, and budget time to fix those.\n\n## Benchmark (same four tasks and mock as every kit)\n3/4 tasks (no structured form fill). **486.9 KB gz** initial plus 60.6 KB lazy (React subtracted), with the registry kits a\nteam would install: CopilotKit, AIKit, SuggestionKit, BlockSelectionKit, MarkdownKit. Code: `benchinline/libs/plate-ai.jsx`\nand the registry files vendored unchanged in `benchinline/libs/plate/registry/`. Only the shadcn Button/Command/Popover are\nthin shims over the same cmdk and Radix parts, the comment/discussion UI is stubbed, and the demo-only `@faker-js/faker`\nfallback is shimmed so it doesn't inflate the bundle.\n\n| Probe | Result |\n|---|---|\n| Ghost text latency | 914 ms = 500 ms registry debounce + 300 ms mock model + render |\n| Requests while typing 42 characters | 2, none aborted (a stale request isn't cancelled) |\n| Screen readers | **Ghost text is in Chrome's accessibility tree** (a `contenteditable=false` span inside the paragraph, not `aria-hidden`); no announcement |\n| Tab / Esc / Ctrl+→ | All work; Tab moves focus on when no suggestion shows |\n| IME (Chrome's composition API) | **A ghost suggestion appeared while a composition was still open** |\n| Rewrite (272 words, Improve writing) | Inline red/green suggestion diff; Accept · Discard · Try again (and Insert below); one Ctrl+Z restores the original |\n| Accept reliability | **Accept applied the rewrite in 16 of 27 trials** (mouse click 2/6 at 8 ms chunks and 3/6 at 30 ms, Enter 5/6, and 2/3 in each of three probe runs); in the others the document was left at the original. One capture (bench.jpg) shows a misplaced preview: the diff landed mid-paragraph with the original text duplicated around it. Cause not isolated: confirm against a real model route before relying on it |\n| AI command menu (⌘J) | Opens with focus in the input; presets; arrow keys; free text; Esc closes and returns focus |\n| Rewrite stream at 4× CPU throttle (median of 3) | **20.9 s script**, review after 24.6 s: every chunk re-diffs the whole block (`applyAISuggestions`) and the registry `useChat` sets no throttle |\n| axe-core (WCAG 2.2 AA) | 2 critical `label`: Slate's hidden `slate-shadow-input` elements; plus 1 contrast issue with the menu open |\n\n## Coverage\n| Need | Support |\n|---|---|\n| Ghost text (copilot) | ✓ `CopilotPlugin`: Tab, Esc, Ctrl+→, Ctrl+Space, debounce, trigger rules |\n| Rewrite with inline diff, Accept / Discard / Try again | ✓ `AIChatPlugin` + suggestions (reliability above) |\n| ⌘J AI menu with presets and free text | ✓ (registry `ai-menu`, cmdk) |\n| Streaming insert, comments, table-cell edits | ✓ (docs; not benchmarked) |\n| AI form fill | ✗ editor content only |\n\n## Styling with Tailwind\nThe plugins are headless, but every piece of UI (ghost text, menu, suggestion marks) comes from Plate's **shadcn registry**\n(`npx shadcn add @plate/ai-kit`): Tailwind classes and shadcn colour variables. We compiled Tailwind over the vendored files\nfor the screenshot. Without shadcn you rebuild or restyle the menu.\n\n## Weaknesses\n- Ghost text is exposed to screen readers and appears during IME composition (both fixable in the registry `GhostText`).\n- Slow on long rewrites: add `experimental_throttle` to the chat (not tested here) or keep rewrites short.\n- Accept intermittently didn't apply in our harness (above).\n- Heavy: 487 KB gz for the editor and AI kits.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished registry UI: inline red/green suggestions, cmdk menu, loading pill |\n| Interactivity | 3 | Right keyboard model and Try again, but Accept failed in 11 of 27 trials |\n| Coverage | 4 | 3/4 tasks natively, plus comments and table edits |\n| Accessibility | 2 | Ghost read by screen readers, no announcement, not IME-safe, 2 critical axe (Slate shadow inputs) |\n| Performance | 1 | 20.9 s script for the rewrite stream; stale ghost requests not aborted |\n| React/Next fit | 4 | React-first, AI SDK v7 peers; UI arrives via the shadcn registry |\n| Bundle size | 1 | 486.9 KB gz (+60.6 lazy) |\n| Licence & health | 5 | MIT; @platejs/ai released 14 Oct 2026 (paid \"Plus\" templates exist, the plugins are free) |"
+  },
+  {
     "id": "3d/apple-airpods-scroll-story",
     "kind": "pattern",
     "title": "3D product story without a 3D engine",

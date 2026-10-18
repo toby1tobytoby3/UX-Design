@@ -104,7 +104,16 @@ isn't for production). Watch MCP Apps, A2UI, AG-UI and json-render.
 AI inside ordinary screens: ghost text in fields and editors, rewrite a selection in place, AI fill for forms, AI command
 menus, inline summaries and suggested replies. Research: `research/E6-inline-ai.md`. Patterns: `pattern: ai-assist`.
 
-INLINE_STACK
+**Stack** (benchmarked in `benchinline/`: same four tasks, ghost text, rewrite with diff, AI fill, AI command menu, from
+one offline mock; scores in `SOURCES.md`, ai-assist section):
+
+| Need | Use | Why (evidence) | Instead, if… |
+|---|---|---|---|
+| Ghost text, rewrite and AI fill in **plain fields** (most forms, comments, descriptions) | **Our reference build**: AI SDK `useCompletion` / `useObject` + `rich-textarea` + jsdiff (`benchinline/libs/ai-sdk-inline.jsx`, 8.8) | No maintained library does ghost text in a plain textarea. Ours passed 4/4: ghost text in 671 ms with one request, Tab/Esc/⌘→, IME-safe, hidden from screen readers with one announcement, rewrite applied 3/3 and undone in one step, 1.5 s script per rewrite, 0 axe. **Caveat:** it was written to these defaults, so the bench partly checks itself | – |
+| Inline AI in a **rich editor** | Decide the editor first (D5, not built yet). **Plate AI** (6.0, MIT) only if the editor is Plate and after fixing its gaps | Plate: ghost text and ⌘J menu work, but Accept applied the rewrite in only **16 of 27 trials**, re-diffing the whole block cost **20.9 s of script** per 272-word rewrite (no throttle), ghost text shows during IME composition and is read by screen readers, 2 critical axe failures. 487 KB gz | Free Tiptap or Lexical core with our own AI layer (same pieces as the plain-field build) |
+| Not recommended | **BlockNote AI** (4.5) | GPL-3.0 or a paid Business subscription for closed source; no ghost text; undo after Accept leaves garbled text (Revert works); ships AI SDK v6 next to our v7 | – |
+
+Not benchmarked: **Tiptap AI** (paid subscription), **Novel** (no release since January 2025), **CopilotTextarea** (deprecated).
 
 | Default | Why | When to depart |
 |---|---|---|

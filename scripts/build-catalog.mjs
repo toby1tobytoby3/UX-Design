@@ -11,9 +11,9 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const ENTRIES = join(ROOT, 'entries');
 const SOURCES = join(ROOT, 'sources');
 const IMAGE = /\.(jpe?g|png|webp)$/i;
-// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat) shares one shape: per-task probes plus
+// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI) shares one shape: per-task probes plus
 // bundle size, with a few category-specific measurements on top.
-const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai'];
+const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline'];
 // Keys starting with `_` are bench-internal (e.g. size probes), not sources.
 const readBench = (f) => Object.fromEntries(Object.entries(JSON.parse(readFileSync(f, 'utf8'))).filter(([k]) => !k.startsWith('_')));
 const bench = Object.assign({}, ...BENCHES.map((d) => join(ROOT, d, 'results.json')).filter(existsSync).map(readBench));
@@ -98,6 +98,14 @@ function summariseBench(b) {
   } else if (kind === 'ui-primitives') {
     Object.assign(out, { keyboard_passed: b.keyboard_passed, keyboard_total: b.keyboard_total, axe_violations: b.axe_violations,
       evidence: `${b.keyboard_passed}/${b.keyboard_total} keyboard checks, ${b.axe_violations} axe` });
+  } else if (kind === 'ai-assist') {
+    const g = b.probe?.ghost ?? {}, rw = b.probe?.rewrite ?? {};
+    const trials = rw.applied_trials ?? [];
+    Object.assign(out, { ghost_latency_ms: g.latency_ms ?? null, ime_safe: g.ime_safe ?? null, ghost_hidden_from_sr: g.ghost_aria_hidden ?? null,
+      rewrite_script_ms: b.rewrite_cost?.script_ms ?? null,
+      evidence: [g.supported ? `ghost ${g.latency_ms} ms${g.ime_safe === false ? ', not IME-safe' : ''}` : 'no ghost text',
+        trials.length ? `accept ${trials.filter(Boolean).length}/${trials.length}` : null,
+        b.rewrite_cost ? `rewrite ${(b.rewrite_cost.script_ms / 1000).toFixed(1)} s script` : null].filter(Boolean).join('; ') });
   } else if (kind === 'ai-chat') {
     const st = b.probe?.stream ?? {};
     const controls = Object.entries(st.controls ?? {}).filter(([k, v]) => k !== 'follows_stream' && v === 'ui').map(([k]) => k);

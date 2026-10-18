@@ -29,7 +29,7 @@ export async function bundle(name, entry) {
   rmSync(outdir, { recursive: true, force: true });
   const { metafile } = await build({ entryPoints: { [name]: entry }, bundle: true, minify: true, format: 'esm', splitting: true,
     outdir, metafile: true, jsx: 'automatic', logLevel: 'error', define: { 'process.env.NODE_ENV': '"production"' },
-    plugins: [registryAliases],
+    plugins: [registryAliases], conditions: ['style'],
     loader: { '.woff': 'file', '.woff2': 'file', '.ttf': 'file', '.svg': 'file', '.png': 'file' } });
   const outs = metafile.outputs;
   const gz = (f) => gzipSync(readFileSync(join(HERE, f))).length;

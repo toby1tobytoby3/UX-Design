@@ -5,7 +5,7 @@
 export const GHOST_PREFIX = 'The quarterly report shows revenue growth ';
 export const GHOST_TEXT = 'of twelve percent across enterprise accounts.';
 export const LATENCY_MS = 300; // fixed "model" latency before a suggestion or the first chunk
-const CHUNK_MS = 8;
+const CHUNK_MS = globalThis.__CHUNK_MS ?? 8; // override for cadence experiments
 
 const sentences = [
   ['Our team has been working hard on the new onboarding flow for the last few weeks', 'Over the past few weeks, the team has rebuilt the onboarding flow'],
@@ -24,8 +24,10 @@ const sentences = [
   ['Please leave your comments directly in the document or send them to me in a message', 'Please comment in the document or send me a message'],
   ['and I will make sure that every single one of them is read and answered by the team', 'and the team will read and reply to every comment'],
 ];
-export const REWRITE_ORIGINAL = sentences.map(([a]) => a).join(' ') + '.';
-export const REWRITE_IMPROVED = sentences.map(([, b]) => b).join(' ') + '.';
+// Pieces pair up into sentences: odd-indexed pieces end one.
+const join = (pick) => sentences.map((s, i) => pick(s) + (i % 2 ? '.' : '')).join(' ');
+export const REWRITE_ORIGINAL = join(([a]) => a);
+export const REWRITE_IMPROVED = join(([, b]) => b);
 export const REWRITE_WORDS = REWRITE_ORIGINAL.split(/\s+/).length;
 
 export const FILL_DESCRIPTION = 'Customers on the Team plan cannot export invoices as PDF since yesterday; the button spins forever. Urgent for finance month-end.';
