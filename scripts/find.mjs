@@ -91,10 +91,10 @@ export function find(query, { limit = 8 } = {}) {
   const { byConcept, free } = matchConcepts(tokenize(query), concepts);
   const conceptIds = Object.keys(byConcept);
   const patterns = new Set(conceptIds.flatMap((id) => concepts[id].patterns));
-  // Concept terms and leftover words are scored differently. A concept term found in a strong field counts as strong
-  // only if the library has entries for that concept; terms for categories we haven't built match other categories'
-  // entries by accident ("panel" in a diff viewer's title), so those go to the weak list. Leftover words (not in any
-  // concept) are strong only in the title or tags, or when two of them match.
+  // Concept terms and leftover words are scored differently. An entry in a matched concept's pattern is strong. Outside
+  // those patterns, one concept term in a strong field is often an accident ("panel" in a diff viewer's title), so it
+  // counts as strong only when two such hits agree and the concept is built. Leftover words (not in any concept) are
+  // strong only in the title or tags, or when two of them match.
   const built = (id) => catalog.some((e) => concepts[id].patterns.includes(e.pattern));
   const conceptTerms = conceptIds.flatMap((id) => [...byConcept[id]].map((t) => [t, wordRe(t), built(id)]));
   const freeTerms = [...new Set(free)].map((t) => [t, wordRe(t)]);
@@ -103,11 +103,12 @@ export function find(query, { limit = 8 } = {}) {
 
   const scored = catalog.map((e) => {
     let score = 0, strongField = false, freeHits = 0, freeTitle = false;
+    const conceptHits = new Set(); // distinct stems, so "panel" and "panels" count once
     const why = [];
     if (patterns.has(e.pattern)) { score += e.kind === 'source' ? 7 : 6; why.push(`pattern ${e.pattern}`); strongField = true; }
     for (const [t, re, built] of conceptTerms) {
       const f = fieldHit(e, re);
-      if (f) { score += f[1]; why.push(`${t} in ${f[0]}`); if (built) strongField = true; }
+      if (f) { score += f[1]; why.push(`${t} in ${f[0]}`); if (built) conceptHits.add(tokenize(t).map(stem).join(' ')); }
       else if (re.test(e.body ?? '')) { score += 0.5; why.push(`${t} in body`); }
     }
     for (const [t, re] of freeTerms) {
@@ -115,7 +116,7 @@ export function find(query, { limit = 8 } = {}) {
       if (f) { score += f[1] * 0.75; why.push(`${t} in ${f[0]}`); freeHits++; if (f[0] === 'title' || f[0] === 'tags') freeTitle = true; }
       else if (re.test(e.body ?? '')) { score += 0.3; why.push(`${t} in body`); }
     }
-    if (freeTitle || freeHits >= 2) strongField = true;
+    if (freeTitle || freeHits >= 2 || conceptHits.size >= 2) strongField = true;
     score += (e.rating ?? (e.score ?? 0) / 2) / 10; // tie-break on quality
     return { e, score: Math.round(score * 10) / 10, strongField, why };
   }).filter((s) => s.score >= 1);

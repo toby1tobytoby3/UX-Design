@@ -12,7 +12,7 @@ const CASES = [
   { q: 'personal budgeting app with onboarding, spending charts and a calm dark mode', expect: ['onboarding/duolingo-one-question-flow', 'sources/recharts', 'design-tokens/radix-12-step-colour-scale'], coverage: 'partial' },
   { q: 'revenue operations dashboard with KPI tiles, filters and drill-down charts', expect: ['dashboard/stripe-home-kpi-overview', 'sources/echarts'], coverage: 'partial' },
   { q: 'trading terminal with docked panels, order book, candlestick price charts and keyboard shortcuts', expect: ['sources/lightweight-charts'], reject: ['ai-review/pierre-diffs-keep-undo-hunks', 'ai-provenance/perplexity-inline-citations-sources-panel'], missing: ['C6'] },
-  { q: 'fleet logistics control room with a live map of vehicles and route exceptions', reject: ['sources/echarts', '3d/bruno-simon-drivable-portfolio'], coverage: 'partial' }, // C3 has a guide; map entries and profiles to be added to expect,
+  { q: 'fleet logistics control room with a live map of vehicles and route exceptions', expect: ['map/geops-live-transit-vehicles', 'map/mbta-line-diagram-live-vehicles'], reject: ['sources/echarts', '3d/bruno-simon-drivable-portfolio'], coverage: 'strong' },
   { q: 'AI product landing page with hero, pricing and social proof', expect: ['hero/linear-dark-product-hero', 'pricing-table/notion-billing-toggle', 'social-proof/vercel-logo-wall-stats'], reject: ['sources/assistant-ui', 'ai-chat/streamdown-streaming-markdown'] },
   { q: '3D furniture configurator with fabric options and AR', expect: ['sources/react-three-fiber', 'sources/model-viewer', '3d/modelviewer-hotspot-annotations'] },
   { q: 'multiplayer whiteboard with live cursors and comments', reject: ['sources/uplot'], missing: ['D2', 'D3'], coverage: 'none' },
