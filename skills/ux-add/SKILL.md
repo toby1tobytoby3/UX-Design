@@ -51,7 +51,9 @@ that entry instead of creating a new one, and tell the user.
   catalog attaches to the profile. For a 3D library, do the same in `bench3d/` (same model, same four
   tasks in `bench3d/scene.js`). Animation libraries go in `benchmotion/libs/` (four tasks via `_shell.jsx`), headless
   component libraries in `benchui/libs/` (dialog, menu, combobox, tabs with keyboard checks) and AI chat kits in
-  `benchai/libs/` (same mock stream from `mock.js`). Score from that evidence and the category note in
+  `benchai/libs/` (same mock stream from `mock.js`). Tables go in `benchtable/libs/` (10,000 rows), split and
+  docking layouts in `benchpanels/libs/` (same three-pane workspace) and map stacks in `benchmap/libs/` (same
+  5,000 live vehicles). Score from that evidence and the category note in
   `guides/source-rubric.md`; `npm run catalog` computes the total.
 - **Screenshot:** save the image into the entry folder as `desktop.jpg` (or
   `mobile.jpg` if it is a phone screenshot). Ask for the source URL if not given;

@@ -13,6 +13,7 @@ via `.claude/skills`) define the workflows.
 - Libraries are benchmarked per category, same tasks for every library: charts in `bench/`, 3D in `bench3d/`
   (`cd bench3d && npm install && (cd model-viewer && npm install) && node run.mjs [lib]`), animation in
   `benchmotion/` (`node run.mjs [lib] && node chart.mjs`), headless UI primitives in `benchui/`, AI chat kits in
-  `benchai/` (about 15 minutes). Each writes `results.json`, which the catalog build attaches to the profile.
+  `benchai/` (about 15 minutes), inline AI in `benchinline/`, tables in `benchtable/` (about 25 minutes), panels in
+  `benchpanels/` (about 8 minutes), maps in `benchmap/` (offline basemap, SwiftShader). Each writes `results.json`, which the catalog build attaches to the profile.
 - Agents answering with this library start at `guides/README.md`.
 - Commit straight to `main`.
