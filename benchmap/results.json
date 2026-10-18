@@ -8,15 +8,15 @@
     "react_baseline_kb": 57.3,
     "lib_only_gz_kb": 444.1,
     "main_thread_gz_kb": 299.4,
-    "first_render_ms": 726,
+    "first_render_ms": 530,
     "live": {
-      "frames": 1791,
+      "frames": 1745,
       "frame_p50_ms": 16.7,
       "frame_p95_ms": 16.8,
-      "frame_max_ms": 67,
-      "dropped_frames": 11,
-      "long_tasks": 0,
-      "long_task_ms": 0
+      "frame_max_ms": 83,
+      "dropped_frames": 57,
+      "long_tasks": 14,
+      "long_task_ms": 954
     },
     "pick": [
       {
@@ -44,14 +44,14 @@
     },
     "fly_default": {
       "arrived": true,
-      "ms": 1694,
-      "frames": 30,
-      "camera_frames": 30,
+      "ms": 1700,
+      "frames": 37,
+      "camera_frames": 37,
       "jumped": false
     },
     "fly_reduced": {
       "arrived": true,
-      "ms": 19,
+      "ms": 6,
       "frames": 1,
       "camera_frames": 1,
       "jumped": true
@@ -104,13 +104,13 @@
     "react_baseline_kb": 57.3,
     "lib_only_gz_kb": 672.2,
     "main_thread_gz_kb": 527.5,
-    "first_render_ms": 704,
+    "first_render_ms": 742,
     "live": {
-      "frames": 1798,
+      "frames": 1789,
       "frame_p50_ms": 16.7,
       "frame_p95_ms": 16.8,
-      "frame_max_ms": 50,
-      "dropped_frames": 3,
+      "frame_max_ms": 67,
+      "dropped_frames": 12,
       "long_tasks": 0,
       "long_task_ms": 0
     },
@@ -140,14 +140,14 @@
     },
     "fly_default": {
       "arrived": true,
-      "ms": 1824,
-      "frames": 12,
-      "camera_frames": 12,
+      "ms": 1780,
+      "frames": 20,
+      "camera_frames": 20,
       "jumped": false
     },
     "fly_reduced": {
       "arrived": true,
-      "ms": 34,
+      "ms": 81,
       "frames": 1,
       "camera_frames": 1,
       "jumped": true
@@ -198,15 +198,15 @@
     "react_baseline_kb": 0,
     "lib_only_gz_kb": 83.6,
     "main_thread_gz_kb": 83.6,
-    "first_render_ms": 273,
+    "first_render_ms": 180,
     "live": {
-      "frames": 1746,
+      "frames": 1495,
       "frame_p50_ms": 16.7,
       "frame_p95_ms": 16.8,
-      "frame_max_ms": 83,
-      "dropped_frames": 56,
-      "long_tasks": 19,
-      "long_task_ms": 1280
+      "frame_max_ms": 300,
+      "dropped_frames": 307,
+      "long_tasks": 29,
+      "long_task_ms": 5847
     },
     "pick": [
       {
@@ -234,14 +234,14 @@
     },
     "fly_default": {
       "arrived": true,
-      "ms": 993,
-      "frames": 58,
-      "camera_frames": 58,
+      "ms": 989,
+      "frames": 59,
+      "camera_frames": 59,
       "jumped": false
     },
     "fly_reduced": {
       "arrived": true,
-      "ms": 986,
+      "ms": 999,
       "frames": 61,
       "camera_frames": 61,
       "jumped": false
@@ -282,15 +282,15 @@
     "react_baseline_kb": 57.3,
     "lib_only_gz_kb": 48.2,
     "main_thread_gz_kb": 48.2,
-    "first_render_ms": 455,
+    "first_render_ms": 310,
     "live": {
-      "frames": 1770,
+      "frames": 1750,
       "frame_p50_ms": 16.7,
       "frame_p95_ms": 16.8,
-      "frame_max_ms": 67,
-      "dropped_frames": 32,
-      "long_tasks": 0,
-      "long_task_ms": 0
+      "frame_max_ms": 83,
+      "dropped_frames": 52,
+      "long_tasks": 6,
+      "long_task_ms": 347
     },
     "pick": [
       {
@@ -318,16 +318,16 @@
     },
     "fly_default": {
       "arrived": true,
-      "ms": 1690,
-      "frames": 99,
-      "camera_frames": 99,
+      "ms": 1685,
+      "frames": 103,
+      "camera_frames": 103,
       "jumped": false
     },
     "fly_reduced": {
       "arrived": true,
-      "ms": 1675,
-      "frames": 97,
-      "camera_frames": 97,
+      "ms": 1686,
+      "frames": 103,
+      "camera_frames": 103,
       "jumped": false
     },
     "reduced_motion_jumps": false,
