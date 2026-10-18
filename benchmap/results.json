@@ -1,0 +1,93 @@
+{
+  "maplibre": {
+    "kind": "map",
+    "stack": "maplibre",
+    "bundle_gz_kb": 357.5,
+    "css_gz_kb": 9.9,
+    "worker_gz_kb": 144.7,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 444.1,
+    "main_thread_gz_kb": 299.4,
+    "first_render_ms": 1129,
+    "live": {
+      "frames": 1488,
+      "frame_p50_ms": 16.7,
+      "frame_p95_ms": 33.3,
+      "frame_max_ms": 333,
+      "dropped_frames": 314,
+      "long_tasks": 2,
+      "long_task_ms": 341
+    },
+    "pick": [
+      {
+        "zoom": 13,
+        "target": 331,
+        "picked": 331,
+        "correct": true,
+        "clearance_px": 99
+      },
+      {
+        "zoom": 16,
+        "target": 466,
+        "picked": 466,
+        "correct": true,
+        "clearance_px": 423
+      }
+    ],
+    "pick_correct": 2,
+    "cluster": {
+      "clusters_in_view": 99,
+      "expanded": true,
+      "clicked_count": 112,
+      "zoom_before": 10,
+      "zoom_after": 11
+    },
+    "fly_default": {
+      "arrived": true,
+      "ms": 1958,
+      "frames": 14,
+      "camera_frames": 14,
+      "jumped": false
+    },
+    "fly_reduced": {
+      "arrived": true,
+      "ms": 20,
+      "frames": 1,
+      "camera_frames": 1,
+      "jumped": true
+    },
+    "reduced_motion_jumps": true,
+    "keyboard": {
+      "first_focus": {
+        "tag": "canvas",
+        "role": "region",
+        "name": "Map",
+        "control": false,
+        "tabs": 1
+      },
+      "map_surface_focusable": true,
+      "surface": {
+        "tag": "canvas",
+        "role": "region",
+        "name": "Map",
+        "control": false,
+        "tabs": 1
+      },
+      "pan": true,
+      "zoom": true
+    },
+    "attribution": {
+      "visible": false,
+      "note": "not rendered"
+    },
+    "axe": [
+      {
+        "id": "link-in-text-block",
+        "impact": "serious",
+        "nodes": 1
+      }
+    ],
+    "errors": []
+  },
+  "_note": "SwiftShader software GPU: timings are relative only. Zooms are MapLibre zooms. lib_only_gz_kb includes the MapLibre worker where used; React and the shared harness are subtracted."
+}

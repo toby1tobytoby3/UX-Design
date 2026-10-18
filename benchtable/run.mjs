@@ -123,7 +123,7 @@ async function axe(page) {
   await page.evaluate(AXE);
   return page.evaluate(async () => {
     const r = await window.axe.run({ include: [['.view']] }, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } });
-    return r.violations.map((v) => `${v.id} [${v.impact}] (${v.nodes.length})`);
+    return r.violations.map((v) => `${v.id} [${v.impact}] (${v.nodes.length}) ${String(v.nodes[0]?.target ?? "").slice(0, 60)}`);
   });
 }
 const gridBox = (page) => page.evaluate(() => { const r = document.querySelector('.view').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
@@ -141,7 +141,8 @@ const TASKS = {
       const h = await page.evaluate(() => window.__probe.header('amount'));
       if (!h) { out.sort_note = 'Amount header not found'; await page.close(); break; }
       await page.evaluate((a) => window.__probe.watch(() => window.__bench.hasText(a[0]) || window.__bench.hasText(a[1])), [MIN_AMOUNT, MAX_AMOUNT]);
-      const c = center(h); await page.mouse.click(c.x - 10, c.y);
+      const sp = await page.evaluate(() => window.__bench.sortPoint?.('amount'));
+      const c = sp ?? { x: center(h).x - 10, y: center(h).y }; await page.mouse.click(c.x, c.y);
       out.sorts.push(await page.evaluate(() => window.__w)); await page.close();
     }
     for (let i = 0; i < 3; i++) {
@@ -237,8 +238,9 @@ const TASKS = {
       const am = await page.evaluate(() => window.__probe.header('amount'));
       const stH = await page.evaluate(() => window.__probe.header('status'));
       if (!am || !stH) break;
-      await page.mouse.click(am.left + 20, am.top + am.height / 2); await page.waitForTimeout(400);
-      await page.keyboard.down(mod); await page.mouse.click(stH.left + 20, stH.top + stH.height / 2); await page.keyboard.up(mod); await page.waitForTimeout(600);
+      const [pa, ps] = await page.evaluate(() => ['amount', 'status'].map((id) => window.__bench.sortPoint?.(id)));
+      await page.mouse.click(pa?.x ?? am.left + 20, pa?.y ?? am.top + am.height / 2); await page.waitForTimeout(400);
+      await page.keyboard.down(mod); await page.mouse.click(ps?.x ?? stH.left + 20, ps?.y ?? stH.top + stH.height / 2); await page.keyboard.up(mod); await page.waitForTimeout(600);
       r.multi_sort_columns = await page.evaluate(() => window.__bench.api.sortCount?.() ?? document.querySelectorAll('.view [aria-sort=ascending],.view [aria-sort=descending]').length);
       r.multi_sort_modifier = mod;
       r.multi_sort_warnings.push(...opened.errors.filter((e) => /enterprise|licen[cs]e|watermark/i.test(e)));

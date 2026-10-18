@@ -217,18 +217,22 @@ const PROBES = {
     c.non_drag_move_built_in = menu.some((m) => /move|split|float|dock|pop/i.test(m));
     return { checks: c, metrics: { groups_after_centre: g1, groups_after_edge: g2, menu }, shot: shotPath };
   },
-  // 6. Drag the handle 240 px over 60 frames while every pane redraws its 20k-point canvas.
-  async perf(page) {
-    const h = await handle(page);
-    await page.evaluate(() => { window.__bench.redraws = 0; window.__bench.drawMs = 0; window.__frames = []; let last = performance.now(); window.__rec = true;
-      const tick = (t) => { window.__frames.push(t - last); last = t; if (window.__rec) requestAnimationFrame(tick); }; requestAnimationFrame(tick); });
-    const t0 = Date.now();
-    await page.mouse.move(h.x, h.y); await page.mouse.down();
-    for (let i = 1; i <= 60; i++) { await page.mouse.move(h.x + i * 4, h.y); await frame(page); }
-    await page.mouse.up(); await wait(page, 300);
-    const r = await page.evaluate(() => { window.__rec = false; const f = window.__frames.slice(1).sort((a, b) => a - b);
-      return { n: f.length, p95: f[Math.floor(f.length * 0.95)] ?? 0, max: f.at(-1) ?? 0, long: f.filter((x) => x > 50).length, redraws: window.__bench.redraws, drawMs: window.__bench.drawMs }; });
-    return { checks: {}, metrics: { frames: r.n, frame_p95_ms: Math.round(r.p95 * 10) / 10, frame_max_ms: Math.round(r.max), long_frames: r.long, canvas_redraws: r.redraws, redraw_ms: Math.round(r.drawMs), wall_ms: Date.now() - t0 } };
+  // 6. Drag the handle 240 px over 60 frames while every pane redraws its 20k-point canvas. Median of 3 runs.
+  async perf(page, lib) {
+    const runs = [];
+    for (let k = 0; k < 3; k++) {
+      if (k) await fresh(page, lib);
+      const h = await handle(page);
+      await page.evaluate(() => { window.__bench.redraws = 0; window.__bench.drawMs = 0; window.__frames = []; let last = performance.now(); window.__rec = true;
+        const tick = (t) => { window.__frames.push(t - last); last = t; if (window.__rec) requestAnimationFrame(tick); }; requestAnimationFrame(tick); });
+      await page.mouse.move(h.x, h.y); await page.mouse.down();
+      for (let i = 1; i <= 60; i++) { await page.mouse.move(h.x + i * 4, h.y); await frame(page); }
+      await page.mouse.up(); await wait(page, 300);
+      runs.push(await page.evaluate(() => { window.__rec = false; const f = window.__frames.slice(1).sort((a, b) => a - b);
+        return { p95: f[Math.floor(f.length * 0.95)] ?? 0, max: f.at(-1) ?? 0, long: f.filter((x) => x > 50).length, redraws: window.__bench.redraws }; }));
+    }
+    const med = (k) => runs.map((r) => r[k]).sort((a, b) => a - b)[1];
+    return { checks: {}, metrics: { frame_p95_ms: Math.round(med('p95') * 10) / 10, frame_max_ms: Math.round(med('max')), long_frames: med('long'), canvas_redraws: med('redraws') } };
   },
 };
 const TASKS = Object.keys(PROBES);

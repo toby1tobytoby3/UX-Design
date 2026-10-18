@@ -30,7 +30,7 @@ export function step() {
 export const toGeoJSON = () => ({ type: 'FeatureCollection', features: vehicles.map((v) => ({
   type: 'Feature', id: v.id, properties: { id: v.id, status: v.status }, geometry: { type: 'Point', coordinates: [v.lng, v.lat] } })) });
 
-globalThis.__bench = { picked: null, ready_ms: null, notes: {} };
+globalThis.__bench = { picked: null, ready_ms: null, vehicles };
 export function register(api) { Object.assign(globalThis.__bench, api); }
 export function ready() { if (globalThis.__bench.ready_ms == null) globalThis.__bench.ready_ms = Math.round(performance.now()); }
 export function pick(id) { globalThis.__bench.picked = id; }

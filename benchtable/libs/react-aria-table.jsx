@@ -45,7 +45,7 @@ function Grid() {
   const [hidden, setHidden] = useState([]);
   const [selected, setSelected] = useState(() => new Set());
   const [editing, setEditing] = useState(null);
-  const cols = COLUMNS.filter((c) => !hidden.includes(c.id));
+  const cols = useMemo(() => COLUMNS.filter((c) => !hidden.includes(c.id)), [hidden]);
   const view = useMemo(() => {
     let out = status ? rows.filter((r) => r.status === status) : rows;
     if (sort) out = [...out].sort((a, b) => (a[sort.column] < b[sort.column] ? -1 : a[sort.column] > b[sort.column] ? 1 : 0) * (sort.direction === 'ascending' ? 1 : -1));

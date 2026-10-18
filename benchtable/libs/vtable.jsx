@@ -24,7 +24,7 @@ const option = {
 
 let table;
 function onReady(instance) {
-  table = instance; window.__vt = instance;
+  table = instance;
   const colOf = (id) => [...Array(table.colCount).keys()].find((c) => table.getHeaderField(c, 0) === id);
   // Probes for a canvas grid: text = values of the visible body cells; rects come from the engine.
   window.__bench.hasText = (s) => {
@@ -38,6 +38,15 @@ function onReady(instance) {
     if (kind === 'cell') { const { rowStart, rowEnd } = table.getBodyVisibleRowRange(); row = -1; for (let r = rowStart; r <= rowEnd; r++) if (table.getCellValue(colOf('id'), r) === rowId) row = r; if (row < 0) return null; }
     const rect = table.getCellRelativeRect(col, row); const box = table.getElement().getBoundingClientRect();
     return { left: box.left + rect.left, top: box.top + rect.top, width: rect.width, height: rect.height };
+  };
+  // Sorting starts from the header's sort icon (a click elsewhere on the header selects the column).
+  window.__bench.sortPoint = (id) => {
+    let icon = null;
+    const walk = (n) => { if (!icon && n.attribute?.funcType === 'sort') icon = n; n.forEachChildren?.(walk); };
+    walk(table.scenegraph.getCell(colOf(id), 0));
+    if (!icon) return null;
+    const b = icon.globalAABBBounds; const box = table.getElement().getBoundingClientRect();
+    return { x: box.left + (b.x1 + b.x2) / 2, y: box.top + (b.y1 + b.y2) / 2 };
   };
   // Focus = the engine's selected cell (the canvas holds DOM focus).
   window.__bench.focusRect = () => {
