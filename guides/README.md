@@ -37,7 +37,7 @@ meaningful release or commit in the last six months.
 | AI SDK RSC | Experimental; not for production (its own docs) | AI SDK UI typed tool parts |
 | AI Elements (legacy package) | Deprecated end of Nov 2026; moved into shadcn/ui | shadcn/ui AI components (copy-in) |
 | Tiptap AI, BlockNote AI, CopilotTextarea | Paid; GPL or paid; deprecated (`guides/agentic-ui.md` §7) | Our AI SDK inline build |
-| ffmpeg.wasm, Theatre.js, WebAV, TimeChart, webgl-plot, prompt-kit, Park UI | Fail the six-month maintenance gate | See the category's shortlist in `research/categories.md` |
+| ffmpeg.wasm, Theatre.js, WebAV, TimeChart, webgl-plot, prompt-kit, Park UI, golden-layout | Fail the six-month maintenance gate | See the category's shortlist in `research/categories.md` |
 
 **Free core, paid edges.** These are fine, but only their free scope: AG Grid Community (not Enterprise), Dockview core
 (not dockview-enterprise), FullCalendar Standard (not Premium resource timelines), Schedule-X core (not premium plugins),
@@ -79,6 +79,7 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
 | Inline AI assist: ghost text, rewrite, AI fill (E6) | `guides/agentic-ui.md` §7 | `ai-assist` (benchmarked in `benchinline/`) | `ai-assist/*` |
 | Tables and data grids (B6) | `guides/tables.md` | `data-table` (benchmarked in `benchtable/`) | `data-table/*` |
 | Maps and live positions (C3, map side of C6) | `guides/maps.md` | `map` (benchmarked in `benchmap/`) | `map/*` |
+| App shell, panels and docking, dashboards (B1, B3, C2) | `guides/shell-panels.md` | `panels` (benchmarked in `benchpanels/`) | `navigation/*`, `panels/*`, `dashboard/*` |
 | Whole briefs (ten scenarios) | `guides/scenarios.md` | – (links to the category guides) | – |
 | Everything else in `taxonomy.md` | – (patterns only) | – | see `CATALOG.md` |
 

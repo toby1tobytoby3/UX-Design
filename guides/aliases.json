@@ -246,7 +246,7 @@
       "patterns": [
         "navigation"
       ],
-      "guide": null,
+      "guide": "guides/shell-panels.md",
       "terms": [
         "app shell",
         "sidebar",
@@ -259,7 +259,12 @@
         "navigation",
         "nav",
         "top bar",
-        "header"
+        "header",
+        "topbar",
+        "skip link",
+        "workspace switcher",
+        "icon rail",
+        "collapsible sidebar"
       ]
     },
     "B2": {
@@ -285,7 +290,7 @@
       "patterns": [
         "panels"
       ],
-      "guide": null,
+      "guide": "guides/shell-panels.md",
       "terms": [
         "panels",
         "panel",
@@ -309,7 +314,12 @@
         "react-grid-layout",
         "docked",
         "dock panels",
-        "workbench"
+        "workbench",
+        "splitter",
+        "window splitter",
+        "layout",
+        "multi-monitor",
+        "tiles"
       ]
     },
     "B4": {
@@ -517,7 +527,7 @@
         "dashboard",
         "chart"
       ],
-      "guide": "guides/charts.md",
+      "guide": "guides/shell-panels.md",
       "terms": [
         "dashboard",
         "dashboards",
