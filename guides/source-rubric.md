@@ -58,3 +58,10 @@ at 2 (star counts, bot commits, badge edits and `pushed_at` don't count). Record
   *Accessibility*: grid or table semantics, keyboard model (arrow keys between cells, Enter/F2 to edit, Esc), row and
   column counts announced when virtualised, measured in `benchtable/`. *Performance*: 10,000-row sort, filter and scroll
   timings and DOM size.
+- **Panels, docking and split layouts** (`pattern: navigation` for shells, sources use `pattern: panels`). Bundle: 5 ≤ 10 KB,
+  4 ≤ 30, 3 ≤ 60, 2 ≤ 120, 1 above (library only, React subtracted). *Default look*: handles, tabs and drop overlays out
+  of the box. *Interactivity*: resize, collapse, double-click reset, persist/restore; for docking libraries also drag to
+  dock, float and pop out. *Coverage*: which of the three workspace models it serves (split panes, dockable tabs, tiles).
+  *Accessibility*: APG window splitter (focusable `separator` with values, arrows, Home/End, Enter collapses), a non-drag
+  alternative for docking (WCAG 2.5.7), labelled regions, measured in `benchpanels/`. *Performance*: frame timing while
+  dragging a sash, layout shift on reload with a saved layout. Paid-only features (e.g. dockview-enterprise) don't count.
