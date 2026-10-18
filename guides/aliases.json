@@ -533,7 +533,9 @@
       ]
     },
     "C3": {
-      "patterns": [],
+      "patterns": [
+        "map"
+      ],
       "guide": null,
       "terms": [
         "map",

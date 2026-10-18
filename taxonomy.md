@@ -38,6 +38,7 @@ more entries would use it.
 | accessibility | Focus indicators, keyboard models, error summaries, reduced-motion/contrast handling |
 | ui-primitives | (sources only) headless accessible component libraries |
 | panels | Split panes, dockable tabs, dashboard tiles: resizable and persisted workspace layouts |
+| map | Interactive maps: basemaps, markers and clusters, live vehicle layers, heatmaps, geofences, fly-to |
 | ai-chat | AI conversation UI: threads, streaming answers, composer, stop/retry/edit/branch |
 | agent-activity | Agent plans, step and tool-call logs, progress of long or background runs, interrupt/redirect |
 | ai-review | Human oversight of AI actions: approval prompts, permission modes, diffs with accept/reject, checkpoints |

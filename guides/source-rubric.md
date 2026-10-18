@@ -65,3 +65,10 @@ at 2 (star counts, bot commits, badge edits and `pushed_at` don't count). Record
   *Accessibility*: APG window splitter (focusable `separator` with values, arrows, Home/End, Enter collapses), a non-drag
   alternative for docking (WCAG 2.5.7), labelled regions, measured in `benchpanels/`. *Performance*: frame timing while
   dragging a sash, layout shift on reload with a saved layout. Paid-only features (e.g. dockview-enterprise) don't count.
+- **Maps and geospatial** (`pattern: map`). Bundle: 5 ≤ 60 KB, 4 ≤ 150, 3 ≤ 300, 2 ≤ 600, 1 above (library only, React
+  subtracted; tiles and styles not counted). *Default look*: a clean basemap style and controls out of the box.
+  *Interactivity*: pan, zoom, pick, cluster expand, fly-to and live updates without custom code. *Coverage*: markers,
+  clusters, heatmaps, lines, polygons, large-data layers, drawing. *Accessibility*: keyboard pan/zoom, a labelled
+  container, `flyTo` honouring reduced motion, attribution visible, measured in `benchmap/`. *Performance*: first render
+  and frame time under 1 Hz updates of 5,000 vehicles (SwiftShader timings are relative only). The tile source is scored
+  separately: free hosted tiles that forbid commercial use don't count.
