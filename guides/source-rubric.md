@@ -51,3 +51,10 @@ at 2 (star counts, bot commits, badge edits and `pushed_at` don't count). Record
   screen readers with one polite announcement, keyboard model (Tab only while a suggestion shows, Esc), IME-safe.
   *Performance*: debounce and cancellation, main-thread cost while streaming, measured in `benchinline/`. A GPL or
   paid-only licence caps *Licence & health* at 2.
+- **Tables and data grids** (`pattern: data-table`). Bundle: 5 ≤ 25 KB, 4 ≤ 60, 3 ≤ 120, 2 ≤ 250, 1 above (library only,
+  React subtracted). *Default look*: a finished grid out of the box; headless libraries score on styling ergonomics and
+  can't exceed 3. *Interactivity*: sort, filter, resize, pin, reorder, select and edit without custom code. *Coverage*:
+  the free edition's features only (grouping, tree data, pivot, export, master/detail); paid-only features don't count.
+  *Accessibility*: grid or table semantics, keyboard model (arrow keys between cells, Enter/F2 to edit, Esc), row and
+  column counts announced when virtualised, measured in `benchtable/`. *Performance*: 10,000-row sort, filter and scroll
+  timings and DOM size.
