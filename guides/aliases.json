@@ -536,7 +536,7 @@
       "patterns": [
         "map"
       ],
-      "guide": null,
+      "guide": "guides/maps.md",
       "terms": [
         "map",
         "maps",
@@ -558,7 +558,19 @@
         "deck.gl",
         "leaflet",
         "kepler.gl",
-        "kepler"
+        "kepler",
+        "live map",
+        "vehicle tracking",
+        "fleet map",
+        "clustering",
+        "clusters",
+        "heatmap",
+        "pmtiles",
+        "openlayers",
+        "basemap",
+        "tiles",
+        "geocoding",
+        "fly-to"
       ]
     },
     "C4": {

@@ -31,7 +31,9 @@ meaningful release or commit in the last six months.
 | tldraw SDK | Production use needs a paid licence key | Excalidraw, React Flow, Konva |
 | Remotion | Licence limits companies over three people | wavesurfer.js + Konva for timelines |
 | React Bits, Animate UI | MIT + Commons Clause (not open source) | Magic UI free components, Motion |
-| Mapbox GL JS | Proprietary terms | MapLibre GL JS (+ deck.gl) |
+| Mapbox GL JS, Google Maps (as a default) | Proprietary terms; paid per call | MapLibre GL JS (+ deck.gl), `guides/maps.md` |
+| Leaflet, react-leaflet | No Leaflet release since May 2023 (2.0 still alpha); react-leaflet is Hippocratic-2.1, not OSI | MapLibre GL JS; OpenLayers for GIS formats |
+| tile.openstreetmap.org, public Nominatim (in a product) | No SLA, can block without notice; no client autocomplete | Self-hosted PMTiles or OpenFreeMap; a hosted geocoder |
 | AI SDK RSC | Experimental; not for production (its own docs) | AI SDK UI typed tool parts |
 | AI Elements (legacy package) | Deprecated end of Nov 2026; moved into shadcn/ui | shadcn/ui AI components (copy-in) |
 | Tiptap AI, BlockNote AI, CopilotTextarea | Paid; GPL or paid; deprecated (`guides/agentic-ui.md` §7) | Our AI SDK inline build |
@@ -75,6 +77,8 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
 | Accessibility and the component-library choice (A7) | `guides/accessibility.md` | 5 `ui-primitives` (benchmarked in `benchui/`) | `accessibility/*` |
 | AI chat, agents, oversight, provenance (E1–E5) | `guides/agentic-ui.md` | `ai-chat` (benchmarked in `benchai/`) | `ai-chat/*`, `agent-activity/*`, `ai-review/*`, `ai-provenance/*` |
 | Inline AI assist: ghost text, rewrite, AI fill (E6) | `guides/agentic-ui.md` §7 | `ai-assist` (benchmarked in `benchinline/`) | `ai-assist/*` |
+| Tables and data grids (B6) | `guides/tables.md` | `data-table` (benchmarked in `benchtable/`) | `data-table/*` |
+| Maps and live positions (C3, map side of C6) | `guides/maps.md` | `map` (benchmarked in `benchmap/`) | `map/*` |
 | Whole briefs (ten scenarios) | `guides/scenarios.md` | – (links to the category guides) | – |
 | Everything else in `taxonomy.md` | – (patterns only) | – | see `CATALOG.md` |
 
