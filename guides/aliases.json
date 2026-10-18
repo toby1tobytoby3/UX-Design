@@ -362,7 +362,7 @@
       "patterns": [
         "data-table"
       ],
-      "guide": null,
+      "guide": "guides/tables.md",
       "terms": [
         "table",
         "tables",
@@ -379,7 +379,16 @@
         "ag grid",
         "ag-grid",
         "vtable",
-        "visactor"
+        "visactor",
+        "handsontable",
+        "mui data grid",
+        "mui x",
+        "react-data-grid",
+        "data grid",
+        "record list",
+        "bulk edit",
+        "frozen column",
+        "sticky header"
       ]
     },
     "B7": {
