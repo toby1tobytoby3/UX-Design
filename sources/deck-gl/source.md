@@ -48,9 +48,10 @@ Code: `benchmap/libs/maplibre-deckgl.jsx` (react-maplibre `<Map>` + `MapboxOverl
 Found in the benchmark:
 - **Interleaved mode crashes on MapLibre 6.** `@deck.gl/mapbox` 9.4.0 reads `map.transform`, which MapLibre 6 removed:
   "Cannot read properties of undefined (reading 'height')" on every frame. Overlaid mode (`interleaved: false`) works,
-  but deck layers then sit above all basemap labels and use a second WebGL context. Until a fix ships, pin MapLibre 5
-  if you need `beforeId` layer slotting, or accept overlaid mode.
-- deck.gl transitions don't check `prefers-reduced-motion`. Turn `transitions` off yourself when it is set.
+  but deck layers then sit above all basemap labels and use a second WebGL context. The same probe with
+  **MapLibre 5.24.0 interleaves fine**, so until a fix ships, pin MapLibre 5 if you need `beforeId` layer slotting, or
+  accept overlaid mode.
+- Nothing in deck.gl 9.4 reads `prefers-reduced-motion`, so attribute transitions animate regardless. Turn `transitions` off yourself when it is set.
 
 ## Weaknesses
 - No basemap, no clustering, no keyboard model of its own: it relies on MapLibre for all three.
