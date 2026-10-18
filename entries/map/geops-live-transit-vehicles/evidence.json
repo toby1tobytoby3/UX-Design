@@ -1,0 +1,31 @@
+{
+  "url": "https://mobility.portal.geops.io/world.geops.transit?lang=en&x=950700&y=6003000&z=13",
+  "captured_at": "2026-10-18",
+  "gpu": "software (SwiftShader); timings relative only",
+  "transfer_kb": 5798,
+  "js_kb": 1254,
+  "frames": [
+    {
+      "frame": "https://mobility.portal.geops.io/world.geops.transit?lang=en&x=950700&y=6003000&z=13&layers=paerke,strassennamen,halteka",
+      "lib": "maplibre",
+      "webgl": [
+        "webgl2"
+      ],
+      "attribution_visible": false,
+      "attribution_text": null,
+      "container": {
+        "tag": "div",
+        "focusable": false,
+        "role": null,
+        "label": null
+      },
+      "controls": [],
+      "canvases": 3,
+      "markers_dom": 0
+    }
+  ],
+  "keyboard": {
+    "focused": false
+  },
+  "still_animating_with_reduced_motion": true
+}

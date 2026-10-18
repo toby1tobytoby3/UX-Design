@@ -353,6 +353,171 @@ window.CATALOG = [
     "body": "## What it is\nReact Aria Components' Table docs, captured live. In the multi-select example (\"Favorite pokemon\") a cell was clicked,\nthen ArrowDown and Shift+ArrowDown pressed: focus skipped the disabled Venusaur row and landed on Pikachu, now selected.\nThe sorting example was captured after clicking the Name header (sorted descending).\n\n## Key techniques\n- Disabled rows render at reduced opacity and are skipped by the keyboard (`disabledKeys`).\n- Selected row: solid purple fill with white text; the focused cell inside it gets a **2px white outline**.\n- Header checkbox shows indeterminate for partial selection; a live \"Current selection: pikachu\" line under the table.\n- Sorted header gets a tinted background, coloured label and a chevron; `aria-sort=\"descending\"`.\n- Unstyled library: every state is a `data-*` attribute (`data-selected`, `data-focus-visible`, `data-disabled`), so these\n  styles are the docs' theme, reproducible with Tailwind data variants.\n\n## Accessibility\n- `role=\"grid\"` with `aria-multiselectable=\"true\"`, `aria-selected` on rows, `aria-sort` on the sortable column.\n- Focus ring visible on the selected (dark) background, which many tables get wrong.\n- Selection state is announced; disabled rows are exposed as disabled rather than hidden.\n\n## Weaknesses\n- Numbers (Level) are left-aligned; right-align numeric columns.\n- Solid purple selection is loud for multi-row selection in dense tables; a tint plus checkbox scales better.\n\n## Related entries\n- `data-table/mui-x-checkbox-selection-count`, `data-table/ag-grid-dense-grid-column-menus`, `accessibility/react-aria-combobox`."
   },
   {
+    "id": "map/deckgl-trips-animated-trails",
+    "kind": "pattern",
+    "title": "Animated fading trails for 10,000 trips over a dark 3D city",
+    "pattern": "map",
+    "page_type": "docs",
+    "tags": [
+      "data-viz",
+      "webgl",
+      "animated",
+      "dark",
+      "open-source"
+    ],
+    "source_url": "https://deck.gl/examples/trips-layer",
+    "source_site": "deck.gl",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 3,
+    "why_it_works": "Short glowing trails that fade behind each moving point show both where things are and where they've been, so flow and direction read without arrows. A small stats card (\"10.0K trips, 3.9K buildings, 897.2K vertices\") anchors the scale.",
+    "use_when": "Showing movement history or flow (fleet replays, delivery routes, network traffic) where a trail beats a dot; analytics and storytelling rather than live operations.",
+    "has_example": false,
+    "path": "entries/map/deckgl-trips-animated-trails",
+    "images": [
+      "entries/map/deckgl-trips-animated-trails/desktop.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\ndeck.gl's TripsLayer example: NYC taxi trips (16 June 2016, 21:00–21:30) animated as orange and teal trails over a dark\nMapLibre basemap with extruded 3D buildings. A floating card gives the data sources, counts and a \"Trail\" length slider.\n\n## Key techniques\n- **TripsLayer**: each path carries timestamps; `currentTime` advances and `trailLength` (180) sets how far the fade reaches back.\n- **Two hues for two fleets** (yellow vs green cabs as orange vs teal) on a near-black basemap.\n- **deck.gl over MapLibre** (`reuseMaps`): MapLibre draws the basemap and handles keyboard; deck.gl draws data in a second WebGL canvas.\n\n## Accessibility\n- The MapLibre canvas is focusable with `role=\"region\"` and `aria-label=\"Map\"`. The deck.gl canvases aren't focusable and\n  have no text alternative.\n- **The animation loops forever and ignores reduced motion.** The example's source (`popmotion` `animate`, `repeat: Infinity`)\n  has no `prefers-reduced-motion` check and no pause control.\n- The Trail slider has no label (`<input type=\"range\">` with no `aria-label` or `<label>`).\n- Attribution (\"© CARTO, © OpenStreetMap contributors\") sits below the fold at 1440×900.\n\n## Weaknesses\n- Software-GPU screenshots repeatedly timed out or crashed the renderer: continuous WebGL animation is heavy. Budget for\n  low-end hardware and pause when the tab is hidden.\n- Orange vs teal trails rely on hue alone, with no legend on the map.\n\n## Related entries\n- `map/geops-live-transit-vehicles`, `3d/*` (WebGL performance notes), `motion/*` (reduced-motion handling)."
+  },
+  {
+    "id": "map/geops-live-transit-vehicles",
+    "kind": "pattern",
+    "title": "Live fleet map with thousands of moving vehicles on a muted basemap",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "data-viz",
+      "webgl",
+      "animated",
+      "b2b",
+      "interactive"
+    ],
+    "source_url": "https://mobility.portal.geops.io/world.geops.transit?lang=en&x=950700&y=6003000&z=13",
+    "source_site": "geops.io",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "A pale, low-saturation basemap pushes roads and labels into the background, so hundreds of live vehicle dots (interpolated between real-time pings, so they glide instead of jumping) read instantly as the subject of the screen.",
+    "use_when": "Any live fleet, vehicle-tracking or control-room map where many moving objects share one view (scenario 4).",
+    "has_example": false,
+    "path": "entries/map/geops-live-transit-vehicles",
+    "images": [
+      "entries/map/geops-live-transit-vehicles/desktop.jpg",
+      "entries/map/geops-live-transit-vehicles/mobile.jpg",
+      "entries/map/geops-live-transit-vehicles/crop-motion-5s-later.jpg"
+    ],
+    "files": [
+      "evidence.json",
+      "entry.md"
+    ],
+    "body": "## What it is\ngeOps' Mobility Portal (the public tracker.geops.ch redirects here), opened at Zürich, zoom 13. Trains, trams, buses and\nboats appear as coloured dots, with the network drawn as grey lines, plus a station search, a \"Topics\" layer menu,\na zoom slider, a basemap switcher (bottom left) and a scale bar. `crop-motion-5s-later.jpg` is the same view five seconds\nlater: the vehicles have moved smoothly.\n\n## Key techniques\n- **The basemap stays quiet**: light grey roads, pale green parks, small grey labels. Only vehicles use saturated colour.\n- **Interpolated motion**: vehicles animate between real-time positions instead of jumping on each ping.\n- **Network lines under vehicles**: dashed and solid grey lines show the route context without competing with the dots.\n- **Stack**: MapLibre 6 canvas with OpenLayers layers on top (`evidence.json`: one WebGL2 context, 3 canvases).\n  5.8 MB transferred, 1.25 MB of JS.\n- **Attribution always visible**, bottom right: \"Geodata © SBB/CFF/FFS, © geOps Tiles, © OpenStreetMap, © OpenMapTiles\".\n\n## Accessibility\n- **The map canvas isn't focusable** (`tabindex=-1`, no role or label), so keyboard users can't pan or zoom the map.\n  Zoom buttons are named only through `title`.\n- Dots appear to encode punctuality with a green-to-red fill, but there's no on-map key, and colour is the only cue (fails 1.4.1).\n- **Vehicles keep moving under `prefers-reduced-motion: reduce`**, and there's no Pause control (WCAG 2.2.2).\n- A welcome dialog covers the map on every first visit. Its close button's name is German (\"Dialog schließen\") on the English page.\n\n## Weaknesses\n- A promo carousel (\"Developer portal\", \"Mapset\") permanently covers the bottom-right of the map, on mobile too.\n- At city zoom, dots overlap in dense areas (Zürich HB) with no clustering or declutter.\n\n## Related entries\n- `map/mbta-line-diagram-live-vehicles` (the list-first accessible alternative), `map/protomaps-data-viz-basemap-flavours`."
+  },
+  {
+    "id": "map/maplibre-clusters-click-to-expand",
+    "kind": "pattern",
+    "title": "Count clusters that ease in on click and jump when motion is reduced",
+    "pattern": "map",
+    "page_type": "docs",
+    "tags": [
+      "data-viz",
+      "webgl",
+      "open-source",
+      "interactive"
+    ],
+    "source_url": "https://maplibre.org/maplibre-gl-js/docs/examples/create-and-style-clusters/",
+    "source_site": "maplibre.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Built-in GeoJSON clustering turns a large earthquake dataset into 39 labelled circles at zoom 3 sized and coloured by count, and clicking a cluster eases straight to the zoom where it splits, so drilling down takes one click instead of guessing.",
+    "use_when": "More than a few hundred points in one view (vehicles, sites, incidents) where individual markers would overlap; the default before reaching for deck.gl.",
+    "has_example": false,
+    "path": "entries/map/maplibre-clusters-click-to-expand",
+    "images": [
+      "entries/map/maplibre-clusters-click-to-expand/desktop.jpg",
+      "entries/map/maplibre-clusters-click-to-expand/crop-after-cluster-click.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nMapLibre GL JS 6.15.0's \"Create and style clusters\" example (captured standalone, `create-and-style-clusters.html`).\nClusters use three steps: radius 20/30/40 and colour `#51bbd6` / `#f1f075` / `#f28cb1` at 0–99 / 100–749 / 750+ points,\nwith the count as the label (abbreviated, e.g. \"1k\"). Single quakes are 4 px `#11b4da` dots with a white stroke.\n`crop-after-cluster-click.jpg` shows the result of clicking the 1,006-point cluster.\n\n## Key techniques\n- **`cluster: true` on the GeoJSON source** plus `getClusterExpansionZoom(clusterId)` → `easeTo({center, zoom})`: the\n  click lands exactly where the cluster breaks apart (zoom 3 → 4 here).\n- **Count plus size plus colour**: three cues for magnitude, so it doesn't rely on colour alone.\n- Unclustered points open a popup (\"magnitude\", \"Was there a tsunami?\").\n\n## Accessibility\n- **Reduced motion is honoured, measured**: with `prefers-reduced-motion: reduce`, the zoom was already at its final value\n  100 ms after the click, with `isMoving()` false. Without it, the map was still easing (zoom 3.5 of 4 at 100 ms).\n  `easeTo` / `flyTo` only animate under reduce when called with `essential: true`.\n- Canvas focusable, `role=\"region\"`, `aria-label=\"Map\"`. **+ / − keys zoom (measured)**.\n- **Cluster colours fail 3:1 against the basemap** (WCAG 1.4.11): yellow on land 1.16:1, blue on land 1.60:1, pink on\n  land 1.64:1. Single points on the ocean are 2.11:1. Count text is black on every cluster (9.2–17.5:1, fine).\n- Clusters aren't keyboard reachable. Only the mouse can expand them.\n- The attribution is collapsed to \"MapLibre ⓘ\".\n\n## Weaknesses\n- The demo basemap is saturated (lilac Canada, green USA), which is why the cluster colours wash out. On a grayscale\n  flavour the same palette would pass.\n\n## Related entries\n- `map/protomaps-data-viz-basemap-flavours`, `map/geops-live-transit-vehicles`."
+  },
+  {
+    "id": "map/mbta-line-diagram-live-vehicles",
+    "kind": "pattern",
+    "title": "Line diagram as the primary view, with a small live-vehicle map beneath",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "b2c",
+      "interactive",
+      "minimal"
+    ],
+    "source_url": "https://www.mbta.com/schedules/Red/line",
+    "source_site": "mbta.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "The full stop list (with branch labels, connections, accessibility icons and \"View departures\" links) carries every fact, so the map can stay small and secondary. Anyone who can't use the map loses nothing.",
+    "use_when": "Transit, delivery or route status pages where people need \"where is it and when does it arrive\" more than spatial exploration; the accessible pattern to pair with any live map.",
+    "has_example": false,
+    "path": "entries/map/mbta-line-diagram-live-vehicles",
+    "images": [
+      "entries/map/mbta-line-diagram-live-vehicles/desktop.jpg",
+      "entries/map/mbta-line-diagram-live-vehicles/mobile.jpg",
+      "entries/map/mbta-line-diagram-live-vehicles/crop-list-and-map.jpg"
+    ],
+    "files": [
+      "evidence.json",
+      "entry.md"
+    ],
+    "body": "## What it is\nMBTA's Red Line page: a \"Stations & Departures\" list drawn as a vertical red line diagram, with a direction toggle\n(\"Northbound · Alewife · Change Direction\") and a station search. Below it, a 688×400 Leaflet map shows the line and\n**31 live train markers** (arrow icons pointing in the direction of travel). `crop-list-and-map.jpg` shows the map under the list.\n\n## Key techniques\n- **List first, map second**: the diagram is the main content, with branches labelled (\"BRAINTREE BRANCH\", \"ALEWIFE BRANCH\"),\n  connecting bus routes as chips, and parking and step-free icons per stop.\n- **Arrow markers** show heading at a glance, unlike plain dots.\n- **Light OSM basemap** with the route in brand red, so the line and trains stand out without a custom style.\n- **Leaflet attribution visible** (\"Leaflet | © OpenStreetMap contributors\").\n\n## Accessibility\n- The map container is focusable (`tabindex=0`), and arrow keys pan it (measured), but it has **no label or role**.\n- Vehicle markers are `<img alt=\"\">` with no focus: decorative to screen readers. That's acceptable only because the list\n  above carries the same information.\n- No motion under reduced motion (trains update in place).\n\n## Weaknesses\n- The list doesn't show live train positions (\"approaching Park St\"), so the live data appears only on the map.\n- Leaflet 1.9.4 (last release May 2023) fails our six-month maintenance gate. Keep the pattern, not the library.\n\n## Related entries\n- `map/geops-live-transit-vehicles`, `data-table/govuk-numeric-semantic-table`."
+  },
+  {
+    "id": "map/protomaps-data-viz-basemap-flavours",
+    "kind": "pattern",
+    "title": "Basemap flavours built for data overlays, white, grayscale and black",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "data-viz",
+      "webgl",
+      "minimal",
+      "open-source",
+      "dark"
+    ],
+    "source_url": "https://maps.protomaps.com/#map=13/51.5072/-0.1276",
+    "source_site": "maps.protomaps.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Three \"data viz\" flavours strip the basemap to neutral tones (white, grayscale, black), so any status colour you draw on top keeps its meaning, and the same view switches flavour with one control.",
+    "use_when": "Choosing a basemap for a dashboard or fleet map where markers, heatmaps or choropleths carry the colour; the default for our maps.",
+    "has_example": false,
+    "path": "entries/map/protomaps-data-viz-basemap-flavours",
+    "images": [
+      "entries/map/protomaps-data-viz-basemap-flavours/desktop.jpg",
+      "entries/map/protomaps-data-viz-basemap-flavours/crop-flavour-black.jpg",
+      "entries/map/protomaps-data-viz-basemap-flavours/crop-flavour-dark.jpg",
+      "entries/map/protomaps-data-viz-basemap-flavours/crop-flavour-grayscale.jpg",
+      "entries/map/protomaps-data-viz-basemap-flavours/crop-flavour-white.jpg"
+    ],
+    "files": [
+      "evidence.json",
+      "entry.md"
+    ],
+    "body": "## What it is\nThe Protomaps basemap viewer at London, zoom 13. A \"flavor\" select switches between light (`desktop.jpg`), dark and the\ndata-viz flavours white, grayscale and black (`crop-flavour-*.jpg`), with a language select, place search, zoom,\ncompass, globe toggle, geolocate and a feature inspector. Tiles come from one PMTiles file (`v4.pmtiles`).\n\n## Key techniques\n- **Neutral flavours for overlays**: grayscale renders land at about `#c2c2c2` with darker water; black at about `#191919`;\n  white at about `#fcfcfc`. They carry no hue to clash with status colours.\n- **Labels stay readable in every flavour**, from street names up to district names in small caps.\n- **One file, self-hostable**: a single PMTiles archive served over HTTP range requests, so no tile server and no API key.\n- MapLibre 6, 929 KB transferred on first load (320 KB JS).\n\n## Accessibility\n- The map canvas is focusable, with `role=\"region\"` and `aria-label=\"Map\"` (MapLibre default). Arrow keys pan it (measured).\n- All controls have names (\"Zoom in\", \"Drag to rotate map, click to reset north\", \"Find my location\").\n- **Attribution visible** (\"Protomaps © OpenStreetMap\"). The map doesn't animate under reduced motion.\n\n## Weaknesses\n- It's a developer tool: the flavour and language selects are small, and the page has no product chrome.\n- In grayscale, water and parks differ only in lightness. Fine for a backdrop, but don't use the basemap to convey information.\n\n## Related entries\n- `map/geops-live-transit-vehicles`, `design-tokens/*` (pick overlay colours that hold 3:1 against the flavour you choose)."
+  },
+  {
     "id": "navigation/atlassian-multi-target-skip-links",
     "kind": "pattern",
     "title": "Multi-target skip links (\"Skip to: Top Bar · Sidebar · Main Content\") as the first focusable element of an app shell",

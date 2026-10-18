@@ -1,0 +1,40 @@
+{
+  "url": "https://maps.protomaps.com/",
+  "captured_at": "2026-10-18",
+  "gpu": "software (SwiftShader); timings relative only",
+  "transfer_kb": 929,
+  "js_kb": 320,
+  "frames": [
+    {
+      "frame": "https://maps.protomaps.com/#flavorName=light&lang=en&map=0.58/0/0",
+      "lib": "maplibre",
+      "webgl": [
+        "webgl2"
+      ],
+      "attribution_visible": true,
+      "attribution_text": "Protomaps © OpenStreetMap",
+      "container": {
+        "tag": "canvas",
+        "focusable": true,
+        "role": "region",
+        "label": "Map"
+      },
+      "controls": [
+        "Clear",
+        "Zoom in",
+        "Zoom out",
+        "Drag to rotate map, click to reset north",
+        "Enable globe",
+        "Find my location",
+        "Toggle Inspect"
+      ],
+      "canvases": 1,
+      "markers_dom": 0
+    }
+  ],
+  "keyboard": {
+    "focused": true,
+    "view_changed": true
+  },
+  "still_animating_with_reduced_motion": false
+}
