@@ -163,4 +163,15 @@ writeFileSync(join(ROOT, 'SOURCES.md'), [
   '',
 ].join('\n'));
 
+// The search vocabulary (guides/aliases.json) must only point at real taxonomy patterns and existing guides.
+const taxonomy = new Set([...readFileSync(join(ROOT, 'taxonomy.md'), 'utf8').matchAll(/^\| ([a-z0-9-]+) \|/gm)].map((m) => m[1]));
+const { concepts } = JSON.parse(readFileSync(join(ROOT, 'guides/aliases.json'), 'utf8'));
+for (const [id, c] of Object.entries(concepts)) {
+  const bad = c.patterns.filter((p) => !taxonomy.has(p));
+  if (bad.length) throw new Error(`guides/aliases.json ${id}: patterns not in taxonomy.md: ${bad.join(', ')}`);
+  if (c.guide && !existsSync(join(ROOT, c.guide))) throw new Error(`guides/aliases.json ${id}: guide ${c.guide} not found`);
+}
+const unmapped = [...new Set(entries.map((e) => e.pattern))].filter((p) => !Object.values(concepts).some((c) => c.patterns.includes(p)));
+if (unmapped.length) console.warn(`aliases: no concept maps to pattern(s) ${unmapped.join(', ')}; add terms to guides/aliases.json`);
+
 console.log(`catalog: ${entries.length} entries`);

@@ -24,7 +24,17 @@ Read `guides/README.md` first: it explains the layers (guides → sources → pa
 and how to answer. For "which library/site?" questions, `SOURCES.md` has the scored comparison per category.
 
 ## 3. Search
-Read `catalog.json`. Each object has `kind`: `pattern` (one UX pattern) or `source` (a scored
+Start with the search script. It knows the team's vocabulary (`guides/aliases.json`: "snackbar" → toasts,
+"frosted" → materials, "order book" → real-time data), matches whole words and phrases, and prints the coverage
+line and the categories that aren't in the library yet:
+```bash
+node <library-clone>/scripts/find.mjs "<the request in the user's words>"   # works from any directory; --json for structured output
+```
+Use its concepts to pick the guide(s) to read, and its results as the shortlist. Treat the **Weak** list as
+false friends unless the entry itself proves relevant. If a request uses a word the script misses, add it to
+`guides/aliases.json` (and a case to `scripts/find.test.mjs`) so the next search finds it.
+
+Then read the shortlisted rows in `catalog.json`. Each object has `kind`: `pattern` (one UX pattern) or `source` (a scored
 profile of a library or site: `score`/10, `licence`, `version`, `use_when`, `avoid_when`,
 `alternatives`, a scorecard and coverage table in `body`). Common fields: `title, pattern,
 page_type, tags, source_site, rating, why_it_works, use_when, has_example, path, images, files, body`.
@@ -40,14 +50,10 @@ animation library…", or names a kind of component rather than a specific look:
    profiled so far").
 4. Then return the matching patterns from that source as below.
 
-For a specific look ("a dark hero", "a pricing toggle"), search patterns directly:
-- Map the request to `pattern` / `page_type` values from `taxonomy.md`, then
-  match `tags`, `title`, `why_it_works`, `use_when` and `body` text.
-- Rank by fit to the task first, then `rating`.
-- Match whole words and meaning, not substrings ("ai" is not a hit for "detail"; "cursor" in a uPlot
-  crosshair note is not a collaboration cursor). Discard hits that only match incidentally.
+For a specific look ("a dark hero", "a pricing toggle"), rank the script's patterns by fit to the task first,
+then `rating`, and discard hits that only match a word incidentally.
 
-Then judge **coverage** for this request:
+Then confirm the script's **coverage** judgement against what you read (it counts what exists, you judge fit):
 - **Strong**: a guide plus scored sources, or 2+ patterns that fit the task itself (not just the keyword).
 - **Partial**: some fitting patterns, but no guide/sources, or key parts of the request uncovered.
 - **None**: nothing that fits.

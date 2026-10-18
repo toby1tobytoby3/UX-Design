@@ -60,7 +60,8 @@ that entry instead of creating a new one, and tell the user.
 ## 4. Decide the entries
 **One entry per pattern, not per page.** A pricing page may give a `pricing-table`
 entry and a `faq` entry. Only keep patterns that are genuinely strong (rating 3+).
-Use `pattern` and `page_type` values from `taxonomy.md`.
+Use `pattern` and `page_type` values from `taxonomy.md`. If you add a new pattern term, also map it in
+`guides/aliases.json` with the words people use for it (`npm run catalog` warns about unmapped patterns).
 
 Folder: `entries/<pattern>/<site>-<short-slug>/` e.g. `entries/pricing-table/linear-annual-toggle/`.
 

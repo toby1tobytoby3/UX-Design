@@ -20,6 +20,8 @@ don't present invented screenshots or results as captured, and don't paste captu
 codebase (open-source code under its licence is fine).
 
 ## Answering a request
+0. **Search first:** `node scripts/find.mjs "<request>"` maps the request's words to categories, guides and
+   entries, and prints the coverage line (vocabulary in `guides/aliases.json`, tests in `scripts/find.test.mjs`).
 1. **Classify it.**
    - *Category* ("I need a chart / date picker / carousel") → step 2.
    - *Look* ("a dark hero", "a pricing toggle like Notion") → step 3.
