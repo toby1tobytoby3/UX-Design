@@ -29,7 +29,7 @@ const CASES = [
   { q: 'page transition', expect: ['sources/native-css', 'motion/nextjs-viewtransition-photo-gallery'] },
   { q: 'chatbot that streams answers', expect: ['ai-chat/streamdown-streaming-markdown', 'sources/ai-sdk-ui'] },
   { q: 'per-hunk diff review', expect: ['ai-review/pierre-diffs-keep-undo-hunks'] },
-  { q: 'AI writing assistant inside the editor', reject: ['hero/linear-dark-product-hero', 'chart/echarts-datazoom-time-series'], missing: ['E6'] },
+  { q: 'AI writing assistant inside the editor', reject: ['hero/linear-dark-product-hero', 'chart/echarts-datazoom-time-series'], missing: ['D5'] },
   { q: 'collaborative cursor', reject: ['sources/uplot'], coverage: 'none' },
 ];
 

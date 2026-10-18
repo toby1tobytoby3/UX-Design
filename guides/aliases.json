@@ -71,7 +71,7 @@
       "terms": ["citation", "citations", "sources", "provenance", "ai label", "ai disclosure", "disclosure", "trust", "confidence", "hallucination", "audit trail", "audit log", "explainability", "ai act"] },
     "E5": { "patterns": [], "guide": "guides/agentic-ui.md",
       "terms": ["generative ui", "gen ui", "artifacts", "artifact", "canvas mode", "ai-generated components"] },
-    "E6": { "patterns": [], "guide": null,
+    "E6": { "patterns": ["ai-assist"], "guide": "guides/agentic-ui.md",
       "terms": ["inline ai", "ghost text", "autocomplete", "autocompletion", "ai autocomplete", "rewrite", "rewrite in place", "ai rewrite", "help me write", "ai fill", "smart compose", "suggested replies", "ai summary", "summarise", "summarize", "edit with ai", "writing assistant"] },
     "F1": { "patterns": ["hero", "feature-grid", "social-proof", "pricing-table", "cta-section", "faq", "footer"], "guide": null,
       "terms": ["landing page", "landing", "homepage", "home page", "marketing site", "marketing page", "hero", "pricing", "pricing page", "testimonials", "logo wall", "social proof", "features section", "cta", "faq", "footer"] },

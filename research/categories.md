@@ -71,7 +71,7 @@ same way charts and 3D were built.
 | E3 | Human review and approvals | Approval prompts, permission modes, always-ask floor, per-hunk diff review, irreversible guards, checkpoints | ✅ `guides/agentic-ui.md` | P1 | jsdiff (engine) + `@pierre/diffs` or `@git-diff-view/react`; Monaco only if already shipping an editor | Cursor review, Claude Code `/rewind` and permission prompts, GitHub PR review, diffs.com |
 | E4 | Trust and provenance | Citations, AI disclosure (EU AI Act Art. 50), AI labels in mixed content, confidence without percentages, model labels, audit trails, C2PA | ✅ `guides/agentic-ui.md` | P1 | (patterns); C2PA Content Credentials | Perplexity, Elicit, Google AI Mode, NotebookLM, IBM Carbon for AI label |
 | E5 | Generative UI | Agents returning interactive components (tables, charts, forms) | ◐ brief in `guides/agentic-ui.md` | P2 | AI SDK UI typed tool parts (not RSC: experimental), CopilotKit; protocols MCP Apps, A2UI, AG-UI | v0, Claude artifacts, ChatGPT canvas |
-| E6 | Inline AI assist | Ghost-text autocomplete, rewrite in place with Accept/Reject, AI form fill, ⌘K "edit with AI" | ✗ | P1 | (patterns; AI SDK) | Cursor Tab, Notion AI, Linear, Gmail |
+| E6 | Inline AI assist | Ghost text, rewrite in place with Accept/Discard/Try again, AI form fill, AI command menus, inline summaries, suggested replies; IME, screen-reader and mobile rules | ✅ `guides/agentic-ui.md` §7 (benchmarked in `benchinline/`) | P1 plain fields · P2 rich editors (with D5) | AI SDK `useCompletion`/`useObject` + `rich-textarea` (our build), Plate AI (MIT); Tiptap AI paid, BlockNote AI GPL/commercial | platejs.org demos, Tiptap template, Cursor Tab, VS Code Copilot, Apple Writing Tools, Linear triage, Gmail |
 
 ## F. Marketing and storytelling
 

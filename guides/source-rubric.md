@@ -42,3 +42,10 @@ A licence that requires payment for commercial use caps **Licence & health** at 
   edit, branch, attachments without custom code. *Coverage*: native support for the four bench tasks (streaming markdown,
   tool/step display, approvals, citations). *Accessibility*: streaming announced politely, labelled composer, keyboard send
   and stop. *Performance*: stable layout and low main-thread time while streaming a long answer, measured in `benchai/`.
+- **Inline AI assist** (editors and field helpers with AI, `pattern: ai-assist`). Bundle: 5 ≤ 30 KB, 4 ≤ 80, 3 ≤ 150,
+  2 ≤ 250, 1 above (library only, React subtracted). *Default look*: the suggestion, rewrite and menu UI out of the box.
+  *Interactivity*: accept, dismiss, partial accept, retry and undo without custom code. *Coverage*: native support for the
+  four bench tasks (ghost text, rewrite with diff, AI fill, AI command menu). *Accessibility*: ghost text hidden from
+  screen readers with one polite announcement, keyboard model (Tab only while a suggestion shows, Esc), IME-safe.
+  *Performance*: debounce and cancellation, main-thread cost while streaming, measured in `benchinline/`. A GPL or
+  paid-only licence caps *Licence & health* at 2.

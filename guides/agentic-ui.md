@@ -1,6 +1,7 @@
 # AI and agentic UI
 
-`ux-find` reads this for chat interfaces, agents, approvals, diffs and review, citations, AI labelling and generative UI.
+`ux-find` reads this for chat interfaces, agents, approvals, diffs and review, citations, AI labelling, generative UI and
+inline AI in ordinary screens (ghost text, rewrite in place, AI fill).
 **Step 1** picks the stack (benchmarked in `benchai/`). **Steps 2–5** are defaults for chat (E1), agent runs (E2), human
 oversight (E3) and trust and provenance (E4). Everything is guidance with reasons: depart when the situation calls for it.
 
@@ -99,9 +100,41 @@ model author markup. Inline cards for one decision or a little data, **at most t
 panel with version history. Model-authored HTML/JS only in a sandboxed iframe. Don't build on AI SDK RSC (its docs say it
 isn't for production). Watch MCP Apps, A2UI, AG-UI and json-render.
 
-## 7. Screens we still need (logged-in products)
+## 7. Inline AI assist (E6)
+AI inside ordinary screens: ghost text in fields and editors, rewrite a selection in place, AI fill for forms, AI command
+menus, inline summaries and suggested replies. Research: `research/E6-inline-ai.md`. Patterns: `pattern: ai-assist`.
+
+INLINE_STACK
+
+| Default | Why | When to depart |
+|---|---|---|
+| Go inline when the user is already editing something and the output has **one known destination** (this field, this selection, this row): 4–7 presets plus one "Ask AI…" field. Open questions and multi-step work go to chat or a side panel | People iterate on the artefact itself; broad commands belong in panels (NN/g, Shape of AI) | AI-native, conversational products (E1/E2) |
+| **Ghost text**: after the caret, in the field's font, muted but **≥ 4.5:1**, not selectable. Off-caret multi-line edits get a gutter marker | Copilot, Cursor and Plate converge on this; it's content, so it needs text contrast | Code editors: follow the editor theme |
+| Trigger only where continuation is likely (caret at the end of a block, after a space or punctuation); **debounce 250–400 ms**; **abort on every keystroke**; manual trigger **Ctrl+Space** | Measured defaults: CopilotKit 250 ms, codemirror-ai 300 ms, monacopilot 400 ms; Cursor now shows *fewer* suggestions for a higher accept rate | Structured fields (tags, SKU): instant non-LLM autocomplete. Slow-thinking prose: 600–800 ms |
+| Worth showing only within ~1 s of the pause; complete to the next punctuation mark; **no spinner** for ghost text | A spinner for something nobody asked for is noise | An explicit "Complete" command shows a "Writing…" pill |
+| Keys: **Tab** accept · **Esc** dismiss (typing over it also dismisses) · **⌘→ / Ctrl+→** next word · **Alt+] / Alt+[** alternatives | The converged model (Copilot, Cursor, Plate, Gmail Smart Compose) | – |
+| In forms, **intercept Tab only while a suggestion is showing**; otherwise Tab moves focus; never touch Shift+Tab | WCAG 2.1.2 no keyboard trap; keeps keyboard form-filling intact | Rich editors where Tab indents: indent when there's no suggestion |
+| Rewrite entry points: a selection-toolbar "Edit with AI", **⌘K** in plain fields (**⌘J** where ⌘K is "insert link"), `/ai` and space-on-empty-line in block editors | Notion, Plate, BlockNote and CopilotKit agree | A single-purpose field: one "Generate" button beats a menu |
+| Show short rewrites as an **inline word diff** (red strike, green insert); longer ones as a highlighted replacement with "Show changes". Action bar under the range: **Accept** (Enter, default) · **Discard** (Esc) · **Try again** · a refine field; **Insert below** for generative actions | Plate, Tiptap and Notion converge; "a suggestion layer, not an overwrite" (Shape of AI) | Proofreading many small fixes: underline each and step through (Apple Writing Tools, Grammarly) |
+| Accept is **one undo step** (⌘Z restores the original exactly); keep Try-again drafts for the session; fields keep "Restore my text" until save | Gmail Help me write, Carbon's "revert to AI", Apple Writing Tools Revert | – |
+| Stream into a **preview layer**, never into committed content; lock the range; "Writing… · Stop (Esc)"; on stop keep the partial preview with Accept/Discard. Form fill streams a partial object field by field (`useObject`) | Users can't review what's already been written over their text | Outputs under ~1 s: render once |
+| **Never auto-apply.** Never overwrite a non-empty field without asking; bulk fills preview 3–5 rows first | Shape of AI auto-fill; Apple: avoid automating destructive actions | Admin-configured auto-apply for low-risk metadata, logged and reversible (Linear) |
+| AI fill: a "✨ Generate" button in or beside the field; output is **pending** (tint + AI label + Accept / Retry / Undo) with **why** for inferred values | Carbon for AI label; Linear's suggestions with reasons | High-volume data entry: accept-all with one review summary |
+| **Labels:** pending AI content is tinted and labelled; accepted prose carries **no permanent label** (it's the user's text); AI-filled fields keep the label until a human edits or confirms | EU AI Act Art. 50(2) exempts assistive editing and 50(4) human-reviewed text (see E4) | Regulated or collaborative docs: keep an AI-assisted footprint in history |
+| Inline summaries on demand for long threads, with **scope and freshness** ("14 messages · 2 min ago"), links to sources, marked stale when new items arrive | Shape of AI summary; NN/g review summaries | Routine material (meeting notes) can summarise automatically |
+| Suggested replies: **3 chips**; tapping **inserts for editing, never sends**; hide once the user types | Ownership of what's sent | Support macros with a review step |
+| Screen readers: ghost text **`aria-hidden`**, one polite announcement ("Suggestion: … Tab to accept"), a setting to turn automatic suggestions off; rewrite results move focus to the action bar with a change count | VS Code's accessibility signals and Accessible View. **Plate's ghost text is not hidden** from screen readers, so don't copy it blindly | – |
+| **IME:** no request and no ghost text during composition; ignore Tab/Enter/Esc while `isComposing` | Ghost text inside a composition corrupts CJK input | – |
+| **Phones:** no ghost text (no Tab key; fights OS predictions); an "Improve" chip after a few words and a bottom sheet of presets, full-width ≥ 44 px buttons | Plate hides ghost text below `sm`; Gmail mobile "Refine my draft" | Tablets with keyboards: desktop model |
+| Cost and privacy: one request per field in flight, cache by prefix, Snooze and off switches, pause on `saveData`/metered; send only the field plus minimal context and say what's sent; **never** send password, card or one-time-code fields | VS Code pauses on metered connections; Apple: show what's shared | Flat-cost internal tools can relax triggers |
+| Failures: ghost text fails **silently**; rewrites fail **inline** with a plain reason + Retry + Cancel and the original untouched; quota says when it resets | BlockNote's error state; Apple and PAIR on paths forward | – |
+
+## 8. Screens we still need (logged-in products)
 The best agentic references sit behind logins, so they need user screenshots (`/ux-add` with the image). Priority list:
 Claude (thinking block, branch arrows, research citations, permission prompt), ChatGPT (agent mode Take over and
 consequential-action confirm, deep research panel), Cursor (todo list, run-mode approval, per-change Keep/Undo, Restore
 checkpoint), Claude Code (permission prompt, mode chip, `/rewind`), Gemini Deep Research (editable plan), Elicit (quote per
-cell). Full list with exact screens: `research/E-agentic-ui.md`, "Logged-in products".
+cell). For inline AI: Cursor Tab (ghost text, word accept, Snooze), VS Code Copilot (hover toolbar, next-edit gutter arrow),
+Notion AI (Edit with AI → Accept / Discard / Try again, database AI Autofill), Gmail (Smart Compose, Help me write drafts,
+thread summary), Linear (triage suggestions with reasons), Apple Writing Tools (proofread, Revert). Full lists with exact
+screens: `research/E-agentic-ui.md` and `research/E6-inline-ai.md`, "Logged-in products".

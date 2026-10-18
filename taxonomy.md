@@ -41,6 +41,7 @@ more entries would use it.
 | agent-activity | Agent plans, step and tool-call logs, progress of long or background runs, interrupt/redirect |
 | ai-review | Human oversight of AI actions: approval prompts, permission modes, diffs with accept/reject, checkpoints |
 | ai-provenance | Citations and sources, AI labelling and disclosure, model/version labels, audit trails |
+| ai-assist | Inline AI in ordinary screens: ghost-text autocomplete, rewrite in place with accept/reject, AI form fill, AI command menus, inline summaries |
 
 ## Page types
 landing · pricing · product · checkout · dashboard · onboarding · auth · settings · docs · search-results · app

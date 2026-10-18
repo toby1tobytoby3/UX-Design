@@ -1,0 +1,26 @@
+{
+  "name": "ux-design-benchinline",
+  "private": true,
+  "type": "module",
+  "description": "Same four inline-AI tasks (ghost text, rewrite with diff, AI form fill, AI command menu) from one mock in every kit: keyboard model, accessibility, streaming cost and bundle size for sources/",
+  "dependencies": {
+    "@ai-sdk/react": "4.0.147",
+    "@blocknote/core": "0.56.0",
+    "@blocknote/mantine": "0.56.0",
+    "@blocknote/react": "0.56.0",
+    "@blocknote/xl-ai": "0.56.0",
+    "@platejs/ai": "53.3.17",
+    "@platejs/markdown": "53.3.17",
+    "@platejs/selection": "53.1.6",
+    "@platejs/suggestion": "53.2.3",
+    "ai": "7.0.143",
+    "axe-core": "4.14.0",
+    "diff": "9.0.0",
+    "esbuild": "0.25.10",
+    "platejs": "53.3.15",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "rich-textarea": "0.28.0",
+    "zod": "4.1.12"
+  }
+}

@@ -49,6 +49,7 @@ codebase (open-source code under its licence is fine).
 | Motion and state feedback (A5, A6) | `guides/motion.md` | 6 `motion` (benchmarked in `benchmotion/`) | `motion/*`, `feedback/*` |
 | Accessibility and the component-library choice (A7) | `guides/accessibility.md` | 5 `ui-primitives` (benchmarked in `benchui/`) | `accessibility/*` |
 | AI chat, agents, oversight, provenance (E1–E5) | `guides/agentic-ui.md` | `ai-chat` (benchmarked in `benchai/`) | `ai-chat/*`, `agent-activity/*`, `ai-review/*`, `ai-provenance/*` |
+| Inline AI assist: ghost text, rewrite, AI fill (E6) | `guides/agentic-ui.md` §7 | `ai-assist` (benchmarked in `benchinline/`) | `ai-assist/*` |
 | Everything else in `taxonomy.md` | – (patterns only) | – | see `CATALOG.md` |
 
 Categories still to build, with priorities and starting research: `research/categories.md`.
