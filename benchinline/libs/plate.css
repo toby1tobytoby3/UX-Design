@@ -1,0 +1,9 @@
+/* Tailwind for the vendored Plate registry UI, with the shadcn colour variables it expects. */
+@import "tailwindcss";
+@source "./plate";
+@theme inline {
+  --color-background: #fff; --color-foreground: #1f1f1e; --color-muted: #f4f3ef; --color-muted-foreground: #52514e;
+  --color-popover: #fff; --color-popover-foreground: #1f1f1e; --color-accent: #e8f0fb; --color-accent-foreground: #1f1f1e;
+  --color-border: #c9c8c3; --color-input: #c9c8c3; --color-ring: #1d63b8; --color-primary: #1d63b8; --color-primary-foreground: #fff;
+  --color-brand: #1d63b8; --color-destructive: #b42318;
+}

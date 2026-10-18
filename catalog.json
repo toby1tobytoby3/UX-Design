@@ -1,5 +1,166 @@
 [
   {
+    "id": "ai-assist/blocknote-ai-menu-failure-retry",
+    "kind": "pattern",
+    "title": "AI edit failure that keeps the selection and offers Retry or Cancel",
+    "pattern": "ai-assist",
+    "page_type": "docs",
+    "tags": [
+      "error-state",
+      "rewrite",
+      "open-source"
+    ],
+    "source_url": "https://www.blocknotejs.org/examples/ai/minimal",
+    "source_site": "blocknotejs.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 3,
+    "why_it_works": "When generation fails the user's text and selection are untouched and the same menu turns into a two-choice recovery (Retry · Cancel), so a failure costs one click, not the user's work.",
+    "use_when": "Any inline AI action that can fail (network, quota, model error) while the user has a selection or draft open.",
+    "has_example": false,
+    "path": "entries/ai-assist/blocknote-ai-menu-failure-retry",
+    "images": [
+      "entries/ai-assist/blocknote-ai-menu-failure-retry/desktop.jpg",
+      "entries/ai-assist/blocknote-ai-menu-failure-retry/crop-failure.jpg",
+      "entries/ai-assist/blocknote-ai-menu-failure-retry/crop-menu.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nBlockNote's AI example. Selecting a block and choosing **Edit with AI** (toolbar button, `aria-label=\"Edit with AI\"`)\nopens \"Ask AI anything…\" with Improve Writing, Fix Spelling, Translate…, Simplify. In this headless capture the\nexample's backend wasn't reachable, so choosing Simplify produced the **failure state**, which is what this entry\nrecords: the prompt field reads \"Oops! Something went wrong\" and the menu offers **Retry** and **Cancel**. The error\nstate itself is the reference here; the successful flow wasn't captured.\n\n**Licence flag:** BlockNote's AI package (`@blocknote/xl-ai`) is GPL-3.0 or commercial, so it's a reference, not a\ndefault dependency for us (see `research/E6-inline-ai.md`).\n\n## Key techniques\n- Failure doesn't move focus or close the menu: the user stays where they were, with the text still selected.\n- Two clear choices; Cancel restores the pre-AI state.\n\n## Accessibility\n- **Gap:** the error is shown only as placeholder-style grey text in the prompt field; no `role=\"alert\"` or live region\n  was found, so screen-reader users hear nothing. Announce failures politely and use real text, not a placeholder.\n- **Gap:** \"Something went wrong\" gives no reason or next step (offline? quota? try later?).\n\n## Weaknesses\n- Generic copy; no indication whether retrying will help.\n\n## Related entries\n- `ai-assist/tiptap-selection-ai-refine-apply`\n- `ai-assist/plate-ai-inline-diff-rewrite`"
+  },
+  {
+    "id": "ai-assist/plate-ai-inline-diff-rewrite",
+    "kind": "pattern",
+    "title": "Selection rewrite shown as an inline diff with Accept, Discard, Insert below and Try again",
+    "pattern": "ai-assist",
+    "page_type": "docs",
+    "tags": [
+      "inline-diff",
+      "rewrite",
+      "open-source",
+      "keyboard",
+      "streaming"
+    ],
+    "source_url": "https://platejs.org/docs/ai",
+    "source_site": "platejs.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "The original stays visible (struck in red) next to the AI's version (green) while it streams, so the user judges the change in place and nothing is replaced until they press Accept.",
+    "use_when": "Rewriting a sentence or paragraph the user already wrote (improve, shorten, fix grammar, change tone) in a rich-text editor.",
+    "has_example": false,
+    "path": "entries/ai-assist/plate-ai-inline-diff-rewrite",
+    "images": [
+      "entries/ai-assist/plate-ai-inline-diff-rewrite/desktop.jpg",
+      "entries/ai-assist/plate-ai-inline-diff-rewrite/crop-diff.jpg",
+      "entries/ai-assist/plate-ai-inline-diff-rewrite/crop-menu.jpg",
+      "entries/ai-assist/plate-ai-inline-diff-rewrite/crop-streaming.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nPlate's AI menu (`@platejs/ai`, MIT, built on the AI SDK). Select text and press **⌘J / Ctrl+J** (or \"Ask AI\" in the\nfloating toolbar, right-click, or space in an empty block). A command menu opens with \"Ask AI anything…\" and presets\n(Improve writing, Comment, Emojify, Make longer, Make shorter, Fix spelling & grammar, Simplify language). The rewrite\nstreams in as a suggestion: deletions red, insertions green. When it finishes the menu offers **Accept · Discard ·\nInsert below · Try again**. While streaming a pill reads **\"Writing… Stop Esc\"** (found in the DOM; it renders just\nbelow the fold in this capture). The demo's model route is mocked, so the inserted words are Latin filler.\n\n## Key techniques\n- The diff is written into the document as suggestion marks (`slate-suggestion`), not an overlay, so it survives scroll\n  and reflow: red `text-red-700` on `bg-red-100` (**5.3:1**), green `text-emerald-700` on `bg-emerald-100` (**4.7:1**).\n- One menu for both stages: the same `cmdk` list holds the prompts before and the decisions after, so the keyboard\n  model (arrows + Enter) never changes.\n- **Insert below** keeps the original and adds the AI version underneath, a useful fourth option between accept and discard.\n- A \"1\" edit badge in the margin marks the block that has a pending suggestion.\n\n## Accessibility\n- **Gap:** insertions and deletions differ only by colour (`text-decoration: none` on both), which fails WCAG 1.4.1;\n  add strikethrough to deletions and underline to insertions.\n- No ARIA on the suggestion marks; one `aria-live=\"polite\"` region exists on the page but stayed empty during the run.\n- \"Ask AI anything…\" is a placeholder with no `aria-label`.\n\n## Weaknesses\n- The UI ships through the shadcn registry, so in our stack we'd rebuild the menu with our own primitives.\n- The diff is word-level; for long rewrites it becomes a wall of red and green, where a side-by-side or \"show changes\" toggle reads better.\n\n## Related entries\n- `ai-assist/plate-copilot-ghost-text` (same editor, ghost text)\n- `ai-assist/tiptap-selection-ai-refine-apply` (same job without a visible diff)\n- `ai-review/pierre-diffs-keep-undo-hunks` (code-hunk version of accept/reject)"
+  },
+  {
+    "id": "ai-assist/plate-copilot-ghost-text",
+    "kind": "pattern",
+    "title": "Ghost-text completion after the caret, accepted with Tab",
+    "pattern": "ai-assist",
+    "page_type": "docs",
+    "tags": [
+      "ghost-text",
+      "keyboard",
+      "open-source",
+      "minimal",
+      "interactive"
+    ],
+    "source_url": "https://platejs.org/docs/copilot",
+    "source_site": "platejs.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "The suggestion appears inline at the caret in dimmed text and becomes real text with one key, so writing never leaves the flow and nothing changes until you accept.",
+    "use_when": "Rich-text or long-form fields where a continuation is likely useful (notes, descriptions, replies) and the user is typing at the end of a block.",
+    "has_example": false,
+    "path": "entries/ai-assist/plate-copilot-ghost-text",
+    "images": [
+      "entries/ai-assist/plate-copilot-ghost-text/desktop.jpg",
+      "entries/ai-assist/plate-copilot-ghost-text/crop-after-tab.jpg",
+      "entries/ai-assist/plate-copilot-ghost-text/crop-ghost.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nPlate's Copilot plugin (`@platejs/ai`, MIT) shown on its docs page. After typing at the end of a paragraph, a grey\ncontinuation appears directly after the caret. **Tab** accepts it all, **⌘→ / Ctrl+→** accepts word by word, **Esc**\ndismisses, **Ctrl+Space** asks again. The page's API route returns 404 in this demo, so the suggestion is mocked Latin\nfiller text: the behaviour is real, the words aren't. `crop-ghost.jpg` is before Tab, `crop-after-tab.jpg` after.\n\n## Key techniques\n- Ghost text is a separate non-editable span after the caret: `<span contenteditable=\"false\" class=\"pointer-events-none text-muted-foreground/70\">`,\n  so clicks and selection pass through to the real text.\n- Colour `oklab(0.556 0 0 / 0.7)` on white, about **2.7:1**. That's deliberately low (it must read as \"not yet yours\"),\n  but it's under the 4.5:1 text minimum, so it can't carry anything the user must read to decide.\n- Triggered after typing at the end of a block (debounced; the research found 250–400 ms in comparable tools) and on\n  demand with Ctrl+Space. On accept the span is replaced by plain text with the same formatting as its neighbours.\n- `max-sm:hidden`: ghost text is switched off on small screens, where Tab isn't available.\n\n## Accessibility\n- **Gap:** the ghost span has no `aria-hidden` and there is no live-region announcement, so a screen reader may read the\n  suggestion as if it were document text, or not mention it at all. Our default: `aria-hidden=\"true\"` on the ghost plus\n  one polite announcement (\"Suggestion available, Tab to accept\").\n- Tab is only intercepted while a suggestion is showing; otherwise it keeps its normal meaning (good).\n- No sign of IME handling in the demo (couldn't be tested headless); suggestions should never appear mid-composition.\n\n## Weaknesses\n- The page's \"Plus\" badge refers to Plate's paid templates; the plugin itself is MIT (see `research/E6-inline-ai.md`).\n- No visible hint that Tab will accept (the docs list the keys, but the editor itself shows none).\n\n## Related entries\n- `ai-assist/plate-ai-inline-diff-rewrite` (same editor, rewrite flow)\n- `ai-assist/vscode-copilot-ghost-text-nes` (the same keyboard model in a code editor, with a hover toolbar)"
+  },
+  {
+    "id": "ai-assist/tiptap-selection-ai-refine-apply",
+    "kind": "pattern",
+    "title": "Selection AI menu whose result can be refined in words before Apply",
+    "pattern": "ai-assist",
+    "page_type": "app",
+    "tags": [
+      "rewrite",
+      "refine",
+      "notion-like",
+      "interactive"
+    ],
+    "source_url": "https://template.tiptap.dev/preview/templates/notion-like",
+    "source_site": "template.tiptap.dev",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "After the AI rewrites the selection, a \"Tell AI what else needs to be changed…\" field lets the user steer the result in plain words, so a near-miss is fixed by refining rather than starting over.",
+    "use_when": "Editors where users rewrite their own text and often want a second, more specific pass (tone, length, wording).",
+    "has_example": false,
+    "path": "entries/ai-assist/tiptap-selection-ai-refine-apply",
+    "images": [
+      "entries/ai-assist/tiptap-selection-ai-refine-apply/desktop.jpg",
+      "entries/ai-assist/tiptap-selection-ai-refine-apply/crop-menu.jpg",
+      "entries/ai-assist/tiptap-selection-ai-refine-apply/crop-result.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nTiptap's Notion-like template, live with a real model (no login needed today). Selecting text shows a floating toolbar\nwhose first button is **Improve** (purple sparkle). Its menu: Adjust tone ›, Fix spelling & grammar, Extend text,\nReduce text, Simplify text, Emojify, then Ask AI, Complete sentence, Summarize, Translate ›. After \"Fix spelling &\ngrammar\" the changed text is highlighted in place (purple) with a prompt field \"Tell AI what else needs to be\nchanged…\" and **Try again · Discard · Apply** (Apply is the primary, filled button).\n\n**Reference only, not a source:** Tiptap's AI features need a paid Tiptap subscription, which we exclude as a\ndependency. Copy the interaction, not the code.\n\n## Key techniques\n- The AI entry point is the first item of the existing selection toolbar, labelled with a verb (\"Improve\"), not a\n  separate AI button somewhere else.\n- Presets are grouped: edits of the selection first, then generation (Ask AI, Complete, Summarize, Translate).\n- Refine-in-words field plus Try again: two kinds of retry, steered and unsteered.\n- Apply is visually primary; Discard is secondary; Try again sits on the left away from the commit action.\n\n## Accessibility\n- Toolbar buttons have `aria-label`s (\"Improve\", \"Bold\"…), and the menu is keyboard reachable.\n- Not checked: whether the result or the error is announced to screen readers.\n\n## Weaknesses\n- **No visible before/after**: the new text replaces the selection and is only tinted, so the user can't see what\n  changed without discarding. Prefer an inline diff (see `ai-assist/plate-ai-inline-diff-rewrite`) or a \"Show changes\" toggle.\n- A real model behind a public demo means results vary and may be rate-limited.\n\n## Related entries\n- `ai-assist/plate-ai-inline-diff-rewrite`\n- `ai-assist/blocknote-ai-menu-failure-retry`"
+  },
+  {
+    "id": "ai-assist/vscode-copilot-ghost-text-nes",
+    "kind": "pattern",
+    "title": "Ghost text with a cycling toolbar, and next-edit suggestions in the gutter",
+    "pattern": "ai-assist",
+    "page_type": "docs",
+    "tags": [
+      "ghost-text",
+      "keyboard",
+      "devtools",
+      "dark"
+    ],
+    "source_url": "https://code.visualstudio.com/docs/copilot/ai-powered-suggestions",
+    "source_site": "code.visualstudio.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "The mature keyboard model for inline AI, in one place. Tab accepts, partial accept goes word by word, alternatives cycle in a small hover toolbar that shows its own shortcuts, and suggestions away from the caret are flagged in the gutter instead of being forced into the text.",
+    "use_when": "Designing the keyboard model and discoverability for any ghost-text feature, especially for power users.",
+    "has_example": false,
+    "path": "entries/ai-assist/vscode-copilot-ghost-text-nes",
+    "images": [
+      "entries/ai-assist/vscode-copilot-ghost-text-nes/crop-hover-toolbar.jpg",
+      "entries/ai-assist/vscode-copilot-ghost-text-nes/crop-nes-gutter.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe VS Code documentation for GitHub Copilot inline suggestions. The two crops are Microsoft's own product\nscreenshots on that public page (captured live from the page, not by us running Copilot):\n- `crop-hover-toolbar.jpg`: dimmed italic ghost text with a hover toolbar: **‹ 1/3 ›** to cycle alternatives,\n  **Accept (Tab)**, **Accept Word (Ctrl + RightArrow)**, and an overflow menu.\n- `crop-nes-gutter.jpg`: a **Next Edit Suggestion**: a gutter marker on line 21 opens \"Copilot Next Edit Suggestion\"\n  with **Go To / Accept (Tab)**, **Reject (Escape)**, Show Collapsed, Settings. The proposed change is drawn inline.\n\n## Key techniques\n- Shortcuts are printed inside the UI (key caps in the toolbar and menu), which teaches the model without docs.\n- Partial accept: ⌘→ / Ctrl+→ accepts the next word or line.\n- Alternatives are numbered (\"1/3\") so the user knows there are more without asking.\n- Suggestions away from the caret are announced by a gutter marker, not by moving the cursor.\n- Restraint (from the page text): a **Snooze** button in the status-bar menu pauses suggestions for five minutes at a time,\n  inline suggestions can be turned off on metered connections, and `editor.inlineSuggest.minShowDelay` sets a show delay\n  (default 0 ms).\n\n## Accessibility\n- The page doesn't show the screen-reader path here; VS Code documents an Accessible View for suggestions\n  (`research/E6-inline-ai.md`). Ghost text is dimmed and italic, i.e. low contrast by design, the same trade-off as Plate.\n\n## Weaknesses\n- Code-editor context: dense prose UIs need a lighter version (no gutter).\n- Screenshots on a docs page can lag the shipping product.\n\n## Related entries\n- `ai-assist/plate-copilot-ghost-text` (the same model in a rich-text editor)"
+  },
+  {
     "id": "3d/apple-airpods-scroll-story",
     "kind": "pattern",
     "title": "3D product story without a 3D engine",
