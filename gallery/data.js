@@ -1003,7 +1003,20 @@ window.CATALOG = [
     "has_example": false,
     "score": 7.8,
     "rating": 4,
-    "bench": null,
+    "bench": {
+      "kind": "map",
+      "bundle_gz_kb": 585.6,
+      "lib_only_gz_kb": 672.2,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 5,
+      "tasks_total": 5,
+      "unsupported": [],
+      "first_render_ms_swiftshader": 742,
+      "live_long_task_ms": 0,
+      "dropped_frames": 12,
+      "axe_violations": 1,
+      "evidence": "render 742 ms; live 5k @1 Hz: 0 ms long tasks; all checks pass"
+    },
     "path": "sources/deck-gl",
     "images": [
       "sources/deck-gl/bench.jpg"
@@ -1011,7 +1024,7 @@ window.CATALOG = [
     "files": [
       "source.md"
     ],
-    "body": "## Verdict\n**The add-on for heavy map data.** Updating 5,000 vehicles at 1 Hz caused **no long tasks** even with the CPU throttled\n4× (MapLibre's own layers: ~32 ms per update). It adds **~228 KB gz** to MapLibre. One trap stands out: on\n**MapLibre 6.15, `MapboxOverlay({ interleaved: true })` crashes** with deck.gl 9.4.0, so the bench ran the overlaid mode.\n\n## Benchmark (same basemap, 5,000 vehicles and tasks as every other stack, `benchmap/`)\nCode: `benchmap/libs/maplibre-deckgl.jsx` (react-maplibre `<Map>` + `MapboxOverlay` through `useControl`, two\n`ScatterplotLayer`s, supercluster below z12). Software GPU (SwiftShader): timings are relative only.\n\n| Task | Result |\n|---|---|\n| First render | 742 ms |\n| 30 s of 1 Hz updates (4× CPU throttle, z12) | p50/p95 frame 16.7/16.8 ms, 12 dropped frames, **0 ms long tasks** (`updateTriggers`) |\n| Click-pick at z13 and z16 | 2/2 correct (`pickable` + `onClick`) |\n| Cluster click | **No clustering built in**; supercluster + `easeTo`, z10 → z11 |\n| `flyTo` with reduced motion | Jumped (MapLibre owns the camera) |\n| Keyboard, attribution, axe | Same as MapLibre: named focusable canvas, arrows and +, attribution shown, 1 axe issue |\n| Bundle | 672.2 KB gz for MapLibre + deck.gl + supercluster, so deck.gl adds ~228 KB |\n\nFound in the benchmark:\n- **Interleaved mode crashes on MapLibre 6.** `@deck.gl/mapbox` 9.4.0 reads `map.transform`, which MapLibre 6 removed:\n  \"Cannot read properties of undefined (reading 'height')\" on every frame. Overlaid mode (`interleaved: false`) works,\n  but deck layers then sit above all basemap labels and use a second WebGL context. Until a fix ships, pin MapLibre 5\n  if you need `beforeId` layer slotting, or accept overlaid mode.\n- deck.gl transitions don't check `prefers-reduced-motion`. Turn `transitions` off yourself when it is set.\n\n## Weaknesses\n- No basemap, no clustering, no keyboard model of its own: it relies on MapLibre for all three.\n- Interleaved with MapLibre 6 is broken in 9.4.0 (above).\n- Canvas output; the accessible path is a synced list.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Layers need explicit colours and sizes; no basemap |\n| Interactivity | 4 | Picking, hover, transitions, controller; clustering needs supercluster |\n| Coverage | 5 | Scatter, icon, path, trips, hexagon, grid, heatmap, H3, 3D; ~1M points at 60 fps (docs) |\n| Accessibility | 3 | Inherits MapLibre's keyboard and camera; transitions ignore reduced motion; canvas only |\n| Performance | 5 | 0 ms long tasks for 5,000 live vehicles at 4× throttle, 12 dropped frames in 30 s |\n| React/Next fit | 4 | `useControl` + `MapboxOverlay` in react-maplibre, or `<DeckGL>`; client-only |\n| Bundle size | 3 | ~228 KB gz on top of MapLibre |\n| Licence & health | 4 | MIT; 9.4.0 released 5 Sep 2026; interleaved mode incompatible with MapLibre 6 |"
+    "body": "## Verdict\n**The add-on for heavy map data.** Updating 5,000 vehicles at 1 Hz caused **no long tasks** even with the CPU throttled\n4× (MapLibre's own layers: ~32 ms per update). It adds **~228 KB gz** to MapLibre. One trap stands out: on\n**MapLibre 6.15, `MapboxOverlay({ interleaved: true })` crashes** with deck.gl 9.4.0, so the bench ran the overlaid mode.\n\n## Benchmark (same basemap, 5,000 vehicles and tasks as every other stack, `benchmap/`)\nCode: `benchmap/libs/maplibre-deckgl.jsx` (react-maplibre `<Map>` + `MapboxOverlay` through `useControl`, two\n`ScatterplotLayer`s, supercluster below z12). Software GPU (SwiftShader): timings are relative only.\n\n| Task | Result |\n|---|---|\n| First render | 742 ms |\n| 30 s of 1 Hz updates (4× CPU throttle, z12) | p50/p95 frame 16.7/16.8 ms, 12 dropped frames, **0 ms long tasks** (`updateTriggers`) |\n| Click-pick at z13 and z16 | 2/2 correct (`pickable` + `onClick`) |\n| Cluster click | **No clustering built in**; supercluster + `easeTo`, z10 → z11 |\n| `flyTo` with reduced motion | Jumped (MapLibre owns the camera) |\n| Keyboard, attribution, axe | Same as MapLibre: named focusable canvas, arrows and +, attribution shown, 1 axe issue |\n| Bundle | 672.2 KB gz for MapLibre + deck.gl + supercluster, so deck.gl adds ~228 KB |\n\nFound in the benchmark:\n- **Interleaved mode crashes on MapLibre 6.** `@deck.gl/mapbox` 9.4.0 reads `map.transform`, which MapLibre 6 removed:\n  \"Cannot read properties of undefined (reading 'height')\" on every frame. Overlaid mode (`interleaved: false`) works,\n  but deck layers then sit above all basemap labels and use a second WebGL context. The same probe with\n  **MapLibre 5.24.0 interleaves fine**, so until a fix ships, pin MapLibre 5 if you need `beforeId` layer slotting, or\n  accept overlaid mode.\n- Nothing in deck.gl 9.4 reads `prefers-reduced-motion`, so attribute transitions animate regardless. Turn `transitions` off yourself when it is set.\n\n## Weaknesses\n- No basemap, no clustering, no keyboard model of its own: it relies on MapLibre for all three.\n- Interleaved with MapLibre 6 is broken in 9.4.0 (above).\n- Canvas output; the accessible path is a synced list.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Layers need explicit colours and sizes; no basemap |\n| Interactivity | 4 | Picking, hover, transitions, controller; clustering needs supercluster |\n| Coverage | 5 | Scatter, icon, path, trips, hexagon, grid, heatmap, H3, 3D; ~1M points at 60 fps (docs) |\n| Accessibility | 3 | Inherits MapLibre's keyboard and camera; transitions ignore reduced motion; canvas only |\n| Performance | 5 | 0 ms long tasks for 5,000 live vehicles at 4× throttle, 12 dropped frames in 30 s |\n| React/Next fit | 4 | `useControl` + `MapboxOverlay` in react-maplibre, or `<DeckGL>`; client-only |\n| Bundle size | 3 | ~228 KB gz on top of MapLibre |\n| Licence & health | 4 | MIT; 9.4.0 released 5 Sep 2026; interleaved mode incompatible with MapLibre 6 |"
   },
   {
     "id": "sources/dockview",
@@ -1140,6 +1153,117 @@ window.CATALOG = [
     "body": "## Verdict\n**The free docking engine to pick when keyboard access matters.** It's the only docking library here whose\nsplitters take focus, expose `separator` semantics and resize with the arrow keys. It also docks, splits and pops out\nas well as Dockview. It still falls short of the APG splitter (no Home/End, no Enter to collapse), its splitters share\none generic name, and moving a tab needs a drag.\n\n## Benchmark (same three-pane workspace as every other library, `benchpanels/`)\n**12/17 checks**, 1 axe violation, **53.7 KB gz** (49.9 KB JS + 3.8 KB CSS). Code: `benchpanels/libs/flexlayout-react.jsx`,\n19 lines.\n\nFound in the benchmark:\n- Keyboard: splitters are reached with Tab, have `role=\"separator\"`, `aria-valuenow/min/max` and `aria-valuetext`\n  (\"16%\"), and ArrowRight moved them **10 px**. Home, End and Enter did nothing. Every splitter is named just \"Resize\",\n  and there's no `aria-controls`.\n- Grab area **8 px** (−4 to +3), the visible 8 px splitter.\n- Docking: Terminal dropped on Inspector joined that tabset; dropped on the Editor's bottom edge it made a new tabset.\n  The built-in pop-out icon (`enablePopout` + `enablePopoutIcon`) opened a real window with the pane inside.\n- No double-click reset.\n- `model.toJson()` / `Model.fromJson` restored the layout on the first painted frame (CLS 0).\n- No built-in non-drag way to move a tab to another tabset (the context menu is yours to build with `onContextMenu`\n  and its exported `PopupMenu`).\n- axe: `color-contrast` on the inactive tab label in the light theme.\n- Drag with heavy panes: p95 frame 16.8 ms. Geometry is applied imperatively, so tab content doesn't re-render on resize.\n\n## Weaknesses\n- Sizes are weights, not pixels: a 240 px sidebar is \"weight 240 of 1440\".\n- 0.x versioning and a JSON model with actions (`Actions.moveNode`) rather than React-style props.\n- Fix the inactive-tab contrast and name each splitter yourself.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 4 | Light, dark, rounded and other themes; CSS variables |\n| Interactivity | 5 | Dock to centre and edge, pop out, maximise, borders, save/restore; no double-click reset |\n| Coverage | 4 | Docking, borders, pop-outs, tab groups; split panes through tabsets; no tiles |\n| Accessibility | 3 | Focusable separators with values and arrow keys; no Home/End/collapse; generic names; contrast failure; drag-only docking |\n| Performance | 4 | Restores on the first frame; 60 fps drag; client-only |\n| React/Next fit | 3 | React component over a JSON model and action API; client-only |\n| Bundle size | 3 | 53.7 KB gz |\n| Licence & health | 4 | MIT; Caplin; release 26 Sep 2026; ~80k weekly downloads; 0.x |"
   },
   {
+    "id": "sources/kepler-gl",
+    "kind": "source",
+    "title": "kepler.gl",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "maps",
+      "analysis",
+      "open-source",
+      "deck-gl",
+      "exploration",
+      "heavy"
+    ],
+    "source_url": "https://kepler.gl",
+    "source_site": "kepler.gl",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "desk-research",
+    "version": "3.2.6",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 5,
+    "s_coverage": 5,
+    "s_a11y": 2,
+    "s_perf": 4,
+    "s_react": 2,
+    "s_bundle": 1,
+    "s_licence": 3,
+    "why_it_works": "A complete geospatial exploration app on deck.gl, with a layer panel, filters, time playback, hexbin and arc layers and DuckDB loading, that analysts can point at a CSV and explore with no code.",
+    "use_when": "An internal analysis tool or a reference for exploration UI (layer list, filter panel, time slider). Embed it only when the whole app is the product.",
+    "avoid_when": "Product UI that needs your own design system, or a light bundle: it brings Redux, styled-components and an old map stack.",
+    "alternatives": [
+      "deck-gl",
+      "maplibre"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": null,
+    "path": "sources/kepler-gl",
+    "images": [],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**An analyst's workbench, not a component library.** Desk research only; it isn't in `benchmap/`, because it is a whole\napp rather than a map renderer. Three flags: **npm `latest` is an alpha** (3.3.0-alpha.16, 17 Oct 2026; the demo runs\nalpha.17), the last stable is **3.2.6 from 16 Mar 2026**, and `@kepler.gl/components` depends on **`mapbox-gl` 1.13.1**\nand `maplibre-gl ^4`, not MapLibre 6.\n\n## What it covers\nLayer panel (point, arc, line, hexbin, H3, trips, polygon, heatmap), field-based colour and size, filters with\nhistograms, time playback, tooltips and brushing, map styles, export to image, HTML or JSON, and DuckDB-based loading.\nPublic demo with sample data: https://kepler.gl/demo/nyctrips (no login).\n\n## Weaknesses\n- The alpha line is the `latest` tag: install `kepler.gl@3.2.6` explicitly for stability, and expect churn.\n- Pulls in Redux (its own store slice), styled-components 6 and `mapbox-gl` 1.x: heavy, and outside our stack.\n- Accessibility not measured. The UI is drag-heavy panels and canvas layers.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | A finished dark analysis UI out of the box |\n| Interactivity | 5 | Filters, brushing, time playback, layer config with no code |\n| Coverage | 5 | Most deck.gl layer types plus data loading and export |\n| Accessibility | 2 | Not measured; drag-based panels and canvas output (desk) |\n| Performance | 4 | deck.gl rendering underneath (desk) |\n| React/Next fit | 2 | A Redux-connected app component; styled-components; old map dependencies |\n| Bundle size | 1 | Several MB of dependencies (Redux, styled-components, mapbox-gl 1.x, deck.gl) |\n| Licence & health | 3 | MIT, active alpha releases; last stable 7 months old; depends on mapbox-gl 1.x and maplibre-gl 4 |"
+  },
+  {
+    "id": "sources/leaflet",
+    "kind": "source",
+    "title": "Leaflet + react-leaflet",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "maps",
+      "open-source",
+      "raster",
+      "dom",
+      "react",
+      "stale"
+    ],
+    "source_url": "https://leafletjs.com",
+    "source_site": "leafletjs.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.9.4",
+    "licence": "BSD-2-Clause (react-leaflet Hippocratic-2.1)",
+    "s_look": 3,
+    "s_interact": 3,
+    "s_coverage": 2,
+    "s_a11y": 3,
+    "s_perf": 3,
+    "s_react": 3,
+    "s_bundle": 5,
+    "s_licence": 1,
+    "why_it_works": "A small, simple raster map with keyboard pan and zoom and a visible attribution by default, and a canvas renderer that handles a few hundred vector markers.",
+    "use_when": "Not recommended for new work. It is measured as a baseline because many existing apps use it.",
+    "avoid_when": "New products. There has been no stable release since May 2023 (2.0 is still alpha), react-leaflet's licence isn't OSI open source, and dense live data needs WebGL.",
+    "alternatives": [
+      "maplibre",
+      "openlayers"
+    ],
+    "has_example": false,
+    "score": 5.8,
+    "rating": 3,
+    "bench": {
+      "kind": "map",
+      "bundle_gz_kb": 106.3,
+      "lib_only_gz_kb": 48.2,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 5,
+      "unsupported": [
+        "reduced_motion"
+      ],
+      "first_render_ms_swiftshader": 310,
+      "live_long_task_ms": 347,
+      "dropped_frames": 52,
+      "axe_violations": 0,
+      "evidence": "render 310 ms; live 5k @1 Hz: 347 ms long tasks; fails reduced_motion"
+    },
+    "path": "sources/leaflet",
+    "images": [
+      "sources/leaflet/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Small and pleasant, but fails our gates.** At **48.2 KB gz** it is the lightest stack, keyboard pan and zoom work by\ndefault, and the attribution is visible. But Leaflet 1.9.4 (18 May 2023) is the last stable release, and the 2.0 alphas\ndate from 2025. **react-leaflet 5 is licensed Hippocratic-2.1**, an ethical-use licence that isn't OSI open source. Use\nMapLibre for new work.\n\n## Benchmark (same basemap, 5,000 vehicles and tasks as every other stack, `benchmap/`)\nCode: `benchmap/libs/leaflet.jsx` (react-leaflet `<MapContainer preferCanvas>`, `<GeoJSON>` basemap, supercluster,\none `<CircleMarker>` per item **in view**). Software GPU (SwiftShader): timings are relative only.\n\n| Task | Result |\n|---|---|\n| First render | 310 ms |\n| 30 s of 1 Hz updates (4× CPU throttle, z12) | p50/p95 frame 16.7/16.8 ms, 52 dropped frames, 347 ms long tasks, but only the ~440 vehicles in view are drawn (the others update all 5,000) |\n| Click-pick at z13 and z16 | 2/2 correct (canvas hit-testing) |\n| Cluster click | **Not built in**: supercluster (the usual `Leaflet.markercluster` plugin uses DOM markers) |\n| `flyTo` with reduced motion | **Animated** for 1.7 s, the same as without |\n| Keyboard | Tab reaches the map container; arrows pan, + zooms. The focus stop has **no role or accessible name** |\n| Attribution | Shown by default (with a \"Leaflet\" credit) |\n| axe | 0 violations |\n| Bundle | 48.2 KB gz for leaflet + react-leaflet (React subtracted); CSS 2.7 KB |\n\n## Weaknesses\n- Fails the six-month maintenance gate; react-leaflet's licence needs legal review.\n- No WebGL: raster tiles and DOM/canvas vectors only, so dense live data needs viewport culling like the bench used.\n- Clustering, heatmaps and drawing are plugins, many of them unmaintained.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Clear zoom buttons and attribution; raster basemaps |\n| Interactivity | 3 | Pan, zoom, pick, fly-to; clustering by plugin |\n| Coverage | 2 | Markers and simple vectors; no vector tiles, aggregation or GPU layers |\n| Accessibility | 3 | Keyboard pan/zoom by default, attribution visible; unnamed focus stop; animation ignores reduced motion |\n| Performance | 3 | Fine for hundreds of markers in view; no GPU path for thousands |\n| React/Next fit | 3 | react-leaflet 5 supports React 19; client-only |\n| Bundle size | 5 | 48.2 KB gz |\n| Licence & health | 1 | Gate: last stable release May 2023. react-leaflet is Hippocratic-2.1 (not OSI) |"
+  },
+  {
     "id": "sources/maplibre",
     "kind": "source",
     "title": "MapLibre GL JS",
@@ -1179,7 +1303,20 @@ window.CATALOG = [
     "has_example": false,
     "score": 7.8,
     "rating": 4,
-    "bench": null,
+    "bench": {
+      "kind": "map",
+      "bundle_gz_kb": 357.5,
+      "lib_only_gz_kb": 444.1,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 5,
+      "tasks_total": 5,
+      "unsupported": [],
+      "first_render_ms_swiftshader": 530,
+      "live_long_task_ms": 954,
+      "dropped_frames": 57,
+      "axe_violations": 1,
+      "evidence": "render 530 ms; live 5k @1 Hz: 954 ms long tasks; all checks pass"
+    },
     "path": "sources/maplibre",
     "images": [
       "sources/maplibre/bench.jpg"
@@ -1255,6 +1392,73 @@ window.CATALOG = [
       "source.md"
     ],
     "body": "## Verdict\n**Good keyboard behaviour, but the free edition is a demo of Pro.** The MIT `DataGrid` passed 5/5 keyboard checks and had\n0 axe violations. The source forces `pagination: true`, `disableMultipleColumnsSorting`, `disableMultipleColumnsFiltering` and\n`disableColumnReorder`, and **throws if `pageSize` > 100** (\"cannot exceed 100 in the MIT version\"). So 10,000 rows are\npaginated 100 at a time, not virtualised, and pinning, multi-sort and reordering need **Pro**. It also brings `@mui/material` and\nEmotion into a Tailwind app.\n\n## Benchmark (same 10,000 rows × 8 columns and four tasks as every kit)\nCode: `benchtable/libs/mui-x-data-grid.jsx`, 39 lines. Timings are at 4× CPU throttling (median of 3) and are only comparable\nwithin this bench.\n\n| Probe | Result |\n|---|---|\n| Library size (React subtracted) | **219.9 KB gz** (includes the Material and Emotion parts the grid pulls in) |\n| First render / sort Amount / filter Status | 660 ms / 481 ms / 381 ms (sort and filter run over all 10,000 rows) |\n| Scroll | **Only one 100-row page scrolls**: p95 100 ms, 16 DOM rows; **row 10,000 unreachable by scrolling** (paged). Not comparable with the virtualised kits |\n| Semantics | `role=grid`, `aria-rowcount=10001`, `aria-multiselectable` |\n| Layout | Sticky header ✓, **pinned column ✗ (Pro)**, drag resize ✓, keyboard resize ✗, hide ✓ (`setColumnVisibility`) |\n| Multi-sort (Shift+click, then Ctrl/⌘+click) | **✗ one column** (forced off in MIT) |\n| Keyboard selection (APG) | **5/5**: Tab in, ↓ →, Space selects, **Shift+↓ extends** (`aria-selected`); footer shows \"3 rows selected\" |\n| Select all | Header checkbox selects all 10,000 (across pages) |\n| Edit Amount | Enter opens the number editor; Enter commits, Esc cancels, Tab commits and moves right |\n| Invalid value | `preProcessEditCellProps` returning `error: true` blocks the commit and sets `aria-invalid`; **no message** (yours to add). Enter pressed within ~200 ms of the last keystroke is ignored while validation runs |\n| axe-core (WCAG 2.2 AA), all four tasks | 0 violations |\n\n## Coverage: free (MIT) vs paid\n| Feature | MIT `DataGrid` | Pro | Premium |\n|---|---|---|---|\n| Rows | Paginated, **max 100 per page** (virtualised within the page) | Unlimited virtualisation, lazy loading | |\n| Sort / filter | **Single column**; one filter at a time; quick filter | Multi-sort, multi-filter, header filters | |\n| Columns | Resize, hide, column groups | **Pinning, reordering** | |\n| Selection and editing | Row checkboxes, cell/row editing, validation | | Cell selection, clipboard paste, undo/redo |\n| Structure | Save/restore state, density | Tree data, master/detail | Row grouping, aggregation, pivot |\n| Export | CSV, print | | Excel |\n\n## Styling with Tailwind/shadcn\nStyled with Emotion and the MUI theme. Match a shadcn app through `createTheme` tokens and `sx`/`slotProps`, mapped to our\nCSS variables. Tailwind classes work on custom cell renderers only. Expect two styling systems in one app.\n\n## Weaknesses\n- The 100-row page cap and single-column sort make the MIT grid a poor fit for analyst or ops grids.\n- Brings `@mui/material` and Emotion (styled runtime) into a Tailwind codebase.\n- Invalid edits get no message, and a fast Enter after typing is swallowed while validation is pending.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 5 | Finished Material grid with footer, pagination and selection count |\n| Interactivity | 3 | Sort, filter, resize, hide, select and edit work; no pinning, multi-sort or reordering in MIT |\n| Coverage | 2 | Free edition: CSV/print and column groups only; grouping, tree, pivot, master/detail, Excel are paid |\n| Accessibility | 5 | 5/5 keyboard including Shift+Arrow, grid ARIA with `aria-rowcount`, visible selection count, 0 axe |\n| Performance | 2 | Can't scroll 10,000 rows: hard 100-row page cap; sort 481 ms and filter 381 ms over the full set |\n| React/Next fit | 3 | Idiomatic, typed React; but needs Material + Emotion alongside Tailwind |\n| Bundle size | 2 | 219.9 KB gz |\n| Licence & health | 5 | MIT, release 8.29.5 on 16 October 2026; Pro/Premium upsell noted above |"
+  },
+  {
+    "id": "sources/openlayers",
+    "kind": "source",
+    "title": "OpenLayers",
+    "pattern": "map",
+    "page_type": "app",
+    "tags": [
+      "maps",
+      "gis",
+      "open-source",
+      "projections",
+      "drawing",
+      "canvas"
+    ],
+    "source_url": "https://openlayers.org",
+    "source_site": "openlayers.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "10.11.0",
+    "licence": "BSD-2-Clause",
+    "s_look": 3,
+    "s_interact": 4,
+    "s_coverage": 5,
+    "s_a11y": 2,
+    "s_perf": 3,
+    "s_react": 2,
+    "s_bundle": 4,
+    "s_licence": 5,
+    "why_it_works": "The full GIS toolkit (any projection, WMS/WMTS, GeoJSON/KML/GPX/GML, built-in draw, modify and snap interactions, a cluster source), tree-shakable to a small bundle and fast to first render.",
+    "use_when": "GIS-heavy products such as surveying, planning and utilities, with non-Web-Mercator projections, OGC services or geometry editing, where a team is happy to wrap it in React itself.",
+    "avoid_when": "A product map that should be keyboard-reachable and calm by default with no extra work (MapLibre), or thousands of live points on the default canvas layers.",
+    "alternatives": [
+      "maplibre",
+      "deck-gl",
+      "leaflet"
+    ],
+    "has_example": false,
+    "score": 7,
+    "rating": 4,
+    "bench": {
+      "kind": "map",
+      "bundle_gz_kb": 84.4,
+      "lib_only_gz_kb": 83.6,
+      "react_baseline_kb": 0,
+      "tasks_supported": 2,
+      "tasks_total": 5,
+      "unsupported": [
+        "reduced_motion",
+        "keyboard",
+        "attribution"
+      ],
+      "first_render_ms_swiftshader": 180,
+      "live_long_task_ms": 5847,
+      "dropped_frames": 307,
+      "axe_violations": 0,
+      "evidence": "render 180 ms; live 5k @1 Hz: 5847 ms long tasks; fails reduced_motion, keyboard, attribution"
+    },
+    "path": "sources/openlayers",
+    "images": [
+      "sources/openlayers/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The GIS specialist, but not accessible by default.** It is the smallest capable stack (**83.6 KB gz**) and had the fastest\nfirst render. Out of the box, though, **the map can't be reached by keyboard** (Tab stops on the zoom buttons only),\n**attribution is collapsed** behind an \"i\" button, and **`view.animate` ignores reduced motion**. Moving 5,000 features\non the default canvas layer cost ~195 ms of main thread per update at 4× throttle, the most in the bench.\n\n## Benchmark (same basemap, 5,000 vehicles and tasks as every other stack, `benchmap/`)\nCode: `benchmap/libs/openlayers.js` (no React wrapper; canvas `VectorLayer`s, built-in `Cluster` source below z12).\nSoftware GPU (SwiftShader): timings are relative only.\n\n| Task | Result |\n|---|---|\n| First render | 180 ms, the fastest |\n| 30 s of 1 Hz updates (4× CPU throttle, z12) | p50/p95 frame 16.7/16.8 ms, 307 dropped frames, **5.8 s of long tasks** |\n| Click-pick at z13 and z16 | 2/2 correct (`forEachFeatureAtPixel`, `singleclick`) |\n| Cluster click | `Cluster` source built in; expanding is your code (`view.fit` to the members), z10 → z12.9 |\n| `flyTo` with reduced motion | **Animated** for 1.0 s, the same as without |\n| Keyboard | **Map surface not focusable.** Tab reaches \"Zoom in\" and \"Zoom out\" only; arrows and + do nothing |\n| Attribution | **Collapsed** behind a button by default |\n| axe | 0 violations |\n| Bundle | 83.6 KB gz; CSS 1.4 KB |\n\nFound in the benchmark:\n- **Moving features one by one froze the page.** `setCoordinates()` on 5,000 features while a `Cluster` source was\n  attached re-clustered on every change event: **127 s per update**. Replacing them in one batch\n  (`clear(true)` + `addFeatures`) brought it down to the figure above. For real fleets, try the WebGL point layer (not measured).\n- Keyboard needs `tabindex=\"0\"` and an `aria-label` on the map target (the docs say so). Pass `collapsed: false` to the\n  Attribution control, and check `matchMedia('(prefers-reduced-motion: reduce)')` before `animate`.\n\n## Weaknesses\n- No official React wrapper: an imperative map in a `ref`, with your own sync code.\n- Three accessibility defaults to fix by hand (above).\n- Default controls are small (about 22 px), so restyle them to meet the 24 px target size.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Plain small controls, collapsed attribution; you bring the basemap |\n| Interactivity | 4 | Pan, zoom, rotate, pick, cluster source, animate; cluster expand is your code |\n| Coverage | 5 | Projections, OGC services, GIS formats, draw/modify/snap, heatmap, WebGL points |\n| Accessibility | 2 | Map not keyboard-reachable by default, attribution collapsed, animation ignores reduced motion; 0 axe |\n| Performance | 3 | Fastest first render; 5.8 s long tasks over 30 updates at 4× throttle on canvas layers |\n| React/Next fit | 2 | No official wrapper; ESM and tree-shakable |\n| Bundle size | 4 | 83.6 KB gz as used |\n| Licence & health | 5 | BSD-2-Clause; 10.11.0 released 4 Oct 2026, dev builds daily |"
   },
   {
     "id": "sources/plate-ai",

@@ -11,9 +11,9 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const ENTRIES = join(ROOT, 'entries');
 const SOURCES = join(ROOT, 'sources');
 const IMAGE = /\.(jpe?g|png|webp)$/i;
-// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI, tables) shares one shape: per-task probes plus
+// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI, tables, panels, maps) shares one shape: per-task probes plus
 // bundle size, with a few category-specific measurements on top.
-const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline', 'benchtable', 'benchpanels'];
+const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline', 'benchtable', 'benchpanels', 'benchmap'];
 // Keys starting with `_` are bench-internal (e.g. size probes), not sources.
 const readBench = (f) => Object.fromEntries(Object.entries(JSON.parse(readFileSync(f, 'utf8'))).filter(([k]) => !k.startsWith('_')));
 const bench = Object.assign({}, ...BENCHES.map((d) => join(ROOT, d, 'results.json')).filter(existsSync).map(readBench));
@@ -125,6 +125,16 @@ function summariseBench(b) {
     Object.assign(out, { model: b.model, checks_passed: b.checks_passed, checks_total: b.checks_total, hit_area_px: b.hit_area_px,
       keyboard_resize: !!kb.arrow_resizes, restores_without_jump: !!rs.no_jump_on_restore, axe_violations: b.axe_violations,
       evidence: `${b.checks_passed}/${b.checks_total} checks; ${b.hit_area_px} px grab area; keyboard resize ${kb.arrow_resizes ? 'yes' : 'no'}; ${rs.no_jump_on_restore ? 'restores without a jump' : 'jumps on restore'}` });
+  } else if (kind === 'map') {
+    // Five product checks: picking, cluster expand, reduced-motion camera, keyboard on the map, visible attribution.
+    const checks = { pick: b.pick_correct === (b.pick ?? []).length && b.pick_correct > 0, cluster: !!b.cluster?.expanded,
+      reduced_motion: !!b.reduced_motion_jumps, keyboard: !!(b.keyboard?.map_surface_focusable && b.keyboard?.pan),
+      attribution: !!b.attribution?.visible };
+    const failed = Object.keys(checks).filter((k) => !checks[k]);
+    Object.assign(out, { tasks_supported: 5 - failed.length, tasks_total: 5, unsupported: failed,
+      first_render_ms_swiftshader: b.first_render_ms, live_long_task_ms: b.live?.long_task_ms ?? null,
+      dropped_frames: b.live?.dropped_frames ?? null, axe_violations: (b.axe ?? []).length,
+      evidence: `render ${b.first_render_ms} ms; live 5k @1 Hz: ${b.live?.long_task_ms} ms long tasks; ${failed.length ? `fails ${failed.join(', ')}` : 'all checks pass'}` });
   }
   return out;
 }

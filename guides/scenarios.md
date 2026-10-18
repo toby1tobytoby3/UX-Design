@@ -42,14 +42,18 @@ allowed, Base UI flavour, see `our-design/README.md`).
 - **Thin:** real-time data (C6), order entry (B5). AG Grid **Enterprise** and dockview-enterprise are paid: check features against the free edition.
 
 ## 4. Live maps and control rooms (Relay, fleet logistics)
-- **Start with:** MapLibre GL JS for the basemap + deck.gl for large data layers (icons, paths, heatmaps); kepler.gl only
-  for exploratory analysis. Not Mapbox GL (proprietary).
-- **Must get right:** basemap separate from data layers; clustering below a zoom threshold; **stale positions shown as
-  stale**; an exceptions queue ranked by severity × time to impact.
-- **Test:** visible-layer density, picking accuracy, fly-to cancellation, GPU memory, lost WebGL context recovery,
-  reduced motion for camera moves (`guides/3d.md` defaults apply).
-- **In the library:** nothing map-specific yet.
-- **Thin:** maps (C3, P1) are next to be built. Tiles, styles and geocoding have their own licences and costs.
+- **Start with (measured, `benchmap/`):** MapLibre GL JS 6 (7.8) + `@vis.gl/react-maplibre` on self-hosted Protomaps
+  PMTiles (grayscale/black flavours); add deck.gl (7.8, overlaid mode) for large live layers, trails and hex aggregation;
+  a synced list as the complete path; kepler.gl only for analysts. Not Mapbox GL (proprietary), not Leaflet (stale).
+- **Must get right:** a muted basemap under the data; clusters that show the worst status (alerts never hidden in a
+  cluster); **per-vehicle freshness** (live / delayed / stale / offline); the camera never moves because data changed;
+  an exceptions queue ranked by severity × time to impact.
+- **Test:** visible-layer density, picking accuracy, fly-to under reduced motion, lost WebGL context recovery, GPU
+  memory; attribution visible; live updates can be paused (WCAG 2.2.2); the list covers every map fact; the Next build
+  is client-only with the worker URL set.
+- **In the library:** `guides/maps.md`, `sources/maplibre`, `sources/deck-gl`, `map/geops-live-transit-vehicles`,
+  `map/mbta-line-diagram-live-vehicles`, `map/maplibre-clusters-click-to-expand`, `map/protomaps-data-viz-basemap-flavours`.
+- **Thin:** real-time data beyond maps (C6); logged-in fleet products (Samsara, Onfleet) need user screenshots.
 
 ## 5. Landing pages (Lumen, AI product)
 - **Start with:** our captured patterns (hero, pricing, proof, mega menu) built in Tailwind; native CSS and

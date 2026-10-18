@@ -116,13 +116,19 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 
 | Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| [deck.gl](sources/deck-gl/source.md) | **7.8** | 3 | 4 | 5 | 3 | 5 | 4 | 3 | 4 | – | – | – | MIT |
-| [MapLibre GL JS](sources/maplibre/source.md) | **7.8** | 3 | 5 | 4 | 4 | 4 | 4 | 2 | 5 | – | – | – | BSD-3-Clause |
+| [deck.gl](sources/deck-gl/source.md) | **7.8** | 3 | 4 | 5 | 3 | 5 | 4 | 3 | 4 | 5/5 | 672.2 | render 742 ms; live 5k @1 Hz: 0 ms long tasks; all checks pass | MIT |
+| [MapLibre GL JS](sources/maplibre/source.md) | **7.8** | 3 | 5 | 4 | 4 | 4 | 4 | 2 | 5 | 5/5 | 444.1 | render 530 ms; live 5k @1 Hz: 954 ms long tasks; all checks pass | BSD-3-Clause |
+| [OpenLayers](sources/openlayers/source.md) | **7** | 3 | 4 | 5 | 2 | 3 | 2 | 4 | 5 | 2/5 | 83.6 | render 180 ms; live 5k @1 Hz: 5847 ms long tasks; fails reduced_motion, keyboard, attribution | BSD-2-Clause |
+| [kepler.gl](sources/kepler-gl/source.md) | **6.5** | 4 | 5 | 5 | 2 | 4 | 2 | 1 | 3 | – | – | – | MIT |
+| [Leaflet + react-leaflet](sources/leaflet/source.md) | **5.8** | 3 | 3 | 2 | 3 | 3 | 3 | 5 | 1 | 4/5 | 48.2 | render 310 ms; live 5k @1 Hz: 347 ms long tasks; fails reduced_motion | BSD-2-Clause (react-leaflet Hippocratic-2.1) |
 
 **Pick it for**
 
 - **deck.gl**: Large or fast-changing data on a map, such as thousands of live vehicles, trails and replays, or hexbin and heatmap aggregation, layered over MapLibre with `MapboxOverlay`.
 - **MapLibre GL JS**: Default for any product map, such as fleet and asset tracking, store finders, delivery zones and ops dashboards, through `@vis.gl/react-maplibre`, with a self-hosted Protomaps or OpenFreeMap style.
+- **OpenLayers**: GIS-heavy products such as surveying, planning and utilities, with non-Web-Mercator projections, OGC services or geometry editing, where a team is happy to wrap it in React itself.
+- **kepler.gl**: An internal analysis tool or a reference for exploration UI (layer list, filter panel, time slider). Embed it only when the whole app is the product.
+- **Leaflet + react-leaflet**: Not recommended for new work. It is measured as a baseline because many existing apps use it.
 
 ## chart
 

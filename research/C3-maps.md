@@ -10,6 +10,10 @@ SwiftShader WebGL). **[D]** vendor docs, fetched today. **[M]** from memory, not
 ---
 
 ## 0. Headline findings
+> **Bench correction (`benchmap/`, 2026-10-18):** deck.gl 9.4 interleaved mode crashes on MapLibre 6.15 (it reads
+> `map.transform`, removed in v6). Use overlaid mode, or MapLibre 5 if deck layers must sit under labels. Only MapLibre's
+> camera honours reduced motion; OpenLayers can't focus the map and collapses attribution. See `guides/maps.md` §2.
+
 1. **The renderer is the easy part; tiles are the decision** [V]. MapLibre (BSD-3) and deck.gl (MIT) are healthy, but the
    tile and geocoding source decides cost, SLA and legality. Of the hosted options, **only OpenFreeMap is free for commercial
    production**: *"no limits on the number of map views… no API keys"*, *"Is commercial usage allowed? Yes"*. It has no SLA.
