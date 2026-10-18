@@ -89,7 +89,7 @@
       <tr><td>Guides</td><td><code>guides/</code></td><td>"What should I use for this job?" Decision tables plus defaults. Start at <code>guides/README.md</code>.</td></tr>
       <tr><td>Sources</td><td><code>sources/</code>, compared in <code>SOURCES.md</code></td><td>"Which library or site is best, and why?" Scored on 8 criteria from benchmark evidence.</td></tr>
       <tr><td>Patterns</td><td><code>entries/&lt;pattern&gt;/&lt;site&gt;/</code></td><td>"What does a great version look like?" Screenshots, analysis, techniques, code.</td></tr>
-      <tr><td>Evidence</td><td><code>bench/</code>, <code>bench3d/</code>, <code>evidence.json</code></td><td>Same-task benchmarks and capture measurements behind every score and claim.</td></tr>
+      <tr><td>Evidence</td><td><code>bench*/</code> (charts, 3D, motion, UI primitives, AI chat, inline AI, tables, panels, maps), <code>evidence.json</code></td><td>Same-task benchmarks and capture measurements behind every score and claim.</td></tr>
       <tr><td>Index and gallery</td><td><code>catalog.json</code>, <code>CATALOG.md</code>, published gallery</td><td>Everything above, for agents (JSON) and people (table, gallery).</td></tr>
     </tbody>
   </table></div>
@@ -228,7 +228,7 @@ flowchart LR
     <thead><tr><th>When</th><th>Do</th></tr></thead>
     <tbody>
       <tr><td>A site redesigns</td><td>Re-run <code>/ux-add</code> on its URL. Recapture already caught Unsection's redesign and Apple swapping its bento grid for a gallery.</td></tr>
-      <tr><td>A library ships a major version</td><td>Bump it in <code>bench/</code> or <code>bench3d/</code>, rerun <code>node run.mjs &lt;lib&gt;</code>, revisit the scores.</td></tr>
+      <tr><td>A library ships a major version</td><td>Bump it in its category's <code>bench*/</code> folder, rerun <code>node run.mjs &lt;lib&gt;</code>, revisit the scores.</td></tr>
       <tr><td>A category gets 3+ sources</td><td>Write a guide for it, using <code>guides/charts.md</code> as the template.</td></tr>
       <tr><td>Our design tokens exist</td><td>Put them in <code>our-design/</code> so rebuilt examples use our real colours and type.</td></tr>
     </tbody>
