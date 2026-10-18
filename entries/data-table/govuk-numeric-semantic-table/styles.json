@@ -1,0 +1,370 @@
+[
+  {
+    "tag": "table",
+    "class": "govuk-table",
+    "styles": {
+      "display": "table",
+      "padding": "0px",
+      "margin": "0px 0px 30px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(128, 128, 128)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "caption",
+    "class": "govuk-table__caption govuk-table__caption--m",
+    "styles": {
+      "display": "table-caption",
+      "padding": "0px",
+      "margin": "0px 0px 15px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "24px",
+      "font-weight": "700",
+      "line-height": "30px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(11, 12, 12)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "thead",
+    "class": "govuk-table__head",
+    "styles": {
+      "display": "table-header-group",
+      "padding": "0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(128, 128, 128)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "tr",
+    "class": "govuk-table__row",
+    "styles": {
+      "display": "table-row",
+      "padding": "0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(128, 128, 128)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "th",
+    "class": "govuk-table__header",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "700",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "th",
+    "class": "govuk-table__header govuk-table__header--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "700",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "th",
+    "class": "govuk-table__header govuk-table__header--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "700",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "tbody",
+    "class": "govuk-table__body",
+    "styles": {
+      "display": "table-row-group",
+      "padding": "0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(128, 128, 128)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "tr",
+    "class": "govuk-table__row",
+    "styles": {
+      "display": "table-row",
+      "padding": "0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(128, 128, 128)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "th",
+    "class": "govuk-table__header",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "700",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "td",
+    "class": "govuk-table__cell govuk-table__cell--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "td",
+    "class": "govuk-table__cell govuk-table__cell--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "tr",
+    "class": "govuk-table__row",
+    "styles": {
+      "display": "table-row",
+      "padding": "0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(128, 128, 128)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "th",
+    "class": "govuk-table__header",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "700",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "td",
+    "class": "govuk-table__cell govuk-table__cell--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "td",
+    "class": "govuk-table__cell govuk-table__cell--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "tr",
+    "class": "govuk-table__row",
+    "styles": {
+      "display": "table-row",
+      "padding": "0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border": "0px none rgb(128, 128, 128)",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "th",
+    "class": "govuk-table__header",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "700",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "td",
+    "class": "govuk-table__cell govuk-table__cell--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 20px 10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  },
+  {
+    "tag": "td",
+    "class": "govuk-table__cell govuk-table__cell--numeric",
+    "styles": {
+      "display": "table-cell",
+      "padding": "10px 0px",
+      "margin": "0px",
+      "font-family": "\"GDS Transport\", arial, sans-serif",
+      "font-size": "19px",
+      "font-weight": "400",
+      "line-height": "25px",
+      "color": "rgb(11, 12, 12)",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "border-radius": "0px",
+      "transition": "all",
+      "animation": "none 0s ease 0s 1 normal none running"
+    }
+  }
+]

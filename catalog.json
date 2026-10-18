@@ -161,6 +161,165 @@
     "body": "## What it is\nThe VS Code documentation for GitHub Copilot inline suggestions. The two crops are Microsoft's own product\nscreenshots on that public page (captured live from the page, not by us running Copilot):\n- `crop-hover-toolbar.jpg`: dimmed italic ghost text with a hover toolbar: **‹ 1/3 ›** to cycle alternatives,\n  **Accept (Tab)**, **Accept Word (Ctrl + RightArrow)**, and an overflow menu.\n- `crop-nes-gutter.jpg`: a **Next Edit Suggestion**: a gutter marker on line 21 opens \"Copilot Next Edit Suggestion\"\n  with **Go To / Accept (Tab)**, **Reject (Escape)**, Show Collapsed, Settings. The proposed change is drawn inline.\n\n## Key techniques\n- Shortcuts are printed inside the UI (key caps in the toolbar and menu), which teaches the model without docs.\n- Partial accept: ⌘→ / Ctrl+→ accepts the next word or line.\n- Alternatives are numbered (\"1/3\") so the user knows there are more without asking.\n- Suggestions away from the caret are announced by a gutter marker, not by moving the cursor.\n- Restraint (from the page text): a **Snooze** button in the status-bar menu pauses suggestions for five minutes at a time,\n  inline suggestions can be turned off on metered connections, and `editor.inlineSuggest.minShowDelay` sets a show delay\n  (default 0 ms).\n\n## Accessibility\n- The page doesn't show the screen-reader path here; VS Code documents an Accessible View for suggestions\n  (`research/E6-inline-ai.md`). Ghost text is dimmed and italic, i.e. low contrast by design, the same trade-off as Plate.\n\n## Weaknesses\n- Code-editor context: dense prose UIs need a lighter version (no gutter).\n- Screenshots on a docs page can lag the shipping product.\n\n## Related entries\n- `ai-assist/plate-copilot-ghost-text` (the same model in a rich-text editor)"
   },
   {
+    "id": "data-table/ag-grid-dense-grid-column-menus",
+    "kind": "pattern",
+    "title": "Dense data grid with grouped headers, floating filters, column menus and inline edit",
+    "pattern": "data-table",
+    "page_type": "app",
+    "tags": [
+      "dense",
+      "keyboard",
+      "interactive",
+      "data-grid",
+      "b2b"
+    ],
+    "source_url": "https://www.ag-grid.com/example/",
+    "source_site": "ag-grid.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Every column carries its own sort, filter and menu affordances in a compact 42px row, so a 1,000-row dataset stays scannable and directly editable without leaving the grid.",
+    "use_when": "Spreadsheet-like work over large tables: ops consoles, admin back offices, trading blotters, anything where users sort, filter and edit in place.",
+    "has_example": false,
+    "path": "entries/data-table/ag-grid-dense-grid-column-menus",
+    "images": [
+      "entries/data-table/ag-grid-dense-grid-column-menus/desktop.jpg",
+      "entries/data-table/ag-grid-dense-grid-column-menus/crop-column-menu.jpg",
+      "entries/data-table/ag-grid-dense-grid-column-menus/crop-inline-edit.jpg",
+      "entries/data-table/ag-grid-dense-grid-column-menus/crop-keyboard-focus.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nAG Grid's public performance demo (1,000 rows × 22 columns, theme \"Quartz\"). Two-level grouped headers (Participant,\nGame of Choice, Performance), a floating filter row under the headers, a ⋮ menu per column, checkbox selection, a\nrow-number column, a status bar (\"Rows: 1,000 · Selected: 1\") and a side panel. Captured live: the grid at rest, the\nLanguage column menu open, keyboard focus moved with arrow keys, and a cell in inline edit after a double-click.\n\n**Edition check:** the row-group drop zone (\"Drag here to set row groups\"), the Columns/Filters side panel, Pivot Mode,\nthe Values aggregation chips and the \"Group by Language\" menu item are **AG Grid Enterprise** (paid). The headers, sort,\ntext/number floating filters, column menu sort/pin/autosize, checkbox selection and cell editing are in Community (MIT).\nCheck the edition matrix before relying on any feature shown.\n\n## Key techniques\n- Row height 42px, 14px IBM Plex Sans; numbers (Bank Balance) right-aligned with `font-variant-numeric: tabular-nums`,\n  negative values in accounting brackets `($2,947)`.\n- Header sort shows an arrow before the label (`↑ Bank Bal…`) and sets `aria-sort=\"ascending\"` on the header cell.\n- Column menu: Sort Ascending/Descending, Pin Column ▸, Autosize This/All, then column-chooser items, grouped by dividers.\n- Floating filter row keeps filtering one click away; the funnel button opens the full filter.\n- Inline edit: double-click (or Enter) swaps the cell for an input with the value pre-selected and a 2px focus border;\n  the header checkbox turns indeterminate once one row is selected.\n- Virtualised: only 21 row elements in the DOM for 1,000 rows.\n\n## Accessibility\n- `role=\"grid\"` with `aria-rowcount=\"1003\"` and `aria-colcount=\"24\"`, so screen readers get the full size despite virtualisation.\n- Arrow keys move a roving `gridcell` focus. The focus indicator is a **1px** `#2196f3` border: 3.12:1 against white,\n  just over the 3:1 minimum and thin (fails the WCAG 2.4.13 area guidance). Use a 2px ring.\n- Selected-row tint is very light; selection is also shown by the checkbox, so it isn't colour-only.\n\n## Weaknesses\n- Everything visible at once (filters, menus, side panel, drop zone) is heavy for occasional users; hide the side panel by default.\n- Several eye-catching features are Enterprise; a team copying this look can accidentally design for paid features.\n- The truncated \"Bank Bal…\" header shows the cost of narrow columns with sort icons.\n\n## Related entries\n- `data-table/mui-x-checkbox-selection-count` (selection footer), `data-table/react-aria-keyboard-selection-sort` (keyboard model),\n  `data-table/primer-datatable-density-actions-loading` (density and row actions), `data-table/govuk-numeric-semantic-table`."
+  },
+  {
+    "id": "data-table/govuk-numeric-semantic-table",
+    "kind": "pattern",
+    "title": "Plain semantic table with a caption, row headers and right-aligned tabular figures",
+    "pattern": "data-table",
+    "page_type": "docs",
+    "tags": [
+      "accessible",
+      "minimal",
+      "editorial"
+    ],
+    "source_url": "https://design-system.service.gov.uk/components/table/numbers/index.html",
+    "source_site": "design-system.service.gov.uk",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Nothing but structure and typography (a caption, scoped headers, row headers, right-aligned tabular numbers and hairline rules) makes a small numeric table instantly comparable and fully readable by screen readers.",
+    "use_when": "Read-only comparisons of a few rows (pricing, rates, settings summaries, reports), where a grid component would be overkill.",
+    "has_example": false,
+    "path": "entries/data-table/govuk-numeric-semantic-table",
+    "images": [
+      "entries/data-table/govuk-numeric-semantic-table/desktop.jpg"
+    ],
+    "files": [
+      "source.html",
+      "styles.json",
+      "entry.md"
+    ],
+    "body": "## What it is\nGOV.UK Design System \"numbers in a table\" example, captured live with the table's HTML and computed styles\n(`source.html`, `styles.json`).\n\n## Key techniques\n- `<caption>` as the visible title (\"Months and rates\", 24px bold).\n- Column headers `<th scope=\"col\">`, row headers `<th scope=\"row\">` in bold, so each value is announced with its month and column.\n- Numeric cells use `govuk-table__cell--numeric`: `text-align: right` and `font-variant-numeric: tabular-nums`, so\n  £85 / £165 line up by digit. Numeric headers are right-aligned to match.\n- 19px text, 10px vertical padding, 20px gap between columns, one 1px `#cecece` rule under each row; no zebra, no borders between columns.\n\n## Accessibility\n- Native table semantics with caption and scopes: the best possible screen-reader experience, no ARIA needed.\n- Row rules are decorative (1.57:1), which is fine because structure, not borders, carries the meaning.\n\n## Weaknesses\n- No sorting, density control or overflow handling; wide tables need a scroll container with a focusable, labelled region.\n\n## Related entries\n- `data-table/primer-datatable-density-actions-loading`, `data-table/react-aria-keyboard-selection-sort`, `accessibility/govuk-error-summary`."
+  },
+  {
+    "id": "data-table/mui-x-checkbox-selection-count",
+    "kind": "pattern",
+    "title": "Checkbox row selection with an indeterminate header and a selected-count footer",
+    "pattern": "data-table",
+    "page_type": "app",
+    "tags": [
+      "selection",
+      "data-grid",
+      "b2b",
+      "minimal"
+    ],
+    "source_url": "https://mui.com/x/react-data-grid/row-selection/",
+    "source_site": "mui.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Selection state is shown three ways at once (checked boxes, a tinted row, and \"3 rows selected\" in the footer), and the header checkbox goes indeterminate, so partial selection is never ambiguous.",
+    "use_when": "Any table where users act on several rows at once (bulk archive, export, assign); pair the count with a bulk-actions bar.",
+    "has_example": false,
+    "path": "entries/data-table/mui-x-checkbox-selection-count",
+    "images": [
+      "entries/data-table/mui-x-checkbox-selection-count/desktop.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nMUI X Data Grid (Community, MIT) checkbox-selection demo, captured live after selecting three rows by clicking their\ncheckboxes. The footer shows \"3 rows selected\" on the left and pagination (\"Rows per page: 100 · 1–10 of 10\") on the right.\n\n## Key techniques\n- 52px rows (MUI's standard density; compact and comfortable modes exist), 14px text.\n- Header checkbox switches to indeterminate (a dash) for partial selection; all-selected shows a check.\n- Selected rows get a pale blue tint (`#edf4fb`); the checkbox remains the primary signal.\n- Quantity column right-aligned; email values styled as links.\n- Selection count lives in the footer next to pagination, so it never shifts the table.\n\n## Accessibility\n- `role=\"grid\"` with `aria-multiselectable=\"true\"` and `aria-rowcount`.\n- Cell focus shows a 1px `#1976d2` outline (4.6:1 on white); thin but compliant at AA.\n- The row tint alone is only 1.11:1 against white, too faint to carry meaning, so it must stay paired with the checkbox (as here).\n\n## Weaknesses\n- The count is in the footer, far from the rows on tall tables; a sticky bulk-actions bar above the table that appears on\n  selection (with the count and actions) is easier to act on.\n- No bulk actions are shown in this demo.\n\n## Related entries\n- `data-table/ag-grid-dense-grid-column-menus`, `data-table/react-aria-keyboard-selection-sort`, `data-table/primer-datatable-density-actions-loading`."
+  },
+  {
+    "id": "data-table/primer-datatable-density-actions-loading",
+    "kind": "pattern",
+    "title": "Product data table with density modes, one default sort, row actions and a skeleton loading state",
+    "pattern": "data-table",
+    "page_type": "app",
+    "tags": [
+      "dense",
+      "devtools",
+      "b2b",
+      "accessible"
+    ],
+    "source_url": "https://primer.style/product/components/data-table/",
+    "source_site": "primer.style",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "GitHub's own table rules are spelled out and shown live: always one sorted column, density as a prop, at most one action pulled out of the overflow menu, and a skeleton that keeps the column layout while loading.",
+    "use_when": "Product tables in dense app UI (repositories, users, invoices, jobs), especially when deciding row-action placement and loading states.",
+    "has_example": false,
+    "path": "entries/data-table/primer-datatable-density-actions-loading",
+    "images": [
+      "entries/data-table/primer-datatable-density-actions-loading/desktop.jpg",
+      "entries/data-table/primer-datatable-density-actions-loading/crop-density-spacious.jpg",
+      "entries/data-table/primer-datatable-density-actions-loading/crop-row-actions.jpg",
+      "entries/data-table/primer-datatable-density-actions-loading/crop-skeleton-loading.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nGitHub Primer's DataTable docs, captured live: the sortable example (Updated column sorted by default), the density\nexample (spacious), the three row-action layouts, and the skeleton loading state.\n\n## Key techniques\n- Compact type: 12px cells, 12px/600 headers, ~37px rows at normal density; bold repository name as the row header.\n- Density as one prop: condensed / normal (default) / spacious cell padding.\n- Sorting rule: \"If a table is sortable, one column must be sorted by default\"; clicking a sorted column toggles\n  direction, unsorted columns start ascending. Sort icon sits after the label (`Updated ⇅`), `aria-sort=\"descending\"`.\n- Row actions: put several actions in a `…` menu; pull out at most **one** frequent action inline (pencil + `…`).\n  Inline icon pairs (edit, delete) only when there are two actions.\n- Loading: `Table.Skeleton` keeps the title, header row and 10 rows of shimmer bars sized to each column, so nothing\n  shifts when data arrives.\n- Title and optional subtitle above the table, labelled by `aria-labelledby`.\n\n## Accessibility\n- Semantic table with a row header (`rowHeader: true`) and `aria-sort` on the sorted column.\n- Icon-only row actions need accessible names (the docs' examples use labelled IconButtons; verify in your build).\n- Primer has a separate Accessibility tab for DataTable; the component is marked Experimental.\n\n## Weaknesses\n- Marked Experimental in Primer React; treat it as a design reference, not a dependency for our stack.\n- No selection or bulk actions in these examples.\n\n## Related entries\n- `data-table/govuk-numeric-semantic-table`, `data-table/mui-x-checkbox-selection-count`, `data-table/ag-grid-dense-grid-column-menus`, `feedback/sonner-stacked-toasts`."
+  },
+  {
+    "id": "data-table/react-aria-keyboard-selection-sort",
+    "kind": "pattern",
+    "title": "Keyboard-first selectable table with disabled rows and a sortable header",
+    "pattern": "data-table",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "keyboard",
+      "selection",
+      "open-source"
+    ],
+    "source_url": "https://react-aria.adobe.com/Table",
+    "source_site": "react-aria.adobe.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "Arrow keys move between cells, skip disabled rows and Shift extends selection, with a clear 2px focus ring on the selected row, which is the APG grid keyboard model done properly in a small semantic table.",
+    "use_when": "Moderate-size tables in app UI where keyboard users must select, sort and act on rows; the reference for how selection and focus should behave.",
+    "has_example": false,
+    "path": "entries/data-table/react-aria-keyboard-selection-sort",
+    "images": [
+      "entries/data-table/react-aria-keyboard-selection-sort/desktop.jpg",
+      "entries/data-table/react-aria-keyboard-selection-sort/crop-sorted-header.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nReact Aria Components' Table docs, captured live. In the multi-select example (\"Favorite pokemon\") a cell was clicked,\nthen ArrowDown and Shift+ArrowDown pressed: focus skipped the disabled Venusaur row and landed on Pikachu, now selected.\nThe sorting example was captured after clicking the Name header (sorted descending).\n\n## Key techniques\n- Disabled rows render at reduced opacity and are skipped by the keyboard (`disabledKeys`).\n- Selected row: solid purple fill with white text; the focused cell inside it gets a **2px white outline**.\n- Header checkbox shows indeterminate for partial selection; a live \"Current selection: pikachu\" line under the table.\n- Sorted header gets a tinted background, coloured label and a chevron; `aria-sort=\"descending\"`.\n- Unstyled library: every state is a `data-*` attribute (`data-selected`, `data-focus-visible`, `data-disabled`), so these\n  styles are the docs' theme, reproducible with Tailwind data variants.\n\n## Accessibility\n- `role=\"grid\"` with `aria-multiselectable=\"true\"`, `aria-selected` on rows, `aria-sort` on the sortable column.\n- Focus ring visible on the selected (dark) background, which many tables get wrong.\n- Selection state is announced; disabled rows are exposed as disabled rather than hidden.\n\n## Weaknesses\n- Numbers (Level) are left-aligned; right-align numeric columns.\n- Solid purple selection is loud for multi-row selection in dense tables; a tint plus checkbox scales better.\n\n## Related entries\n- `data-table/mui-x-checkbox-selection-count`, `data-table/ag-grid-dense-grid-column-menus`, `accessibility/react-aria-combobox`."
+  },
+  {
     "id": "sources/ai-sdk-inline",
     "kind": "source",
     "title": "AI SDK + rich-textarea (our reference build)",
