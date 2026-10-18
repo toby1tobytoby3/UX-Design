@@ -161,6 +161,38 @@
     "body": "## What it is\nThe VS Code documentation for GitHub Copilot inline suggestions. The two crops are Microsoft's own product\nscreenshots on that public page (captured live from the page, not by us running Copilot):\n- `crop-hover-toolbar.jpg`: dimmed italic ghost text with a hover toolbar: **‹ 1/3 ›** to cycle alternatives,\n  **Accept (Tab)**, **Accept Word (Ctrl + RightArrow)**, and an overflow menu.\n- `crop-nes-gutter.jpg`: a **Next Edit Suggestion**: a gutter marker on line 21 opens \"Copilot Next Edit Suggestion\"\n  with **Go To / Accept (Tab)**, **Reject (Escape)**, Show Collapsed, Settings. The proposed change is drawn inline.\n\n## Key techniques\n- Shortcuts are printed inside the UI (key caps in the toolbar and menu), which teaches the model without docs.\n- Partial accept: ⌘→ / Ctrl+→ accepts the next word or line.\n- Alternatives are numbered (\"1/3\") so the user knows there are more without asking.\n- Suggestions away from the caret are announced by a gutter marker, not by moving the cursor.\n- Restraint (from the page text): a **Snooze** button in the status-bar menu pauses suggestions for five minutes at a time,\n  inline suggestions can be turned off on metered connections, and `editor.inlineSuggest.minShowDelay` sets a show delay\n  (default 0 ms).\n\n## Accessibility\n- The page doesn't show the screen-reader path here; VS Code documents an Accessible View for suggestions\n  (`research/E6-inline-ai.md`). Ghost text is dimmed and italic, i.e. low contrast by design, the same trade-off as Plate.\n\n## Weaknesses\n- Code-editor context: dense prose UIs need a lighter version (no gutter).\n- Screenshots on a docs page can lag the shipping product.\n\n## Related entries\n- `ai-assist/plate-copilot-ghost-text` (the same model in a rich-text editor)"
   },
   {
+    "id": "dashboard/grafana-per-panel-failure-time-range",
+    "kind": "pattern",
+    "title": "Dashboard with one global time range and refresh in the URL, and per-panel failure tiles that leave the rest of the board working",
+    "pattern": "dashboard",
+    "page_type": "dashboard",
+    "tags": [
+      "dark",
+      "dense",
+      "data-viz",
+      "devtools",
+      "b2b"
+    ],
+    "source_url": "https://play.grafana.org/d/appenv-banking-exec-overview/banking-executive-overview",
+    "source_site": "play.grafana.org",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 3,
+    "why_it_works": "Shows the parts of a monitoring dashboard that matter when things go wrong. One time range and auto-refresh control the whole board and live in the URL, and a failing query breaks only its own tile, with an error icon in the tile header and a Details disclosure.",
+    "use_when": "Operational and executive dashboards built from many independent queries, especially when designing the time range control, auto-refresh and partial-failure states.",
+    "has_example": false,
+    "path": "entries/dashboard/grafana-per-panel-failure-time-range",
+    "images": [
+      "entries/dashboard/grafana-per-panel-failure-time-range/desktop.jpg",
+      "entries/dashboard/grafana-per-panel-failure-time-range/crop-time-picker.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nGrafana Play's \"Grafana Bank — Executive Overview\", captured headless. The panel data sources failed in the\nheadless browser, so this capture shows **Grafana's failure state**, not the normal charts. A text intro panel\nsits above 8 KPI tiles (Money Moved, Success Rate, Loans Disbursed, Approval Rate, Fraud Declines, Logins, Chats,\nTickets) that each show \"An unexpected error happened ▸ Details\". Three charts below show \"No data\". The second\nimage has the time picker open.\n\n## Key techniques\n- Global controls top-right: ◀ / time range (\"Last 6 hours\") / ▶ step, zoom out, Refresh with an interval\n  (\"30s\"), share and Edit. The URL carries them: `?from=now-6h&to=now&timezone=browser&refresh=30s`.\n- Time picker: absolute From/To that accept relative expressions (`now-6h`), a searchable list of quick ranges,\n  recently used ranges, and the time zone with \"Change time settings\" in the footer.\n- Partial failure: each panel fails on its own. An error badge in the panel header plus an inline message and a\n  Details disclosure. The rest of the dashboard and its controls stay usable.\n- A text panel at the top says what the board is for and that \"all figures follow the dashboard time range\".\n\n## Accessibility (measured)\n- \"Skip to main content\" link present. Each panel is a `<section aria-labelledby>` pointing at its title.\n- The panel error badge is a focusable `<button aria-label=\"Panel status\">`. The name doesn't say \"error\", so\n  include the state (\"Query failed: Money Moved\").\n- The refresh interval has a descriptive name: \"Choose refresh time interval with current interval 30 seconds selected\".\n\n## Weaknesses\n- KPI tiles at this width truncate titles to one letter (\"M…\", \"S…\") and the error text wraps word by word. Set a\n  minimum tile width, or let the title take priority over the badge.\n- \"An unexpected error happened\" is generic. Say what failed and offer Retry in the tile.\n- \"No data\" and \"error\" look different and that's correct, but \"No data\" gives no reason or time range hint.\n\n## Related entries\n- `dashboard/stripe-home-kpi-overview`, `panels/dockview-trading-workspace-docking`."
+  },
+  {
     "id": "data-table/ag-grid-dense-grid-column-menus",
     "kind": "pattern",
     "title": "Dense data grid with grouped headers, floating filters, column menus and inline edit",
@@ -318,6 +350,199 @@
       "entry.md"
     ],
     "body": "## What it is\nReact Aria Components' Table docs, captured live. In the multi-select example (\"Favorite pokemon\") a cell was clicked,\nthen ArrowDown and Shift+ArrowDown pressed: focus skipped the disabled Venusaur row and landed on Pikachu, now selected.\nThe sorting example was captured after clicking the Name header (sorted descending).\n\n## Key techniques\n- Disabled rows render at reduced opacity and are skipped by the keyboard (`disabledKeys`).\n- Selected row: solid purple fill with white text; the focused cell inside it gets a **2px white outline**.\n- Header checkbox shows indeterminate for partial selection; a live \"Current selection: pikachu\" line under the table.\n- Sorted header gets a tinted background, coloured label and a chevron; `aria-sort=\"descending\"`.\n- Unstyled library: every state is a `data-*` attribute (`data-selected`, `data-focus-visible`, `data-disabled`), so these\n  styles are the docs' theme, reproducible with Tailwind data variants.\n\n## Accessibility\n- `role=\"grid\"` with `aria-multiselectable=\"true\"`, `aria-selected` on rows, `aria-sort` on the sortable column.\n- Focus ring visible on the selected (dark) background, which many tables get wrong.\n- Selection state is announced; disabled rows are exposed as disabled rather than hidden.\n\n## Weaknesses\n- Numbers (Level) are left-aligned; right-align numeric columns.\n- Solid purple selection is loud for multi-row selection in dense tables; a tint plus checkbox scales better.\n\n## Related entries\n- `data-table/mui-x-checkbox-selection-count`, `data-table/ag-grid-dense-grid-column-menus`, `accessibility/react-aria-combobox`."
+  },
+  {
+    "id": "navigation/atlassian-multi-target-skip-links",
+    "kind": "pattern",
+    "title": "Multi-target skip links (\"Skip to: Top Bar · Sidebar · Main Content\") as the first focusable element of an app shell",
+    "pattern": "navigation",
+    "page_type": "docs",
+    "tags": [
+      "accessible",
+      "keyboard",
+      "b2b",
+      "minimal"
+    ],
+    "source_url": "https://atlassian.design/components/navigation-system/examples",
+    "source_site": "atlassian.design",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "In a three-region shell, a single \"Skip to main content\" isn't enough. Atlassian's navigation system renders a small focus-revealed menu with one link per region, so keyboard users can jump straight to the top bar, sidebar or main content.",
+    "use_when": "Any app shell with a top bar and a sidebar. It meets WCAG 2.4.1 Bypass Blocks and helps most where the sidebar is long.",
+    "has_example": false,
+    "path": "entries/navigation/atlassian-multi-target-skip-links",
+    "images": [
+      "entries/navigation/atlassian-multi-target-skip-links/desktop.jpg",
+      "entries/navigation/atlassian-multi-target-skip-links/crop-skip-links.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\natlassian.design's own shell, built with `@atlaskit/navigation-system`. When focused, the first focusable element\nreveals a card at the top-left: \"Skip to:\" with three links. Captured: the page, and the skip card with \"Top Bar\" focused.\n\n## Key techniques\n- Markup: `<ol>` of three `<a href=\"#top-navigation\">`, `#side-navigation` and `#main-content`. Hidden until\n  focused, then shown as a white card with a shadow over the logo.\n- Each target matches a landmark: `<header id=\"top-navigation\">`, `<nav id=\"side-navigation\" aria-label=\"Sidebar\">`,\n  and `<div role=\"main\" id=\"main-content\" tabindex=\"-1\">`.\n- The link labels name the regions as users see them (\"Top Bar\", \"Sidebar\", \"Main Content\").\n\n## Accessibility (measured)\n- The skip link is the first focusable element in the DOM (`a[href=\"#top-navigation\"]`, `tabindex=\"0\"`).\n- Tab moves Top Bar → Sidebar → Main Content within the card. Enter on \"Main Content\" moved focus to\n  `div#main-content` (`tabindex=\"-1\"`), so focus really moves and doesn't just scroll.\n- The focused link has a visible 2 px blue outline on the white card.\n\n## Weaknesses\n- The card covers the logo while visible. That's fine because it only shows during keyboard focus.\n- A second `<nav aria-label=\"Page content\">` (the on-page contents) isn't offered as a skip target. Add targets\n  only for the regions people need to jump to.\n\n## Related entries\n- `navigation/shadcn-sidebar-icon-rail`, `panels/vscode-workbench-parts` (F6 part cycling as the in-app equivalent)."
+  },
+  {
+    "id": "navigation/shadcn-sidebar-icon-rail",
+    "kind": "pattern",
+    "title": "App sidebar that collapses to a 48 px icon rail with Ctrl+B, tooltips on hover and focus, and the state saved in a cookie",
+    "pattern": "navigation",
+    "page_type": "app",
+    "tags": [
+      "open-source",
+      "saas",
+      "b2b",
+      "minimal",
+      "keyboard"
+    ],
+    "source_url": "https://ui.shadcn.com/view/new-york-v4/sidebar-07",
+    "source_site": "ui.shadcn.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "The standard SaaS shell in copy-in code. A 256 px sidebar with a team switcher, grouped nav (\"Platform\", \"Projects\") and a user menu collapses to a 48 px icon rail with Ctrl+B or the header trigger, and every rail icon shows its label as a tooltip on hover and on keyboard focus.",
+    "use_when": "Product app shells with 5–15 top-level destinations where people want more room for content but still need one-click navigation.",
+    "has_example": false,
+    "path": "entries/navigation/shadcn-sidebar-icon-rail",
+    "images": [
+      "entries/navigation/shadcn-sidebar-icon-rail/desktop.jpg",
+      "entries/navigation/shadcn-sidebar-icon-rail/crop-rail-tooltip.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nshadcn/ui block `sidebar-07` (new-york-v4 view). It has a team switcher (\"Acme Inc / Enterprise\"), a \"Platform\"\ngroup with collapsible items, \"Projects\", a user footer, and a header with the trigger and breadcrumb (\"Build Your\nApplication › Data Fetching\"). Captured: expanded, then collapsed with Ctrl+B and the \"Playground\" tooltip showing.\nFor our stack, use the Base UI flavour of the same block (`our-design/README.md`).\n\n## Key techniques\n- Widths: 256 px expanded, 48 px collapsed (`collapsible=\"icon\"`). Menu buttons are 32 × 32 px in the rail.\n- The text stays in the DOM when collapsed (overflow hidden), so each button keeps its accessible name.\n- Tooltip per item (`tooltip={item.title}`), shown only when collapsed.\n- State saved in a cookie `sidebar_state=false` so the server can render the right width with no flash. The\n  standalone view page doesn't read it back (it reloads expanded), but the app layout in the docs does.\n- A thin \"rail\" button on the sidebar edge toggles on click (`tabindex=\"-1\"`, mouse convenience). The header\n  trigger is the keyboard path.\n\n## Accessibility (measured)\n- Tooltips appear on keyboard **focus** as well as hover (`aria-describedby` set on the button).\n- Tab order: team switcher → Playground → History → Starred… (the nav comes before the content; there is no skip link).\n- Trigger is a `<button>` with sr-only text \"Toggle Sidebar\" but **no `aria-expanded`**. Add it, or announce the state.\n- Only one `<nav>`, and it has no label. Label it (\"Main\") if there are other navs.\n- Ctrl+B conflicts with \"bold\" in rich-text editors. Disable or remap it inside editors.\n\n## Weaknesses\n- No skip link. Pair it with `navigation/atlassian-multi-target-skip-links`.\n- The rail hides group labels, so people with many items lose the structure when collapsed.\n\n## Related entries\n- `navigation/atlassian-multi-target-skip-links`, `panels/vscode-workbench-parts`,\n  `panels/react-resizable-panels-keyboard-splitter-collapse`."
+  },
+  {
+    "id": "panels/dockview-trading-workspace-docking",
+    "kind": "pattern",
+    "title": "Dockable trading workspace with drag-to-dock overlays, floating groups, pop-outs and edge panels",
+    "pattern": "panels",
+    "page_type": "app",
+    "tags": [
+      "open-source",
+      "dense",
+      "data-viz",
+      "b2b",
+      "interactive"
+    ],
+    "source_url": "https://dockview.dev/demo/",
+    "source_site": "dockview.dev",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "A full IDE-style docking model (tab groups, split by dragging to an edge, Shift+click to float, pop out to a new window, collapsible edge groups) shown on a realistic dense trading screen, with a clear half-pane drop preview while dragging.",
+    "use_when": "Power-user workspaces where people arrange many views themselves (trading terminals, monitoring consoles, IDE-like tools). For fixed two- or three-pane layouts use split panes instead.",
+    "has_example": false,
+    "path": "entries/panels/dockview-trading-workspace-docking",
+    "images": [
+      "entries/panels/dockview-trading-workspace-docking/desktop.jpg",
+      "entries/panels/dockview-trading-workspace-docking/crop-drop-overlay.jpg",
+      "entries/panels/dockview-trading-workspace-docking/crop-floating.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe Dockview demo (dockview 8.6.0, MIT core) is a trading terminal: correlation matrix, order book, FX rates with\nG10/EM/Crosses sub-tabs, an order blotter, a vol surface, news and tech view. It also has \"Explorer\" and \"Outline\" edge\ngroups and a Terminal/Output/Problems bottom panel. Captured: the default layout, a tab mid-drag over the Orders group's left\nedge (the drop preview shades the left half), and a Shift+click floating group.\n\n## Key techniques\n- Each group header has a tab strip, \"+\" (add), and on the right **Open In New Window** (pop-out) and **Maximize View**.\n- While dragging a tab, an overlay shades the target region: centre to add as a tab, a half to split\n  (`dv-drop-target-selection`). The preview is large and unambiguous.\n- Shift+click a tab floats it as an overlay window (hint shown in the top bar: \"Shift + click a tab to float it\").\n- Edge groups (\"Explorer\", \"Outline\") collapse to vertical tabs on the window edges and peek open on click, with pin and close.\n- 4 px sashes between groups. Dense 12–13 px monospace numerics.\n\n## Accessibility (measured)\n- Tabs are `role=\"tab\"` inside 11 `role=\"tablist\"`s, with `aria-selected`. ArrowRight moves focus within a group\n  (Orders → Positions). Tab panels use `aria-labelledby` pointing at their tab.\n- **Sashes are not focusable**: no `role`, no `tabindex` on any of the 9 `.dv-sash` elements, so groups can't be\n  resized from the keyboard in this demo.\n- Group actions \"Open In New Window\" and \"Maximize View\" are `<div title=…>` with no role or tabindex, so they are\n  mouse-only.\n- No keyboard or menu alternative to drag-to-dock was found in the demo (WCAG 2.5.7 needs a single-pointer\n  alternative such as a \"Move to…\" menu).\n- Layout is not persisted: nothing written to `localStorage` (the library supports `toJSON`/`fromJSON`; the demo doesn't use it).\n\n## Weaknesses\n- Copy the docking model and drop preview. Add keyboard sashes, real buttons for group actions, a \"Move to group /\n  New window\" menu on each tab, and layout save/restore with a Reset.\n- Floating and pop-out windows multiply focus contexts. Give each a name and a way back (\"Dock back\").\n- Some features shown on dockview.dev may be in the paid dockview-enterprise; check before relying on them.\n\n## Related entries\n- `panels/flexlayout-docking-keyboard-splitters` (same model, better keyboard support), `panels/vscode-workbench-parts`,\n  `panels/react-resizable-panels-keyboard-splitter-collapse`, `data-table/ag-grid-dense-grid-column-menus`."
+  },
+  {
+    "id": "panels/flexlayout-docking-keyboard-splitters",
+    "kind": "pattern",
+    "title": "Docking layout with keyboard-operable splitters, edge borders, tab overflow and layout undo",
+    "pattern": "panels",
+    "page_type": "app",
+    "tags": [
+      "open-source",
+      "accessible",
+      "keyboard",
+      "dense",
+      "interactive"
+    ],
+    "source_url": "https://caplin.github.io/FlexLayout/demos/v0.11/demo/",
+    "source_site": "caplin.github.io",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 4,
+    "why_it_works": "The docking library with the most complete keyboard story. Splitters are labelled APG separators that move with arrow keys behind a 2 px focus ring, tabs follow the APG tabs pattern, and shortcuts are remappable through a keyMap prop (WCAG 2.1.4).",
+    "use_when": "Dockable multi-view tools where keyboard and screen-reader users must be able to resize and navigate as well as pointer users.",
+    "has_example": false,
+    "path": "entries/panels/flexlayout-docking-keyboard-splitters",
+    "images": [
+      "entries/panels/flexlayout-docking-keyboard-splitters/desktop.jpg",
+      "entries/panels/flexlayout-docking-keyboard-splitters/crop-keyboard-splitter.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nFlexLayout's demo (flexlayout-react 0.11.1, MIT). Tabsets hold an OpenLayers map, ChartJS, AG Grid, MUI Grid,\nWikipedia and an editor. Borders sit on three edges (\"Model Explorer\", \"Theme\"/\"SubLayout 1\",\n\"Terminal\"/\"Action Log\"/\"Layout JSON\"). A toolbar has layout presets, undo/redo, To-From JSON, size and theme\nselects, and Add Drag/Active/Float. Captured: the default layout after moving a splitter with the keyboard.\n\n## Key techniques\n- Borders: collapsible edge tab strips (vertical text on the sides) for secondary tools. Tabsets have maximise and\n  close, and an overflow menu (\"▾ 4\") when tabs don't fit.\n- Undo/redo of layout changes in the toolbar. This is cheap insurance against an accidental drag.\n- Layout as JSON (`To-From JSON`), so presets (\"Simple\", \"Mosaic Style\", \"Tab Groups\", \"Complex\") are just data.\n- Size presets (xx-small to large) and themes, including an \"Aria\" theme.\n\n## Accessibility (measured)\n- 4 splitters: `role=\"separator\"`, `tabindex=\"0\"`, `aria-valuenow` (33 / 50 / 66), `aria-orientation`,\n  `aria-label=\"Resize\"`. The label is the same everywhere; name the panes (\"Resize map and chart\").\n- Keyboard: focusing the first splitter and pressing ArrowRight ×5 moved it 50 px (10 px per press).\n  Focus ring: `2px solid rgb(59,125,231)`.\n- Tabs are `role=\"tab\"` with roving tabindex (selected 0, others −1) in 8 tablists. The documented keys are\n  Ctrl+Delete to close, F2 to rename, Enter to move into the content, and Esc to close a border overlay.\n- The splitter position survived a reload; nothing was written to `localStorage`.\n- Docking itself is still drag-only. The docs list no keyboard or menu \"move tab to…\" command, so add one\n  (WCAG 2.5.7).\n\n## Weaknesses\n- The demo toolbar is a developer harness, not a pattern to copy.\n- Generic \"Resize\" labels on every splitter.\n- Dense default spacing and tiny border text. Pick the \"medium\" size or larger for general audiences.\n\n## Related entries\n- `panels/dockview-trading-workspace-docking`, `panels/react-resizable-panels-keyboard-splitter-collapse`,\n  `panels/vscode-workbench-parts`."
+  },
+  {
+    "id": "panels/react-resizable-panels-keyboard-splitter-collapse",
+    "kind": "pattern",
+    "title": "Split panes with a focusable APG splitter, keyboard resize, Enter to collapse and a saved layout",
+    "pattern": "panels",
+    "page_type": "docs",
+    "tags": [
+      "open-source",
+      "accessible",
+      "keyboard",
+      "devtools",
+      "minimal"
+    ],
+    "source_url": "https://react-resizable-panels.vercel.app/examples/collapsible-panels",
+    "source_site": "react-resizable-panels.vercel.app",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "Every separator is a focusable APG window splitter with live values, so arrow keys resize, Home/End jump to the limits and Enter collapses and restores. A collapsed panel keeps its separator, so it can always be reopened.",
+    "use_when": "Two- or three-pane app layouts (list/detail, editor/preview, sidebar/content) where people resize and collapse panes and expect the layout back on reload.",
+    "has_example": false,
+    "path": "entries/panels/react-resizable-panels-keyboard-splitter-collapse",
+    "images": [
+      "entries/panels/react-resizable-panels-keyboard-splitter-collapse/desktop.jpg",
+      "entries/panels/react-resizable-panels-keyboard-splitter-collapse/crop-collapsed.jpg",
+      "entries/panels/react-resizable-panels-keyboard-splitter-collapse/crop-keyboard-focus.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nThe react-resizable-panels docs (v4.14.5, MIT), with live demos captured: the collapsible panels page. The\nseparator was focused, moved with the keyboard and collapsed with Enter. The persistent-layout example was\nresized and then reloaded.\n\n## Key techniques\n- API v4: `<Group>`, `<Panel collapsible minSize collapsedSize>`, `<Separator>`. Persistence is one hook,\n  `useDefaultLayout({ id, storage })`, which feeds `defaultLayout` and `onLayoutChanged`.\n- Sizes can be pixels or percentages (`minSize={100}`, `defaultSize=\"0%\"`). The collapse threshold defaults to halfway\n  between `collapsedSize` and `minSize`.\n- `collapsedSize={35}` leaves a 35 px strip, the VS Code \"Folders\" pattern. It is better than collapsing to 0 when\n  the panel has an icon rail.\n- Separator: 7 px wide hit area. It shows a 1 px line at rest and turns solid accent blue on focus or drag\n  (see `crop-keyboard-focus.jpg`).\n- The docs recommend keeping a `<Separator>` beside a fully collapsible panel \"to give users something to click to re-open it\".\n\n## Accessibility (measured)\n- All 4 separators on the page: `role=\"separator\"`, `tabindex=\"0\"`, `aria-valuenow/min/max`, `aria-controls`\n  pointing at the panel, and `aria-orientation`.\n- Keyboard: ArrowRight ×3 moved 50 → 65 (5% steps). Home → 0 (collapsed), End → 75 (max). Enter collapsed to 0,\n  and Enter again restored to 75.\n- No `aria-label` on the separators. APG asks for a name (`aria-label`, or `aria-labelledby` the primary pane's\n  heading). Add one in your build, e.g. \"Resize sidebar\".\n- Persistence: resizing with the keyboard (33 → 53) survived a reload. The demo stores it in `sessionStorage`\n  (`react-resizable-panels:unique-layout-id`), while the code sample shows `localStorage`. Pick the storage\n  deliberately: per tab or per user.\n\n## Weaknesses\n- The demo's separator has no visible grip at rest (1 px line), so pointer users may not discover it. Show a grip\n  or widen the line on hover.\n- Neither the separators nor the collapsed state carry a name or a \"collapsed\" announcement out of the box.\n- The docs site's purple chrome is not a styling reference. Copy the behaviour, not the look.\n\n## Related entries\n- `panels/flexlayout-docking-keyboard-splitters`, `panels/dockview-trading-workspace-docking`,\n  `panels/vscode-workbench-parts`, `navigation/shadcn-sidebar-icon-rail`."
+  },
+  {
+    "id": "panels/vscode-workbench-parts",
+    "kind": "pattern",
+    "title": "IDE workbench with named parts, F6 to cycle between them, one-key toggles for sidebar and panel, and layout buttons",
+    "pattern": "panels",
+    "page_type": "app",
+    "tags": [
+      "devtools",
+      "dark",
+      "keyboard",
+      "dense",
+      "accessible"
+    ],
+    "source_url": "https://vscode.dev/",
+    "source_site": "vscode.dev",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "url",
+    "rating": 5,
+    "why_it_works": "The canonical fixed-region workspace. Activity bar, sidebar, editor, bottom panel, secondary sidebar and status bar are each a named part, and every part can be reached and toggled from the keyboard (F6 cycles the parts, Ctrl+B the sidebar, Ctrl+J the panel), with matching layout toggle buttons in the title bar.",
+    "use_when": "Tool UIs with a primary work area plus optional navigation and output regions (editors, consoles, admin tools). Use it as the model for which regions exist and how people show, hide and reach them.",
+    "has_example": false,
+    "path": "entries/panels/vscode-workbench-parts",
+    "images": [
+      "entries/panels/vscode-workbench-parts/desktop.jpg",
+      "entries/panels/vscode-workbench-parts/crop-panel-open.jpg"
+    ],
+    "files": [
+      "entry.md"
+    ],
+    "body": "## What it is\nvscode.dev with no folder open, captured at 1440×900 with the bottom panel opened (Ctrl+J). The parts are the\nactivity bar (48 px), Explorer sidebar (300 px), editor (main), panel (Problems / Output / Terminal) and status\nbar. The four layout toggles sit at the top-right of the title bar.\n\n## Key techniques\n- Fixed regions instead of free docking: views move between known containers (sidebar, panel, secondary\n  sidebar), so the layout never becomes unrecognisable.\n- Toggle shortcuts: Ctrl+B sidebar (300 → 0 → 300 px measured), Ctrl+J panel (0 → 292 px). Panel maximise and close sit in the panel header.\n- Title-bar layout buttons mirror the shortcuts for pointer users, and \"Customize Layout\" gives presets.\n- Empty states inside parts give clear next actions (Open Folder, Open Recent, Connect to Tunnel…).\n- Sashes are 4 px. The sidebar sash shows a small grip at its midpoint.\n\n## Accessibility (measured)\n- F6 cycles focus across parts: status bar → activity bar → sidebar → editor → panel. This is the same\n  \"jump between regions\" idea as skip links, but repeatable.\n- Landmarks: the banner part is `role=\"banner\"`, the editor `role=\"main\"` and the status bar `role=\"status\"`.\n  Other parts have no landmark role.\n- **Sashes are not focusable**: `.monaco-sash` elements have no role or tabindex. Keyboard resizing is done\n  through commands (\"View: Increase/Decrease Current View Size\"), not a focusable splitter. Prefer an APG\n  separator in web apps.\n- Activity bar items are named with their shortcut (\"Explorer (Ctrl+Shift+E)\").\n\n## Weaknesses\n- Keyboard resize hidden in the command palette is not discoverable. Give splitters focus and arrow keys.\n- No skip link, because F6 replaces it. On the web, add a skip link too, since most users don't know F6.\n\n## Related entries\n- `panels/react-resizable-panels-keyboard-splitter-collapse`, `panels/flexlayout-docking-keyboard-splitters`,\n  `panels/dockview-trading-workspace-docking`, `navigation/atlassian-multi-target-skip-links`."
   },
   {
     "id": "sources/ai-sdk-inline",
