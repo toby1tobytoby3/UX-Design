@@ -68,6 +68,7 @@ function Grid() {
   const virtualizer = useVirtualizer({ count: tableRows.length, getScrollElement: () => scrollRef.current, estimateSize: () => 36, overscan: 8 });
   useEffect(() => {
     window.__bench.api = {
+      clearSelection: () => table.toggleAllRowsSelected(false),
       getSelectedCount: () => Object.keys(table.state.rowSelection ?? table.atoms.rowSelection.get()).length,
       getAmount: (id) => window.__bench._rows.find((r) => r.id === id)?.amount,
       hideColumn: (col) => table.getColumn(col).toggleVisibility(false),
@@ -85,7 +86,7 @@ function Grid() {
           {table.getHeaderGroups().map((g) => (
             <tr key={g.id} aria-rowindex={1}>
               {g.headers.map((h) => (
-                <th key={h.id} style={{ width: h.getSize(), ...pinStyle(h.column), ...(h.column.getIsPinned() ? { zIndex: 3 } : {}) }}
+                <th key={h.id} className={h.column.id === 'amount' ? 'num' : undefined} style={{ width: h.getSize(), ...pinStyle(h.column), ...(h.column.getIsPinned() ? { zIndex: 3 } : {}) }}
                   aria-sort={{ asc: 'ascending', desc: 'descending' }[h.column.getIsSorted()] ?? undefined}>
                   {h.column.getCanSort() ? <button className="sort" onClick={h.column.getToggleSortingHandler()}>{h.isPlaceholder ? null : <table.FlexRender header={h} />}{{ asc: ' ▲', desc: ' ▼' }[h.column.getIsSorted()] ?? ''}</button>
                     : <table.FlexRender header={h} />}

@@ -365,6 +365,19 @@ async function screenshot(kit, slug) {
   const { page } = await open(kit, 'select');
   await page.focus('#status-filter'); await page.keyboard.press('Tab');
   for (const k of ['ArrowDown', 'ArrowDown', 'Space', 'Shift+ArrowDown', 'Shift+ArrowDown']) { await page.keyboard.press(k); await page.waitForTimeout(100); }
+  if ((await page.evaluate(() => window.__bench.api.getSelectedCount())) !== 3) {
+    // No keyboard range selection: clear, then tick rows 2-4 with the mouse.
+    await page.evaluate(() => { window.__bench.api.clearSelection?.(); const s = window.__probe.scroller(); if (s) s.scrollTop = 0; });
+    for (const id of ['INV-00002', 'INV-00003', 'INV-00004']) {
+      const box = await page.evaluate((id) => {
+        if (window.__bench.cellRect) return window.__bench.cellRect('cell', 'select', id);
+        const key = [...document.querySelectorAll('.view [role=row],.view tr')].find((r) => r.textContent.includes(id));
+        const cb = key?.querySelector('input[type=checkbox],[role=checkbox],.ag-checkbox-input'); if (!cb) return null;
+        const r = cb.getBoundingClientRect(); return { left: r.left, top: r.top, width: r.width, height: r.height };
+      }, id);
+      if (box) { const c = center(box); await page.mouse.click(c.x, c.y); await page.waitForTimeout(150); }
+    }
+  }
   const g = await gridBox(page); await page.mouse.move(g.x, g.y); await page.mouse.wheel(220, 0); await page.waitForTimeout(500);
   mkdirSync(join(SOURCES, slug), { recursive: true });
   await page.locator('section').screenshot({ path: join(SOURCES, slug, 'bench.jpg'), type: 'jpeg', quality: 82 });

@@ -8,15 +8,15 @@
     "react_baseline_kb": 57.3,
     "lib_only_gz_kb": 444.1,
     "main_thread_gz_kb": 299.4,
-    "first_render_ms": 1129,
+    "first_render_ms": 726,
     "live": {
-      "frames": 1488,
+      "frames": 1791,
       "frame_p50_ms": 16.7,
-      "frame_p95_ms": 33.3,
-      "frame_max_ms": 333,
-      "dropped_frames": 314,
-      "long_tasks": 2,
-      "long_task_ms": 341
+      "frame_p95_ms": 16.8,
+      "frame_max_ms": 67,
+      "dropped_frames": 11,
+      "long_tasks": 0,
+      "long_task_ms": 0
     },
     "pick": [
       {
@@ -44,14 +44,14 @@
     },
     "fly_default": {
       "arrived": true,
-      "ms": 1958,
-      "frames": 14,
-      "camera_frames": 14,
+      "ms": 1694,
+      "frames": 30,
+      "camera_frames": 30,
       "jumped": false
     },
     "fly_reduced": {
       "arrived": true,
-      "ms": 20,
+      "ms": 19,
       "frames": 1,
       "camera_frames": 1,
       "jumped": true
@@ -77,8 +77,8 @@
       "zoom": true
     },
     "attribution": {
-      "visible": false,
-      "note": "not rendered"
+      "visible": true,
+      "note": "shown by default"
     },
     "axe": [
       {
@@ -87,7 +87,279 @@
         "nodes": 1
       }
     ],
+    "notes": [
+      "v6 has no default export: `import maplibregl from 'maplibre-gl'` fails; use named imports or `import * as`",
+      "v6 is ES modules only and loads its worker as a module from next to the bundle; an IIFE bundle needs setWorkerUrl()",
+      "Cluster count labels need a glyphs URL (self-hosted fonts) for text; the bench draws size-stepped circles only"
+    ],
     "errors": []
   },
-  "_note": "SwiftShader software GPU: timings are relative only. Zooms are MapLibre zooms. lib_only_gz_kb includes the MapLibre worker where used; React and the shared harness are subtracted."
+  "_note": "SwiftShader software GPU: timings are relative only. Zooms are MapLibre zooms. lib_only_gz_kb includes the MapLibre worker where used; React and the shared harness are subtracted.",
+  "deck-gl": {
+    "kind": "map",
+    "stack": "maplibre-deckgl",
+    "bundle_gz_kb": 585.6,
+    "css_gz_kb": 9.9,
+    "worker_gz_kb": 144.7,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 672.2,
+    "main_thread_gz_kb": 527.5,
+    "first_render_ms": 704,
+    "live": {
+      "frames": 1798,
+      "frame_p50_ms": 16.7,
+      "frame_p95_ms": 16.8,
+      "frame_max_ms": 50,
+      "dropped_frames": 3,
+      "long_tasks": 0,
+      "long_task_ms": 0
+    },
+    "pick": [
+      {
+        "zoom": 13,
+        "target": 331,
+        "picked": 331,
+        "correct": true,
+        "clearance_px": 99
+      },
+      {
+        "zoom": 16,
+        "target": 466,
+        "picked": 466,
+        "correct": true,
+        "clearance_px": 423
+      }
+    ],
+    "pick_correct": 2,
+    "cluster": {
+      "clusters_in_view": 99,
+      "expanded": true,
+      "clicked_count": 112,
+      "zoom_before": 10,
+      "zoom_after": 11
+    },
+    "fly_default": {
+      "arrived": true,
+      "ms": 1824,
+      "frames": 12,
+      "camera_frames": 12,
+      "jumped": false
+    },
+    "fly_reduced": {
+      "arrived": true,
+      "ms": 34,
+      "frames": 1,
+      "camera_frames": 1,
+      "jumped": true
+    },
+    "reduced_motion_jumps": true,
+    "keyboard": {
+      "first_focus": {
+        "tag": "canvas",
+        "role": "region",
+        "name": "Map",
+        "control": false,
+        "tabs": 1
+      },
+      "map_surface_focusable": true,
+      "surface": {
+        "tag": "canvas",
+        "role": "region",
+        "name": "Map",
+        "control": false,
+        "tabs": 1
+      },
+      "pan": true,
+      "zoom": true
+    },
+    "attribution": {
+      "visible": true,
+      "note": "shown by default"
+    },
+    "axe": [
+      {
+        "id": "link-in-text-block",
+        "impact": "serious",
+        "nodes": 1
+      }
+    ],
+    "notes": [
+      "MapboxOverlay `interleaved: true` crashes on MapLibre 6.15 with deck.gl 9.4.0 (reads map.transform, removed in v6); overlaid mode works",
+      "No clustering built in: supercluster (or MapLibre clusters under the deck layer)"
+    ],
+    "errors": []
+  },
+  "openlayers": {
+    "kind": "map",
+    "stack": "openlayers",
+    "bundle_gz_kb": 84.4,
+    "css_gz_kb": 1.4,
+    "worker_gz_kb": 0,
+    "react_baseline_kb": 0,
+    "lib_only_gz_kb": 83.6,
+    "main_thread_gz_kb": 83.6,
+    "first_render_ms": 273,
+    "live": {
+      "frames": 1746,
+      "frame_p50_ms": 16.7,
+      "frame_p95_ms": 16.8,
+      "frame_max_ms": 83,
+      "dropped_frames": 56,
+      "long_tasks": 19,
+      "long_task_ms": 1280
+    },
+    "pick": [
+      {
+        "zoom": 13,
+        "target": 331,
+        "picked": 331,
+        "correct": true,
+        "clearance_px": 99
+      },
+      {
+        "zoom": 16,
+        "target": 466,
+        "picked": 466,
+        "correct": true,
+        "clearance_px": 423
+      }
+    ],
+    "pick_correct": 2,
+    "cluster": {
+      "clusters_in_view": 115,
+      "expanded": true,
+      "clicked_count": 70,
+      "zoom_before": 10,
+      "zoom_after": 12.86
+    },
+    "fly_default": {
+      "arrived": true,
+      "ms": 993,
+      "frames": 58,
+      "camera_frames": 58,
+      "jumped": false
+    },
+    "fly_reduced": {
+      "arrived": true,
+      "ms": 986,
+      "frames": 61,
+      "camera_frames": 61,
+      "jumped": false
+    },
+    "reduced_motion_jumps": false,
+    "keyboard": {
+      "first_focus": {
+        "tag": "button",
+        "role": null,
+        "name": "Zoom in",
+        "control": true,
+        "tabs": 1
+      },
+      "map_surface_focusable": false,
+      "surface": null,
+      "pan": false,
+      "zoom": false
+    },
+    "attribution": {
+      "visible": false,
+      "note": "collapsed behind a button"
+    },
+    "axe": [],
+    "notes": [
+      "No official React wrapper; used directly in a ref",
+      "Cluster source is built in; expanding a cluster on click is a few lines (view.fit)",
+      "The map viewport is not focusable by default; keyboard pan/zoom needs tabindex=\"0\" on the target element",
+      "Moving 5,000 features one by one with setCoordinates() while a Cluster source is attached froze the page for 127 s per update (re-clusters on every change event); replacing features in one batch (clear + addFeatures) fixed it"
+    ],
+    "errors": []
+  },
+  "leaflet": {
+    "kind": "map",
+    "stack": "leaflet",
+    "bundle_gz_kb": 106.3,
+    "css_gz_kb": 2.7,
+    "worker_gz_kb": 0,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 48.2,
+    "main_thread_gz_kb": 48.2,
+    "first_render_ms": 455,
+    "live": {
+      "frames": 1770,
+      "frame_p50_ms": 16.7,
+      "frame_p95_ms": 16.8,
+      "frame_max_ms": 67,
+      "dropped_frames": 32,
+      "long_tasks": 0,
+      "long_task_ms": 0
+    },
+    "pick": [
+      {
+        "zoom": 13,
+        "target": 331,
+        "picked": 331,
+        "correct": true,
+        "clearance_px": 100
+      },
+      {
+        "zoom": 16,
+        "target": 466,
+        "picked": 466,
+        "correct": true,
+        "clearance_px": 423
+      }
+    ],
+    "pick_correct": 2,
+    "cluster": {
+      "clusters_in_view": 99,
+      "expanded": true,
+      "clicked_count": 112,
+      "zoom_before": 10,
+      "zoom_after": 11
+    },
+    "fly_default": {
+      "arrived": true,
+      "ms": 1690,
+      "frames": 99,
+      "camera_frames": 99,
+      "jumped": false
+    },
+    "fly_reduced": {
+      "arrived": true,
+      "ms": 1675,
+      "frames": 97,
+      "camera_frames": 97,
+      "jumped": false
+    },
+    "reduced_motion_jumps": false,
+    "keyboard": {
+      "first_focus": {
+        "tag": "div",
+        "role": null,
+        "name": "",
+        "control": false,
+        "tabs": 1
+      },
+      "map_surface_focusable": true,
+      "surface": {
+        "tag": "div",
+        "role": null,
+        "name": "",
+        "control": false,
+        "tabs": 1
+      },
+      "pan": true,
+      "zoom": true
+    },
+    "attribution": {
+      "visible": true,
+      "note": "shown by default"
+    },
+    "axe": [],
+    "notes": [
+      "No clustering built in (Leaflet.markercluster plugin uses DOM markers); supercluster used",
+      "Last stable release 1.9.4, May 2023; 2.0 still alpha",
+      "react-leaflet is Hippocratic-2.1 licensed (not OSI open source)"
+    ],
+    "errors": []
+  }
 }

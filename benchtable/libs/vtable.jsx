@@ -56,7 +56,7 @@ function onReady(instance) {
     const rect = table.getCellRelativeRect(range.end.col, range.end.row);
     return { inside: true, editor: editing, cellRole: 'canvas cell', left: box.left + rect.left, top: box.top + rect.top, width: rect.width, height: rect.height };
   };
-  window.__bench.scrollToBottom = () => table.scrollToRow?.(table.rowCount - 1) ?? table.scrollTop(1e9);
+  window.__bench.scrollToBottom = () => { table.scrollTop = 1e9; };
   window.__bench.api = {
     getSelectedCount: () => table.getCheckboxState('select').filter(Boolean).length,
     getAmount: (id) => Number(table.records.find((r) => r.id === id)?.amount),

@@ -83,7 +83,7 @@ function Grid() {
               <Column key={c.id} id={c.id} isRowHeader={c.id === 'id'} allowsSorting defaultWidth={c.width}>
                 {({ sortDirection }) => (
                   <span style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                    <span style={{ flex: 1 }}>{c.title}</span>{sortDirection && (sortDirection === 'ascending' ? '▲' : '▼')}
+                    <span style={{ flex: 1, textAlign: c.id === 'amount' ? 'right' : undefined }}>{c.title}</span>{sortDirection && (sortDirection === 'ascending' ? '▲' : '▼')}
                     <ColumnResizer className="resizer" aria-label={`Resize ${c.title}`} />
                   </span>
                 )}

@@ -25,7 +25,8 @@ const base = new VectorLayer({
     return new Style({ fill: fill(C[k]) });
   },
 });
-const points = new VectorSource({ features: vehicles.map((v) => { const f = new Feature({ geometry: new Point(fromLonLat([v.lng, v.lat])), status: v.status }); f.setId(v.id); return f; }) });
+const makeFeatures = () => vehicles.map((v) => { const f = new Feature({ geometry: new Point(fromLonLat([v.lng, v.lat])), status: v.status }); f.setId(v.id); return f; });
+const points = new VectorSource({ features: makeFeatures() });
 const dot = { ok: new Style({ image: new Circle({ radius: 5, fill: fill(C.ok), stroke: new Stroke({ color: C.halo, width: 1.5 }) }) }),
   alert: new Style({ image: new Circle({ radius: 5, fill: fill(C.alert), stroke: new Stroke({ color: C.halo, width: 1.5 }) }) }) };
 const clusterStyles = {};
@@ -59,5 +60,7 @@ register({
   clusters: () => view.getZoom() >= CLUSTER_BELOW + Z ? [] : clusterLayer.getSource().getFeatures().filter((f) => f.get('features').length > 1)
     .map((f) => { const [x, y] = map.getPixelFromCoordinate(f.getGeometry().getCoordinates()); return { x, y, count: f.get('features').length }; }),
 });
-live(() => vehicles.forEach((v) => points.getFeatureById(v.id).getGeometry().setCoordinates(fromLonLat([v.lng, v.lat]))));
+// Replace all features in one batch. Moving each feature with setCoordinates() fires a change event per feature, and
+// the Cluster source re-clusters on every one: 5,000 moves froze the page for 127 s in this bench.
+live(() => { points.clear(true); points.addFeatures(makeFeatures()); });
 base.getSource().once('featuresloadend', () => map.once('rendercomplete', ready));

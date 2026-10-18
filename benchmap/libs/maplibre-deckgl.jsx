@@ -1,5 +1,6 @@
-// MapLibre basemap with deck.gl drawing the vehicles (MapboxOverlay, interleaved). deck.gl has no clustering:
-// supercluster builds the clusters below z12.
+// MapLibre basemap with deck.gl drawing the vehicles (MapboxOverlay). deck.gl has no clustering: supercluster builds
+// the clusters below z12. Interleaved mode crashes on MapLibre 6 with deck.gl 9.4.0 (it reads map.transform, which v6
+// removed), so this uses the overlaid mode: deck.gl draws on its own canvas above the map.
 import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Map, useControl } from '@vis.gl/react-maplibre';
@@ -10,12 +11,12 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { CENTER, START_ZOOM, CLUSTER_BELOW, BBOX, vehicles, toGeoJSON, register, ready, pick, live } from '../shared.js';
 import { basemapStyle, mapHooks } from './_maplibre-common.js';
 
-document.getElementById('lib').textContent = 'MapLibre + deck.gl (interleaved)';
+document.getElementById('lib').textContent = 'MapLibre + deck.gl (overlaid)';
 const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const OK = rgb('#2a63c4'), ALERT = rgb('#c4320a'), WHITE = [255, 255, 255];
 
 function DeckGLOverlay(props) {
-  const overlay = useControl(() => new MapboxOverlay({ interleaved: true }));
+  const overlay = useControl(() => new MapboxOverlay({ interleaved: false }));
   overlay.setProps(props);
   return null;
 }

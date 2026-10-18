@@ -36,6 +36,7 @@ function Grid() {
   }, [rows, status, sortColumns]);
   useEffect(() => {
     window.__bench.api = {
+      clearSelection: () => setSelected(new Set()),
       getSelectedCount: () => window.__bench._sel.size,
       getAmount: (id) => window.__bench._rows.find((r) => r.id === id)?.amount,
       hideColumn: (col) => setHidden((h) => [...h, col]),

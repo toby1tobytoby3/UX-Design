@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Map benchmark runner: bundle each stack, measure gzipped size, serve the page, basemap and MapLibre worker over
 // localhost, and run the same tasks in headless Chromium (software GPU):
-//   first render · 30 s of 1 Hz updates to 5,000 vehicles (frame times, long tasks) · click-pick at z13 and z16 ·
+//   first render · 30 s of 1 Hz updates to 5,000 vehicles at 4× CPU throttle (frame times, long tasks) · click-pick at z13 and z16 ·
 //   cluster click expands · flyTo with reduced motion · keyboard pan/zoom, accessible name, axe · attribution visible.
 //   node run.mjs [stack ...]     (default: every file in libs/ not starting with _)
 // Writes ../sources/<slug>/bench.jpg and results.json. Zooms are MapLibre zooms (OpenLayers and Leaflet use +1 internally).
@@ -17,6 +17,19 @@ const HERE = new URL('.', import.meta.url).pathname;
 const SOURCES = join(HERE, '../sources');
 const SLUGS = { maplibre: 'maplibre', 'maplibre-deckgl': 'deck-gl', openlayers: 'openlayers', leaflet: 'leaflet' };
 const LIVE_SECONDS = 30;
+// Found while building the stacks (not measurable by the probes below).
+const NOTES = {
+  maplibre: ['v6 has no default export: `import maplibregl from \'maplibre-gl\'` fails; use named imports or `import * as`',
+    'v6 is ES modules only and loads its worker as a module from next to the bundle; an IIFE bundle needs setWorkerUrl()',
+    'Cluster count labels need a glyphs URL (self-hosted fonts) for text; the bench draws size-stepped circles only'],
+  'deck-gl': ['MapboxOverlay `interleaved: true` crashes on MapLibre 6.15 with deck.gl 9.4.0 (reads map.transform, removed in v6); overlaid mode works',
+    'No clustering built in: supercluster (or MapLibre clusters under the deck layer)'],
+  openlayers: ['No official React wrapper; used directly in a ref', 'Cluster source is built in; expanding a cluster on click is a few lines (view.fit)',
+    'The map viewport is not focusable by default; keyboard pan/zoom needs tabindex="0" on the target element',
+    'Moving 5,000 features one by one with setCoordinates() while a Cluster source is attached froze the page for 127 s per update (re-clusters on every change event); replacing features in one batch (clear + addFeatures) fixed it'],
+  leaflet: ['No clustering built in (Leaflet.markercluster plugin uses DOM markers); supercluster used', 'Last stable release 1.9.4, May 2023; 2.0 still alpha',
+    'react-leaflet is Hippocratic-2.1 licensed (not OSI open source)'],
+};
 const want = process.argv.slice(2);
 const libs = readdirSync(join(HERE, 'libs')).filter((f) => /\.jsx?$/.test(f) && !f.startsWith('_'))
   .map((f) => basename(f, extname(f))).filter((l) => !want.length || want.includes(l));
@@ -111,7 +124,8 @@ for (const lib of libs) {
     new PerformanceObserver((l) => l.getEntries().forEach((e) => window.__longtasks.push(e.duration))).observe({ type: 'longtask', buffered: true });
   });
   await page.goto(`${base}/${lib}.html`);
-  await page.waitForFunction(() => window.__bench?.ready_ms != null && window.__bench.view, null, { timeout: 90000 }).catch(() => {});
+  const loaded = await page.waitForFunction(() => window.__bench?.ready_ms != null && window.__bench.view, null, { timeout: 90000 }).then(() => true, () => false);
+  if (!loaded) { results[SLUGS[lib] ?? lib] = { kind: 'map', stack: lib, failed: true, errors }; console.log(lib, 'did not render', errors.slice(0, 2)); await page.close(); continue; }
   const first_render_ms = await page.evaluate(() => window.__bench.ready_ms);
   await wait(page, 1000);
 
@@ -190,9 +204,11 @@ for (const lib of libs) {
   const fly_reduced = await flyMeasure(page, true);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
 
-  // Live: 30 s of 1 Hz updates at z12 (individual vehicles), frame deltas from requestAnimationFrame.
+  // Live: 30 s of 1 Hz updates at z12 (individual vehicles) with the CPU throttled 4×, frame deltas from requestAnimationFrame.
   await page.evaluate(() => void window.__bench.jumpTo([-0.1, 51.5], 12));
   await wait(page, 1500);
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
   const liveStats = await page.evaluate((secs) => new Promise((resolve) => {
     const lt0 = window.__longtasks.length, deltas = [];
     let last = performance.now(); const t0 = last;
@@ -211,6 +227,7 @@ for (const lib of libs) {
     };
     requestAnimationFrame(loop);
   }), LIVE_SECONDS);
+  await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 });
 
   await page.evaluate(() => void window.__bench.jumpTo([-0.115, 51.505], 12.6));
   await wait(page, 1500);
@@ -224,9 +241,10 @@ for (const lib of libs) {
     kind: 'map', stack: lib, bundle_gz_kb: size.js, css_gz_kb: size.css, worker_gz_kb: workerKb, react_baseline_kb: usesReact ? reactBase : 0,
     lib_only_gz_kb: Math.round((libOnly + workerKb) * 10) / 10, main_thread_gz_kb: libOnly,
     first_render_ms, live: liveStats, pick, pick_correct: pick.filter((p) => p.correct).length, cluster,
-    fly_default, fly_reduced, reduced_motion_jumps: fly_reduced.jumped, keyboard, attribution, axe, errors,
+    fly_default, fly_reduced, reduced_motion_jumps: fly_reduced.jumped, keyboard, attribution, axe, notes: NOTES[slug] ?? [], errors,
   };
   const r = results[slug];
+  writeFileSync(join(HERE, 'results.json'), JSON.stringify(results, null, 2) + '\n');
   console.log(slug.padEnd(10), `${r.lib_only_gz_kb} KB`, `first ${first_render_ms} ms`, `live p50/p95 ${liveStats.frame_p50_ms}/${liveStats.frame_p95_ms} drop ${liveStats.dropped_frames} lt ${liveStats.long_task_ms}ms`,
     `pick ${r.pick_correct}/2`, `cluster ${cluster.expanded}`, `fly ${fly_default.ms}ms→reduced ${fly_reduced.ms}ms jumped=${fly_reduced.jumped}`,
     `kbd focus=${keyboard.map_surface_focusable} pan=${keyboard.pan} zoom=${keyboard.zoom}`, `attr ${attribution.visible}`, `axe ${axe.length}`, errors.length ? errors : '');

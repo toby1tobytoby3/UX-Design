@@ -15,7 +15,8 @@
   .tbl tbody{display:grid;position:relative}
   .tbl tr{display:flex;width:100%}
   .tbl th,.tbl td{display:flex;align-items:center;padding:0 10px;height:36px;border-bottom:1px solid #f0f0f2;background:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .tbl th{font-weight:500;color:#52525b;background:#fafafa;position:relative;user-select:none}
+  .tbl th{font-weight:500;color:#52525b;background:#fafafa;position:relative;user-select:none;text-align:left}
+  .tbl th.num button.sort{text-align:right}
   .tbl th button.sort{all:unset;cursor:pointer;flex:1}
   .tbl tr[data-selected] td,.tbl tr[aria-selected=true] td,.tbl [data-selected] [role=gridcell]{background:#eef4fd}
   .tbl .resizer{position:absolute;right:0;top:0;height:100%;width:6px;cursor:col-resize;background:transparent}
@@ -26,6 +27,7 @@
   .rac-table{width:100%;position:relative}
   .rac-table [role=grid]{outline:none}
   .rac-table [role=columnheader],.rac-table [role=gridcell],.rac-table [role=rowheader]{display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #f0f0f2;background:#fff;white-space:nowrap;overflow:hidden;box-sizing:border-box;outline:none}
+  .rac-table [role=gridcell],.rac-table [role=rowheader]{height:36px} .rac-table [role=columnheader]{height:38px}
   .rac-table [role=columnheader]{font-weight:500;color:#52525b;background:#fafafa;position:relative;cursor:default}
   .rac-table [role=row][data-selected] [role=gridcell],.rac-table [role=row][data-selected] [role=rowheader]{background:#eef4fd}
   .rac-table [data-focus-visible]{outline:2px solid #2a78d6;outline-offset:-2px}

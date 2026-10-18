@@ -9,6 +9,6 @@ const server = createServer((req, res) => { const url = req.url.split('?')[0]; c
 const b = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const p = await b.newPage();
 p.on('pageerror', (e) => console.log('ERR', e.stack.slice(0,900))); p.on('console', (m) => console.log(m.type(), m.text().slice(0, 300)));
-await p.goto(`http://127.0.0.1:${server.address().port}/${process.argv[2]}.html`);
+await p.goto(`http://127.0.0.1:${server.address().port}/${process.argv[2]}`);
 await p.waitForTimeout(8000);
 await b.close(); server.close();

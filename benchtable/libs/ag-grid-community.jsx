@@ -19,6 +19,7 @@ function Grid() {
   })), []);
   const onGridReady = useCallback(({ api }) => {
     window.__bench.api = {
+      clearSelection: () => api.deselectAll(),
       getSelectedCount: () => api.getSelectedRows().length,
       getAmount: (id) => api.getRowNode(id)?.data.amount,
       hideColumn: (col) => api.setColumnsVisible([col], false),

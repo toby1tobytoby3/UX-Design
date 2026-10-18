@@ -10,7 +10,10 @@ export const STORE = 'bench-layout';
 export const load = () => { try { return JSON.parse(localStorage.getItem(STORE)); } catch { return null; } };
 export const save = (v) => localStorage.setItem(STORE, JSON.stringify(v));
 
-const POINTS = (() => { let y = 0; return Array.from({ length: 20000 }, (_, i) => (y += Math.sin(i * 0.37) * 3 + (((i * 7919) % 13) - 6) * 0.4)); })();
+const POINTS = (() => { // a deterministic random walk, normalised to 0..1
+  let y = 0, s = 7; const p = Array.from({ length: 20000 }, () => (y += ((s = (s * 16807) % 2147483647) / 2147483647 - 0.5)));
+  const lo = Math.min(...p), hi = Math.max(...p); return p.map((v) => (v - lo) / (hi - lo));
+})();
 window.__bench = { notes: {}, redraws: 0, drawMs: 0 };
 
 function draw(canvas) {
@@ -21,7 +24,7 @@ function draw(canvas) {
   const ctx = canvas.getContext('2d'); const w = canvas.width, h = canvas.height;
   ctx.fillStyle = '#fbfaf8'; ctx.fillRect(0, 0, w, h);
   ctx.strokeStyle = '#2a78d6'; ctx.lineWidth = 1; ctx.beginPath();
-  for (let i = 0; i < POINTS.length; i++) { const x = (i / POINTS.length) * w, yy = h / 2 - POINTS[i] * 0.15; i ? ctx.lineTo(x, yy) : ctx.moveTo(x, yy); }
+  for (let i = 0; i < POINTS.length; i++) { const x = (i / POINTS.length) * w, yy = h - 12 - POINTS[i] * (h - 24); i ? ctx.lineTo(x, yy) : ctx.moveTo(x, yy); }
   ctx.stroke();
   window.__bench.redraws++; window.__bench.drawMs += performance.now() - t;
 }
