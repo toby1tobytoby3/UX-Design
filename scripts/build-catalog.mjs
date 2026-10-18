@@ -11,9 +11,9 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const ENTRIES = join(ROOT, 'entries');
 const SOURCES = join(ROOT, 'sources');
 const IMAGE = /\.(jpe?g|png|webp)$/i;
-// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI) shares one shape: per-task probes plus
+// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI, tables) shares one shape: per-task probes plus
 // bundle size, with a few category-specific measurements on top.
-const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline'];
+const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline', 'benchtable'];
 // Keys starting with `_` are bench-internal (e.g. size probes), not sources.
 const readBench = (f) => Object.fromEntries(Object.entries(JSON.parse(readFileSync(f, 'utf8'))).filter(([k]) => !k.startsWith('_')));
 const bench = Object.assign({}, ...BENCHES.map((d) => join(ROOT, d, 'results.json')).filter(existsSync).map(readBench));
@@ -113,6 +113,13 @@ function summariseBench(b) {
     Object.assign(out, { stream_script_ms: st.script_ms ?? null, layout_shift: st.cls ?? null, raw_markdown_seen: raw,
       controls_built_in: controls, live_region: (b.a11y?.live_regions ?? []).length > 0,
       evidence: st.script_ms ? `${(st.script_ms / 1000).toFixed(1)} s script; ${raw.length ? `raw ${raw.join('/')} seen mid-stream` : 'no raw markdown'}; controls: ${controls.join(', ') || 'none'}` : '' });
+  } else if (kind === 'data-table') {
+    const big = b.probe?.big ?? {}, lay = b.probe?.layout ?? {};
+    Object.assign(out, { render_ms: big.render_ms ?? null, sort_ms: big.sort_ms ?? null, filter_ms: big.filter_ms ?? null,
+      dom_rows: big.dom_rows ?? null, aria_rowcount_ok: big.aria_rowcount_ok ?? null, multi_sort: lay.multi_sort ?? null,
+      keyboard_passed: b.keyboard_passed, keyboard_total: b.keyboard_total, axe_violations: b.axe_violations,
+      evidence: big.supported ? `10k rows: sort ${big.sort_ms} ms, filter ${big.filter_ms} ms, ${big.dom_rows} DOM rows; ${b.keyboard_passed}/${b.keyboard_total} keyboard, ${b.axe_violations} axe`
+        : `10k rows not supported; ${b.keyboard_passed}/${b.keyboard_total} keyboard` });
   }
   return out;
 }

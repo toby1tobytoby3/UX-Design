@@ -24,8 +24,13 @@ function Grid() {
   const view = useMemo(() => {
     let out = status ? rows.filter((r) => r.status === status) : rows;
     if (sortColumns.length) {
-      const { columnKey, direction } = sortColumns[0];
-      out = [...out].sort((a, b) => (a[columnKey] < b[columnKey] ? -1 : a[columnKey] > b[columnKey] ? 1 : 0) * (direction === 'ASC' ? 1 : -1));
+      out = [...out].sort((a, b) => {
+        for (const { columnKey: k, direction } of sortColumns) {
+          const d = (a[k] < b[k] ? -1 : a[k] > b[k] ? 1 : 0) * (direction === 'ASC' ? 1 : -1);
+          if (d) return d;
+        }
+        return 0;
+      });
     }
     return out;
   }, [rows, status, sortColumns]);
@@ -36,9 +41,10 @@ function Grid() {
       hideColumn: (col) => setHidden((h) => [...h, col]),
       hideMethod: 'columns prop (no visibility API)',
       setStatusFilter: setStatus,
+      sortCount: () => window.__bench._sort.length, // aria-sort is dropped once more than one column is sorted
     };
   }, []);
-  window.__bench._sel = selected; window.__bench._rows = rows;
+  window.__bench._sel = selected; window.__bench._rows = rows; window.__bench._sort = sortColumns;
   return (
     <DataGrid className="rdg-light" style={{ height: '100%' }} columns={columns} rows={view} rowKeyGetter={(r) => r.id} rowHeight={36}
       sortColumns={sortColumns} onSortColumnsChange={setSortColumns} selectedRows={selected} onSelectedRowsChange={setSelected}

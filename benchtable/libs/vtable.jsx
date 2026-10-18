@@ -16,7 +16,7 @@ const columnsFor = (hidden = []) => [
   })),
 ];
 const option = {
-  records, columns: columnsFor(), frozenColCount: 2, defaultRowHeight: 36, defaultHeaderRowHeight: 38, widthMode: 'standard',
+  records, columns: columnsFor(), frozenColCount: 2, multipleSort: true, defaultRowHeight: 36, defaultHeaderRowHeight: 38, widthMode: 'standard',
   editCellTrigger: ['doubleclick', 'keydown'], keyboardOptions: { moveFocusCellOnTab: true, editCellOnEnter: true, selectAllOnCtrlA: true },
   columnResizeMode: 'header',
   theme: VTable.themes.DEFAULT.extends({ defaultStyle: { fontSize: 13 }, headerStyle: { fontSize: 13, color: '#52525b', bgColor: '#fafafa' }, bodyStyle: { fontSize: 13 } }),
@@ -24,7 +24,7 @@ const option = {
 
 let table;
 function onReady(instance) {
-  table = instance;
+  table = instance; window.__vt = instance;
   const colOf = (id) => [...Array(table.colCount).keys()].find((c) => table.getHeaderField(c, 0) === id);
   // Probes for a canvas grid: text = values of the visible body cells; rects come from the engine.
   window.__bench.hasText = (s) => {
@@ -39,15 +39,24 @@ function onReady(instance) {
     const rect = table.getCellRelativeRect(col, row); const box = table.getElement().getBoundingClientRect();
     return { left: box.left + rect.left, top: box.top + rect.top, width: rect.width, height: rect.height };
   };
+  // Focus = the engine's selected cell (the canvas holds DOM focus).
+  window.__bench.focusRect = () => {
+    const range = table.getSelectedCellRanges().at(-1); const box = table.getElement().getBoundingClientRect();
+    const editing = document.activeElement?.tagName === 'INPUT';
+    if (!range) return { inside: document.activeElement === table.getElement() || editing, editor: editing };
+    const rect = table.getCellRelativeRect(range.end.col, range.end.row);
+    return { inside: true, editor: editing, cellRole: 'canvas cell', left: box.left + rect.left, top: box.top + rect.top, width: rect.width, height: rect.height };
+  };
   window.__bench.scrollToBottom = () => table.scrollToRow?.(table.rowCount - 1) ?? table.scrollTop(1e9);
   window.__bench.api = {
     getSelectedCount: () => table.getCheckboxState('select').filter(Boolean).length,
     getAmount: (id) => Number(table.records.find((r) => r.id === id)?.amount),
+    sortCount: () => [].concat(table.sortState ?? []).filter((x) => x && x.order && x.order !== 'normal').length,
     hideColumn: (col) => table.updateColumns(columnsFor([col])),
     hideMethod: 'updateColumns with hide: true (native)',
     setStatusFilter: (s) => table.updateFilterRules(s ? [{ filterKey: 'status', filteredValues: [s] }] : []),
   };
 }
 const Grid = () => <ListTable option={option} onReady={onReady} height={440} width={780} />;
-window.__bench.notes = { filter: 'native updateFilterRules', sort: 'native', edit: 'native InputEditor (vtable-editors)', pin: 'native frozenColCount', resize: 'native drag on canvas', select: 'native checkbox column', a11y: 'canvas: no DOM rows, no ARIA' };
+window.__bench.notes = { filter: 'native updateFilterRules', sort: 'native (multipleSort: true adds every clicked column, no modifier)', edit: 'native InputEditor (vtable-editors)', pin: 'native frozenColCount', resize: 'native drag on canvas', select: 'native checkbox column', a11y: 'canvas: no DOM rows, no ARIA' };
 renderBench('VisActor VTable (canvas)', Grid);

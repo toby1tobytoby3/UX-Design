@@ -64,13 +64,14 @@ const HELPERS = (titles) => {
       return cell ? rect(cell) : null;
     },
     focus() {
-      if (window.__bench.focusRect) return { inside: true, ...window.__bench.focusRect() };
+      if (window.__bench.focusRect) return window.__bench.focusRect();
       const a = document.activeElement;
       const inside = !!a && view().contains(a) && a !== view();
       const cell = a?.closest?.('[role=gridcell],[role=columnheader],[role=rowheader],[role=cell],td,th');
       const row = a?.closest?.('[role=row],tr');
+      const box = cell ?? (row && view().contains(row) ? row : null); // row-level focus (React Aria) has no cell
       return { inside, tag: a?.tagName, role: a?.getAttribute?.('role'), label: a?.getAttribute?.('aria-label'), cellRole: cell?.getAttribute('role') ?? cell?.tagName,
-        rowSelected: row?.getAttribute('aria-selected'), editor: ['INPUT', 'TEXTAREA'].includes(a?.tagName) && a.type !== 'checkbox', ...(cell ? rect(cell) : {}) };
+        rowSelected: row?.getAttribute('aria-selected'), editor: ['INPUT', 'TEXTAREA'].includes(a?.tagName) && a.type !== 'checkbox', rowFocus: !cell && !!box, ...(box ? rect(box) : {}) };
     },
     rows() { return view().querySelectorAll('[role=row],tr').length; },
     semantics() {
@@ -87,11 +88,12 @@ const HELPERS = (titles) => {
     },
     // Resolve once `cond` is true; time is measured from the next pointerdown, change or keydown.
     watch(cond) {
-      return new Promise((resolve) => {
-        let t0 = null;
+      window.__w = new Promise((resolve) => {
+        let t0 = null; const armed = performance.now();
         const start = () => { if (t0 === null) { t0 = performance.now(); requestAnimationFrame(tick); } };
         for (const ev of ['pointerdown', 'change', 'keydown']) addEventListener(ev, start, { capture: true, once: true });
         const tick = () => { if (cond()) resolve(Math.round(performance.now() - t0)); else if (performance.now() - t0 > 20000) resolve(null); else requestAnimationFrame(tick); };
+        setTimeout(() => { if (t0 === null) resolve(null); }, 25000);
       });
     },
     frames(ms) {
@@ -106,7 +108,7 @@ async function open(kit, task, { throttle = 1 } = {}) {
   const page = await browser.newPage({ viewport: { width: 860, height: 640 }, locale: 'en-GB' });
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message.slice(0, 200)));
-  page.on('console', (m) => m.type() === 'error' && errors.push(m.text().slice(0, 200)));
+  page.on('console', (m) => ['error', 'warning'].includes(m.type()) && errors.push(`${m.type()}: ${m.text().slice(0, 200)}`));
   let cdp = null;
   if (throttle > 1) { cdp = await page.context().newCDPSession(page); await cdp.send('Emulation.setCPUThrottlingRate', { rate: throttle }); }
   log('open', kit, task);
@@ -138,15 +140,15 @@ const TASKS = {
       const { page } = await open(kit, 'big', { throttle: 4 });
       const h = await page.evaluate(() => window.__probe.header('amount'));
       if (!h) { out.sort_note = 'Amount header not found'; await page.close(); break; }
-      const done = page.evaluate((a) => window.__probe.watch(() => window.__bench.hasText(a[0]) || window.__bench.hasText(a[1])), [MIN_AMOUNT, MAX_AMOUNT]);
+      await page.evaluate((a) => window.__probe.watch(() => window.__bench.hasText(a[0]) || window.__bench.hasText(a[1])), [MIN_AMOUNT, MAX_AMOUNT]);
       const c = center(h); await page.mouse.click(c.x - 10, c.y);
-      out.sorts.push(await done); await page.close();
+      out.sorts.push(await page.evaluate(() => window.__w)); await page.close();
     }
     for (let i = 0; i < 3; i++) {
       const { page } = await open(kit, 'big', { throttle: 4 });
-      const done = page.evaluate((id) => window.__probe.watch(() => window.__bench.hasText(id) && !window.__bench.hasText('INV-00001')), FIRST_REFUNDED);
+      await page.evaluate((id) => window.__probe.watch(() => window.__bench.hasText(id) && !window.__bench.hasText('INV-00001')), FIRST_REFUNDED);
       await page.selectOption('#status-filter', 'Refunded');
-      out.filters.push(await done); await page.close();
+      out.filters.push(await page.evaluate(() => window.__w)); await page.close();
     }
     const { page, errors } = await open(kit, 'big', { throttle: 4 });
     const g = await gridBox(page); await page.mouse.move(g.x, g.y);
@@ -202,16 +204,49 @@ const TASKS = {
       const kb = await page.evaluate(() => {
         const h = [...document.querySelectorAll('.view [role=columnheader],.view th')].find((e) => e.textContent.trim().startsWith('Customer'));
         const el = h && [...h.querySelectorAll('[role=separator],[aria-label*="esize" i],input[type=range]')].find((x) => x.tabIndex >= 0 || x.tagName === 'INPUT');
-        if (!el) return false; el.focus(); return document.activeElement === el || h.contains(document.activeElement);
+        if (el) { el.focus(); if (document.activeElement === el || h.contains(document.activeElement)) return 'resizer'; }
+        // No focusable resizer: some grids resize from the focused header with Ctrl+Arrow.
+        if (h) { h.focus(); if (h.contains(document.activeElement)) return 'header'; }
+        return false;
       });
       if (kb) {
         const w0 = (await page.evaluate(() => window.__probe.header('customer'))).width;
-        for (let i = 0; i < 4; i++) { await page.keyboard.press('ArrowRight'); await page.waitForTimeout(60); }
-        const w1 = (await page.evaluate(() => window.__probe.header('customer'))).width;
-        r.resize_keyboard = w1 - w0 >= 10;
+        const width = async () => (await page.evaluate(() => window.__probe.header('customer'))).width;
+        for (let i = 0; i < 4; i++) { await page.keyboard.press(kb === 'header' ? 'ControlOrMeta+ArrowRight' : 'ArrowRight'); await page.waitForTimeout(60); }
+        r.resize_keyboard_via = (await width()) - w0 >= 10 ? (kb === 'header' ? 'Ctrl+Arrow on header' : 'focusable resizer + Arrow') : null;
+        if (!r.resize_keyboard_via && kb === 'header') {
+          // React Aria: Enter on the focused header opens a resize mode (a menu when the column also sorts).
+          await page.keyboard.press('Escape'); await page.evaluate(() => [...document.querySelectorAll('.view [role=columnheader]')].find((e) => e.textContent.trim().startsWith('Customer'))?.focus());
+          const w2 = await width();
+          await page.keyboard.press('Enter'); await page.waitForTimeout(200);
+          const menu = await page.evaluate(() => [...document.querySelectorAll('[role=menuitem]')].find((e) => /resize/i.test(e.textContent))?.textContent ?? null);
+          if (menu) { await page.keyboard.press('ArrowDown'); await page.keyboard.press('ArrowDown'); await page.getByRole('menuitem', { name: /resize/i }).focus(); await page.keyboard.press('Enter'); await page.waitForTimeout(200); }
+          for (let i = 0; i < 4; i++) { await page.keyboard.press('ArrowRight'); await page.waitForTimeout(60); }
+          if ((await width()) - w2 >= 10) r.resize_keyboard_via = menu ? `Enter on header, "${menu.trim()}" menu, Arrow` : 'Enter on header, Arrow';
+        }
+        r.resize_keyboard = !!r.resize_keyboard_via;
       } else r.resize_keyboard = false;
     }
     await page.close();
+
+    // Multi-column sort: click Amount, then Shift+click Status (the common convention), on a fresh page Ctrl/Cmd+click
+    // (react-data-grid, for one, uses it). Counted from aria-sort, or the kit's sort state when aria-sort is absent.
+    r.multi_sort_warnings = [];
+    for (const mod of ['Shift', 'ControlOrMeta']) {
+      const opened = await open(kit, 'layout'); page = opened.page;
+      const am = await page.evaluate(() => window.__probe.header('amount'));
+      const stH = await page.evaluate(() => window.__probe.header('status'));
+      if (!am || !stH) break;
+      await page.mouse.click(am.left + 20, am.top + am.height / 2); await page.waitForTimeout(400);
+      await page.keyboard.down(mod); await page.mouse.click(stH.left + 20, stH.top + stH.height / 2); await page.keyboard.up(mod); await page.waitForTimeout(600);
+      r.multi_sort_columns = await page.evaluate(() => window.__bench.api.sortCount?.() ?? document.querySelectorAll('.view [aria-sort=ascending],.view [aria-sort=descending]').length);
+      r.multi_sort_modifier = mod;
+      r.multi_sort_warnings.push(...opened.errors.filter((e) => /enterprise|licen[cs]e|watermark/i.test(e)));
+      r.watermark = await page.evaluate(() => /enterprise|trial|licen[cs]e/i.test(document.querySelector('.view').innerText));
+      await page.close();
+      if (r.multi_sort_columns >= 2) break;
+    }
+    r.multi_sort = r.multi_sort_columns >= 2;
 
     ({ page } = await open(kit, 'layout'));
     r.hide_method = await page.evaluate(() => window.__bench.api.hideMethod);
@@ -227,17 +262,20 @@ const TASKS = {
   async select(kit) {
     const r = {};
     const { page } = await open(kit, 'select');
-    await page.focus('#before'); await page.keyboard.press('Tab'); await page.waitForTimeout(150);
+    await page.focus('#status-filter'); await page.keyboard.press('Tab'); await page.waitForTimeout(150);
     const f0 = await page.evaluate(() => window.__probe.focus());
     r.tab_into_grid = f0.inside; r.first_focus = [f0.tag, f0.role ?? f0.cellRole, f0.label].filter(Boolean).join(' ');
     const press = async (k) => { await page.keyboard.press(k); await page.waitForTimeout(120); return page.evaluate(() => window.__probe.focus()); };
     const p1 = await press('ArrowDown');
     const p2 = await press('ArrowDown');
     r.arrow_down_moves = p2.top != null && p1.top != null && p2.top > p1.top + 10;
-    const p3 = await press('ArrowRight');
-    r.arrow_right_moves = p3.left != null && p2.left != null && p3.left > p2.left + 10;
+    let p3 = await press('ArrowRight');
+    let from = p2;
+    // Row-level focus: the first ArrowRight enters the row's first cell; the second must move across.
+    if (p2.rowFocus && !p3.rowFocus) { from = p3; p3 = await press('ArrowRight'); r.row_focus_first = true; }
+    r.arrow_right_moves = p3.left != null && from.left != null && p3.left > from.left + 10;
     r.focus_role = p3.cellRole ?? p3.role ?? p3.tag;
-    await press('ArrowLeft');
+    await press('ArrowLeft'); if (r.row_focus_first) await press('ArrowLeft');
     const before = await page.evaluate(() => window.__bench.api.getSelectedCount());
     const sp = await press('Space');
     const after = await page.evaluate(() => window.__bench.api.getSelectedCount());
@@ -248,8 +286,14 @@ const TASKS = {
     r.shift_extends = ext === after + 2;
     r.selected_after_shift = ext;
     const cb = await page.evaluate(() => window.__probe.headerCheckbox());
-    if (cb) { const c = center(cb); await page.mouse.click(c.x, c.y); await page.waitForTimeout(500); }
-    r.select_all_count = await page.evaluate(() => window.__bench.api.getSelectedCount());
+    // From a partial selection some kits clear on the first click (indeterminate -> none -> all); allow a second click.
+    for (let i = 1; cb && i <= 2; i++) {
+      const c = center(cb); await page.mouse.click(c.x, c.y); await page.waitForTimeout(500);
+      r.select_all_count = await page.evaluate(() => window.__bench.api.getSelectedCount());
+      r.select_all_clicks = i;
+      if (r.select_all_count >= 100) break;
+    }
+    r.select_all_count ??= await page.evaluate(() => window.__bench.api.getSelectedCount());
     r.select_all = r.select_all_count >= 100; // MIT DataGrid pages rows; a full-page select-all counts
     const sem = await page.evaluate(() => window.__probe.semantics());
     r.role = sem.role; r.multiselectable = sem.multiselectable;
@@ -282,7 +326,7 @@ const TASKS = {
       }
       return false;
     };
-    const type = async (s) => { await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.type(s, { delay: 20 }); };
+    const type = async (s) => { await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.type(s, { delay: 20 }); await page.waitForTimeout(300); };
     const amount = () => page.evaluate(() => window.__bench.api.getAmount('INV-00001'));
     if (!(await startEdit())) { r.supported = false; r.note = 'no editor opened by Enter, F2 or double-click'; r.axe = await axe(page); await page.close(); return r; }
     r.starts_with = how;
@@ -295,13 +339,19 @@ const TASKS = {
     const v = await amount();
     r.invalid_rejected = Number(v) === 123.45;
     r.invalid_value_stored = String(v);
-    r.invalid_message = await page.evaluate(() => !!document.querySelector('.view [role=alert]') || /invalid|enter a number|must be/i.test(document.querySelector('.view').textContent));
+    Object.assign(r, await page.evaluate(() => {
+      const a = document.activeElement;
+      const visible = [...document.querySelectorAll('[role=alert],[role=tooltip]')].map((e) => e.textContent.trim()).filter(Boolean).join(' | ')
+        || (document.body.innerText.match(/[^\n]*(invalid|enter a number|must be)[^\n]*/i)?.[0] ?? '');
+      return { invalid_marked: !!document.querySelector('.view [aria-invalid=true]'), invalid_message_text: visible || (a?.validationMessage ? `(validity only) ${a.validationMessage}` : ''), invalid_message: !!visible };
+    }));
     if (await isEditing()) { await page.keyboard.press('Escape'); await page.waitForTimeout(200); }
     await startEdit(); await type('200'); await page.keyboard.press('Tab'); await page.waitForTimeout(400);
     r.tab_commits = Number(await amount()) === 200;
     const f = await page.evaluate(() => window.__probe.focus());
     const c1 = await cell();
-    r.tab_moves_right = !!(f.left != null && c1 && f.left > c1.left + 20);
+    r.tab_moves = !!(f.left != null && c1 && (f.left > c1.left + 20 || f.top > c1.top + 10));
+    r.after_tab = `${f.tag ?? ''} ${f.cellRole ?? ''} x=${Math.round(f.left ?? -1)} y=${Math.round(f.top ?? -1)} (amount cell x=${Math.round(c1?.left ?? -1)} y=${Math.round(c1?.top ?? -1)})${f.editor ? ' editing' : ''}`;
     r.axe = await axe(page);
     await page.close();
     r.supported = true;
@@ -311,7 +361,7 @@ const TASKS = {
 
 async function screenshot(kit, slug) {
   const { page } = await open(kit, 'select');
-  await page.focus('#before'); await page.keyboard.press('Tab');
+  await page.focus('#status-filter'); await page.keyboard.press('Tab');
   for (const k of ['ArrowDown', 'ArrowDown', 'Space', 'Shift+ArrowDown', 'Shift+ArrowDown']) { await page.keyboard.press(k); await page.waitForTimeout(100); }
   const g = await gridBox(page); await page.mouse.move(g.x, g.y); await page.mouse.wheel(220, 0); await page.waitForTimeout(500);
   mkdirSync(join(SOURCES, slug), { recursive: true });
@@ -327,6 +377,7 @@ for (const kit of kits) {
   writeFileSync(join(HERE, 'dist', `${kit}.html`), html);
   const probe = {};
   for (const [t, fn] of Object.entries(TASKS)) {
+    if (process.env.ONLY && !process.env.ONLY.split(',').includes(t)) { probe[t] = results[kit]?.probe?.[t]; continue; }
     try { probe[t] = await fn(kit); } catch (e) { probe[t] = { supported: false, note: `harness error: ${e.message.split('\n')[0]}` }; }
     console.log(kit, t, JSON.stringify(probe[t]).slice(0, 400));
   }
@@ -334,7 +385,7 @@ for (const kit of kits) {
   const { page } = await open(kit, 'big'); const notes = await page.evaluate(() => window.__bench.notes); await page.close();
   results[kit] = {
     kind: 'data-table', bundle_gz_kb: size.js, css_gz_kb: size.css, baseline_kb: base, lib_only_gz_kb: Math.round((size.js - base + size.css) * 10) / 10,
-    tasks_total: 4, tasks_supported: Object.values(probe).filter((p) => p.supported).length, notes, probe,
+    tasks_total: 4, tasks_supported: Object.values(probe).filter((p) => p?.supported).length, notes, probe,
     keyboard_passed: probe.select?.keyboard_passed ?? 0, keyboard_total: probe.select?.keyboard_total ?? 5,
     axe_violations: [probe.big, probe.layout, probe.select, probe.edit].reduce((n, p) => n + (p?.axe?.length ?? 0), 0),
   };

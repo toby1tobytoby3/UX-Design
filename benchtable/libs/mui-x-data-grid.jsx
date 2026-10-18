@@ -11,7 +11,8 @@ function Grid() {
   const [selection, setSelection] = useState({ type: 'include', ids: new Set() });
   const columns = useMemo(() => COLUMNS.map((c) => ({
     field: c.id, headerName: c.title, width: c.width,
-    ...(c.id === 'amount' ? { type: 'number', editable: true, valueFormatter: (v) => fmt(v) } : {}),
+    ...(c.id === 'amount' ? { type: 'number', editable: true, valueFormatter: (v) => fmt(v),
+      preProcessEditCellProps: ({ props }) => ({ ...props, error: props.value == null || Number.isNaN(props.value) }) } : {}),
     ...(c.id === 'flagged' ? { type: 'boolean' } : {}),
   })), []);
   useEffect(() => {
@@ -34,5 +35,5 @@ function Grid() {
     </div>
   );
 }
-window.__bench.notes = { filter: 'native filterModel', sort: 'native', edit: 'native (type number)', pin: 'Pro only (not in MIT)', resize: 'native drag', select: 'native checkboxSelection', rows: 'MIT edition caps page size at 100: 10,000 rows are paginated' };
+window.__bench.notes = { filter: 'native filterModel', sort: 'native', edit: 'native (type number) + preProcessEditCellProps validation; Enter within ~200 ms of the last keystroke is ignored while validation runs', pin: 'Pro only (not in MIT)', resize: 'native drag', select: 'native checkboxSelection', rows: 'MIT edition caps page size at 100: 10,000 rows are paginated' };
 renderBench('MUI X DataGrid (MIT)', Grid);

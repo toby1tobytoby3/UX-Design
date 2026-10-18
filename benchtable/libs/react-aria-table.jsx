@@ -23,11 +23,15 @@ function AmountCell({ row, editing, setEditing, commit }) {
         onChange={(e) => setDraft(e.target.value)}
         onKeyDown={(e) => {
           e.stopPropagation(); // keep the grid's own keyboard handling out of the input
+          const cell = e.currentTarget.closest('[role=gridcell]');
           if (e.key === 'Enter' || e.key === 'Tab') {
+            e.preventDefault();
             const n = Number(draft);
-            if (draft.trim() === '' || Number.isNaN(n)) { e.preventDefault(); setError('Enter a number'); return; }
+            if (draft.trim() === '' || Number.isNaN(n)) { setError('Enter a number'); return; }
             commit(row.id, n); setEditing(null);
-          } else if (e.key === 'Escape') { setEditing(null); }
+            const next = e.key === 'Tab' ? cell.nextElementSibling ?? cell : cell;
+            setTimeout(() => next.focus()); // after the table re-renders, or it restores focus to the edited cell
+          } else if (e.key === 'Escape') { setEditing(null); cell.focus(); }
         }} />
       {error && <span role="alert" style={{ color: '#b42318', fontSize: 11 }}>{error}</span>}
     </span>
@@ -57,16 +61,22 @@ function Grid() {
     };
   }, []);
   window.__bench._sel = selected; window.__bench._rows = rows; window.__bench._n = view.length;
+  // Table doesn't take onKeyDownCapture, so Enter/F2 on an Amount cell is caught by a capture listener on the document.
+  const editingRef = useRef(null); editingRef.current = editing;
+  useEffect(() => {
+    const onKey = (e) => {
+      const cell = e.target.closest?.('[data-col="amount"]');
+      if (cell && e.target === cell && (e.key === 'Enter' || e.key === 'F2') && !editingRef.current) { e.preventDefault(); e.stopPropagation(); setEditing(cell.dataset.row); }
+    };
+    document.addEventListener('keydown', onKey, true);
+    return () => document.removeEventListener('keydown', onKey, true);
+  }, []);
   const commit = (id, n) => setRows((all) => all.map((r) => (r.id === id ? { ...r, amount: n } : r)));
   return (
     <ResizableTableContainer className="tbl rac-table">
       <Virtualizer layout={TableLayout} layoutOptions={{ rowHeight: 36, headingHeight: 38 }}>
         <Table aria-label="Invoices" selectionMode="multiple" selectedKeys={selected} onSelectionChange={setSelected}
-          sortDescriptor={sort ?? undefined} onSortChange={setSort}
-          onKeyDownCapture={(e) => {
-            const cell = e.target.closest?.('[data-col="amount"]');
-            if (cell && (e.key === 'Enter' || e.key === 'F2') && !editing) { e.preventDefault(); e.stopPropagation(); setEditing(cell.dataset.row); }
-          }}>
+          sortDescriptor={sort ?? undefined} onSortChange={setSort}>
           <TableHeader>
             <Column width={44} minWidth={44}><Check slot="selection" /></Column>
             {cols.map((c) => (
@@ -98,5 +108,5 @@ function Grid() {
     </ResizableTableContainer>
   );
 }
-window.__bench.notes = { filter: 'app-side filter (no filter API)', sort: 'native sort state, app sorts rows', edit: 'hand-built (no editing API)', pin: 'not available', resize: 'native ColumnResizer (drag and keyboard)', select: 'native selectionMode multiple' };
+window.__bench.notes = { filter: 'app-side filter (no filter API)', sort: 'native sort state, app sorts rows', edit: 'hand-built (no editing API)', pin: 'not available', resize: 'native ColumnResizer drag; keyboard resize needs the app to call startResize() from a column menu (not wired here)', select: 'native selectionMode multiple' };
 renderBench('React Aria Table', Grid);

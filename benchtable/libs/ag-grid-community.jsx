@@ -14,7 +14,8 @@ function Grid() {
     field: c.id, headerName: c.title, width: c.width, sortable: true, resizable: true,
     ...(c.id === 'id' ? { pinned: 'left' } : {}),
     ...(c.id === 'status' ? { filter: 'agTextColumnFilter' } : {}),
-    ...(c.id === 'amount' ? { type: 'numericColumn', editable: true, cellEditor: 'agNumberCellEditor', valueFormatter: (p) => fmt(p.value) } : {}),
+    ...(c.id === 'amount' ? { type: 'numericColumn', editable: true, cellEditor: 'agNumberCellEditor',
+      cellEditorParams: { getValidationErrors: ({ value }) => (value == null ? ['Enter a number'] : null) }, valueFormatter: (p) => fmt(p.value) } : {}),
   })), []);
   const onGridReady = useCallback(({ api }) => {
     window.__bench.api = {
@@ -32,9 +33,9 @@ function Grid() {
     <div style={{ height: '100%' }}>
       <AgGridReact ref={ref} rowData={rows} columnDefs={columnDefs} getRowId={(p) => p.data.id} onGridReady={onGridReady}
         rowSelection={{ mode: 'multiRow', checkboxes: true, headerCheckbox: true, enableClickSelection: false }}
-        rowHeight={36} headerHeight={38} />
+        rowHeight={36} headerHeight={38} invalidEditValueMode="block" />
     </div>
   );
 }
-window.__bench.notes = { filter: 'native column filter model', sort: 'native', edit: 'native agNumberCellEditor', pin: 'native pinned: left', resize: 'native drag', select: 'native multiRow + checkboxes' };
+window.__bench.notes = { filter: 'native column filter model', sort: 'native', edit: 'native agNumberCellEditor + getValidationErrors, invalidEditValueMode: block', pin: 'native pinned: left', resize: 'native drag', select: 'native multiRow + checkboxes' };
 renderBench('AG Grid Community', Grid);

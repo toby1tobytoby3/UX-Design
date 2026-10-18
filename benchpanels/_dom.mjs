@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+import { createServer } from 'node:http';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+const HERE = new URL('.', import.meta.url).pathname;
+const server = createServer((req, res) => { const f = join(HERE, 'dist', req.url.split('?')[0]); if (!existsSync(f)) { res.writeHead(404).end(); return; } res.writeHead(200, { 'content-type': f.endsWith('.html') ? 'text/html' : f.endsWith('.css') ? 'text/css' : 'text/javascript' }).end(readFileSync(f)); }).listen(0);
+const browser = await chromium.launch(); const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+await page.goto(`http://127.0.0.1:${server.address().port}/${process.argv[2]}.html`); await page.waitForTimeout(800);
+console.log(await page.evaluate((s) => document.querySelector(s).outerHTML.replace(/<canvas[^>]*>/g, '').slice(0, 3000), process.argv[3] || '#app'));
+await browser.close(); server.close();

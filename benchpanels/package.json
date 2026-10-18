@@ -1,0 +1,17 @@
+{
+  "name": "ux-design-benchpanels",
+  "private": true,
+  "type": "module",
+  "description": "Same three-pane workspace in every split, docking and tiles library: drag and keyboard resize, double-click reset, persistence, rearranging, drag frame timing with heavy panes, axe-core and bundle sizes for sources/",
+  "dependencies": {
+    "react-resizable-panels": "4.14.5",
+    "dockview-react": "8.6.0",
+    "flexlayout-react": "0.11.1",
+    "allotment": "1.20.6",
+    "react-grid-layout": "2.3.0",
+    "axe-core": "4.14.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "esbuild": "0.25.10"
+  }
+}
