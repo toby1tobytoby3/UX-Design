@@ -1,5 +1,5 @@
 {
-  "_about": "Hand-maintained search vocabulary for scripts/find.mjs (used by ux-find). Each concept maps the words people use to taxonomy patterns, a guide and a category id from research/categories.md (status and priority are read from there). terms are whole words or phrases; weak_terms only count when no ordinary term from any concept matched. npm run catalog checks that patterns and guides exist.",
+  "_about": "Hand-maintained search vocabulary for scripts/find.mjs (used by ux-find). Each concept maps the words people use to taxonomy patterns, a guide and a category id from research/categories.md (status and priority are read from there). terms are whole words or phrases; weak_terms only count when no ordinary term from any concept matched. npm run catalog checks that patterns and guides exist. scenarios maps phrases to the numbered sections of guides/scenarios.md; they add a hint and don't consume words.",
   "concepts": {
     "A1": {
       "patterns": [
@@ -495,7 +495,10 @@
         "visx",
         "lightweight charts",
         "uplot",
-        "observable plot"
+        "observable plot",
+        "price chart",
+        "financial chart",
+        "trading chart"
       ]
     },
     "C2": {
@@ -604,7 +607,11 @@
         "order book",
         "live updates",
         "websocket",
-        "price feed"
+        "price feed",
+        "trading",
+        "trading terminal",
+        "market data",
+        "stock prices"
       ]
     },
     "D1": {
@@ -953,5 +960,66 @@
         "mobile menu"
       ]
     }
+  },
+  "scenarios": {
+    "1": [
+      "budgeting",
+      "personal finance",
+      "budget app",
+      "spending tracker"
+    ],
+    "2": [
+      "kpi dashboard",
+      "revenue operations",
+      "revops",
+      "analytics dashboard",
+      "executive dashboard"
+    ],
+    "3": [
+      "trading terminal",
+      "trading",
+      "order book",
+      "brokerage",
+      "market data"
+    ],
+    "4": [
+      "control room",
+      "fleet",
+      "logistics",
+      "dispatch",
+      "live map"
+    ],
+    "5": [
+      "landing page",
+      "marketing site",
+      "product launch page"
+    ],
+    "6": [
+      "configurator",
+      "product configurator",
+      "3d product"
+    ],
+    "7": [
+      "whiteboard",
+      "multiplayer canvas",
+      "collaborative canvas"
+    ],
+    "8": [
+      "video editor",
+      "video editing",
+      "media editor"
+    ],
+    "9": [
+      "fraud",
+      "investigation graph",
+      "network graph",
+      "link analysis"
+    ],
+    "10": [
+      "agent workspace",
+      "ai agent",
+      "agent console",
+      "agentic app"
+    ]
   }
 }

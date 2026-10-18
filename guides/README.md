@@ -45,18 +45,20 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
 ## Answering a request
 0. **Search first:** `node scripts/find.mjs "<request>"` maps the request's words to categories, guides and
    entries, and prints the coverage line (vocabulary in `guides/aliases.json`, tests in `scripts/find.test.mjs`).
-1. **Classify it.**
-   - *Category* ("I need a chart / date picker / carousel") → step 2.
-   - *Look* ("a dark hero", "a pricing toggle like Notion") → step 3.
+1. **Whole brief?** ("a trading terminal", "an AI agent workspace") Start with `guides/scenarios.md`: a starting stack
+   per scenario, what must be right, what to test, and what the library holds. Then the category guides below.
+2. **Classify it.**
+   - *Category* ("I need a chart / date picker / carousel") → step 3.
+   - *Look* ("a dark hero", "a pricing toggle like Notion") → step 4.
    - *Specific source* ("is ECharts any good?") → read its profile, then compare with `SOURCES.md`.
-2. **Category: guide, then sources.** Open `guides/<category>.md` and take the form from the job table and
+3. **Category: guide, then sources.** Open `guides/<category>.md` and take the form from the job table and
    the library from the fit table. Confirm against `SOURCES.md` and the chosen profile's "Found in the benchmark".
-   Answer: **"Use X (score) because…; runner-up Y if…; change these defaults: …"**. Then go to step 3 for patterns.
-3. **Patterns.** Filter `catalog.json` by `pattern` (see `taxonomy.md`), rank by fit then `rating`, and view
+   Answer: **"Use X (score) because…; runner-up Y if…; change these defaults: …"**. Then go to step 4 for patterns.
+4. **Patterns.** Filter `catalog.json` by `pattern` (see `taxonomy.md`), rank by fit then `rating`, and view
    the first image before recommending. Return the top 3 with techniques that apply to this task.
-4. **Code.** Prefer, in order: `example.tsx` (our rebuild), runnable `option.js` / `bench/libs/*`, `preview.html`.
+5. **Code.** Prefer, in order: `example.tsx` (our rebuild), runnable `option.js` / `bench/libs/*`, `preview.html`.
    `source.html` / `styles.json` are reference only (see the hard limits above). Open-source code can be reused under its licence.
-5. **Coverage, then explore.** Open the answer with a coverage line (strong / partial / none). The library is curated
+6. **Coverage, then explore.** Open the answer with a coverage line (strong / partial / none). The library is curated
    recommendations, not the only allowed answer: when coverage is partial or none, or something outside it is clearly
    better, research it yourself (web search, `npm view` for licence and maintenance, live capture with `scripts/capture.mjs`,
    a rough rubric score) as described in `skills/ux-find/SKILL.md` step 4. Label each recommendation **Curated** or
@@ -73,6 +75,7 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
 | Accessibility and the component-library choice (A7) | `guides/accessibility.md` | 5 `ui-primitives` (benchmarked in `benchui/`) | `accessibility/*` |
 | AI chat, agents, oversight, provenance (E1–E5) | `guides/agentic-ui.md` | `ai-chat` (benchmarked in `benchai/`) | `ai-chat/*`, `agent-activity/*`, `ai-review/*`, `ai-provenance/*` |
 | Inline AI assist: ghost text, rewrite, AI fill (E6) | `guides/agentic-ui.md` §7 | `ai-assist` (benchmarked in `benchinline/`) | `ai-assist/*` |
+| Whole briefs (ten scenarios) | `guides/scenarios.md` | – (links to the category guides) | – |
 | Everything else in `taxonomy.md` | – (patterns only) | – | see `CATALOG.md` |
 
 Categories still to build, with priorities and starting research: `research/categories.md`.

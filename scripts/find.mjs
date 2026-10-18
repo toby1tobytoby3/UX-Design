@@ -26,14 +26,14 @@ const wordRe = (phrase) => new RegExp(`(^|[^a-z0-9])${phrase.split(' ').map((w) 
 
 export function loadLibrary() {
   const catalog = JSON.parse(readFileSync(join(ROOT, 'catalog.json'), 'utf8'));
-  const { concepts } = JSON.parse(readFileSync(join(ROOT, 'guides/aliases.json'), 'utf8'));
+  const { concepts, scenarios = {} } = JSON.parse(readFileSync(join(ROOT, 'guides/aliases.json'), 'utf8'));
   // Category status and priority come from the research map, so the coverage line stays current.
   const rows = readFileSync(join(ROOT, 'research/categories.md'), 'utf8').split('\n').filter((l) => /^\| [A-F]\d+ \|/.test(l));
   const categories = Object.fromEntries(rows.map((l) => {
     const c = l.split('|').map((x) => x.trim());
     return [c[1], { name: c[2], status: c[4].split(' ')[0], priority: c[5] }];
   }));
-  return { catalog, concepts, categories, shortlist: loadShortlist() };
+  return { catalog, concepts, scenarios, categories, shortlist: loadShortlist() };
 }
 
 // The team's catalogue (research/catalogue/) gives a vetted starting point for categories the library hasn't built:
@@ -87,7 +87,7 @@ function matchConcepts(tokens, concepts) {
 }
 
 export function find(query, { limit = 8 } = {}) {
-  const { catalog, concepts, categories, shortlist } = loadLibrary();
+  const { catalog, concepts, scenarios, categories, shortlist } = loadLibrary();
   const { byConcept, free } = matchConcepts(tokenize(query), concepts);
   const conceptIds = Object.keys(byConcept);
   const patterns = new Set(conceptIds.flatMap((id) => concepts[id].patterns));
@@ -145,6 +145,8 @@ export function find(query, { limit = 8 } = {}) {
     patterns: strongHits.filter((s) => s.e.kind === 'pattern').slice(0, limit).map(brief),
     weak: weakHits.slice(0, 5).map(brief),
     missing: conceptReport.filter((c) => c.level === 'none').map((c) => `${c.id} ${c.name} (${c.priority ?? 'unprioritised'})`),
+    // Whole-brief hint: a scenario phrase points at guides/scenarios.md without taking words from the concepts.
+    scenarios: Object.entries(scenarios).filter(([, terms]) => terms.some((t) => wordRe(t).test(query))).map(([n]) => `guides/scenarios.md §${n}`),
     shortlist: Object.fromEntries(conceptReport.filter((c) => c.level !== 'strong' && shortlist[c.id]?.tools)
       .map((c) => [c.id, { tools: shortlist[c.id].tools, reference: shortlist[c.id].references[0] ?? null }])),
   };
@@ -165,6 +167,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   console.log(`Library coverage: ${r.coverage}${covered.length ? ` — covered: ${covered.join('; ')}` : ''}${r.missing.length ? ` — not in library yet: ${r.missing.join('; ')} → explore` : ''}`);
   for (const c of r.concepts) console.log(`  ${c.id.padEnd(4)} ${c.name.padEnd(36)} ${c.level.padEnd(7)} guide: ${c.guide ?? '–'} · sources ${c.sources} · patterns ${c.patterns} · matched "${c.matched.join('", "')}"`);
   if (r.free_terms.length) console.log(`  other terms searched: ${r.free_terms.join(', ')}`);
+  if (r.scenarios.length) console.log(`  whole brief? starting stack in ${r.scenarios.join(', ')}`);
   const sl = Object.entries(r.shortlist);
   if (sl.length) {
     console.log('\nStart exploring from the team catalogue (research/catalogue/, licence and maintenance checked; not benchmarked)');

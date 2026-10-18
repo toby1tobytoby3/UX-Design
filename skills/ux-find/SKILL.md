@@ -21,7 +21,8 @@ If none exist, `git clone --depth 1 https://github.com/toby1tobytoby3/UX-Design 
 
 ## 2. Read the map
 Read `guides/README.md` first: it explains the layers (guides → sources → patterns → evidence)
-and how to answer. For "which library/site?" questions, `SOURCES.md` has the scored comparison per category.
+and how to answer, and lists tools to avoid. For a whole product or screen ("a trading terminal", "an agent
+workspace"), start from `guides/scenarios.md`: a starting stack, what must be right and what to test. For "which library/site?" questions, `SOURCES.md` has the scored comparison per category.
 
 ## 3. Search
 Start with the search script. It knows the team's vocabulary (`guides/aliases.json`: "snackbar" → toasts,

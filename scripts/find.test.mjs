@@ -31,6 +31,8 @@ const CASES = [
   { q: 'per-hunk diff review', expect: ['ai-review/pierre-diffs-keep-undo-hunks'] },
   { q: 'AI writing assistant inside the editor', reject: ['hero/linear-dark-product-hero', 'chart/echarts-datazoom-time-series'], missing: ['D5'] },
   { q: 'collaborative cursor', reject: ['sources/uplot'], coverage: 'none' },
+  { q: 'design a trading terminal', scenario: 3, missing: ['C6'] },
+  { q: 'an AI agent workspace with approvals', scenario: 10 },
 ];
 
 // The old way: substring search over each catalog row, every non-trivial word.
@@ -51,6 +53,7 @@ for (const c of CASES) {
   for (const id of c.reject ?? []) if (returned.includes(id)) problems.push(`false hit ${id}`);
   for (const id of c.missing ?? []) if (!r.missing.some((m) => m.startsWith(`${id} `))) problems.push(`gap ${id} not reported`);
   if (c.coverage && r.coverage !== c.coverage) problems.push(`coverage ${r.coverage}, want ${c.coverage}`);
+  if (c.scenario && !r.scenarios.includes(`guides/scenarios.md §${c.scenario}`)) problems.push(`scenario ${c.scenario} not suggested`);
   const old = naive(c.q);
   const oldTop = old.slice(0, 16);
   rows.push({ q: c.q, ok: !problems.length, problems, returned: returned.length,

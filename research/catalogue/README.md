@@ -9,7 +9,7 @@ The team's parallel research: 62 curated tools across all 40 categories, with li
 | `resources.csv` | One row per tool: role, recommendation (core / situational / watch), licence and licence class, maintenance gate with dated evidence, use when / avoid, best demo, editorial scores |
 | `categories.csv` | Per category (A1–F3): curated tools, guide questions, starter-list changes, gaps that need custom work |
 | `references.csv` | 3 reference URLs per category with the specific moment and what to learn (reviewed, not captured) |
-| `scenarios.csv` | 10 scenario recipes (the same ten desktop briefs as `docs/test-run-10-briefs.html`) |
+| `scenarios.csv` | 10 scenario recipes (they match the ten desktop briefs in `docs/test-run-10-briefs.html`) |
 | `excluded.csv` | Tools excluded or bounded: maintenance, licence, paid tiers, deprecations |
 | `examples.csv`, `reference-sites.csv` | Extra example links per tool; inspiration galleries (Siteinspire, Landbook, Recent) |
 
