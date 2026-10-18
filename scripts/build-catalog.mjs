@@ -13,7 +13,7 @@ const SOURCES = join(ROOT, 'sources');
 const IMAGE = /\.(jpe?g|png|webp)$/i;
 // Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI, tables) shares one shape: per-task probes plus
 // bundle size, with a few category-specific measurements on top.
-const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline', 'benchtable'];
+const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline', 'benchtable', 'benchpanels'];
 // Keys starting with `_` are bench-internal (e.g. size probes), not sources.
 const readBench = (f) => Object.fromEntries(Object.entries(JSON.parse(readFileSync(f, 'utf8'))).filter(([k]) => !k.startsWith('_')));
 const bench = Object.assign({}, ...BENCHES.map((d) => join(ROOT, d, 'results.json')).filter(existsSync).map(readBench));
@@ -120,6 +120,11 @@ function summariseBench(b) {
       keyboard_passed: b.keyboard_passed, keyboard_total: b.keyboard_total, axe_violations: b.axe_violations,
       evidence: big.supported ? `10k rows: sort ${big.sort_ms} ms, filter ${big.filter_ms} ms, ${big.dom_rows} DOM rows; ${b.keyboard_passed}/${b.keyboard_total} keyboard, ${b.axe_violations} axe`
         : `10k rows not supported; ${b.keyboard_passed}/${b.keyboard_total} keyboard` });
+  } else if (kind === 'panels') {
+    const kb = b.probe?.keyboard?.checks ?? {}, rs = b.probe?.persist?.checks ?? {};
+    Object.assign(out, { model: b.model, checks_passed: b.checks_passed, checks_total: b.checks_total, hit_area_px: b.hit_area_px,
+      keyboard_resize: !!kb.arrow_resizes, restores_without_jump: !!rs.no_jump_on_restore, axe_violations: b.axe_violations,
+      evidence: `${b.checks_passed}/${b.checks_total} checks; ${b.hit_area_px} px grab area; keyboard resize ${kb.arrow_resizes ? 'yes' : 'no'}; ${rs.no_jump_on_restore ? 'restores without a jump' : 'jumps on restore'}` });
   }
   return out;
 }

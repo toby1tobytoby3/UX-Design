@@ -36,6 +36,24 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **Plate AI (@platejs/ai)**: You need inline AI inside a rich document editor (headings, lists, tables) and have chosen Slate/Plate as that editor.
 - **BlockNote AI (@blocknote/xl-ai)**: An open-source (GPL-compatible) product already built on BlockNote that wants a Notion-like "Ask AI" menu.
 
+## panels
+
+| Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| [react-resizable-panels](sources/react-resizable-panels/source.md) | **8.8** | 3 | 5 | 3 | 5 | 5 | 5 | 4 | 5 | 5/6 | 20 | 12/12 checks; 11 px grab area; keyboard resize yes; restores without a jump | MIT |
+| [Dockview (free core)](sources/dockview/source.md) | **7.5** | 5 | 5 | 4 | 2 | 4 | 4 | 2 | 4 | 6/6 | 104.2 | 7/17 checks; 4 px grab area; keyboard resize no; restores without a jump | MIT |
+| [FlexLayout](sources/flexlayout-react/source.md) | **7.5** | 4 | 5 | 4 | 3 | 4 | 3 | 3 | 4 | 6/6 | 53.7 | 12/17 checks; 8 px grab area; keyboard resize yes; restores without a jump | MIT |
+| [React Grid Layout](sources/react-grid-layout/source.md) | **7** | 3 | 4 | 3 | 1 | 4 | 4 | 4 | 5 | 6/6 | 24.9 | 5/14 checks; 25 px grab area; keyboard resize no; restores without a jump | MIT |
+| [Allotment](sources/allotment/source.md) | **6.5** | 4 | 3 | 2 | 1 | 3 | 4 | 4 | 5 | 5/6 | 11 | 3/12 checks; 8 px grab area; keyboard resize no; jumps on restore | MIT |
+
+**Pick it for**
+
+- **react-resizable-panels**: Default for any fixed set of resizable regions (sidebar, list-detail-inspector, chat-artefact, preview over timeline), and through shadcn's Resizable, which wraps it.
+- **Dockview (free core)**: A mouse-first workbench with many views and multiple monitors (trading terminal, monitoring console), when pop-outs and polish matter more than keyboard resizing, and you will add the keyboard layer yourself.
+- **FlexLayout**: A docking workbench that must be keyboard-operable without paying for it (trading terminal, IDE-like tools), and you can live with a JSON model API.
+- **React Grid Layout**: User-customisable dashboards where different roles arrange their own tiles, inside an explicit Edit layout mode that also gives keyboard users move up/down and S/M/L menus.
+- **Allotment**: Rarely; a mouse-only internal tool that wants the VS Code look with no styling work.
+
 ## 3d
 
 | Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
@@ -53,6 +71,26 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **three.js**: Custom 3D outside React, or when you need full control of the render loop; and as the engine underneath React Three Fiber and model-viewer.
 - **Babylon.js**: Game-like or tool-like 3D applications (simulators, digital twins, XR, editors) where engine features matter more than page weight.
 - **OGL**: Lightweight WebGL effects such as shader backgrounds, image distortions and particle fields, written by someone comfortable with GLSL.
+
+## data-table
+
+| Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| [react-data-grid](sources/react-data-grid/source.md) | **8.3** | 4 | 4 | 3 | 4 | 5 | 4 | 5 | 4 | 4/4 | 17.1 | 10k rows: sort 99 ms, filter 26 ms, 21 DOM rows; 4/5 keyboard, 0 axe | MIT |
+| [TanStack Table v9 + TanStack Virtual](sources/tanstack-table/source.md) | **7.8** | 3 | 3 | 4 | 2 | 5 | 5 | 4 | 5 | 4/4 | 29.9 | 10k rows: sort 234 ms, filter 67 ms, 30 DOM rows; 1/5 keyboard, 0 axe | MIT |
+| [AG Grid Community](sources/ag-grid-community/source.md) | **7.5** | 5 | 5 | 3 | 4 | 3 | 4 | 1 | 5 | 4/4 | 322.4 | 10k rows: sort 591 ms, filter 589 ms, 33 DOM rows; 4/5 keyboard, 0 axe | MIT (Community); Enterprise is commercial |
+| [MUI X Data Grid (MIT)](sources/mui-x-data-grid/source.md) | **6.8** | 5 | 3 | 2 | 5 | 2 | 3 | 2 | 5 | 4/4 | 219.9 | 10k rows: sort 481 ms, filter 381 ms, 16 DOM rows; 5/5 keyboard, 0 axe | MIT (DataGrid); Pro and Premium are commercial |
+| [React Aria Table](sources/react-aria-table/source.md) | **6.5** | 3 | 2 | 1 | 5 | 2 | 5 | 3 | 5 | 4/4 | 78.1 | 10k rows: sort 2917 ms, filter 1762 ms, 19 DOM rows; 5/5 keyboard, 0 axe | Apache-2.0 |
+| [VisActor VTable (watch)](sources/vtable/source.md) | **6.3** | 4 | 4 | 5 | 1 | 3 | 2 | 1 | 5 | 4/4 | 662 | 10k rows: sort 639 ms, filter 326 ms, 0 DOM rows; 1/5 keyboard, 4 axe | MIT |
+
+**Pick it for**
+
+- **react-data-grid**: Editable record grids in a React 19 app where size and speed matter and you're happy to sort, filter and validate rows yourself (Supabase Studio's table editor is built on it).
+- **TanStack Table v9 + TanStack Virtual**: Record tables in our own design system (the shadcn Data Table), from simple lists to virtualised 10k-row views, where we want full control of markup and are happy to write the keyboard layer if cells become interactive.
+- **AG Grid Community**: A brief needs a finished editing grid now (admin tools, back-office record grids, ops consoles) and none of the Enterprise features below (range selection, clipboard, grouping, pivot, Excel, column menu, status bar).
+- **MUI X Data Grid (MIT)**: The app already uses MUI/Material and the grid fits in pages of 100 rows with one sort column and no pinned columns, e.g. settings and admin lists.
+- **React Aria Table**: Admin and settings tables of up to a few thousand rows where keyboard and screen-reader correctness matter more than grid features, especially if the app already uses React Aria Components.
+- **VisActor VTable (watch)**: Watch only. Consider it for internal, sighted-user analytics views (dense pivots, very wide tables) where accessibility requirements have been explicitly waived.
 
 ## motion
 

@@ -274,6 +274,7 @@ for (const lib of libs) {
     kind: 'panels', model: await (async () => { const s = readFileSync(join(HERE, 'libs', `${lib}.jsx`), 'utf8'); return s.match(/model: '(\w+)'/)[1]; })(),
     bundle_gz_kb: size.js, css_gz_kb: size.css, baseline_kb: baseline,
     lib_only_gz_kb: Math.round((size.js - baseline + size.css) * 10) / 10,
+    tasks_total: TASKS.length, tasks_supported: Object.values(probe).filter((p) => p.supported).length,
     checks_passed: checks.filter(Boolean).length, checks_total: checks.length,
     hit_area_px: probe.resize.metrics.hit_area_px ?? 0, frame_p95_ms: probe.perf.metrics.frame_p95_ms ?? null,
     axe_violations: axe.length, axe, probe, errors,

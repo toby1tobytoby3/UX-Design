@@ -711,6 +711,73 @@ window.CATALOG = [
     "body": "## What it is\nvscode.dev with no folder open, captured at 1440×900 with the bottom panel opened (Ctrl+J). The parts are the\nactivity bar (48 px), Explorer sidebar (300 px), editor (main), panel (Problems / Output / Terminal) and status\nbar. The four layout toggles sit at the top-right of the title bar.\n\n## Key techniques\n- Fixed regions instead of free docking: views move between known containers (sidebar, panel, secondary\n  sidebar), so the layout never becomes unrecognisable.\n- Toggle shortcuts: Ctrl+B sidebar (300 → 0 → 300 px measured), Ctrl+J panel (0 → 292 px). Panel maximise and close sit in the panel header.\n- Title-bar layout buttons mirror the shortcuts for pointer users, and \"Customize Layout\" gives presets.\n- Empty states inside parts give clear next actions (Open Folder, Open Recent, Connect to Tunnel…).\n- Sashes are 4 px. The sidebar sash shows a small grip at its midpoint.\n\n## Accessibility (measured)\n- F6 cycles focus across parts: status bar → activity bar → sidebar → editor → panel. This is the same\n  \"jump between regions\" idea as skip links, but repeatable.\n- Landmarks: the banner part is `role=\"banner\"`, the editor `role=\"main\"` and the status bar `role=\"status\"`.\n  Other parts have no landmark role.\n- **Sashes are not focusable**: `.monaco-sash` elements have no role or tabindex. Keyboard resizing is done\n  through commands (\"View: Increase/Decrease Current View Size\"), not a focusable splitter. Prefer an APG\n  separator in web apps.\n- Activity bar items are named with their shortcut (\"Explorer (Ctrl+Shift+E)\").\n\n## Weaknesses\n- Keyboard resize hidden in the command palette is not discoverable. Give splitters focus and arrow keys.\n- No skip link, because F6 replaces it. On the web, add a skip link too, since most users don't know F6.\n\n## Related entries\n- `panels/react-resizable-panels-keyboard-splitter-collapse`, `panels/flexlayout-docking-keyboard-splitters`,\n  `panels/dockview-trading-workspace-docking`, `navigation/atlassian-multi-target-skip-links`."
   },
   {
+    "id": "sources/ag-grid-community",
+    "kind": "source",
+    "title": "AG Grid Community",
+    "pattern": "data-table",
+    "page_type": "dashboard",
+    "tags": [
+      "data-grid",
+      "open-core",
+      "editing",
+      "virtualised",
+      "keyboard",
+      "react"
+    ],
+    "source_url": "https://www.ag-grid.com/react-data-grid/",
+    "source_site": "ag-grid.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "ag-grid-community 36.2.0 + ag-grid-react 36.2.0",
+    "licence": "MIT (Community); Enterprise is commercial",
+    "s_look": 5,
+    "s_interact": 5,
+    "s_coverage": 3,
+    "s_a11y": 4,
+    "s_perf": 3,
+    "s_react": 4,
+    "s_bundle": 1,
+    "s_licence": 5,
+    "why_it_works": "The most complete free DOM grid. Sorting (including Shift+click multi-sort), column filters, pinning, resizing, hiding, checkbox selection and cell editing with validation all work from config, with full grid ARIA and APG arrow-key navigation.",
+    "use_when": "A brief needs a finished editing grid now (admin tools, back-office record grids, ops consoles) and none of the Enterprise features below (range selection, clipboard, grouping, pivot, Excel, column menu, status bar).",
+    "avoid_when": "Bundle size matters (322 KB gz, the heaviest DOM grid tested), the design must look like the rest of a Tailwind/shadcn app without re-theming, or the \"must haves\" include anything on the Enterprise list.",
+    "alternatives": [
+      "react-data-grid",
+      "tanstack-table",
+      "mui-x-data-grid"
+    ],
+    "has_example": false,
+    "score": 7.5,
+    "rating": 4,
+    "bench": {
+      "kind": "data-table",
+      "bundle_gz_kb": 391.1,
+      "lib_only_gz_kb": 322.4,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "render_ms": 988,
+      "sort_ms": 591,
+      "filter_ms": 589,
+      "dom_rows": 33,
+      "aria_rowcount_ok": true,
+      "multi_sort": true,
+      "keyboard_passed": 4,
+      "keyboard_total": 5,
+      "axe_violations": 0,
+      "evidence": "10k rows: sort 591 ms, filter 589 ms, 33 DOM rows; 4/5 keyboard, 0 axe"
+    },
+    "path": "sources/ag-grid-community",
+    "images": [
+      "sources/ag-grid-community/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The pick when you need a full editing grid today and can afford the weight.** It passed every layout and edit probe with\nnative config: a pinned column, Shift+click multi-sort, drag resize, hide, Enter/Esc/Tab editing and blocked invalid values\nwith an announced message. Keyboard selection scored 4/5, with 0 axe violations. It costs **322 KB gz**, and it's open-core:\nclipboard, range selection, the column menu, set filters, grouping, pivot and Excel export are **Enterprise (paid)**. Check every\nmust-have against the coverage table first.\n\n## Benchmark (same 10,000 rows × 8 columns and four tasks as every kit)\nCode: `benchtable/libs/ag-grid-community.jsx`, 42 lines, with only `AllCommunityModule` registered. Timings are at 4× CPU\nthrottling (median of 3) and are only comparable within this bench.\n\n| Probe | Result |\n|---|---|\n| Library size (React subtracted) | **322.4 KB gz** (CSS is in the JS) |\n| First render / sort Amount / filter Status | 988 ms / 591 ms / 589 ms |\n| Scroll (50 wheel steps) | p95 frame gap 183 ms, 11 frames over 50 ms; 33 DOM rows; reaches row 10,000 |\n| Semantics | `role=grid`, `aria-rowcount=10001`, `aria-multiselectable` |\n| Layout | Sticky header ✓, pinned ID column ✓ (`pinned: 'left'`), drag resize ✓, keyboard resize ✗, hide ✓ (`setColumnsVisible`) |\n| **Multi-sort (Shift+click), Community modules only** | **✓ 2 columns sorted, no watermark, no console warning or error.** The edition page lists multi-column sorting under Enterprise, but it works in Community |\n| Keyboard selection (APG) | 4/5: Tab in, ↓ and → move between cells, Space selects (`aria-selected`); **Shift+↓ doesn't extend** (range selection is Enterprise) |\n| Select all | Header checkbox selects all 10,000; no visible count (the status bar is Enterprise) |\n| Edit Amount | Enter opens `agNumberCellEditor`; Enter commits, Esc cancels; Tab commits and moves to the **next editable cell** (Amount on the next row) |\n| Invalid value | With `getValidationErrors` + `invalidEditValueMode: 'block'`: value kept, red outline, `aria-invalid`, screen-reader announcement \"Enter a number\". **No visible text** (tooltip on hover only) |\n| axe-core (WCAG 2.2 AA), all four tasks | 0 violations |\n\n## Coverage: free (Community) vs paid (Enterprise)\n| Feature | Community (MIT) | Enterprise only |\n|---|---|---|\n| Sort, multi-sort, column filters (text/number/date) | ✓ | Set, multi and advanced filters |\n| Pinning, resize, move, hide columns; row pinning | ✓ | Column menu, side bar, tool panels |\n| Row selection with checkboxes | ✓ | Cell range selection, fill handle |\n| Cell and full-row editing, validation, undo/redo of edits | ✓ | Batch editing |\n| Export | CSV | Excel, clipboard copy/paste |\n| Data models | Client-side, pagination, infinite | Server-side row model |\n| Structure | – | Row grouping, aggregation, pivot, tree data, master/detail, status bar, formulas, find |\n\nEnterprise runs unlicensed only with a watermark and console error (vendor docs, `research/B6-tables.md` §0.1).\n\n## Styling with Tailwind/shadcn\nAG Grid draws its own theme (Quartz by default, 42 px rows). Match a shadcn app through the Theming API's parameters (colours,\nfont, row height, borders) mapped to our CSS variables, not with Tailwind classes on cells. Custom cell renderers can use\nTailwind freely. Expect a day of theme work before it looks native.\n\n## Weaknesses\n- 322 KB gz for the Community modules we registered, ten times react-data-grid.\n- Invalid-value feedback is only `aria-invalid` plus an announcement; sighted users see a red outline with no text unless they hover.\n- No keyboard column resize. Shift+Arrow range selection, the clipboard and the column menu need Enterprise.\n- Users and stakeholders often assume \"AG Grid\" includes the Enterprise demos they've seen; label captures carefully.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 5 | Finished Quartz theme: headers, filters, checkboxes, pinned shadow |\n| Interactivity | 5 | Sort, multi-sort, filter, pin, resize, move, hide, select, edit with validation, all native |\n| Coverage | 3 | Free edition: CSV export and infinite model, but no grouping, tree, pivot, master/detail or Excel |\n| Accessibility | 4 | Grid ARIA with `aria-rowcount`, 4/5 keyboard, edit keys, 0 axe; no keyboard resize; invalid message not visible |\n| Performance | 3 | Mid-pack: 591 ms sort, 589 ms filter, 183 ms p95 scroll gaps at 4× throttle |\n| React/Next fit | 4 | `ag-grid-react` component, typed; imperative `api` for most actions; client component |\n| Bundle size | 1 | 322.4 KB gz |\n| Licence & health | 5 | MIT Community, release 36.2.0 on 16 September 2026; open-core upsell noted above |"
+  },
+  {
     "id": "sources/ai-sdk-inline",
     "kind": "source",
     "title": "AI SDK + rich-textarea (our reference build)",
@@ -771,6 +838,68 @@ window.CATALOG = [
       "source.md"
     ],
     "body": "## Verdict\n**The default for inline AI on plain fields, and the code to copy.** It's our own small build on the AI SDK, written to the\ndefaults in `research/E6-inline-ai.md`, and it passed every probe in the bench: 4/4 tasks, every keyboard and IME check, zero\naxe violations, and the lowest main-thread cost. **Read the scores with that in mind:** the bench checks the same defaults the\nbuild was written to, so its lead on keyboard and accessibility is partly by construction. Its job is to show those defaults\nare cheap to meet; the third-party kits are judged against them.\n\n## Benchmark (same four tasks and mock as every kit)\n4/4 tasks. **96.8 KB gz** for the library code (React subtracted); zod is a large share, so `zod/mini` or a JSON-schema helper\nwould shrink it (not measured). Code: `benchinline/libs/ai-sdk-inline.jsx` (`AiTextField`, `AiRewriteField`, `AiFillForm`).\n\n| Probe | Result |\n|---|---|\n| Ghost text latency (last keystroke → suggestion) | 671 ms = 300 ms debounce + 300 ms mock model + render |\n| Requests while typing 42 characters | **1** (debounce, trigger only after a space at the end) |\n| Screen readers | Ghost `aria-hidden`, **not** in Chrome's accessibility tree; one polite announcement: \"Suggestion available. Tab to accept, Escape to dismiss.\" |\n| Tab / Esc / Ctrl+→ | Tab accepts and keeps focus; **Tab moves focus on when no suggestion shows**; Esc dismisses; Ctrl+→ accepts one word |\n| IME (Chrome's own composition API) | No request and no ghost while composing (composition text reached the field) |\n| Rewrite (272 words, Improve writing) | Word diff (`<ins>`/`<del>` with hidden \"added/removed\" labels) before anything changes; Accept · Discard · Try again; applied 3/3; **one Ctrl+Z restores the original** 3/3 (edits go through the native undo stack) |\n| AI form fill | 3 empty fields filled; the user's \"Billing\" category left alone; each AI value marked \"AI\" with Revert; editing clears the mark; nothing submitted |\n| AI command menu (Ctrl/⌘+J) | Opens with focus in the input; 4 presets; arrow keys move; free text; Esc closes and returns focus |\n| Rewrite stream at 4× CPU throttle (median of 3) | **1.5 s script**, review after 4.6 s |\n| axe-core (WCAG 2.2 AA tags), menu closed and open | 0 violations |\n\n## Coverage\n| Need | Support |\n|---|---|\n| Ghost text in a textarea | ✓ `AiTextField` (rich-textarea draws the suggestion) |\n| Partial accept, Esc, IME safety, single announcement | ✓ |\n| Rewrite with diff, Accept / Discard / Try again, native undo | ✓ `AiRewriteField` (jsdiff `diffWords`) |\n| AI form fill with labels and revert | ✓ `AiFillForm` (`useObject` + zod schema) |\n| Slash or ⌘J menu with presets and free text | ✓ (⌘J; a slash trigger would be a small addition) |\n| Rich text (headings, lists, tables) | ✗ plain text only |\n| Inline summaries, suggested replies | Not built; the same `useCompletion` pattern applies |\n\n## Styling with Tailwind\nPlain elements with a dozen class names; restyle freely. No shadcn or registry dependency. `rich-textarea` needs the textarea\nto keep a fixed font and padding so the mirrored ghost layer lines up.\n\n## Weaknesses\n- It's a reference build, not a maintained library: we own its bugs and its upgrades.\n- `document.execCommand('insertText')` is how edits land on the native undo stack; it's deprecated but still the only way that\n  works in Chrome, Safari and Firefox (with a `setRangeText` fallback that loses undo).\n- Ghost text needs the caret at the end of the text; mid-text suggestions (next-edit prediction) are out of scope.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Clean but plain: a grey suggestion, a diff panel and a list menu |\n| Interactivity | 5 | Accept, dismiss, word accept, try again, revert and native undo all passed |\n| Coverage | 5 | 4/4 tasks |\n| Accessibility | 5 | Ghost hidden from screen readers with one announcement, Tab only while a suggestion shows, IME-safe, 0 axe |\n| Performance | 5 | 1 request while typing; 1.5 s script for the 272-word rewrite (Plate 20.9 s) |\n| React/Next fit | 5 | Hooks and plain components; client components only |\n| Bundle size | 3 | 96.8 KB gz, mostly zod and the AI SDK |\n| Licence & health | 4 | Permissive dependencies, all released in 2026; the glue code is ours to maintain |"
+  },
+  {
+    "id": "sources/allotment",
+    "kind": "source",
+    "title": "Allotment",
+    "pattern": "panels",
+    "page_type": "app",
+    "tags": [
+      "open-source",
+      "react",
+      "resizable"
+    ],
+    "source_url": "https://allotment.mulberryhousesoftware.com/",
+    "source_site": "allotment.mulberryhousesoftware.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "1.20.6",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 3,
+    "s_coverage": 2,
+    "s_a11y": 1,
+    "s_perf": 3,
+    "s_react": 4,
+    "s_bundle": 4,
+    "s_licence": 5,
+    "why_it_works": "VS Code's split view ported to React, so it looks and drags like the editor out of the box, with snap-to-collapse and double-click reset.",
+    "use_when": "Rarely; a mouse-only internal tool that wants the VS Code look with no styling work.",
+    "avoid_when": "Anything that must be keyboard-accessible or show a saved layout without a jump: use react-resizable-panels.",
+    "alternatives": [
+      "react-resizable-panels"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "kind": "panels",
+      "bundle_gz_kb": 67.9,
+      "lib_only_gz_kb": 11,
+      "tasks_supported": 5,
+      "tasks_total": 6,
+      "unsupported": [
+        "rearrange: Split panes only: no tabs, docking or tiles"
+      ],
+      "model": "split",
+      "checks_passed": 3,
+      "checks_total": 12,
+      "hit_area_px": 8,
+      "keyboard_resize": false,
+      "restores_without_jump": false,
+      "axe_violations": 0,
+      "evidence": "3/12 checks; 8 px grab area; keyboard resize no; jumps on restore"
+    },
+    "path": "sources/allotment",
+    "images": [
+      "sources/allotment/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Not recommended: use react-resizable-panels.** Allotment drags well and is small, but its sashes can't be reached or\nmoved from the keyboard and have no separator semantics, and a saved layout paints at the wrong size first.\n\n## Benchmark (same three-pane workspace as every other library, `benchpanels/`)\n**3/12 checks**, 0 axe violations (the sashes are plain `div`s, so axe has nothing to flag), **11.0 KB gz** including\n1.0 KB of CSS. Code: `benchpanels/libs/allotment.jsx`, 19 lines.\n\nFound in the benchmark:\n- Grab area **8 px** (−4 to +3), below the 10 px we ask for.\n- Keyboard: **0/7**. The sash isn't focusable and has no `role`, value or name.\n- Double-click reset Explorer to its 240 px preferred size.\n- Persistence through `defaultSizes` + `onChange` restored 360 px, but the **first painted frame showed 300 px**\n  before it jumped (CLS 0.73).\n- Drag with heavy panes: p95 frame 16.8 ms, like every other library.\n\n## Weaknesses\n- No keyboard resizing and no separator semantics, so resizing fails WCAG 2.1.1 (Keyboard).\n- Measures after mount, so saved sizes cause a visible jump. The docs say it *\"only works in a browser\"*\n  (`dynamic(…, { ssr: false })` in Next).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 4 | VS Code look by default; CSS variables for the separator |\n| Interactivity | 3 | Drag, snap collapse, double-click reset; no keyboard; persistence is yours to wire |\n| Coverage | 2 | Split panes only |\n| Accessibility | 1 | 0/7 keyboard checks; 8 px grab area |\n| Performance | 3 | 60 fps drag, but CLS 0.73 restoring a saved layout; client-only |\n| React/Next fit | 4 | React components; needs `ssr: false` |\n| Bundle size | 4 | 11.0 KB gz |\n| Licence & health | 5 | MIT; release 12 Oct 2026; ~150k weekly downloads |"
   },
   {
     "id": "sources/blocknote-ai",
@@ -836,6 +965,199 @@ window.CATALOG = [
     "body": "## Verdict\n**Polished to look at, hard to recommend.** It ran fully offline and produced a clear tracked-changes review, but it has no\nghost text and no form fill, its agent animation made a 272-word rewrite take **18.6 s** to review (the model finished in about\n1.5 s), **undo after Accept walked back into garbled intermediate text** instead of the original, and the AI package is\n**GPL-3.0 or paid** for closed-source use. It also still depends on AI SDK v6, a major version behind.\n\n## Benchmark (same four tasks and mock as every kit)\n2/4 tasks (no ghost text, no form fill). **473.7 KB gz** initial plus 107.9 KB lazy and 38.9 KB CSS (React subtracted), with\nMantine as the default UI. Code: `benchinline/libs/blocknote-ai.jsx`, wired as its docs show (AIExtension, AIMenuController,\nthe AI toolbar button and slash items). Offline through `ClientSideTransport` and a mock model from xl-ai's own bundled AI SDK\nv6, answering with an `applyDocumentOperations` tool call.\n\n| Probe | Result |\n|---|---|\n| Ghost text | ✗ not offered by `@blocknote/xl-ai` 0.56 |\n| Rewrite (272 words, Improve Writing) | Tracked insert/strike-through diff before applying; **Accept** and **Revert** (Revert restores the original cleanly); no Try again in the review state; applied 3/3 |\n| Review time | **18.6 s** in a normal run: `delayAgentStep` adds 10–200 ms of artificial delay per edit step to animate the agent cursor (source comment: \"this can take longer due to artificial delays\") |\n| Undo after Accept | **Never returned to the original within 40 presses** (3/3 trials): the first Ctrl+Z gives a half-reverted mix (\"confusingnfus or that felt…\") |\n| AI command menu (slash `/ai` → Ask AI) | Opens with focus in the input; presets; arrow keys; free text; Esc closes and returns focus |\n| Rewrite stream at 4× CPU throttle (median of 3) | 3.5 s script, review after 27.8 s (mostly the animation) |\n| axe-core (WCAG 2.2 AA) | Menu closed: 1 critical `aria-allowed-attr`, 2 serious `aria-input-field-name`. Menu open: also 3 serious `aria-hidden-focus` |\n\n## Coverage\n| Need | Support |\n|---|---|\n| Ghost text | ✗ |\n| Rewrite with tracked changes, Accept / Revert | ✓ (no Try again while reviewing; Retry appears on errors) |\n| Slash and toolbar AI menu with presets and free text | ✓ |\n| AI form fill | ✗ editor blocks only |\n| Agent cursor animation | ✓ (on by default; it's what makes reviews slow) |\n\n## Styling with Tailwind\nDefault UI is Mantine (38.9 KB CSS). A shadcn variant (`@blocknote/shadcn`) needs Tailwind 4; either way you're inside\nBlockNote's design system rather than ours.\n\n## Weaknesses\n- Licence: closed-source use of the AI package needs a paid BlockNote Business subscription; its server helper is AGPL.\n- No ghost text or form fill.\n- Slow, animated rewrites; undo after Accept doesn't restore the original.\n- Depends on AI SDK v6 while the rest of our stack is on v7 (two copies in the bundle).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Notion-like menu, tracked changes, agent cursor |\n| Interactivity | 2 | Accept and Revert only; no Try again in review; undo after Accept broken |\n| Coverage | 2 | 2/4 tasks |\n| Accessibility | 2 | 1 critical and 2–5 serious axe violations |\n| Performance | 2 | Modest script (3.5 s) but 18.6 s to review a rewrite by design |\n| React/Next fit | 3 | React 19 works; Mantine by default; AI SDK v6 alongside our v7 |\n| Bundle size | 1 | 473.7 KB gz (+107.9 lazy) |\n| Licence & health | 2 | GPL-3.0 or paid (capped at 2 by the rubric); actively released (0.56.0, Oct 2026) |"
   },
   {
+    "id": "sources/dockview",
+    "kind": "source",
+    "title": "Dockview (free core)",
+    "pattern": "panels",
+    "page_type": "app",
+    "tags": [
+      "open-source",
+      "react",
+      "docking",
+      "resizable"
+    ],
+    "source_url": "https://dockview.dev/",
+    "source_site": "dockview.dev",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "8.6.0",
+    "licence": "MIT",
+    "s_look": 5,
+    "s_interact": 5,
+    "s_coverage": 4,
+    "s_a11y": 2,
+    "s_perf": 4,
+    "s_react": 4,
+    "s_bundle": 2,
+    "s_licence": 4,
+    "why_it_works": "The most polished free docking engine. Tabs drag between groups with a clear drop overlay, edges split, groups float or pop out into real browser windows, and the layout saves and restores as JSON without a jump.",
+    "use_when": "A mouse-first workbench with many views and multiple monitors (trading terminal, monitoring console), when pop-outs and polish matter more than keyboard resizing, and you will add the keyboard layer yourself.",
+    "avoid_when": "A fixed set of regions (use react-resizable-panels), or keyboard access to resizing and docking is a requirement and you can't build it (FlexLayout gets closer for free). Never install dockview-enterprise by accident.",
+    "alternatives": [
+      "flexlayout-react",
+      "react-resizable-panels"
+    ],
+    "has_example": false,
+    "score": 7.5,
+    "rating": 4,
+    "bench": {
+      "kind": "panels",
+      "bundle_gz_kb": 151.6,
+      "lib_only_gz_kb": 104.2,
+      "tasks_supported": 6,
+      "tasks_total": 6,
+      "unsupported": [],
+      "model": "dock",
+      "checks_passed": 7,
+      "checks_total": 17,
+      "hit_area_px": 4,
+      "keyboard_resize": false,
+      "restores_without_jump": true,
+      "axe_violations": 1,
+      "evidence": "7/17 checks; 4 px grab area; keyboard resize no; restores without a jump"
+    },
+    "path": "sources/dockview",
+    "images": [
+      "sources/dockview/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The best free docking UX, with the weakest free accessibility.** In the benchmark it docked a tab into a group,\nsplit to an edge and popped a group into a new window. It also restored the saved layout on the first frame. But its\nsashes are 4 px `div`s that can't be focused, and keyboard docking and the F6 keymap are paid (Enterprise). Choose it\nfor docking only if you'll add separators or commands on top.\n\n## Benchmark (same three-pane workspace as every other library, `benchpanels/`; free `dockview-react` only)\n**7/17 checks**, 1 axe violation, **104.2 KB gz** (93.7 KB JS + 10.5 KB CSS). Code: `benchpanels/libs/dockview.jsx`,\n28 lines.\n\nFound in the benchmark:\n- Docking: dragging the Terminal tab onto the Inspector pane joined that group, and dropping it on the Editor's bottom\n  edge made a new group. The drop overlay tints the target (screenshot). Pop-out opened a real window with the pane in\n  it, but the free core has **no built-in pop-out button**: we added a 3-line header action calling `addPopoutGroup`.\n- Grab area **4 px** (−2 to +1) on `.dv-sash`. The sash isn't focusable and has no `role`, value or name: **0/7\n  keyboard checks**.\n- No double-click reset on sashes.\n- `toJSON` / `fromJSON` restored the layout on the first painted frame (CLS 0).\n- No built-in non-drag way to move a tab (Shift+F10 on a tab opens nothing), which WCAG 2.2 SC 2.5.7 asks for.\n- axe: `nested-interactive`. The default tab (`role=\"tab\"`) contains a focusable close button.\n- Drag with heavy panes: p95 frame 16.8 ms, like every other library.\n\n## Free vs paid (checked 18 Oct 2026, `dockview.dev/docs/overview/licence`)\nFree: floating groups, pop-out windows, edge groups, save/restore, ARIA tabs and regions, announcements. Paid\n(dockview-enterprise): keyboard docking, the F6/spatial keymap, layout history, pinned and multi-row tabs, auto-hide\nedges. A side-effect import of the enterprise package turns them on, so lock it out of `package.json`.\n\n## Weaknesses\n- No keyboard resizing in the free core; 4 px sashes.\n- The heaviest library tested: 104 KB gz with CSS.\n- Client-only DOM engine: render it in a client component and load the layout JSON after mount.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 5 | Ready themes (light, dark, VS, spaced), tabs, drop overlays; CSS variables |\n| Interactivity | 5 | Dock to centre and edge, float, pop out, save/restore; no double-click reset |\n| Coverage | 4 | Docking, floating, pop-outs, edge groups, and split panes through its gridview; no tiles |\n| Accessibility | 2 | Tabs and regions have roles, but 0/7 splitter checks, 4 px sashes, nested-interactive tab, keyboard docking paid |\n| Performance | 4 | Restores on the first frame; 60 fps drag; client-only |\n| React/Next fit | 4 | `dockview-react` component and API object; client component |\n| Bundle size | 2 | 104.2 KB gz |\n| Licence & health | 4 | MIT core, open-core with paid features; release 16 Oct 2026; ~256k weekly downloads (React package) |"
+  },
+  {
+    "id": "sources/flexlayout-react",
+    "kind": "source",
+    "title": "FlexLayout",
+    "pattern": "panels",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "react",
+      "docking",
+      "resizable",
+      "keyboard"
+    ],
+    "source_url": "https://caplin.github.io/FlexLayout/demos/v0.11/demo/",
+    "source_site": "caplin.github.io",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "0.11.1",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 5,
+    "s_coverage": 4,
+    "s_a11y": 3,
+    "s_perf": 4,
+    "s_react": 3,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "A free docking engine whose splitters you can operate from the keyboard. Tabsets dock to centre or edge, tabs pop out with a built-in button, and every command shortcut is rebindable and announced through aria-keyshortcuts.",
+    "use_when": "A docking workbench that must be keyboard-operable without paying for it (trading terminal, IDE-like tools), and you can live with a JSON model API.",
+    "avoid_when": "A fixed set of regions (react-resizable-panels is simpler and passes every check), or you want the most polished drag and float experience (Dockview).",
+    "alternatives": [
+      "dockview",
+      "react-resizable-panels"
+    ],
+    "has_example": false,
+    "score": 7.5,
+    "rating": 4,
+    "bench": {
+      "kind": "panels",
+      "bundle_gz_kb": 107.8,
+      "lib_only_gz_kb": 53.7,
+      "tasks_supported": 6,
+      "tasks_total": 6,
+      "unsupported": [],
+      "model": "dock",
+      "checks_passed": 12,
+      "checks_total": 17,
+      "hit_area_px": 8,
+      "keyboard_resize": true,
+      "restores_without_jump": true,
+      "axe_violations": 1,
+      "evidence": "12/17 checks; 8 px grab area; keyboard resize yes; restores without a jump"
+    },
+    "path": "sources/flexlayout-react",
+    "images": [
+      "sources/flexlayout-react/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The free docking engine to pick when keyboard access matters.** It's the only docking library here whose\nsplitters take focus, expose `separator` semantics and resize with the arrow keys. It also docks, splits and pops out\nas well as Dockview. It still falls short of the APG splitter (no Home/End, no Enter to collapse), its splitters share\none generic name, and moving a tab needs a drag.\n\n## Benchmark (same three-pane workspace as every other library, `benchpanels/`)\n**12/17 checks**, 1 axe violation, **53.7 KB gz** (49.9 KB JS + 3.8 KB CSS). Code: `benchpanels/libs/flexlayout-react.jsx`,\n19 lines.\n\nFound in the benchmark:\n- Keyboard: splitters are reached with Tab, have `role=\"separator\"`, `aria-valuenow/min/max` and `aria-valuetext`\n  (\"16%\"), and ArrowRight moved them **10 px**. Home, End and Enter did nothing. Every splitter is named just \"Resize\",\n  and there's no `aria-controls`.\n- Grab area **8 px** (−4 to +3), the visible 8 px splitter.\n- Docking: Terminal dropped on Inspector joined that tabset; dropped on the Editor's bottom edge it made a new tabset.\n  The built-in pop-out icon (`enablePopout` + `enablePopoutIcon`) opened a real window with the pane inside.\n- No double-click reset.\n- `model.toJson()` / `Model.fromJson` restored the layout on the first painted frame (CLS 0).\n- No built-in non-drag way to move a tab to another tabset (the context menu is yours to build with `onContextMenu`\n  and its exported `PopupMenu`).\n- axe: `color-contrast` on the inactive tab label in the light theme.\n- Drag with heavy panes: p95 frame 16.8 ms. Geometry is applied imperatively, so tab content doesn't re-render on resize.\n\n## Weaknesses\n- Sizes are weights, not pixels: a 240 px sidebar is \"weight 240 of 1440\".\n- 0.x versioning and a JSON model with actions (`Actions.moveNode`) rather than React-style props.\n- Fix the inactive-tab contrast and name each splitter yourself.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 4 | Light, dark, rounded and other themes; CSS variables |\n| Interactivity | 5 | Dock to centre and edge, pop out, maximise, borders, save/restore; no double-click reset |\n| Coverage | 4 | Docking, borders, pop-outs, tab groups; split panes through tabsets; no tiles |\n| Accessibility | 3 | Focusable separators with values and arrow keys; no Home/End/collapse; generic names; contrast failure; drag-only docking |\n| Performance | 4 | Restores on the first frame; 60 fps drag; client-only |\n| React/Next fit | 3 | React component over a JSON model and action API; client-only |\n| Bundle size | 3 | 53.7 KB gz |\n| Licence & health | 4 | MIT; Caplin; release 26 Sep 2026; ~80k weekly downloads; 0.x |"
+  },
+  {
+    "id": "sources/mui-x-data-grid",
+    "kind": "source",
+    "title": "MUI X Data Grid (MIT)",
+    "pattern": "data-table",
+    "page_type": "dashboard",
+    "tags": [
+      "data-grid",
+      "open-core",
+      "material",
+      "editing",
+      "keyboard",
+      "react"
+    ],
+    "source_url": "https://mui.com/x/react-data-grid/",
+    "source_site": "mui.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "@mui/x-data-grid 8.29.5 (+ @mui/material 7.3.11, Emotion 11)",
+    "licence": "MIT (DataGrid); Pro and Premium are commercial",
+    "s_look": 5,
+    "s_interact": 3,
+    "s_coverage": 2,
+    "s_a11y": 5,
+    "s_perf": 2,
+    "s_react": 3,
+    "s_bundle": 2,
+    "s_licence": 5,
+    "why_it_works": "A finished Material grid with the best keyboard result in the bench (5/5, including Shift+Arrow range select), a visible \"n rows selected\" count, and native editing with validation through preProcessEditCellProps.",
+    "use_when": "The app already uses MUI/Material and the grid fits in pages of 100 rows with one sort column and no pinned columns, e.g. settings and admin lists.",
+    "avoid_when": "You need to scroll thousands of rows, multi-sort, pinned or reordered columns (all Pro), a Tailwind/shadcn look without Material and Emotion, or a small bundle.",
+    "alternatives": [
+      "ag-grid-community",
+      "react-data-grid",
+      "tanstack-table"
+    ],
+    "has_example": false,
+    "score": 6.8,
+    "rating": 3,
+    "bench": {
+      "kind": "data-table",
+      "bundle_gz_kb": 288.6,
+      "lib_only_gz_kb": 219.9,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "render_ms": 660,
+      "sort_ms": 481,
+      "filter_ms": 381,
+      "dom_rows": 16,
+      "aria_rowcount_ok": true,
+      "multi_sort": false,
+      "keyboard_passed": 5,
+      "keyboard_total": 5,
+      "axe_violations": 0,
+      "evidence": "10k rows: sort 481 ms, filter 381 ms, 16 DOM rows; 5/5 keyboard, 0 axe"
+    },
+    "path": "sources/mui-x-data-grid",
+    "images": [
+      "sources/mui-x-data-grid/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Good keyboard behaviour, but the free edition is a demo of Pro.** The MIT `DataGrid` passed 5/5 keyboard checks and had\n0 axe violations. The source forces `pagination: true`, `disableMultipleColumnsSorting`, `disableMultipleColumnsFiltering` and\n`disableColumnReorder`, and **throws if `pageSize` > 100** (\"cannot exceed 100 in the MIT version\"). So 10,000 rows are\npaginated 100 at a time, not virtualised, and pinning, multi-sort and reordering need **Pro**. It also brings `@mui/material` and\nEmotion into a Tailwind app.\n\n## Benchmark (same 10,000 rows × 8 columns and four tasks as every kit)\nCode: `benchtable/libs/mui-x-data-grid.jsx`, 39 lines. Timings are at 4× CPU throttling (median of 3) and are only comparable\nwithin this bench.\n\n| Probe | Result |\n|---|---|\n| Library size (React subtracted) | **219.9 KB gz** (includes the Material and Emotion parts the grid pulls in) |\n| First render / sort Amount / filter Status | 660 ms / 481 ms / 381 ms (sort and filter run over all 10,000 rows) |\n| Scroll | **Only one 100-row page scrolls**: p95 100 ms, 16 DOM rows; **row 10,000 unreachable by scrolling** (paged). Not comparable with the virtualised kits |\n| Semantics | `role=grid`, `aria-rowcount=10001`, `aria-multiselectable` |\n| Layout | Sticky header ✓, **pinned column ✗ (Pro)**, drag resize ✓, keyboard resize ✗, hide ✓ (`setColumnVisibility`) |\n| Multi-sort (Shift+click, then Ctrl/⌘+click) | **✗ one column** (forced off in MIT) |\n| Keyboard selection (APG) | **5/5**: Tab in, ↓ →, Space selects, **Shift+↓ extends** (`aria-selected`); footer shows \"3 rows selected\" |\n| Select all | Header checkbox selects all 10,000 (across pages) |\n| Edit Amount | Enter opens the number editor; Enter commits, Esc cancels, Tab commits and moves right |\n| Invalid value | `preProcessEditCellProps` returning `error: true` blocks the commit and sets `aria-invalid`; **no message** (yours to add). Enter pressed within ~200 ms of the last keystroke is ignored while validation runs |\n| axe-core (WCAG 2.2 AA), all four tasks | 0 violations |\n\n## Coverage: free (MIT) vs paid\n| Feature | MIT `DataGrid` | Pro | Premium |\n|---|---|---|---|\n| Rows | Paginated, **max 100 per page** (virtualised within the page) | Unlimited virtualisation, lazy loading | |\n| Sort / filter | **Single column**; one filter at a time; quick filter | Multi-sort, multi-filter, header filters | |\n| Columns | Resize, hide, column groups | **Pinning, reordering** | |\n| Selection and editing | Row checkboxes, cell/row editing, validation | | Cell selection, clipboard paste, undo/redo |\n| Structure | Save/restore state, density | Tree data, master/detail | Row grouping, aggregation, pivot |\n| Export | CSV, print | | Excel |\n\n## Styling with Tailwind/shadcn\nStyled with Emotion and the MUI theme. Match a shadcn app through `createTheme` tokens and `sx`/`slotProps`, mapped to our\nCSS variables. Tailwind classes work on custom cell renderers only. Expect two styling systems in one app.\n\n## Weaknesses\n- The 100-row page cap and single-column sort make the MIT grid a poor fit for analyst or ops grids.\n- Brings `@mui/material` and Emotion (styled runtime) into a Tailwind codebase.\n- Invalid edits get no message, and a fast Enter after typing is swallowed while validation is pending.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 5 | Finished Material grid with footer, pagination and selection count |\n| Interactivity | 3 | Sort, filter, resize, hide, select and edit work; no pinning, multi-sort or reordering in MIT |\n| Coverage | 2 | Free edition: CSV/print and column groups only; grouping, tree, pivot, master/detail, Excel are paid |\n| Accessibility | 5 | 5/5 keyboard including Shift+Arrow, grid ARIA with `aria-rowcount`, visible selection count, 0 axe |\n| Performance | 2 | Can't scroll 10,000 rows: hard 100-row page cap; sort 481 ms and filter 381 ms over the full set |\n| React/Next fit | 3 | Idiomatic, typed React; but needs Material + Emotion alongside Tailwind |\n| Bundle size | 2 | 219.9 KB gz |\n| Licence & health | 5 | MIT, release 8.29.5 on 16 October 2026; Pro/Premium upsell noted above |"
+  },
+  {
     "id": "sources/plate-ai",
     "kind": "source",
     "title": "Plate AI (@platejs/ai)",
@@ -897,6 +1219,400 @@ window.CATALOG = [
       "source.md"
     ],
     "body": "## Verdict\n**Capable and MIT, but not ready to drop in.** It covered three of the four tasks natively and its keyboard model is right\n(Tab, Esc, Ctrl+→, Try again). But in our runs the ghost text was read by screen readers and appeared mid-IME composition,\nthe rewrite stream cost **20.9 s of main-thread script** for a 272-word paragraph, and **Accept intermittently left the original\ntext**. Use it only if Plate is already your rich editor, and budget time to fix those.\n\n## Benchmark (same four tasks and mock as every kit)\n3/4 tasks (no structured form fill). **486.9 KB gz** initial plus 60.6 KB lazy (React subtracted), with the registry kits a\nteam would install: CopilotKit, AIKit, SuggestionKit, BlockSelectionKit, MarkdownKit. Code: `benchinline/libs/plate-ai.jsx`\nand the registry files vendored unchanged in `benchinline/libs/plate/registry/`. Only the shadcn Button/Command/Popover are\nthin shims over the same cmdk and Radix parts, the comment/discussion UI is stubbed, and the demo-only `@faker-js/faker`\nfallback is shimmed so it doesn't inflate the bundle.\n\n| Probe | Result |\n|---|---|\n| Ghost text latency | 914 ms = 500 ms registry debounce + 300 ms mock model + render |\n| Requests while typing 42 characters | 2, none aborted (a stale request isn't cancelled) |\n| Screen readers | **Ghost text is in Chrome's accessibility tree** (a `contenteditable=false` span inside the paragraph, not `aria-hidden`); no announcement |\n| Tab / Esc / Ctrl+→ | All work; Tab moves focus on when no suggestion shows |\n| IME (Chrome's composition API) | **A ghost suggestion appeared while a composition was still open** |\n| Rewrite (272 words, Improve writing) | Inline red/green suggestion diff; Accept · Discard · Try again (and Insert below); one Ctrl+Z restores the original |\n| Accept reliability | **Accept applied the rewrite in 16 of 27 trials** (mouse click 2/6 at 8 ms chunks and 3/6 at 30 ms, Enter 5/6, and 2/3 in each of three probe runs); in the others the document was left at the original. One capture (bench.jpg) shows a misplaced preview: the diff landed mid-paragraph with the original text duplicated around it. Cause not isolated: confirm against a real model route before relying on it |\n| AI command menu (⌘J) | Opens with focus in the input; presets; arrow keys; free text; Esc closes and returns focus |\n| Rewrite stream at 4× CPU throttle (median of 3) | **20.9 s script**, review after 24.6 s: every chunk re-diffs the whole block (`applyAISuggestions`) and the registry `useChat` sets no throttle |\n| axe-core (WCAG 2.2 AA) | 2 critical `label`: Slate's hidden `slate-shadow-input` elements; plus 1 contrast issue with the menu open |\n\n## Coverage\n| Need | Support |\n|---|---|\n| Ghost text (copilot) | ✓ `CopilotPlugin`: Tab, Esc, Ctrl+→, Ctrl+Space, debounce, trigger rules |\n| Rewrite with inline diff, Accept / Discard / Try again | ✓ `AIChatPlugin` + suggestions (reliability above) |\n| ⌘J AI menu with presets and free text | ✓ (registry `ai-menu`, cmdk) |\n| Streaming insert, comments, table-cell edits | ✓ (docs; not benchmarked) |\n| AI form fill | ✗ editor content only |\n\n## Styling with Tailwind\nThe plugins are headless, but every piece of UI (ghost text, menu, suggestion marks) comes from Plate's **shadcn registry**\n(`npx shadcn add @plate/ai-kit`): Tailwind classes and shadcn colour variables. We compiled Tailwind over the vendored files\nfor the screenshot. Without shadcn you rebuild or restyle the menu.\n\n## Weaknesses\n- Ghost text is exposed to screen readers and appears during IME composition (both fixable in the registry `GhostText`).\n- Slow on long rewrites: add `experimental_throttle` to the chat (not tested here) or keep rewrites short.\n- Accept intermittently didn't apply in our harness (above).\n- Heavy: 487 KB gz for the editor and AI kits.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Polished registry UI: inline red/green suggestions, cmdk menu, loading pill |\n| Interactivity | 3 | Right keyboard model and Try again, but Accept failed in 11 of 27 trials |\n| Coverage | 4 | 3/4 tasks natively, plus comments and table edits |\n| Accessibility | 2 | Ghost read by screen readers, no announcement, not IME-safe, 2 critical axe (Slate shadow inputs) |\n| Performance | 1 | 20.9 s script for the rewrite stream; stale ghost requests not aborted |\n| React/Next fit | 4 | React-first, AI SDK v7 peers; UI arrives via the shadcn registry |\n| Bundle size | 1 | 486.9 KB gz (+60.6 lazy) |\n| Licence & health | 5 | MIT; @platejs/ai released 14 Oct 2026 (paid \"Plus\" templates exist, the plugins are free) |"
+  },
+  {
+    "id": "sources/react-aria-table",
+    "kind": "source",
+    "title": "React Aria Table",
+    "pattern": "data-table",
+    "page_type": "dashboard",
+    "tags": [
+      "accessible",
+      "headless",
+      "keyboard",
+      "table",
+      "react"
+    ],
+    "source_url": "https://react-aria.adobe.com/Table",
+    "source_site": "react-aria.adobe.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "react-aria-components 1.22.1 (Table + Virtualizer + ResizableTableContainer)",
+    "licence": "Apache-2.0",
+    "s_look": 3,
+    "s_interact": 2,
+    "s_coverage": 1,
+    "s_a11y": 5,
+    "s_perf": 2,
+    "s_react": 5,
+    "s_bundle": 3,
+    "s_licence": 5,
+    "why_it_works": "The most correct accessible table in the bench. Row and cell keyboard focus, Space and Shift+Arrow selection, sortable headers and column resizing come with full grid ARIA and zero axe violations, and every state is a data attribute Tailwind can target.",
+    "use_when": "Admin and settings tables of up to a few thousand rows where keyboard and screen-reader correctness matter more than grid features, especially if the app already uses React Aria Components.",
+    "avoid_when": "Large client-side datasets (it was the slowest kit at 10,000 rows), or briefs needing pinned columns, filtering or cell editing out of the box.",
+    "alternatives": [
+      "tanstack-table",
+      "react-data-grid",
+      "ag-grid-community"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "kind": "data-table",
+      "bundle_gz_kb": 146.8,
+      "lib_only_gz_kb": 78.1,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "render_ms": 3220,
+      "sort_ms": 2917,
+      "filter_ms": 1762,
+      "dom_rows": 19,
+      "aria_rowcount_ok": true,
+      "multi_sort": false,
+      "keyboard_passed": 5,
+      "keyboard_total": 5,
+      "axe_violations": 0,
+      "evidence": "10k rows: sort 2917 ms, filter 1762 ms, 19 DOM rows; 5/5 keyboard, 0 axe"
+    },
+    "path": "sources/react-aria-table",
+    "images": [
+      "sources/react-aria-table/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The accessibility reference, not a data grid.** It passed 5/5 keyboard checks, `aria-rowcount=10001`, and had 0 axe\nviolations. Selection, sorting and drag resizing are native. But there's no filter API, no pinning, no editing and single-column\nsort only. At 10,000 rows it was **the slowest kit by far** (2.9 s sort at 4× throttle), because the whole collection is rebuilt on\nevery change, even though only 19 rows are in the DOM.\n\n## Benchmark (same 10,000 rows × 8 columns and four tasks as every kit)\nCode: `benchtable/libs/react-aria-table.jsx`, 112 lines (the editor and filter are ours). Timings are at 4× CPU throttling\n(median of 3) and are only comparable within this bench.\n\n| Probe | Result |\n|---|---|\n| Library size (React subtracted) | **78.1 KB gz** |\n| First render / sort Amount / filter Status | **3,220 ms / 2,917 ms / 1,762 ms** (slowest in the bench) |\n| Scroll (50 wheel steps) | p95 frame gap 417 ms; 19 DOM rows (`Virtualizer` + `TableLayout`); reaches row 10,000 |\n| Semantics | `role=grid`, `aria-rowcount=10001`, `aria-multiselectable`, `rowheader` cells |\n| Layout | Sticky header ✓, **pinned column ✗ (no API)**, drag resize ✓ (`ColumnResizer`), hide ✓ (by removing the column) |\n| Keyboard resize | ✗ as wired. The API exists: `startResize()` from a column menu, then arrow keys. It needs app wiring (docs example) |\n| Multi-sort | ✗ (one `sortDescriptor`) |\n| Keyboard selection (APG) | **5/5**: Tab focuses the row, → enters cells, ↓ and → move, Space selects, Shift+↓ extends (`aria-selected`) |\n| Select all | Header checkbox selects all 10,000; no built-in count |\n| Edit Amount (**hand-built**, not counted as native) | Enter/F2 opens our input; Enter commits, Esc cancels, invalid shows `role=alert` \"Enter a number\". Tab commits, but focus stays on the cell because the table restores focus to it |\n| axe-core (WCAG 2.2 AA), all four tasks | 0 violations |\n\n## Coverage (all free)\n| Feature | Support |\n|---|---|\n| Sort | ✓ single column (`sortDescriptor`; the app sorts rows) |\n| Filter | ✗ (filter the items yourself) |\n| Selection | ✓ single/multiple, checkbox or highlight behaviour, `disabledKeys` |\n| Columns | ✓ resize (`ColumnResizer`); ✗ pinning, hiding API, reorder (drag and drop reorders rows) |\n| Long lists | ✓ `Virtualizer`, `onLoadMore` |\n| Editing, grouping, tree, pivot, export, master/detail | ✗ |\n\n## Styling with Tailwind/shadcn\nThe best of the bench: unstyled, with state as `data-*` attributes (`data-selected`, `data-focus-visible`, `data-resizing`) and\n`className` render functions. A shadcn look takes a handful of classes. The virtualised layout sets row positions itself, so cell\nheights must match `rowHeight` exactly (we hit this: rows misaligned until cells were fixed to 36 px).\n\n## Weaknesses\n- Slow with large client-side data: 2.9 s sort and 1.8 s filter at 4× throttle on 10,000 rows. Page or window the data on the server.\n- No pinning, filtering, editing or multi-sort; keyboard resize needs a column menu you build.\n- Row-first focus (Tab lands on the row, → enters cells) differs from AG Grid and MUI, which focus cells directly.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Headless (capped at 3); excellent styling ergonomics via `data-*` state |\n| Interactivity | 2 | Sort, select and drag resize are native; filter, pin and edit are not |\n| Coverage | 1 | None of grouping, tree data, pivot, export or master/detail |\n| Accessibility | 5 | 5/5 keyboard, grid ARIA with `aria-rowcount`, row headers, 0 axe |\n| Performance | 2 | Slowest kit: 3.2 s render, 2.9 s sort, 417 ms p95 scroll gaps at 4× throttle |\n| React/Next fit | 5 | Typed React components, Tailwind-friendly, same package as our UI primitives |\n| Bundle size | 3 | 78.1 KB gz (shared with other React Aria components if you already use them) |\n| Licence & health | 5 | Apache-2.0, Adobe, release 1.22.1 on 9 October 2026 |"
+  },
+  {
+    "id": "sources/react-data-grid",
+    "kind": "source",
+    "title": "react-data-grid",
+    "pattern": "data-table",
+    "page_type": "dashboard",
+    "tags": [
+      "data-grid",
+      "open-source",
+      "editing",
+      "virtualised",
+      "keyboard",
+      "react"
+    ],
+    "source_url": "https://github.com/adazzle/react-data-grid",
+    "source_site": "github.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "7.0.0-beta.61",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 4,
+    "s_coverage": 3,
+    "s_a11y": 4,
+    "s_perf": 5,
+    "s_react": 4,
+    "s_bundle": 5,
+    "s_licence": 4,
+    "why_it_works": "A lean, fast spreadsheet-style grid. At 17 KB gz it was the smallest and fastest kit, with frozen columns, Ctrl+click multi-sort, keyboard column resize, a checkbox column, cell editing and full grid ARIA.",
+    "use_when": "Editable record grids in a React 19 app where size and speed matter and you're happy to sort, filter and validate rows yourself (Supabase Studio's table editor is built on it).",
+    "avoid_when": "You want filtering, export or number editing with validation out of the box, or you can't accept a library still versioned as a 7.0 beta.",
+    "alternatives": [
+      "ag-grid-community",
+      "tanstack-table",
+      "react-aria-table"
+    ],
+    "has_example": false,
+    "score": 8.3,
+    "rating": 4,
+    "bench": {
+      "kind": "data-table",
+      "bundle_gz_kb": 83.8,
+      "lib_only_gz_kb": 17.1,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "render_ms": 194,
+      "sort_ms": 99,
+      "filter_ms": 26,
+      "dom_rows": 21,
+      "aria_rowcount_ok": true,
+      "multi_sort": true,
+      "keyboard_passed": 4,
+      "keyboard_total": 5,
+      "axe_violations": 0,
+      "evidence": "10k rows: sort 99 ms, filter 26 ms, 21 DOM rows; 4/5 keyboard, 0 axe"
+    },
+    "path": "sources/react-data-grid",
+    "images": [
+      "sources/react-data-grid/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The best value grid: smallest, fastest and keyboard-friendly.** **17.1 KB gz** and the fastest sort (99 ms), filter (26 ms) and\nfirst render (194 ms) at 4× throttle. Frozen columns, Ctrl/⌘+click multi-sort, drag and **keyboard** column resize, checkbox\nselection, editing and grid ARIA are built in. It's lean on purpose, though: the app sorts and filters rows itself, there's\nonly a text editor, and nothing validates input. It's still a perpetual 7.0 beta, so pin the exact version.\n\n## Benchmark (same 10,000 rows × 8 columns and four tasks as every kit)\nCode: `benchtable/libs/react-data-grid.jsx`, 59 lines. Timings are at 4× CPU throttling (median of 3) and are only comparable\nwithin this bench.\n\n| Probe | Result |\n|---|---|\n| Library size (React subtracted) | **17.1 KB gz** (2 KB of it CSS) |\n| First render / sort Amount / filter Status | **194 ms / 99 ms / 26 ms** (fastest; the sort and filter are our `useMemo`) |\n| Scroll (50 wheel steps) | p95 frame gap 83 ms; 21 DOM rows; reaches row 10,000 |\n| Semantics | `role=grid`, `aria-rowcount=10001`, `aria-rowindex`, `aria-colindex`, `aria-multiselectable` |\n| Layout | Sticky header ✓, frozen ID column ✓ (`frozen: true`), drag resize ✓, **keyboard resize ✓ (Ctrl+←/→ on a focused header)**, hide ✓ (by removing the column) |\n| Multi-sort | Shift+click ✗; **Ctrl/⌘+click ✓** (2 columns, priority numbers). **`aria-sort` is dropped from every header once more than one column is sorted** |\n| Keyboard selection (APG) | 4/5: Tab in, ↓ → move, Space selects (`aria-selected`); Shift+↓ doesn't extend (Shift+click does) |\n| Select all | Header checkbox: from a partial selection the first click clears, the second selects all 10,000; no count |\n| Edit Amount | Enter opens `renderTextEditor`; Enter commits, Esc cancels, Tab commits and moves right |\n| Invalid value | **✗ \"abc\" is stored** (we got `NaN` after `Number()`); no number editor, no validation hook, no message |\n| axe-core (WCAG 2.2 AA), all four tasks | 0 violations |\n\n## Coverage (all free)\n| Feature | Support |\n|---|---|\n| Sort | Native sort state, multi-sort with priority; the app sorts rows |\n| Filter | ✗ (filter rows yourself; header filters are a docs example) |\n| Columns | Frozen, resize (drag and keyboard), reorder (`onColumnsReorder`); hide by removing |\n| Selection | Checkbox column, Shift+click ranges; cell copy/paste and fill-handle hooks (`onCopy`, `onPaste`, `onFill`) |\n| Editing | Text editor; custom editors via `renderEditCell`; no validation |\n| Structure | Row grouping (`TreeDataGrid`), summary rows; ✗ pivot, export, master/detail (examples only) |\n\n## Styling with Tailwind/shadcn\nShips a small stylesheet in CSS layers with `rdg-light`/`rdg-dark` and CSS variables (`--rdg-background-color`,\n`--rdg-selection-color`, …). Map those to our tokens and pass `className`/`cellClass`/`headerCellClass` for Tailwind on cells.\nPlain-looking by default.\n\n## Weaknesses\n- No validation or number editor: invalid text reaches your data unless your editor or `onRowsChange` rejects it.\n- `aria-sort` disappears under multi-sort, so screen-reader users lose the sort state; announce it yourself.\n- Perpetual beta (7.0.0-beta.61, released 14 July 2026, inside the six-month window) and peers on React ^19.2.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Finished but plain grid with light/dark themes |\n| Interactivity | 4 | Frozen, resize (incl. keyboard), multi-sort, reorder, select and edit are native; sort/filter logic is the app's |\n| Coverage | 3 | Row grouping and summary rows; no export, pivot or master/detail |\n| Accessibility | 4 | Grid ARIA with row/col indexes, 4/5 keyboard, keyboard resize, 0 axe; `aria-sort` dropped under multi-sort; no invalid feedback |\n| Performance | 5 | Fastest kit: 194 ms render, 99 ms sort, 26 ms filter, 83 ms p95 scroll gaps |\n| React/Next fit | 4 | React-first and typed; needs React ^19.2 and its own stylesheet |\n| Bundle size | 5 | 17.1 KB gz |\n| Licence & health | 4 | MIT, release on 14 July 2026, but a beta label for years: pin versions |"
+  },
+  {
+    "id": "sources/react-grid-layout",
+    "kind": "source",
+    "title": "React Grid Layout",
+    "pattern": "panels",
+    "page_type": "dashboard",
+    "tags": [
+      "open-source",
+      "react",
+      "resizable"
+    ],
+    "source_url": "https://react-grid-layout.github.io/react-grid-layout/examples/00-showcase.html",
+    "source_site": "react-grid-layout.github.io",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "2.3.0",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 4,
+    "s_coverage": 3,
+    "s_a11y": 1,
+    "s_perf": 4,
+    "s_react": 4,
+    "s_bundle": 4,
+    "s_licence": 5,
+    "why_it_works": "Dashboard tiles that users drag and resize on a snapping column grid, with compaction, responsive breakpoints and a layout array that's easy to save.",
+    "use_when": "User-customisable dashboards where different roles arrange their own tiles, inside an explicit Edit layout mode that also gives keyboard users move up/down and S/M/L menus.",
+    "avoid_when": "Curated dashboards (use CSS Grid), split panes (react-resizable-panels; its Grid covers fixed, resizable tiles), or docking views.",
+    "alternatives": [
+      "react-resizable-panels",
+      "dockview"
+    ],
+    "has_example": false,
+    "score": 7,
+    "rating": 4,
+    "bench": {
+      "kind": "panels",
+      "bundle_gz_kb": 81.9,
+      "lib_only_gz_kb": 24.9,
+      "tasks_supported": 6,
+      "tasks_total": 6,
+      "unsupported": [],
+      "model": "tiles",
+      "checks_passed": 5,
+      "checks_total": 14,
+      "hit_area_px": 25,
+      "keyboard_resize": false,
+      "restores_without_jump": true,
+      "axe_violations": 0,
+      "evidence": "5/14 checks; 25 px grab area; keyboard resize no; restores without a jump"
+    },
+    "path": "sources/react-grid-layout",
+    "images": [
+      "sources/react-grid-layout/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The tiles library, with no keyboard support at all.** It moved and resized tiles cleanly with the mouse and\nrestored without a jump once you ask it to measure before mount. Tiles and handles can't be focused, so any\ncustomisable dashboard needs a non-drag alternative you build yourself (WCAG 2.5.7 and 2.1.1).\n\n## Benchmark (same three-pane workspace as every other library, `benchpanels/`, as three tiles on a 12-column grid)\n**5/14 checks**, 0 axe violations, **24.9 KB gz** (24.0 KB JS + 0.9 KB CSS). Code: `benchpanels/libs/react-grid-layout.jsx`,\n30 lines (east-edge handles so the resize task matches the other libraries).\n\nFound in the benchmark:\n- Drag-resizing snaps to columns: +120 px is one 120 px column, so only 14 canvas redraws happened during a 240 px drag\n  (120 for the splitters). Neighbouring tiles reflow instead of shrinking.\n- Grab area **25 px** (−15 to +9) on the 20 px handle.\n- Dragging the Inspector tile by its title to the left edge moved it to x = 0 and pushed Explorer down (vertical\n  compaction).\n- Keyboard: **0/7** on the handle. Tiles have no `tabindex` or key handlers, so there's no keyboard move either.\n- No double-click reset.\n- Persistence with `onLayoutChange` restored the layout, **but only after we set `useContainerWidth({ measureBeforeMount:\n  true })`**. With the default, the first frame used a 1280 px guess (Explorer 320 px) and then jumped.\n\n## Weaknesses\n- No keyboard operation of any kind.\n- `useContainerWidth` defaults to a 1280 px guess. Use `measureBeforeMount` or an `initialWidth` matching your layout.\n- The demo URL moved: `examples/00-showcase.html` (`0-showcase.html` is a 404).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 3 | Minimal placeholder and handle styles; you style the tiles |\n| Interactivity | 4 | Drag to move, resize, compaction, responsive breakpoints, persistence via `onLayoutChange` |\n| Coverage | 3 | Tiles only, but the main free tiles library |\n| Accessibility | 1 | 0/7 keyboard checks; tiles and handles not focusable |\n| Performance | 4 | 60 fps; snapping limits redraws; needs `measureBeforeMount` to restore without a jump |\n| React/Next fit | 4 | v2 TypeScript rewrite with hooks; `measureBeforeMount` for SSR |\n| Bundle size | 4 | 24.9 KB gz |\n| Licence & health | 5 | MIT; release 5 Oct 2026; ~2.2M weekly downloads |"
+  },
+  {
+    "id": "sources/react-resizable-panels",
+    "kind": "source",
+    "title": "react-resizable-panels",
+    "pattern": "panels",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "keyboard",
+      "react",
+      "resizable"
+    ],
+    "source_url": "https://react-resizable-panels.vercel.app/",
+    "source_site": "react-resizable-panels.vercel.app",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "4.14.5",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 5,
+    "s_coverage": 3,
+    "s_a11y": 5,
+    "s_perf": 5,
+    "s_react": 5,
+    "s_bundle": 4,
+    "s_licence": 5,
+    "why_it_works": "Split panes that follow the WAI-ARIA window splitter (focusable separator with values, arrows, Home/End, Enter to collapse), with a 10 px minimum grab area, double-click reset and a persistence hook that restores without a visible jump.",
+    "use_when": "Default for any fixed set of resizable regions (sidebar, list-detail-inspector, chat-artefact, preview over timeline), and through shadcn's Resizable, which wraps it.",
+    "avoid_when": "Users must move, tab, float or pop out views (use a docking library), or rearrange dashboard tiles (react-grid-layout).",
+    "alternatives": [
+      "allotment",
+      "flexlayout-react",
+      "dockview",
+      "react-grid-layout"
+    ],
+    "has_example": false,
+    "score": 8.8,
+    "rating": 4,
+    "bench": {
+      "kind": "panels",
+      "bundle_gz_kb": 77.9,
+      "lib_only_gz_kb": 20,
+      "tasks_supported": 5,
+      "tasks_total": 6,
+      "unsupported": [
+        "rearrange: Split panes only: no tabs, docking or tiles"
+      ],
+      "model": "split",
+      "checks_passed": 12,
+      "checks_total": 12,
+      "hit_area_px": 11,
+      "keyboard_resize": true,
+      "restores_without_jump": true,
+      "axe_violations": 0,
+      "evidence": "12/12 checks; 11 px grab area; keyboard resize yes; restores without a jump"
+    },
+    "path": "sources/react-resizable-panels",
+    "images": [
+      "sources/react-resizable-panels/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The default for split panes.** It is the only library in the benchmark that passed every check (12/12), with no\naxe violations, and the persisted layout came back on the first painted frame. It does one model, split panes (plus a\nfixed 2-D `Grid`), so docking workbenches need something else.\n\n## Benchmark (same three-pane workspace as every other library, `benchpanels/`)\n**12/12 checks**, **0 axe violations**, **20.0 KB gz** (React and the shared panes subtracted). Code:\n`benchpanels/libs/react-resizable-panels.jsx`, 20 lines.\n\nFound in the benchmark:\n- **Grab area 11 px** (−5 to +5 around a 1 px line), measured by dragging from every pixel offset. The rendered\n  separator is 0 px wide; the library hit-tests the pointer itself (`resizeTargetMinimumSize`, 10 px fine / 20 px coarse).\n- Keyboard: reached with Tab; `role=\"separator\"`, `aria-valuenow/min/max` (in percent), `aria-controls` = the Explorer\n  pane. ArrowRight moved 72 px (5 % of the group), Home collapsed (the pane is `collapsible`), End went to the 480 px\n  max, Enter collapsed and Enter restored. The name comes from the `aria-label` you pass: it renders none by default.\n- Double-click reset Explorer from 360 px to its 240 px default.\n- `useDefaultLayout({ id, storage: localStorage })` restored 360 px **on the first painted frame**, CLS 0. Cookie storage\n  is documented for server rendering.\n- Dragging the sash 240 px over 60 frames while both affected panes redrew a 20,000-point canvas: p95 frame 16.8 ms.\n  Every library tied here, so performance doesn't separate them.\n\n## Weaknesses\n- Unstyled: you draw the line, hover and focus states (shadcn's `Resizable` does it for you).\n- No tabs, docking, floating or pop-outs.\n- Pass `aria-label` on each `Separator`: without it the separator has no name.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Styling ergonomics | 3 | Headless; `data-separator` state attribute and `className`; shadcn `Resizable` gives a ready skin |\n| Interactivity | 5 | Drag, keyboard, collapse, double-click reset, persistence, all built in |\n| Coverage | 3 | Split panes and a fixed 2-D grid; no docking or user-arranged tiles |\n| Accessibility | 5 | 12/12 checks including the full APG window-splitter keyboard model; 11 px grab area; 0 axe |\n| Performance | 5 | Restores on the first frame (CLS 0); 60 fps drag with heavy panes; SSR cookie storage |\n| React/Next fit | 5 | React components and hooks; server-rendering examples |\n| Bundle size | 4 | 20.0 KB gz |\n| Licence & health | 5 | MIT; release 12 Oct 2026; ~19.7M weekly downloads |"
+  },
+  {
+    "id": "sources/tanstack-table",
+    "kind": "source",
+    "title": "TanStack Table v9 + TanStack Virtual",
+    "pattern": "data-table",
+    "page_type": "dashboard",
+    "tags": [
+      "headless",
+      "open-source",
+      "shadcn",
+      "virtualised",
+      "react",
+      "tailwind"
+    ],
+    "source_url": "https://tanstack.com/table/latest",
+    "source_site": "tanstack.com",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "@tanstack/react-table 9.3.1 + @tanstack/react-virtual 3.14.21",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 3,
+    "s_coverage": 4,
+    "s_a11y": 2,
+    "s_perf": 5,
+    "s_react": 5,
+    "s_bundle": 4,
+    "s_licence": 5,
+    "why_it_works": "Headless table state (sort, multi-sort, filters, selection, sizing, pinning, visibility, grouping) with no markup of its own, so the table is ours in Tailwind and shadcn/ui's Data Table recipe is written against it. Fast at 10,000 rows when paired with TanStack Virtual.",
+    "use_when": "Record tables in our own design system (the shadcn Data Table), from simple lists to virtualised 10k-row views, where we want full control of markup and are happy to write the keyboard layer if cells become interactive.",
+    "avoid_when": "You need a finished editing grid with APG arrow-key navigation now (use AG Grid Community or react-data-grid), or the team can't own the markup, ARIA and keyboard code.",
+    "alternatives": [
+      "react-data-grid",
+      "ag-grid-community",
+      "react-aria-table"
+    ],
+    "has_example": false,
+    "score": 7.8,
+    "rating": 4,
+    "bench": {
+      "kind": "data-table",
+      "bundle_gz_kb": 98.6,
+      "lib_only_gz_kb": 29.9,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "render_ms": 292,
+      "sort_ms": 234,
+      "filter_ms": 67,
+      "dom_rows": 30,
+      "aria_rowcount_ok": true,
+      "multi_sort": true,
+      "keyboard_passed": 1,
+      "keyboard_total": 5,
+      "axe_violations": 0,
+      "evidence": "10k rows: sort 234 ms, filter 67 ms, 30 DOM rows; 1/5 keyboard, 0 axe"
+    },
+    "path": "sources/tanstack-table",
+    "images": [
+      "sources/tanstack-table/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Our default for owned UI, as long as the gaps are budgeted.** The state engine is complete and fast (234 ms sort, 67 ms filter, 67 ms p95\nscroll gaps at 4× throttle), with Shift+click multi-sort, pinning, resizing and visibility all native, at **29.9 KB gz** with Virtual.\nEverything you see is our markup, though. Rendered as the semantic `<table>` the shadcn recipe uses, it **passed 1/5 grid keyboard\nchecks** (Tab only). That's correct for a read-mostly table (APG: a table *\"is not an interactive widget\"*), but arrow-key cell\nnavigation, editing and `aria-rowcount` are code we write.\n\n## Benchmark (same 10,000 rows × 8 columns and four tasks as every kit)\nCode: `benchtable/libs/tanstack-table.jsx`, 119 lines (markup, sticky CSS, resize handle and editor are ours). Timings are at 4× CPU\nthrottling (median of 3) and are only comparable within this bench.\n\n| Probe | Result |\n|---|---|\n| Library size (React subtracted) | **29.9 KB gz** for Table + Virtual |\n| First render / sort Amount / filter Status | 292 ms / 234 ms / 67 ms |\n| Scroll (50 wheel steps) | p95 frame gap **67 ms** (best); 30 DOM rows; reaches row 10,000 |\n| Semantics | `<table>` (role table), `aria-rowcount=10001` and `aria-rowindex` **set by us** |\n| Layout | Sticky header ✓ (CSS), pinned ID column ✓ (`columnPinning` + `column.getStart()` + our sticky CSS), drag resize ✓ (`getResizeHandler`), keyboard resize ✗, hide ✓ (`toggleVisibility`) |\n| Multi-sort | **✓ Shift+click**, 2 columns, native |\n| Keyboard selection | 1/5: Tab reaches the select-all checkbox; no arrow-key cell navigation (table semantics; checkboxes are separate tab stops) |\n| Select all | Our header checkbox (`getToggleAllRowsSelectedHandler`) selects all 10,000 |\n| Edit Amount (**hand-built**, not counted as native) | Enter/F2 opens our input; Enter commits, Esc cancels, invalid shows `role=alert` \"Enter a number\"; Tab commits and moves to the next focusable element (the next row's checkbox) |\n| axe-core (WCAG 2.2 AA), all four tasks | 0 violations |\n\n## Coverage (all free; headless state only)\n| Feature | Support |\n|---|---|\n| Sort / filter | ✓ multi-sort, column and global filters, faceting (counts and min/max) |\n| Columns | ✓ sizing and resizing, pinning (start/end), visibility, ordering |\n| Rows | ✓ selection, pinning, pagination, expanding (tree data), grouping and aggregation |\n| v9 examples | Cell selection, experimental spreadsheet (docs, not tested) |\n| Virtualisation | Separate package, `@tanstack/react-virtual` (included above) |\n| Editing, export, ARIA grid keyboard model | ✗ (patterns in the docs; you build them) |\n\n## Styling with Tailwind/shadcn\nThe best fit: it renders nothing, so shadcn/ui's `Table`, `Checkbox` and `DropdownMenu` (the copy-in Data Table recipe, now v9) are\nthe markup. Pinned columns need `position: sticky` with `left: column.getStart('start')` and an opaque background; the virtualised body\nneeds `display: grid` rows with fixed heights.\n\n## Weaknesses\n- Every interactive behaviour beyond state is ours: APG grid keys, roving focus, editing, `aria-rowcount`/`rowindex`, resize handles.\n- v9 changed the API (`useTable` with `tableFeatures`, `createColumnHelper().columns`); v8 blog posts and older shadcn copies need migrating.\n- Sticky pinned columns and virtual rows are easy to get subtly wrong (backgrounds, z-index, row heights).\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Headless (capped at 3); shadcn's Data Table recipe is the look |\n| Interactivity | 3 | All state native (multi-sort, pin, resize, hide, select), but no UI or editing without our code |\n| Coverage | 4 | Grouping, aggregation, tree/expanding, faceting, pinning all free; no export |\n| Accessibility | 2 | Semantic table only; 1/5 grid keyboard checks; counts and keys are ours to add |\n| Performance | 5 | 234 ms sort, 67 ms filter, 67 ms p95 scroll gaps with 30 DOM rows |\n| React/Next fit | 5 | Hooks, typed, any markup, the shadcn default |\n| Bundle size | 4 | 29.9 KB gz with Virtual |\n| Licence & health | 5 | MIT, release 9.3.1 on 12 October 2026 (9.0.0 on 4 August 2026) |"
+  },
+  {
+    "id": "sources/vtable",
+    "kind": "source",
+    "title": "VisActor VTable (watch)",
+    "pattern": "data-table",
+    "page_type": "dashboard",
+    "tags": [
+      "canvas",
+      "data-grid",
+      "pivot",
+      "open-source",
+      "watch"
+    ],
+    "source_url": "https://visactor.io/vtable",
+    "source_site": "visactor.io",
+    "captured_at": "2026-10-18",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "@visactor/vtable 1.26.8 + @visactor/react-vtable 1.26.8 + @visactor/vtable-editors 1.26.8",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 4,
+    "s_coverage": 5,
+    "s_a11y": 1,
+    "s_perf": 3,
+    "s_react": 2,
+    "s_bundle": 1,
+    "s_licence": 5,
+    "why_it_works": "A canvas grid with a wide free feature set (pivot tables, tree, Gantt, frozen columns, multi-sort, checkbox selection, editors) that renders zero DOM rows, so DOM size never grows with the data.",
+    "use_when": "Watch only. Consider it for internal, sighted-user analytics views (dense pivots, very wide tables) where accessibility requirements have been explicitly waived.",
+    "avoid_when": "Anything customer-facing or covered by accessibility requirements. It has no grid semantics, so screen-reader users get nothing, and keyboard users can't start navigation without a mouse.",
+    "alternatives": [
+      "ag-grid-community",
+      "react-data-grid",
+      "tanstack-table"
+    ],
+    "has_example": false,
+    "score": 6.3,
+    "rating": 3,
+    "bench": {
+      "kind": "data-table",
+      "bundle_gz_kb": 730.7,
+      "lib_only_gz_kb": 662,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "render_ms": 2085,
+      "sort_ms": 639,
+      "filter_ms": 326,
+      "dom_rows": 0,
+      "aria_rowcount_ok": false,
+      "multi_sort": true,
+      "keyboard_passed": 1,
+      "keyboard_total": 5,
+      "axe_violations": 4,
+      "evidence": "10k rows: sort 639 ms, filter 326 ms, 0 DOM rows; 1/5 keyboard, 4 axe"
+    },
+    "path": "sources/vtable",
+    "images": [
+      "sources/vtable/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Watch, don't use.** It did every layout and edit task natively (frozen columns, multi-sort, drag resize, hide, select all,\nEnter/Esc/Tab editing). It's also free for pivot and tree views. But it draws everything on a `<canvas>`. **In the DOM there are 5\nelements and no ARIA roles at all**: a `tabindex=0` div, an unlabelled hidden `<input>` (axe \"label\", critical) and the canvas.\nScreen readers get nothing. Keyboard users can Tab in, but no cell is selected until someone clicks, so the arrow keys do nothing.\nIt's also **662 KB gz**.\n\n## Benchmark (same 10,000 rows × 8 columns and four tasks as every kit)\nCode: `benchtable/libs/vtable.jsx`, 71 lines. Probes use VTable's own API (cell rects, values, sort state) because there's no DOM\nto read. Timings are at 4× CPU throttling (median of 3) and are only comparable within this bench.\n\n| Probe | Result |\n|---|---|\n| Library size (React subtracted) | **662 KB gz** (vtable + react-vtable + vtable-editors) |\n| First render / sort Amount / filter Status | 2,085 ms / 639 ms / 326 ms |\n| Scroll (50 wheel steps) | p95 frame gap 217 ms; **0 DOM rows** (canvas); reaches row 10,000 |\n| Semantics | **None**: no `grid`/`table` role, no `aria-rowcount`; confirmed in the DOM (5 elements) and by source grep (only `aria-hidden`) |\n| Layout | Sticky header ✓, frozen ID column ✓ (`frozenColCount`), drag resize ✓, keyboard resize ✗, hide ✓ (`hide: true` via `updateColumns`) |\n| Multi-sort | ✓ with `multipleSort: true` (each click adds a column; no modifier). Sorting starts from the header's sort icon; clicking elsewhere selects the column |\n| Keyboard selection | 1/5: Tab focuses the canvas, but with no selected cell ↓ → do nothing. **After a mouse click** the arrows move the cell selection and Shift+arrow extends a cell range; Space doesn't tick the row checkbox |\n| Select all | Header checkbox selects all 10,000; no count |\n| Edit Amount | Enter opens `InputEditor` (after a click selects the cell); Enter commits, Esc cancels, Tab commits and moves right |\n| Invalid value | **✗ \"abc\" is stored** (no validation in `InputEditor`; a custom editor's `validateValue` is the hook, not tested) |\n| axe-core (WCAG 2.2 AA) | 4 violations across the tasks, all the unlabelled focus `<input>` (\"label\", critical) |\n\n## Coverage (all free)\n| Feature | Support |\n|---|---|\n| Table types | List table, **pivot table**, pivot chart, Gantt (separate package) (docs) |\n| Sort / filter | ✓ multi-sort, `updateFilterRules` (no filter UI in the core) |\n| Columns | ✓ frozen left/right, resize, hide, drag to reorder (docs) |\n| Rows | ✓ checkbox column, tree and grouping (docs), merged cells |\n| Editing | ✓ input, date, list editors; custom editors with validation hooks |\n| Export | ✓ CSV/Excel via `@visactor/vtable-export` (docs, not tested) |\n\n## Styling with Tailwind/shadcn\nNot possible with classes: styles are a JS theme object (`themes.DEFAULT.extends({...})`) drawn on canvas. Map our tokens into the\ntheme by hand (font, colours, row heights). Custom cell content is drawn with VTable's own layout primitives, not React DOM.\n\n## Weaknesses\n- No accessibility tree: fails WCAG for any user-facing table. This alone keeps it on the watch list.\n- Keyboard navigation needs a mouse click first; Ctrl+F, text selection and browser translation don't see the content.\n- 662 KB gz and a 2 s first render at 4× throttle; an imperative option-object API in a thin React wrapper.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Finished canvas grid with sort icons, frozen shadow and checkboxes |\n| Interactivity | 4 | Frozen, multi-sort, resize, hide, select and edit native; sort starts only from the icon; no validation |\n| Coverage | 5 | Pivot, tree, grouping, Gantt and export, all MIT (docs) |\n| Accessibility | 1 | Canvas with no roles or ARIA, unlabelled input, 1/5 keyboard, 4 axe violations |\n| Performance | 3 | 0 DOM rows, but 2.1 s first render, 639 ms sort, 217 ms p95 scroll gaps at 4× throttle |\n| React/Next fit | 2 | Thin wrapper over an imperative option object; canvas can't use React components or Tailwind |\n| Bundle size | 1 | 662 KB gz |\n| Licence & health | 5 | MIT, VisActor, release 1.26.8 on 11 September 2026 |"
   },
   {
     "id": "3d/apple-airpods-scroll-story",
