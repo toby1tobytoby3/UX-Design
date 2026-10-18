@@ -100,6 +100,7 @@ const HELPERS = (titles) => {
   };
 };
 
+const log = process.env.V ? (...a) => console.log(new Date().toISOString().slice(11, 19), ...a) : () => {};
 const browser = await chromium.launch();
 async function open(kit, task, { throttle = 1 } = {}) {
   const page = await browser.newPage({ viewport: { width: 860, height: 640 }, locale: 'en-GB' });
@@ -108,6 +109,7 @@ async function open(kit, task, { throttle = 1 } = {}) {
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text().slice(0, 200)));
   let cdp = null;
   if (throttle > 1) { cdp = await page.context().newCDPSession(page); await cdp.send('Emulation.setCPUThrottlingRate', { rate: throttle }); }
+  log('open', kit, task);
   await page.goto(`${host}/${kit}.html?task=${task}`);
   await page.waitForFunction(() => window.__bench?.renderMs != null, null, { timeout: 60000 }).catch(() => {});
   await page.evaluate(HELPERS, TITLES);
