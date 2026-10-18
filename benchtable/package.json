@@ -1,0 +1,26 @@
+{
+  "name": "ux-design-benchtable",
+  "private": true,
+  "type": "module",
+  "description": "Same 10,000-row grid and four tasks (big data, layout, keyboard selection, inline edit) in every table/grid library: timings, keyboard and ARIA checks, axe-core, bundle sizes for sources/",
+  "dependencies": {
+    "@tanstack/react-table": "9.3.1",
+    "@tanstack/react-virtual": "3.14.21",
+    "ag-grid-community": "36.2.0",
+    "ag-grid-react": "36.2.0",
+    "react-aria-components": "1.22.1",
+    "@mui/x-data-grid": "8.29.5",
+    "@mui/material": "7.3.11",
+    "@mui/system": "7.3.11",
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "react-data-grid": "7.0.0-beta.61",
+    "@visactor/react-vtable": "1.26.8",
+    "@visactor/vtable": "1.26.8",
+    "@visactor/vtable-editors": "1.26.8",
+    "axe-core": "4.14.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "esbuild": "0.25.10"
+  }
+}

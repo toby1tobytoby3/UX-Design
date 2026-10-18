@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Tables and data grids benchmark</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#fcfcfb;color:#1f1f1e;font:13px/1.4 system-ui,sans-serif}
+  header{display:flex;justify-content:space-between;align-items:baseline;padding:14px 24px 0} header b{font-size:18px} header span{color:#52514e}
+  main{padding:12px 24px 24px}
+  section{background:#fff;border:1px solid #ecebe7;border-radius:10px;padding:10px 12px 12px;width:808px}
+  h2{margin:0 0 8px;font-size:13px;font-weight:600} h2 small{color:#52514e;font-weight:400}
+  .toolbar{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .toolbar button,.toolbar select{font:inherit;padding:5px 10px;border:1px solid #d6d4cd;border-radius:7px;background:#fff}
+  .view{position:relative;height:440px;width:780px}
+  /* Minimal shadcn-style styling for the headless kits (TanStack, React Aria). */
+  .tbl{border:1px solid #e4e4e7;border-radius:8px;overflow:auto;height:100%;background:#fff}
+  .tbl table{border-collapse:separate;border-spacing:0;display:grid;font-size:13px}
+  .tbl thead{display:grid;position:sticky;top:0;z-index:2}
+  .tbl tbody{display:grid;position:relative}
+  .tbl tr{display:flex;width:100%}
+  .tbl th,.tbl td{display:flex;align-items:center;padding:0 10px;height:36px;border-bottom:1px solid #f0f0f2;background:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tbl th{font-weight:500;color:#52525b;background:#fafafa;position:relative;user-select:none}
+  .tbl th button.sort{all:unset;cursor:pointer;flex:1}
+  .tbl tr[data-selected] td,.tbl tr[aria-selected=true] td,.tbl [data-selected] [role=gridcell]{background:#eef4fd}
+  .tbl .resizer{position:absolute;right:0;top:0;height:100%;width:6px;cursor:col-resize;background:transparent}
+  .tbl .resizer:hover,.tbl .resizer[data-resizing],.tbl .resizer[data-focus-visible]{background:#2a78d6}
+  .tbl .num{justify-content:flex-end;font-variant-numeric:tabular-nums}
+  .tbl input.cell-edit{font:inherit;width:100%;padding:3px 6px;border:1px solid #2a78d6;border-radius:4px}
+  .tbl [data-focus-visible]{outline:2px solid #2a78d6;outline-offset:-2px}
+  .rac-table{width:100%}
+</style></head><body>
+<header><b id="lib">Library</b><span>Same 10,000 rows · same four tasks · keyboard + ARIA checks · axe-core</span></header>
+<main><section><h2>Task</h2>
+  <div class="toolbar"><button id="before">Before grid</button><label>Status <select id="status-filter" aria-label="Filter by status"></select></label></div>
+  <div class="view"></div>
+</section></main>
+<script src="LIB.js"></script>
+</body></html>
