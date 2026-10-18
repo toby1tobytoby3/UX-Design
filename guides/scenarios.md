@@ -33,12 +33,13 @@ allowed, Base UI flavour, see `our-design/README.md`).
 
 ## 3. Real-time trading terminal (Meridian Pro)
 - **Start with:** Lightweight Charts (6.5) for price charts (uPlot 5.5 or ECharts canvas for telemetry-style series);
-  AG Grid Community for the order blotter; Dockview core for dockable panes; tabular numerals everywhere.
+  AG Grid Community (7.5) for the order blotter; FlexLayout (7.5, keyboard-resizable splitters) or Dockview core (7.5,
+  more polish, no keyboard resize) for dockable panes, plus a tab menu as the non-drag alternative; tabular numerals everywhere.
 - **Must get right:** stable pan and zoom; **batched tick updates**; decimal precision; reconnect and stale-feed
   indicators; no motion on data except a brief tick flash (`guides/motion.md`: no digit rolls on live data).
 - **Test:** replay the expected tick rate and bursts; measure dropped frames and memory; keyboard order entry.
-- **In the library:** `guides/charts.md` (financial row), `sources/lightweight-charts`, `sources/uplot`, `command-palette/linear-cmdk-menu`.
-- **Thin:** panels and docking (B3), real-time data (C6), order entry (B5). AG Grid **Enterprise** and dockview-enterprise are paid: check features against the free edition.
+- **In the library:** `guides/charts.md` (financial row), `guides/shell-panels.md` §2, `guides/tables.md`, `sources/lightweight-charts`, `sources/uplot`, `panels/dockview-trading-workspace-docking`, `panels/flexlayout-docking-keyboard-splitters`, `command-palette/linear-cmdk-menu`.
+- **Thin:** real-time data (C6), order entry (B5). AG Grid **Enterprise** and dockview-enterprise are paid: check features against the free edition.
 
 ## 4. Live maps and control rooms (Relay, fleet logistics)
 - **Start with:** MapLibre GL JS for the basemap + deck.gl for large data layers (icons, paths, heatmaps); kepler.gl only
@@ -78,13 +79,13 @@ allowed, Base UI flavour, see `our-design/README.md`).
 - **Thin:** canvas (D2) and collaboration (D3), both P2. Use the catalogue shortlist.
 
 ## 8. Video editing timelines (Cutline)
-- **Start with:** a custom timeline from wavesurfer.js (waveforms) + Konva (tracks), Dockview or react-resizable-panels
-  for the four-pane layout, WebCodecs for decode. OpenReel is a **watch** reference only (alpha; codec licences need
+- **Start with:** a custom timeline from wavesurfer.js (waveforms) + Konva (tracks), react-resizable-panels (8.8) for
+  the four-pane layout (docking only if users rearrange panes), WebCodecs for decode. OpenReel is a **watch** reference only (alpha; codec licences need
   review). Not Remotion (licence limits companies over three people).
 - **Must get right:** frame-accurate tracks, snapping, trimming, precomputed waveform peaks, J/K/L transport.
 - **Test:** decode and seek latency, long assets, A/V sync, export, undo.
-- **In the library:** nothing yet.
-- **Thin:** media editing (D4) and panels (B3).
+- **In the library:** `guides/shell-panels.md` §2 (split panes), `panels/react-resizable-panels-keyboard-splitter-collapse`.
+- **Thin:** media editing (D4).
 
 ## 9. Network graphs (Sentinel, fraud investigation)
 - **Start with:** Sigma.js + Graphology (WebGL) for exploring large networks; React Flow for editable node diagrams with
@@ -104,5 +105,5 @@ allowed, Base UI flavour, see `our-design/README.md`).
 - **Must get right:** streaming without flicker, stop and retry, a live plan, tool outcomes, source anchors, scoped
   human approval before side effects, and an announcement for screen readers (no kit ships one).
 - **Test:** interrupted streams, rejected approvals, stale plans, replay, tool errors, citation targets.
-- **In the library:** `guides/agentic-ui.md`, `ai-chat/*`, `agent-activity/*`, `ai-review/*`, `ai-provenance/*`, `ai-assist/*`.
-- **Thin:** logged-in product screens (Claude, ChatGPT agent, Cursor): need user screenshots; the app shell (B1).
+- **In the library:** `guides/agentic-ui.md`, `guides/shell-panels.md` (chat · artefact · inspector as split panes), `ai-chat/*`, `agent-activity/*`, `ai-review/*`, `ai-provenance/*`, `ai-assist/*`.
+- **Thin:** logged-in product screens (Claude, ChatGPT agent, Cursor): need user screenshots.

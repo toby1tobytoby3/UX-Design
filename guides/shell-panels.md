@@ -14,7 +14,7 @@ Research behind this guide, with sources: `research/B1-B3-C2-shell-panels.md`. P
 |---|---|---|
 | **Sidebar** when there are more than 5 sections or users switch often; a **48 px top bar** holds global tools (search/⌘K, notifications, help, account). Top bar alone for ≤ 5 sections | Carbon: left panel above five items or frequent switching | Workbenches (editor, terminal): menu in the top bar, an activity bar on the left edge |
 | Sidebar **240 px** expanded (200–400 if resizable), **48 px icon rail** collapsed; main area min **320 px** | shadcn 256/48, Primer min 256, Atlassian 240–320 | Deep trees (files, channels): 280–320 px and resizable |
-| Collapse to a rail is an option, not the default; the rail keeps the active state and **tooltips on the right**; toggle by a visible button **and** ⌘/Ctrl+B; collapse state in a **cookie read on the server** (no flash) | NN/g: don't hide navigation behind icons. shadcn writes the cookie, but your layout must read it | In rich-text panes ⌘B is bold: use Ctrl+[ or ⌘\ |
+| Collapse to a rail is an option, not the default; the rail keeps the active state and **tooltips on the right**; toggle by a visible button with `aria-expanded` **and** ⌘/Ctrl+B; collapse state in a **cookie read on the server** (no flash) | NN/g: don't hide navigation behind icons. shadcn's sidebar writes the cookie but its demo reloads expanded, and its toggle has no `aria-expanded` (`navigation/shadcn-sidebar-icon-rail`): patch both | In rich-text panes ⌘B is bold: use Ctrl+[ or ⌘\ |
 | Resizable sidebar off by default; when on, drag + keyboard (±10 px, Shift ±50, Home/End, **Esc cancels**, double-click resets), below ~120 px collapses to the rail | Mantine `useAppShellResize` | Tree-heavy products where names truncate |
 | Three levels **workspace › project › object**; the **switcher at the top of the sidebar** (avatar, name, chevron) with search, recent, Create and a shortcut; switching keeps the same section if it exists | Linear, Vercel, Slack; Carbon: no third tier in the left panel, use page tabs | Single workspace: no switcher, account menu bottom-left |
 | Breadcrumbs show **hierarchy, not history**; the last item is the current page (`aria-current="page"`, not a link); segments double as switchers (Project ▾); collapse the middle to "…" | NN/g; GOV.UK | Flat apps: a page title only |
@@ -33,7 +33,19 @@ Pick one model per surface; they don't substitute for each other.
 | **Dockable tabs** (move, group, float, pop out) | Trading terminal, IDE, monitoring workbenches across monitors | **Dockview** (free core) or **FlexLayout**, see the table below | Simple apps: docking costs learning and state |
 | **Dashboard tiles** (snap grid, reorder, resize) | User-customised dashboards (Grafana, Datadog) | **react-grid-layout**; rrp `Grid` when tiles are fixed and only resized | Curated dashboards: plain CSS Grid |
 
-PANELS_STACK
+Measured in `benchpanels/` (same Explorer · Editor · Inspector workspace at 1440×900, each pane a 20,000-point canvas
+that redraws on resize; docking libraries also dock a Terminal tab). Scores from `SOURCES.md`.
+
+| Model | Use | Score | What the bench showed | Watch for |
+|---|---|---|---|---|
+| Split panes | **react-resizable-panels** (shadcn `Resizable`) | 8.8 | The only library to pass every check (12/12, 0 axe): full APG splitter keys, Enter collapses and restores, 11 px grab area, restores a saved layout with no jump; 20 KB | Separators have no name: pass `aria-label` (the live demo has none either) |
+| Docking, keyboard matters | **FlexLayout** | 7.5 | Docks, splits to an edge and pops out a real window; splitters are focusable and arrow keys resize (10 px); 54 KB | No Home/End or Enter-to-collapse; every splitter is named "Resize"; light theme's inactive tab label fails contrast |
+| Docking, polish matters | **Dockview** (free core) | 7.5 | Docks, splits, floats and pops out; the most finished look; 104 KB | **Sashes can't be focused** (4 px, no keyboard resize); a focusable close button inside each tab (axe `nested-interactive`); no pop-out button in the free core (three lines against its API) |
+| User-arranged tiles | **React Grid Layout** | 7.0 | Drag and resize with compaction; 25 px resize handles; restores without a jump only with `measureBeforeMount` | **No keyboard move or resize** (5/14 checks): build the Edit-layout mode with move up/down and S/M/L size menus |
+| Not recommended | Allotment | 6.5 | Native VS Code look, 11 KB | No separator semantics or keyboard resize; first frame renders 300 px then jumps (CLS 0.73) |
+
+Neither docking library moves a tab without dragging (WCAG 2.5.7): add the tab menu below whichever you pick. Drag
+performance didn't separate them: every library held 16.8 ms p95 frames while dragging past heavy panes.
 
 | Default | Why | When to depart |
 |---|---|---|

@@ -32,9 +32,9 @@ same way charts and 3D were built.
 
 | # | Category | Covers | Status | Priority | Example tools to assess | Example references |
 |---|---|---|---|---|---|---|
-| B1 | App shell and navigation | Sidebars, workspaces, tabs, breadcrumbs, split views | ◐ `guides/shell-panels.md` §1 (draft) | P1 | shadcn/ui; Mantine; Dockview; react-resizable-panels; Radix Primitives; nuqs *(catalogue)* | Linear, Vercel dashboard, Notion, Arc |
+| B1 | App shell and navigation | Sidebars, workspaces, tabs, breadcrumbs, split views | ✅ `guides/shell-panels.md` §1 | P1 | shadcn/ui; Mantine; Dockview; react-resizable-panels; Radix Primitives; nuqs *(catalogue)* | Linear, Vercel dashboard, Notion, Arc |
 | B2 | Command palette and shortcuts | ⌘K, fuzzy search, natural-language commands, shortcut hints | ◐ | P1 | Mantine; React Aria Components; Base UI *(catalogue)* | Linear, Raycast, Superhuman, VS Code |
-| B3 | Panels, docking and split layouts | Dockable tabs, pop-outs, saved layouts, resizable panes | ◐ `guides/shell-panels.md` §2 (draft; bench `benchpanels/`) | P1 split panes · P2 docking | Dockview; react-resizable-panels; React Grid Layout *(catalogue)* | VS Code, TradingView, Figma |
+| B3 | Panels, docking and split layouts | Dockable tabs, pop-outs, saved layouts, resizable panes | ✅ `guides/shell-panels.md` §2 (benchmarked in `benchpanels/`) | P1 split panes · P2 docking | react-resizable-panels; FlexLayout; Dockview (free core); React Grid Layout; Allotment (benchmarked) | VS Code, TradingView, Figma |
 | B4 | Overlays | Modals, sheets, popovers, hover cards, toasts, drawers | ✗ | P1 | Base UI; React Aria Components; Radix Primitives; Sonner; Ark UI *(catalogue)* | Apple sheets, Linear, Stripe |
 | B5 | Forms and inputs | Inline editing, validation, date/time pickers, comboboxes, numeric precision input | ✗ | P2 | React Hook Form; React Aria Components; Base UI; Mantine; Ark UI *(catalogue)* | Stripe Checkout, Linear, Typeform |
 | B6 | Tables and data grids | Sorting, grouping, inline edit, virtualised rows, frozen columns | ✅ `guides/tables.md` (benchmarked in `benchtable/`) | P1 | TanStack Table; react-data-grid; AG Grid Community; React Aria Components; MUI X; VisActor VTable (benchmarked) | Airtable, Linear, Retool |
@@ -48,7 +48,7 @@ same way charts and 3D were built.
 | # | Category | Covers | Status | Priority | Example tools to assess | Example references |
 |---|---|---|---|---|---|---|
 | C1 | Charts | Chart types, zoom, tooltips, palettes | ✅ | – | (9 profiled) | Stripe, Vercel, Our World in Data |
-| C2 | Dashboards and analytics | KPI hierarchy, bento layouts, cross-filtering, drill-down, NL query | ◐ `guides/shell-panels.md` §3 + `guides/charts.md` | P1 | React Grid Layout; Recharts; Apache ECharts; TanStack Table; TanStack Virtual; nuqs *(catalogue)* | Amplitude, Hex, Mixpanel, Stripe |
+| C2 | Dashboards and analytics | KPI hierarchy, bento layouts, cross-filtering, drill-down, NL query | ✅ `guides/shell-panels.md` §3 + `guides/charts.md` | P1 | React Grid Layout; Recharts; Apache ECharts; TanStack Table; TanStack Virtual; nuqs *(catalogue)* | Amplitude, Hex, Mixpanel, Stripe |
 | C3 | Maps and geospatial | Vector maps, layers, clustering, fly-to, heatmaps, geofences, live positions, tiles and geocoding | ◐ `guides/maps.md` (draft; bench `benchmap/`) | P1 | MapLibre GL JS; deck.gl; kepler.gl *(catalogue)* | Uber/kepler demos, Citymapper, Strava |
 | C4 | Network graphs | Force layouts, expand-on-click, path finding, large graphs | ✗ | P2 | Sigma.js + Graphology; React Flow; Apache ECharts; AntV G6 *(catalogue)* | Neo4j Bloom, Linkurious, Obsidian graph |
 | C5 | Timelines and scheduling | Gantt, calendars, scrubbers, event timelines | ✗ | P2 | OpenReel Video (watch); FullCalendar Standard; Schedule-X core; wavesurfer.js; Konva; VisActor VTable *(catalogue)* | Linear roadmaps, Cron/Notion Calendar |
