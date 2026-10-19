@@ -1,6 +1,7 @@
 ---
 title: model-viewer
 kind: source
+featured: 3d/modelviewer-hotspot-annotations
 pattern: 3d
 page_type: product
 tags: [3d, webgl, open-source, accessible, ecommerce, ar]

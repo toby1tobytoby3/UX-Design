@@ -1,6 +1,7 @@
 ---
 title: FlexLayout
 kind: source
+featured: panels/flexlayout-docking-keyboard-splitters
 pattern: panels
 page_type: app
 tags: [accessible, open-source, react, docking, resizable, keyboard]

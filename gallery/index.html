@@ -85,6 +85,11 @@
   .pill.ok { background: var(--accent-soft); color: var(--accent); }
   .stars { color: var(--star); letter-spacing: 1px; }
   .empty { text-align: center; padding: 80px 0; color: var(--muted); }
+  .section { grid-column: 1 / -1; margin: 18px 0 -6px; font-size: 15px; letter-spacing: -0.01em; }
+  .section:first-child { margin-top: 0; }
+  .section span { color: var(--muted); font-weight: 400; }
+  .thumbwrap { position: relative; display: block; }
+  .thumbwrap .tlabel { position: absolute; left: 8px; bottom: 8px; background: color-mix(in srgb, var(--panel) 88%, transparent); color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-size: 11px; }
 
   dialog { border: 0; padding: 0; width: min(1100px, 100vw - 32px); max-height: calc(100vh - 32px); border-radius: 14px; background: var(--panel); color: var(--text); box-shadow: 0 30px 80px #0005; }
   dialog::backdrop { background: var(--scrim); }
@@ -244,25 +249,41 @@
     return true;
   }
 
+  // A library card shows the library in a real product when its profile names a `featured` pattern; otherwise its
+  // benchmark render (the same test data for every library in a category), labelled as such.
+  const byId = Object.fromEntries(data.map((e) => [e.id, e]));
+  const realImg = (e) => (e.images || []).find((i) => !/\/preview\.\w+$/.test(i)) || (e.images || [])[0];
+  function thumbOf(e) {
+    if (!isSource(e)) return { src: e.images[0], label: '' };
+    const f = e.featured && byId[e.featured];
+    if (f && realImg(f)) return { src: realImg(f), label: `In use · ${f.source_site}` };
+    return { src: e.images[0], label: e.images[0] ? 'Benchmark' : '' };
+  }
+  function card(e) {
+    const c = document.createElement('button');
+    c.className = 'card';
+    const t = thumbOf(e);
+    c.innerHTML = `
+      <span class="thumbwrap">${t.src ? `<img class="thumb" loading="lazy" src="${BASE}${esc(t.src)}" alt="">` : '<span class="thumb"></span>'}${t.label ? `<span class="tlabel">${esc(t.label)}</span>` : ''}</span>
+      <div class="body">
+        <h3>${esc(e.title)}</h3>
+        <div class="meta">${isSource(e) ? `<span class="pill src">Library · ${esc(e.score)}/10</span><span class="pill">${esc(e.pattern)}</span><span>${esc(e.licence)}</span>` : `<span class="pill">${esc(e.pattern)}</span><span>${esc(e.source_site)}</span><span class="stars" aria-label="${e.rating} stars">${stars(e.rating)}</span>`}
+        ${isCaptured(e) ? '' : `<span class="pill warn">${e.images.every((i) => /\/preview\.\w+$/.test(i)) ? 'preview only' : 'needs capture'}</span>`}${e.has_example ? '<span class="pill ok">code</span>' : ''}</div>
+      </div>`;
+    c.onclick = () => open(e);
+    return c;
+  }
   function render() {
-    // Sources first (best score first), then patterns by rating.
-    const list = data.filter(matches).sort((a, b) =>
-      (isSource(b) - isSource(a)) || ((b.score || 0) - (a.score || 0)) || ((b.rating || 0) - (a.rating || 0)));
+    // Real-product patterns first (best rated, live captures before rebuilds), then libraries by score.
+    const list = data.filter(matches);
+    const pats = list.filter((e) => !isSource(e)).sort((a, b) => ((b.rating || 0) - (a.rating || 0)) || (isCaptured(b) - isCaptured(a)));
+    const libs = list.filter(isSource).sort((a, b) => (b.score || 0) - (a.score || 0));
     renderApplied(list.length);
-    $('grid').innerHTML = list.length ? '' : '<div class="empty">No entries match. Clear a filter, or add a reference with ux-add.</div>';
-    for (const e of list) {
-      const card = document.createElement('button');
-      card.className = 'card';
-      card.innerHTML = `
-        ${e.images[0] ? `<img class="thumb" loading="lazy" src="${BASE}${esc(e.images[0])}" alt="">` : '<div class="thumb"></div>'}
-        <div class="body">
-          <h3>${esc(e.title)}</h3>
-          <div class="meta">${isSource(e) ? `<span class="pill src">Source · ${esc(e.score)}/10</span><span class="pill">${esc(e.pattern)}</span><span>${esc(e.licence)}</span>` : `<span class="pill">${esc(e.pattern)}</span><span>${esc(e.source_site)}</span><span class="stars" aria-label="${e.rating} stars">${stars(e.rating)}</span>`}
-          ${isCaptured(e) ? '' : `<span class="pill warn">${e.images.every((i) => /\/preview\.\w+$/.test(i)) ? 'preview only' : 'needs capture'}</span>`}${e.has_example ? '<span class="pill ok">code</span>' : ''}</div>
-        </div>`;
-      card.onclick = () => open(e);
-      $('grid').append(card);
-    }
+    const grid = $('grid');
+    grid.innerHTML = list.length ? '' : '<div class="empty">No entries match. Clear a filter, or add a reference with ux-add.</div>';
+    const section = (title, n, note) => { const h = document.createElement('h2'); h.className = 'section'; h.innerHTML = `${title} <span>· ${n}${note ? ` · ${note}` : ''}</span>`; grid.append(h); };
+    if (pats.length) { if (libs.length) section('Patterns from real products', pats.length); pats.forEach((e) => grid.append(card(e))); }
+    if (libs.length) { if (pats.length) section('Libraries, scored', libs.length, 'thumbnails show the library in use where we have it, otherwise its benchmark'); libs.forEach((e) => grid.append(card(e))); }
   }
 
   // Tiny markdown: ## headings, - lists, > quotes, **bold**, `code`, paragraphs.
@@ -296,9 +317,11 @@
   function open(e) {
     const views = $('views');
     views.innerHTML = '';
-    e.images.forEach((src, i) => {
+    const f = isSource(e) && e.featured && byId[e.featured];
+    const imgs = [...(f && realImg(f) ? [realImg(f)] : []), ...e.images];
+    imgs.forEach((src, i) => {
       const b = document.createElement('button');
-      b.textContent = src.split('/').pop().replace(/\.\w+$/, '');
+      b.textContent = f && i === 0 ? `in use: ${f.source_site}` : src.split('/').pop().replace(/\.\w+$/, '');
       b.onclick = () => {
         $('dlg-img').src = BASE + src;
         views.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
@@ -306,7 +329,7 @@
       views.append(b);
       if (i === 0) b.click();
     });
-    if (!e.images.length) $('dlg-img').removeAttribute('src');
+    if (!imgs.length) $('dlg-img').removeAttribute('src');
 
     const file = (f) => e.files.includes(f);
     $('dlg-info').innerHTML = `
@@ -316,6 +339,7 @@
       <div class="why"><b>Why it works</b>${esc(e.why_it_works)}</div>
       <div><b>${isSource(e) ? 'Pick it for' : 'Use when'}:</b> ${esc(e.use_when)}</div>
       ${e.avoid_when ? `<div><b>Avoid when:</b> ${esc(e.avoid_when)}</div>` : ''}
+      ${f ? `<p class="meta">Seen in use: <a href="#" data-open="${esc(f.id)}">${esc(f.title)}</a></p>` : ''}
       ${isSource(e) ? `<p class="meta"><span class="pill src">${esc(e.score)}/10</span><span>${esc(e.licence)} · v${esc(e.version)}</span>${Array.isArray(e.alternatives) ? `<span>Alternatives: ${e.alternatives.map(esc).join(', ')}</span>` : ''}</p>` : ''}
       <div class="links">
         ${e.source_url && e.source_url !== 'unknown' ? `<a href="${esc(e.source_url)}" target="_blank" rel="noopener">Source: ${esc(e.source_site)} ↗</a>` : ''}
@@ -325,7 +349,8 @@
       </div>
       <div class="md">${md(e.body)}</div>
       <p class="meta">Path: <code>${esc(e.path)}</code> · captured ${esc(e.captured_at)} by ${esc(e.captured_by)}</p>`;
-    $('dlg').showModal();
+    $('dlg-info').querySelectorAll('[data-open]').forEach((a) => a.onclick = (ev) => { ev.preventDefault(); open(byId[a.dataset.open]); });
+    if (!$('dlg').open) $('dlg').showModal();
     $('dlg').scrollTop = 0;
   }
 

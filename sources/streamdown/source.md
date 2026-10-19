@@ -1,6 +1,7 @@
 ---
 title: Streamdown
 kind: source
+featured: ai-chat/streamdown-streaming-markdown
 pattern: ai-chat
 page_type: app
 tags: [ai, chat, streaming, markdown, open-source]

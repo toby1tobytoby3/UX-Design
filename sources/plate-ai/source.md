@@ -1,6 +1,7 @@
 ---
 title: Plate AI (@platejs/ai)
 kind: source
+featured: ai-assist/plate-ai-inline-diff-rewrite
 pattern: ai-assist
 page_type: app
 tags: [ai, ghost-text, rich-text, editor, open-source]

@@ -1,6 +1,7 @@
 ---
 title: Dockview (free core)
 kind: source
+featured: panels/dockview-trading-workspace-docking
 pattern: panels
 page_type: app
 tags: [open-source, react, docking, resizable]

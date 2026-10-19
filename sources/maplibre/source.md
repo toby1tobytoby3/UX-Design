@@ -1,6 +1,7 @@
 ---
 title: MapLibre GL JS
 kind: source
+featured: map/maplibre-clusters-click-to-expand
 pattern: map
 page_type: app
 tags: [maps, webgl, open-source, vector-tiles, clustering, react]

@@ -1,6 +1,7 @@
 ---
 title: CSS + View Transitions (the platform)
 kind: source
+featured: motion/scroll-driven-cover-to-header
 pattern: motion
 page_type: app
 tags: [animated, open-source, native, view-transitions, scroll-driven]

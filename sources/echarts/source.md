@@ -1,6 +1,7 @@
 ---
 title: Apache ECharts
 kind: source
+featured: chart/echarts-datazoom-time-series
 pattern: chart
 page_type: dashboard
 tags: [data-viz, open-source, interactive, dashboard, large-data]

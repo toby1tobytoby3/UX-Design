@@ -1,6 +1,7 @@
 ---
 title: MUI X Data Grid (MIT)
 kind: source
+featured: data-table/mui-x-checkbox-selection-count
 pattern: data-table
 page_type: dashboard
 tags: [data-grid, open-core, material, editing, keyboard, react]

@@ -1,6 +1,7 @@
 ---
 title: Vercel AI SDK UI (useChat)
 kind: source
+featured: agent-activity/ai-elements-plan-tool-steps
 pattern: ai-chat
 page_type: app
 tags: [ai, chat, streaming, open-source, headless, agents]

@@ -1,6 +1,7 @@
 ---
 title: React Aria Components
 kind: source
+featured: accessibility/react-aria-combobox
 pattern: ui-primitives
 page_type: app
 tags: [accessible, open-source, keyboard, react, headless]

@@ -906,6 +906,7 @@ window.CATALOG = [
     "id": "sources/ag-grid-community",
     "kind": "source",
     "title": "AG Grid Community",
+    "featured": "data-table/ag-grid-dense-grid-column-menus",
     "pattern": "data-table",
     "page_type": "dashboard",
     "tags": [
@@ -1097,6 +1098,7 @@ window.CATALOG = [
     "id": "sources/blocknote-ai",
     "kind": "source",
     "title": "BlockNote AI (@blocknote/xl-ai)",
+    "featured": "ai-assist/blocknote-ai-menu-failure-retry",
     "pattern": "ai-assist",
     "page_type": "app",
     "tags": [
@@ -1160,6 +1162,7 @@ window.CATALOG = [
     "id": "sources/deck-gl",
     "kind": "source",
     "title": "deck.gl",
+    "featured": "map/deckgl-trips-animated-trails",
     "pattern": "map",
     "page_type": "app",
     "tags": [
@@ -1222,6 +1225,7 @@ window.CATALOG = [
     "id": "sources/dockview",
     "kind": "source",
     "title": "Dockview (free core)",
+    "featured": "panels/dockview-trading-workspace-docking",
     "pattern": "panels",
     "page_type": "app",
     "tags": [
@@ -1284,6 +1288,7 @@ window.CATALOG = [
     "id": "sources/flexlayout-react",
     "kind": "source",
     "title": "FlexLayout",
+    "featured": "panels/flexlayout-docking-keyboard-splitters",
     "pattern": "panels",
     "page_type": "app",
     "tags": [
@@ -1459,6 +1464,7 @@ window.CATALOG = [
     "id": "sources/maplibre",
     "kind": "source",
     "title": "MapLibre GL JS",
+    "featured": "map/maplibre-clusters-click-to-expand",
     "pattern": "map",
     "page_type": "app",
     "tags": [
@@ -1522,6 +1528,7 @@ window.CATALOG = [
     "id": "sources/mui-x-data-grid",
     "kind": "source",
     "title": "MUI X Data Grid (MIT)",
+    "featured": "data-table/mui-x-checkbox-selection-count",
     "pattern": "data-table",
     "page_type": "dashboard",
     "tags": [
@@ -1656,6 +1663,7 @@ window.CATALOG = [
     "id": "sources/plate-ai",
     "kind": "source",
     "title": "Plate AI (@platejs/ai)",
+    "featured": "ai-assist/plate-ai-inline-diff-rewrite",
     "pattern": "ai-assist",
     "page_type": "app",
     "tags": [
@@ -1719,6 +1727,7 @@ window.CATALOG = [
     "id": "sources/react-aria-table",
     "kind": "source",
     "title": "React Aria Table",
+    "featured": "data-table/react-aria-keyboard-selection-sort",
     "pattern": "data-table",
     "page_type": "dashboard",
     "tags": [
@@ -1913,6 +1922,7 @@ window.CATALOG = [
     "id": "sources/react-resizable-panels",
     "kind": "source",
     "title": "react-resizable-panels",
+    "featured": "panels/react-resizable-panels-keyboard-splitter-collapse",
     "pattern": "panels",
     "page_type": "app",
     "tags": [
@@ -3418,6 +3428,7 @@ window.CATALOG = [
     "id": "sources/ai-sdk-ui",
     "kind": "source",
     "title": "Vercel AI SDK UI (useChat)",
+    "featured": "agent-activity/ai-elements-plan-tool-steps",
     "pattern": "ai-chat",
     "page_type": "app",
     "tags": [
@@ -3997,6 +4008,7 @@ window.CATALOG = [
     "id": "sources/echarts",
     "kind": "source",
     "title": "Apache ECharts",
+    "featured": "chart/echarts-datazoom-time-series",
     "pattern": "chart",
     "page_type": "dashboard",
     "tags": [
@@ -4318,6 +4330,7 @@ window.CATALOG = [
     "id": "sources/model-viewer",
     "kind": "source",
     "title": "model-viewer",
+    "featured": "3d/modelviewer-hotspot-annotations",
     "pattern": "3d",
     "page_type": "product",
     "tags": [
@@ -4448,6 +4461,7 @@ window.CATALOG = [
     "id": "sources/native-css",
     "kind": "source",
     "title": "CSS + View Transitions (the platform)",
+    "featured": "motion/scroll-driven-cover-to-header",
     "pattern": "motion",
     "page_type": "app",
     "tags": [
@@ -4696,6 +4710,7 @@ window.CATALOG = [
     "id": "sources/react-aria",
     "kind": "source",
     "title": "React Aria Components",
+    "featured": "accessibility/react-aria-combobox",
     "pattern": "ui-primitives",
     "page_type": "app",
     "tags": [
@@ -4943,6 +4958,7 @@ window.CATALOG = [
     "id": "sources/streamdown",
     "kind": "source",
     "title": "Streamdown",
+    "featured": "ai-chat/streamdown-streaming-markdown",
     "pattern": "ai-chat",
     "page_type": "app",
     "tags": [

@@ -1,6 +1,7 @@
 ---
 title: React Aria Table
 kind: source
+featured: data-table/react-aria-keyboard-selection-sort
 pattern: data-table
 page_type: dashboard
 tags: [accessible, headless, keyboard, table, react]

@@ -1,6 +1,7 @@
 ---
 title: deck.gl
 kind: source
+featured: map/deckgl-trips-animated-trails
 pattern: map
 page_type: app
 tags: [maps, webgl, open-source, large-data, react, aggregation]

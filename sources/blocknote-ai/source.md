@@ -1,6 +1,7 @@
 ---
 title: BlockNote AI (@blocknote/xl-ai)
 kind: source
+featured: ai-assist/blocknote-ai-menu-failure-retry
 pattern: ai-assist
 page_type: app
 tags: [ai, rich-text, editor, gpl]

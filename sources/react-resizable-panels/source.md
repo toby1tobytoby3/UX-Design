@@ -1,6 +1,7 @@
 ---
 title: react-resizable-panels
 kind: source
+featured: panels/react-resizable-panels-keyboard-splitter-collapse
 pattern: panels
 page_type: app
 tags: [accessible, open-source, keyboard, react, resizable]

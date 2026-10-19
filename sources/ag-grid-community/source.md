@@ -1,6 +1,7 @@
 ---
 title: AG Grid Community
 kind: source
+featured: data-table/ag-grid-dense-grid-column-menus
 pattern: data-table
 page_type: dashboard
 tags: [data-grid, open-core, editing, virtualised, keyboard, react]
