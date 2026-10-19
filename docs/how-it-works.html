@@ -21,6 +21,7 @@
     --paper: #12151b; --sheet: #191d25; --ink: #e8ebf1; --muted: #9aa3b2; --rule: #2a303b;
     --accent: #6aa6ec; --accent-soft: #1d2b40; --code: #222834; --warn: #e2b061; --warn-soft: #33281a; color-scheme: dark;
   }
+  *, *::before, *::after { box-sizing: border-box; }
   body { background: var(--paper); color: var(--ink); font: 17px/1.62 var(--body); }
   .wrap { max-width: 760px; margin: 0 auto; padding-block: 48px 96px;
     padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
@@ -38,15 +39,28 @@
   .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin: 24px 0 8px; }
   .facts div { background: var(--sheet); padding: 14px 16px; }
   .facts b { display: block; font: 700 28px/1.1 var(--display); font-variant-numeric: tabular-nums; }
-  .facts span { font: 13px/1.35 var(--display); color: var(--muted); }
-  nav.index { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 500 14px/1.4 var(--display); margin: 8px 0 0; }
-  nav.index a { text-decoration: none; }
+  .facts span { display: block; font: 13px/1.35 var(--display); color: var(--muted); }
+  /* Section index: pinned to the top and swipeable sideways on narrow screens. */
+  nav.index { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 3; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
+    margin: 8px -16px 0; padding: 10px 16px; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule); font: 500 14px/1.2 var(--display); }
+  nav.index::-webkit-scrollbar { display: none; }
+  nav.index a { flex: none; text-decoration: none; padding: 7px 12px; border-radius: 99px; background: var(--sheet); border: 1px solid var(--rule); }
+  @media (min-width: 641px) { nav.index { flex-wrap: wrap; overflow: visible; } }
+  h2[id] { scroll-margin-top: 64px; }
   .scroll { overflow-x: auto; margin: 16px 0; }
   table { border-collapse: collapse; width: 100%; font: 14.5px/1.45 var(--display); background: var(--sheet); }
   th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--rule); }
   th { font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
   .figure { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; overflow-x: auto; margin: 18px 0; }
   .figure figcaption { font: 13px/1.4 var(--display); color: var(--muted); margin-top: 8px; }
+  .flow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font: 14px/1.35 var(--display); }
+  .flow ol { list-style: none; margin: 0; padding: 0; }
+  .flow h3 { margin: 0 0 10px; font-size: 15px; }
+  .flow li { background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; position: relative; }
+  .flow li + li { margin-top: 22px; }
+  .flow li + li::before { content: "↓"; position: absolute; top: -20px; left: 14px; color: var(--muted); }
+  .flow .store { grid-column: 1 / -1; text-align: center; background: var(--accent-soft); color: var(--ink); border-radius: 8px; padding: 10px; }
   ol.steps { padding-left: 0; list-style: none; counter-reset: s; }
   ol.steps > li { counter-increment: s; position: relative; padding-left: 40px; margin: 0 0 14px; }
   ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: 1px; width: 26px; height: 26px; border-radius: 50%;
@@ -62,7 +76,21 @@
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .two > div { min-width: 0; background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
   .two h3 { margin-top: 0; }
-  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } body { font-size: 16px; } }
+  @media (max-width: 640px) {
+    .two, .flow { grid-template-columns: 1fr; }
+    body { font-size: 16px; }
+    .wrap { padding-top: 24px; }
+    h2 { font-size: 23px; margin-top: 40px; }
+    .facts b { font-size: 24px; }
+    /* Tables become stacked cards: each row a card, each cell labelled with its column. */
+    .scroll { overflow: visible; }
+    .scroll table, .scroll tbody, .scroll tr, .scroll td { display: block; width: 100%; }
+    .scroll thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .scroll tr { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 6px 14px; margin-bottom: 10px; }
+    .scroll td { border: 0; padding: 6px 0; }
+    .scroll td::before { content: attr(data-label); display: block; font: 700 11px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+    .scroll table { background: none; }
+  }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 </style>
 
@@ -72,10 +100,10 @@
   <p class="lede">A shared memory of the best UX on the web, which any Claude session can search while building. You feed it links, screenshots and names; it captures, analyses, scores and files them; agents pull the right reference, the evidence and working code into whatever they're building.</p>
 
   <div class="facts">
-    <div><b>22</b><span>UX patterns (19 live captures)</span></div>
-    <div><b>14</b><span>scored libraries (9 chart, 5 3D)</span></div>
-    <div><b>2</b><span>decision guides (charts, 3D)</span></div>
-    <div><b>2</b><span>skills: <code>/ux-add</code>, <code>/ux-find</code></span></div>
+    <div><b>60</b><span>UX patterns from real products</span></div>
+    <div><b>49</b><span>libraries scored, 9 categories benchmarked</span></div>
+    <div><b>17</b><span>categories with full guides</span></div>
+    <div><b>24</b><span>more as one-line quick picks</span></div>
   </div>
   <nav class="index" aria-label="Sections">
     <a href="#map">The map</a><a href="#find">Agents finding</a><a href="#add">Agents adding</a><a href="#us">How we use it</a><a href="#setup">Setup</a><a href="#guidance">Guidance, not rules</a><a href="#upkeep">Upkeep</a>
@@ -86,30 +114,30 @@
   <div class="scroll"><table>
     <thead><tr><th>Layer</th><th>Where</th><th>Answers</th></tr></thead>
     <tbody>
-      <tr><td>Guides</td><td><code>guides/</code></td><td>"What should I use for this job?" Decision tables plus defaults. Start at <code>guides/README.md</code>.</td></tr>
-      <tr><td>Sources</td><td><code>sources/</code>, compared in <code>SOURCES.md</code></td><td>"Which library or site is best, and why?" Scored on 8 criteria from benchmark evidence.</td></tr>
-      <tr><td>Patterns</td><td><code>entries/&lt;pattern&gt;/&lt;site&gt;/</code></td><td>"What does a great version look like?" Screenshots, analysis, techniques, code.</td></tr>
-      <tr><td>Evidence</td><td><code>bench*/</code> (charts, 3D, motion, UI primitives, AI chat, inline AI, tables, panels, maps), <code>evidence.json</code></td><td>Same-task benchmarks and capture measurements behind every score and claim.</td></tr>
-      <tr><td>Index and gallery</td><td><code>catalog.json</code>, <code>CATALOG.md</code>, published gallery</td><td>Everything above, for agents (JSON) and people (table, gallery).</td></tr>
+      <tr><td data-label="Layer">Guides</td><td data-label="Where"><code>guides/</code></td><td data-label="Answers">"What should I use for this job?" Decision tables plus defaults, or a one-line quick pick (<code>guides/quick-picks.md</code>) for lighter categories. Start at <code>guides/README.md</code>.</td></tr>
+      <tr><td data-label="Layer">Sources</td><td data-label="Where"><code>sources/</code>, compared in <code>SOURCES.md</code></td><td data-label="Answers">"Which library or site is best, and why?" Scored on 8 criteria from benchmark evidence.</td></tr>
+      <tr><td data-label="Layer">Patterns</td><td data-label="Where"><code>entries/&lt;pattern&gt;/&lt;site&gt;/</code></td><td data-label="Answers">"What does a great version look like?" Screenshots, analysis, techniques, code.</td></tr>
+      <tr><td data-label="Layer">Evidence</td><td data-label="Where"><code>bench*/</code> (charts, 3D, motion, UI primitives, AI chat, inline AI, tables, panels, maps), <code>evidence.json</code></td><td data-label="Answers">Same-task benchmarks and capture measurements behind every score and claim.</td></tr>
+      <tr><td data-label="Layer">Index and gallery</td><td data-label="Where"><code>catalog.json</code>, <code>CATALOG.md</code>, published gallery</td><td data-label="Answers">Everything above, for agents (JSON) and people (table, gallery).</td></tr>
     </tbody>
   </table></div>
 
   <figure class="figure">
-<pre class="mermaid">
-flowchart LR
-  A["You: link, screenshot or name"] --> B["/ux-add"]
-  B --> C["Capture: screenshots, code, evidence"]
-  C --> D["Entry or source profile in the repo"]
-  D --> E["npm run catalog"]
-  E --> F["catalog.json + CATALOG.md + SOURCES.md"]
-  E --> G["Published gallery"]
-  H["Agent building UI"] --> I["/ux-find"]
-  I --> J["guides/README.md"]
-  J --> K["Category guide"]
-  K --> L["Source scores"]
-  L --> M["Patterns + code"]
-  F -.-> I
-</pre>
+    <div class="flow">
+      <div><h3>Adding (<code>/ux-add</code>)</h3><ol>
+        <li>You: a link, screenshot or name</li>
+        <li>Capture: screenshots, code, evidence</li>
+        <li>Entry or scored profile in the repo</li>
+        <li><code>npm run catalog</code>, commit, republish the gallery</li>
+      </ol></div>
+      <div><h3>Finding (<code>/ux-find</code>)</h3><ol>
+        <li>An agent building UI, or you asking</li>
+        <li>Search, then <code>guides/README.md</code></li>
+        <li>Category guide or quick pick, then scores</li>
+        <li>Patterns, screenshots and code</li>
+      </ol></div>
+      <div class="store">One store: <code>catalog.json</code> · <code>CATALOG.md</code> · <code>SOURCES.md</code> · the gallery</div>
+    </div>
     <figcaption>Two loops share one store: <code>/ux-add</code> writes to it, <code>/ux-find</code> reads from it.</figcaption>
   </figure>
 
@@ -153,11 +181,11 @@ flowchart LR
   <div class="scroll"><table>
     <thead><tr><th>You give it</th><th>What it does</th><th>What gets saved</th></tr></thead>
     <tbody>
-      <tr><td>A URL</td><td>Live capture at desktop and phone widths; opens menus or panels when needed (hover, click)</td><td><code>desktop.jpg</code>, <code>mobile.jpg</code>, crops, and <code>source.html</code> + <code>styles.json</code> for a focused element</td></tr>
-      <tr><td>A 3D or motion-heavy URL</td><td>Waits for heavy scenes, captures scroll frames, checks reduced motion</td><td>Images plus <code>evidence.json</code> (weight, engine, canvas labels, motion behaviour)</td></tr>
-      <tr><td>A screenshot</td><td>Saves and analyses it; asks for the source URL</td><td>The image, flagged <code>needs_capture</code> until a live capture replaces it</td></tr>
-      <tr><td>Just a name ("apache charts")</td><td>Searches to find the real site first</td><td>As for a URL</td></tr>
-      <tr><td>An open-source library</td><td>Installs it, runs the shared benchmark, scores it</td><td>A source profile, benchmark render and code, plus patterns for anything best-in-class</td></tr>
+      <tr><td data-label="You give it">A URL</td><td data-label="What it does">Live capture at desktop and phone widths; opens menus or panels when needed (hover, click)</td><td data-label="What gets saved"><code>desktop.jpg</code>, <code>mobile.jpg</code>, crops, and <code>source.html</code> + <code>styles.json</code> for a focused element</td></tr>
+      <tr><td data-label="You give it">A 3D or motion-heavy URL</td><td data-label="What it does">Waits for heavy scenes, captures scroll frames, checks reduced motion</td><td data-label="What gets saved">Images plus <code>evidence.json</code> (weight, engine, canvas labels, motion behaviour)</td></tr>
+      <tr><td data-label="You give it">A screenshot</td><td data-label="What it does">Saves and analyses it; asks for the source URL</td><td data-label="What gets saved">The image, flagged <code>needs_capture</code> until a live capture replaces it</td></tr>
+      <tr><td data-label="You give it">Just a name ("apache charts")</td><td data-label="What it does">Searches to find the real site first</td><td data-label="What gets saved">As for a URL</td></tr>
+      <tr><td data-label="You give it">An open-source library</td><td data-label="What it does">Installs it, runs the shared benchmark, scores it</td><td data-label="What gets saved">A source profile, benchmark render and code, plus patterns for anything best-in-class</td></tr>
     </tbody>
   </table></div>
   <p>Then, every time: one entry per pattern (a page can yield several), a rating of 3 to 5 stars (anything weaker isn't kept), duplicate check, <code>npm run catalog</code>, commit to <code>main</code>, and republish the gallery. If the gallery can't be republished, the skill says so instead of skipping it.</p>
@@ -227,11 +255,11 @@ flowchart LR
   <div class="scroll"><table>
     <thead><tr><th>When</th><th>Do</th></tr></thead>
     <tbody>
-      <tr><td>A site redesigns</td><td>Re-run <code>/ux-add</code> on its URL. Recapture already caught Unsection's redesign and Apple swapping its bento grid for a gallery.</td></tr>
-      <tr><td>A library ships a major version</td><td>Bump it in its category's <code>bench*/</code> folder, rerun <code>node run.mjs &lt;lib&gt;</code>, revisit the scores.</td></tr>
-      <tr><td>A category gets 3+ sources</td><td>Write a guide for it, using <code>guides/charts.md</code> as the template.</td></tr>
-      <tr><td>Our design tokens exist</td><td>Put them in <code>our-design/</code> so rebuilt examples use our real colours and type.</td></tr>
+      <tr><td data-label="When">A site redesigns</td><td data-label="Do">Re-run <code>/ux-add</code> on its URL. Recapture already caught Unsection's redesign and Apple swapping its bento grid for a gallery.</td></tr>
+      <tr><td data-label="When">A library ships a major version</td><td data-label="Do">Bump it in its category's <code>bench*/</code> folder, rerun <code>node run.mjs &lt;lib&gt;</code>, revisit the scores.</td></tr>
+      <tr><td data-label="When">A project leans on a quick-pick category</td><td data-label="Do">Let <code>/ux-find</code> explore it and <code>/ux-add</code> keep what's good. Write a full guide only if it keeps coming up.</td></tr>
+      <tr><td data-label="When">Our design tokens exist</td><td data-label="Do">Put them in <code>our-design/</code> so rebuilt examples use our real colours and type.</td></tr>
     </tbody>
   </table></div>
-  <div class="note"><b>Open items.</b> Three entries are only visible when signed in (Linear's command menu, the Stripe dashboard, GitHub's empty repo) and need screenshots from you. Benchmark timings come from a software GPU, so 3D performance still needs a real-phone check.</div>
+  <div class="note"><b>Open items.</b> Signed-in products (Linear, Stripe, Samsara and others) need screenshots from you when convenient. Benchmark timings for maps and 3D come from a software GPU, so check them on real hardware before relying on exact numbers.</div>
 </div>
