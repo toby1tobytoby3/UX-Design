@@ -63,7 +63,8 @@ Partial or none → step 4. Strong → you may still explore if you know of some
 
 ## 4. Explore (beyond the library)
 Research the gap yourself, the way a designer would, rather than stopping at "not in the library":
-1. **Find candidates.** Start from the team catalogue: `find.mjs` prints its licence- and maintenance-checked shortlist
+1. **Find candidates.** Read the category's row in `guides/quick-picks.md` first; often that's enough for a quick
+   question. For more, start from the team catalogue: `find.mjs` prints its licence- and maintenance-checked shortlist
    and a reference moment for each missing category (full data in `research/catalogue/`). Then web-search for anything newer.
    Prefer open-source; flag anything paid; check the Avoid list in `guides/README.md`.
 2. **Check tools quickly.** For each library: `npm view <pkg> version license time.modified` (licence and

@@ -130,7 +130,9 @@ export function find(query, { limit = 8 } = {}) {
     const sources = present(id).filter((e) => e.kind === 'source').length;
     const pats = present(id).filter((e) => e.kind === 'pattern').length;
     const guide = c.guide && existsSync(join(ROOT, c.guide)) ? c.guide : null;
-    const level = guide && (sources || pats >= 2) ? 'strong' : guide || pats ? 'partial' : 'none';
+    // A one-line quick pick is a starting point, not coverage: the category still counts as a gap to explore.
+    const full = guide && guide !== QUICK_PICKS;
+    const level = full && (sources || pats >= 2) ? 'strong' : full || pats ? 'partial' : 'none';
     return { id, name: cat.name ?? id, matched: [...byConcept[id]], guide, sources, patterns: pats, level, status: cat.status, priority: cat.priority };
   });
 
@@ -152,6 +154,7 @@ export function find(query, { limit = 8 } = {}) {
       .map((c) => [c.id, { tools: shortlist[c.id].tools, reference: shortlist[c.id].references[0] ?? null }])),
   };
 }
+const QUICK_PICKS = 'guides/quick-picks.md';
 const brief = (s) => ({ id: s.e.id, kind: s.e.kind, title: s.e.title, pattern: s.e.pattern, score: s.score,
   ...(s.e.kind === 'source' ? { source_score: s.e.score } : { rating: s.e.rating }), path: s.e.path, why: s.why.slice(0, 3) });
 

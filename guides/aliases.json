@@ -37,7 +37,7 @@
     },
     "A2": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "typography",
         "type scale",
@@ -51,7 +51,7 @@
     },
     "A3": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "layout",
         "spacing",
@@ -202,7 +202,7 @@
     },
     "A8": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "performance",
         "virtualisation",
@@ -218,7 +218,7 @@
     },
     "A9": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "microcopy",
         "copywriting",
@@ -230,7 +230,7 @@
     },
     "A10": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "icon",
         "icons",
@@ -271,7 +271,7 @@
       "patterns": [
         "command-palette"
       ],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "command palette",
         "cmd k",
@@ -348,7 +348,7 @@
         "form",
         "settings"
       ],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "form",
         "forms",
@@ -409,7 +409,7 @@
         "filters",
         "content-grid"
       ],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "search",
         "search bar",
@@ -439,7 +439,7 @@
         "empty-state",
         "feedback"
       ],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "empty state",
         "empty states",
@@ -454,7 +454,7 @@
       "patterns": [
         "onboarding"
       ],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "onboarding",
         "first run",
@@ -470,7 +470,7 @@
     },
     "B10": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "notifications",
         "notification centre",
@@ -585,7 +585,7 @@
     },
     "C4": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "network graph",
         "graph visualisation",
@@ -612,7 +612,7 @@
     },
     "C5": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "timeline",
         "timelines",
@@ -630,7 +630,7 @@
     },
     "C6": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "real-time",
         "realtime",
@@ -676,7 +676,7 @@
     },
     "D2": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "whiteboard",
         "whiteboards",
@@ -699,7 +699,7 @@
     },
     "D3": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "multiplayer",
         "collaboration",
@@ -720,7 +720,7 @@
     },
     "D4": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "video editor",
         "video editing",
@@ -741,7 +741,7 @@
     },
     "D5": {
       "patterns": [],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "rich text",
         "text editor",
@@ -940,7 +940,7 @@
         "faq",
         "footer"
       ],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "landing page",
         "landing",
@@ -986,7 +986,7 @@
         "navigation",
         "mega-menu"
       ],
-      "guide": null,
+      "guide": "guides/quick-picks.md",
       "terms": [
         "mega menu",
         "megamenu",

@@ -65,7 +65,8 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
    better, research it yourself (web search, `npm view` for licence and maintenance, live capture with `scripts/capture.mjs`,
    a rough rubric score) as described in `skills/ux-find/SKILL.md` step 4. Label each recommendation **Curated** or
    **Explored**, and offer to add good finds with `ux-add`. Mention `needs_capture` entries as lower confidence.
-   `research/categories.md` maps the categories still to be built.
+   For categories without their own guide, `guides/quick-picks.md` gives a one-line starting point (what to use, what
+   to avoid, one tip); explore from there only as deep as the task needs.
 
 ## Categories covered
 | Category | Guide | Sources profiled | Patterns |
@@ -81,6 +82,8 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
 | Maps and live positions (C3, map side of C6) | `guides/maps.md` | 5 `map` (4 benchmarked in `benchmap/`) | `map/*` |
 | App shell, panels and docking, dashboards (B1, B3, C2) | `guides/shell-panels.md` | 5 `panels` (benchmarked in `benchpanels/`) | `navigation/*`, `panels/*`, `dashboard/*` |
 | Whole briefs (ten scenarios) | `guides/scenarios.md` | – (links to the category guides) | – |
-| Everything else in `taxonomy.md` | – (patterns only) | – | see `CATALOG.md` |
+| Everything else (command palette, overlays, forms, real-time data, graphs, editors, typography…) | `guides/quick-picks.md` (one line each, not benchmarked) | – | see `CATALOG.md` |
 
-Categories still to build, with priorities and starting research: `research/categories.md`.
+The library is complete at this level: the categories above have full guides, everything else has a quick pick.
+Go deeper on a category only when a project needs it (`ux-find` explores, `ux-add` keeps the result). Status and the
+team catalogue's shortlist per category: `research/categories.md`.
