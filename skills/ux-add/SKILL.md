@@ -20,7 +20,12 @@ that entry instead of creating a new one, and tell the user.
 
 ## 3. Capture
 - **URL:** `node scripts/capture.mjs <url> <tmp-dir>` for desktop + mobile screenshots.
-  Look at them, decide which patterns are worth keeping, then capture each one
+  **Then go past the landing page**: open the pages people actually use (a component or template page, the
+  library or search results, the app itself), operate the main interaction (use a filter, open a dialog or
+  picker, run the generator) and capture that state with `--click`. Test it with the keyboard (Tab to it,
+  Enter, Escape: does focus move in and come back?) and with reduced motion on. For a kit, read the source of
+  the component you tested. The landing page is marketing; the patterns and the evidence are a click or two in.
+  Decide which patterns are worth keeping, then capture each one
   focused: `node scripts/capture.mjs <url> <entry-dir> --selector "<css>"`.
   This also saves `source.html` and `styles.json` for that element.
   If the site blocks capture or the network denies it, tell the user and ask for
