@@ -21,6 +21,7 @@ const CASES = [
   { q: 'AI agent workspace with task cards, approvals and citations', expect: ['agent-activity/ai-elements-plan-tool-steps', 'ai-review/ai-elements-inline-approval-checkpoint', 'ai-provenance/perplexity-inline-citations-sources-panel'], coverage: 'partial' }, // "workspace" is the app shell (B1), not built yet
   // Vocabulary: synonyms and phrases people actually use
   { q: 'toast', expect: ['feedback/sonner-stacked-toasts'] },
+  { q: 'AI tool start screen with suggested prompts', expect: ['ai-chat/manus-prompt-first-start-mode-chips'] },
   { q: 'snackbar after delete with undo', expect: ['feedback/sonner-stacked-toasts'] },
   { q: 'frosted glass panel', expect: ['design-tokens/geist-materials-elevation'] },
   { q: 'focus ring', expect: ['accessibility/govuk-two-tone-focus'], coverage: 'strong' },

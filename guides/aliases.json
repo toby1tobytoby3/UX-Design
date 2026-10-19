@@ -239,7 +239,12 @@
         "imagery",
         "avatar",
         "avatars",
-        "lucide"
+        "lucide",
+        "haikei",
+        "svg background",
+        "svg backgrounds",
+        "blob background",
+        "wave background"
       ]
     },
     "B1": {
@@ -800,7 +805,13 @@
         "vercel ai sdk",
         "usechat",
         "streamdown",
-        "copilotkit"
+        "copilotkit",
+        "starter prompts",
+        "suggested prompts",
+        "prompt suggestions",
+        "prompt box",
+        "manus",
+        "what can i do for you"
       ],
       "weak_terms": [
         "ai",
@@ -959,7 +970,15 @@
         "faq",
         "footer",
         "magic ui",
-        "kokonut"
+        "kokonut",
+        "motion primitives",
+        "smooth ui",
+        "smoothui",
+        "watermelon ui",
+        "unlumen",
+        "animated components",
+        "component kit",
+        "copy-paste components"
       ]
     },
     "F2": {
