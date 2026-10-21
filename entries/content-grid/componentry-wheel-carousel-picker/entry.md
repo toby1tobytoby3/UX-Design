@@ -11,7 +11,7 @@ input: url
 rating: 4
 why_it_works: Items sit on a curved wheel that fades toward the edges, so a list of 15 reads as a dial with one clear choice in the middle, and unlike most showpiece carousels it is a real listbox you can drive with the arrow keys.
 use_when: A small, browsable set (portfolio projects, collections, chapters) where choosing one item and seeing its image is the whole job, on a showcase or portfolio page.
-has_example: false
+has_example: true
 ---
 
 ## What it is
@@ -29,6 +29,10 @@ Measured: the wheel is `role="listbox"` named "Wheel carousel", focusable (`tabi
 `aria-activedescendant`. **ArrowDown moved the selection** (Halcyon Fields → Meridian House → Norlight Pavilion) and `aria-selected`
 followed it. The component checks `prefers-reduced-motion` in its source, and no animations were running with reduced motion on.
 Rare for a showpiece component.
+
+## Rebuild
+`example.tsx` (React + Tailwind, no dependencies): a `listbox` with `aria-activedescendant`, arrow keys plus Home/End,
+one step per mouse-wheel flick, labels on a 16rem arc with faded ends, and CSS transitions that switch off under reduced motion.
 
 ## Weaknesses
 - Rotated labels at the ends of the arc are hard to read; keep the list short (about 15 at most).

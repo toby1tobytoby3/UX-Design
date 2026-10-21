@@ -11,7 +11,7 @@ input: url
 rating: 3
 why_it_works: Hovering marks the exact date three ways at once (a vertical line, a dot on each series and a filled date pill on the x-axis) and puts the values in a small two-row tooltip, so reading two series at one moment takes one glance.
 use_when: Time series with two to four series where people compare values at a single date: revenue vs costs, plan vs actual.
-has_example: false
+has_example: true
 ---
 
 ## What it is
@@ -38,6 +38,11 @@ menu straight to "Copy" and "View Code", so **the values and the tooltip are mou
 Across the library's source, none of the 143 component files handles keys and 10 check for reduced motion. Copy the look; add a
 keyboard layer (arrow keys move the crosshair, as in Recharts' `accessibilityLayer`) and a data table or summary yourself
 (`guides/charts.md`).
+
+## Rebuild
+`example.tsx` (React + Tailwind, no dependencies) keeps the look and adds what Bklit leaves out: the chart is focusable,
+← → Home End move the crosshair, each move is announced in a polite live region, Escape clears it, and a "Show the data
+as a table" disclosure holds all 30 rows. Use it as the keyboard layer when building with Bklit.
 
 ## Weaknesses
 - Grey-on-grey series rely on lightness only; check the two lines keep 3:1 against each other and the background.

@@ -12,7 +12,7 @@ captured_by: toby
 input: library-render
 version: registry @ 17de6a9 (2026-10-20; package is unversioned 0.0.0)
 licence: MIT (core); Studio proprietary
-s_look: 3
+s_look: 5
 s_interact: 4
 s_coverage: 4
 s_a11y: 1
@@ -55,7 +55,7 @@ Found in the benchmark:
 ## Scorecard
 | Criterion | Score | Evidence |
 |---|---|---|
-| Default look | 3 | Polished shadcn look and animation, held back by repeated ticks, cut labels and the stacked overflow |
+| Default look | 5 | The team's preferred chart look (raised from 3 on 21 Oct 2026 by team preference): monochrome, crosshair tooltips, patterned slices and smooth animation. The repeated ticks, cut labels and stacked overflow still need fixing in your copy |
 | Interactivity | 4 | Crosshair tooltips, brush-to-zoom, hover legends and animated domain changes built in |
 | Coverage | 4 | Area, line, bar (horizontal, grouped, stacked), pie/donut, ring, radar, scatter, candlestick, sankey, sunburst, heatmap, choropleth, funnel, gauge, live line; stacked columns are buggy |
 | Accessibility | 1 | Nothing focusable, no roles or labels on the charts, no keyboard handling in any component |

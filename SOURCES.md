@@ -136,8 +136,8 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | [Apache ECharts](sources/echarts/source.md) | **7.8** | 3 | 5 | 5 | 3 | 5 | 3 | 2 | 5 | 4/4 | 205.1 | svg | Apache-2.0 |
 | [Recharts](sources/recharts/source.md) | **7.5** | 4 | 4 | 3 | 4 | 2 | 5 | 3 | 5 | 4/4 | 125.2 | svg | MIT |
+| [Bklit UI](sources/bklit-ui/source.md) | **7** | 5 | 4 | 4 | 1 | 3 | 4 | 3 | 4 | 4/4 | 129.7 | svg | MIT (core); Studio proprietary |
 | [visx](sources/visx/source.md) | **7** | 2 | 3 | 4 | 2 | 3 | 5 | 5 | 4 | 4/4 | 38.5 | svg | MIT |
-| [Bklit UI](sources/bklit-ui/source.md) | **6.5** | 3 | 4 | 4 | 1 | 3 | 4 | 3 | 4 | 4/4 | 129.7 | svg | MIT (core); Studio proprietary |
 | [AG Charts Community](sources/ag-charts/source.md) | **6.5** | 4 | 3 | 3 | 4 | 4 | 4 | 1 | 3 | 4/4 | 412.8 | canvas | MIT (community edition) |
 | [TradingView Lightweight Charts](sources/lightweight-charts/source.md) | **6.5** | 4 | 5 | 1 | 1 | 5 | 2 | 4 | 4 | 1/4 | 54.3 | canvas | Apache-2.0 (attribution required) |
 | [D3](sources/d3/source.md) | **6** | 1 | 4 | 5 | 2 | 3 | 2 | 5 | 2 | 4/4 | 31.9 | svg | ISC |
@@ -149,8 +149,8 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 
 - **Apache ECharts**: Data-heavy dashboards that need zoom, drill-down, live updates, large datasets or specialist charts (sankey, heatmap, candlestick, treemap, geo).
 - **Recharts**: Everyday product and dashboard charts in our React/Next app (lines, bars, areas, donuts) with up to a few thousand points.
-- **visx**: Signature or bespoke charts where design control matters more than speed of build, inside the React app.
 - **Bklit UI**: Marketing pages, product dashboards and demos in our Tailwind/shadcn stack where the chart has to look finished and animate nicely, and keyboard or screen-reader access to the data is covered elsewhere (a table next to it).
+- **visx**: Signature or bespoke charts where design control matters more than speed of build, inside the React app.
 - **AG Charts Community**: Teams already using AG Grid, or business dashboards where built-in keyboard accessibility matters and bundle size does not.
 - **TradingView Lightweight Charts**: Prices, balances, portfolio or any financial time series where pan/zoom feel matters.
 - **D3**: Editorial, one-off or highly custom visualisations; or use its maths modules (scales, shapes, formats) under React rendering.
