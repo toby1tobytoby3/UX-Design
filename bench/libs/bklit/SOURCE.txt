@@ -1,0 +1,2 @@
+Copied from github.com/bklit/bklit-ui packages/ui/src (charts, lib/utils), MIT. Commit:
+17de6a98a348078dee9ef2d8cffee4442ea712dd 2026-10-20

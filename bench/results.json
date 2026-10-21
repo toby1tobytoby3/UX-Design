@@ -367,5 +367,46 @@
       }
     },
     "errors": []
+  },
+  "bklit-ui": {
+    "bundle_gz_kb": 187,
+    "react_baseline_kb": 57.3,
+    "lib_only_gz_kb": 129.7,
+    "charts_supported": 4,
+    "probe": {
+      "ts": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "bar": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "stack": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 0,
+        "described": ""
+      },
+      "donut": {
+        "supported": true,
+        "note": "",
+        "renderer": "svg",
+        "focusable": 0,
+        "aria": 1,
+        "described": "127,400"
+      }
+    },
+    "errors": []
   }
 }
