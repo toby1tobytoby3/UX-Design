@@ -55,7 +55,7 @@ Found in the benchmark:
 ## Scorecard
 | Criterion | Score | Evidence |
 |---|---|---|
-| Default look | 5 | The team's preferred chart look (raised from 3 on 21 Oct 2026 by team preference): monochrome, crosshair tooltips, patterned slices and smooth animation. The repeated ticks, cut labels and stacked overflow still need fixing in your copy |
+| Default look | 5 | Raised from 3 on 21 Oct 2026 after team review: monochrome, crosshair tooltips, patterned slices and smooth animation. The repeated ticks, cut labels and stacked overflow still need fixing in your copy |
 | Interactivity | 4 | Crosshair tooltips, brush-to-zoom, hover legends and animated domain changes built in |
 | Coverage | 4 | Area, line, bar (horizontal, grouped, stacked), pie/donut, ring, radar, scatter, candlestick, sankey, sunburst, heatmap, choropleth, funnel, gauge, live line; stacked columns are buggy |
 | Accessibility | 1 | Nothing focusable, no roles or labels on the charts, no keyboard handling in any component |

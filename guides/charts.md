@@ -31,7 +31,7 @@ Overall scores are in `SOURCES.md`; **fit beats score**. Start from the first ro
 | Real-time or very long time series | **uPlot** | 5.5 | 24.4 KB gz canvas, drag-zoom; time series only; no release since Mar 2025 | ECharts (canvas) |
 | Financial price charts | **Lightweight Charts** | 6.5 | Best pan/zoom/crosshair feel; time series only; attribution required | uPlot |
 | "Make it look like a Tailwind dashboard" | **Recharts + our tokens**, using Tremor as the visual reference | – | Tremor npm is stale and blocks React 19 | – |
-| **Our preferred chart look**: polished, animated charts for products and marketing pages | **Bklit UI** (shadcn copy-in, on visx) | 7.0 | Team favourite for looks: crosshair tooltips, brush and patterned slices built in; 130 KB gz. **Add a keyboard layer and a data table** (it has none): copy the pattern from `chart/bklit-area-crosshair-date-pill-tooltip/example.tsx`. Fix the stacked-column overflow in your copy | Recharts + our tokens when you need accessibility built in |
+| Polished, animated charts on a product or marketing page | **Bklit UI** (shadcn copy-in, on visx) | 7.0 | Finished look, crosshair tooltips, brush and patterned slices built in; 130 KB gz. **No keyboard or screen-reader access**: add a keyboard layer and a data table (pattern in `chart/bklit-area-crosshair-date-pill-tooltip/example.tsx`). Stacked columns overflow; fix in your copy | Recharts + our tokens |
 
 Usually not worth it as dependencies: **Tremor (npm)**, which is stale and React 18 only, and **AG Charts Community** unless
 already on AG Grid (413 KB gz; zoom is paid). Commercial-only libraries (Highcharts, etc.) are out of scope by decision.
