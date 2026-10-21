@@ -31,6 +31,7 @@ Overall scores are in `SOURCES.md`; **fit beats score**. Start from the first ro
 | Real-time or very long time series | **uPlot** | 5.5 | 24.4 KB gz canvas, drag-zoom; time series only; no release since Mar 2025 | ECharts (canvas) |
 | Financial price charts | **Lightweight Charts** | 6.5 | Best pan/zoom/crosshair feel; time series only; attribution required | uPlot |
 | "Make it look like a Tailwind dashboard" | **Recharts + our tokens**, using Tremor as the visual reference | – | Tremor npm is stale and blocks React 19 | – |
+| Polished, animated charts on a marketing page or demo, data also shown elsewhere | **Bklit UI** (shadcn copy-in, on visx) | 6.5 | Finished look, crosshair tooltips and brush built in; 130 KB gz; **no keyboard or screen-reader access**, stacked columns overflow, no versioned releases | Recharts + our tokens |
 
 Usually not worth it as dependencies: **Tremor (npm)**, which is stale and React 18 only, and **AG Charts Community** unless
 already on AG Grid (413 KB gz; zoom is paid). Commercial-only libraries (Highcharts, etc.) are out of scope by decision.

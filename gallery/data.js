@@ -67,6 +67,68 @@ window.CATALOG = [
     "body": "## What it is\nComponentry's Wheel Carousel (MIT; installs with `shadcn add @componentry/wheel-carousel`; depends on framer-motion). Project\nnames are laid out on an arc with rotated, fading labels; the active one sits level in the middle with a blue dot, and its image\ncrossfades in on the left. Drag or scroll spins the wheel with inertia. There's a second variant with a landscape image on the right.\n\n## Key techniques\n- **Arc layout with rotation and opacity falloff**, so position on the wheel shows distance from the current item.\n- **One active item, level and bright**; everything else is rotated and dimmed.\n- **Image crossfade tied to the active item**, rather than a separate gallery.\n\n## Accessibility\nMeasured: the wheel is `role=\"listbox\"` named \"Wheel carousel\", focusable (`tabindex=\"0\"`), with 15 `role=\"option\"` items and\n`aria-activedescendant`. **ArrowDown moved the selection** (Halcyon Fields → Meridian House → Norlight Pavilion) and `aria-selected`\nfollowed it. The component checks `prefers-reduced-motion` in its source, and no animations were running with reduced motion on.\nRare for a showpiece component.\n\n## Weaknesses\n- Rotated labels at the ends of the arc are hard to read; keep the list short (about 15 at most).\n- No visible hint that the arrow keys work; add one for keyboard users.\n- Across the kit, 23 of 64 components check for reduced motion, and most are WebGL hero effects (ribbons, liquid glass, dither)\n  meant for landing pages.\n\n> Captured live on 21 Oct 2026 with Playwright, including hover, keyboard and reduced-motion checks, plus a read of the component source."
   },
   {
+    "id": "sources/bklit-ui",
+    "kind": "source",
+    "title": "Bklit UI",
+    "featured": "chart/bklit-area-crosshair-date-pill-tooltip",
+    "pattern": "chart",
+    "page_type": "dashboard",
+    "tags": [
+      "data-viz",
+      "open-source",
+      "react",
+      "tailwind",
+      "shadcn",
+      "animated"
+    ],
+    "source_url": "https://bklit.com",
+    "source_site": "bklit.com",
+    "captured_at": "2026-10-21",
+    "captured_by": "toby",
+    "input": "library-render",
+    "version": "registry @ 17de6a9 (2026-10-20; package is unversioned 0.0.0)",
+    "licence": "MIT (core); Studio proprietary",
+    "s_look": 3,
+    "s_interact": 4,
+    "s_coverage": 4,
+    "s_a11y": 1,
+    "s_perf": 3,
+    "s_react": 4,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "Polished, animated shadcn-style chart components on visx (crosshair tooltips, brush, donut centre totals, wide chart range) that drop into a Tailwind app with the look already done.",
+    "use_when": "Marketing pages, product dashboards and demos in our Tailwind/shadcn stack where the chart has to look finished and animate nicely, and keyboard or screen-reader access to the data is covered elsewhere (a table next to it).",
+    "avoid_when": "The chart is the only way to reach the data (no keyboard or screen-reader support at all), or you need stacked columns (stacked vertical bars overflow their plot in this version).",
+    "alternatives": [
+      "recharts",
+      "visx",
+      "echarts"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "kind": "chart",
+      "bundle_gz_kb": 187,
+      "lib_only_gz_kb": 129.7,
+      "react_baseline_kb": 57.3,
+      "tasks_supported": 4,
+      "tasks_total": 4,
+      "unsupported": [],
+      "renderer": "svg",
+      "keyboard_focusable": false,
+      "evidence": "svg"
+    },
+    "path": "sources/bklit-ui",
+    "images": [
+      "sources/bklit-ui/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Best-looking copy-in charts for our stack, but not accessible and not yet solid.** Bklit wraps visx in finished,\nanimated components: the polish visx leaves to you (tooltips, crosshair, brush, centre totals, enter animations) is\ndone. The trade-off is everything we care about underneath: the charts can't be focused or read by a screen reader, the\npackage has no versioned releases, and the stacked bar chart has a scaling bug. Use it for the look; keep a data table or\nRecharts for anything people must operate.\n\n## Benchmark\nAll 4 charts drawn with Bklit's own components (`bench/libs/bklit-ui.jsx`; 101 component files copied from the registry\ninto `bench/libs/bklit/`, plus a Tailwind v4 build of their classes). **129.7 KB gz for the library** (187 KB with React):\nvisx parts, Motion and Bklit's own code. SVG.\n\nFound in the benchmark:\n- **Stacked columns overflow their plot.** In vertical mode the y-scale is rebuilt per series group from the *largest single\n  value* × 1.1 (`resolveDomain` in `bar-chart.tsx`) and ignores `stacked`, so any stack taller than that runs off the top\n  (our tickets chart: totals of 1,000–1,230 drawn on a ~550 scale). Horizontal and grouped bars are fine.\n- **Axis ticks repeat**: the time series y-axis reads 2k, 2k, 1k, 500 (values rounded to whole thousands).\n- **Horizontal bars have no value axis or labels**, and long category names are cut (\"Organic s…\").\n- Brush-to-zoom works out of the box (`ChartBrushLayout` with a mini overview), and the donut shows its total in the centre.\n- **Accessibility probe: 0 focusable elements and 0 ARIA in three of four charts**; the donut's only text is \"127,400\".\n  Live on bklit.com/charts/area-chart the chart `<svg>` has no role, label or title, and Tab goes from the Curve menu\n  straight to Copy and View Code, so the chart never gets focus. In `packages/ui/src`, 0 of 143 component files handle\n  keyboard events and 10 check reduced motion.\n- Needs Tailwind: without its classes the axes and legends lay out wrongly.\n\n## Scorecard\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Polished shadcn look and animation, held back by repeated ticks, cut labels and the stacked overflow |\n| Interactivity | 4 | Crosshair tooltips, brush-to-zoom, hover legends and animated domain changes built in |\n| Coverage | 4 | Area, line, bar (horizontal, grouped, stacked), pie/donut, ring, radar, scatter, candlestick, sankey, sunburst, heatmap, choropleth, funnel, gauge, live line; stacked columns are buggy |\n| Accessibility | 1 | Nothing focusable, no roles or labels on the charts, no keyboard handling in any component |\n| Performance | 3 | SVG with Motion animations on every chart; fine at benchmark sizes, not built for large data |\n| React/Next fit | 4 | React 18/19 client components, installed with the shadcn CLI; ~100 files and Tailwind v4 for four charts |\n| Bundle size | 3 | 129.7 KB gz library cost (charts scale: ≤ 150 KB) |\n| Licence & health | 4 | MIT core (Studio is proprietary and not needed); commits daily (last 20 Oct 2026); no versioned releases, one maintainer |\n\n## Compared with visx and Recharts\n- **visx (7.0)** is what Bklit is built on: 38.5 KB, full control, but you build every tooltip, axis and legend yourself.\n  Bklit is visx with that work done and styled, at three times the size and with its own bugs.\n- **Recharts (7.5)** is the safer default: versioned releases, a keyboard layer (3 focusable elements on the time series,\n  ARIA on every chart in the same benchmark) and correct stacking, at a similar size (125 KB). It looks plainer; style it\n  with our tokens.\n\n## Coverage\n| Chart | Bklit |\n|---|---|\n| Time series with zoom | ✓ area chart + `ChartBrushLayout` |\n| Sorted horizontal bars | ✓ (no value axis or labels) |\n| Stacked composition | ✗ as shipped: stacked vertical bars overflow the plot |\n| Donut with total | ✓ `PieChart` + `PieCenter` |\n\n## Patterns in our library from this source\n- `chart/bklit-area-crosshair-date-pill-tooltip` (the area chart's hover state, captured live)\n\n## Using it in our stack\nInstall single charts with the shadcn CLI rather than the whole set, check the copied files into our repo, and pair each\nchart with an accessible alternative (a table or a text summary). Don't use its stacked bar chart until the y-domain bug is\nfixed upstream."
+  },
+  {
     "id": "accessibility/smoothui-country-picker-search-recent",
     "kind": "pattern",
     "title": "Country picker in a modal with search by name, code or dial code, recent picks first, and correct focus handling",
