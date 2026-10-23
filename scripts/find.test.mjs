@@ -17,7 +17,10 @@ const CASES = [
   { q: '3D furniture configurator with fabric options and AR', expect: ['sources/react-three-fiber', 'sources/model-viewer', '3d/modelviewer-hotspot-annotations'] },
   { q: 'multiplayer whiteboard with live cursors and comments', reject: ['sources/uplot'], missing: ['D2', 'D3'], coverage: 'none' },
   { q: 'browser video editor with timeline, waveforms and keyframes', missing: ['D4'], coverage: 'none' },
-  { q: 'fraud investigation network graph with thousands of nodes', missing: ['C4'] },
+  { q: 'fraud investigation network graph with thousands of nodes', coverage: 'partial' }, // layout engines profiled; no renderer (Sigma) yet
+  { q: 'layered dependency graph layout for a digital twin', expect: ['sources/elkjs', 'graph/elk-layer-pinned-twin-layout'] },
+  { q: 'blueprint linework 3d', expect: ['3d/blueprint-linework-data-hall'] },
+  { q: 'rive animation for a mascot', expect: ['sources/rive'] },
   { q: 'AI agent workspace with task cards, approvals and citations', expect: ['agent-activity/ai-elements-plan-tool-steps', 'ai-review/ai-elements-inline-approval-checkpoint', 'ai-provenance/perplexity-inline-citations-sources-panel'], coverage: 'partial' }, // "workspace" is the app shell (B1), not built yet
   // Vocabulary: synonyms and phrases people actually use
   { q: 'toast', expect: ['feedback/sonner-stacked-toasts'] },

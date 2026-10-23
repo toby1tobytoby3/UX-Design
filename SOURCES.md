@@ -102,6 +102,7 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 | [GSAP](sources/gsap/source.md) | **6.8** | 4 | 4 | 5 | 3 | 4 | 3 | 1 | 3 | 4/4 | 54.6 | 47 ms script; scroll: js-scroll-listener | GSAP Standard "no charge" licence (free, not OSI open source) |
 | [React Spring](sources/react-spring/source.md) | **6.5** | 3 | 4 | 3 | 3 | 2 | 4 | 3 | 4 | 4/4 | 20.6 | 150 ms script; scroll: js-scroll-listener | MIT |
 | [anime.js](sources/animejs/source.md) | **6.3** | 2 | 4 | 4 | 2 | 4 | 2 | 3 | 4 | 4/4 | 26.5 | 65 ms script; scroll: js-scroll-listener | MIT |
+| [Rive runtime (@rive-app/canvas, @rive-app/react-canvas)](sources/rive/source.md) | **5.8** | 5 | 4 | 2 | 1 | 3 | 4 | 1 | 3 | – | – | – | MIT (runtime); editor is a paid product for teams |
 
 **Pick it for**
 
@@ -111,6 +112,7 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **GSAP**: Marketing and storytelling pages, where sequenced timelines, pinned scroll scenes and SVG/text effects must behave the same in every browser.
 - **React Spring**: Physics-driven values in an existing React Spring codebase, or data visualisations interpolating many values with springs.
 - **anime.js**: Framework-agnostic or vanilla pages that want GSAP-style timelines under MIT, or small interactive pieces outside React.
+- **Rive runtime (@rive-app/canvas, @rive-app/react-canvas)**: Illustrated motion that must respond to state (hover, success, error, progress); the maintained replacement for Lottie Web in that role.
 
 ## map
 
@@ -175,3 +177,15 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 - **Vercel AI SDK UI (useChat)**: The default foundation for any chat or agent UI in our Next app. Pair it with Streamdown for markdown and our own Tailwind components (or assistant-ui primitives) for the UI.
 - **CopilotKit**: An in-app copilot (sidebar or popup) that reads and changes app state through frontend tools, where a finished look matters more than bundle size.
 - **LlamaIndex chat-ui**: An internal RAG prototype over documents where source cards and a PDF viewer matter more than polish, weight or accessibility.
+
+## graph
+
+| Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| [ELK (elkjs)](sources/elkjs/source.md) | **5.8** | 4 | 1 | 5 | 2 | 4 | 3 | 1 | 3 | – | – | – | EPL-2.0 OR GPL-3.0-or-later |
+| [dagre (@dagrejs/dagre)](sources/dagre/source.md) | **5.5** | 2 | 1 | 2 | 2 | 2 | 3 | 5 | 5 | – | – | – | MIT |
+
+**Pick it for**
+
+- **ELK (elkjs)**: Layered architecture, dependency or lineage diagrams where rows have fixed meaning or graphs reach thousands of nodes, ideally laid out at build time or in a Web Worker.
+- **dagre (@dagrejs/dagre)**: Live auto-layout of small directed graphs (under ~300 nodes) in the browser where rows don't need fixed meaning.

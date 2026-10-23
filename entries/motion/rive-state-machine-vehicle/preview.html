@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rive runtime</title>
+<style>
+body{margin:0;background:#f5f7fa;color:#1a2430;font:13px/1.4 system-ui,sans-serif}
+header{padding:16px 24px}h1{font-size:16px;margin:0}p{margin:4px 0 0;color:#5a6673}
+canvas{display:block;margin:0 auto;width:640px;height:480px;background:#fff;border-radius:12px}
+button{margin:12px auto;display:block;font:inherit;padding:6px 14px}
+</style></head><body>
+<header><h1>@rive-app/canvas 2.45.1 · Rive's public "vehicles" sample</h1><p id="meta">Loading…</p></header>
+<canvas id="c" width="1280" height="960" role="img" aria-label="Animated cartoon truck driving on a road (Rive sample animation)"></canvas>
+<button id="toggle" type="button" aria-pressed="false">Pause</button>
+<script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.45.1/rive.js"></script>
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const t0 = performance.now();
+const r = new rive.Rive({
+  src: "https://cdn.rive.app/animations/vehicles.riv", /* Rive public sample, not stored in this repo */ canvas: document.getElementById('c'),
+  autoplay: !reduced,                       // Rive does not check reduced motion itself
+  onLoad: () => { r.resizeDrawingSurfaceToCanvas();
+    document.getElementById('meta').textContent = `Loaded in ${Math.round(performance.now() - t0)} ms · animations: ${r.animationNames.join(', ')} · state machines: ${r.stateMachineNames.join(', ') || 'none'} · autoplay ${reduced ? 'off (reduced motion)' : 'on'}`;
+    window.__ready = true; }
+});
+const btn = document.getElementById('toggle');
+btn.onclick = () => { if (r.isPlaying) { r.pause(); btn.textContent = 'Play'; btn.setAttribute('aria-pressed', 'true'); } else { r.play(); btn.textContent = 'Pause'; btn.setAttribute('aria-pressed', 'false'); } };
+</script></body></html>

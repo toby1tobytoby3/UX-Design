@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dagre layered layout</title>
+<style>
+:root{--bg:#fff;--ink:#1a2430;--muted:#5a6673;--edge:#9aa7b4;--accent:#2563eb}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.4 system-ui,sans-serif}
+header{padding:16px 24px 0}h1{font-size:16px;margin:0}p{margin:4px 0 0;color:var(--muted)}
+svg{display:block;width:100%;height:calc(100vh - 70px)}
+.n rect{fill:#f5f7fa;stroke:var(--ink);stroke-width:1}.n text{font:10px ui-monospace,monospace;fill:var(--ink)}
+.e{fill:none;stroke:var(--edge);stroke-width:1}.lane{fill:var(--muted);font:600 11px system-ui;letter-spacing:.08em;text-transform:uppercase}
+</style></head><body>
+<header><h1>@dagrejs/dagre 3.1.1 · 7-layer twin graph (35 nodes)</h1><p id="meta">Layout running…</p></header>
+<svg id="g" role="img" aria-label="Layered dependency graph of 35 nodes across seven layers, laid out top to bottom by dagre"></svg>
+<script src="https://cdn.jsdelivr.net/npm/@dagrejs/dagre@3.1.1/dist/dagre.js"></script>
+<script>
+// Same seeded graph as the benchmark: N nodes over 7 layers, 1-2 edges to the next layer.
+function graph(n,seed=1){let s=seed;const r=()=>(s=(s*16807)%2147483647)/2147483647;const L=7;const nodes=[],edges=[];
+ for(let i=0;i<n;i++)nodes.push({id:'n'+i,layer:Math.floor(i*L/n)});
+ for(const a of nodes){const next=nodes.filter(b=>b.layer===a.layer+1);if(!next.length)continue;const k=1+Math.floor(r()*2);for(let j=0;j<k;j++)edges.push({s:a.id,t:next[Math.floor(r()*next.length)].id});}
+ return {nodes,edges};}
+const LAYERS=['Journeys','Processes','Applications','Environments','CIs','Hosting','Networks'];
+function draw(G,pos,paths,ms){const svg=document.getElementById('g');const xs=Object.values(pos).map(p=>p.x),ys=Object.values(pos).map(p=>p.y);
+ const minX=Math.min(...xs)-40,maxX=Math.max(...xs)+40,minY=Math.min(...ys)-20,maxY=Math.max(...ys)+20;
+ svg.setAttribute('viewBox',`${minX-110} ${minY} ${maxX-minX+120} ${maxY-minY}`);let h='';
+ paths.forEach(pts=>{h+=`<polyline class="e" points="${pts.map(p=>p.x+','+p.y).join(' ')}"/>`;});
+ const seen={};const ranks=[...new Set(Object.values(pos).map(p=>p.y))].sort((a,b)=>a-b);G.nodes.forEach(n=>{const p=pos[n.id];h+=`<g class="n"><rect x="${p.x-30}" y="${p.y-10}" width="60" height="20" rx="3"/><text x="${p.x}" y="${p.y+3}" text-anchor="middle">${n.id}</text></g>`;
+  if(!seen[p.y]){seen[p.y]=1;h+=`<text class="lane" x="${minX-100}" y="${p.y+4}">rank ${ranks.indexOf(p.y)}</text>`;}});
+ svg.innerHTML=h;document.getElementById('meta').textContent=`${G.nodes.length} nodes · ${G.edges.length} edges · layout ${ms.toFixed(0)} ms in this browser · ranks chosen by dagre; orphan nodes (n28–n33, our Networks layer) float to rank 0`;window.__ready=true;}
+
+const G=graph(35);const g=new dagre.graphlib.Graph({multigraph:true});g.setGraph({rankdir:'TB',nodesep:12,ranksep:40});g.setDefaultEdgeLabel(()=>({}));
+G.nodes.forEach(n=>g.setNode(n.id,{width:60,height:20}));G.edges.forEach((e,i)=>g.setEdge(e.s,e.t,{},'e'+i));
+const t=performance.now();dagre.layout(g);const ms=performance.now()-t;
+draw(G,Object.fromEntries(G.nodes.map(n=>[n.id,g.node(n.id)])),g.edges().map(e=>g.edge(e).points),ms);
+</script></body></html>

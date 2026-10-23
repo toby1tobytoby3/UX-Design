@@ -1,0 +1,16 @@
+{
+  "measured_at": "2026-10-23",
+  "method": "layout-bench.mjs in Node 22: seeded 7-layer graph, 1-2 edges per node to the next layer, rankdir top-to-bottom, nodesep 12, ranksep 40. Layout time only. Same machine for both libraries; compare relative, not absolute.",
+  "versions": { "@dagrejs/dagre": "3.1.1", "elkjs": "0.12.0" },
+  "layout_ms": {
+    "35":   { "dagre": 40,    "elk": 193 },
+    "500":  { "dagre": 1401,  "elk": 622 },
+    "2000": { "dagre": 42591, "elk": 4659 },
+    "5000": { "dagre": "not finished after >10 min (stopped)", "elk": 25584 }
+  },
+  "bundle_gz_bytes": { "@dagrejs/dagre": 16953, "elkjs/lib/elk.bundled.js": 442485 },
+  "layer_pinning": {
+    "dagre": "No public API: node rank is computed and overwritten; orphan nodes float to rank 0.",
+    "elk": "elk.partitioning.activate + elk.partitioning.partition per node. Requires elk.separateConnectedComponents=false, otherwise disconnected parts are laid out separately and pins are ignored."
+  }
+}

@@ -30,7 +30,9 @@ Overall scores are in `SOURCES.md` (motion section); **fit beats score**. Start 
 
 Not worth adding for new work: **React Spring** (6.5) does less than Motion with the highest main-thread cost in the bench
 (150 ms vs Motion 81 ms for 60 boxes at 4× CPU throttle) and no layout primitive. Rive and Lottie are illustration runtimes
-with paid authoring tools, not UI motion systems.
+with paid authoring tools, not UI motion systems. For illustrations that must react to state, **Rive** (`sources/rive`, MIT runtime):
+self-host its 884 KB gz WebAssembly (it loads from unpkg by default) and gate autoplay on reduced motion yourself. For a fixed
+one-shot flourish, a pre-rendered clip played once on select is far lighter (`navigation/airbnb-3d-category-icon-tabs`).
 
 ![Drawer trajectories with each library's defaults](img/motion-curves.png)
 

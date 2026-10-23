@@ -38,7 +38,8 @@ const viewports = {
 const MAX_HEIGHT = 2400; // keep crops focused and the repo small
 
 mkdirSync(outDir, { recursive: true });
-const browser = await chromium.launch();
+// CHROMIUM_PATH lets cloud images with a different Playwright browser build run captures.
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
 try {
   for (const [vp, size] of Object.entries(viewports)) {
     if (only && only !== vp) continue;

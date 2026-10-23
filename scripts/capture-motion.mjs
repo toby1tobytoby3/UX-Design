@@ -18,7 +18,7 @@ const [url, outDir] = args;
 if (!url || !outDir) { console.error('usage: capture-motion.mjs <url> <outDir> [--wait s] [--scroll n] [--selector css]'); process.exit(1); }
 mkdirSync(outDir, { recursive: true });
 
-const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const glHook = () => {
   const orig = HTMLCanvasElement.prototype.getContext; window.__gl = [];
   HTMLCanvasElement.prototype.getContext = function (type, ...rest) { if (/webgl|webgpu/.test(type)) window.__gl.push(type); return orig.call(this, type, ...rest); };
