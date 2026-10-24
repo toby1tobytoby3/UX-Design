@@ -17,3 +17,18 @@ via `.claude/skills`) define the workflows.
   `benchpanels/` (about 8 minutes), maps in `benchmap/` (offline basemap, SwiftShader). Each writes `results.json`, which the catalog build attaches to the profile.
 - Agents answering with this library start at `guides/README.md`.
 - Commit straight to `main`.
+
+## Working style
+
+Adapted from [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) (MIT).
+Bias toward caution over speed; use judgment on trivial tasks.
+
+- **Think before coding.** State assumptions; if unsure, ask. Present multiple interpretations
+  rather than picking silently. Say so if a simpler approach exists.
+- **Simplicity first.** Minimum code that solves the problem: no unrequested features, no
+  abstractions for single-use code, no error handling for impossible cases.
+- **Surgical changes.** Every changed line traces to the request. Match existing style, don't
+  tidy adjacent code, mention unrelated dead code instead of deleting it. Remove only what your
+  own change orphaned.
+- **Goal-driven.** Turn the task into a verifiable goal (reproducing test, `npm run catalog`
+  passes) and loop until it holds. For multi-step work, state a short plan with a check per step.
