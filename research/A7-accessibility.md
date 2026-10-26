@@ -1,6 +1,6 @@
 # A7 Accessibility: research for the guide
 
-Research for `guides/accessibility.md` (not yet written), for **desktop web apps on React/Next + Tailwind, no shadcn**.
+Research for `guides/accessibility.md` (written since; where this note and the guide differ, the guide wins), for **desktop web apps on React/Next + Tailwind, no shadcn**.
 Researched 2026-10-17. Legend: **[v]** verified today (npm, curl, package source or page text); **[r]** reasoned
 from experience or secondary sources, so confirm before relying on it; **[u]** unverified.
 npm figures come from `npm view <pkg> version license time.modified`. Weekly downloads come from

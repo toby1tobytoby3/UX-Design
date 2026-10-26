@@ -78,6 +78,9 @@ export default async function aggregate({ browser, CONFIG, OUT, HERE }) {
     if (t === 'review') track = { found: c.found.length, total: 31, recall_pct: c.recall_pct, by_category: c.by_category, by_severity: c.by_severity, missed: c.missed, unlisted_valid: c.unlisted_valid, unlisted_invalid: c.unlisted_invalid };
     (entries[id] ??= { tracks: {}, cost: {} }); entries[id].tracks[t] = track; const k = cost(t, id); if (k) entries[id].cost[t] = k;
   }
+  // Repeat runs live in out/<track>/<id>-r2 (same brief, fresh agent): kept apart under `_repeats`, never mixed into a profile's score.
+  const repeats = {};
+  for (const [id, e] of Object.entries(entries)) if (!CONFIG[id] && /-r\d+$/.test(id)) repeats[id] = { of: id.replace(/-r\d+$/, ''), tracks: e.tracks, cost: e.cost };
   for (const [id, e] of Object.entries(entries)) {
     const cfg = CONFIG[id]; if (!cfg) continue;
     const dirs = cfg.dirs ?? (cfg.dir ? [cfg.dir] : []);
@@ -85,6 +88,7 @@ export default async function aggregate({ browser, CONFIG, OUT, HERE }) {
     const record = { kind: 'design-skill', commit: cfg.sha?.slice(0, 7) ?? null, footprint, tracks: e.tracks, cost: e.cost };
     results[cfg.slug ?? `_${id}`] = record;
   }
+  if (Object.keys(repeats).length) results._repeats = repeats;
   // The control's numbers are the bar every skill is compared with.
   writeFileSync(join(HERE, 'results.json'), JSON.stringify(results, null, 1) + '\n');
 

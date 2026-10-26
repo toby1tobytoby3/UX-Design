@@ -3,8 +3,8 @@
 Research for row B6 of `research/categories.md`: tables and data grids in desktop web apps (record lists, admin tables,
 spreadsheet-like grids, live grids). Researched 2026-10-18 for our stack: React/Next + Tailwind, with shadcn/ui allowed as
 copy-in code. The same-task benchmark (`benchtable/`: TanStack Table + Virtual, AG Grid Community, React Aria Table, MUI X
-DataGrid, react-data-grid, VTable) is being built in parallel, so this file doesn't benchmark anything. Early captures are in
-`entries/data-table/*` (not yet catalogued).
+DataGrid, react-data-grid, VTable) was built after this note (results in `guides/tables.md`), so this file doesn't benchmark anything. Early captures
+are now catalogued in `entries/data-table/` (5 entries).
 
 Evidence key (same as E6): **[V]** checked today (npm, curl, page text, package source). **[D]** from a vendor's own docs,
 fetched today. **[M]** from memory or product observation, not re-verified today.

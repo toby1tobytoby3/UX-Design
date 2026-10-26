@@ -1,6 +1,6 @@
 # PPT chart coverage review and gap plan
 
-Status: plan only, nothing built. Reviewed 26 Oct 2026 against `TobyStrAcc/Tobys_Claude_PlugIns_Skills` at `0a9704c` (read-only access). Barrax is out of scope.
+Status: **built.** All 11 templates, the lookup words and the reference fixes are on `main` of `TobyStrAcc/Tobys_Claude_PlugIns_Skills` (commit `fda1af2`, 26 Oct 2026); the ID list below is what was built, and the table of gaps is kept as the record of why. Original status: plan only, nothing built. Reviewed 26 Oct 2026 against `TobyStrAcc/Tobys_Claude_PlugIns_Skills` at `0a9704c` (read-only access). Barrax is out of scope.
 
 ## 1. What was reviewed
 
