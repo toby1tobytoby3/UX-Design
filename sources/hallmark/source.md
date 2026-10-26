@@ -58,9 +58,10 @@ in-thread. As an auditor, half its gate list is generated-look style rules that 
 usability defects (tabindex, zoom lock, unreachable controls) came from inspection.
 
 ## Using it here
-Not vendored yet: the pinned commit is fetched into `benchskills/.cache/` by `node benchskills/fetch.mjs`. If we adopt it,
-copy `skills/hallmark/` unmodified into `vendor/skills/`, never run `scripts/install-hook.mjs` without `--print` first (it
-edits `.claude/settings.json`), and keep `TOGETHER_API_KEY` unset unless image generation is wanted.
+Vendored unmodified in `vendor/skills/hallmark/` (26 Oct 2026), loaded in this repo's sessions, not shipped by the plugin.
+It needs no key and costs nothing: leave `TOGETHER_API_KEY` unset (optional paid image generation; stand-ins are used
+without it) and never run `scripts/install-hook.mjs` (it edits `.claude/settings.json`). Its browser lint needs
+`puppeteer-core` and, as root, `--no-sandbox`; without them it still builds and the static checks run.
 
 ## Limits
 One brief, one run per track, two judges. The pricing brief suits a skill that fights word counts badly; a sparser page

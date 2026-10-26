@@ -15,7 +15,7 @@ each `sources/<slug>/source.md`.
 | Review a built screen or a pull request, with a report a team can act on | **Interface Skills** (`better-interface`, `interface-review`) | Ranked, located, before and after code, verdict; found 87% against the control's 90% | Hallmark `audit` (97%, but half its gates are generated-look rules) |
 | Name the rules to check against | **UI UX Pro Max** `quick-reference.md` | Named rules by category with IDs; 22 stacks incl. React and Tailwind; review 90% | Interface Skills `better-accessibility` (WCAG 2.2 criteria) |
 | Explain a process or pipeline as a diagram | **The unaided model** (HTML cards) | Jury 4.75 against 3.63 and 1.75; 12 of 12 checks; text 12 px at 390 | Diagram Design if you need a swimlane look |
-| A branded diagram of a specific type, or a draw.io, Mermaid or Excalidraw import | **Diagram Design** | 45 type references, brand onboarding, import and export; text is 8 px and the phone layout needed a second SVG | Archify for code-grounded maps on a large screen |
+| A branded diagram of a specific type, or a draw.io, Mermaid or Excalidraw import | **Diagram Design** (not vendored) | 45 type references, brand onboarding, import and export; text is 8 px and the phone layout needed a second SVG | Archify for code-grounded maps on a large screen |
 
 ## 2. What was measured
 | Skill (commit) | Page: checks / jury | Review: defects found | Diagram: checks / jury | Cost vs control | Score |
@@ -51,10 +51,12 @@ no better than no skill gets 3).
   about one rubric point are noise. Hallmark's lead on look (0.75 of a jury point) is the one gap that two judges agreed on.
 
 ## 4. Using them in this repo
-- Vendored, loaded in our own sessions, **not** shipped by the `ux-library` plugin: Interface Skills (13 of 14), Diagram
-  Design, Anthropic `frontend-design`, plus the Pocock skills. See `vendor/skills/THIRD_PARTY.md`; `npm run skills:link`.
-- Not vendored: Hallmark, Taste Skill, UI UX Pro Max, Archify. `node benchskills/fetch.mjs` fetches their pinned commits
-  for re-runs; vendor a new one only after vetting it (`ux-add`, "Agent skill, plugin or design-toolkit repo").
+- **Vendored** means an unmodified copy saved in `vendor/skills/`, pinned to one version, so it loads in our own sessions
+  with nothing to install, no sign-up and no cost. It is **not** shipped by the `ux-library` plugin. Vendored: Hallmark,
+  Interface Skills (13 of 14), Anthropic `frontend-design`, plus the Pocock skills. See `vendor/skills/THIRD_PARTY.md`;
+  `npm run skills:link`.
+- Not vendored: Taste Skill, UI UX Pro Max, Diagram Design, Archify. `node benchskills/fetch.mjs` fetches their pinned commits
+  for re-runs; vendor a new one only after vetting it, and only if it is free and works without setup (`ux-add`, "Agent skill, plugin or design-toolkit repo").
 - Every third-party skill is code an agent will follow: `node scripts/vet-skill-repo.mjs <repo>` first, read the flagged
   lines, never install by running the author's installer, pin the commit. Opt-in behaviours found so far: Hallmark's hook
   installer and Together AI image key, Taste's `install.sh` and open-archive downloads, Archify's update check

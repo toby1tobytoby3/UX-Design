@@ -5,8 +5,8 @@
       "slug": "hallmark",
       "repo": "Nutlope/hallmark",
       "sha": "7ec868225c6caa040558c321ee0fefa0e73f83a8",
-      "root": ".cache/hallmark",
-      "dir": ".cache/hallmark/skills/hallmark",
+      "root": "../vendor/skills/hallmark",
+      "dir": "../vendor/skills/hallmark",
       "tracks": [
         "build",
         "review"
@@ -74,8 +74,8 @@
       "slug": "diagram-design",
       "repo": "cathrynlavery/diagram-design",
       "sha": "b8f36171da6e1bce05c3eb984969e5d4e7cb3a20",
-      "root": "../vendor/skills/diagram-design",
-      "dir": "../vendor/skills/diagram-design",
+      "root": ".cache/diagram-design",
+      "dir": ".cache/diagram-design/skills/diagram-design",
       "tracks": [
         "diagram"
       ]

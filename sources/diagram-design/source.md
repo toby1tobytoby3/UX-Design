@@ -52,9 +52,10 @@ hand). Fails: effective text under 11 px at 1280 and under 10 px at 390. Page we
 answered the style-guide gate with "keep the default" as the brief required. Details: `benchskills/out/diagram/diagram-design/`.
 
 ## Using it here
-Vendored unmodified in `vendor/skills/diagram-design/` with its bundled icon notices (Tabler MIT, Simple Icons CC0, log-z
-logos MIT). Its slash commands (`/doctor`, `/export-diagram`, the importers) are plugin commands and were not vendored;
-the skill's own text covers the same procedures. Vet result: base64 decoding is draw.io import, nothing runs at install.
+Not vendored (removed 26 Oct 2026 after a short stay): the unaided model drew a better explainer, and a 395-line skill
+that fires on the word "diagram" and asks a style-guide question first is more to carry than it earns. `node
+benchskills/fetch.mjs` fetches the pinned commit if you want to try it or re-run the benchmark; it installs with
+`npx skills add cathrynlavery/diagram-design`. Vet result: base64 decoding is draw.io import, nothing runs at install.
 
 ## Limits
 One brief, one run, a process diagram. The skill's strengths (45 types, brand onboarding, import and export) were not
