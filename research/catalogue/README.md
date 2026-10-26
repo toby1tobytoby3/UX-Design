@@ -10,6 +10,7 @@ The team's parallel research: 62 curated tools across all 40 categories, with li
 | `categories.csv` | Per category (A1–F3): curated tools, guide questions, starter-list changes, gaps that need custom work |
 | `references.csv` | 3 reference URLs per category with the specific moment and what to learn (reviewed, not captured) |
 | `scenarios.csv` | 10 scenario recipes (they match the ten desktop briefs in `docs/test-run-10-briefs.html`) |
+| `design-toolkits.csv` | 14 layout, type, token and public design-system candidates vetted 26 Oct 2026 (licence, latest release, six-month gate): 3 trial, 7 reference, 4 skip. Read in public docs only; none benchmarked |
 | `excluded.csv` | Tools excluded or bounded: maintenance, licence, paid tiers, deprecations |
 | `examples.csv`, `reference-sites.csv` | Extra example links per tool; inspiration galleries (Siteinspire, Landbook, Recent) |
 

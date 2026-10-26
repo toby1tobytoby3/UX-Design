@@ -40,8 +40,8 @@ used through shadcn/ui copy-in components).
 
 | Category | What it is | Use | One tip |
 |---|---|---|---|
-| Typography (A2) | Fonts and type sizes | One variable sans, self-hosted with Fontsource; Tailwind's type scale | 14–16 px body in apps; `tabular-nums` for numbers in tables and KPIs |
-| Layout and density (A3) | Spacing, grids, compact vs comfortable | Tailwind's 4 px spacing scale; a 12-column grid for dashboards | Two densities at most, saved per user (`guides/shell-panels.md` §1) |
+| Typography (A2) | Fonts and type sizes | One variable sans, self-hosted with Fontsource; Tailwind's type scale | 14–16 px body in apps; `tabular-nums` for numbers in tables and KPIs; fluid scales: copy Utopia's clamp() maths into theme values (`research/catalogue/design-toolkits.csv`) |
+| Layout and density (A3) | Spacing, grids, compact vs comfortable | Tailwind's 4 px spacing scale; a 12-column grid for dashboards | Two densities at most, saved per user (`guides/shell-panels.md` §1); for dense enterprise UI read IBM Carbon (trial) and, for forms and accessibility, GOV.UK and USWDS public docs (reference only) |
 | Performance (A8) | Keeping it fast and smooth | TanStack Virtual for long lists | Interactions under 200 ms; animate only transform and opacity; reserve space so nothing jumps while loading |
 | Content and microcopy (A9) | The words in the UI | GOV.UK style: plain words | Buttons name the action ("Save changes", not "OK"); errors say what happened and how to fix it |
 | Icons and imagery (A10) | Icon sets, images, generated backgrounds | Lucide (shadcn's default); Haikei (haikei.app, free web app) for SVG waves, blobs and gradients, exported as files | Pair icons with a label or an `aria-label`; serve AVIF or WebP |
