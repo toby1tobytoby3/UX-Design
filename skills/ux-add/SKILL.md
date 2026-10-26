@@ -60,6 +60,25 @@ that entry instead of creating a new one, and tell the user.
   docking layouts in `benchpanels/libs/` (same three-pane workspace) and map stacks in `benchmap/libs/` (same
   5,000 live vehicles). Score from that evidence and the category note in
   `guides/source-rubric.md`; `npm run catalog` computes the total.
+- **Agent skill, plugin or design-toolkit repo** (a link to one, or to a list of them): the README is marketing; the
+  skill's own files are the reference. Never install it and never run its scripts or hooks while exploring.
+  1. **Vet it first:** `node scripts/vet-skill-repo.mjs <owner/repo> --json` clones shallowly into a scratch folder,
+     reads files only, and reports commit and age, licence, footprint, every `SKILL.md` (size, `allowed-tools`,
+     user-invoked only), install-time scripts, hooks, and the lines that exec, fetch, decode or write agent config.
+     Read every flagged line. Undisclosed egress, install-time code or silent config writes stop the add.
+  2. **Read the whole skill, not the front page:** `SKILL.md` end to end, each reference it tells the agent to load,
+     the scripts it runs, the changelog and open issues. Note what it needs (Node, Python, Chrome, API keys, paid
+     services, network hosts), what it writes and where, and how to switch each of those off.
+  3. **Run it, don't just read it:** decide its kind (builder, reviewer or diagram maker), give it the shared brief in
+     `benchskills/` with a no-skill control, and score it with the *Agent design skills* note in
+     `guides/source-rubric.md` (`benchskills/README.md` has the procedure). Pin the commit.
+  4. **Record it:** `sources/<slug>/source.md` (`pattern: design-skills`, `input: skill-repo`, the commit as
+     `version`) and a row in `guides/design-skills.md`. To use it in this repo, copy it unmodified into
+     `vendor/skills/` (never `skills/`: the plugin ships that folder), add it to `vendor/skills/THIRD_PARTY.md`, run
+     `npm run skills:link`.
+  5. **A list or "awesome" page of such repos:** don't add its entries on trust. Collect the links, vet each with the
+     script, and log each in `research/catalogue/skill-sources.csv` (adopt, trial or skip, with the reason). Explore
+     in depth only the ones that fit a library category.
 - **Screenshot:** save the image into the entry folder as `desktop.jpg` (or
   `mobile.jpg` if it is a phone screenshot). Ask for the source URL if not given;
   use `source_url: unknown` if they don't have it.

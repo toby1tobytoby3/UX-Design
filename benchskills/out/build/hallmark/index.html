@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerly pricing</title>
+<meta name="description" content="Ledgerly pricing: three plans for invoice reconciliation, with monthly and annual prices, a plan comparison and answers to common questions.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · shape: Index-First · genre: modern-minimal · theme: Coral (deal 1/3, seed ledgerly-pricing-invoice-reconciliation-a4fd·fbe93ffe·2026-10-26·r0) · job: sign up · draw: ecb3dd · copy: verbatim
+ * hero: Index (swap from Ledge: the plans are the list, so the list leads) · nav: slab · footer: mast · imagery: none (stationery built in CSS) · signature: the plan index on the desk with a groove switch that re-prices every sheet
+ * axes: light/grotesk-sans/warm · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: P, a pricing page has little argument to make; the plans set as ruled index cards in rows (not three tiles) and the groove switch re-pricing every sheet carry it */
+:root {
+  color-scheme: light;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  --color-paper: oklch(97% 0.006 55); --color-paper-2: oklch(94.5% 0.007 55); --color-paper-3: oklch(91.5% 0.009 55);
+  --color-ink: oklch(21% 0.012 38); --color-ink-2: oklch(29% 0.013 40); --color-muted: oklch(47% 0.013 45);
+  --color-rule: oklch(87% 0.009 55); --color-rule-2: oklch(81% 0.011 55);
+  --color-accent: oklch(74% 0.125 30); --color-accent-ink: oklch(21% 0.012 38); --color-accent-2: oklch(54% 0.165 29); --color-focus: oklch(54% 0.17 30);
+  --color-cotton: oklch(98.8% 0.0045 80); --color-desk: oklch(94.3% 0.008 64); --color-print: oklch(23% 0.012 38);
+  --color-board: oklch(22% 0.011 40); --color-board-type: oklch(96.5% 0.006 70); --color-board-muted: oklch(79% 0.012 60); --color-board-rule: oklch(36% 0.012 45); --color-paid: oklch(55.5% 0.15 33);
+  --tex-cotton: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.011' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.33 0 0 0 0.16 0'/%3E%3C/filter%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.28 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23c)'/%3E%3Crect width='360' height='360' filter='url(%23g)'/%3E%3C/svg%3E");
+  --tex-desk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018' numOctaves='3' seed='12'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0.2 0'/%3E%3C/filter%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.33 0 0 0 0 0.25 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23c)'/%3E%3Crect width='360' height='360' filter='url(%23g)'/%3E%3C/svg%3E");
+  --shade: 32% 0.03 50; --lit: 100% 0.005 80; --deep: 7% 0.01 40;
+  --font-display: "General Sans", ui-sans-serif, system-ui, sans-serif; --font-body: var(--font-display);
+  --font-outlier: "Geist Mono", ui-monospace, monospace;
+  --radius-card: 8px; --radius-input: 6px; --radius-pill: 999px; --radius-stock: 8px; --radius-groove: 12px; --rule-hair: 1px;
+  --shadow-card: 0 1px 2px oklch(20% 0.01 35 / 0.05);
+  --edge-stock: inset 0 1px 0 oklch(var(--lit) / 0.9), inset 0 -1px 0 oklch(var(--shade) / 0.07), 0 0 0 0.5px oklch(var(--shade) / 0.22), 0 1px 0 oklch(var(--shade) / 0.12);
+  --cast-stock: 6px 5px 10px -6px oklch(var(--shade) / 0.3); --cast-stock-lift: 12px 10px 18px -8px oklch(var(--shade) / 0.3);
+  --cast-board: 6px 5px 10px -4px oklch(var(--deep) / 0.6);
+  --press-groove: inset 1px 1.5px 2px oklch(var(--shade) / 0.16), inset -1px -1px 0 oklch(var(--lit) / 0.9), 0 0 0 0.5px oklch(var(--shade) / 0.2);
+  --tracking-display: -0.03em; --display-weight: 600;
+}
+
+/* Hallmark · dismissed 46a · the 20% is the annual_discount in pricing-content.json, supplied with the brief, not a claim of ours */
+/* Hallmark · answered F4 · the theme's own control pair: an ink board button on the plan sheets, a cotton card on the slab and the board, never adjacent */
+
+/* base */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scrollbar-color: var(--color-muted) var(--color-paper); scroll-padding-top: var(--space-xl); scroll-behavior: smooth; }
+body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.55; font-synthesis: none; -webkit-font-smoothing: antialiased; caret-color: var(--color-accent); }
+::selection { background: color-mix(in oklab, var(--color-accent) 22%, transparent); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+a:hover { text-decoration-color: var(--color-accent-2); }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight, 700); font-synthesis: none; letter-spacing: var(--tracking-display); line-height: 1.05; overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
+h1 { max-width: 24ch; font-size: var(--text-display-s); } h2 { max-width: 30ch; font-size: clamp(2rem, 1.2vw + 1.5rem, 2.75rem); } h3 { max-width: 40ch; font-size: var(--text-title); line-height: 1.2; }
+.lead { font-size: var(--text-lead); line-height: 1.45; max-width: 52ch; }
+p { margin: 0; text-wrap: pretty; }
+p:not([class]) { max-width: 65ch; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+button, input { font: inherit; }
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); box-sizing: border-box; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.fig { font-family: var(--font-outlier); font-variant-numeric: tabular-nums; }
+
+/* stock, desk, controls */
+.stock { background-color: var(--color-cotton); background-image: linear-gradient(100deg, var(--color-cotton), transparent 45%), var(--tex-cotton); color: var(--color-print); box-shadow: var(--edge-stock), var(--cast-stock); }
+.desk { background-color: var(--color-desk); background-image: radial-gradient(90% 120% at 0% 30%, var(--color-cotton), transparent 62%), var(--tex-desk); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 var(--space-lg); border: 0; border-radius: var(--radius-stock); font-weight: 500; font-size: var(--text-md); line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer; transition: transform var(--dur-micro) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.btn--card { background-color: var(--color-cotton); background-image: var(--tex-cotton); color: var(--color-print); text-shadow: 0.5px 0.75px 0 var(--color-cotton); box-shadow: var(--edge-stock), var(--cast-stock); }
+.btn--ink { background: var(--color-board); color: var(--color-board-type); text-shadow: 0 -0.75px 0 var(--color-ink); box-shadow: var(--cast-stock); }
+.btn:hover { transform: translateY(-1px); box-shadow: var(--edge-stock), var(--cast-stock-lift); }
+.btn--ink:hover { box-shadow: var(--cast-stock-lift); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; transform: none; }
+.btn--board { box-shadow: var(--edge-stock), var(--cast-board); }
+.btn--board:hover { box-shadow: var(--edge-stock), var(--cast-board); }
+.skip { position: absolute; left: var(--space-md); top: calc(-1 * var(--space-3xl)); z-index: var(--z-toast); padding: var(--space-xs) var(--space-md); background: var(--color-board); color: var(--color-board-type); border-radius: var(--radius-input); }
+.skip:focus-visible { top: var(--space-md); }
+
+/* nav: slab */
+.slab { position: relative; z-index: var(--z-raised); }
+.slab .container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 72px; }
+.mark { font-family: var(--font-display); font-weight: 600; font-size: var(--text-xl); letter-spacing: var(--tracking-display); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+
+/* hero: the plan index on the desk */
+.hero { position: relative; padding-block: var(--space-xl) var(--space-xl); }
+.hero__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: var(--gap-columns); row-gap: var(--space-lg); }
+.hero__head .lead { margin-top: var(--space-md); }
+.billing { justify-self: end; display: grid; gap: var(--space-xs); justify-items: end; }
+.groove { position: relative; display: grid; grid-template-columns: 1fr 1fr; min-width: 17rem; margin: 0; padding: var(--space-2xs); border: 0; border-radius: var(--radius-groove); background: var(--color-paper-3); box-shadow: var(--press-groove); }
+.groove__card { position: absolute; inset-block: var(--space-2xs); inset-inline-start: var(--space-2xs); width: calc(50% - var(--space-2xs)); border-radius: var(--radius-stock); background-color: var(--color-cotton); background-image: var(--tex-cotton); box-shadow: var(--edge-stock), var(--cast-stock); transition: transform var(--dur-short) var(--ease-in-out); }
+.groove:has(#bill-annual:checked) .groove__card { transform: translateX(100%); }
+.groove label { position: relative; z-index: var(--z-base); display: flex; align-items: center; justify-content: center; min-height: 44px; padding-inline: var(--space-md); border-radius: var(--radius-stock); color: var(--color-muted); font-weight: 500; cursor: pointer; transition: color var(--dur-short) var(--ease-out); }
+.groove label:hover { color: var(--color-ink); }
+.groove input:checked + label { color: var(--color-ink); }
+.groove input:focus-visible + label { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.billing__note { min-height: 1lh; font-size: var(--text-sm); color: var(--color-muted); text-align: right; }
+
+.plans { display: grid; gap: var(--space-lg); margin-top: var(--space-xl); }
+.plan { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 3.6fr) minmax(0, 4.9fr) minmax(0, 2fr); align-items: center; column-gap: var(--space-lg); padding: var(--space-lg) var(--space-xl); border-radius: var(--radius-card); }
+.plan h3 { font-size: var(--text-xl); }
+.price { display: flex; align-items: baseline; gap: var(--space-2xs); font-weight: 600; font-size: clamp(3rem, 3.2vw + 1.5rem, 4.5rem); letter-spacing: -0.05em; line-height: 0.95; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price .cur { font-size: 0.5em; letter-spacing: 0; align-self: flex-start; margin-top: 0.1em; font-weight: 500; }
+.price__note { margin-top: var(--space-xs); font-size: var(--text-sm); color: var(--color-muted); max-width: none; }
+.feat { display: grid; grid-auto-flow: column; grid-template-rows: repeat(var(--rows, 3), auto); grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gap-columns); }
+.feat li { padding-block: var(--space-xs); border-top: 1px solid var(--color-rule); line-height: 1.35; }
+.feat li:nth-child(-n+3) { border-top-color: var(--color-rule); }
+.feat--one { grid-template-columns: minmax(0, 1fr); }
+.plan .btn { width: 100%; padding-inline: var(--space-md); }
+
+.hero:not(:has(#bill-annual:checked)) [data-a], .hero:has(#bill-annual:checked) [data-m] { display: none; }
+
+/* sections */
+.section { padding-block: var(--section-gap-s); }
+.section--follow { padding-top: 0; }
+.section--terms { padding-bottom: var(--section-gap); }
+.section__head { margin-bottom: var(--space-2xl); }
+
+/* comparison table */
+.compare { width: 100%; border-collapse: collapse; }
+.compare caption { text-align: left; }
+.compare th, .compare td { padding: var(--space-md) var(--space-md) var(--space-md) 0; border-bottom: 1px solid var(--color-rule); text-align: left; vertical-align: middle; }
+.compare thead th { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); white-space: nowrap; border-bottom-color: var(--color-rule-2); }
+.compare tbody th { font-weight: 500; font-size: var(--text-md); width: 40%; }
+.compare td { font-family: var(--font-outlier); font-variant-numeric: tabular-nums; font-size: var(--text-md); height: 64px; }
+.compare td.is-no { color: var(--color-muted); }
+
+/* terms: figures from the brief */
+.terms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.terms > li { padding-inline: var(--space-lg); border-left: 1px solid var(--color-rule-2); }
+.terms > li:first-child { padding-left: 0; border-left: 0; }
+.terms > li:last-child { padding-right: 0; }
+.terms b { display: block; font-weight: 600; font-size: var(--text-display-s); letter-spacing: -0.05em; line-height: 0.95; font-variant-numeric: tabular-nums; }
+.terms b span { font-size: var(--text-title); font-weight: 500; letter-spacing: var(--tracking-display); margin-left: var(--space-xs); }
+.terms p { margin-top: var(--space-md); color: var(--color-ink-2); max-width: 28ch; }
+
+/* questions */
+.faq { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap-columns); row-gap: var(--space-xl); }
+.faq__head { grid-column: 1 / span 4; }
+.faq__list { grid-column: 5 / span 8; border-bottom: 1px solid var(--color-rule); }
+.qa { padding-block: var(--space-lg); border-top: 1px solid var(--color-rule); }
+.qa h3 { max-width: none; }
+.qa p { margin-top: var(--space-xs); color: var(--color-ink-2); }
+
+/* board: the close, and the footer mast */
+.board { background: var(--color-board); color: var(--color-board-type); padding-block: var(--section-gap-s) var(--space-xl); }
+.board a { text-decoration-color: var(--color-board-muted); }
+.board a:hover { text-decoration-color: var(--color-accent); }
+.board__close { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; column-gap: var(--gap-columns); row-gap: var(--space-xl); }
+.board__close .lead { margin-top: var(--space-md); color: var(--color-board-muted); }
+.board__action { justify-self: end; }
+.mast { margin-top: var(--space-3xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-board-rule); }
+.mast__mark { font-family: var(--font-display); font-weight: 600; font-size: clamp(4rem, 13vw, 11rem); letter-spacing: -0.05em; line-height: 0.85; overflow-wrap: break-word; min-width: 0; max-width: 100%; }
+.mast__links { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-xl); margin-top: var(--space-xl); }
+.mast__links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-board-type); }
+.mast__legal { margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-board-muted); }
+
+/* narrower screens */
+@media (max-width: 64rem) {
+  .plan { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name price" "feat feat" "cta cta"; row-gap: var(--space-md); padding: var(--space-lg); }
+  .plan > h3 { grid-area: name; }
+  .plan > .price-block { grid-area: price; text-align: right; }
+  .plan .price { justify-content: flex-end; }
+  .plan > .feat { grid-area: feat; }
+  .plan > .btn { grid-area: cta; }
+  .faq__head, .faq__list { grid-column: 1 / -1; }
+  .board__close { grid-template-columns: minmax(0, 1fr); }
+  .board__action { justify-self: start; }
+}
+@media (max-width: 60rem) {
+  :root { --gutter: 24px; --section-gap-s: 80px; --section-gap: 96px; --section-gap-l: 120px; }
+  .hero__head { grid-template-columns: minmax(0, 1fr); }
+  .billing { justify-self: stretch; justify-items: stretch; }
+  .billing__note { text-align: left; }
+  .groove { min-width: 0; }
+}
+@media (max-width: 40rem) {
+  .compare thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .compare, .compare tbody, .compare tr, .compare th, .compare td { display: block; width: 100%; }
+  .compare tbody th { width: 100%; padding: var(--space-md) 0 var(--space-2xs); border-bottom: 0; font-size: var(--text-lg); }
+  .compare tr { padding-bottom: var(--space-sm); border-bottom: 1px solid var(--color-rule); }
+  .compare td { display: flex; justify-content: space-between; gap: var(--space-md); height: auto; min-height: 44px; align-items: center; padding: var(--space-xs) 0; border-bottom: 0; }
+  .compare td::before { content: attr(data-label); font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-muted); }
+  .section__head { margin-bottom: var(--space-xl); }
+}
+@media (max-width: 48rem) {
+  .terms { grid-template-columns: minmax(0, 1fr); }
+  .terms > li { padding: var(--space-lg) 0; border-left: 0; border-top: 1px solid var(--color-rule-2); }
+  .terms > li:first-child { padding-top: 0; border-top: 0; }
+}
+@media (max-width: 40rem) {
+  :root { --gutter: 16px; --section-gap-s: 56px; --section-gap: 72px; --section-gap-l: 96px; --gap-columns: 16px; }
+  .slab .container { min-height: 64px; }
+  .slab .btn { padding-inline: var(--space-md); }
+  .plan { padding: var(--space-md); }
+  .feat, .feat--one { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: minmax(0, 1fr); }
+  .price { font-size: var(--text-3xl); }
+  .qa h3 { font-size: var(--text-lg); }
+  .board { padding-block: var(--space-3xl) var(--space-lg); }
+  .mast { margin-top: var(--space-2xl); }
+}
+@media (max-width: 24rem) {
+  .slab .btn { padding-inline: var(--space-sm); font-size: var(--text-sm); }
+  .mark { font-size: var(--text-lg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *:not(.keep-motion), *:not(.keep-motion)::before, *:not(.keep-motion)::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .btn { transition: none; }
+  .btn:hover, .btn:active { transform: none; }
+  .groove__card { transition: none; }
+}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="slab stock">
+  <div class="container">
+    <a class="mark" href="#top" aria-label="Ledgerly, back to top">Ledgerly</a>
+    <a class="btn btn--card" href="#trial">Start free trial</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero desk" id="plans" aria-labelledby="h1">
+    <div class="container">
+      <div class="hero__head">
+        <div>
+          <h1 id="h1">From one seat to fifteen</h1>
+          <p class="lead">Invoice reconciliation for small accounting teams.</p>
+        </div>
+        <div class="billing">
+          <fieldset class="groove">
+            <legend class="visually-hidden">Billing period</legend>
+            <span class="groove__card" aria-hidden="true"></span>
+            <input class="visually-hidden" type="radio" name="billing" id="bill-monthly" value="monthly" checked>
+            <label for="bill-monthly">Monthly</label>
+            <input class="visually-hidden" type="radio" name="billing" id="bill-annual" value="annual">
+            <label for="bill-annual">Annual</label>
+          </fieldset>
+          <p class="billing__note" id="billing-note" role="status">Billed monthly.</p>
+        </div>
+      </div>
+
+      <h2 class="visually-hidden">Plans</h2>
+      <ul class="plans">
+        <li class="plan stock">
+          <h3>Starter</h3>
+          <div class="price-block">
+            <p class="price"><span data-m><span class="cur">$</span>19</span><span data-a><span class="cur">$</span>15.20</span></p>
+            <p class="price__note"><span data-m>per month</span><span data-a>per month, billed annually</span></p>
+          </div>
+          <ul class="feat feat--one" style="--rows: 3">
+            <li>1 seat</li>
+            <li>100 reconciliations per month</li>
+            <li>Email support</li>
+          </ul>
+          <a class="btn btn--ink" href="#trial" aria-label="Start free trial on the Starter plan">Start free trial</a>
+        </li>
+        <li class="plan stock">
+          <h3>Team</h3>
+          <div class="price-block">
+            <p class="price"><span data-m><span class="cur">$</span>59</span><span data-a><span class="cur">$</span>47.20</span></p>
+            <p class="price__note"><span data-m>per month</span><span data-a>per month, billed annually</span></p>
+          </div>
+          <ul class="feat" style="--rows: 2">
+            <li>5 seats</li>
+            <li>Unlimited reconciliations</li>
+            <li>Shared matching rules</li>
+            <li>Email support</li>
+          </ul>
+          <a class="btn btn--ink" href="#trial" aria-label="Start free trial on the Team plan">Start free trial</a>
+        </li>
+        <li class="plan stock">
+          <h3>Business</h3>
+          <div class="price-block">
+            <p class="price"><span data-m><span class="cur">$</span>149</span><span data-a><span class="cur">$</span>119.20</span></p>
+            <p class="price__note"><span data-m>per month</span><span data-a>per month, billed annually</span></p>
+          </div>
+          <ul class="feat" style="--rows: 3">
+            <li>15 seats</li>
+            <li>Unlimited reconciliations</li>
+            <li>Shared matching rules</li>
+            <li>SSO</li>
+            <li>Audit log</li>
+            <li>Priority support</li>
+          </ul>
+          <a class="btn btn--ink" href="#trial" aria-label="Start free trial on the Business plan">Start free trial</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="compare" aria-labelledby="h-compare">
+    <div class="container">
+      <div class="section__head">
+        <h2 id="h-compare">Every plan, row by row</h2>
+      </div>
+      <table class="compare">
+        <caption class="visually-hidden">Plan comparison: Starter, Team and Business</caption>
+        <thead>
+          <tr><th scope="col">Feature</th><th scope="col">Starter</th><th scope="col">Team</th><th scope="col">Business</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Seats</th><td data-label="Starter">1</td><td data-label="Team">5</td><td data-label="Business">15</td></tr>
+          <tr><th scope="row">Reconciliations per month</th><td data-label="Starter">100</td><td data-label="Team">Unlimited</td><td data-label="Business">Unlimited</td></tr>
+          <tr><th scope="row">Bank connections</th><td data-label="Starter">1</td><td data-label="Team">5</td><td data-label="Business">20</td></tr>
+          <tr><th scope="row">Shared matching rules</th><td class="is-no" data-label="Starter">No</td><td data-label="Team">Yes</td><td data-label="Business">Yes</td></tr>
+          <tr><th scope="row">Export to CSV and PDF</th><td data-label="Starter">Yes</td><td data-label="Team">Yes</td><td data-label="Business">Yes</td></tr>
+          <tr><th scope="row">SSO</th><td class="is-no" data-label="Starter">No</td><td class="is-no" data-label="Team">No</td><td data-label="Business">Yes</td></tr>
+          <tr><th scope="row">Audit log</th><td class="is-no" data-label="Starter">No</td><td class="is-no" data-label="Team">No</td><td data-label="Business">Yes</td></tr>
+          <tr><th scope="row">Support</th><td data-label="Starter">Email</td><td data-label="Team">Email</td><td data-label="Business">Priority</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section--follow section--terms" id="terms" aria-labelledby="h-terms">
+    <div class="container">
+      <h2 class="visually-hidden" id="h-terms">The terms in three numbers</h2>
+      <ul class="terms">
+        <li><b>14<span>days</span></b><p>Free trial on every plan, and no card is needed to begin.</p></li>
+        <li><b>20%</b><p>Less than twelve monthly payments, when you are billed annually.</p></li>
+        <li><b>30<span>days</span></b><p>To ask for a refund of your first charge, refunded in full.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--follow" id="questions" aria-labelledby="h-faq">
+    <div class="container faq">
+      <div class="faq__head">
+        <h2 id="h-faq">Questions before you start</h2>
+      </div>
+      <div class="faq__list">
+        <div class="qa">
+          <h3>Can I change plans later?</h3>
+          <p>Yes. Upgrade or downgrade at any time; the change applies from your next billing date.</p>
+        </div>
+        <div class="qa">
+          <h3>Is there a free trial?</h3>
+          <p>Yes. Every plan starts with a 14-day free trial, and no card is needed to begin.</p>
+        </div>
+        <div class="qa">
+          <h3>What counts as a reconciliation?</h3>
+          <p>One bank statement matched against your ledger for one account in one month.</p>
+        </div>
+        <div class="qa">
+          <h3>How does annual billing work?</h3>
+          <p>You are charged once a year at 20% less than twelve monthly payments.</p>
+        </div>
+        <div class="qa">
+          <h3>Do you offer refunds?</h3>
+          <p>Yes. Ask within 30 days of your first charge and we refund it in full.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="board" id="trial" aria-labelledby="h-trial">
+  <div class="container">
+    <div class="board__close">
+      <div>
+        <h2 id="h-trial">Try any plan for 14 days</h2>
+        <p class="lead">No card is needed to begin.</p>
+      </div>
+      <div class="board__action">
+        <a class="btn btn--card btn--board" href="#trial">Start free trial</a>
+      </div>
+    </div>
+    <div class="mast">
+      <p class="mast__mark" aria-hidden="true">Ledgerly</p>
+      <nav class="mast__links" aria-label="On this page">
+        <a href="#plans">Plans</a>
+        <a href="#compare">Compare</a>
+        <a href="#questions">Questions</a>
+      </nav>
+      <p class="mast__legal">Ledgerly, invoice reconciliation for small accounting teams.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var note = document.getElementById('billing-note');
+  var msgs = { monthly: 'Billed monthly.', annual: 'Billed annually, 20% less than twelve monthly payments.' };
+  document.querySelectorAll('input[name="billing"]').forEach(function (r) {
+    r.addEventListener('change', function () { if (r.checked) note.textContent = msgs[r.value]; });
+  });
+})();
+</script>
+</body>
+</html>

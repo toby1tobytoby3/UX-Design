@@ -8,7 +8,7 @@ Read this first. It's the map for any agent using this repo to help build UI.
 | **Guides** | `guides/<category>.md` | "What should I use for this job?" Decision tables plus defaults |
 | **Source profiles** | `sources/<slug>/source.md`, compared in `SOURCES.md` | "Which library or site is best, and why?" Scored on 8 criteria with evidence |
 | **Patterns** | `entries/<pattern>/<slug>/` | "What does a great version look like?" Screenshots, analysis, code |
-| **Evidence** | `bench/` (charts), `bench3d/` (3D) | Same-task benchmarks behind the scores: renders, bundle sizes, a11y probes |
+| **Evidence** | `bench/` (charts), `bench3d/` (3D), `benchskills/` (agent design skills) | Same-task benchmarks behind the scores: renders, bundle sizes, a11y probes |
 | **Index** | `catalog.json` (`kind: pattern` or `source`) | Everything above, machine-readable |
 | **Conventions** | `taxonomy.md`, `guides/source-rubric.md`, `our-design/` | Vocabulary, scoring, our stack's rules |
 
@@ -81,6 +81,7 @@ GSAP is free but not open source (Webflow licence). axe-core (MPL-2.0) is fine a
 | Tables and data grids (B6) | `guides/tables.md` | 6 `data-table` (benchmarked in `benchtable/`) | `data-table/*` |
 | Maps and live positions (C3, map side of C6) | `guides/maps.md` | 5 `map` (4 benchmarked in `benchmap/`) | `map/*` |
 | App shell, panels and docking, dashboards (B1, B3, C2) | `guides/shell-panels.md` | 5 `panels` (benchmarked in `benchpanels/`) | `navigation/*`, `panels/*`, `dashboard/*` |
+| Agent design skills: builders, reviewers, diagram makers (G1-G3) | `guides/design-skills.md` | 7 `design-skills` (benchmarked in `benchskills/` against a no-skill control) | – |
 | Whole briefs (ten scenarios) | `guides/scenarios.md` | – (links to the category guides) | – |
 | Everything else (command palette, overlays, forms, real-time data, graphs, editors, typography…) | `guides/quick-picks.md` (one line each, not benchmarked) | – | see `CATALOG.md` |
 

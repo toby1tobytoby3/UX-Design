@@ -1,0 +1,201 @@
+{
+ "label": "D",
+ "defects": {
+  "D01": {
+   "found": true,
+   "quote": "It has an SVG only, with no `aria-label`, a 28x28px target and a 1px #ccc border."
+  },
+  "D02": {
+   "found": true,
+   "quote": "Placeholder-only input with no `<label>`."
+  },
+  "D03": {
+   "found": true,
+   "quote": "\"Compare plans\" is a `<p onclick>` (L97)."
+  },
+  "D04": {
+   "found": true,
+   "quote": "`a:focus, button:focus, input:focus {outline:none}` has no replacement."
+  },
+  "D05": {
+   "found": true,
+   "quote": "Neither the logo nor the hero image has `alt`."
+  },
+  "D06": {
+   "found": true,
+   "quote": "The cells are empty red and green blocks with no text or icon."
+  },
+  "D07": {
+   "found": true,
+   "quote": "`tabindex=\"3\"` on FAQ. Measured tab sequence is FAQ, Pricing, Sign in."
+  },
+  "D08": {
+   "found": true,
+   "quote": "The plan names are `<h4>` straight after `<h1>` (L77, 85, 91)"
+  },
+  "D09": {
+   "found": true,
+   "quote": "Reduced motion is ignored (verified: animation is still `scroll`)."
+  },
+  "D10": {
+   "found": true,
+   "quote": "`.lede` #bbb on white (L21, 73) is 1.92:1."
+  },
+  "D11": {
+   "found": true,
+   "quote": "`.btn-primary` white on #ffd23f (L25, \"Submit\") is 1.44:1."
+  },
+  "D12": {
+   "found": true,
+   "quote": "Input border #e6e6e6 (L44) is about 1.3:1 against white, against a 3:1 target."
+  },
+  "D13": {
+   "found": true,
+   "quote": "`.compare table {min-width:560px}` (L40) forces page-wide horizontal scroll."
+  },
+  "D14": {
+   "found": true,
+   "quote": "Footer links are about 14px tall with 6px gaps (below the 24px WCAG 2.2 minimum)"
+  },
+  "D15": {
+   "found": true,
+   "quote": "It is `width:180px; overflow:hidden; nowrap`, with scrollWidth 357 against clientWidth 180."
+  },
+  "D16": {
+   "found": true,
+   "quote": "Sticky header is 140px tall (L11).**"
+  },
+  "D17": {
+   "found": true,
+   "quote": "Paddings are 20, 24 and 28px, and heights are 267, 237 and 438px."
+  },
+  "D18": {
+   "found": true,
+   "quote": "`.plan li` is 12px (L35), `.feature-line` 12px, `.fineprint` 11px, footer links 12px, badge 12px."
+  },
+  "D19": {
+   "found": true,
+   "quote": "`max-width:none` gives a 1232px measure of about 190 characters per line, with `line-height:1`."
+  },
+  "D20": {
+   "found": true,
+   "quote": "Five unrelated font stacks.** Georgia, Arial, Comic Sans (banner, L14), Courier (ticker and prices, L16, 33) and Impact"
+  },
+  "D21": {
+   "found": true,
+   "quote": "All three plan CTAs read \"Click here\" (L82, 88, 94).**"
+  },
+  "D22": {
+   "found": true,
+   "quote": "Static errors show on load: a raw \"Error 422\" plus a redundant \"invalid email address\"."
+  },
+  "D23": {
+   "found": true,
+   "quote": "The errors have no `aria-describedby`, `role=\"alert\"` or `aria-invalid`, and give no recovery hint."
+  },
+  "D24": {
+   "found": false,
+   "quote": ""
+  },
+  "D25": {
+   "found": true,
+   "quote": "Buttons are a generic \"OK\" / \"Cancel\", with no danger styling and OK first."
+  },
+  "D26": {
+   "found": true,
+   "quote": "`transition: all 0.6s` plus `:hover {width:104%; height:auto}`"
+  },
+  "D27": {
+   "found": false,
+   "quote": ""
+  },
+  "D28": {
+   "found": true,
+   "quote": "Rocket, lock and chart emoji are not hidden from assistive tech and render differently per OS."
+  },
+  "D29": {
+   "found": false,
+   "quote": ""
+  },
+  "D30": {
+   "found": true,
+   "quote": "`maximum-scale=1, user-scalable=no`."
+  },
+  "D31": {
+   "found": true,
+   "quote": "No landmarks or skip link.** There is no `<nav>` or `<main>`"
+  }
+ },
+ "unlisted": [
+  {
+   "quote": "There is no `<form>` element, so Enter does nothing.",
+   "valid": true,
+   "why": "Newsletter input and button are not inside a form element."
+  },
+  {
+   "quote": "`role=dialog` is inline and not modal, with no focus management or Escape handling.",
+   "valid": true,
+   "why": "Static div with role=dialog, no modal behaviour or script."
+  },
+  {
+   "quote": "A workspace-deletion prompt makes no sense on a pricing page.",
+   "valid": true,
+   "why": "Delete-workspace dialog is out of place on the pricing page."
+  },
+  {
+   "quote": "`.hero .lede` on the violet gradient (L22) is 4.04:1 at 18px.",
+   "valid": true,
+   "why": "#dcd0ff on #7b2ff7 computes to about 4.05:1."
+  },
+  {
+   "quote": "`.fineprint` #777 at 11px (L47) is 4.48:1.",
+   "valid": true,
+   "why": "#777 on white is 4.48:1, just under 4.5."
+  },
+  {
+   "quote": "Prices show $19, $59 and $149 with no \"/month\".",
+   "valid": true,
+   "why": "Price divs show no unit; only the faint lede mentions monthly."
+  },
+  {
+   "quote": "\"Most popular tier\" sits on the cheapest tier (Starter).",
+   "valid": true,
+   "why": "Badge is on the Starter card at line 78."
+  },
+  {
+   "quote": "Yellow `.btn-primary` and purple `.choose` have the same weight, and no plan is clearly recommended.",
+   "valid": true,
+   "why": "Two competing button styles and no emphasised plan."
+  },
+  {
+   "quote": "`:root` tokens exist but components use raw hex.",
+   "valid": true,
+   "why": "Components use raw hex, with tokens defined but barely used."
+  },
+  {
+   "quote": "The links at L62-64 and the footer links are `href=\"#\"` placeholders.",
+   "valid": true,
+   "why": "Sign in and footer links are href=# and nav has no current state."
+  },
+  {
+   "quote": "It has no `<caption>` or `scope` on `<th>`",
+   "valid": true,
+   "why": "Table lacks caption and scope attributes."
+  },
+  {
+   "quote": "The logo isn't a link home",
+   "valid": true,
+   "why": "Logo img is not wrapped in a link."
+  },
+  {
+   "quote": "Banner, ticker and hero take about 410px at 1280px, so the plans start about 730px down.",
+   "valid": true,
+   "why": "Stacked banner, ticker and hero push plans below the fold."
+  },
+  {
+   "quote": "Their content spills past the card borders",
+   "valid": true,
+   "why": "No-wrap flex row at 375px squeezes cards and content overflows."
+  }
+ ]
+}

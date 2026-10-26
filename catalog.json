@@ -1,5 +1,651 @@
 [
   {
+    "id": "sources/anthropic-frontend-design",
+    "kind": "source",
+    "title": "Anthropic frontend-design",
+    "pattern": "design-skills",
+    "page_type": "landing",
+    "tags": [
+      "open-source",
+      "minimal",
+      "editorial"
+    ],
+    "source_url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+    "source_site": "github.com/anthropics",
+    "captured_at": "2026-10-26",
+    "captured_by": "toby",
+    "input": "skill-repo",
+    "version": "dbd4588",
+    "licence": "Apache-2.0",
+    "s_look": 3,
+    "s_interact": 2,
+    "s_coverage": 3,
+    "s_a11y": 3,
+    "s_perf": 5,
+    "s_react": 3,
+    "s_bundle": 5,
+    "s_licence": 5,
+    "why_it_works": "A 72-line prompt that makes the agent act as a design lead: ground the design in the subject, avoid generic defaults, choose type and palette on purpose, and review its own screenshots.",
+    "use_when": "You want a cheap nudge away from template output on any page and will check accessibility, forms and tables yourself.",
+    "avoid_when": "You need checks, measurements or rules for accessibility, forms, tables or toggles: it has none, and no scripts.",
+    "alternatives": [
+      "hallmark",
+      "taste-skill",
+      "ui-ux-pro-max"
+    ],
+    "has_example": false,
+    "score": 7.3,
+    "rating": 4,
+    "bench": {
+      "kind": "design-skill",
+      "lib_only_gz_kb": "–",
+      "tasks_supported": 1,
+      "tasks_total": 1,
+      "unsupported": [],
+      "tracks": {
+        "build": {
+          "checks_passed": 13,
+          "checks_total": 14,
+          "failed": [
+            "targets_24_px"
+          ],
+          "axe_violations": 0,
+          "overflow_390_px": 0,
+          "keyboard_focus": "13/13",
+          "content_pct": 100,
+          "targets_24_share": 0.86,
+          "min_font_px": 14,
+          "weight_kb": 107,
+          "external_hosts": [
+            "fonts.googleapis.com",
+            "fonts.gstatic.com"
+          ],
+          "unsupported_claims": [],
+          "jury_mean": 3.63,
+          "jury_dims": {
+            "hierarchy": 3.5,
+            "craft": 3,
+            "distinctiveness": 4,
+            "brief_fit": 4
+          }
+        }
+      },
+      "skill_md_lines": 72,
+      "evidence": "page 13/14 checks, jury 3.63"
+    },
+    "path": "sources/anthropic-frontend-design",
+    "images": [
+      "sources/anthropic-frontend-design/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Indistinguishable from no skill on this brief, at 1.2 times the cost.** Its pricing page matched the control exactly on\nthe jury (3.63 each) and passed 13 of 14 checks to the control's 12. The run said the \"avoid the generic defaults\" list\nand the plan-then-review pass forced real changes before any code was written (the three-card layout, hero stat and cream\npalette were replaced by a ruled-ledger layout), but the skill says nothing concrete about accessibility, forms, tables or\ntoggles. It is the lightest way to add design pressure, and it adds little beyond it.\n\n## Scorecard (n = 1 run)\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Jury 3.63 against 3.63 (hierarchy 3.5, craft 3, distinctiveness 4, brief fit 4) |\n| Interactivity | 2 | Prose with a self-review step; no scripts, no inspector |\n| Coverage | 3 | 13 of 14 checks against 12 of 14 (same band) |\n| Accessibility | 3 | axe 0, focus visible on 13 of 13 stops; 86% of targets at least 24 px (fails the 90% bar) |\n| Performance | 5 | 104k tokens, 16 tool calls, 232 s against 88k, 14, 129 s (1.2x) |\n| React/Next fit | 3 | Names no stack; works with any |\n| Bundle size | 5 | 72 lines, 19 KB |\n| Licence & health | 5 | Apache-2.0, from Anthropic, no code to run, last commit 17 days before vetting |\n\n## Benchmark\n**Build** (pricing page): fails only the 24 px target-size bar (86%). All facts present, nothing invented, page weight 107 KB\nplus Google Fonts. The run's own notes: radio semantics, live announcements, the mobile table, no-JavaScript content and\nnaming three identical call-to-action buttons came from its own judgement, not the skill. Details:\n`benchskills/out/build/frontend-design/`.\n\n## Using it here\nVendored unmodified in `vendor/skills/frontend-design/` (Apache-2.0, notice kept). It loads automatically when UI work\nmatches its description.\n\n## Limits\nOne brief, one run, two judges. Not run on the review or diagram tracks (it is a builder)."
+  },
+  {
+    "id": "sources/archify",
+    "kind": "source",
+    "title": "Archify",
+    "pattern": "design-skills",
+    "page_type": "docs",
+    "tags": [
+      "open-source",
+      "interactive",
+      "data-viz",
+      "devtools"
+    ],
+    "source_url": "https://github.com/tt-a1i/archify",
+    "source_site": "github.com/tt-a1i",
+    "captured_at": "2026-10-26",
+    "captured_by": "toby",
+    "input": "skill-repo",
+    "version": "81c6be8",
+    "licence": "Apache-2.0",
+    "s_look": 1,
+    "s_interact": 5,
+    "s_coverage": 2,
+    "s_a11y": 1,
+    "s_perf": 5,
+    "s_react": 2,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "A validated pipeline for architecture, workflow, sequence, data-flow, lifecycle, ERD, class, tree, timeline and waterfall diagrams as explorable standalone HTML, with schemas, browser checks, themes, motion and export, and a repository-evidence mode for tracing real code.",
+    "use_when": "You are mapping a real codebase or system and want a checked, explorable diagram with source links, and a viewer on a laptop is enough.",
+    "avoid_when": "The diagram has to be legible on a phone, carry a proper text alternative, or stay lightweight: the library-pipeline run was the least readable of three, and the repository is 104 MB.",
+    "alternatives": [
+      "diagram-design"
+    ],
+    "has_example": false,
+    "score": 5.8,
+    "rating": 3,
+    "bench": {
+      "kind": "design-skill",
+      "lib_only_gz_kb": "–",
+      "tasks_supported": 1,
+      "tasks_total": 1,
+      "unsupported": [],
+      "tracks": {
+        "diagram": {
+          "checks_passed": 9,
+          "checks_total": 12,
+          "failed": [
+            "text_10_px_at_390",
+            "text_11_px_at_1280",
+            "no_serious_axe"
+          ],
+          "labels": "24/24",
+          "overlaps": 0,
+          "text_spill": 0,
+          "min_text_px_390": 4.5,
+          "weight_kb": 844,
+          "jury_mean": 1.75,
+          "jury_dims": {
+            "clarity": 2,
+            "structure": 2,
+            "craft": 2,
+            "brief_fit": 1
+          }
+        }
+      },
+      "skill_md_lines": 138,
+      "evidence": "diagram 9/12 checks, jury 1.75"
+    },
+    "path": "sources/archify",
+    "images": [
+      "sources/archify/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The most engineered skill we tested, and the least readable output on our brief.** Its own gates (validate, deliver, a\nstrict check and a real-browser check) passed first time, and the run cost only 1.4 times the control's tokens. But both\njudges ranked the result last (1.75 out of 5): at 1280 px the node text is about 7 px, at 390 px about 4.5 px (the viewer\ndoes not fit the diagram to a phone; the skill says narrow layouts get containment only), and axe reports two serious\nissues. The schema has no description field, so the text alternative is generic. Choose it for code-grounded system maps\nviewed on a large screen, not for explainers.\n\n## Scorecard (n = 1 run)\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 1 | Jury 1.75 against 4.75 for the control |\n| Interactivity | 5 | `finalize` runs validation, delivery, strict checks and a browser check in one command; schemas per type; a `guide` command that routes a scenario to a type |\n| Coverage | 2 | 9 of 12 scripted checks against 12 of 12 |\n| Accessibility | 1 | Text 7.4 px at 1280 and 4.5 px at 390; axe: `label-content-name-mismatch` and `nested-interactive` (serious); generic text alternative |\n| Performance | 5 | 115k tokens, 19 tool calls, 223 s against 81k, 9, 88 s (1.4x) |\n| React/Next fit | 2 | Standalone viewer HTML from JSON candidates; no React or Tailwind path |\n| Bundle size | 3 | 138 lines of `SKILL.md` but 17.7 MB in the skill folder (the repository is 104 MB, 475 code files) |\n| Licence & health | 4 | Apache-2.0, last commit the day before vetting. Every delivery makes an update check over the network: disclosed, and off with `ARCHIFY_UPDATE_CHECK_DISABLED=1`, which caps this at 4 |\n\n## Benchmark (diagram track)\n24 of 24 required labels present; no overlaps or spill; no invented facts (read by hand); fits 390 px without sideways\nscroll because the viewer shrinks the whole diagram. Fails: text size at both widths and the axe check. Page weight 844 KB.\nRun notes: node tag text did not render, so layer names moved into sublabels; boundaries are limited to `region` and\n`security-group`. Details: `benchskills/out/diagram/archify/`.\n\n## Using it here\nNot vendored: the repository is 104 MB and the result did not earn a place in `vendor/skills/`. The pinned commit is\nfetched into `benchskills/.cache/` by `node benchskills/fetch.mjs` for re-runs. Vet result: base64 and secret-read hits are\nan embedded asset and a contributor-card script; the only network behaviour is the update check.\n\n## Limits\nOne brief and one run. The repository-evidence mode (tracing a real codebase), the explainer and the export formats were\nnot exercised. The jury is two model judges; the scripted checks are the harder evidence."
+  },
+  {
+    "id": "sources/diagram-design",
+    "kind": "source",
+    "title": "Diagram Design",
+    "pattern": "design-skills",
+    "page_type": "docs",
+    "tags": [
+      "open-source",
+      "editorial",
+      "data-viz",
+      "minimal"
+    ],
+    "source_url": "https://github.com/cathrynlavery/diagram-design",
+    "source_site": "github.com/cathrynlavery",
+    "captured_at": "2026-10-26",
+    "captured_by": "toby",
+    "input": "skill-repo",
+    "version": "b8f3617",
+    "licence": "MIT",
+    "s_look": 2,
+    "s_interact": 3,
+    "s_coverage": 2,
+    "s_a11y": 1,
+    "s_perf": 3,
+    "s_react": 3,
+    "s_bundle": 3,
+    "s_licence": 5,
+    "why_it_works": "An editorial diagram system: 45 diagram types drawn as one self-contained HTML and SVG file in your brand, with draw.io, Mermaid and Excalidraw import and PNG or SVG export.",
+    "use_when": "You need a branded diagram of a type the skill has a reference for (swimlane, sequence, ER, quadrant, Wardley, service blueprint, journey) and can accept fine print, or you are importing from draw.io, Mermaid or Excalidraw.",
+    "avoid_when": "The diagram must read comfortably on a phone or at small sizes, or it is a plain process explanation: on the library-pipeline brief the unaided model's card layout beat it with both judges.",
+    "alternatives": [
+      "archify"
+    ],
+    "has_example": false,
+    "score": 5.5,
+    "rating": 3,
+    "bench": {
+      "kind": "design-skill",
+      "lib_only_gz_kb": "–",
+      "tasks_supported": 1,
+      "tasks_total": 1,
+      "unsupported": [],
+      "tracks": {
+        "diagram": {
+          "checks_passed": 10,
+          "checks_total": 12,
+          "failed": [
+            "text_10_px_at_390",
+            "text_11_px_at_1280"
+          ],
+          "labels": "24/24",
+          "overlaps": 0,
+          "text_spill": 0,
+          "min_text_px_390": 7.1,
+          "weight_kb": 1866,
+          "jury_mean": 3.63,
+          "jury_dims": {
+            "clarity": 3.5,
+            "structure": 4,
+            "craft": 4,
+            "brief_fit": 3
+          }
+        }
+      },
+      "skill_md_lines": 395,
+      "evidence": "diagram 10/12 checks, jury 3.63"
+    },
+    "path": "sources/diagram-design",
+    "images": [
+      "sources/diagram-design/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**Elegant and disciplined, but on the one brief we gave it, worse than no skill.** Both blind judges ranked the\ncontrol's HTML card diagram first (4.75 out of 5), Diagram Design second (3.63) and Archify last (1.75). The skill drew a\nclean four-lane swimlane with one focal element and every required label, but its type is 8 px on desktop and 7 px on a\nphone, so it fails the text-size checks the control passes. Its own phone fix is a scrolling wide SVG that shows a third\nof the canvas; the run had to add a second single-column SVG to meet the brief. The gap may be narrower for diagram types\nthe control would have drawn worse (ER, quadrant, Wardley), which this benchmark did not test.\n\n## Scorecard (n = 1 run per track)\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Jury 3.63 against 4.75 for the control (band 4 against 5) |\n| Interactivity | 3 | `self_check.py` and per-type checklists, but the connector-geometry verifier (`verify-geometry.py`) lives outside the skill folder in the upstream repo, so it was not available to the run |\n| Coverage | 2 | 10 of 12 scripted checks against 12 of 12; both fails are text size |\n| Accessibility | 1 | Text 8 px at 1280 and 7.1 px at 390; no axe violation above moderate; text alternative present |\n| Performance | 3 | 191k tokens, 24 tool calls, 471 s against 81k, 9, 88 s (2.4x) |\n| React/Next fit | 3 | Standalone HTML/SVG in its own style guide; can take your brand colours and fonts, not your components |\n| Bundle size | 3 | 395 lines of `SKILL.md`, 5.2 MB with 45 type references and templates |\n| Licence & health | 5 | MIT, last commit the day of vetting, a privacy policy that says no telemetry; output loads Google Fonts |\n\n## Benchmark (diagram track: how the library turns a reference into an answer)\n24 of 24 required labels present, no overlapping or spilling text, no sideways scroll at 390, no invented facts (read by\nhand). Fails: effective text under 11 px at 1280 and under 10 px at 390. Page weight 1.8 MB (Google Fonts). The run\nanswered the style-guide gate with \"keep the default\" as the brief required. Details: `benchskills/out/diagram/diagram-design/`.\n\n## Using it here\nVendored unmodified in `vendor/skills/diagram-design/` with its bundled icon notices (Tabler MIT, Simple Icons CC0, log-z\nlogos MIT). Its slash commands (`/doctor`, `/export-diagram`, the importers) are plugin commands and were not vendored;\nthe skill's own text covers the same procedures. Vet result: base64 decoding is draw.io import, nothing runs at install.\n\n## Limits\nOne brief, one run, a process diagram. The skill's strengths (45 types, brand onboarding, import and export) were not\nexercised. The jury is two model judges; the scripted checks are the harder evidence."
+  },
+  {
+    "id": "sources/hallmark",
+    "kind": "source",
+    "title": "Hallmark",
+    "pattern": "design-skills",
+    "page_type": "landing",
+    "tags": [
+      "open-source",
+      "accessible",
+      "saas",
+      "editorial",
+      "minimal"
+    ],
+    "source_url": "https://github.com/Nutlope/hallmark",
+    "source_site": "github.com/Nutlope",
+    "captured_at": "2026-10-26",
+    "captured_by": "toby",
+    "input": "skill-repo",
+    "version": "7ec8682",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 5,
+    "s_coverage": 3,
+    "s_a11y": 3,
+    "s_perf": 4,
+    "s_react": 3,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "A design skill with a 16-rule floor that is checked in a real browser (sloplint), a theme dealt from 48 so consecutive builds don't converge, and redesign and audit commands that report by tier with file and line.",
+    "use_when": "Building a new marketing page or screen that must not look generated, or auditing a page against a floor of checkable rules (tokens only, visible focus, reduced motion, no invented facts, mobile layout).",
+    "avoid_when": "The page is dense with content: its word budget (about 80 words a screen) fought the brief and needed a \"verbatim copy\" stamp. Don't run it on an existing design unless you name it, as its own text says; as root it needs puppeteer-core and --no-sandbox for the render check.",
+    "alternatives": [
+      "taste-skill",
+      "ui-ux-pro-max",
+      "anthropic-frontend-design"
+    ],
+    "has_example": false,
+    "score": 7.3,
+    "rating": 4,
+    "bench": {
+      "kind": "design-skill",
+      "lib_only_gz_kb": "–",
+      "tasks_supported": 2,
+      "tasks_total": 2,
+      "unsupported": [],
+      "tracks": {
+        "build": {
+          "checks_passed": 13,
+          "checks_total": 14,
+          "failed": [
+            "targets_24_px"
+          ],
+          "axe_violations": 0,
+          "overflow_390_px": 0,
+          "keyboard_focus": "11/11",
+          "content_pct": 100,
+          "targets_24_share": 0.83,
+          "min_font_px": 14,
+          "weight_kb": 90,
+          "external_hosts": [
+            "fonts.googleapis.com",
+            "api.fontshare.com",
+            "fonts.gstatic.com",
+            "cdn.fontshare.com"
+          ],
+          "unsupported_claims": [],
+          "jury_mean": 4.38,
+          "jury_dims": {
+            "hierarchy": 5,
+            "craft": 4.5,
+            "distinctiveness": 4,
+            "brief_fit": 4
+          }
+        },
+        "review": {
+          "found": 30,
+          "total": 31,
+          "recall_pct": 97,
+          "by_category": {
+            "accessibility": "11/11",
+            "contrast": "3/3",
+            "layout": "5/5",
+            "typography": "3/3",
+            "writing": "4/5",
+            "polish": "4/4"
+          },
+          "by_severity": {
+            "high": "10/10",
+            "medium": "16/16",
+            "low": "4/5"
+          },
+          "missed": [
+            "D24"
+          ],
+          "unlisted_valid": 16,
+          "unlisted_invalid": 1
+        }
+      },
+      "skill_md_lines": 155,
+      "evidence": "page 13/14 checks, jury 4.38; review 30/31 seeded defects"
+    },
+    "path": "sources/hallmark",
+    "images": [
+      "sources/hallmark/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The only skill that measurably improved the page.** Both blind judges ranked its pricing page first (jury 4.38 out of 5\nagainst 3.63 for the no-skill control) and it was the best reviewer too (30 of 31 planted defects, 97%). It also costs\nthe most to run well: 2.3 times the control's tokens and five extra minutes on the build, plus two workarounds before its\nlinter would run. Use it when look and discipline matter more than speed.\n\n## Scorecard (n = 1 run per track)\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 4 | Jury 4.38 against 3.63 (hierarchy 5, craft 4.5, distinctiveness 4, brief fit 4). Plans as full-width rows with price, features and call to action on one line |\n| Interactivity | 5 | `sloplint --render` measures the built page in a browser against the floor and the run iterated to 0 FAIL; redesign and audit verbs; a tiered gate list |\n| Coverage | 3 | Build: 13 of 14 scripted checks against 12 of 14. Review: 97% against 90% (band 5 both) |\n| Accessibility | 3 | 0 axe violations; focus visible on 11 of 11 stops; only miss is touch targets (83% at least 24 px). Found 11/11 accessibility defects in review |\n| Performance | 4 | Build 198k tokens, 40 tool calls, 442 s against 88k, 14, 129 s; audit 135k against 85k. Mean 1.9x |\n| React/Next fit | 3 | Stack-agnostic: tokens at `:root`, `--url` mode for a running dev server; output was single-file HTML |\n| Bundle size | 3 | 155 lines of `SKILL.md`, 6.7 MB of themes, references and 755 photographs |\n| Licence & health | 4 | MIT, last commit four days before vetting. Disclosed opt-ins: a hook installer, a Together AI key for image generation. The page loads two font hosts (Google Fonts and Fontshare) |\n\n## Benchmark\n**Build** (pricing page): axe 0, no sideways scroll, every Tab stop shows focus, annual toggle and FAQ work by keyboard,\nall 37 facts present, nothing invented, reduced motion respected, works without JavaScript. Fails only \"90% of targets at\nleast 24 px\" (83%). Page weight 90 KB plus fonts. **Review** (31 seeded defects): found 30; missed plan/package/tier\nwording. 16 further valid findings outside the key, one wrong. Details: `benchskills/out/build/hallmark/`,\n`benchskills/out/review/hallmark/`.\n\nFound in the run: the 80-word screen limit cannot hold three plans, an eight-row table and five answers, so the run\nused the skill's `copy: verbatim` stamp (the findings become notes); `sloplint --render` needs `puppeteer-core` and fails as\nroot without `--no-sandbox`, and the skill documents neither; no subagent tool was available so its two review passes ran\nin-thread. As an auditor, half its gate list is generated-look style rules that said little about a page it didn't build;\nusability defects (tabindex, zoom lock, unreachable controls) came from inspection.\n\n## Using it here\nNot vendored yet: the pinned commit is fetched into `benchskills/.cache/` by `node benchskills/fetch.mjs`. If we adopt it,\ncopy `skills/hallmark/` unmodified into `vendor/skills/`, never run `scripts/install-hook.mjs` without `--print` first (it\nedits `.claude/settings.json`), and keep `TOGETHER_API_KEY` unset unless image generation is wanted.\n\n## Limits\nOne brief, one run per track, two judges. The pricing brief suits a skill that fights word counts badly; a sparser page\nwould not show that cost."
+  },
+  {
+    "id": "sources/interface-skills",
+    "kind": "source",
+    "title": "Interface Skills (better-* review and polish skills)",
+    "pattern": "design-skills",
+    "page_type": "app",
+    "tags": [
+      "accessible",
+      "open-source",
+      "react",
+      "devtools",
+      "minimal"
+    ],
+    "source_url": "https://github.com/jakubkrehel/skills",
+    "source_site": "github.com/jakubkrehel",
+    "captured_at": "2026-10-26",
+    "captured_by": "toby",
+    "input": "skill-repo",
+    "version": "592aedc",
+    "licence": "MIT",
+    "s_look": 4,
+    "s_interact": 3,
+    "s_coverage": 3,
+    "s_a11y": 3,
+    "s_perf": 4,
+    "s_react": 5,
+    "s_bundle": 2,
+    "s_licence": 5,
+    "why_it_works": "A set of 14 small, plain-markdown skills that review a screen across accessibility, layout, type, colour, copy and polish and return one ranked, located report with before and after code in the project's own styling system.",
+    "use_when": "You want a structured review of a built screen or a pull request (better-interface, interface-review) or the domain skills on their own (better-accessibility, better-colors, better-typography, better-layout, better-writing, better-ui).",
+    "avoid_when": "You need a raw count of every defect: the review keeps to 15 findings and folds minor ones into a coverage note. It also ships no inspector, so every measurement comes from the agent's own browser script.",
+    "alternatives": [
+      "hallmark",
+      "taste-skill",
+      "ui-ux-pro-max"
+    ],
+    "has_example": false,
+    "score": 7.3,
+    "rating": 4,
+    "bench": {
+      "kind": "design-skill",
+      "lib_only_gz_kb": "–",
+      "tasks_supported": 1,
+      "tasks_total": 1,
+      "unsupported": [],
+      "tracks": {
+        "review": {
+          "found": 27,
+          "total": 31,
+          "recall_pct": 87,
+          "by_category": {
+            "accessibility": "11/11",
+            "contrast": "3/3",
+            "layout": "4/5",
+            "typography": "3/3",
+            "writing": "4/5",
+            "polish": "2/4"
+          },
+          "by_severity": {
+            "high": "10/10",
+            "medium": "15/16",
+            "low": "2/5"
+          },
+          "missed": [
+            "D14",
+            "D24",
+            "D27",
+            "D29"
+          ],
+          "unlisted_valid": 13,
+          "unlisted_invalid": 1
+        }
+      },
+      "skill_md_lines": 919,
+      "evidence": "review 27/31 seeded defects"
+    },
+    "path": "sources/interface-skills",
+    "images": [
+      "sources/interface-skills/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The best-organised reviewer tested, but on this fixture it found no more than the unaided model.** It reported 27 of 31\nplanted defects (87%) against 28 (90%) for the control, with every accessibility defect found (11 of 11, the control found\n10) and four missed. What it adds is not recall: it is a report a team can act on (severity, domain, line number, before and\nafter code, a verdict, a coverage note saying what was and wasn't inspected) at 1.6 times the tokens of the control.\nInstall it for review structure and the domain skills; don't expect it to surface problems a careful agent would miss.\n\n## Scorecard (n = 1 run; see `benchskills/README.md` for limits)\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look (report usability) | 4 | 15 ranked rows, each with location, before, after and why; overall verdict. Rows 3, 12 and 14 bundle several root causes, which makes them harder to hand out |\n| Interactivity | 3 | Tells the agent to measure (tab the page, read the accessibility tree, emulate reduced motion, resize, translate, mirror) but ships no script: the run wrote its own Playwright probes |\n| Coverage | 3 | 87% recall against 90% for the control: same band, so no gain |\n| Accessibility | 3 | 11/11 accessibility defects against 10/11: same band |\n| Performance | 4 | 134k tokens, 20 tool calls, 220 s against 85k, 9, 89 s for the control (1.58x) |\n| React/Next fit | 5 | Fixes are written in the project's styling system; `better-typography` ships a CSS-to-Tailwind cheat sheet |\n| Bundle size | 2 | The umbrella loads seven `SKILL.md` files (919 lines, 174 KB); the run read six plus three references |\n| Licence & health | 5 | MIT, last commit the day before vetting, no install-time code, no hooks, no telemetry |\n\n## Benchmark (review track: a pricing page with 31 planted defects)\nDefects found by category: accessibility 11/11, contrast 3/3, typography 3/3, layout 4/5, writing 4/5, polish 2/4.\nMissed: footer link size (the report decided it passes the WCAG 2.5.8 spacing exception), plan/package/tier terminology,\nradius mismatch and the purple-blue gradient. The 15-finding cap pushed real defects (missing alt text, landmarks, emoji\nicons, dead handlers) into a \"noticed but left out\" note; they are credited here because the report names them. Thirteen\nfurther findings outside the key were valid and one was wrong. Details: `benchskills/out/review/interface-skills/`.\n\n## What it is\n`better-interface` routes a screen to `better-accessibility`, `better-colors`, `better-layout`, `better-typography`,\n`better-writing` and `better-ui`, collects their evidence and returns one ranked verdict. `interface-review` does the same\nfor a branch, pull request or uncommitted change (it reports what the change made worse, not the whole codebase).\n`explain-interface`, `break`, `state-machine` and `variant` are user-invoked commands (the harness will not let an agent\ncall them); `build-design` builds from a Figma file or a design image. Only the review path was benchmarked.\n\n## Using it here\nVendored unmodified in `vendor/skills/` (13 of the 14 skills; `teardown` left out), loaded in this repo's sessions through\n`.claude/skills`. Not shipped by the `ux-library` plugin. Vet result: no lifecycle scripts, hooks or telemetry; the\nspawn and network hits are `teardown`'s viewer assets and documentation links.\n\n## Limits\nOne run per skill; the answer key is 31 defects a careful agent with a browser can find, so it measures a floor, not a\nceiling. The skill was followed by an agent reading it, not loaded by Claude Code's skill system."
+  },
+  {
+    "id": "sources/taste-skill",
+    "kind": "source",
+    "title": "Taste Skill (design-taste-frontend)",
+    "pattern": "design-skills",
+    "page_type": "landing",
+    "tags": [
+      "open-source",
+      "editorial",
+      "illustrative",
+      "animated"
+    ],
+    "source_url": "https://github.com/Leonxlnx/taste-skill",
+    "source_site": "github.com/Leonxlnx",
+    "captured_at": "2026-10-26",
+    "captured_by": "toby",
+    "input": "skill-repo",
+    "version": "12af471",
+    "licence": "MIT",
+    "s_look": 2,
+    "s_interact": 5,
+    "s_coverage": 3,
+    "s_a11y": 3,
+    "s_perf": 3,
+    "s_react": 3,
+    "s_bundle": 3,
+    "s_licence": 4,
+    "why_it_works": "Art direction for pages, distilled from 247 gallery sites: a script deals three researched directions to choose from, the idea comes from the subject, and a browser inspector checks a strict no-ornament house style and a look-and-fix loop on screenshots.",
+    "use_when": "A landing or brand page where a point of view matters more than conversion clarity and you can supply or fetch real imagery (it finds credited open-archive pictures).",
+    "avoid_when": "The page's job is to compare things quickly, as a pricing page is: its page was the most distinctive and the hardest to use. Not a UX audit: as a reviewer it caught only the measurable and style problems.",
+    "alternatives": [
+      "hallmark",
+      "ui-ux-pro-max",
+      "anthropic-frontend-design"
+    ],
+    "has_example": false,
+    "score": 6.5,
+    "rating": 3,
+    "bench": {
+      "kind": "design-skill",
+      "lib_only_gz_kb": "–",
+      "tasks_supported": 2,
+      "tasks_total": 2,
+      "unsupported": [],
+      "tracks": {
+        "build": {
+          "checks_passed": 14,
+          "checks_total": 14,
+          "failed": [],
+          "axe_violations": 0,
+          "overflow_390_px": 0,
+          "keyboard_focus": "24/24",
+          "content_pct": 100,
+          "targets_24_share": 0.9,
+          "min_font_px": 14,
+          "weight_kb": 976,
+          "external_hosts": [
+            "fonts.googleapis.com",
+            "fonts.gstatic.com"
+          ],
+          "unsupported_claims": [],
+          "jury_mean": 2.88,
+          "jury_dims": {
+            "hierarchy": 2,
+            "craft": 2.5,
+            "distinctiveness": 5,
+            "brief_fit": 2
+          }
+        },
+        "review": {
+          "found": 28,
+          "total": 31,
+          "recall_pct": 90,
+          "by_category": {
+            "accessibility": "10/11",
+            "contrast": "3/3",
+            "layout": "5/5",
+            "typography": "3/3",
+            "writing": "4/5",
+            "polish": "3/4"
+          },
+          "by_severity": {
+            "high": "10/10",
+            "medium": "15/16",
+            "low": "3/5"
+          },
+          "missed": [
+            "D24",
+            "D27",
+            "D31"
+          ],
+          "unlisted_valid": 11,
+          "unlisted_invalid": 0
+        }
+      },
+      "skill_md_lines": 543,
+      "evidence": "page 14/14 checks, jury 2.88; review 28/31 seeded defects"
+    },
+    "path": "sources/taste-skill",
+    "images": [
+      "sources/taste-skill/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**The most distinctive page and the weakest pricing page.** It passed all 14 scripted checks (the only skill to do so) and\nboth judges gave it the top mark for distinctiveness (5 of 5), but ranked it last overall (2.88 against 3.63 for the\ncontrol): staggered plan cards, prices below the first screen, a collage of ledger scans and extra panels the brief didn't\nask for. It cost 2.8 times the control's tokens and 16 minutes to build. As a reviewer it matched the control (28 of 31).\nChoose it for brand pages, not for comparison pages.\n\n## Scorecard (n = 1 run per track)\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 2 | Jury 2.88 against 3.63 (distinctiveness 5, hierarchy 2, craft 2.5, brief fit 2) |\n| Interactivity | 5 | `draw.mjs` deals directions; `inspect.mjs` measures the page in a real browser (final run 0 FAIL); screenshots at three widths and a juror's rubric |\n| Coverage | 3 | Build 14 of 14 checks against 12 of 14 (band 5 both); review 90% against 90% |\n| Accessibility | 3 | axe 0, focus visible on 24 of 24 stops, 90% of targets at least 24 px; review found 10/11 accessibility defects |\n| Performance | 3 | Build 248k tokens, 60 tool calls, 956 s against 88k, 14, 129 s; review 120k against 85k. Mean 2.1x |\n| React/Next fit | 3 | Any stack (HTML, React, Next, Vue, Svelte, Astro, Tailwind named), output was single-file HTML |\n| Bundle size | 3 | 543 lines of `SKILL.md`, 2.4 MB with a research library and scripts |\n| Licence & health | 4 | MIT, last commit the day before vetting, an active changelog with community fixes. Disclosed: `assets.mjs` fetches open-archive images (credited on the page); `install.sh` symlinks into `~/.claude/skills` only when run. README carries sponsors and an app upsell |\n\n## Benchmark\n**Build:** all 14 checks pass; page weight 976 KB (two credited archive photographs from Wikimedia Commons). Judges: both\npraised the point of view and marked it down for hierarchy and brief fit: prices not visible on the first screen, a\nbroken wordmark at 390 px, a mobile page of about 7,500 px. **Review:** 28 of 31 (missed terminology, radius nesting,\nlandmarks); 11 further valid findings, none wrong. Details: `benchskills/out/build/taste-skill/`,\n`benchskills/out/review/taste-skill/`.\n\nFound in the runs: the inspector crashes as root without `--no-sandbox` and the skill documents only `CHROME_PATH`\n(the run used a wrapper outside the skill); some inspector findings were heuristic noise (navy fields counted as blank, a\nsmall label above a price read as an eyebrow); the skill asks for footage and four or more real pictures, and none\nhonest existed. As a reviewer it reports banned patterns and misses real usability defects (focus outlines, positive\ntabindex, zoom lock, unnamed buttons, colour-only cells), which the run found by its own probes.\n\n## Using it here\nNot vendored. Pinned and fetched by `node benchskills/fetch.mjs`. If adopted, copy `skills/taste-skill/` unmodified into\n`vendor/skills/`; don't run `install.sh` (it writes into the home directory).\n\n## Limits\nOne brief, one run per track, two judges. The jury scores a pricing page by how it compares plans; a brand page would\nfavour it more."
+  },
+  {
+    "id": "sources/ui-ux-pro-max",
+    "kind": "source",
+    "title": "UI UX Pro Max",
+    "pattern": "design-skills",
+    "page_type": "app",
+    "tags": [
+      "open-source",
+      "accessible",
+      "react",
+      "saas"
+    ],
+    "source_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+    "source_site": "github.com/nextlevelbuilder",
+    "captured_at": "2026-10-26",
+    "captured_by": "toby",
+    "input": "skill-repo",
+    "version": "1f88579",
+    "licence": "MIT",
+    "s_look": 3,
+    "s_interact": 3,
+    "s_coverage": 3,
+    "s_a11y": 3,
+    "s_perf": 5,
+    "s_react": 5,
+    "s_bundle": 4,
+    "s_licence": 4,
+    "why_it_works": "A searchable local database of 79 styles, 192 product palettes, 74 font pairings and 119 UX guidelines across 22 stacks, with a priority table that puts accessibility and touch first and a design-system generator.",
+    "use_when": "You want named, sourced UX rules as a checklist, or a starting palette, font pairing and style for a product type, in a stack it knows (React, Next, Tailwind, shadcn, Vue, Svelte, Flutter, SwiftUI).",
+    "avoid_when": "You need an audit with measurements: it has no rendering or contrast step, its search returned off-topic rows for review queries, and its generated pattern for pricing pushed trust badges, logo carousels and stats the brief forbade.",
+    "alternatives": [
+      "hallmark",
+      "interface-skills"
+    ],
+    "has_example": false,
+    "score": 7.5,
+    "rating": 4,
+    "bench": {
+      "kind": "design-skill",
+      "lib_only_gz_kb": "–",
+      "tasks_supported": 2,
+      "tasks_total": 2,
+      "unsupported": [],
+      "tracks": {
+        "build": {
+          "checks_passed": 13,
+          "checks_total": 14,
+          "failed": [
+            "hero_cta_above_fold"
+          ],
+          "axe_violations": 0,
+          "overflow_390_px": 0,
+          "keyboard_focus": "16/16",
+          "content_pct": 100,
+          "targets_24_share": 1,
+          "min_font_px": 13,
+          "weight_kb": 139,
+          "external_hosts": [
+            "fonts.googleapis.com",
+            "fonts.gstatic.com"
+          ],
+          "unsupported_claims": [],
+          "jury_mean": 3.88,
+          "jury_dims": {
+            "hierarchy": 4,
+            "craft": 4,
+            "distinctiveness": 3,
+            "brief_fit": 4.5
+          }
+        },
+        "review": {
+          "found": 28,
+          "total": 31,
+          "recall_pct": 90,
+          "by_category": {
+            "accessibility": "11/11",
+            "contrast": "3/3",
+            "layout": "5/5",
+            "typography": "3/3",
+            "writing": "4/5",
+            "polish": "2/4"
+          },
+          "by_severity": {
+            "high": "10/10",
+            "medium": "16/16",
+            "low": "2/5"
+          },
+          "missed": [
+            "D24",
+            "D27",
+            "D29"
+          ],
+          "unlisted_valid": 14,
+          "unlisted_invalid": 0
+        }
+      },
+      "skill_md_lines": 215,
+      "evidence": "page 13/14 checks, jury 3.88; review 28/31 seeded defects"
+    },
+    "path": "sources/ui-ux-pro-max",
+    "images": [
+      "sources/ui-ux-pro-max/bench.jpg"
+    ],
+    "files": [
+      "source.md"
+    ],
+    "body": "## Verdict\n**A useful rules reference with a modest lift.** Its pricing page scored 3.88 against 3.63 for the control (a gap inside\nthe noise of one run and two judges) and it passed 13 of 14 checks; as a reviewer it found 28 of 31 defects, the same as the\ncontrol. The most useful part is `references/quick-reference.md`: named rules by category that work as an audit checklist\nand let each finding cite a standard. The generated design system gave a coherent palette, but parts of it fought the brief.\nAt 1.5 times the control's tokens it is cheap enough to use as a reference; don't expect it to find or fix more by itself.\n\n## Scorecard (n = 1 run per track)\n| Criterion | Score | Evidence |\n|---|---|---|\n| Default look | 3 | Jury 3.88 against 3.63 (hierarchy 4, craft 4, distinctiveness 3, brief fit 4.5): same band |\n| Interactivity | 3 | A search tool and a persisted design system, but no step that renders or measures the result |\n| Coverage | 3 | Build 13 of 14 checks against 12 of 14; review 90% against 90% |\n| Accessibility | 3 | axe 0, focus visible on 16 of 16 stops, every target at least 44 px; review found 11/11 accessibility defects |\n| Performance | 5 | Build 134k tokens, 24 tool calls, 245 s against 88k, 14, 129 s; review 121k against 85k. Mean 1.5x |\n| React/Next fit | 5 | 22 technology stacks including React, Next, Tailwind and shadcn; detects the stack from `package.json` |\n| Bundle size | 4 | 215 lines of `SKILL.md`, 3.6 MB of data (the repository is 22 MB because 13 skills are duplicated for the CLI) |\n| Licence & health | 4 | MIT, last commit the day of vetting. A sample `stack/.claude/settings.json` has a broad `Read(//home/**)` allow and `enableAllProjectMcpServers` (not active unless copied); one script scrapes Pexels for slide backgrounds; the README carries donate links and cross-promotion |\n\n## Benchmark\n**Build:** fails only \"headline and call to action in the first screen\" (the call to action sits below it). All 37 facts\npresent, nothing invented, page weight 139 KB plus Google Fonts. **Review:** 28 of 31 (missed plan/package/tier\nterminology, radius nesting and the purple-blue gradient); 14 further valid findings, none wrong. Details:\n`benchskills/out/build/ui-ux-pro-max/`, `benchskills/out/review/ui-ux-pro-max/`.\n\nFound in the runs: the generated \"Trust & Authority\" pricing pattern pushed security badges, logo carousels and stats, which\nthe brief forbids (the run dropped them); its `pages/pricing.md` override came out labelled \"Settings / Profile\" with a\n1,400 px grid (ignored); `pro-rules.md` covers native apps only; \"emoji icons\" returned no results. A second parallel run\nwrote screenshots with the same scratch file names into this run's folder; the run deleted that folder and re-ran its\nchecks, and its `index.html` was unchanged (hash before and after). The review report was returned as text because the\nharness refused the agent's file write; it is transcribed verbatim (`RUN.md` says so).\n\n## Using it here\nNot vendored. Pinned and fetched by `node benchskills/fetch.mjs`. If adopted, copy `.claude/skills/ui-ux-pro-max/` and the\n`src/ui-ux-pro-max/data` it links to, set `CLAUDE_PLUGIN_ROOT`, and treat its output as suggestions (the skill says so).\n\n## Limits\nOne brief, one run per track, two judges; one parallel-run contamination incident noted above."
+  },
+  {
     "id": "3d/blueprint-linework-data-hall",
     "kind": "pattern",
     "title": "Blueprint-style 3D linework for a data hall, with a dependency thread through stacked layers",

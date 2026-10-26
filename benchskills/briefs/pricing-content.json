@@ -1,0 +1,28 @@
+{
+  "product": "Ledgerly",
+  "tagline_hint": "Invoice reconciliation for small accounting teams",
+  "annual_discount": "20%",
+  "plans": [
+    { "name": "Starter", "monthly": "19", "annual": "15.20", "features": ["1 seat", "100 reconciliations per month", "Email support"] },
+    { "name": "Team", "monthly": "59", "annual": "47.20", "features": ["5 seats", "Unlimited reconciliations", "Shared matching rules", "Email support"] },
+    { "name": "Business", "monthly": "149", "annual": "119.20", "features": ["15 seats", "Unlimited reconciliations", "Shared matching rules", "SSO", "Audit log", "Priority support"] }
+  ],
+  "cta": "Start free trial",
+  "comparison": [
+    ["Seats", "1", "5", "15"],
+    ["Reconciliations per month", "100", "Unlimited", "Unlimited"],
+    ["Bank connections", "1", "5", "20"],
+    ["Shared matching rules", "No", "Yes", "Yes"],
+    ["Export to CSV and PDF", "Yes", "Yes", "Yes"],
+    ["SSO", "No", "No", "Yes"],
+    ["Audit log", "No", "No", "Yes"],
+    ["Support", "Email", "Email", "Priority"]
+  ],
+  "faq": [
+    ["Can I change plans later?", "Yes. Upgrade or downgrade at any time; the change applies from your next billing date."],
+    ["Is there a free trial?", "Yes. Every plan starts with a 14-day free trial, and no card is needed to begin."],
+    ["What counts as a reconciliation?", "One bank statement matched against your ledger for one account in one month."],
+    ["How does annual billing work?", "You are charged once a year at 20% less than twelve monthly payments."],
+    ["Do you offer refunds?", "Yes. Ask within 30 days of your first charge and we refund it in full."]
+  ]
+}

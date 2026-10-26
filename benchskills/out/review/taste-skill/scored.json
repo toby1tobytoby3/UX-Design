@@ -1,0 +1,186 @@
+{
+ "label": "B",
+ "defects": {
+  "D01": {
+   "found": true,
+   "quote": "`.banner-close` (L66) contains only an SVG, with no `aria-label`, so it is announced as \"button\"."
+  },
+  "D02": {
+   "found": true,
+   "quote": "`#newsletter-email` has only a placeholder (L112), so the field has no accessible name once it is filled"
+  },
+  "D03": {
+   "found": true,
+   "quote": "It is a `<p onclick>` (L97): not focusable, not announced as a link or button"
+  },
+  "D04": {
+   "found": true,
+   "quote": "`a:focus, button:focus, input:focus { outline: none }` (L10), with no replacement."
+  },
+  "D05": {
+   "found": true,
+   "quote": "Logo is a blank yellow rectangle with no alt text"
+  },
+  "D06": {
+   "found": true,
+   "quote": "`td.yes` is green and `td.no` is red with no text or icon (L42-43, L101-103)."
+  },
+  "D07": {
+   "found": true,
+   "quote": "`<a href=\"#faq\" tabindex=\"3\">` (L63) takes the first Tab stop, ahead of \"Pricing\"."
+  },
+  "D08": {
+   "found": true,
+   "quote": "The only heading levels are an `h1`, then plan titles as `h4` (L77, no `h2`/`h3` above them)"
+  },
+  "D09": {
+   "found": true,
+   "quote": "`.ticker span` animates 8s linear infinite (L16-18) with no pause or reduced-motion rule."
+  },
+  "D10": {
+   "found": true,
+   "quote": "the intro line \"Prices are shown per month, billed monthly.\" at 1.9:1 (`.lede` #bbb on white, L21)"
+  },
+  "D11": {
+   "found": true,
+   "quote": "\"Submit\" at 1.4:1 (white on #ffd23f, L25)"
+  },
+  "D12": {
+   "found": true,
+   "quote": "the input border #e6e6e6 on white is about 1.3:1 (needs 3:1 for a form control)"
+  },
+  "D13": {
+   "found": true,
+   "quote": "Its `min-width: 560px` makes it overflow at 390px (the table is cut off after \"Starter\", L40)."
+  },
+  "D14": {
+   "found": true,
+   "quote": "12px text, 14px tall hit areas and 6px gaps (L55; measured 33-43 x 14px)."
+  },
+  "D15": {
+   "found": true,
+   "quote": "`.feature-line` (L36, L81) is `width: 180px; white-space: nowrap; overflow: hidden`"
+  },
+  "D16": {
+   "found": true,
+   "quote": "`header.site { position: sticky; height: 140px }` (L11) takes 16% of a 900px desktop screen"
+  },
+  "D17": {
+   "found": true,
+   "quote": "Paddings are 20/24/28px (L28-29), so inner content starts at different offsets"
+  },
+  "D18": {
+   "found": true,
+   "quote": "`.plan li` is 12px (L35) and the Starter details are 12px"
+  },
+  "D19": {
+   "found": true,
+   "quote": "`.about` has `max-width: none` and `line-height: 1` (L45-46)."
+  },
+  "D20": {
+   "found": true,
+   "quote": "Georgia (body), Impact (headings, L20/31/53), Arial (nav, buttons, footer)"
+  },
+  "D21": {
+   "found": true,
+   "quote": "All three plan buttons (L82/88/94, `.choose`) share the label \"Click here\"."
+  },
+  "D22": {
+   "found": true,
+   "quote": "\"Error 422\" is an HTTP code meaning nothing to a user"
+  },
+  "D23": {
+   "found": true,
+   "quote": "the second message blames the user without saying what a valid address looks like"
+  },
+  "D24": {
+   "found": false,
+   "quote": ""
+  },
+  "D25": {
+   "found": true,
+   "quote": "its \"OK / Cancel\" labels are vague for an irreversible action"
+  },
+  "D26": {
+   "found": true,
+   "quote": "`.plan:hover { width: 104%; height: auto }` with `transition: all 0.6s` (L27, L30)."
+  },
+  "D27": {
+   "found": false,
+   "quote": ""
+  },
+  "D28": {
+   "found": true,
+   "quote": "Emoji used as feature icons."
+  },
+  "D29": {
+   "found": true,
+   "quote": "`.hero` uses a purple-to-blue gradient (L19)"
+  },
+  "D30": {
+   "found": true,
+   "quote": "The viewport meta has `maximum-scale=1, user-scalable=no` (L5)."
+  },
+  "D31": {
+   "found": false,
+   "quote": ""
+  }
+ },
+ "unlisted": [
+  {
+   "quote": "Plan cards do not wrap on a phone; the Business plan is off-screen.",
+   "valid": true,
+   "why": "Non-wrapping flex row of cards overflows at 390px."
+  },
+  {
+   "quote": "\"Most popular tier\" is on the cheapest plan.",
+   "valid": true,
+   "why": "Badge sits only on Starter, the $19 plan."
+  },
+  {
+   "quote": "Prices lack a period and sit in a monospace face.",
+   "valid": true,
+   "why": "Prices have no /month and use Courier New."
+  },
+  {
+   "quote": "Comparison table is thin and incomplete.",
+   "valid": true,
+   "why": "Table lists only three features, omitting seats and limits."
+  },
+  {
+   "quote": "Hero headline and hero image are weak.",
+   "valid": true,
+   "why": "Generic headline and empty translucent placeholder image."
+  },
+  {
+   "quote": "Contradictory billing copy.",
+   "valid": true,
+   "why": "Billed monthly versus annual plans billed yearly, no annual option."
+  },
+  {
+   "quote": "Page order puts irrelevant items between the plans and the fine print.",
+   "valid": true,
+   "why": "Fine print sits far from the prices it qualifies."
+  },
+  {
+   "quote": "FAQ is thin and boxed.",
+   "valid": true,
+   "why": "Only two one-line answers in the FAQ."
+  },
+  {
+   "quote": "are on screen before anyone has typed. They are not linked to the field (`aria-describedby`, `aria-invalid`)",
+   "valid": true,
+   "why": "Errors are static on load and not associated with the input."
+  },
+  {
+   "quote": "\"Sign in\" is `href=\"#\"` (L64), a dead link.",
+   "valid": true,
+   "why": "Sign in link points to # in the fixture."
+  },
+  {
+   "quote": "**Fixed header + banner + ticker stack above the hero**",
+   "valid": true,
+   "why": "Stack of header, banner and ticker pushes content down; header is sticky."
+  }
+ ]
+}

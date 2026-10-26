@@ -1,0 +1,28 @@
+TASTESKILL · LINT   1 file(s)
+
+FAIL
+  [mono] Monospace type. Only literal code may be monospace.  (2×)
+      ../../../fixtures/seeded-pricing.html:16  font-family: "Courier New", monospace
+      ../../../fixtures/seeded-pricing.html:33  font-family: "Courier New", monospace
+  [gradient] Gradient fill. Use a flat colour or a real image (a neutral scrim over a photo is the one exception).  (1×)
+      ../../../fixtures/seeded-pricing.html:19  linear-gradient(
+  [hairline] Thin rule / divider line. Separate with space, tone or scale; lines belong to real tables and form fields.  (1×)
+      ../../../fixtures/seeded-pricing.html:52  border-bottom: 1px
+  [emoji] Emoji used as UI.  (1×)
+      ../../../fixtures/seeded-pricing.html:74  🚀
+
+WARN
+  [outlined-box] A 1px outlined box. Prefer a filled surface or no box.  (3×)
+      ../../../fixtures/seeded-pricing.html:15  border: 1px solid
+      ../../../fixtures/seeded-pricing.html:27  border: 1px solid
+      ../../../fixtures/seeded-pricing.html:49  border: 1px solid
+  [transition-all] transition: all. Name the properties (transform, opacity).  (1×)
+      ../../../fixtures/seeded-pricing.html:27  transition: all
+  [cta-copy] Generic button label. Name the action or the thing ("Book a table", "See the plans").  (4×)
+      ../../../fixtures/seeded-pricing.html:82  >Click here<
+      ../../../fixtures/seeded-pricing.html:88  >Click here<
+      ../../../fixtures/seeded-pricing.html:94  >Click here<
+      ../../../fixtures/seeded-pricing.html:113  >Submit<
+
+RESULT: 5 FAIL, 8 WARN — fix the FAILs before rendering.
+Interface fragments marked data-ui keep their own borders and shadows. Any other line that must keep a flagged pattern for a real reason can carry the comment taste-skill-ignore.

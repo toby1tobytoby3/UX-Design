@@ -1,0 +1,66 @@
+TASTESKILL · INSPECT   /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html
+
+MEASURED (first viewport listed)
+  hero headline   "Pick the perfect Package"  4 words · 1 line(s) · 44px (3.1vw) · Impact 700 · tracking 0em · leading 1.2
+  @768px          1 line(s) · 44px
+  @390px          2 line(s) · 44px
+  typefaces       Georgia 79%, Courier New 7%, Arial 6%, Impact 6%, Comic Sans MS 2%
+  sizes in use    11 / 12 / 13 / 14 / 16 / 18 / 19 / 24 / 32 / 44 px   body 16px / 1
+  colour          page #ffffff · button #7b2ff7
+  page            2.3 screens · 242 words · 2 images · hero media none
+  headings        4 · longest 1 line(s) · median 1 words
+
+FAIL — fix every one of these
+  [eyebrow] @1440px (+768, 390)  3 eyebrow/kicker label(s) above headings: "Team" above "$59"; "Business" above "$149"; "Most popular tier" (pill) above "$19"
+      → Delete them. If the label carried real information, fold it into the headline or the supporting sentence.
+  [mono] @1440px (+768, 390)  Monospace type outside code: Courier New — e.g. "Reconciled this week: invoices matched, ", "$19", "$59", "$149"
+      → Set it in the text face. Monospace is for literal code inside <pre>/<code> only.
+  [emoji] @1440px (+768, 390)  Emoji in the page: 🚀 🔒 📈
+      → Remove. Use words or real imagery.
+  [gradient] @1440px (+768, 390)  1 gradient fill(s): div.hero → linear-gradient(135deg, rgb(123, 47, 247), rgb(47, 128, 237))
+      → Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.
+  [hairline] @1440px (+768, 390)  2 thin rule(s)/divider line(s): details 1392px | details 1392px
+      → Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.
+  [outlined-box] @1440px (+768)  4 boxes drawn with a 1px outline.
+      → Define a surface by its fill (one tone step from the page) or leave the content unboxed.
+  [palette-purple] @1440px (+768, 390)  Indigo / violet (button #7b2ff7).
+      → Use the accent from the drawn palette.
+  [contrast] @1440px (+768, 390)  Unreadable text: "Submit" 1.4:1 (#ffffff on #ffd23f); "Prices are shown per month, billed month" 1.9:1 (#bbbbbb on #ffffff)
+      → Raise contrast to at least 4.5:1 for text, 3:1 for large display.
+  [font-count] @1440px (+768, 390)  5 typefaces in use (Georgia, Courier New, Arial, Impact, Comic Sans MS).
+      → Two at most: one display, one text. Often one is enough.
+  [few-pictures] @1440px  Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.
+      → Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve.
+  [small-text] @1440px (+768, 390)  8 text blocks under 13px.
+      → Nothing meant to be read goes below 13px.
+  [focal-point] @1440px  The first screen has no dominant element: the largest type is 44px (3.1vw) and no single picture holds a third of the viewport.
+      → Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw.
+  [still-page] @1440px  Only 1 element(s) moved while the page loaded and scrolled.
+      → Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback.
+  [overflow] @390px  Page scrolls sideways by 194px at 390px. Widest offenders: div.plan (+11px), h4 (+132px), div.price (+132px).
+      → Constrain the element that is wider than the viewport (max-width: 100%, or overflow: clip on its section).
+
+WARN — fix, or be able to defend
+  [size-count] @1440px (+768, 390)  10 different font sizes (11, 12, 13, 14, 16, 18, 19, 24, 32, 44).
+      → A page needs about five: display, heading, lead, body, small.
+  [first-action] @1440px (+390)  No visible button in the first screen.
+      → Give the one primary action a real button in the first screen (a filled or solid-bordered control, 44px or taller), not only a link in the navigation.
+  [no-footage] @1440px  No video anywhere on the page.
+      → Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject.
+  [measure] @1440px (+768)  Longest paragraph runs about 174 characters per line.
+      → Cap paragraphs at 45–75 characters (max-width: 60ch).
+  [outlined-box] @390px  2 box(es) drawn with a 1px outline.
+      → Prefer a filled surface or no box.
+  [edge-text] @390px  1 text block(s) sit 12–15px from the phone's edge: "Unlimited reconciliations" (14px)
+      → The page margin is 16–20px on a phone; the header and the corner labels sit on it too.
+
+LOOK AT THE RENDER — open these with your image viewer / Read tool before saying anything about quality:
+  desktop 1440px  .taste-skill/before/desktop-fold.jpg
+                  .taste-skill/before/desktop-page-01.jpg
+  tablet 768px    .taste-skill/before/tablet-fold.jpg
+                  .taste-skill/before/tablet-page-01.jpg
+  mobile 390px    .taste-skill/before/mobile-fold.jpg
+                  .taste-skill/before/mobile-page-01.jpg
+
+report: .taste-skill/before/report.json
+RESULT: 14 FAIL, 6 WARN — not done.

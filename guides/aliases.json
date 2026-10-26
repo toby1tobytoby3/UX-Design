@@ -1038,6 +1038,78 @@
         "sticky nav",
         "mobile menu"
       ]
+    },
+    "G1": {
+      "patterns": [
+        "design-skills"
+      ],
+      "guide": "guides/design-skills.md",
+      "terms": [
+        "design skill",
+        "design skills",
+        "frontend design skill",
+        "anti-slop",
+        "ai slop",
+        "generic looking ui",
+        "looks ai generated",
+        "make it look designed",
+        "art direction",
+        "design direction",
+        "landing page skill",
+        "hallmark",
+        "taste skill",
+        "ui ux pro max",
+        "frontend-design",
+        "design toolkit",
+        "design system generator",
+        "claude skill for design"
+      ]
+    },
+    "G2": {
+      "patterns": [
+        "design-skills"
+      ],
+      "guide": "guides/design-skills.md",
+      "terms": [
+        "interface review",
+        "ui review",
+        "design review",
+        "design critique",
+        "audit my ui",
+        "accessibility audit skill",
+        "review skill",
+        "better-interface",
+        "better interface",
+        "interface skills",
+        "wcag review",
+        "polish",
+        "ui polish",
+        "layout review",
+        "typography review",
+        "copy review",
+        "microcopy review"
+      ]
+    },
+    "G3": {
+      "patterns": [
+        "design-skills"
+      ],
+      "guide": "guides/design-skills.md",
+      "terms": [
+        "diagram skill",
+        "draw a diagram",
+        "architecture diagram",
+        "flowchart skill",
+        "sequence diagram",
+        "diagram design",
+        "archify",
+        "mermaid alternative",
+        "editorial diagram",
+        "swimlane",
+        "service blueprint",
+        "user journey diagram",
+        "wardley map"
+      ]
     }
   },
   "scenarios": {

@@ -1,0 +1,2360 @@
+{
+ "url": "index.html",
+ "at": "2026-10-26T10:13:29.193Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 7,
+   "filled": [
+    1,
+    0.63,
+    0.63,
+    0.87,
+    0.4,
+    0.87,
+    0.87
+   ],
+   "motion": {
+    "elements": 37,
+    "css": 0,
+    "transitions": 36,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 5448,
+     "screens": 6.1,
+     "words": 508,
+     "img": 4,
+     "video": 0,
+     "canvas": 0,
+     "svg": 1,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "pittsboro-merchant-business-ledger.jpg",
+      "account-book-of-thomas-mister.jpg",
+      "pittsboro-merchant-business-ledger.jpg",
+      "account-book-of-thomas-mister.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Ledgerly",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 151.2,
+     "vw": 10.5,
+     "font": "Stack Sans Headline",
+     "weight": 300,
+     "tracking": -0.03,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.39,
+     "top": 316,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Ledgerly",
+     "words": 1,
+     "lines": 1,
+     "size": 151.2,
+     "font": "Stack Sans Headline"
+    },
+    "headings": [
+     {
+      "text": "Ledgerly",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 151.2,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 316,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "From 19",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.21,
+      "top": 508,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Plans that tie out",
+      "words": 4,
+      "chars": 18,
+      "lines": 2,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.29,
+      "top": 1050,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "149",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.08,
+      "top": 1122,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "59",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.05,
+      "top": 1272,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "19",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.05,
+      "top": 1380,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "Before you start",
+      "words": 3,
+      "chars": 16,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.46,
+      "top": 1863,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "14 days",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.21,
+      "top": 1863,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "30 days",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.21,
+      "top": 2103,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Compare plans",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 2541,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Questions",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 151.2,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 3293,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Try it free for 14 days",
+      "words": 6,
+      "chars": 23,
+      "lines": 2,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.32,
+      "top": 4487,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "L e d g e r l y",
+      "words": 8,
+      "chars": 15,
+      "lines": 1,
+      "size": 151.2,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.82,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 4934,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 13,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Stack Sans Text",
+       "share": 0.95,
+       "mono": false
+      },
+      {
+       "family": "Stack Sans Headline",
+       "share": 0.05,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      15,
+      19,
+      26,
+      64,
+      151
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Stack Sans Text",
+      "size": 19,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 13.9
+     },
+     "measureChars": 44,
+     "max": {
+      "size": 151.2,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "text": "Ledgerly"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#05070a",
+       "top": 2469,
+       "hsl": {
+        "h": 216,
+        "s": 0.33,
+        "l": 0.03
+       }
+      },
+      {
+       "color": "#1f2b4d",
+       "top": 3153,
+       "hsl": {
+        "h": 224,
+        "s": 0.43,
+        "l": 0.21
+       }
+      },
+      {
+       "color": "#e3e1dc",
+       "top": 4902,
+       "hsl": {
+        "h": 43,
+        "s": 0.11,
+        "l": 0.88
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2b4d",
+       "share": 0.52
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.31
+      },
+      {
+       "color": "#565d73",
+       "share": 0.09
+      },
+      {
+       "color": "#0a3a80",
+       "share": 0.03
+      },
+      {
+       "color": "#a9afc0",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1f2b4d",
+      "hsl": {
+       "h": 224,
+       "s": 0.43,
+       "l": 0.21
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 3,
+     "radius": 8,
+     "height": 64,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to the plans",
+      "Start free trial",
+      "Start free trial"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 14,
+     "boxRadius": 8,
+     "squareMedia": 1,
+     "roundedMedia": 3,
+     "mediaRadius": 8,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.26
+     },
+     {
+      "type": "img",
+      "ratio": 0.22
+     }
+    ],
+    "nav": {
+     "links": 6,
+     "fixed": false,
+     "height": 68,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "stack sans headline",
+     "stack sans text"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 5448,
+    "margins": {
+     "left": 32,
+     "right": 32
+    },
+    "sections": [
+     {
+      "sel": "div#hero.board-hero",
+      "tag": "div",
+      "top": 68,
+      "height": 824,
+      "words": 45,
+      "media": 1,
+      "middle": 130,
+      "heading": {
+       "text": "Ledgerly",
+       "size": 151,
+       "tag": "h1"
+      },
+      "left": 26,
+      "right": 8,
+      "textLeft": 26,
+      "textRight": 53,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plans.pricing",
+      "tag": "section",
+      "top": 1050,
+      "height": 630,
+      "words": 81,
+      "media": 0,
+      "middle": 175,
+      "heading": {
+       "text": "19",
+       "size": 64,
+       "tag": "span"
+      },
+      "left": 32,
+      "right": 223,
+      "textLeft": 32,
+      "textRight": 223,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#terms.terms",
+      "tag": "section",
+      "top": 1839,
+      "height": 472,
+      "words": 89,
+      "media": 0,
+      "middle": 55,
+      "heading": {
+       "text": "Before you start",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 390,
+      "right": 42,
+      "textLeft": 390,
+      "textRight": 42,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#compare.compare",
+      "tag": "section",
+      "top": 2469,
+      "height": 684,
+      "words": 46,
+      "media": 0,
+      "middle": 367,
+      "heading": {
+       "text": "Compare plans",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 32,
+      "textLeft": 32,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#faq.faq",
+      "tag": "section",
+      "top": 3153,
+      "height": 1135,
+      "words": 96,
+      "media": 0,
+      "middle": 18,
+      "heading": {
+       "text": "Questions",
+       "size": 151,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 71,
+      "textLeft": 32,
+      "textRight": 71,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.cta",
+      "tag": "section",
+      "top": 4446,
+      "height": 360,
+      "words": 33,
+      "media": 1,
+      "middle": 82,
+      "heading": {
+       "text": "Try it free for 14 days",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 301,
+      "textLeft": 285,
+      "textRight": 301,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 4902,
+      "height": 546,
+      "words": 77,
+      "media": 0,
+      "middle": 81,
+      "heading": {
+       "text": "Plans",
+       "size": 15,
+       "tag": "h3"
+      },
+      "left": 32,
+      "right": 47,
+      "textLeft": 32,
+      "textRight": 47,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 4808,
+      "height": 352
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Ledgerly",
+      "size": 151,
+      "top": 316,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 26,
+      "n": 10
+     },
+     {
+      "x": 724,
+      "n": 5
+     },
+     {
+      "x": 285,
+      "n": 2
+     },
+     {
+      "x": 390,
+      "n": 2
+     },
+     {
+      "x": 1106,
+      "n": 2
+     },
+     {
+      "x": 509,
+      "n": 1
+     },
+     {
+      "x": 561,
+      "n": 1
+     },
+     {
+      "x": 748,
+      "n": 1
+     },
+     {
+      "x": 987,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 25,
+    "bodySize": 19,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.07,
+    "voidBox": {
+     "x": 0,
+     "y": 120,
+     "w": 720,
+     "h": 120
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 6,
+   "filled": [
+    0.87,
+    0.7,
+    0.88,
+    0.78,
+    0.66,
+    0.93
+   ],
+   "motion": {
+    "elements": 36,
+    "css": 0,
+    "transitions": 35,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 5608,
+     "screens": 5.5,
+     "words": 508,
+     "img": 4,
+     "video": 0,
+     "canvas": 0,
+     "svg": 1,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "pittsboro-merchant-business-ledger.jpg",
+      "account-book-of-thomas-mister.jpg",
+      "pittsboro-merchant-business-ledger.jpg",
+      "account-book-of-thomas-mister.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Ledgerly",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 80.6,
+     "vw": 10.5,
+     "font": "Stack Sans Headline",
+     "weight": 300,
+     "tracking": -0.03,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.39,
+     "top": 209,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Ledgerly",
+     "words": 1,
+     "lines": 1,
+     "size": 80.6,
+     "font": "Stack Sans Headline"
+    },
+    "headings": [
+     {
+      "text": "Ledgerly",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 80.6,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 209,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "From 19",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.42,
+      "top": 718,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Plans that tie out",
+      "words": 4,
+      "chars": 18,
+      "lines": 2,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 1045,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "149",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.11,
+      "top": 1324,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "59",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.07,
+      "top": 1444,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "19",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.07,
+      "top": 1514,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "Before you start",
+      "words": 3,
+      "chars": 16,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.59,
+      "top": 1929,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "14 days",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.42,
+      "top": 2377,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "30 days",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.42,
+      "top": 2377,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Compare plans",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2713,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Questions",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 80.6,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 3416,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Try it free for 14 days",
+      "words": 6,
+      "chars": 23,
+      "lines": 2,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 4476,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "L e d g e r l y",
+      "words": 8,
+      "chars": 15,
+      "lines": 1,
+      "size": 80.6,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.82,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 5021,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 13,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Stack Sans Text",
+       "share": 0.95,
+       "mono": false
+      },
+      {
+       "family": "Stack Sans Headline",
+       "share": 0.05,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      18,
+      19,
+      23,
+      45,
+      81
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": {
+      "font": "Stack Sans Text",
+      "size": 17.9,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 20.2
+     },
+     "measureChars": 34,
+     "max": {
+      "size": 80.6,
+      "vw": 10.5,
+      "font": "Stack Sans Headline",
+      "text": "Ledgerly"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#05070a",
+       "top": 2657,
+       "hsl": {
+        "h": 216,
+        "s": 0.33,
+        "l": 0.03
+       }
+      },
+      {
+       "color": "#e3e1dc",
+       "top": 4989,
+       "hsl": {
+        "h": 43,
+        "s": 0.11,
+        "l": 0.88
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2b4d",
+       "share": 0.52
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.31
+      },
+      {
+       "color": "#565d73",
+       "share": 0.09
+      },
+      {
+       "color": "#0a3a80",
+       "share": 0.03
+      },
+      {
+       "color": "#a9afc0",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1f2b4d",
+      "hsl": {
+       "h": 224,
+       "s": 0.43,
+       "l": 0.21
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 3,
+     "radius": 8,
+     "height": 64,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to the plans",
+      "Start free trial",
+      "Start free trial"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 15,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 4,
+     "mediaRadius": 8,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.21
+     },
+     {
+      "type": "img",
+      "ratio": 0.18
+     }
+    ],
+    "nav": {
+     "links": 6,
+     "fixed": false,
+     "height": 68,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "stack sans headline",
+     "stack sans text"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 5608,
+    "margins": {
+     "left": 29,
+     "right": 32
+    },
+    "sections": [
+     {
+      "sel": "div#hero.board-hero",
+      "tag": "div",
+      "top": 68,
+      "height": 889,
+      "words": 45,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "Ledgerly",
+       "size": 81,
+       "tag": "h1"
+      },
+      "left": 8,
+      "right": 0,
+      "textLeft": 29,
+      "textRight": 34,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plans.pricing",
+      "tag": "section",
+      "top": 1045,
+      "height": 771,
+      "words": 81,
+      "media": 0,
+      "middle": 32,
+      "heading": {
+       "text": "19",
+       "size": 45,
+       "tag": "span"
+      },
+      "left": 32,
+      "right": 32,
+      "textLeft": 32,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#terms.terms",
+      "tag": "section",
+      "top": 1905,
+      "height": 664,
+      "words": 81,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Before you start",
+       "size": 45,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 34,
+      "textLeft": 32,
+      "textRight": 34,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#compare.compare",
+      "tag": "section",
+      "top": 2657,
+      "height": 663,
+      "words": 43,
+      "media": 0,
+      "middle": 99,
+      "heading": {
+       "text": "Compare plans",
+       "size": 45,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 32,
+      "textLeft": 32,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#faq.faq",
+      "tag": "section",
+      "top": 3320,
+      "height": 1036,
+      "words": 96,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Questions",
+       "size": 81,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 39,
+      "textLeft": 32,
+      "textRight": 39,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.cta",
+      "tag": "section",
+      "top": 4444,
+      "height": 449,
+      "words": 33,
+      "media": 1,
+      "middle": 63,
+      "heading": {
+       "text": "Try it free for 14 days",
+       "size": 45,
+       "tag": "h2"
+      },
+      "left": 8,
+      "right": 56,
+      "textLeft": 40,
+      "textRight": 56,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 4989,
+      "height": 618,
+      "words": 77,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Plans",
+       "size": 14,
+       "tag": "h3"
+      },
+      "left": 32,
+      "right": 47,
+      "textLeft": 32,
+      "textRight": 47,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 4896,
+      "height": 372
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Ledgerly",
+      "size": 81,
+      "top": 209,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 29,
+      "n": 11
+     },
+     {
+      "x": 329,
+      "n": 5
+     },
+     {
+      "x": 285,
+      "n": 3
+     },
+     {
+      "x": 40,
+      "n": 2
+     },
+     {
+      "x": 412,
+      "n": 2
+     },
+     {
+      "x": 515,
+      "n": 1
+     },
+     {
+      "x": 539,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 25,
+    "bodySize": 18,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 9,
+   "filled": [
+    1,
+    0.69,
+    1,
+    0.8,
+    0.81,
+    1,
+    0.6,
+    0.8,
+    1
+   ],
+   "motion": {
+    "elements": 35,
+    "css": 0,
+    "transitions": 34,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 7538,
+     "screens": 8.9,
+     "words": 503,
+     "img": 4,
+     "video": 0,
+     "canvas": 0,
+     "svg": 1,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "pittsboro-merchant-business-ledger.jpg",
+      "account-book-of-thomas-mister.jpg",
+      "pittsboro-merchant-business-ledger.jpg",
+      "account-book-of-thomas-mister.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Ledgerly",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 68,
+     "vw": 17.4,
+     "font": "Stack Sans Headline",
+     "weight": 300,
+     "tracking": -0.03,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.65,
+     "top": 210,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Ledgerly",
+     "words": 1,
+     "lines": 1,
+     "size": 68,
+     "font": "Stack Sans Headline"
+    },
+    "headings": [
+     {
+      "text": "Ledgerly",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 68,
+      "vw": 17.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.65,
+      "top": 210,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "From 19",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 538,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Plans that tie out",
+      "words": 4,
+      "chars": 18,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 1415,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "19",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.12,
+      "top": 1728,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "59",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.12,
+      "top": 2061,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "149",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.18,
+      "top": 2426,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "Before you start",
+      "words": 3,
+      "chars": 16,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 3173,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "14 days",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 3358,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "30 days",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 3852,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Compare plans",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 4162,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Questions",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 68,
+      "vw": 17.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.78,
+      "top": 5109,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Try it free for 14 days",
+      "words": 6,
+      "chars": 23,
+      "lines": 2,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 6074,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "L e d g e r l y",
+      "words": 8,
+      "chars": 15,
+      "lines": 2,
+      "size": 68,
+      "vw": 17.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 0.82,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 6713,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 13,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Stack Sans Text",
+       "share": 0.95,
+       "mono": false
+      },
+      {
+       "family": "Stack Sans Headline",
+       "share": 0.05,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      17,
+      19,
+      20,
+      40,
+      68
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": {
+      "font": "Stack Sans Text",
+      "size": 17,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 13.9
+     },
+     "measureChars": 44,
+     "max": {
+      "size": 68,
+      "vw": 17.4,
+      "font": "Stack Sans Headline",
+      "text": "Ledgerly"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#e3e1dc",
+       "top": 1664,
+       "hsl": {
+        "h": 43,
+        "s": 0.11,
+        "l": 0.88
+       }
+      },
+      {
+       "color": "#1f2b4d",
+       "top": 1997,
+       "hsl": {
+        "h": 224,
+        "s": 0.43,
+        "l": 0.21
+       }
+      },
+      {
+       "color": "#05070a",
+       "top": 2362,
+       "hsl": {
+        "h": 216,
+        "s": 0.33,
+        "l": 0.03
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 3522,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2b4d",
+       "share": 0.53
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.32
+      },
+      {
+       "color": "#565d73",
+       "share": 0.09
+      },
+      {
+       "color": "#0a3a80",
+       "share": 0.02
+      },
+      {
+       "color": "#bcc2d4",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1f2b4d",
+      "hsl": {
+       "h": 224,
+       "s": 0.43,
+       "l": 0.21
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 5,
+     "inHero": 3,
+     "radius": 8,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to the plans",
+      "Start free trial",
+      "Start free trial"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 15,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 3,
+     "mediaRadius": 8,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.1
+     }
+    ],
+    "nav": {
+     "links": 5,
+     "fixed": false,
+     "height": 66,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "stack sans headline",
+     "stack sans text"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 7538,
+    "margins": {
+     "left": 20,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "div#hero.board-hero",
+      "tag": "div",
+      "top": 66,
+      "height": 1269,
+      "words": 45,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Ledgerly",
+       "size": 68,
+       "tag": "h1"
+      },
+      "left": 6,
+      "right": 6,
+      "textLeft": 23,
+      "textRight": 79,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plans.pricing",
+      "tag": "section",
+      "top": 1415,
+      "height": 1369,
+      "words": 81,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "19",
+       "size": 40,
+       "tag": "span"
+      },
+      "left": 20,
+      "right": 31,
+      "textLeft": 20,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#terms.terms",
+      "tag": "section",
+      "top": 2864,
+      "height": 1138,
+      "words": 85,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Before you start",
+       "size": 40,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#compare.compare",
+      "tag": "section",
+      "top": 4082,
+      "height": 955,
+      "words": 38,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 53,
+      "textLeft": 20,
+      "textRight": 53,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#faq.faq",
+      "tag": "section",
+      "top": 5037,
+      "height": 929,
+      "words": 92,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Questions",
+       "size": 68,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 20,
+      "textLeft": 20,
+      "textRight": 20,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.cta",
+      "tag": "section",
+      "top": 6046,
+      "height": 590,
+      "words": 33,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Try it free for 14 days",
+       "size": 40,
+       "tag": "h2"
+      },
+      "left": 6,
+      "right": 29,
+      "textLeft": 26,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 6693,
+      "height": 845,
+      "words": 77,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Plans",
+       "size": 14,
+       "tag": "h3"
+      },
+      "left": 20,
+      "right": 29,
+      "textLeft": 20,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 6640,
+      "height": 300
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Ledgerly",
+      "size": 68,
+      "top": 210,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 20,
+      "n": 22
+     },
+     {
+      "x": 68,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 23,
+    "bodySize": 17,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/desktop-fold.jpg",
+   "pages": [
+    "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/desktop-page-01.jpg",
+    "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/desktop-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/tablet-fold.jpg",
+   "pages": [
+    "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/mobile-fold.jpg",
+   "pages": [
+    "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/mobile-page-01.jpg",
+    "/home/user/UX-Design/benchskills/out/build/taste-skill/.taste-skill/inspect/mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

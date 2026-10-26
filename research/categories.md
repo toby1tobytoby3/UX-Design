@@ -1,7 +1,7 @@
 # Category map for research
 
-The categories the UX library covers, grouped into six layers. The 17 marked ✅ have a full guide, scored sources and
-live patterns. **The other 24 stop at a quick pick** (`guides/quick-picks.md`: one line each, not benchmarked), which is
+The categories the UX library covers, grouped into seven layers. The 20 marked ✅ have a full guide, scored sources and
+live patterns (G's evidence is a benchmark of skills, not captured patterns). **The other 24 stop at a quick pick** (`guides/quick-picks.md`: one line each, not benchmarked), which is
 enough for a loose lookup. Build one out fully only when a project actually needs it.
 
 - **Status**: ✅ covered (guide + scored sources + patterns) · ◐ quick pick (one-line starting point; `ux-find` explores the rest)
@@ -83,6 +83,14 @@ enough for a loose lookup. Build one out fully only when a project actually need
 | F1 | Landing page sections | Hero, proof, pricing, FAQ, security/trust, CTA | ◐ quick pick (`guides/quick-picks.md`) | P3 | Magic UI; shadcn/ui; Motion; Kokonut UI; Rive Web runtime *(catalogue)* | Linear, Stripe, Notion, Vercel |
 | F2 | Scroll-driven storytelling | Pinned sections, reveals, scroll-linked motion on native scroll | ◐ quick pick (`guides/quick-picks.md`) | P3 | Motion; Anime.js; Lenis; PixiJS *(catalogue)* | Apple, Igloo |
 | F3 | Navigation and mega menus | Sticky/condensing nav, mega menus, mobile menus | ◐ quick pick (`guides/quick-picks.md`) | P3 | Radix Primitives; React Aria Components; shadcn/ui *(catalogue)* | Stripe, Vercel |
+
+## G. Build tooling (agent skills)
+
+| # | Category | Covers | Status | Priority | Example tools to assess | Example references |
+|---|---|---|---|---|---|---|
+| G1 | Design-direction skills (builders) | Skills that make an agent build pages and screens that don't look generated: art direction, themes, floors of rules, look-and-fix loops | ✅ `guides/design-skills.md` (benchmarked in `benchskills/`) | P2 | Hallmark; Taste Skill; UI UX Pro Max; Anthropic frontend-design *(skill repos, vetted)* | Awwwards, One Page Love |
+| G2 | Interface review skills | Skills that audit or polish an existing screen: accessibility, layout, typography, colour, copy, UI polish, branch/PR review | ✅ `guides/design-skills.md` (benchmarked in `benchskills/`) | P2 | Interface Skills (`better-*`); Hallmark audit *(skill repos, vetted)* | GOV.UK, Apple HIG |
+| G3 | Diagram skills | Skills that draw architecture, flow, journey and chart diagrams as HTML/SVG | ✅ `guides/design-skills.md` (benchmarked in `benchskills/`) | P3 | Diagram Design; Archify *(skill repos, vetted)* | Stripe docs, Our World in Data |
 
 ## What to bring back per category
 

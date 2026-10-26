@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How the UX library works</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --ink:#1a1d23; --muted:#555b66; --line:#c9ccd3;
+  --add:#2149c7; --add-bg:#e8edfc; --find:#6a2fb0; --find-bg:#f0e8fa;
+  --cat:#8a4a00; --cat-bg:#ffefd2; --cat-line:#e0a53c;
+  --lib-bg:#ecebe5; --code-bg:#eef0f3;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14161a; --card:#1e2128; --ink:#eceef2; --muted:#a3a9b5; --line:#3b404b;
+    --add:#8fa8ff; --add-bg:#1d2744; --find:#cba6ff; --find-bg:#2b2040;
+    --cat:#ffc66b; --cat-bg:#3a2a0c; --cat-line:#a3721c;
+    --lib-bg:#1a1c21; --code-bg:#2a2e37;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:32px 40px 40px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+.lede{margin:0 0 24px;color:var(--muted);max-width:68ch}
+code,.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;
+  background:var(--code-bg);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.cat{background:var(--cat-bg);color:var(--cat);border:1px solid var(--cat-line);font-weight:600}
+
+/* lanes */
+.lane{border:1.5px solid var(--lc);border-radius:14px;background:var(--lbg);padding:16px 16px 18px}
+.lane.add{--lc:var(--add);--lbg:var(--add-bg)}
+.lane.find{--lc:var(--find);--lbg:var(--find-bg)}
+.lane-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 14px}
+.lane-head h2{margin:0;font-size:19px;color:var(--lc)}
+.lane-head p{margin:0;color:var(--muted);font-size:15px}
+.steps{list-style:none;margin:0;padding:0;display:flex;align-items:stretch}
+.card{flex:1 1 0;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 12px 14px;position:relative}
+.card .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;
+  background:var(--lc);color:var(--bg);font-weight:700;font-size:13px;margin-bottom:6px}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card p,.card ul{margin:0;font-size:14px;color:var(--muted)}
+.card ul{padding-left:16px}
+.card li{margin:2px 0;display:list-item}
+.card.opt{border-style:dashed}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--lc);border:1px solid var(--lc);
+  border-radius:999px;padding:0 8px;margin-bottom:6px}
+.arr{flex:0 0 28px;display:grid;place-items:center;color:var(--lc);padding:0}
+.arr svg{width:22px;height:22px}
+
+/* connectors between lane and library */
+.link{display:flex;align-items:center;justify-content:center;gap:10px;padding:6px 0;color:var(--muted);font-size:14px}
+.link svg{width:26px;height:26px;flex:none}
+.link.up svg{transform:rotate(180deg)}
+.link b{color:var(--ink)}
+.later{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:1px 10px;background:var(--card)}
+
+/* library */
+.lib{border:1.5px solid var(--line);border-radius:14px;background:var(--lib-bg);padding:16px}
+.lib h2{margin:0 0 2px;font-size:19px}
+.lib>p{margin:0 0 12px;color:var(--muted);font-size:15px}
+.layers{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.layer{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.layer h3{margin:0 0 2px;font-size:16px}
+.layer p{margin:0;color:var(--muted)}
+.layer .t{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;border-radius:999px;padding:0 8px;border:1px solid}
+.layer .t.a{color:var(--add);border-color:var(--add)}
+.layer .t.f{color:var(--find);border-color:var(--find)}
+.hinge{background:var(--cat-bg);border:1.5px solid var(--cat-line);border-radius:10px;padding:10px 14px;font-size:15px;color:var(--ink)}
+.hinge strong{color:var(--cat)}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:18px 0 0;color:var(--muted);font-size:14px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:2px solid}
+.legend .la::before{border-color:var(--add);background:var(--add-bg)}
+.legend .lf::before{border-color:var(--find);background:var(--find-bg)}
+.legend .lc::before{border-color:var(--cat-line);background:var(--cat-bg)}
+.legend .lo::before{border:2px dashed var(--muted)}
+details{margin-top:18px;color:var(--muted);font-size:15px}
+summary{cursor:pointer;color:var(--ink);font-weight:600}
+details ol{margin:8px 0 0;padding-left:22px}
+details li{margin:3px 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* narrow: stack vertically */
+@media (max-width:1040px){
+  .wrap{padding:24px 16px 32px}
+  .steps{flex-direction:column}
+  .arr{flex:0 0 26px;width:100%}
+  .arr svg{transform:rotate(90deg)}
+  .layers{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  h1{font-size:23px}
+  .layers{grid-template-columns:1fr}
+  .lane,.lib{padding:12px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<figure role="group" aria-labelledby="t" aria-describedby="alt" style="margin:0">
+  <h1 id="t">How the UX library turns a reference into an answer</h1>
+  <p class="lede">Two skills share one library. <code>ux-add</code> puts references in; later, <code>ux-find</code> pulls the best ones out. The generated <code class="cat">catalog.json</code> is the link between them.</p>
+
+  <p class="sr" id="alt">Diagram in three parts, read top to bottom. Part one, adding a reference with ux-add, has six steps: a person gives ux-add a URL or screenshot; ux-add captures it with the Playwright script capture.mjs, producing desktop and mobile screenshots and element crops with source.html and styles.json; it checks catalog.json for duplicates; it writes one entry.md per pattern, rated 3 to 5 with flat frontmatter; npm run catalog regenerates catalog.json, CATALOG.md, SOURCES.md and gallery/data.js; the change is committed to main and the published gallery is republished. Part two is the library, which has four layers: guides, source profiles, patterns, and benchmark evidence in the bench folders. catalog.json is the link: ux-add checks it, npm run catalog rewrites it, and ux-find reads it. Part three, later, finding a pattern with ux-find, has five steps plus one optional step: a person asks ux-find for a pattern; it reads guides/README.md; it runs find.mjs, whose vocabulary is in aliases.json; it reads catalog.json; it returns the top three references with screenshots, techniques and code; optionally it rebuilds one as example.tsx in React and Tailwind.</p>
+
+  <!-- ADD -->
+  <section class="lane add" aria-labelledby="h-add">
+    <div class="lane-head"><h2 id="h-add">A. Add a reference with <code>ux-add</code></h2><p>Write path: one input becomes entries and a refreshed catalog.</p></div>
+    <ol class="steps">
+      <li class="card"><span class="n">1</span><h3>Person gives a URL or screenshot</h3><p>The input to <code>ux-add</code>.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">2</span><h3>Capture</h3><p>Playwright script <code>capture.mjs</code> saves:</p><ul><li>desktop and mobile screenshots</li><li>element crops with <code>source.html</code> and <code>styles.json</code></li></ul></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">3</span><h3>Check for duplicates</h3><p>Looks in <code class="cat">catalog.json</code> before writing anything.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">4</span><h3>Write the entries</h3><p>One <code>entry.md</code> per pattern, rated 3 to 5, flat frontmatter.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">5</span><h3>Rebuild the catalog</h3><p><code>npm run catalog</code> regenerates:</p><ul><li><code class="cat">catalog.json</code></li><li><code>CATALOG.md</code></li><li><code>SOURCES.md</code></li><li><code>gallery/data.js</code></li></ul></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">6</span><h3>Publish</h3><p>Commit to <code>main</code>, then republish the published gallery.</p></li>
+    </ol>
+  </section>
+
+  <div class="link" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+    <span><b>The library is updated</b></span>
+  </div>
+
+  <!-- LIBRARY -->
+  <section class="lib" aria-labelledby="h-lib">
+    <h2 id="h-lib">The library: four layers</h2>
+    <p>What a designer can draw on once the entries are in.</p>
+    <ul class="layers">
+      <li class="layer"><h3>Guides</h3><p>Where <code>ux-find</code> starts, at <code>guides/README.md</code>.</p><span class="t f">read first by ux-find</span></li>
+      <li class="layer"><h3>Source profiles</h3><p>Profiles of the sources.</p></li>
+      <li class="layer"><h3>Patterns</h3><p>The <code>entry.md</code> files that <code>ux-add</code> writes.</p><span class="t a">written by ux-add</span></li>
+      <li class="layer"><h3>Benchmark evidence</h3><p>Kept in the <code>bench*/</code> folders.</p></li>
+    </ul>
+    <div class="hinge"><strong>The link between the two skills:</strong> <code class="cat">catalog.json</code> is checked by <code>ux-add</code> for duplicates, rewritten by <code>npm run catalog</code>, and read by <code>ux-find</code>.</div>
+  </section>
+
+  <div class="link up" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+    <span><span class="later">Later</span>&nbsp; <b>ux-find reads from it</b></span>
+  </div>
+
+  <!-- FIND -->
+  <section class="lane find" aria-labelledby="h-find">
+    <div class="lane-head"><h2 id="h-find">B. Find a pattern with <code>ux-find</code></h2><p>Read path: one question becomes three references.</p></div>
+    <ol class="steps">
+      <li class="card"><span class="n">1</span><h3>Person asks for a pattern</h3><p>The input to <code>ux-find</code>.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">2</span><h3>Read the guide</h3><p>Opens <code>guides/README.md</code>.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">3</span><h3>Run the search</h3><p>Runs <code>find.mjs</code>; its vocabulary is in <code>aliases.json</code>.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">4</span><h3>Read the catalog</h3><p>Reads <code class="cat">catalog.json</code>.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card"><span class="n">5</span><h3>Return the top three</h3><p>Three references, each with screenshots, techniques and code.</p></li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+      <li class="card opt"><span class="tag">Optional</span><h3>Rebuild one</h3><p>As <code>example.tsx</code> (React + Tailwind).</p></li>
+    </ol>
+  </section>
+
+  <div class="legend" aria-hidden="true">
+    <span class="la">ux-add (write)</span><span class="lf">ux-find (read)</span><span class="lc">catalog.json, the shared file</span><span class="lo">optional step</span>
+  </div>
+</figure>
+
+<details>
+  <summary>Read it as a list</summary>
+  <ol>
+    <li><b>Add.</b> A person gives <code>ux-add</code> a URL or screenshot. It captures it with <code>capture.mjs</code>, checks <code>catalog.json</code> for duplicates, writes one <code>entry.md</code> per pattern, runs <code>npm run catalog</code>, commits to <code>main</code> and republishes the gallery.</li>
+    <li><b>Library.</b> Guides, source profiles, patterns and benchmark evidence (<code>bench*/</code>).</li>
+    <li><b>Find.</b> Later, a person asks <code>ux-find</code> for a pattern. It reads <code>guides/README.md</code>, runs <code>find.mjs</code>, reads <code>catalog.json</code> and returns the top three references; it can rebuild one as <code>example.tsx</code>.</li>
+  </ol>
+</details>
+</main>
+</body>
+</html>

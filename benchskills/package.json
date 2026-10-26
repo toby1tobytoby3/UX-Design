@@ -1,0 +1,9 @@
+{
+  "name": "ux-design-benchskills",
+  "private": true,
+  "type": "module",
+  "description": "Design skills (builders, reviewers, diagram makers) given the same briefs and checked the same way: axe, keyboard, reduced motion, overflow, seeded-defect recall, blind visual jury.",
+  "dependencies": {
+    "axe-core": "4.14.0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+ "ratings": {
+  "A": {
+   "hierarchy": 4,
+   "craft": 4,
+   "distinctiveness": 3,
+   "brief_fit": 4
+  },
+  "B": {
+   "hierarchy": 4,
+   "craft": 4,
+   "distinctiveness": 2,
+   "brief_fit": 4
+  },
+  "C": {
+   "hierarchy": 2,
+   "craft": 2,
+   "distinctiveness": 5,
+   "brief_fit": 2
+  },
+  "D": {
+   "hierarchy": 5,
+   "craft": 4,
+   "distinctiveness": 4,
+   "brief_fit": 4
+  },
+  "E": {
+   "hierarchy": 4,
+   "craft": 3,
+   "distinctiveness": 4,
+   "brief_fit": 4
+  }
+ },
+ "rank": [
+  "D",
+  "A",
+  "E",
+  "B",
+  "C"
+ ],
+ "notes": {
+  "A": "Calm green-and-serif page with a statement-to-ledger illustration, clear cards with checklists, and a clean table, FAQ and closing call to action, though the fold cuts the cards off and the mobile table is cramped.",
+  "B": "Tidy and well ordered, with plan cards, comparison table, FAQ and a call-to-action band all working on mobile, but it reads as a generic SaaS template with a green button that doesn't match the navy brand colour.",
+  "C": "Bold archival ledger-photo collage has a strong point of view, but the fold has no plan or price comparison, the plan cards are staggered and oddly sized, the mobile page runs to about 7,500px, the footer wordmark breaks into spaced letters, and the extra panels are padding.",
+  "D": "Plans sit as full-width rows with price, features and a call to action each, so all three can be compared within the first screen, and the table collapses neatly into stacked lists on mobile with a restrained, warm finish.",
+  "E": "Distinctive serif and green point of view with bordered cards and a clean table, but the plan cards are cut off at the fold and the mobile table breaks words (\"Reconciliat ions\", \"connectio ns\")."
+ }
+}

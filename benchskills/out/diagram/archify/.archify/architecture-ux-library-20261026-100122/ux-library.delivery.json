@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "d68e0f47-3532-48cb-852f-888b059aa3c2",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/user/UX-Design/benchskills/out/diagram/archify/.archify/architecture-ux-library-20261026-100122/candidate.json",
+  "output": "/home/user/UX-Design/benchskills/out/diagram/archify/.archify/architecture-ux-library-20261026-100122/ux-library.html",
+  "specification": {
+    "sha256": "fc4c5395b7012abe5dff69265c410cd82dab8deb56844eb7e02079b7c3db645b",
+    "bytes": 5819
+  },
+  "artifact": {
+    "sha256": "4a410c3d988c76b3b8d5d6b3b21f51df8d6c84b3181e9c32ae63bc4acbfec4eb",
+    "bytes": 864357
+  }
+}

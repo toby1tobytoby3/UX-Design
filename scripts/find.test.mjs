@@ -35,6 +35,9 @@ const CASES = [
   { q: 'per-hunk diff review', expect: ['ai-review/pierre-diffs-keep-undo-hunks'] },
   { q: 'AI writing assistant inside the editor', reject: ['hero/linear-dark-product-hero', 'chart/echarts-datazoom-time-series'], missing: ['D5'] },
   { q: 'collaborative cursor', reject: ['sources/uplot'], coverage: 'none' },
+  { q: 'a skill to stop my AI generated landing page looking generic', expect: ['sources/hallmark'] },
+  { q: 'audit my UI for layout typography and accessibility problems with a skill', expect: ['sources/interface-skills'] },
+  { q: 'diagram skill for an architecture diagram', expect: ['sources/diagram-design', 'sources/archify'] },
   { q: 'design a trading terminal', scenario: 3, missing: ['C6'] },
   { q: 'an AI agent workspace with approvals', scenario: 10 },
 ];

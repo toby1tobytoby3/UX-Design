@@ -1,0 +1,32 @@
+{
+ "ratings": {
+  "A": {
+   "clarity": 2,
+   "structure": 2,
+   "craft": 2,
+   "brief_fit": 1
+  },
+  "B": {
+   "clarity": 3,
+   "structure": 4,
+   "craft": 4,
+   "brief_fit": 3
+  },
+  "C": {
+   "clarity": 5,
+   "structure": 5,
+   "craft": 4,
+   "brief_fit": 5
+  }
+ },
+ "rank": [
+  "C",
+  "B",
+  "A"
+ ],
+ "notes": {
+  "A": "The desktop node graph is crowded with criss-crossing connectors and no clear reading order, the four layers are loose nodes, and at 390 px the canvas is clipped with editor chrome, so the real explanation falls back to bullet lists.",
+  "B": "The desktop swimlane is elegant and shows the catalog hand-off well, but type is tiny, the four layers are only an italic aside, and on mobile it shrinks to a narrow column with microscopic text that then repeats itself as a list.",
+  "C": "Numbered cards in two colour-coded paths, a four-layer panel and a highlighted catalog.json link give a newcomer a clear in-order story, and the six-column desktop layout stacks cleanly into a legible single column on mobile, though the layer descriptions are thin."
+ }
+}

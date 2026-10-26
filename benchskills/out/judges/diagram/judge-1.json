@@ -1,0 +1,32 @@
+{
+ "ratings": {
+  "A": {
+   "clarity": 2,
+   "structure": 2,
+   "craft": 2,
+   "brief_fit": 1
+  },
+  "B": {
+   "clarity": 4,
+   "structure": 4,
+   "craft": 4,
+   "brief_fit": 3
+  },
+  "C": {
+   "clarity": 5,
+   "structure": 5,
+   "craft": 4,
+   "brief_fit": 5
+  }
+ },
+ "rank": [
+  "C",
+  "B",
+  "A"
+ ],
+ "notes": {
+  "A": "The desktop node graph has numbered edges but a tangled reading order, tiny text, and the four layers are shown only as stray boxes and a bullet list, while at 390 px the canvas is clipped and the diagram is mostly unreadable, so the explanatory cards carry the content.",
+  "B": "The swimlane reads cleanly on desktop with a good focal catalog hand-off, and the mobile version stacks into a single readable column, but the four layers are just a text aside and card, and the desktop has wasted space and tiny in-box text.",
+  "C": "The two labelled bands for add and find, with a middle four-layers panel tied together by the catalog.json callout, give the clearest newcomer flow, and the numbered steps reflow to a clean single column on mobile with legible type."
+ }
+}

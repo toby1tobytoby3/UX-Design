@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Ledgerly pricing</title>
+<style>
+  :root { --ink: #222; --bg: #fff; --accent: #ffd23f; }
+  body { margin: 0; font-family: Georgia, serif; color: var(--ink); background: var(--bg); font-size: 16px; }
+  a:focus, button:focus, input:focus { outline: none; }
+  header.site { position: sticky; top: 0; height: 140px; background: #1d1d2b; color: #fff; display: flex; align-items: center; gap: 24px; padding: 0 24px; z-index: 5; }
+  header.site .logo { height: 40px; }
+  header.site a { color: #fff; font-family: Arial, sans-serif; text-decoration: none; }
+  .banner { background: #f4f4f4; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; font-family: "Comic Sans MS", cursive; }
+  .banner-close { width: 28px; height: 28px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+  .ticker { overflow: hidden; white-space: nowrap; background: #eef; font-family: "Courier New", monospace; }
+  .ticker span { display: inline-block; padding-left: 100%; animation: scroll 8s linear infinite; }
+  @keyframes scroll { to { transform: translateX(-100%); } }
+  .hero { background: linear-gradient(135deg, #7b2ff7, #2f80ed); color: #fff; padding: 56px 24px; text-align: center; }
+  .hero h1 { font-family: Impact, sans-serif; font-size: 44px; margin: 0 0 12px; }
+  .lede { color: #bbb; font-size: 18px; }
+  .hero .lede { color: #dcd0ff; }
+  .intro .lede { padding: 0 24px; }
+  .hero-shot { width: 320px; height: 180px; margin-top: 24px; background: #fff3; }
+  .btn-primary { background: var(--accent); color: #fff; border: 0; padding: 12px 20px; font-size: 16px; font-family: Arial, sans-serif; border-radius: 6px; cursor: pointer; }
+  .plans { display: flex; gap: 16px; padding: 32px 24px; align-items: flex-start; }
+  .plan { border: 1px solid #ddd; border-radius: 8px; padding: 24px; flex: 1; transition: all 0.6s; }
+  .plan:nth-child(1) { padding: 20px; }
+  .plan:nth-child(3) { padding: 28px; height: 380px; }
+  .plan:hover { width: 104%; height: auto; }
+  .plan h4 { font-family: Impact, sans-serif; margin: 0 0 8px; }
+  .plan .badge { border-radius: 20px; background: #eef; padding: 4px 12px; font-size: 12px; display: inline-block; }
+  .plan .price { font-family: "Courier New", monospace; font-size: 32px; }
+  .plan ul { padding-left: 18px; }
+  .plan li { font-size: 12px; margin: 6px 0; }
+  .feature-line { width: 180px; white-space: nowrap; overflow: hidden; font-size: 12px; }
+  .choose { display: inline-block; border: 0; background: #7b2ff7; color: #fff; padding: 10px 14px; border-radius: 4px; }
+  .compare-link { color: #06c; text-decoration: underline; cursor: pointer; padding: 0 24px; }
+  .compare { padding: 0 24px; }
+  .compare table { min-width: 560px; border-collapse: collapse; font-size: 14px; }
+  .compare th, .compare td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+  td.yes { background: #2da44e; }
+  td.no { background: #cf222e; }
+  input { border: 1px solid #e6e6e6; padding: 8px; font-size: 16px; }
+  .about { max-width: none; padding: 0 24px; }
+  .about p { line-height: 1; }
+  .fineprint { font-size: 11px; color: #777; padding: 0 24px; }
+  .error { color: #cf222e; padding: 0 24px; }
+  .confirm { margin: 16px 24px; padding: 16px; border: 1px solid #aaa; border-radius: 8px; }
+  .confirm button { padding: 6px 12px; }
+  .faq { padding: 0 24px; }
+  .faq details { border-bottom: 1px solid #ddd; padding: 12px 0; }
+  .faq summary { font-family: Impact, sans-serif; }
+  footer { background: #f0f0f0; padding: 24px; font-family: Arial, sans-serif; }
+  footer a { font-size: 12px; padding: 0; display: inline-block; margin-right: 6px; color: #06c; }
+  .features-icons span { font-size: 24px; margin-right: 8px; }
+</style>
+</head>
+<body>
+<header class="site">
+  <img class="logo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40'%3E%3Crect width='120' height='40' fill='%23ffd23f'/%3E%3C/svg%3E">
+  <a href="#plans">Pricing</a>
+  <a href="#faq" tabindex="3">FAQ</a>
+  <a href="#">Sign in</a>
+</header>
+<div class="banner"><span>New: bank feeds for 12 more countries</span><button class="banner-close"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11" stroke="#333" stroke-width="2"/></svg></button></div>
+<div class="ticker"><span>Reconciled this week: invoices matched, bank lines cleared, exceptions flagged, ledgers balanced</span></div>
+<div class="hero">
+  <h1>Pick the perfect Package</h1>
+  <p class="lede">Reconcile invoices to bank statements without the spreadsheet pain.</p>
+  <img class="hero-shot" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' fill='%23ffffff33'/%3E%3C/svg%3E">
+</div>
+<div class="intro"><p class="lede">Prices are shown per month, billed monthly.</p></div>
+<div class="features-icons" style="padding:0 24px"><span>🚀</span> Fast set-up <span>🔒</span> Private by default <span>📈</span> Clear reports</div>
+<div class="plans" id="plans">
+  <div class="plan">
+    <h4>Starter</h4>
+    <span class="badge">Most popular tier</span>
+    <div class="price">$19</div>
+    <ul><li>1 seat</li><li>100 reconciliations per month</li><li>Email support</li></ul>
+    <div class="feature-line">100 reconciliations per month, one bank connection, CSV and PDF export</div>
+    <button class="choose">Click here</button>
+  </div>
+  <div class="plan">
+    <h4>Team</h4>
+    <div class="price">$59</div>
+    <ul><li>5 seats</li><li>Unlimited reconciliations</li><li>Shared matching rules</li></ul>
+    <button class="choose">Click here</button>
+  </div>
+  <div class="plan">
+    <h4>Business</h4>
+    <div class="price">$149</div>
+    <ul><li>15 seats</li><li>SSO</li><li>Audit log</li><li>Priority support</li></ul>
+    <button class="choose">Click here</button>
+  </div>
+</div>
+<p class="compare-link" onclick="document.querySelector('.compare').scrollIntoView()">Compare plans</p>
+<div class="compare">
+  <table>
+    <tr><th>Feature</th><th>Starter</th><th>Team</th><th>Business</th></tr>
+    <tr><td>Shared matching rules</td><td class="no"></td><td class="yes"></td><td class="yes"></td></tr>
+    <tr><td>SSO</td><td class="no"></td><td class="no"></td><td class="yes"></td></tr>
+    <tr><td>Audit log</td><td class="no"></td><td class="no"></td><td class="yes"></td></tr>
+  </table>
+</div>
+<section class="about">
+  <h2>Why teams choose Ledgerly</h2>
+  <p>Ledgerly matches the lines on a bank statement to the invoices in your ledger and flags anything that does not match so that your team can resolve exceptions quickly instead of hunting through spreadsheets at the end of every month, and because the matching rules are shared across your whole team nothing depends on one person remembering how a supplier is usually paid or which reference format they use on their remittance advice.</p>
+</section>
+<section class="form" style="padding:0 24px">
+  <h3>Get pricing updates</h3>
+  <input id="newsletter-email" type="email" placeholder="Email address">
+  <button class="btn-primary">Submit</button>
+  <p class="error">Error 422</p>
+  <p class="error">You entered an invalid email address.</p>
+</section>
+<div class="confirm" role="dialog" aria-label="Delete workspace">
+  <p>Delete workspace? This cannot be undone.</p>
+  <button>OK</button> <button>Cancel</button>
+</div>
+<p class="fineprint">Prices exclude tax. Annual plans are billed once a year. Cancel any time before renewal. All plans include a trial.</p>
+<section class="faq" id="faq">
+  <h2>Questions</h2>
+  <details><summary>Can I change plans later?</summary><p>Yes. Upgrade or downgrade at any time.</p></details>
+  <details><summary>Is there a free trial?</summary><p>Yes, 14 days.</p></details>
+</section>
+<footer>
+  <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Contact</a><a href="#">Status</a><a href="#">Careers</a>
+</footer>
+<script>function toggleCompare() {}</script>
+</body>
+</html>

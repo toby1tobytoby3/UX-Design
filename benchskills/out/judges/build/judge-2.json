@@ -1,0 +1,48 @@
+{
+ "ratings": {
+  "A": {
+   "hierarchy": 4,
+   "craft": 4,
+   "distinctiveness": 2,
+   "brief_fit": 4
+  },
+  "B": {
+   "hierarchy": 4,
+   "craft": 4,
+   "distinctiveness": 4,
+   "brief_fit": 5
+  },
+  "C": {
+   "hierarchy": 2,
+   "craft": 3,
+   "distinctiveness": 5,
+   "brief_fit": 2
+  },
+  "D": {
+   "hierarchy": 5,
+   "craft": 5,
+   "distinctiveness": 4,
+   "brief_fit": 4
+  },
+  "E": {
+   "hierarchy": 3,
+   "craft": 3,
+   "distinctiveness": 4,
+   "brief_fit": 4
+  }
+ },
+ "rank": [
+  "D",
+  "B",
+  "A",
+  "E",
+  "C"
+ ],
+ "notes": {
+  "A": "Clean, competent and fully complete, with a clear plan, table and FAQ order on both widths, but it reads as a generic SaaS template with green buttons and a stock hero illustration.",
+  "B": "Polished serif and forest-green system with a statement-matching illustration, CTAs placed above the features, a clear table and a closing CTA; it is complete and honest, though the mobile table crowds the right edge slightly.",
+  "C": "The most distinctive page, with a ledger-scan collage and big wordmark, but prices are hard to find above the fold, the staggered plan cards are hard to compare, the dark table and the broken Ledgerly wordmark on mobile are awkward, and the imagery and stat blocks are decoration the brief did not ask for.",
+  "D": "Full-width plan rows put price, features and CTA in a single scan line within the first screen, and the monochrome type with warm texture and open FAQ answers feels deliberate, so it has the best hierarchy and finish, though the 14/20/30-day stat strip repeats facts and adds little.",
+  "E": "Warm serif editorial look with a clear ledger-matching motif and an easy-to-scan table, but the prices sit mostly below the fold, the CTAs are small and left-stranded, and the mobile comparison table wraps badly (\"Reconciliat ions\")."
+ }
+}

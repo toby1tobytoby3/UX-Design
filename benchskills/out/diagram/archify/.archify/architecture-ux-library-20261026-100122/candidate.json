@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "How the UX library turns a reference into an answer",
+    "output": ".archify/architecture-ux-library-20261026-100122/ux-library.html",
+    "quality_profile": "showcase",
+    "locale": "en",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": { "label": "Person" },
+        "backend": { "label": "Skill or script" },
+        "database": { "label": "File or folder" },
+        "cloud": { "label": "Published on main" },
+        "frontend": { "label": "What the person gets" }
+      }
+    }
+  },
+  "components": [
+    { "id": "capture-files", "type": "database", "label": "Capture files", "sublabel": "screenshots, crops", "pos": [564, 40], "size": [150, 60] },
+    { "id": "capture", "type": "backend", "label": "capture.mjs", "sublabel": "Playwright script", "pos": [302, 40], "size": [150, 60] },
+    { "id": "profiles", "type": "database", "label": "Source profiles", "sublabel": "source profiles layer", "pos": [826, 40], "size": [150, 60] },
+    { "id": "bench", "type": "database", "label": "Benchmark evidence", "sublabel": "benchmark layer, bench*/", "pos": [1088, 40], "size": [150, 60], "tag": "layer" },
+
+    { "id": "person-add", "type": "external", "label": "Person", "sublabel": "URL or screenshot", "pos": [40, 190], "size": [150, 60] },
+    { "id": "ux-add", "type": "backend", "label": "ux-add", "sublabel": "skill", "pos": [302, 190], "size": [150, 60] },
+    { "id": "entry", "type": "database", "label": "entry.md", "sublabel": "patterns layer, rated 3-5", "pos": [564, 190], "size": [150, 60], "tag": "layer: patterns" },
+    { "id": "build", "type": "backend", "label": "npm run catalog", "sublabel": "regenerates", "pos": [826, 190], "size": [150, 60] },
+    { "id": "main", "type": "cloud", "label": "main", "sublabel": "change committed", "pos": [1088, 190], "size": [150, 60] },
+
+    { "id": "catalog", "type": "database", "label": "Generated catalog", "sublabel": "catalog.json + 3 files", "pos": [564, 340], "size": [150, 60] },
+    { "id": "gallery", "type": "cloud", "label": "Published gallery", "sublabel": "republished", "pos": [1088, 340], "size": [150, 60] },
+
+    { "id": "person-find", "type": "external", "label": "Person", "sublabel": "wants a pattern", "pos": [40, 490], "size": [150, 60] },
+    { "id": "ux-find", "type": "backend", "label": "ux-find", "sublabel": "skill", "pos": [564, 490], "size": [150, 60] },
+    { "id": "find", "type": "backend", "label": "find.mjs", "sublabel": "search script", "pos": [826, 490], "size": [150, 60] },
+    { "id": "aliases", "type": "database", "label": "aliases.json", "sublabel": "vocabulary", "pos": [1088, 490], "size": [150, 60] },
+
+    { "id": "guides", "type": "database", "label": "guides/README.md", "sublabel": "guides layer", "pos": [302, 640], "size": [150, 60], "tag": "layer: guides" },
+    { "id": "answer", "type": "frontend", "label": "Top three references", "sublabel": "screenshots, techniques, code", "pos": [826, 640], "size": [150, 60] },
+    { "id": "example", "type": "frontend", "label": "example.tsx", "sublabel": "React + Tailwind", "pos": [1088, 640], "size": [150, 60] }
+  ],
+  "connections": [
+    { "id": "ux-add-to-capture", "from": "ux-add", "to": "capture", "label": "2 captures", "fromSide": "top", "toSide": "bottom" },
+    { "id": "capture-to-files", "from": "capture", "to": "capture-files", "label": "produces" },
+    { "id": "person-to-add", "from": "person-add", "to": "ux-add", "label": "1 gives", "variant": "emphasis" },
+    { "id": "add-to-catalog", "from": "ux-add", "to": "catalog", "label": "3 checks duplicates", "fromSide": "bottom", "toSide": "left" },
+    { "id": "add-to-entry", "from": "ux-add", "to": "entry", "label": "4 writes", "variant": "emphasis" },
+    { "id": "entry-to-build", "from": "entry", "to": "build", "label": "5 then" },
+    { "id": "build-to-catalog", "from": "build", "to": "catalog", "label": "6 regenerates", "fromSide": "bottom", "toSide": "right" },
+    { "id": "build-to-main", "from": "build", "to": "main", "label": "7 commit" },
+    { "id": "main-to-gallery", "from": "main", "to": "gallery", "label": "8 republish" },
+
+    { "id": "person-to-find", "from": "person-find", "to": "ux-find", "label": "1 asks", "variant": "emphasis" },
+    { "id": "find-to-guides", "from": "ux-find", "to": "guides", "label": "2 reads first", "fromSide": "bottom", "toSide": "right" },
+    { "id": "find-to-script", "from": "ux-find", "to": "find", "label": "3 runs" },
+    { "id": "script-to-aliases", "from": "find", "to": "aliases", "label": "uses" },
+    { "id": "find-to-catalog", "from": "ux-find", "to": "catalog", "label": "4 reads", "fromSide": "top", "toSide": "bottom" },
+    { "id": "find-to-answer", "from": "ux-find", "to": "answer", "label": "5 returns", "fromSide": "bottom", "toSide": "left" },
+    { "id": "answer-to-example", "from": "answer", "to": "example", "label": "optional", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Adding a reference", "items": ["capture.mjs saves desktop and mobile screenshots and element crops with source.html and styles.json", "ux-add checks catalog.json for duplicates, then writes one entry.md per pattern, rated 3 to 5, with flat frontmatter"] },
+    { "dot": "emerald", "title": "What npm run catalog regenerates", "items": ["catalog.json", "CATALOG.md", "SOURCES.md", "gallery/data.js"] },
+    { "dot": "violet", "title": "Finding a pattern", "items": ["ux-find reads guides/README.md, runs find.mjs (vocabulary in aliases.json) and reads catalog.json", "It returns the top three references, optionally rebuilding one as example.tsx"] },
+    { "dot": "amber", "title": "The four layers", "items": ["Guides", "Source profiles", "Patterns", "Benchmark evidence (bench*/)"] }
+  ]
+}

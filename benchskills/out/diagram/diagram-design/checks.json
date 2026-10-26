@@ -1,0 +1,50 @@
+{
+ "file": "diagram.html",
+ "widths": {
+  "390": {
+   "overflow_px": 0,
+   "console_errors": 0,
+   "text_nodes": 89,
+   "overlaps": 0,
+   "overlap_examples": [],
+   "min_effective_text_px": 7.1,
+   "clipped": 0,
+   "text_spill": 0,
+   "connectors": 23,
+   "text_alternative": true,
+   "words": 287
+  },
+  "1280": {
+   "overflow_px": 0,
+   "console_errors": 0,
+   "text_nodes": 91,
+   "overlaps": 0,
+   "overlap_examples": [],
+   "min_effective_text_px": 8,
+   "clipped": 0,
+   "text_spill": 0,
+   "connectors": 23,
+   "text_alternative": true,
+   "words": 290
+  }
+ },
+ "axe": [
+  "landmark-one-main:moderate:1",
+  "region:moderate:1"
+ ],
+ "labels": {
+  "required": 24,
+  "present": 24,
+  "missing": []
+ },
+ "numbers_in_text": [],
+ "weight_kb": 1866,
+ "external_hosts": [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com"
+ ],
+ "failed_requests": 0,
+ "reduced_motion": {
+  "infinite_animations": 0
+ }
+}

@@ -11,9 +11,9 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const ENTRIES = join(ROOT, 'entries');
 const SOURCES = join(ROOT, 'sources');
 const IMAGE = /\.(jpe?g|png|webp)$/i;
-// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI, tables, panels, maps) shares one shape: per-task probes plus
+// Benchmark evidence: every bench (charts, 3D, motion, UI primitives, AI chat, inline AI, tables, panels, maps, design skills) shares one shape: per-task probes plus
 // bundle size, with a few category-specific measurements on top.
-const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline', 'benchtable', 'benchpanels', 'benchmap'];
+const BENCHES = ['bench', 'bench3d', 'benchmotion', 'benchui', 'benchai', 'benchinline', 'benchtable', 'benchpanels', 'benchmap', 'benchskills'];
 // Keys starting with `_` are bench-internal (e.g. size probes), not sources.
 const readBench = (f) => Object.fromEntries(Object.entries(JSON.parse(readFileSync(f, 'utf8'))).filter(([k]) => !k.startsWith('_')));
 const bench = Object.assign({}, ...BENCHES.map((d) => join(ROOT, d, 'results.json')).filter(existsSync).map(readBench));
@@ -135,6 +135,13 @@ function summariseBench(b) {
       first_render_ms_swiftshader: b.first_render_ms, live_long_task_ms: b.live?.long_task_ms ?? null,
       dropped_frames: b.live?.dropped_frames ?? null, axe_violations: (b.axe ?? []).length,
       evidence: `render ${b.first_render_ms} ms; live 5k @1 Hz: ${b.live?.long_task_ms} ms long tasks; ${failed.length ? `fails ${failed.join(', ')}` : 'all checks pass'}` });
+  } else if (kind === 'design-skill') {
+    // Tracks a skill ran in: build (pricing page), review (31 seeded defects), diagram (the library's pipeline).
+    const t = b.tracks ?? {};
+    const parts = [t.build && `page ${t.build.checks_passed}/${t.build.checks_total} checks, jury ${t.build.jury_mean ?? 'n/a'}`,
+      t.review && `review ${t.review.found}/${t.review.total} seeded defects`,
+      t.diagram && `diagram ${t.diagram.checks_passed}/${t.diagram.checks_total} checks, jury ${t.diagram.jury_mean ?? 'n/a'}`].filter(Boolean);
+    Object.assign(out, { lib_only_gz_kb: '–', tasks_supported: Object.keys(t).length, tasks_total: Object.keys(t).length, tracks: t, skill_md_lines: b.footprint?.skill_md_lines, evidence: parts.join('; ') });
   }
   return out;
 }

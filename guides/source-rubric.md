@@ -72,3 +72,23 @@ at 2 (star counts, bot commits, badge edits and `pushed_at` don't count). Record
   container, `flyTo` honouring reduced motion, attribution visible, measured in `benchmap/`. *Performance*: first render
   and frame time under 1 Hz updates of 5,000 vehicles (SwiftShader timings are relative only). The tile source is scored
   separately: free hosted tiles that forbid commercial use don't count.
+- **Agent design skills** (skills and toolkits that build, review or diagram UI, `pattern: design-skills`). Every skill is
+  given the same brief for the kind of work it does, then checked the same way (`benchskills/`): *builders* make a
+  pricing page, *reviewers* audit a page seeded with 31 known defects, *diagram makers* draw the library's own pipeline;
+  each kind also runs without any skill as the control. *Default look*, *Coverage* and *Accessibility* are scored
+  against it, kept between 1 and 5, so a skill that does no better than the unaided model gets 3: Default look is
+  3 + the rounded difference between the skill's jury mean and the control's; Coverage and Accessibility are
+  3 + (the skill's band minus the control's band) on the scales below. Score from the track(s) the skill ran in. *Default look*: blind-jury mean (1-5, two judges
+  who see only the screenshots) of the page or diagram; for reviewers, how usable the report is out of the box (located, ranked, fix written in the
+  project's styling system). *Interactivity*: a measured loop built in (browser inspector, validator, look-and-fix
+  rounds): 5; checklist only: 3; prose only: 1. *Coverage*: share of the track's scripted checks passed, or recall of
+  the seeded defects (5 ≥ 85%, 4 ≥ 70, 3 ≥ 55, 2 ≥ 40). *Accessibility*: axe violations plus the scripted keyboard,
+  focus, reduced-motion and target-size checks (builders, diagrams); recall on the accessibility defects (reviewers).
+  *Performance*: run cost against the control (tokens and minutes: 5 ≤ 1.5×, 4 ≤ 2×, 3 ≤ 3×, 2 ≤ 5×, 1 above) and
+  steps that failed. *React/Next fit*: writes into the project's own stack and tokens (Tailwind, React) or can be told
+  to: 5; HTML only with stack notes: 3; locked to another tool: 1. *Bundle size* is the static footprint an agent
+  loads: 5 ≤ 150 lines of core `SKILL.md` and ≤ 1 MB, 4 ≤ 300 and ≤ 5 MB, 3 ≤ 600 and ≤ 25 MB, 2 ≤ 1,000 and ≤ 60 MB,
+  1 above. *Licence & health* adds the vetting result (`scripts/vet-skill-repo.mjs`): undisclosed data egress,
+  install-time code or config writes cap it at 2; disclosed, opt-out egress caps it at 4; paid services the skill
+  depends on are named in `avoid_when`. n = 1 run per skill per track, so differences under about one rubric point are
+  noise; the profile says so.

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/user/UX-Design/benchskills/out/diagram/archify/.archify/architecture-ux-library-20261026-100122/candidate.json",
+    "sha256": "fc4c5395b7012abe5dff69265c410cd82dab8deb56844eb7e02079b7c3db645b",
+    "bytes": 5819
+  },
+  "artifact": {
+    "path": "/home/user/UX-Design/benchskills/out/diagram/archify/.archify/architecture-ux-library-20261026-100122/ux-library.html",
+    "sha256": "4a410c3d988c76b3b8d5d6b3b21f51df8d6c84b3181e9c32ae63bc4acbfec4eb",
+    "bytes": 864357
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/user/UX-Design/benchskills/out/diagram/archify/.archify/architecture-ux-library-20261026-100122/review-2/ux-library.finalize.json",
+    "summaryReceipt": "/home/user/UX-Design/benchskills/out/diagram/archify/.archify/architecture-ux-library-20261026-100122/review-2/ux-library.finalize-summary.json",
+    "browserCheckReceipt": "/home/user/UX-Design/benchskills/out/diagram/archify/.archify/architecture-ux-library-20261026-100122/review-2/ux-library.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2733,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

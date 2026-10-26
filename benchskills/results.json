@@ -1,0 +1,478 @@
+{
+ "_baseline": {
+  "kind": "design-skill",
+  "commit": null,
+  "footprint": null,
+  "tracks": {
+   "build": {
+    "checks_passed": 12,
+    "checks_total": 14,
+    "failed": [
+     "text_12_px_min",
+     "hero_cta_above_fold"
+    ],
+    "axe_violations": 1,
+    "overflow_390_px": 0,
+    "keyboard_focus": "14/14",
+    "content_pct": 100,
+    "targets_24_share": 1,
+    "min_font_px": 11,
+    "weight_kb": 25,
+    "external_hosts": [],
+    "unsupported_claims": [],
+    "jury_mean": 3.63,
+    "jury_dims": {
+     "hierarchy": 4,
+     "craft": 4,
+     "distinctiveness": 2.5,
+     "brief_fit": 4
+    }
+   },
+   "review": {
+    "found": 28,
+    "total": 31,
+    "recall_pct": 90,
+    "by_category": {
+     "accessibility": "10/11",
+     "contrast": "3/3",
+     "layout": "5/5",
+     "typography": "3/3",
+     "writing": "5/5",
+     "polish": "2/4"
+    },
+    "by_severity": {
+     "high": "10/10",
+     "medium": "15/16",
+     "low": "3/5"
+    },
+    "missed": [
+     "D27",
+     "D29",
+     "D31"
+    ],
+    "unlisted_valid": 11,
+    "unlisted_invalid": 1
+   },
+   "diagram": {
+    "checks_passed": 12,
+    "checks_total": 12,
+    "failed": [],
+    "labels": "24/24",
+    "overlaps": 0,
+    "text_spill": 0,
+    "min_text_px_390": 12,
+    "weight_kb": 14,
+    "jury_mean": 4.75,
+    "jury_dims": {
+     "clarity": 5,
+     "structure": 5,
+     "craft": 4,
+     "brief_fit": 5
+    }
+   }
+  },
+  "cost": {
+   "build": {
+    "tokens": 87783,
+    "tool_uses": 14,
+    "seconds": 129
+   },
+   "review": {
+    "tokens": 84626,
+    "tool_uses": 9,
+    "seconds": 89
+   },
+   "diagram": {
+    "tokens": 80642,
+    "tool_uses": 9,
+    "seconds": 88
+   }
+  }
+ },
+ "anthropic-frontend-design": {
+  "kind": "design-skill",
+  "commit": "dbd4588",
+  "footprint": {
+   "skill_md_lines": 72,
+   "dir_kb": 19,
+   "skills_loaded": 1
+  },
+  "tracks": {
+   "build": {
+    "checks_passed": 13,
+    "checks_total": 14,
+    "failed": [
+     "targets_24_px"
+    ],
+    "axe_violations": 0,
+    "overflow_390_px": 0,
+    "keyboard_focus": "13/13",
+    "content_pct": 100,
+    "targets_24_share": 0.86,
+    "min_font_px": 14,
+    "weight_kb": 107,
+    "external_hosts": [
+     "fonts.googleapis.com",
+     "fonts.gstatic.com"
+    ],
+    "unsupported_claims": [],
+    "jury_mean": 3.63,
+    "jury_dims": {
+     "hierarchy": 3.5,
+     "craft": 3,
+     "distinctiveness": 4,
+     "brief_fit": 4
+    }
+   }
+  },
+  "cost": {
+   "build": {
+    "tokens": 103687,
+    "tool_uses": 16,
+    "seconds": 232
+   }
+  }
+ },
+ "hallmark": {
+  "kind": "design-skill",
+  "commit": "7ec8682",
+  "footprint": {
+   "skill_md_lines": 155,
+   "dir_kb": 6681,
+   "skills_loaded": 1
+  },
+  "tracks": {
+   "build": {
+    "checks_passed": 13,
+    "checks_total": 14,
+    "failed": [
+     "targets_24_px"
+    ],
+    "axe_violations": 0,
+    "overflow_390_px": 0,
+    "keyboard_focus": "11/11",
+    "content_pct": 100,
+    "targets_24_share": 0.83,
+    "min_font_px": 14,
+    "weight_kb": 90,
+    "external_hosts": [
+     "fonts.googleapis.com",
+     "api.fontshare.com",
+     "fonts.gstatic.com",
+     "cdn.fontshare.com"
+    ],
+    "unsupported_claims": [],
+    "jury_mean": 4.38,
+    "jury_dims": {
+     "hierarchy": 5,
+     "craft": 4.5,
+     "distinctiveness": 4,
+     "brief_fit": 4
+    }
+   },
+   "review": {
+    "found": 30,
+    "total": 31,
+    "recall_pct": 97,
+    "by_category": {
+     "accessibility": "11/11",
+     "contrast": "3/3",
+     "layout": "5/5",
+     "typography": "3/3",
+     "writing": "4/5",
+     "polish": "4/4"
+    },
+    "by_severity": {
+     "high": "10/10",
+     "medium": "16/16",
+     "low": "4/5"
+    },
+    "missed": [
+     "D24"
+    ],
+    "unlisted_valid": 16,
+    "unlisted_invalid": 1
+   }
+  },
+  "cost": {
+   "build": {
+    "tokens": 197998,
+    "tool_uses": 40,
+    "seconds": 442
+   },
+   "review": {
+    "tokens": 135455,
+    "tool_uses": 21,
+    "seconds": 143
+   }
+  }
+ },
+ "taste-skill": {
+  "kind": "design-skill",
+  "commit": "12af471",
+  "footprint": {
+   "skill_md_lines": 543,
+   "dir_kb": 2367,
+   "skills_loaded": 1
+  },
+  "tracks": {
+   "build": {
+    "checks_passed": 14,
+    "checks_total": 14,
+    "failed": [],
+    "axe_violations": 0,
+    "overflow_390_px": 0,
+    "keyboard_focus": "24/24",
+    "content_pct": 100,
+    "targets_24_share": 0.9,
+    "min_font_px": 14,
+    "weight_kb": 976,
+    "external_hosts": [
+     "fonts.googleapis.com",
+     "fonts.gstatic.com"
+    ],
+    "unsupported_claims": [],
+    "jury_mean": 2.88,
+    "jury_dims": {
+     "hierarchy": 2,
+     "craft": 2.5,
+     "distinctiveness": 5,
+     "brief_fit": 2
+    }
+   },
+   "review": {
+    "found": 28,
+    "total": 31,
+    "recall_pct": 90,
+    "by_category": {
+     "accessibility": "10/11",
+     "contrast": "3/3",
+     "layout": "5/5",
+     "typography": "3/3",
+     "writing": "4/5",
+     "polish": "3/4"
+    },
+    "by_severity": {
+     "high": "10/10",
+     "medium": "15/16",
+     "low": "3/5"
+    },
+    "missed": [
+     "D24",
+     "D27",
+     "D31"
+    ],
+    "unlisted_valid": 11,
+    "unlisted_invalid": 0
+   }
+  },
+  "cost": {
+   "build": {
+    "tokens": 247549,
+    "tool_uses": 60,
+    "seconds": 956
+   },
+   "review": {
+    "tokens": 119897,
+    "tool_uses": 17,
+    "seconds": 141
+   }
+  }
+ },
+ "ui-ux-pro-max": {
+  "kind": "design-skill",
+  "commit": "1f88579",
+  "footprint": {
+   "skill_md_lines": 215,
+   "dir_kb": 3644,
+   "skills_loaded": 1
+  },
+  "tracks": {
+   "build": {
+    "checks_passed": 13,
+    "checks_total": 14,
+    "failed": [
+     "hero_cta_above_fold"
+    ],
+    "axe_violations": 0,
+    "overflow_390_px": 0,
+    "keyboard_focus": "16/16",
+    "content_pct": 100,
+    "targets_24_share": 1,
+    "min_font_px": 13,
+    "weight_kb": 139,
+    "external_hosts": [
+     "fonts.googleapis.com",
+     "fonts.gstatic.com"
+    ],
+    "unsupported_claims": [],
+    "jury_mean": 3.88,
+    "jury_dims": {
+     "hierarchy": 4,
+     "craft": 4,
+     "distinctiveness": 3,
+     "brief_fit": 4.5
+    }
+   },
+   "review": {
+    "found": 28,
+    "total": 31,
+    "recall_pct": 90,
+    "by_category": {
+     "accessibility": "11/11",
+     "contrast": "3/3",
+     "layout": "5/5",
+     "typography": "3/3",
+     "writing": "4/5",
+     "polish": "2/4"
+    },
+    "by_severity": {
+     "high": "10/10",
+     "medium": "16/16",
+     "low": "2/5"
+    },
+    "missed": [
+     "D24",
+     "D27",
+     "D29"
+    ],
+    "unlisted_valid": 14,
+    "unlisted_invalid": 0
+   }
+  },
+  "cost": {
+   "build": {
+    "tokens": 133550,
+    "tool_uses": 24,
+    "seconds": 245
+   },
+   "review": {
+    "tokens": 121147,
+    "tool_uses": 13,
+    "seconds": 141,
+    "note": "report returned as text; transcribed into report.md and RUN.md"
+   }
+  }
+ },
+ "interface-skills": {
+  "kind": "design-skill",
+  "commit": "592aedc",
+  "footprint": {
+   "skill_md_lines": 919,
+   "dir_kb": 174,
+   "skills_loaded": 7
+  },
+  "tracks": {
+   "review": {
+    "found": 27,
+    "total": 31,
+    "recall_pct": 87,
+    "by_category": {
+     "accessibility": "11/11",
+     "contrast": "3/3",
+     "layout": "4/5",
+     "typography": "3/3",
+     "writing": "4/5",
+     "polish": "2/4"
+    },
+    "by_severity": {
+     "high": "10/10",
+     "medium": "15/16",
+     "low": "2/5"
+    },
+    "missed": [
+     "D14",
+     "D24",
+     "D27",
+     "D29"
+    ],
+    "unlisted_valid": 13,
+    "unlisted_invalid": 1
+   }
+  },
+  "cost": {
+   "review": {
+    "tokens": 134013,
+    "tool_uses": 20,
+    "seconds": 220
+   }
+  }
+ },
+ "archify": {
+  "kind": "design-skill",
+  "commit": "81c6be8",
+  "footprint": {
+   "skill_md_lines": 138,
+   "dir_kb": 17722,
+   "skills_loaded": 1
+  },
+  "tracks": {
+   "diagram": {
+    "checks_passed": 9,
+    "checks_total": 12,
+    "failed": [
+     "text_10_px_at_390",
+     "text_11_px_at_1280",
+     "no_serious_axe"
+    ],
+    "labels": "24/24",
+    "overlaps": 0,
+    "text_spill": 0,
+    "min_text_px_390": 4.5,
+    "weight_kb": 844,
+    "jury_mean": 1.75,
+    "jury_dims": {
+     "clarity": 2,
+     "structure": 2,
+     "craft": 2,
+     "brief_fit": 1
+    }
+   }
+  },
+  "cost": {
+   "diagram": {
+    "tokens": 115091,
+    "tool_uses": 19,
+    "seconds": 223
+   }
+  }
+ },
+ "diagram-design": {
+  "kind": "design-skill",
+  "commit": "b8f3617",
+  "footprint": {
+   "skill_md_lines": 395,
+   "dir_kb": 5213,
+   "skills_loaded": 1
+  },
+  "tracks": {
+   "diagram": {
+    "checks_passed": 10,
+    "checks_total": 12,
+    "failed": [
+     "text_10_px_at_390",
+     "text_11_px_at_1280"
+    ],
+    "labels": "24/24",
+    "overlaps": 0,
+    "text_spill": 0,
+    "min_text_px_390": 7.1,
+    "weight_kb": 1866,
+    "jury_mean": 3.63,
+    "jury_dims": {
+     "clarity": 3.5,
+     "structure": 4,
+     "craft": 4,
+     "brief_fit": 3
+    }
+   }
+  },
+  "cost": {
+   "diagram": {
+    "tokens": 191165,
+    "tool_uses": 24,
+    "seconds": 471
+   }
+  }
+ }
+}

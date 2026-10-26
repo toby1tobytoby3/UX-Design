@@ -1,0 +1,19 @@
+  FAIL 2a /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:19 purple-to-blue gradient on .hero | fix: One anchor hue; drop the gradient
+  FAIL 10a /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:27 transition: all on .plan | fix: List the transitioned properties explicitly
+  FAIL 27 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:18 motion present, no prefers-reduced-motion block | fix: Add a prefers-reduced-motion fallback
+  FAIL 30a x3 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:74 emoji icon "🚀" in <span class="">; /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:74 emoji icon "🔒" in <span class=""> | fix: One icon library or custom SVG
+  FAIL 33 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:66 <svg> without aria-hidden or aria-label | fix: Add aria-hidden or an aria-label
+  FAIL 34 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:1 no overflow-x: clip on html and body | fix: overflow-x: clip on both html and body
+  FAIL 48 x39 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:9 font-family literal "Georgia, serif" on body; /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:11 colour literal #1d1d2b outside tokens (background on header.sit… | fix: Lift the value into the token block
+  REFLEX 24b x5 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:34 padding-left: 18px (off the 4px scale) on .plan ul; /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:35 margin: 6px 0 (off the 4px scale) on .plan li | fix: Use the 4px spacing scale
+  REFLEX 26b x2 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:1 no :active styling anywhere; /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:1 no :disabled styling anywhere | fix: All eight states; guard: not a form control, no aria-disabled anywhere
+  REFLEX 37 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:16 5 font families: georgia, arial, comic sans ms, courier new, im… | fix: Drop the extra family; three is the ceiling
+  WARN 18 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:17 infinite animation on .ticker span with no pause state | fix: Pause on hover and focus
+  WARN 40 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:25 1.44:1 < 4.5:1 on .btn-primary | fix: Raise the contrast to threshold
+  WARN F3 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:20 no text-wrap: balance on any display head (1 head rule(s), e.g.… | fix: Add text-wrap: balance to h1/h2-level heads
+  WARN F6 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:33 numeric selector .plan .price at display size without tabular f… | fix: Add font-variant-numeric: tabular-nums
+  WARN F21 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:77 h1 is followed by h4 ("Starter") | fix: Step heading levels one at a time; size a head with CSS, never with its level
+  WARN F23 /home/user/UX-Design/benchskills/fixtures/seeded-pricing.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+sloplint: 47 FAIL, 8 REFLEX, 6 WARN across 1 file(s), grouped by gate; every line is in .hallmark/before.txt.
+render tier not run: no puppeteer-core found locally, globally or via HALLMARK_PUPPETEER
+before: recorded 2 links, 0 fields, 1 handlers, 0 test hooks, 0 script hooks in .hallmark/before.json; --kept checks a redesign against it

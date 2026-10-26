@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing | Ledgerly</title>
+<meta name="description" content="Ledgerly pricing: invoice reconciliation for small accounting teams. Three plans, monthly or annual billing, 14-day free trial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<style>
+/* Tokens: from design-system/ledgerly/MASTER.md (Minimalism & Swiss Style, navy + green) */
+:root {
+  --color-primary: #1E3A5F;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #2563EB;
+  --color-accent: #059669;
+  --color-accent-hover: #10B981;
+  --color-on-accent: #000000;
+  --color-background: #F8FAFC;
+  --color-foreground: #0F172A;
+  --color-card: #FFFFFF;
+  --color-muted: #F1F3F5;
+  --color-muted-foreground: #475569;
+  --color-border: #D5DAE1;
+  --color-ring: #1E3A5F;
+  --color-link: #1E3A5F;
+  --color-check: #047857;
+
+  --font-heading: "Poppins", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --font-body: "Open Sans", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+
+  --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px;
+  --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
+
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.06);
+  --shadow-md: 0 4px 6px rgba(15,23,42,.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --t: 200ms ease;
+  --container: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary: #A9C3EA;
+    --color-on-primary: #0B1220;
+    --color-accent: #34D399;
+    --color-accent-hover: #6EE7B7;
+    --color-background: #0B1220;
+    --color-foreground: #E8EEF7;
+    --color-card: #121C30;
+    --color-muted: #17233B;
+    --color-muted-foreground: #A6B4C8;
+    --color-border: #2B3A56;
+    --color-ring: #A9C3EA;
+    --color-link: #A9C3EA;
+    --color-check: #34D399;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-md: 0 4px 6px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 16px; }
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-heading); line-height: 1.2; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: var(--color-link); }
+.num { font-variant-numeric: tabular-nums; }
+
+:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 3px; border-radius: 4px; }
+.btn:focus-visible { outline-offset: 3px; border-radius: var(--radius-sm); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip {
+  position: absolute; left: 16px; top: -100px; z-index: 100;
+  background: var(--color-primary); color: var(--color-on-primary);
+  padding: 12px 16px; border-radius: var(--radius-sm); font-weight: 600; text-decoration: none;
+}
+.skip:focus { top: 16px; }
+
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: 16px; }
+@media (min-width: 768px) { .container { padding-inline: 32px; } }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--color-border); background: var(--color-card); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; padding-block: 8px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; color: var(--color-foreground); text-decoration: none; min-height: 44px; }
+.brand svg { flex: none; }
+.nav { display: flex; gap: 4px; }
+.nav a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px;
+  color: var(--color-foreground); text-decoration: none; font-weight: 500; font-size: .9375rem; border-radius: var(--radius-sm);
+  transition: background-color var(--t);
+}
+.nav a:hover { background: var(--color-muted); }
+.nav a[aria-current="page"] { font-weight: 700; box-shadow: inset 0 -3px 0 var(--color-primary); border-radius: 0; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 12px 24px; border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-weight: 700; font-size: 1rem; line-height: 1.2;
+  text-decoration: none; cursor: pointer; border: 2px solid transparent;
+  background: var(--color-accent); color: var(--color-on-accent);
+  transition: background-color var(--t), box-shadow var(--t), transform var(--t);
+}
+.btn:hover { background: var(--color-accent-hover); box-shadow: var(--shadow-md); }
+.btn:active { transform: translateY(1px); }
+
+/* Hero */
+.hero { padding-block: 40px 24px; }
+.hero-grid { display: grid; gap: 32px; align-items: center; }
+.eyebrow { font-weight: 600; font-size: .875rem; letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted-foreground); margin-bottom: 12px; }
+.hero h1 { font-size: 2.25rem; font-weight: 700; color: var(--color-foreground); }
+.hero .lead { margin-top: 16px; font-size: 1.125rem; color: var(--color-muted-foreground); max-width: 34rem; }
+.trial-note { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.trial-note svg { color: var(--color-check); flex: none; }
+.hero-art { display: none; }
+@media (min-width: 900px) {
+  .hero { padding-block: 64px 32px; }
+  .hero-grid { grid-template-columns: 1.1fr .9fr; gap: 64px; }
+  .hero h1 { font-size: 3rem; }
+  .hero-art { display: block; }
+}
+.art { width: 100%; height: auto; display: block; }
+.art .a-card { fill: var(--color-card); stroke: var(--color-border); stroke-width: 1.5; }
+.art .a-bar { fill: var(--color-muted); }
+.art .a-bar-strong { fill: var(--color-border); }
+.art .a-link { stroke: var(--color-primary); stroke-width: 2; fill: none; }
+.art .a-dot { fill: var(--color-accent); }
+.art .a-label { fill: var(--color-muted-foreground); font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+
+/* Plans */
+.section { padding-block: 40px; }
+@media (min-width: 768px) { .section { padding-block: 64px; } }
+.section-head { margin-bottom: 24px; }
+.section-head h2 { font-size: 1.625rem; font-weight: 600; }
+.section-head p { margin-top: 8px; color: var(--color-muted-foreground); }
+@media (min-width: 768px) { .section-head h2 { font-size: 2rem; } }
+
+.billing-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-bottom: 24px; }
+.toggle { display: inline-flex; padding: 4px; gap: 4px; background: var(--color-muted); border: 1px solid var(--color-border); border-radius: 12px; }
+.toggle button {
+  min-height: 44px; min-width: 44px; padding: 8px 20px; border: 0; border-radius: 8px; cursor: pointer;
+  background: transparent; color: var(--color-foreground);
+  font: 600 1rem/1.2 var(--font-body);
+  transition: background-color var(--t), color var(--t), box-shadow var(--t);
+}
+.toggle button:hover { background: var(--color-card); }
+.toggle button[aria-pressed="true"] { background: var(--color-primary); color: var(--color-on-primary); box-shadow: var(--shadow-sm); }
+.toggle button .save { font-weight: 600; font-size: .8125rem; margin-left: 6px; opacity: .95; }
+.toggle button:focus-visible { outline-offset: 2px; }
+.billing-status { font-size: .9375rem; color: var(--color-muted-foreground); }
+
+.plans { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .plans { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+@media (min-width: 1024px) { .plans { gap: 24px; } }
+.plan {
+  display: flex; flex-direction: column; background: var(--color-card);
+  border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+@media (min-width: 768px) and (max-width: 1023px) { .plan { padding: 20px; } }
+.plan h3 { font-size: 1.25rem; font-weight: 600; }
+.price { margin-top: 16px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px; }
+.price .cur { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; align-self: flex-start; margin-top: 6px; }
+.price .amount { font-family: var(--font-heading); font-size: 3rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.price .per { color: var(--color-muted-foreground); font-size: .9375rem; }
+.billed { margin-top: 4px; min-height: 3em; font-size: .9375rem; color: var(--color-muted-foreground); }
+.plan hr { border: 0; border-top: 1px solid var(--color-border); margin: 20px 0; }
+.features { display: grid; gap: 12px; margin-bottom: 24px; }
+.features li { display: flex; gap: 10px; align-items: flex-start; }
+.features svg { flex: none; margin-top: 3px; color: var(--color-check); }
+.plan .btn { margin-top: auto; width: 100%; }
+.fade { transition: opacity 150ms ease; }
+.fade.is-swapping { opacity: 0; }
+
+/* Comparison */
+.table-wrap { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: .8125rem; }
+caption { text-align: left; padding: 0; }
+th, td { padding: 12px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid var(--color-border); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--color-muted); font-family: var(--font-heading); font-weight: 600; font-size: .8125rem; }
+tbody th { text-align: left; font-weight: 600; width: 31%; padding-left: 12px; padding-right: 4px; }
+thead th:first-child { text-align: left; padding-left: 12px; width: 31%; }
+tbody tr:nth-child(even) { background: color-mix(in srgb, var(--color-muted) 55%, transparent); }
+td .yn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+td .yes svg { color: var(--color-check); }
+td .no { color: var(--color-muted-foreground); }
+@media (min-width: 768px) {
+  table { font-size: 1rem; }
+  th, td { padding: 16px 16px; }
+  tbody th { padding-right: 16px; }
+  thead th { font-size: 1rem; }
+  tbody th, thead th:first-child { padding-left: 24px; width: 34%; }
+}
+
+/* FAQ */
+.faq { display: grid; gap: 12px; max-width: 48rem; }
+.faq details { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 56px; padding: 12px 16px; font-weight: 600; font-size: 1rem; border-radius: var(--radius-sm);
+  transition: background-color var(--t);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { background: var(--color-muted); }
+.faq summary:focus-visible { outline-offset: -3px; }
+.faq summary svg { flex: none; transition: transform var(--t); color: var(--color-primary); }
+.faq details[open] summary svg { transform: rotate(180deg); }
+.faq .answer { padding: 0 16px 16px; color: var(--color-muted-foreground); max-width: 40rem; }
+
+/* Final CTA */
+.final { background: var(--color-primary); color: var(--color-on-primary); border-radius: var(--radius); padding: 32px 24px; display: grid; gap: 16px; justify-items: start; }
+.final h2 { font-size: 1.5rem; font-weight: 600; }
+.final p { opacity: .95; }
+@media (min-width: 768px) {
+  .final { padding: 48px; grid-template-columns: 1fr auto; align-items: center; gap: 32px; }
+  .final h2 { font-size: 1.875rem; }
+}
+.final .btn:focus-visible { outline-color: var(--color-on-primary); }
+
+.site-footer { border-top: 1px solid var(--color-border); margin-top: 48px; padding-block: 24px; color: var(--color-muted-foreground); font-size: .9375rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  .btn:active { transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#top" aria-label="Ledgerly home">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><rect width="28" height="28" rx="7" fill="#1E3A5F"/><path d="M8 9h12M8 14h12M8 19h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="20.5" cy="19" r="2.5" fill="#34D399"/></svg>
+      Ledgerly
+    </a>
+    <nav class="nav" aria-label="On this page">
+      <a href="#plans" aria-current="page">Pricing</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero" id="top" aria-labelledby="page-title">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Pricing</p>
+        <h1 id="page-title">Simple plans for invoice reconciliation</h1>
+        <p class="lead">Invoice reconciliation for small accounting teams. Pick the plan that fits your firm.</p>
+        <p class="trial-note">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          14-day free trial on every plan, no card needed
+        </p>
+      </div>
+      <!-- Honest stand-in: abstract illustration of matching two lists; no figures or claims -->
+      <div class="hero-art" aria-hidden="true">
+        <svg class="art" viewBox="0 0 440 300" focusable="false">
+          <text class="a-label" x="20" y="24">Bank statement</text>
+          <text class="a-label" x="260" y="24">Ledger</text>
+          <rect class="a-card" x="10" y="36" width="170" height="244" rx="12"/>
+          <rect class="a-card" x="250" y="36" width="180" height="244" rx="12"/>
+          <g>
+            <rect class="a-bar-strong" x="26" y="60" width="90" height="10" rx="5"/><rect class="a-bar" x="26" y="78" width="60" height="8" rx="4"/>
+            <rect class="a-bar-strong" x="26" y="110" width="104" height="10" rx="5"/><rect class="a-bar" x="26" y="128" width="50" height="8" rx="4"/>
+            <rect class="a-bar-strong" x="26" y="160" width="80" height="10" rx="5"/><rect class="a-bar" x="26" y="178" width="66" height="8" rx="4"/>
+            <rect class="a-bar-strong" x="26" y="210" width="96" height="10" rx="5"/><rect class="a-bar" x="26" y="228" width="44" height="8" rx="4"/>
+            <rect class="a-bar" x="26" y="252" width="110" height="8" rx="4"/>
+          </g>
+          <g>
+            <rect class="a-bar-strong" x="268" y="60" width="96" height="10" rx="5"/><rect class="a-bar" x="268" y="78" width="64" height="8" rx="4"/>
+            <rect class="a-bar-strong" x="268" y="110" width="110" height="10" rx="5"/><rect class="a-bar" x="268" y="128" width="54" height="8" rx="4"/>
+            <rect class="a-bar-strong" x="268" y="160" width="84" height="10" rx="5"/><rect class="a-bar" x="268" y="178" width="70" height="8" rx="4"/>
+            <rect class="a-bar-strong" x="268" y="210" width="100" height="10" rx="5"/><rect class="a-bar" x="268" y="228" width="48" height="8" rx="4"/>
+          </g>
+          <g>
+            <path class="a-link" d="M180 66 C 215 66, 215 66, 250 66"/>
+            <path class="a-link" d="M180 116 C 215 116, 215 116, 250 116"/>
+            <path class="a-link" d="M180 166 C 215 166, 215 166, 250 166"/>
+            <path class="a-link" d="M180 216 C 215 216, 215 216, 250 216"/>
+            <circle class="a-dot" cx="215" cy="66" r="9"/><circle class="a-dot" cx="215" cy="116" r="9"/><circle class="a-dot" cx="215" cy="166" r="9"/><circle class="a-dot" cx="215" cy="216" r="9"/>
+            <g stroke="#000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M211 66l3 3 5-6"/><path d="M211 116l3 3 5-6"/><path d="M211 166l3 3 5-6"/><path d="M211 216l3 3 5-6"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plans" aria-labelledby="plans-title" style="padding-top:16px">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="plans-title">Choose a plan</h2>
+      </div>
+
+      <div class="billing-bar">
+        <div class="toggle" role="group" aria-label="Billing period">
+          <button type="button" id="btn-monthly" aria-pressed="true">Monthly</button>
+          <button type="button" id="btn-annual" aria-pressed="false">Annual<span class="save">Save 20%</span></button>
+        </div>
+        <p class="billing-status" id="billing-status" role="status" aria-live="polite">Showing monthly prices.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan" aria-labelledby="plan-starter">
+          <h3 id="plan-starter">Starter</h3>
+          <p class="price fade"><span class="cur" aria-hidden="true">$</span><span class="amount" data-monthly="19" data-annual="15.20"><span class="sr-only">$</span>19</span><span class="per">per month</span></p>
+          <p class="billed fade" data-monthly="Billed monthly" data-annual="Billed annually, 20% less than twelve monthly payments">Billed monthly</p>
+          <hr>
+          <ul class="features">
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>1 seat</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>100 reconciliations per month</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Email support</span></li>
+          </ul>
+          <a class="btn" href="/trial?plan=starter" data-plan="starter" aria-label="Start free trial, Starter plan">Start free trial</a>
+        </article>
+
+        <article class="plan" aria-labelledby="plan-team">
+          <h3 id="plan-team">Team</h3>
+          <p class="price fade"><span class="cur" aria-hidden="true">$</span><span class="amount" data-monthly="59" data-annual="47.20"><span class="sr-only">$</span>59</span><span class="per">per month</span></p>
+          <p class="billed fade" data-monthly="Billed monthly" data-annual="Billed annually, 20% less than twelve monthly payments">Billed monthly</p>
+          <hr>
+          <ul class="features">
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 seats</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Unlimited reconciliations</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Shared matching rules</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Email support</span></li>
+          </ul>
+          <a class="btn" href="/trial?plan=team" data-plan="team" aria-label="Start free trial, Team plan">Start free trial</a>
+        </article>
+
+        <article class="plan" aria-labelledby="plan-business">
+          <h3 id="plan-business">Business</h3>
+          <p class="price fade"><span class="cur" aria-hidden="true">$</span><span class="amount" data-monthly="149" data-annual="119.20"><span class="sr-only">$</span>149</span><span class="per">per month</span></p>
+          <p class="billed fade" data-monthly="Billed monthly" data-annual="Billed annually, 20% less than twelve monthly payments">Billed monthly</p>
+          <hr>
+          <ul class="features">
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>15 seats</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Unlimited reconciliations</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Shared matching rules</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>SSO</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Audit log</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority support</span></li>
+          </ul>
+          <a class="btn" href="/trial?plan=business" data-plan="business" aria-label="Start free trial, Business plan">Start free trial</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="compare" aria-labelledby="compare-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="compare-title">Compare plans</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Plan comparison: Starter, Team and Business</caption>
+          <thead>
+            <tr><th scope="col">Feature</th><th scope="col">Starter</th><th scope="col">Team</th><th scope="col">Business</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Seats</th><td class="num">1</td><td class="num">5</td><td class="num">15</td></tr>
+            <tr><th scope="row">Reconciliations per month</th><td class="num">100</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><th scope="row">Bank connections</th><td class="num">1</td><td class="num">5</td><td class="num">20</td></tr>
+            <tr><th scope="row">Shared matching rules</th><td><span class="yn no"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M3 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>No</span></td><td><span class="yn yes"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Yes</span></td><td><span class="yn yes"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Yes</span></td></tr>
+            <tr><th scope="row">Export to CSV and PDF</th><td><span class="yn yes"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Yes</span></td><td><span class="yn yes"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Yes</span></td><td><span class="yn yes"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Yes</span></td></tr>
+            <tr><th scope="row">SSO</th><td><span class="yn no"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M3 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>No</span></td><td><span class="yn no"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M3 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>No</span></td><td><span class="yn yes"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Yes</span></td></tr>
+            <tr><th scope="row">Audit log</th><td><span class="yn no"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M3 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>No</span></td><td><span class="yn no"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M3 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>No</span></td><td><span class="yn yes"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Yes</span></td></tr>
+            <tr><th scope="row">Support</th><td>Email</td><td>Email</td><td>Priority</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="faq-title">Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Can I change plans later?<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p class="answer">Yes. Upgrade or downgrade at any time; the change applies from your next billing date.</p>
+        </details>
+        <details>
+          <summary>Is there a free trial?<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p class="answer">Yes. Every plan starts with a 14-day free trial, and no card is needed to begin.</p>
+        </details>
+        <details>
+          <summary>What counts as a reconciliation?<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p class="answer">One bank statement matched against your ledger for one account in one month.</p>
+        </details>
+        <details>
+          <summary>How does annual billing work?<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p class="answer">You are charged once a year at 20% less than twelve monthly payments.</p>
+        </details>
+        <details>
+          <summary>Do you offer refunds?<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p class="answer">Yes. Ask within 30 days of your first charge and we refund it in full.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:8px" aria-labelledby="final-title">
+    <div class="container">
+      <div class="final">
+        <div>
+          <h2 id="final-title">Ready to try Ledgerly?</h2>
+          <p style="margin-top:8px">Every plan starts with a 14-day free trial, and no card is needed to begin.</p>
+        </div>
+        <a class="btn" href="/trial" aria-label="Start free trial">Start free trial</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">Ledgerly &middot; Invoice reconciliation for small accounting teams</div>
+</footer>
+
+<script>
+(function () {
+  var mBtn = document.getElementById('btn-monthly');
+  var aBtn = document.getElementById('btn-annual');
+  var status = document.getElementById('billing-status');
+  var amounts = document.querySelectorAll('.amount');
+  var billed = document.querySelectorAll('.billed');
+  var links = document.querySelectorAll('.plan .btn');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var mode = 'monthly';
+
+  function paint(m) {
+    amounts.forEach(function (el) {
+      el.innerHTML = '<span class="sr-only">$</span>' + el.getAttribute('data-' + m);
+    });
+    billed.forEach(function (el) { el.textContent = el.getAttribute('data-' + m); });
+    links.forEach(function (a) {
+      a.href = '/trial?plan=' + a.getAttribute('data-plan') + '&billing=' + m;
+    });
+    status.textContent = m === 'annual'
+      ? 'Showing annual prices, billed annually.'
+      : 'Showing monthly prices.';
+  }
+
+  function set(m) {
+    if (m === mode) return;
+    mode = m;
+    mBtn.setAttribute('aria-pressed', String(m === 'monthly'));
+    aBtn.setAttribute('aria-pressed', String(m === 'annual'));
+    var fades = document.querySelectorAll('.fade');
+    if (reduce.matches) { paint(m); return; }
+    fades.forEach(function (f) { f.classList.add('is-swapping'); });
+    setTimeout(function () {
+      paint(m);
+      fades.forEach(function (f) { f.classList.remove('is-swapping'); });
+    }, 150);
+  }
+
+  mBtn.addEventListener('click', function () { set('monthly'); });
+  aBtn.addEventListener('click', function () { set('annual'); });
+})();
+</script>
+</body>
+</html>

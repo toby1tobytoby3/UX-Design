@@ -1,0 +1,48 @@
+{
+ "file": "diagram.html",
+ "widths": {
+  "390": {
+   "overflow_px": 0,
+   "console_errors": 0,
+   "text_nodes": 72,
+   "overlaps": 0,
+   "overlap_examples": [],
+   "min_effective_text_px": 12,
+   "clipped": 0,
+   "text_spill": 0,
+   "connectors": 0,
+   "text_alternative": true,
+   "words": 462
+  },
+  "1280": {
+   "overflow_px": 0,
+   "console_errors": 0,
+   "text_nodes": 72,
+   "overlaps": 0,
+   "overlap_examples": [],
+   "min_effective_text_px": 12,
+   "clipped": 0,
+   "text_spill": 0,
+   "connectors": 0,
+   "text_alternative": true,
+   "words": 462
+  }
+ },
+ "axe": [],
+ "labels": {
+  "required": 24,
+  "present": 24,
+  "missing": []
+ },
+ "numbers_in_text": [
+  "1",
+  "2",
+  "6"
+ ],
+ "weight_kb": 14,
+ "external_hosts": [],
+ "failed_requests": 0,
+ "reduced_motion": {
+  "infinite_animations": 0
+ }
+}

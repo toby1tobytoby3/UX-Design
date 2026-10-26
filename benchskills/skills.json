@@ -1,0 +1,103 @@
+{
+  "_about": "Skills under test. `dir` is what a run agent is told to read; `root` is the repo root (some skills expect to run from it). Non-vendored skills are fetched at the pinned commit by `node fetch.mjs` into .cache/ (gitignored). A baseline run gets no skill. `dirs` lists every folder a skill loads when it routes to siblings; footprint sums them.",
+  "skills": {
+    "hallmark": {
+      "slug": "hallmark",
+      "repo": "Nutlope/hallmark",
+      "sha": "7ec868225c6caa040558c321ee0fefa0e73f83a8",
+      "root": ".cache/hallmark",
+      "dir": ".cache/hallmark/skills/hallmark",
+      "tracks": [
+        "build",
+        "review"
+      ],
+      "review_note": "Run its `audit <path>` verb."
+    },
+    "taste-skill": {
+      "slug": "taste-skill",
+      "repo": "Leonxlnx/taste-skill",
+      "sha": "12af471f627f866411b4bd785b19646d3672784c",
+      "root": ".cache/taste-skill",
+      "dir": ".cache/taste-skill/skills/taste-skill",
+      "tracks": [
+        "build",
+        "review"
+      ],
+      "review_note": "Use its inspector and look-and-fix rubric to review; do not rebuild the page."
+    },
+    "ui-ux-pro-max": {
+      "slug": "ui-ux-pro-max",
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sha": "1f8857914da3c723d58dab1d609dd0d55a86bf51",
+      "root": ".cache/ui-ux-pro-max",
+      "dir": ".cache/ui-ux-pro-max/.claude/skills/ui-ux-pro-max",
+      "tracks": [
+        "build",
+        "review"
+      ],
+      "review_note": "Use its search tool and guidelines to review; do not rebuild the page.",
+      "env": {
+        "CLAUDE_PLUGIN_ROOT": ".cache/ui-ux-pro-max"
+      }
+    },
+    "frontend-design": {
+      "slug": "anthropic-frontend-design",
+      "repo": "anthropics/skills",
+      "sha": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "root": "../vendor/skills",
+      "dir": "../vendor/skills/frontend-design",
+      "tracks": [
+        "build"
+      ]
+    },
+    "interface-skills": {
+      "slug": "interface-skills",
+      "repo": "jakubkrehel/skills",
+      "sha": "592aedc44d7d5b3e29740984252902f3e5402a1c",
+      "root": "../vendor/skills",
+      "dir": "../vendor/skills/better-interface",
+      "tracks": [
+        "review"
+      ],
+      "review_note": "Run `better-interface` (it routes to the better-* skills next to it).",
+      "dirs": [
+        "../vendor/skills/better-interface",
+        "../vendor/skills/better-accessibility",
+        "../vendor/skills/better-colors",
+        "../vendor/skills/better-layout",
+        "../vendor/skills/better-typography",
+        "../vendor/skills/better-ui",
+        "../vendor/skills/better-writing"
+      ]
+    },
+    "diagram-design": {
+      "slug": "diagram-design",
+      "repo": "cathrynlavery/diagram-design",
+      "sha": "b8f36171da6e1bce05c3eb984969e5d4e7cb3a20",
+      "root": "../vendor/skills/diagram-design",
+      "dir": "../vendor/skills/diagram-design",
+      "tracks": [
+        "diagram"
+      ]
+    },
+    "archify": {
+      "slug": "archify",
+      "repo": "tt-a1i/archify",
+      "sha": "81c6be8d87090670c45d08a8f97f9d29c5af0bec",
+      "root": ".cache/archify/archify",
+      "dir": ".cache/archify/archify",
+      "tracks": [
+        "diagram"
+      ]
+    },
+    "baseline": {
+      "slug": null,
+      "tracks": [
+        "build",
+        "review",
+        "diagram"
+      ],
+      "note": "Same model, same brief, no skill. The control every skill has to beat."
+    }
+  }
+}

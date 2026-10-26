@@ -14,7 +14,10 @@ vendored third-party ones in `vendor/skills/` (`npm run skills:link` exposes bot
   (`cd bench3d && npm install && (cd model-viewer && npm install) && node run.mjs [lib]`), animation in
   `benchmotion/` (`node run.mjs [lib] && node chart.mjs`), headless UI primitives in `benchui/`, AI chat kits in
   `benchai/` (about 15 minutes), inline AI in `benchinline/`, tables in `benchtable/` (about 25 minutes), panels in
-  `benchpanels/` (about 8 minutes), maps in `benchmap/` (offline basemap, SwiftShader). Each writes `results.json`, which the catalog build attaches to the profile.
+  `benchpanels/` (about 8 minutes), maps in `benchmap/` (offline basemap, SwiftShader), agent design skills in `benchskills/`
+  (builders, reviewers and diagram makers against a no-skill control; `node fetch.mjs`, then follow its README: agents generate, scripts measure). Each writes `results.json`, which the catalog build attaches to the profile.
+- Agent skills and toolkits are third-party code: vet them with `scripts/vet-skill-repo.mjs` before reading, vendoring or
+  scoring; vendored copies go in `vendor/skills/`, never `skills/` (the plugin ships that).
 - Agents answering with this library start at `guides/README.md`.
 - Commit straight to `main`.
 

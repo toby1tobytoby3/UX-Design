@@ -1,0 +1,27 @@
+[
+ {
+  "shape": "Index-First",
+  "theme": "coral",
+  "axes": "light/grotesk-sans/warm",
+  "hero": "Index",
+  "nav": "slab",
+  "footer": "mast",
+  "imagery": "none (stationery built in CSS)",
+  "photos": [],
+  "entry": "plan index rows on desk",
+  "fingerprint": "index-first/index/slab/mast/rows+table/restrained",
+  "sections": [
+   "Index",
+   "Table",
+   "Figures",
+   "Rows",
+   "Board close",
+   "Mast"
+  ],
+  "signature": "plan index on the desk with a groove switch re-pricing every sheet",
+  "waived": [],
+  "prompt": "Ledgerly pricing page",
+  "date": "2026-10-26",
+  "mode": "build"
+ }
+]
