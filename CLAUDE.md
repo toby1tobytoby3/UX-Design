@@ -1,7 +1,7 @@
 # UX-Design repo
 
-The UX reference library. See SPEC.md for the design; the skills in `skills/` (also exposed
-via `.claude/skills`) define the workflows.
+The UX reference library. See SPEC.md for the design; our skills in `skills/` (shipped by the plugin) and
+vendored third-party ones in `vendor/skills/` (`npm run skills:link` exposes both via `.claude/skills`) define the workflows.
 
 - Entries live in `entries/<pattern>/<site>-<slug>/entry.md`. Frontmatter is flat `key: value`
   with inline `[a, b]` lists only — the catalog parser supports nothing else.
