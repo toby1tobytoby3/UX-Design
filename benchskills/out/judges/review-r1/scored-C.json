@@ -1,0 +1,201 @@
+{
+ "label": "C",
+ "defects": {
+  "D01": {
+   "found": true,
+   "quote": "interactive control with no accessible name (4.1.2, 2.5.3)"
+  },
+  "D02": {
+   "found": true,
+   "quote": "No `<label>` (0 labels on the page); the placeholder is the only name and disappears on typing"
+  },
+  "D03": {
+   "found": true,
+   "quote": "path reachable by pointer but not by keyboard (2.1.1)"
+  },
+  "D04": {
+   "found": true,
+   "quote": "keyboard-reachable controls with no visible focus indicator (WCAG 2.4.7)"
+  },
+  "D05": {
+   "found": true,
+   "quote": "`<img>` with no `alt` on the logo and hero images (lines 61, 71)"
+  },
+  "D06": {
+   "found": true,
+   "quote": "state or meaning carried by color alone (1.4.1)"
+  },
+  "D07": {
+   "found": true,
+   "quote": "the positive tabindex puts FAQ first in the tab order, before Pricing"
+  },
+  "D08": {
+   "found": true,
+   "quote": "skip from h1 to h4 (2.4.6 outline, heading rank)"
+  },
+  "D09": {
+   "found": true,
+   "quote": "motion that ignores `prefers-reduced-motion` (2.3.3 intent)"
+  },
+  "D10": {
+   "found": true,
+   "quote": "`#bbb` on white **1.92:1**"
+  },
+  "D11": {
+   "found": true,
+   "quote": "Submit white on yellow **1.44:1** (needs 4.5)"
+  },
+  "D12": {
+   "found": true,
+   "quote": "Field border `#e6e6e6` on white is **1.25:1**"
+  },
+  "D13": {
+   "found": true,
+   "quote": "at 375 and 320, `scrollWidth` is **584** against a 320 viewport"
+  },
+  "D14": {
+   "found": false,
+   "quote": ""
+  },
+  "D15": {
+   "found": true,
+   "quote": "The text is 357px wide in a 180px box"
+  },
+  "D16": {
+   "found": true,
+   "quote": "the top 140px of the page sits under the header"
+  },
+  "D17": {
+   "found": true,
+   "quote": "Three paddings (20, 24, 28px) misalign the plan names and prices across the row"
+  },
+  "D18": {
+   "found": true,
+   "quote": "The actual plan features are 12px and the billing terms 11px."
+  },
+  "D19": {
+   "found": true,
+   "quote": "The about paragraph is 1232px wide (about 190 characters) at line-height 1"
+  },
+  "D20": {
+   "found": true,
+   "quote": "It is five font families, two of them novelty faces"
+  },
+  "D21": {
+   "found": true,
+   "quote": "three identical \"Click here\" buttons give a screen-reader button list"
+  },
+  "D22": {
+   "found": true,
+   "quote": "\"Error 422\" is a server status code meaningless to a user"
+  },
+  "D23": {
+   "found": true,
+   "quote": "\"invalid email address\" accuses the user and gives no format"
+  },
+  "D24": {
+   "found": false,
+   "quote": ""
+  },
+  "D25": {
+   "found": true,
+   "quote": "The destructive \"OK\" is styled the same as Cancel and does not repeat the consequence."
+  },
+  "D26": {
+   "found": true,
+   "quote": "`transition:all` also animates layout properties."
+  },
+  "D27": {
+   "found": false,
+   "quote": ""
+  },
+  "D28": {
+   "found": true,
+   "quote": "emoji icons not hidden from assistive technology (line 74)"
+  },
+  "D29": {
+   "found": false,
+   "quote": ""
+  },
+  "D30": {
+   "found": true,
+   "quote": "Disables pinch-zoom on phones (1.4.4 resize text)"
+  },
+  "D31": {
+   "found": true,
+   "quote": "missing `<main>` and `<nav>` landmarks"
+  }
+ },
+ "unlisted": [
+  {
+   "quote": "The button also does nothing when pressed (no handler)",
+   "valid": true,
+   "why": "Banner close button has no click handler in the fixture."
+  },
+  {
+   "quote": "hero lede `#dcd0ff` on the gradient **3.43 to 3.84:1**",
+   "valid": true,
+   "why": "Light lavender text over the purple-to-blue gradient has low contrast."
+  },
+  {
+   "quote": "table text `#222` on red **2.97:1**",
+   "valid": false,
+   "why": "Table cells are empty; there is no text on the red fill."
+  },
+  {
+   "quote": "fine print `#777` on white **4.48:1** at 11px",
+   "valid": true,
+   "why": "#777 on white is just under 4.5:1 for small text."
+  },
+  {
+   "quote": "The Business card spans x 417 to 552, so its \"Click here\" button (right edge 522) sits fully off-screen",
+   "valid": true,
+   "why": "Non-wrapping flex plans squeeze or overflow at narrow widths."
+  },
+  {
+   "quote": "Also add `scope=\"col\"` to the `<th>` cells (line 100).",
+   "valid": true,
+   "why": "Table header cells lack scope attributes."
+  },
+  {
+   "quote": "No `name` or `autocomplete` (1.3.5).",
+   "valid": true,
+   "why": "Email input has no name or autocomplete attribute."
+  },
+  {
+   "quote": "The error text is not linked with `aria-describedby` or `aria-invalid`, so it is not announced.",
+   "valid": true,
+   "why": "Errors are static paragraphs unassociated with the input."
+  },
+  {
+   "quote": "It is always visible on first load, before anything was entered, so it also misleads.",
+   "valid": true,
+   "why": "Error paragraphs render unconditionally in the fixture."
+  },
+  {
+   "quote": "`role=\"dialog\"` but no modal behavior or focus handling",
+   "valid": true,
+   "why": "Static confirm block has role=dialog without dialog behaviour."
+  },
+  {
+   "quote": "\"billed monthly\" against the fine print \"Annual plans are billed once a year\" with no annual plan shown",
+   "valid": true,
+   "why": "Billing copy contradicts the fine print; no annual plan exists."
+  },
+  {
+   "quote": "the dead `toggleCompare()` (line 130)",
+   "valid": true,
+   "why": "Empty unused function exists in the script."
+  },
+  {
+   "quote": "the hero heading capitalisation (\"Package\" in title case against sentence-case elsewhere)",
+   "valid": true,
+   "why": "H1 capitalises Package inconsistently; minor but real."
+  },
+  {
+   "quote": "The plan names are 16px, the same as body and smaller than the 32px price",
+   "valid": true,
+   "why": "h4 plan names default to 16px; price is 32px."
+  }
+ ]
+}

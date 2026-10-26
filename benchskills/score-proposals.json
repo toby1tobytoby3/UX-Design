@@ -4,58 +4,63 @@
   "s_coverage": 3,
   "s_a11y": 3,
   "s_perf": 5,
-  "cost_ratio": 1.18,
+  "cost_ratio": 1.19,
   "s_bundle": 5,
   "tracks": [
    "build"
-  ]
+  ],
+  "runs": 2
  },
  "hallmark": {
-  "s_look": 4,
+  "s_look": 3,
   "s_coverage": 3,
   "s_a11y": 3,
   "s_perf": 4,
-  "cost_ratio": 1.93,
+  "cost_ratio": 1.95,
   "s_bundle": 3,
   "tracks": [
    "build",
    "review"
-  ]
+  ],
+  "runs": 2
  },
  "taste-skill": {
   "s_look": 2,
   "s_coverage": 3,
   "s_a11y": 3,
   "s_perf": 3,
-  "cost_ratio": 2.12,
+  "cost_ratio": 2.2,
   "s_bundle": 3,
   "tracks": [
    "build",
    "review"
-  ]
+  ],
+  "runs": 2
  },
  "ui-ux-pro-max": {
   "s_look": 3,
   "s_coverage": 3,
   "s_a11y": 3,
   "s_perf": 5,
-  "cost_ratio": 1.48,
+  "cost_ratio": 1.38,
   "s_bundle": 4,
   "tracks": [
    "build",
    "review"
-  ]
+  ],
+  "runs": 2
  },
  "interface-skills": {
   "s_look": null,
   "s_coverage": 3,
   "s_a11y": 3,
   "s_perf": 4,
-  "cost_ratio": 1.58,
+  "cost_ratio": 1.83,
   "s_bundle": 2,
   "tracks": [
    "review"
-  ]
+  ],
+  "runs": 2
  },
  "archify": {
   "s_look": 1,
@@ -66,7 +71,8 @@
   "s_bundle": 3,
   "tracks": [
    "diagram"
-  ]
+  ],
+  "runs": 1
  },
  "diagram-design": {
   "s_look": 2,
@@ -77,6 +83,7 @@
   "s_bundle": 3,
   "tracks": [
    "diagram"
-  ]
+  ],
+  "runs": 1
  }
 }

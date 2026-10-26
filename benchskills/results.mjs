@@ -80,7 +80,7 @@ export default async function aggregate({ browser, CONFIG, OUT, HERE }) {
   }
   // Repeat runs live in out/<track>/<id>-r2 (same brief, fresh agent): kept apart under `_repeats`, never mixed into a profile's score.
   const repeats = {};
-  for (const [id, e] of Object.entries(entries)) if (!CONFIG[id] && /-r\d+$/.test(id)) repeats[id] = { of: id.replace(/-r\d+$/, ''), tracks: e.tracks, cost: e.cost };
+  for (const [id, e] of Object.entries(entries)) if (!CONFIG[id] && /-r\d+$/.test(id)) { const of = id.replace(/-r\d+$/, ''); repeats[id] = { of, slug: CONFIG[of]?.slug ?? `_${of}`, tracks: e.tracks, cost: e.cost }; }
   for (const [id, e] of Object.entries(entries)) {
     const cfg = CONFIG[id]; if (!cfg) continue;
     const dirs = cfg.dirs ?? (cfg.dir ? [cfg.dir] : []);

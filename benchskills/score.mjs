@@ -17,13 +17,17 @@ const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
 const A11Y_BUILD = ['no_serious_axe', 'focus_visible_everywhere', 'toggle_by_keyboard', 'faq_by_keyboard', 'reduced_motion_respected', 'targets_24_px', 'page_structure'];
 const A11Y_DIAGRAM = ['no_serious_axe', 'text_alternative', 'reduced_motion_respected', 'text_10_px_at_390', 'text_11_px_at_1280'];
 
-// Percent measures per track. Each returns null when the skill did not run in that track.
+// Each skill's numbers pool its first run with any repeat runs (`_repeats` in results.json, written by results.mjs): the mean over runs
+// is banded, so one lucky or unlucky run moves a score less. The control is pooled the same way.
+const runsOf = (slug, r, t) => [r.tracks[t], ...Object.values(results._repeats ?? {}).filter((x) => x.slug === slug && x.tracks[t]).map((x) => x.tracks[t])].filter(Boolean);
+const costOf = (slug, r, t) => [r.cost?.[t], ...Object.values(results._repeats ?? {}).filter((x) => x.slug === slug && x.cost?.[t]).map((x) => x.cost[t])].filter(Boolean);
+
+// Percent measures for one run of a track.
 const measure = {
-  coverage: (r, t) => { const k = r.tracks[t]; if (!k) return null; return t === 'review' ? k.recall_pct : (100 * k.checks_passed) / k.checks_total; },
-  a11y: (r, t) => { const k = r.tracks[t]; if (!k) return null;
+  coverage: (k, t) => (t === 'review' ? k.recall_pct : (100 * k.checks_passed) / k.checks_total),
+  a11y: (k, t) => {
     if (t === 'review') { const [f, n] = k.by_category.accessibility.split('/').map(Number); return (100 * f) / n; }
     const keys = t === 'build' ? A11Y_BUILD : A11Y_DIAGRAM; return (100 * keys.filter((x) => !k.failed.includes(x)).length) / keys.length; },
-  look: (r, t) => { const k = r.tracks[t]; return k?.jury_mean != null ? ((k.jury_mean - 1) / 4) * 100 : null; }, // jury 1..5 -> 0..100, banded like the others
 };
 // The jury is a 1-5 mean, compared with the control's mean directly (rounded difference), not banded.
 
@@ -31,14 +35,15 @@ const rel = (slug, r, key) => {
   const deltas = [];
   for (const t of ['build', 'review', 'diagram']) {
     if (!r.tracks[t]) continue;
-    if (key === 'look') { const a = r.tracks[t].jury_mean, b = control.tracks[t]?.jury_mean; if (a != null && b != null) deltas.push(Math.round(a - b)); continue; }
-    const a = measure[key](r, t), b = measure[key](control, t);
-    if (a != null && b != null) deltas.push(band(a) - band(b));
+    const mine = runsOf(slug, r, t), ctl = runsOf('_baseline', control, t);
+    if (!mine.length || !ctl.length) continue;
+    if (key === 'look') { const a = mean(mine.map((k) => k.jury_mean).filter((x) => x != null)), b = mean(ctl.map((k) => k.jury_mean).filter((x) => x != null)); if (!Number.isNaN(a) && !Number.isNaN(b)) deltas.push(Math.round(a - b)); continue; }
+    deltas.push(band(mean(mine.map((k) => measure[key](k, t)))) - band(mean(ctl.map((k) => measure[key](k, t)))));
   }
   return deltas.length ? clamp(3 + Math.round(mean(deltas))) : null;
 };
-const perf = (r) => {
-  const ratios = Object.entries(r.cost ?? {}).filter(([t]) => control.cost?.[t]).map(([t, c]) => c.tokens / control.cost[t].tokens);
+const perf = (slug, r) => {
+  const ratios = Object.keys(r.cost ?? {}).filter((t) => control.cost?.[t]).map((t) => mean(costOf(slug, r, t).map((c) => c.tokens)) / mean(costOf('_baseline', control, t).map((c) => c.tokens)));
   if (!ratios.length) return { score: null };
   const x = mean(ratios);
   return { score: x <= 1.5 ? 5 : x <= 2 ? 4 : x <= 3 ? 3 : x <= 5 ? 2 : 1, ratio: Math.round(x * 100) / 100 };
@@ -49,7 +54,7 @@ const bundle = (r) => { const f = r.footprint; if (!f) return null; const mb = f
 const out = {};
 for (const [slug, r] of Object.entries(results)) {
   if (slug.startsWith('_')) continue;
-  out[slug] = { s_look: rel(slug, r, 'look'), s_coverage: rel(slug, r, 'coverage'), s_a11y: rel(slug, r, 'a11y'), s_perf: perf(r).score, cost_ratio: perf(r).ratio, s_bundle: bundle(r), tracks: Object.keys(r.tracks) };
+  out[slug] = { s_look: rel(slug, r, 'look'), s_coverage: rel(slug, r, 'coverage'), s_a11y: rel(slug, r, 'a11y'), s_perf: perf(slug, r).score, cost_ratio: perf(slug, r).ratio, s_bundle: bundle(r), tracks: Object.keys(r.tracks), runs: Math.max(...Object.keys(r.tracks).map((t) => runsOf(slug, r, t).length)) };
 }
 writeFileSync(join(HERE, 'score-proposals.json'), JSON.stringify(out, null, 1) + '\n');
 console.log('slug'.padEnd(26), 'look cover a11y perf(x)   bundle tracks');

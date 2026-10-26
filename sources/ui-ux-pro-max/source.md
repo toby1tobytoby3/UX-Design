@@ -33,7 +33,9 @@ control. The most useful part is `references/quick-reference.md`: named rules by
 and let each finding cite a standard. The generated design system gave a coherent palette, but parts of it fought the brief.
 At 1.5 times the control's tokens it is cheap enough to use as a reference; don't expect it to find or fix more by itself.
 
-## Scorecard (n = 1 run per track)
+**Repeat run (26 Oct 2026).** Fresh agent, and both rounds' pages rated together by two new blind judges. Jury for the page: 3.75 then 3.63 (control 4.00 then 3.50); checks 13 of 14 both times; review 28 then 28 of 31 (control 28 then 26). Pooled cost 1.4 times the control's tokens. Steady, and level with the control.
+
+## Scorecard (first run; see the repeat run above)
 | Criterion | Score | Evidence |
 |---|---|---|
 | Default look | 3 | Jury 3.88 against 3.63 (hierarchy 4, craft 4, distinctiveness 3, brief fit 4.5): same band |

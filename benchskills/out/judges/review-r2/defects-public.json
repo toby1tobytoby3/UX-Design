@@ -1,0 +1,250 @@
+[
+ {
+  "id": "D01",
+  "category": "accessibility",
+  "severity": "high",
+  "title": "Icon-only close button has no accessible name",
+  "where": "button.banner-close",
+  "fix": "Add aria-label=\"Dismiss announcement\" and hide the svg"
+ },
+ {
+  "id": "D02",
+  "category": "accessibility",
+  "severity": "high",
+  "title": "Email field relies on a placeholder instead of a label",
+  "where": "input#newsletter-email",
+  "fix": "Add a visible <label for>"
+ },
+ {
+  "id": "D03",
+  "category": "accessibility",
+  "severity": "high",
+  "title": "\"Compare plans\" is a paragraph with onclick: not focusable, no role",
+  "where": "p.compare-link",
+  "fix": "Use a real <button> or <a href=\"#compare\">"
+ },
+ {
+  "id": "D04",
+  "category": "accessibility",
+  "severity": "high",
+  "title": "Focus outline removed with no replacement",
+  "where": "a:focus, button:focus, input:focus { outline: none }",
+  "fix": "Restore a visible :focus-visible indicator with 3:1 contrast"
+ },
+ {
+  "id": "D05",
+  "category": "accessibility",
+  "severity": "high",
+  "title": "Logo and hero images have no alt attribute",
+  "where": "img.logo, img.hero-shot",
+  "fix": "alt=\"Ledgerly\" for the logo, alt=\"\" for the decorative shot"
+ },
+ {
+  "id": "D06",
+  "category": "accessibility",
+  "severity": "high",
+  "title": "Plan availability in the comparison table is shown by colour only",
+  "where": "td.yes / td.no",
+  "fix": "Add Yes/No text or icons with names; do not rely on red/green"
+ },
+ {
+  "id": "D07",
+  "category": "accessibility",
+  "severity": "medium",
+  "title": "Positive tabindex on the FAQ link breaks tab order",
+  "where": "a[tabindex=\"3\"]",
+  "fix": "Remove tabindex or use 0"
+ },
+ {
+  "id": "D08",
+  "category": "accessibility",
+  "severity": "medium",
+  "title": "Heading levels skip from h1 to h4 (plan names)",
+  "where": "h1 > h4.plan",
+  "fix": "Use h2 for sections and h3 for plan names"
+ },
+ {
+  "id": "D09",
+  "category": "accessibility",
+  "severity": "medium",
+  "title": "Infinite scrolling ticker cannot be paused and ignores reduced motion",
+  "where": "div.ticker",
+  "fix": "Remove it, or add pause control and prefers-reduced-motion"
+ },
+ {
+  "id": "D10",
+  "category": "contrast",
+  "severity": "high",
+  "title": "Lede text #bbb on white is about 1.9:1",
+  "where": "p.lede (intro)",
+  "fix": "Darken to at least 4.5:1, e.g. #595959"
+ },
+ {
+  "id": "D11",
+  "category": "contrast",
+  "severity": "high",
+  "title": "White text on yellow button is about 1.4:1",
+  "where": "button.btn-primary",
+  "fix": "Use dark text (#222) on the yellow"
+ },
+ {
+  "id": "D12",
+  "category": "contrast",
+  "severity": "medium",
+  "title": "Input border #e6e6e6 fails 3:1 non-text contrast",
+  "where": "input border",
+  "fix": "Use a border of at least 3:1 against the background"
+ },
+ {
+  "id": "D13",
+  "category": "layout",
+  "severity": "high",
+  "title": "Comparison table has min-width 560px, so the page scrolls sideways at 390px",
+  "where": "div.compare table",
+  "fix": "Allow it to reflow or wrap it in an overflow-x container with a label"
+ },
+ {
+  "id": "D14",
+  "category": "layout",
+  "severity": "medium",
+  "title": "Footer links are about 14px tall with 6px gaps (below 24px target size)",
+  "where": "footer a",
+  "fix": "Give links 24px+ targets or spacing (WCAG 2.5.8)"
+ },
+ {
+  "id": "D15",
+  "category": "layout",
+  "severity": "medium",
+  "title": "Feature line is clipped with overflow:hidden and no wrapping",
+  "where": "div.feature-line",
+  "fix": "Allow wrapping or add an ellipsis with an accessible full text"
+ },
+ {
+  "id": "D16",
+  "category": "layout",
+  "severity": "medium",
+  "title": "140px sticky header eats the viewport on mobile and covers anchor targets",
+  "where": "header.site",
+  "fix": "Shrink it, and add scroll-margin-top on anchor targets"
+ },
+ {
+  "id": "D17",
+  "category": "layout",
+  "severity": "medium",
+  "title": "Plan cards have different padding and height; CTAs do not align",
+  "where": "div.plan:nth-child",
+  "fix": "Make cards equal-height flex columns with the CTA pinned to the bottom"
+ },
+ {
+  "id": "D18",
+  "category": "typography",
+  "severity": "medium",
+  "title": "Text set at 11-12px (list items, badge, fine print)",
+  "where": "li, .badge, .fineprint",
+  "fix": "Raise body and list text to 16px, fine print to 14px minimum"
+ },
+ {
+  "id": "D19",
+  "category": "typography",
+  "severity": "medium",
+  "title": "About paragraph runs the full width at line-height 1 (about 160 characters a line)",
+  "where": "section.about p",
+  "fix": "Cap at about 65ch and use line-height 1.5"
+ },
+ {
+  "id": "D20",
+  "category": "typography",
+  "severity": "low",
+  "title": "Five unrelated typefaces (Georgia, Arial, Impact, Courier New, Comic Sans)",
+  "where": "font-family declarations",
+  "fix": "Pick one or two families and use roles"
+ },
+ {
+  "id": "D21",
+  "category": "writing",
+  "severity": "medium",
+  "title": "Vague button labels: \"Click here\" (three times) and \"Submit\"",
+  "where": "button.choose, button.btn-primary",
+  "fix": "\"Start free trial\" on plan buttons; \"Get pricing updates\" on the form"
+ },
+ {
+  "id": "D22",
+  "category": "writing",
+  "severity": "medium",
+  "title": "Error message \"Error 422\" says nothing about what happened or what to do",
+  "where": "p.error",
+  "fix": "Say what is wrong and how to fix it"
+ },
+ {
+  "id": "D23",
+  "category": "writing",
+  "severity": "medium",
+  "title": "\"You entered an invalid email address\" blames the user and gives no fix",
+  "where": "p.error",
+  "fix": "\"Enter an email like name@example.com\""
+ },
+ {
+  "id": "D24",
+  "category": "writing",
+  "severity": "low",
+  "title": "Plan, package and tier used for the same thing",
+  "where": "h1, .badge, section copy",
+  "fix": "Choose one term (plan) and use it everywhere"
+ },
+ {
+  "id": "D25",
+  "category": "writing",
+  "severity": "medium",
+  "title": "Destructive confirmation uses OK and Cancel instead of naming the action",
+  "where": "div.confirm",
+  "fix": "Label the buttons \"Delete workspace\" and \"Keep workspace\""
+ },
+ {
+  "id": "D26",
+  "category": "polish",
+  "severity": "medium",
+  "title": "transition: all and a hover that animates width and height",
+  "where": "div.plan, div.plan:hover",
+  "fix": "Transition only opacity/transform/box-shadow; avoid layout properties"
+ },
+ {
+  "id": "D27",
+  "category": "polish",
+  "severity": "low",
+  "title": "Inner radii do not nest: 8px card, 20px badge and mixed 4px/6px button radii",
+  "where": "border-radius values",
+  "fix": "Use concentric radii and one button radius"
+ },
+ {
+  "id": "D28",
+  "category": "polish",
+  "severity": "low",
+  "title": "Emoji used as feature icons",
+  "where": "div.features-icons",
+  "fix": "Use a consistent icon set with accessible names"
+ },
+ {
+  "id": "D29",
+  "category": "polish",
+  "severity": "low",
+  "title": "Purple-to-blue gradient hero (stock generated look)",
+  "where": "div.hero",
+  "fix": "Choose a palette tied to the product, drop the gradient"
+ },
+ {
+  "id": "D30",
+  "category": "accessibility",
+  "severity": "high",
+  "title": "Viewport meta disables pinch zoom (maximum-scale=1, user-scalable=no)",
+  "where": "meta[name=viewport]",
+  "fix": "Remove maximum-scale and user-scalable (WCAG 1.4.4)"
+ },
+ {
+  "id": "D31",
+  "category": "accessibility",
+  "severity": "medium",
+  "title": "No <main> landmark and no skip link; page is all divs",
+  "where": "document structure",
+  "fix": "Wrap content in <main>, add a skip-to-content link"
+ }
+]

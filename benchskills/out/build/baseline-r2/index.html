@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing – Ledgerly</title>
+<meta name="description" content="Ledgerly pricing: invoice reconciliation for small accounting teams. Three plans, every one starts with a 14-day free trial.">
+<style>
+:root{
+  --bg:#f7f5ef;
+  --surface:#ffffff;
+  --ink:#16221c;
+  --muted:#4f5d55;
+  --line:#d9d6ca;
+  --accent:#1d5c43;
+  --accent-ink:#ffffff;
+  --accent-soft:#e3efe8;
+  --focus:#0b57d0;
+  --radius:14px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+@media (min-width:700px){.wrap{padding:0 32px}}
+
+.skip{position:absolute;left:16px;top:-60px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:8px;z-index:10}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+
+header.site{border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font:700 22px/1 var(--serif);letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.brand svg{flex:none}
+.here{font-size:15px;font-weight:600;color:var(--accent);border-bottom:2px solid var(--accent);padding:4px 0}
+
+.hero{padding:48px 0 24px;text-align:center}
+.hero h1{font:600 clamp(2.1rem,6vw,3.4rem)/1.1 var(--serif);letter-spacing:-.02em;margin:0 0 14px}
+.hero p{margin:0 auto;max-width:34em;color:var(--muted);font-size:1.125rem}
+
+/* toggle */
+.toggle-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin:28px 0 36px}
+.toggle{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.toggle button{font:600 15px/1 var(--sans);border:0;background:transparent;color:var(--ink);padding:12px 20px;min-height:44px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.toggle button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.toggle button:not([aria-pressed="true"]):hover{background:var(--accent-soft)}
+.save{font-size:12px;font-weight:700;background:var(--accent-soft);color:var(--accent);padding:3px 8px;border-radius:999px}
+.toggle button[aria-pressed="true"] .save{background:#fff;color:var(--accent)}
+.toggle-note{font-size:14px;color:var(--muted);margin:0;min-height:1.5em}
+
+/* plans */
+.plans{display:grid;gap:16px;grid-template-columns:1fr;list-style:none;margin:0;padding:0}
+@media (min-width:700px){.plans{grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 20px;display:flex;flex-direction:column}
+@media (min-width:1000px){.plan{padding:28px 28px}}
+.plan h2{font:600 1.5rem/1.2 var(--serif);margin:0 0 16px}
+.price{display:flex;align-items:baseline;gap:4px;margin:0}
+.price .cur{font:600 1.5rem/1 var(--serif)}
+.price .amt{font:600 3rem/1 var(--serif);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.period{margin:6px 0 0;color:var(--muted);font-size:.95rem}
+@media (min-width:700px) and (max-width:999px){.period{min-height:3em}}
+.plan ul{list-style:none;margin:20px 0 24px;padding:20px 0 0;border-top:1px solid var(--line);display:grid;gap:10px}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;background:var(--accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M3.5 9.5l3.5 3.5 7.5-8' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M3.5 9.5l3.5 3.5 7.5-8' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.btn{margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;border:2px solid var(--accent);transition:background-color .15s}
+.btn:hover{background:#154633;border-color:#154633}
+
+/* sections */
+section.block{padding:64px 0 0}
+section.block>.wrap>h2{font:600 clamp(1.6rem,4vw,2.2rem)/1.2 var(--serif);letter-spacing:-.01em;margin:0 0 24px}
+
+/* table */
+.table-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;font-size:.875rem}
+caption{text-align:left;padding:0;position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+th,td{padding:12px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-weight:700;background:var(--accent-soft);color:var(--ink)}
+tbody th{font-weight:600;width:36%}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+td.no{color:var(--muted)}
+@media (min-width:700px){
+  table{font-size:1rem}
+  th,td{padding:16px 20px}
+  tbody th{width:40%}
+}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:760px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+summary{cursor:pointer;list-style:none;padding:16px 18px;min-height:48px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:16px;border-radius:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";flex:none;width:10px;height:10px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+details[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+details p{margin:0;padding:0 18px 18px;color:var(--muted);max-width:60ch}
+
+footer{margin-top:72px;border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:.9rem}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+@media (forced-colors:active){
+  .toggle button[aria-pressed="true"]{outline:2px solid Highlight}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#plans">Skip to plans</a>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Ledgerly">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="6" fill="#1d5c43"/><path d="M7 8h12M7 13h12M7 18h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      Ledgerly
+    </a>
+    <span class="here" aria-current="page">Pricing</span>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <div class="hero">
+      <h1>Pricing</h1>
+      <p>Invoice reconciliation for small accounting teams. Pick a plan and start with a free trial.</p>
+    </div>
+
+    <div class="toggle-wrap">
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button type="button" id="btn-monthly" aria-pressed="true">Monthly</button>
+        <button type="button" id="btn-annual" aria-pressed="false">Annual <span class="save">Save 20%</span></button>
+      </div>
+      <p class="toggle-note" id="toggle-note">Prices shown per month, billed monthly.</p>
+    </div>
+
+    <ul class="plans" id="plans">
+      <li class="plan" data-monthly="19" data-annual="15.20">
+        <h2>Starter</h2>
+        <p class="price"><span class="cur" aria-hidden="true">$</span><span class="amt">19</span><span class="sr">dollars</span></p>
+        <p class="period">per month</p>
+        <ul>
+          <li>1 seat</li>
+          <li>100 reconciliations per month</li>
+          <li>Email support</li>
+        </ul>
+        <a class="btn" href="#plans">Start free trial<span class="sr"> on the Starter plan</span></a>
+      </li>
+      <li class="plan" data-monthly="59" data-annual="47.20">
+        <h2>Team</h2>
+        <p class="price"><span class="cur" aria-hidden="true">$</span><span class="amt">59</span><span class="sr">dollars</span></p>
+        <p class="period">per month</p>
+        <ul>
+          <li>5 seats</li>
+          <li>Unlimited reconciliations</li>
+          <li>Shared matching rules</li>
+          <li>Email support</li>
+        </ul>
+        <a class="btn" href="#plans">Start free trial<span class="sr"> on the Team plan</span></a>
+      </li>
+      <li class="plan" data-monthly="149" data-annual="119.20">
+        <h2>Business</h2>
+        <p class="price"><span class="cur" aria-hidden="true">$</span><span class="amt">149</span><span class="sr">dollars</span></p>
+        <p class="period">per month</p>
+        <ul>
+          <li>15 seats</li>
+          <li>Unlimited reconciliations</li>
+          <li>Shared matching rules</li>
+          <li>SSO</li>
+          <li>Audit log</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="btn" href="#plans">Start free trial<span class="sr"> on the Business plan</span></a>
+      </li>
+    </ul>
+    <p class="sr" id="live" role="status" aria-live="polite"></p>
+  </div>
+
+  <section class="block" aria-labelledby="compare-h">
+    <div class="wrap">
+      <h2 id="compare-h">Compare plans</h2>
+      <div class="table-scroll">
+        <table>
+          <caption>Plan comparison</caption>
+          <thead>
+            <tr><th scope="col">Feature</th><th scope="col">Starter</th><th scope="col">Team</th><th scope="col">Business</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Seats</th><td>1</td><td>5</td><td>15</td></tr>
+            <tr><th scope="row">Reconciliations per month</th><td>100</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><th scope="row">Bank connections</th><td>1</td><td>5</td><td>20</td></tr>
+            <tr><th scope="row">Shared matching rules</th><td class="no">No</td><td>Yes</td><td>Yes</td></tr>
+            <tr><th scope="row">Export to CSV and PDF</th><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+            <tr><th scope="row">SSO</th><td class="no">No</td><td class="no">No</td><td>Yes</td></tr>
+            <tr><th scope="row">Audit log</th><td class="no">No</td><td class="no">No</td><td>Yes</td></tr>
+            <tr><th scope="row">Support</th><td>Email</td><td>Email</td><td>Priority</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="faq-h">
+    <div class="wrap">
+      <h2 id="faq-h">Frequently asked questions</h2>
+      <div class="faq">
+        <details><summary>Can I change plans later?</summary><p>Yes. Upgrade or downgrade at any time; the change applies from your next billing date.</p></details>
+        <details><summary>Is there a free trial?</summary><p>Yes. Every plan starts with a 14-day free trial, and no card is needed to begin.</p></details>
+        <details><summary>What counts as a reconciliation?</summary><p>One bank statement matched against your ledger for one account in one month.</p></details>
+        <details><summary>How does annual billing work?</summary><p>You are charged once a year at 20% less than twelve monthly payments.</p></details>
+        <details><summary>Do you offer refunds?</summary><p>Yes. Ask within 30 days of your first charge and we refund it in full.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Ledgerly. Invoice reconciliation for small accounting teams.</div>
+</footer>
+
+<script>
+(function(){
+  var bm=document.getElementById('btn-monthly'), ba=document.getElementById('btn-annual');
+  var note=document.getElementById('toggle-note'), live=document.getElementById('live');
+  var plans=document.querySelectorAll('.plan');
+  function set(annual){
+    bm.setAttribute('aria-pressed', String(!annual));
+    ba.setAttribute('aria-pressed', String(annual));
+    plans.forEach(function(p){
+      p.querySelector('.amt').textContent = annual ? p.dataset.annual : p.dataset.monthly;
+      p.querySelector('.period').textContent = annual ? 'per month, billed annually' : 'per month';
+    });
+    var msg = annual ? 'Annual prices shown, 20% less than monthly. Prices are per month and billed annually.' : 'Prices shown per month, billed monthly.';
+    note.textContent = msg;
+    live.textContent = annual ? 'Showing annual prices, billed annually.' : 'Showing monthly prices.';
+  }
+  bm.addEventListener('click', function(){ set(false); });
+  ba.addEventListener('click', function(){ set(true); });
+})();
+</script>
+</body>
+</html>

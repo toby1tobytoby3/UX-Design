@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerly pricing</title>
+<meta name="description" content="Ledgerly pricing: three plans for matching bank statements to the ledger, each with a 14-day free trial.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · shape: Price Sheet (Offer rows, swapped from Letter) · genre: modern-minimal · theme: Coral (deal 1/3, seed ledgerly-pricing-invoice-reconciliation-6009·efdb0bf6·2026-10-26·r0) · job: sign up · draw: 090f17
+ * hero: Banner · nav: edge-aligned · footer: mast on the board · imagery: none · signature: the plan prices set huge on cotton sheets, re-printed by a pressed-groove billing switch · copy: verbatim
+ * axes: light/grotesk-sans/warm · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: S, a pricing page can sit under any SaaS name; fixed by building the sheets as cotton stationery on felt and setting the price as the signature instead of a card grid */
+/* Hallmark · dismissed 46a · "20% less" is the annual_discount the brief supplies in pricing-content.json, not an invented figure */
+/* Hallmark · answered F4 · the three plan buttons share one ink recipe and are stacked in separate rows, never side by side */
+:root {
+  color-scheme: light;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --text-price: clamp(3.5rem, 9vw, 6.5rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  --color-paper: oklch(97% 0.006 55); --color-paper-2: oklch(94.5% 0.007 55); --color-paper-3: oklch(91.5% 0.009 55);
+  --color-ink: oklch(21% 0.012 38); --color-ink-2: oklch(29% 0.013 40); --color-muted: oklch(47% 0.013 45);
+  --color-rule: oklch(87% 0.009 55); --color-rule-2: oklch(81% 0.011 55);
+  --color-accent: oklch(74% 0.125 30); --color-accent-ink: oklch(21% 0.012 38); --color-accent-2: oklch(54% 0.165 29); --color-focus: oklch(54% 0.17 30);
+  --color-cotton: oklch(98.8% 0.0045 80); --color-desk: oklch(94.3% 0.008 64); --color-print: oklch(23% 0.012 38);
+  --color-board: oklch(22% 0.011 40); --color-board-type: oklch(96.5% 0.006 70); --color-paid: oklch(55.5% 0.15 33);
+  --tex-cotton: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.011' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.38 0 0 0 0 0.3 0 0 0 0.07 0'/%3E%3C/filter%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.34 0 0 0 0 0.28 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23c)'/%3E%3Crect width='360' height='360' filter='url(%23g)'/%3E%3C/svg%3E");
+  --tex-desk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018 0.9' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.33 0 0 0 0 0.27 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23f)'/%3E%3C/svg%3E");
+  --shade: 32% 0.03 50; --lit: 100% 0.005 80; --deep: 7% 0.01 40;
+  --font-display: "General Sans", ui-sans-serif, system-ui, sans-serif; --font-body: var(--font-display);
+  --font-outlier: "Geist Mono", ui-monospace, monospace;
+  --radius-card: 8px; --radius-input: 6px; --radius-pill: 999px; --radius-stock: 8px; --radius-groove: 12px; --rule-hair: 1px;
+  --shadow-card: 0 1px 2px oklch(20% 0.01 35 / 0.05);
+  --edge-stock: inset 0 1px 0 oklch(var(--lit) / 0.9), inset 0 -1px 0 oklch(var(--shade) / 0.07), 0 0 0 0.5px oklch(var(--shade) / 0.22), 0 1px 0 oklch(var(--shade) / 0.12);
+  --cast-stock: 6px 5px 10px -6px oklch(var(--shade) / 0.3); --cast-stock-lift: 12px 10px 18px -8px oklch(var(--shade) / 0.3);
+  --press-groove: inset 1px 1.5px 2px oklch(var(--shade) / 0.16), inset -1px -1px 0 oklch(var(--lit) / 0.9), 0 0 0 0.5px oklch(var(--shade) / 0.2);
+  --cast-board: 6px 5px 10px -6px oklch(var(--deep) / 0.5);
+  --tracking-display: -0.03em; --display-weight: 600;
+}
+
+/* base: what the Floor already decided */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scrollbar-color: var(--color-muted) var(--color-paper); scroll-padding-top: var(--space-3xl); }
+body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.55; -webkit-font-smoothing: antialiased; caret-color: var(--color-accent); font-synthesis: none; }
+::selection { background: color-mix(in oklab, var(--color-accent) 22%, transparent); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+a:hover { text-decoration-color: var(--color-accent-2); }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight, 700); font-synthesis: none; letter-spacing: var(--tracking-display); line-height: 1.05; overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
+h1 { max-width: 20ch; font-size: var(--text-display); } h2 { max-width: 30ch; font-size: var(--text-section); } h3 { max-width: 40ch; font-size: var(--text-title); line-height: 1.2; }
+.lead { font-size: var(--text-lead); line-height: 1.45; max-width: 52ch; }
+p { margin: 0; text-wrap: pretty; }
+p:not([class]) { max-width: 65ch; }
+img, video { max-width: 100%; height: auto; display: block; }
+svg { display: block; }
+[hidden] { display: none !important; }
+button, input, select, textarea { font: inherit; }
+ul, ol, dl, dd, figure { margin: 0; padding: 0; list-style: none; }
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 60rem) { :root { --gutter: 24px; --section-gap-s: 80px; --section-gap: 96px; --section-gap-l: 120px; } }
+@media (max-width: 40rem) { :root { --gutter: 16px; --section-gap-s: 56px; --section-gap: 72px; --section-gap-l: 96px; --gap-columns: 16px; } }
+@media (prefers-reduced-motion: reduce) { *:not(.keep-motion), *:not(.keep-motion)::before, *:not(.keep-motion)::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+
+/* skip link */
+.skip { position: absolute; left: var(--space-md); top: calc(-1 * var(--space-3xl)); z-index: var(--z-toast); padding: var(--space-xs) var(--space-md); background: var(--color-ink); color: var(--color-paper); border-radius: var(--radius-input); }
+.skip:focus-visible { top: var(--space-md); }
+
+/* surfaces */
+.desk { background-color: var(--color-desk); background-image: radial-gradient(90% 120% at 0% 30%, var(--color-cotton), transparent 62%), var(--tex-desk); }
+.desk-flat { background-color: var(--color-desk); background-image: var(--tex-desk); }
+.stock { background-color: var(--color-cotton); background-image: linear-gradient(100deg, var(--color-cotton), transparent 45%), var(--tex-cotton); color: var(--color-print); box-shadow: var(--edge-stock), var(--cast-stock); border-radius: var(--radius-stock); }
+
+/* controls */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 48px; padding: 0 var(--space-lg); border: 0; border-radius: var(--radius-stock); font-weight: 500; font-size: var(--text-md); line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer; transition: transform var(--dur-micro) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.btn--ink { background: var(--color-board); color: var(--color-board-type); text-shadow: 0 -0.75px 0 var(--color-ink); box-shadow: var(--cast-stock); }
+.btn--card { background-color: var(--color-cotton); background-image: var(--tex-cotton); color: var(--color-print); text-shadow: 0.5px 0.75px 0 var(--color-cotton); box-shadow: var(--edge-stock), var(--cast-stock); }
+.btn--ink:hover { box-shadow: var(--cast-stock-lift); transform: translateY(-1px); }
+.btn--card:hover { box-shadow: var(--edge-stock), var(--cast-stock-lift); transform: translateY(-1px); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; transform: none; }
+.btn[aria-busy="true"] { cursor: progress; }
+
+/* nav: edge-aligned, a wordmark and one action */
+.nav { position: absolute; inset-inline: 0; top: 0; z-index: var(--z-sticky-nav); }
+.nav__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 72px; }
+.wordmark { font-weight: 600; font-size: var(--text-xl); letter-spacing: var(--tracking-display); text-decoration: none; line-height: 1; }
+.nav .btn { min-height: 44px; padding: 0 var(--space-md); }
+
+/* hero: Banner on the desk */
+.hero { padding-block: calc(72px + var(--space-lg)) var(--space-3xl); }
+.hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-xl) var(--gap-columns); align-items: end; }
+.hero__head { display: grid; gap: var(--space-lg); }
+.hero__ctl { justify-self: end; width: 100%; max-width: 26rem; }
+
+/* billing switch: a groove pressed into cotton, a card riding in it */
+.seg { position: relative; display: grid; grid-template-columns: 1fr 1fr; margin: 0; padding: var(--space-2xs); min-width: 0; border: 0; border-radius: var(--radius-groove); background-color: var(--color-paper-2); box-shadow: var(--press-groove); }
+.seg::before { content: ""; position: absolute; inset-block: var(--space-2xs); inset-inline-start: var(--space-2xs); width: calc(50% - var(--space-2xs)); border-radius: var(--radius-stock); background-color: var(--color-cotton); background-image: var(--tex-cotton); box-shadow: var(--edge-stock), var(--cast-stock); transition: transform var(--dur-short) var(--ease-in-out); }
+main:has(#bill-annual:checked) .seg::before { transform: translateX(100%); }
+.seg__opt { position: relative; display: flex; min-width: 0; }
+.seg__opt input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.seg__opt label { position: relative; z-index: var(--z-base); flex: 1; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; column-gap: var(--space-xs); min-height: 44px; padding: var(--space-3xs) var(--space-sm); border-radius: var(--radius-stock); font-weight: 500; text-align: center; cursor: pointer; color: var(--color-muted); transition: color var(--dur-short) var(--ease-out); }
+.seg__opt label small { font-size: var(--text-sm); font-weight: 400; }
+.seg__opt label:hover { color: var(--color-ink); }
+.seg__opt input:checked + label { color: var(--color-print); }
+.seg__opt input:focus-visible + label { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.seg legend { padding: 0; }
+
+/* plans: three cotton sheets, each a row */
+.plans { padding-bottom: var(--section-gap-s); }
+.sheets { display: grid; gap: var(--space-lg); }
+.sheet { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 4fr) minmax(0, 4fr) minmax(0, 2fr); grid-template-areas: "id feat price cta"; gap: var(--space-lg) var(--gap-columns); align-items: center; padding: var(--space-xl); }
+.sheet__id { grid-area: id; }
+.sheet__feat { grid-area: feat; display: grid; gap: var(--space-xs); }
+.sheet__feat li { display: flex; align-items: flex-start; gap: var(--space-sm); }
+.sheet__feat svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: var(--space-2xs); color: var(--color-ink-2); }
+.sheet__price { grid-area: price; min-width: 0; }
+.sheet__cta { grid-area: cta; justify-self: end; }
+.figure { display: block; font-size: var(--text-price); font-weight: 600; letter-spacing: -0.05em; line-height: 0.9; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
+.p--a { display: none; }
+main:has(#bill-annual:checked) .p--m { display: none; }
+main:has(#bill-annual:checked) .p--a { display: inline; }
+.unit { margin-top: var(--space-sm); font-size: var(--text-title); font-weight: 500; line-height: 1.1; }
+.bill { min-height: 1lh; margin-top: var(--space-2xs); color: var(--color-muted); font-size: var(--text-md); visibility: hidden; }
+main:has(#bill-annual:checked) .bill { visibility: visible; }
+
+/* comparison: a plain table on paper */
+.compare { padding-block: var(--section-gap-s) var(--section-gap-l); }
+.head-block { display: grid; gap: var(--space-md); margin-bottom: var(--space-2xl); }
+.cmp { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.cmp th, .cmp td { padding: var(--space-lg) var(--space-md) var(--space-lg) 0; border-bottom: 1px solid var(--color-rule); text-align: left; vertical-align: baseline; }
+.cmp thead th { color: var(--color-muted); font-size: var(--text-sm); font-weight: 500; border-bottom-color: var(--color-rule-2); white-space: nowrap; }
+.cmp tbody th { font-weight: 600; }
+.cmp td { font-weight: 400; }
+.cmp .fig { font-family: var(--font-outlier); }
+.cmp .no { color: var(--color-muted); }
+.cmp thead th:first-child, .cmp tbody th { width: 40%; }
+
+/* questions: rows on a ruled list */
+.faq { padding-bottom: var(--section-gap); }
+.faq__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-xl) var(--gap-columns); align-items: start; }
+.qa { border-top: 1px solid var(--color-rule-2); }
+.qa details { border-bottom: 1px solid var(--color-rule); }
+.qa summary { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); min-height: 72px; padding-block: var(--space-md); font-size: var(--text-title); font-weight: 500; line-height: 1.25; cursor: pointer; list-style: none; transition: color var(--dur-short) var(--ease-out); }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary:hover { color: var(--color-accent-2); }
+.qa summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.qa summary svg { flex-shrink: 0; width: 24px; height: 24px; color: var(--color-muted); transition: transform var(--dur-short) var(--ease-in-out); }
+.qa details[open] summary svg { transform: rotate(180deg); }
+.qa .answer { padding-bottom: var(--space-lg); max-width: 56ch; color: var(--color-ink-2); }
+
+/* footer: the board */
+.foot { background: var(--color-board); color: var(--color-board-type); padding-block: var(--space-3xl); }
+.foot__mast { display: grid; gap: var(--space-lg); }
+.foot .wordmark { font-size: var(--text-display-s); }
+.foot__tag { color: var(--color-board-type); }
+.foot__links { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid var(--color-ink-2); }
+.foot a { color: var(--color-board-type); }
+.foot a:hover { text-decoration-color: var(--color-accent); }
+
+@media (max-width: 60rem) {
+  .hero { padding-block: calc(72px + var(--space-md)) var(--space-xl); }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); }
+  .hero__ctl { justify-self: start; }
+  .sheet { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "id price" "feat cta"; padding: var(--space-lg); align-items: start; }
+  .sheet__cta { align-self: end; }
+  .faq__grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 40rem) {
+  .sheet { grid-template-columns: minmax(0, 1fr); grid-template-areas: "id" "price" "feat" "cta"; }
+  .sheet__cta { justify-self: stretch; }
+  .sheet__cta .btn { width: 100%; }
+  .cmp thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .cmp tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 var(--space-md); padding-block: var(--space-md); border-bottom: 1px solid var(--color-rule); }
+  .cmp tbody th { grid-column: 1 / -1; width: auto; padding: 0 0 var(--space-xs); border: 0; }
+  .cmp td { padding: 0; border: 0; }
+  .cmp td::before { content: attr(data-label); display: block; color: var(--color-muted); font-size: var(--text-sm); font-family: var(--font-body); }
+  .cmp tbody, .cmp { display: block; }
+  .qa summary { font-size: var(--text-lg); }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="container nav__bar">
+    <a class="wordmark" href="#top" aria-label="Ledgerly, back to the top">Ledgerly</a>
+    <a class="btn btn--card" href="#plans">Start free trial</a>
+  </div>
+</header>
+
+<main id="main">
+    <section class="hero desk" id="top" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__head">
+          <h1 id="hero-title">Pricing for invoice reconciliation</h1>
+          <p class="lead">Every plan starts with a 14-day free trial, no card needed.</p>
+        </div>
+        <div class="hero__ctl">
+          <fieldset class="seg">
+            <legend class="visually-hidden">Billing period</legend>
+            <span class="seg__opt"><input type="radio" name="billing" id="bill-monthly" value="monthly" checked><label for="bill-monthly">Monthly</label></span>
+            <span class="seg__opt"><input type="radio" name="billing" id="bill-annual" value="annual"><label for="bill-annual">Annual <small>20% less</small></label></span>
+          </fieldset>
+          <p class="visually-hidden" id="bill-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="plans desk-flat" id="plans" aria-labelledby="plans-title">
+      <div class="container">
+        <h2 class="visually-hidden" id="plans-title">Plans</h2>
+        <ul class="sheets">
+          <li>
+            <article class="sheet stock" aria-labelledby="plan-starter">
+              <div class="sheet__id"><h3 id="plan-starter">Starter</h3></div>
+              <ul class="sheet__feat">
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>1 seat</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>100 reconciliations per month</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Email support</li>
+              </ul>
+              <div class="sheet__price">
+                <span class="figure"><span class="p p--m">19</span><span class="p p--a">15.20</span></span>
+                <p class="unit">per month</p>
+                <p class="bill">Billed annually</p>
+              </div>
+              <div class="sheet__cta"><a class="btn btn--ink" href="#plans" aria-describedby="plan-starter">Start free trial</a></div>
+            </article>
+          </li>
+          <li>
+            <article class="sheet stock" aria-labelledby="plan-team">
+              <div class="sheet__id"><h3 id="plan-team">Team</h3></div>
+              <ul class="sheet__feat">
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>5 seats</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Unlimited reconciliations</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Shared matching rules</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Email support</li>
+              </ul>
+              <div class="sheet__price">
+                <span class="figure"><span class="p p--m">59</span><span class="p p--a">47.20</span></span>
+                <p class="unit">per month</p>
+                <p class="bill">Billed annually</p>
+              </div>
+              <div class="sheet__cta"><a class="btn btn--ink" href="#plans" aria-describedby="plan-team">Start free trial</a></div>
+            </article>
+          </li>
+          <li>
+            <article class="sheet stock" aria-labelledby="plan-business">
+              <div class="sheet__id"><h3 id="plan-business">Business</h3></div>
+              <ul class="sheet__feat">
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>15 seats</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Unlimited reconciliations</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Shared matching rules</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>SSO</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Audit log</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Priority support</li>
+              </ul>
+              <div class="sheet__price">
+                <span class="figure"><span class="p p--m">149</span><span class="p p--a">119.20</span></span>
+                <p class="unit">per month</p>
+                <p class="bill">Billed annually</p>
+              </div>
+              <div class="sheet__cta"><a class="btn btn--ink" href="#plans" aria-describedby="plan-business">Start free trial</a></div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  <section class="compare" id="compare" aria-labelledby="compare-title">
+    <div class="container">
+      <div class="head-block"><h2 id="compare-title">What each plan includes</h2></div>
+      <table class="cmp" role="table">
+        <thead role="rowgroup">
+          <tr role="row"><th scope="col" role="columnheader"><span class="visually-hidden">Feature</span></th><th scope="col" role="columnheader">Starter</th><th scope="col" role="columnheader">Team</th><th scope="col" role="columnheader">Business</th></tr>
+        </thead>
+        <tbody role="rowgroup">
+          <tr role="row"><th scope="row" role="rowheader">Seats</th><td role="cell" class="fig" data-label="Starter">1</td><td role="cell" class="fig" data-label="Team">5</td><td role="cell" class="fig" data-label="Business">15</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Reconciliations per month</th><td role="cell" class="fig" data-label="Starter">100</td><td role="cell" data-label="Team">Unlimited</td><td role="cell" data-label="Business">Unlimited</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Bank connections</th><td role="cell" class="fig" data-label="Starter">1</td><td role="cell" class="fig" data-label="Team">5</td><td role="cell" class="fig" data-label="Business">20</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Shared matching rules</th><td role="cell" class="no" data-label="Starter">No</td><td role="cell" data-label="Team">Yes</td><td role="cell" data-label="Business">Yes</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Export to CSV and PDF</th><td role="cell" data-label="Starter">Yes</td><td role="cell" data-label="Team">Yes</td><td role="cell" data-label="Business">Yes</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">SSO</th><td role="cell" class="no" data-label="Starter">No</td><td role="cell" class="no" data-label="Team">No</td><td role="cell" data-label="Business">Yes</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Audit log</th><td role="cell" class="no" data-label="Starter">No</td><td role="cell" class="no" data-label="Team">No</td><td role="cell" data-label="Business">Yes</td></tr>
+          <tr role="row"><th scope="row" role="rowheader">Support</th><td role="cell" data-label="Starter">Email</td><td role="cell" data-label="Team">Email</td><td role="cell" data-label="Business">Priority</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="container faq__grid">
+      <h2 id="faq-title">Questions before you start</h2>
+      <div class="qa">
+        <details>
+          <summary>Can I change plans later?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p class="answer">Yes. Upgrade or downgrade at any time; the change applies from your next billing date.</p>
+        </details>
+        <details>
+          <summary>Is there a free trial?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p class="answer">Yes. Every plan starts with a 14-day free trial, and no card is needed to begin.</p>
+        </details>
+        <details>
+          <summary>What counts as a reconciliation?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p class="answer">One bank statement matched against your ledger for one account in one month.</p>
+        </details>
+        <details>
+          <summary>How does annual billing work?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p class="answer">You are charged once a year at 20% less than twelve monthly payments.</p>
+        </details>
+        <details>
+          <summary>Do you offer refunds?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p class="answer">Yes. Ask within 30 days of your first charge and we refund it in full.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="container foot__mast">
+    <a class="wordmark" href="#top" aria-label="Ledgerly, back to the top">Ledgerly</a>
+    <p class="foot__tag">Invoice reconciliation for small accounting teams</p>
+    <nav class="foot__links" aria-label="On this page">
+      <a href="#plans">Plans</a>
+      <a href="#compare">Compare plans</a>
+      <a href="#faq">Questions</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var annual = document.getElementById('bill-annual');
+  var status = document.getElementById('bill-status');
+  if (!annual || !status) return;
+  document.querySelectorAll('input[name="billing"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      status.textContent = annual.checked ? 'Showing annual prices, billed annually.' : 'Showing monthly prices.';
+    });
+  });
+})();
+</script>
+</body>
+</html>

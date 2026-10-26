@@ -11,7 +11,7 @@ captured_by: toby
 input: skill-repo
 version: 7ec8682
 licence: MIT
-s_look: 4
+s_look: 3
 s_interact: 5
 s_coverage: 3
 s_a11y: 3
@@ -27,15 +27,17 @@ has_example: false
 ---
 
 ## Verdict
-**The only skill that measurably improved the page.** Both blind judges ranked its pricing page first (jury 4.38 out of 5
-against 3.63 for the no-skill control) and it was the best reviewer too (30 of 31 planted defects, 97%). It also costs
+**The best first run, but its lead on look did not repeat.** Both blind judges ranked its first pricing page top (jury 4.38 of 5
+against 3.63 for the no-skill control) and it was the best first reviewer (30 of 31 planted defects, 97%); a second run came out level with the control. It also costs
 the most to run well: 2.3 times the control's tokens and five extra minutes on the build, plus two workarounds before its
 linter would run. Use it when look and discipline matter more than speed.
 
-## Scorecard (n = 1 run per track)
+**Repeat run (26 Oct 2026).** Built again with a fresh agent, and both rounds' pages were rated together by two new blind judges. Jury for the page: 4.25 then 3.75 (control 4.00 then 3.50), so the lead over the control shrank from 0.75 to 0.25 and the pooled mean (4.00) is level with frontend-design. Scripted checks fell from 13 of 14 to 11 (missing content, touch targets, page without JavaScript). Review: 30 then 28 of 31 (control 28 then 26). Pooled cost 1.95 times the control's tokens. Read the first-run verdict above as the best case.
+
+## Scorecard (first run; see the repeat run above)
 | Criterion | Score | Evidence |
 |---|---|---|
-| Default look | 4 | Jury 4.38 against 3.63 (hierarchy 5, craft 4.5, distinctiveness 4, brief fit 4). Plans as full-width rows with price, features and call to action on one line |
+| Default look | 3 | First run jury 4.38 against 3.63; pooled over two runs 4.00 against 3.75, the same band (hierarchy 5, craft 4.5, distinctiveness 4, brief fit 4 on the first run). Plans as full-width rows with price, features and call to action on one line |
 | Interactivity | 5 | `sloplint --render` measures the built page in a browser against the floor and the run iterated to 0 FAIL; redesign and audit verbs; a tiered gate list |
 | Coverage | 3 | Build: 13 of 14 scripted checks against 12 of 14. Review: 97% against 90% (band 5 both) |
 | Accessibility | 3 | 0 axe violations; focus visible on 11 of 11 stops; only miss is touch targets (83% at least 24 px). Found 11/11 accessibility defects in review |

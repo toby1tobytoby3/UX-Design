@@ -1,0 +1,191 @@
+{
+ "label": "E",
+ "defects": {
+  "D01": {
+   "found": true,
+   "quote": "It contains only an SVG, so a screen reader announces \"button\"."
+  },
+  "D02": {
+   "found": true,
+   "quote": "The only label is the placeholder, which disappears on typing and is not a reliable accessible name."
+  },
+  "D03": {
+   "found": true,
+   "quote": "\"Compare plans\" is a `<p>` with an `onclick`"
+  },
+  "D04": {
+   "found": true,
+   "quote": "Keyboard focus indicator removed everywhere"
+  },
+  "D05": {
+   "found": true,
+   "quote": "Both `<img>` tags have no `alt`."
+  },
+  "D06": {
+   "found": true,
+   "quote": "Comparison table encodes yes/no by colour only"
+  },
+  "D07": {
+   "found": true,
+   "quote": "A positive tabindex jumps FAQ ahead of Pricing, which breaks reading order (WCAG 2.4.3)."
+  },
+  "D08": {
+   "found": true,
+   "quote": "Heading levels jump: h1 then h4 (plan names), h2, h3"
+  },
+  "D09": {
+   "found": true,
+   "quote": "Looping, auto-scrolling ticker"
+  },
+  "D10": {
+   "found": true,
+   "quote": "\"Prices are shown per month, billed monthly.\" is #bbb on white, 1.92:1."
+  },
+  "D11": {
+   "found": true,
+   "quote": "White text on #ffd23f is 1.44:1"
+  },
+  "D12": {
+   "found": true,
+   "quote": "The border is #e6e6e6 on white, 1.25:1"
+  },
+  "D13": {
+   "found": true,
+   "quote": "At 390 and 320 px `scrollWidth` is 584 against a 390 or 320 px viewport, so the page scrolls sideways."
+  },
+  "D14": {
+   "found": true,
+   "quote": "Touch targets are about 14 px high."
+  },
+  "D15": {
+   "found": true,
+   "quote": "The text \"100 reconciliations per month, one bank connection, CSV and PDF export\" is cut at \"one ba\""
+  },
+  "D16": {
+   "found": true,
+   "quote": "Sticky header is 140 px tall and covers anchor targets"
+  },
+  "D17": {
+   "found": true,
+   "quote": "Paddings differ (20, 24, 28 px) and Business has a fixed `height: 380px`."
+  },
+  "D18": {
+   "found": true,
+   "quote": "Feature list items are 12 px, the badge 12 px, the fine print 11 px and the footer links 12 px."
+  },
+  "D19": {
+   "found": true,
+   "quote": "A single 100+ word sentence is set across the full 1230 px width"
+  },
+  "D20": {
+   "found": true,
+   "quote": "Georgia, Arial, Comic Sans MS, Courier New and Impact are mixed in one view."
+  },
+  "D21": {
+   "found": true,
+   "quote": "Plan CTAs read \"Click here\""
+  },
+  "D22": {
+   "found": true,
+   "quote": "\"Error 422\" is a raw status code"
+  },
+  "D23": {
+   "found": true,
+   "quote": "That blames the user and gives no example or next step."
+  },
+  "D24": {
+   "found": true,
+   "quote": "\"Perfect Package\" is filler and \"Package\" is capitalised at random, while the page calls them \"plans\" and \"tier\" in other places."
+  },
+  "D25": {
+   "found": true,
+   "quote": "The buttons \"OK\" and \"Cancel\" are vague"
+  },
+  "D26": {
+   "found": true,
+   "quote": "`transition: all` animates layout properties"
+  },
+  "D27": {
+   "found": false,
+   "quote": ""
+  },
+  "D28": {
+   "found": true,
+   "quote": "The emoji are read aloud (\"rocket\", \"locked\", \"chart increasing\") and render differently per platform."
+  },
+  "D29": {
+   "found": false,
+   "quote": ""
+  },
+  "D30": {
+   "found": true,
+   "quote": "Page blocks zoom"
+  },
+  "D31": {
+   "found": false,
+   "quote": ""
+  }
+ },
+ "unlisted": [
+  {
+   "quote": "\"Most popular\" sits on Starter, the cheapest plan, with no visual emphasis",
+   "valid": true,
+   "why": "Badge is on Starter card only, no emphasis; misplaced."
+  },
+  {
+   "quote": "The hero lede (#dcd0ff) is 4.04:1 on the purple end of the gradient",
+   "valid": true,
+   "why": "Computed ratio matches; hero lede fails AA on gradient."
+  },
+  {
+   "quote": "Annual plans are billed once a year\" and \"All plans include a trial\" conflict",
+   "valid": true,
+   "why": "Fine print mentions annual billing and trial absent elsewhere in plans."
+  },
+  {
+   "quote": "The input and button are not in a form element, so Enter does not submit",
+   "valid": true,
+   "why": "Section is not a form element; input and button unwrapped."
+  },
+  {
+   "quote": "A \"Delete workspace\" confirmation sits inline in a pricing page, which is out of context.",
+   "valid": true,
+   "why": "Inline static dialog with no modal behaviour exists in fixture."
+  },
+  {
+   "quote": "It also has no JavaScript, so it does nothing",
+   "valid": true,
+   "why": "Close button has no handler; script is only empty toggleCompare."
+  },
+  {
+   "quote": "The three plan cards stay in one row.",
+   "valid": true,
+   "why": "Flex row with no responsive rule squashes cards on phones."
+  },
+  {
+   "quote": "Add `<caption>`, `<thead>` and `scope=\"col\"` / `scope=\"row\"` for the headers.",
+   "valid": true,
+   "why": "Table lacks caption, thead and scope attributes."
+  },
+  {
+   "quote": "has no association with the input",
+   "valid": true,
+   "why": "Error paragraphs lack aria-describedby, role alert; real issue."
+  },
+  {
+   "quote": "The line also duplicates the list item above it.",
+   "valid": true,
+   "why": "Feature line repeats '100 reconciliations per month' from list."
+  },
+  {
+   "quote": "there is no link to the home page",
+   "valid": true,
+   "why": "Logo img is not wrapped in a link."
+  },
+  {
+   "quote": "Only two questions, with no billing, cancellation or tax answers",
+   "valid": false,
+   "why": "Subjective content critique, weakly actionable; not a defect in fixture."
+  }
+ ]
+}

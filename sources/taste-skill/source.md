@@ -33,7 +33,9 @@ control): staggered plan cards, prices below the first screen, a collage of ledg
 ask for. It cost 2.8 times the control's tokens and 16 minutes to build. As a reviewer it matched the control (28 of 31).
 Choose it for brand pages, not for comparison pages.
 
-## Scorecard (n = 1 run per track)
+**Repeat run (26 Oct 2026).** Fresh agent, and both rounds' pages rated together by two new blind judges. Jury for the page: 2.50 then 3.25 (control 4.00 then 3.50); checks 14 of 14 then 11 of 14 (missing content, touch targets, no JavaScript); review 28 then 29 of 31 (control 28 then 26). It stays last on the pricing page in both rounds and the cost is 2.2 times the control's tokens pooled.
+
+## Scorecard (first run; see the repeat run above)
 | Criterion | Score | Evidence |
 |---|---|---|
 | Default look | 2 | Jury 2.88 against 3.63 (distinctiveness 5, hierarchy 2, craft 2.5, brief fit 2) |

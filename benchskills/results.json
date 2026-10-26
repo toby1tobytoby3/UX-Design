@@ -20,12 +20,12 @@
     "weight_kb": 25,
     "external_hosts": [],
     "unsupported_claims": [],
-    "jury_mean": 3.63,
+    "jury_mean": 4,
     "jury_dims": {
      "hierarchy": 4,
-     "craft": 4,
-     "distinctiveness": 2.5,
-     "brief_fit": 4
+     "craft": 4.5,
+     "distinctiveness": 3,
+     "brief_fit": 4.5
     }
    },
    "review": {
@@ -116,11 +116,11 @@
      "fonts.gstatic.com"
     ],
     "unsupported_claims": [],
-    "jury_mean": 3.63,
+    "jury_mean": 3.88,
     "jury_dims": {
-     "hierarchy": 3.5,
+     "hierarchy": 4,
      "craft": 3,
-     "distinctiveness": 4,
+     "distinctiveness": 4.5,
      "brief_fit": 4
     }
    }
@@ -162,10 +162,10 @@
      "cdn.fontshare.com"
     ],
     "unsupported_claims": [],
-    "jury_mean": 4.38,
+    "jury_mean": 4.25,
     "jury_dims": {
      "hierarchy": 5,
-     "craft": 4.5,
+     "craft": 4,
      "distinctiveness": 4,
      "brief_fit": 4
     }
@@ -232,12 +232,12 @@
      "fonts.gstatic.com"
     ],
     "unsupported_claims": [],
-    "jury_mean": 2.88,
+    "jury_mean": 2.5,
     "jury_dims": {
      "hierarchy": 2,
-     "craft": 2.5,
-     "distinctiveness": 5,
-     "brief_fit": 2
+     "craft": 2,
+     "distinctiveness": 4.5,
+     "brief_fit": 1.5
     }
    },
    "review": {
@@ -306,12 +306,12 @@
      "fonts.gstatic.com"
     ],
     "unsupported_claims": [],
-    "jury_mean": 3.88,
+    "jury_mean": 3.75,
     "jury_dims": {
      "hierarchy": 4,
      "craft": 4,
      "distinctiveness": 3,
-     "brief_fit": 4.5
+     "brief_fit": 4
     }
    },
    "review": {
@@ -442,7 +442,7 @@
   "commit": "b8f3617",
   "footprint": {
    "skill_md_lines": 395,
-   "dir_kb": 5213,
+   "dir_kb": 5208,
    "skills_loaded": 1
   },
   "tracks": {
@@ -472,6 +472,365 @@
     "tokens": 191165,
     "tool_uses": 24,
     "seconds": 471
+   }
+  }
+ },
+ "_repeats": {
+  "baseline-r2": {
+   "of": "baseline",
+   "slug": "_baseline",
+   "tracks": {
+    "build": {
+     "checks_passed": 13,
+     "checks_total": 14,
+     "failed": [
+      "hero_cta_above_fold"
+     ],
+     "axe_violations": 0,
+     "overflow_390_px": 0,
+     "keyboard_focus": "12/12",
+     "content_pct": 100,
+     "targets_24_share": 1,
+     "min_font_px": 12,
+     "weight_kb": 13,
+     "external_hosts": [],
+     "unsupported_claims": [],
+     "jury_mean": 3.5,
+     "jury_dims": {
+      "hierarchy": 4,
+      "craft": 4,
+      "distinctiveness": 1.5,
+      "brief_fit": 4.5
+     }
+    },
+    "review": {
+     "found": 26,
+     "total": 31,
+     "recall_pct": 84,
+     "by_category": {
+      "accessibility": "10/11",
+      "contrast": "3/3",
+      "layout": "5/5",
+      "typography": "3/3",
+      "writing": "3/5",
+      "polish": "2/4"
+     },
+     "by_severity": {
+      "high": "10/10",
+      "medium": "14/16",
+      "low": "2/5"
+     },
+     "missed": [
+      "D23",
+      "D24",
+      "D27",
+      "D29",
+      "D31"
+     ],
+     "unlisted_valid": 11,
+     "unlisted_invalid": 1
+    }
+   },
+   "cost": {
+    "build": {
+     "tokens": 81721,
+     "tool_uses": 8,
+     "seconds": 78
+    },
+    "review": {
+     "tokens": 82162,
+     "tool_uses": 8,
+     "seconds": 80
+    }
+   }
+  },
+  "frontend-design-r2": {
+   "of": "frontend-design",
+   "slug": "anthropic-frontend-design",
+   "tracks": {
+    "build": {
+     "checks_passed": 12,
+     "checks_total": 14,
+     "failed": [
+      "targets_24_px",
+      "hero_cta_above_fold"
+     ],
+     "axe_violations": 0,
+     "overflow_390_px": 0,
+     "keyboard_focus": "11/11",
+     "content_pct": 100,
+     "targets_24_share": 0.83,
+     "min_font_px": 14,
+     "weight_kb": 148,
+     "external_hosts": [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com"
+     ],
+     "unsupported_claims": [],
+     "jury_mean": 4.13,
+     "jury_dims": {
+      "hierarchy": 4,
+      "craft": 4,
+      "distinctiveness": 4.5,
+      "brief_fit": 4
+     }
+    }
+   },
+   "cost": {
+    "build": {
+     "tokens": 98702,
+     "tool_uses": 18,
+     "seconds": 221
+    }
+   }
+  },
+  "hallmark-r2": {
+   "of": "hallmark",
+   "slug": "hallmark",
+   "tracks": {
+    "build": {
+     "checks_passed": 11,
+     "checks_total": 14,
+     "failed": [
+      "content_complete",
+      "targets_24_px",
+      "works_without_js"
+     ],
+     "axe_violations": 0,
+     "overflow_390_px": 0,
+     "keyboard_focus": "16/16",
+     "content_pct": 92,
+     "targets_24_share": 0.88,
+     "min_font_px": 14,
+     "weight_kb": 90,
+     "external_hosts": [
+      "fonts.googleapis.com",
+      "api.fontshare.com",
+      "fonts.gstatic.com",
+      "cdn.fontshare.com"
+     ],
+     "unsupported_claims": [],
+     "jury_mean": 3.75,
+     "jury_dims": {
+      "hierarchy": 4,
+      "craft": 4,
+      "distinctiveness": 3.5,
+      "brief_fit": 3.5
+     }
+    },
+    "review": {
+     "found": 28,
+     "total": 31,
+     "recall_pct": 90,
+     "by_category": {
+      "accessibility": "10/11",
+      "contrast": "3/3",
+      "layout": "5/5",
+      "typography": "3/3",
+      "writing": "4/5",
+      "polish": "3/4"
+     },
+     "by_severity": {
+      "high": "10/10",
+      "medium": "15/16",
+      "low": "3/5"
+     },
+     "missed": [
+      "D24",
+      "D27",
+      "D31"
+     ],
+     "unlisted_valid": 12,
+     "unlisted_invalid": 2
+    }
+   },
+   "cost": {
+    "build": {
+     "tokens": 192496,
+     "tool_uses": 44,
+     "seconds": 500
+    },
+    "review": {
+     "tokens": 131634,
+     "tool_uses": 19,
+     "seconds": 173
+    }
+   }
+  },
+  "taste-skill-r2": {
+   "of": "taste-skill",
+   "slug": "taste-skill",
+   "tracks": {
+    "build": {
+     "checks_passed": 11,
+     "checks_total": 14,
+     "failed": [
+      "content_complete",
+      "targets_24_px",
+      "works_without_js"
+     ],
+     "axe_violations": 0,
+     "overflow_390_px": 0,
+     "keyboard_focus": "21/21",
+     "content_pct": 92,
+     "targets_24_share": 0.89,
+     "min_font_px": 13,
+     "weight_kb": 113,
+     "external_hosts": [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com"
+     ],
+     "unsupported_claims": [],
+     "jury_mean": 3.25,
+     "jury_dims": {
+      "hierarchy": 2.5,
+      "craft": 3,
+      "distinctiveness": 5,
+      "brief_fit": 2.5
+     }
+    },
+    "review": {
+     "found": 29,
+     "total": 31,
+     "recall_pct": 94,
+     "by_category": {
+      "accessibility": "11/11",
+      "contrast": "3/3",
+      "layout": "5/5",
+      "typography": "3/3",
+      "writing": "4/5",
+      "polish": "3/4"
+     },
+     "by_severity": {
+      "high": "10/10",
+      "medium": "16/16",
+      "low": "3/5"
+     },
+     "missed": [
+      "D24",
+      "D27"
+     ],
+     "unlisted_valid": 14,
+     "unlisted_invalid": 1
+    }
+   },
+   "cost": {
+    "build": {
+     "tokens": 249554,
+     "tool_uses": 62,
+     "seconds": 903
+    },
+    "review": {
+     "tokens": 124220,
+     "tool_uses": 23,
+     "seconds": 185
+    }
+   }
+  },
+  "ui-ux-pro-max-r2": {
+   "of": "ui-ux-pro-max",
+   "slug": "ui-ux-pro-max",
+   "tracks": {
+    "build": {
+     "checks_passed": 13,
+     "checks_total": 14,
+     "failed": [
+      "hero_cta_above_fold"
+     ],
+     "axe_violations": 0,
+     "overflow_390_px": 0,
+     "keyboard_focus": "12/12",
+     "content_pct": 100,
+     "targets_24_share": 1,
+     "min_font_px": 14,
+     "weight_kb": 57,
+     "external_hosts": [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com"
+     ],
+     "unsupported_claims": [],
+     "jury_mean": 3.63,
+     "jury_dims": {
+      "hierarchy": 4.5,
+      "craft": 4,
+      "distinctiveness": 2,
+      "brief_fit": 4
+     }
+    },
+    "review": {
+     "found": 28,
+     "total": 31,
+     "recall_pct": 90,
+     "by_category": {
+      "accessibility": "11/11",
+      "contrast": "3/3",
+      "layout": "5/5",
+      "typography": "3/3",
+      "writing": "4/5",
+      "polish": "2/4"
+     },
+     "by_severity": {
+      "high": "10/10",
+      "medium": "16/16",
+      "low": "2/5"
+     },
+     "missed": [
+      "D24",
+      "D27",
+      "D29"
+     ],
+     "unlisted_valid": 12,
+     "unlisted_invalid": 0
+    }
+   },
+   "cost": {
+    "build": {
+     "tokens": 94275,
+     "tool_uses": 11,
+     "seconds": 79
+    },
+    "review": {
+     "tokens": 115028,
+     "tool_uses": 15,
+     "seconds": 115
+    }
+   }
+  },
+  "interface-skills-r2": {
+   "of": "interface-skills",
+   "slug": "interface-skills",
+   "tracks": {
+    "review": {
+     "found": 29,
+     "total": 31,
+     "recall_pct": 94,
+     "by_category": {
+      "accessibility": "11/11",
+      "contrast": "3/3",
+      "layout": "4/5",
+      "typography": "3/3",
+      "writing": "5/5",
+      "polish": "3/4"
+     },
+     "by_severity": {
+      "high": "10/10",
+      "medium": "15/16",
+      "low": "4/5"
+     },
+     "missed": [
+      "D14",
+      "D29"
+     ],
+     "unlisted_valid": 11,
+     "unlisted_invalid": 0
+    }
+   },
+   "cost": {
+    "review": {
+     "tokens": 171063,
+     "tool_uses": 20,
+     "seconds": 325
+    }
    }
   }
  }

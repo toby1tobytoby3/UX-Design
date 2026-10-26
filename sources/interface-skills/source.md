@@ -33,6 +33,8 @@ planted defects (87%) against 28 (90%) for the control, with every accessibility
 after code, a verdict, a coverage note saying what was and wasn't inspected) at 1.6 times the tokens of the control.
 Install it for review structure and the domain skills; don't expect it to surface problems a careful agent would miss.
 
+**Repeat run (26 Oct 2026).** Fresh agent, blind scorer with verified quotes: 27 then 29 of 31 planted defects (control 28 then 26), with 11 further valid findings and none wrong in the second run. Its report writing was refused by the harness, so the reply was saved verbatim (noted in its `RUN.md`). Pooled cost 1.8 times the control's tokens.
+
 ## Scorecard (n = 1 run; see `benchskills/README.md` for limits)
 | Criterion | Score | Evidence |
 |---|---|---|

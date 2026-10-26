@@ -1,0 +1,26 @@
+[
+ {
+  "shape": "Price Sheet (Offer rows, swapped from Letter)",
+  "theme": "coral",
+  "axes": "light/grotesk-sans/warm",
+  "hero": "Banner",
+  "nav": "edge-aligned",
+  "footer": "mast on the board",
+  "imagery": "none",
+  "photos": [],
+  "entry": "switcher-led",
+  "fingerprint": "offer-rows/table/rows/board",
+  "sections": [
+   "Hero",
+   "Offer rows with Switcher",
+   "Table",
+   "Rows (FAQ)",
+   "Footer"
+  ],
+  "signature": "plan prices set huge on cotton sheets, re-printed by a pressed-groove billing switch",
+  "waived": [],
+  "prompt": "Ledgerly pricing page",
+  "date": "2026-10-26",
+  "mode": "build"
+ }
+]

@@ -1,0 +1,216 @@
+{
+ "label": "A",
+ "defects": {
+  "D01": {
+   "found": true,
+   "quote": "Banner close button has no accessible name and an unlabelled SVG (Floor 33), lines 15 and 66."
+  },
+  "D02": {
+   "found": true,
+   "quote": "Newsletter form has no label or form element (lines 110 to 113)."
+  },
+  "D03": {
+   "found": true,
+   "quote": "is a `<p onclick>` (line 97). It is not focusable and has no role"
+  },
+  "D04": {
+   "found": true,
+   "quote": "Keyboard focus is removed everywhere (Floor 26a), line 10."
+  },
+  "D05": {
+   "found": true,
+   "quote": "The logo `<img>` has no `alt` and is not a link home; the hero shot has no `alt`."
+  },
+  "D06": {
+   "found": true,
+   "quote": "Compare table says yes and no by colour only (lines 42, 43, 101 to 103)."
+  },
+  "D07": {
+   "found": true,
+   "quote": "Tab order is wrong (`tabindex=\"3\"` on the FAQ link, line 63)."
+  },
+  "D08": {
+   "found": true,
+   "quote": "Heading structure is skipped (F21), lines 69, 77, 107, 111."
+  },
+  "D09": {
+   "found": true,
+   "quote": "Ticker marquee loops forever with no pause (Floor 18, 27), lines 16 to 18, 67."
+  },
+  "D10": {
+   "found": true,
+   "quote": "`#bbb` on white is about 1.9:1, and this is the line that qualifies every price."
+  },
+  "D11": {
+   "found": true,
+   "quote": "White text on `--accent: #ffd23f`, 1.44:1 (measured by the render tier)."
+  },
+  "D12": {
+   "found": true,
+   "quote": "The field edge is `#e6e6e6` on white, 1.25:1 (Floor 40)."
+  },
+  "D13": {
+   "found": true,
+   "quote": "Page scrolls sideways on phones (Floor 34), `.compare table { min-width: 560px }` line 40"
+  },
+  "D14": {
+   "found": true,
+   "quote": "footer links 12px type, 14px tall with 6px gaps and no padding (49b, 39b)"
+  },
+  "D15": {
+   "found": true,
+   "quote": "The Starter `.feature-line` is `width: 180px; overflow: hidden; nowrap`"
+  },
+  "D16": {
+   "found": true,
+   "quote": "The sticky header is 140px tall (line 11) and sits over anchor targets."
+  },
+  "D17": {
+   "found": true,
+   "quote": "Card padding is 20, 24 and 28px (`:nth-child` rules)"
+  },
+  "D18": {
+   "found": true,
+   "quote": "Plan list items are 12px, the badge 12px, the fine print 11px (strain gate 75)"
+  },
+  "D19": {
+   "found": true,
+   "quote": "the About paragraph is `line-height: 1` (computes to 16px, lines touching) at about 144 characters per line at 1440"
+  },
+  "D20": {
+   "found": true,
+   "quote": "Five families: Georgia body, Arial nav and buttons, Comic Sans banner, Courier New ticker and prices, Impact headings"
+  },
+  "D21": {
+   "found": true,
+   "quote": "Every plan CTA reads \"Click here\" (lines 82, 88, 94)"
+  },
+  "D22": {
+   "found": true,
+   "quote": "Two error lines, \"Error 422\" and \"You entered an invalid email address.\", are shown before anyone types."
+  },
+  "D23": {
+   "found": true,
+   "quote": "drop \"Error 422\" jargon and say what to type (\"Enter an email like name@company.com\")"
+  },
+  "D24": {
+   "found": false,
+   "quote": ""
+  },
+  "D25": {
+   "found": true,
+   "quote": "\"OK\" next to a delete question is ambiguous."
+  },
+  "D26": {
+   "found": true,
+   "quote": "Hover on plan cards animates width and height with `transition: all` (Floor 10a), lines 27 and 30."
+  },
+  "D27": {
+   "found": true,
+   "quote": "Plan buttons are purple `#7b2ff7` at 4px radius, 35px; the newsletter button is yellow at 6px radius, 42px"
+  },
+  "D28": {
+   "found": true,
+   "quote": "Emoji used as icons (Floor 30a), line 74."
+  },
+  "D29": {
+   "found": true,
+   "quote": "Purple-to-blue gradient hero (Floor 2a), line 19."
+  },
+  "D30": {
+   "found": true,
+   "quote": "Zoom is disabled, line 5."
+  },
+  "D31": {
+   "found": true,
+   "quote": "no `<main>` or landmarks exist"
+  }
+ },
+ "unlisted": [
+  {
+   "quote": "\"Most popular tier\" badge is on the cheapest plan (line 78), and only on it.",
+   "valid": true,
+   "why": "Badge sits only on Starter, unsupported claim contradicting emphasis."
+  },
+  {
+   "quote": "Hero lede on the gradient fails contrast (Floor 40), `.hero .lede` line 22.",
+   "valid": true,
+   "why": "#dcd0ff over gradient is plausibly under 4.5:1."
+  },
+  {
+   "quote": "The hero has no action and the first screen has no price",
+   "valid": true,
+   "why": "Hero has headline, lede and blank image, no button or price."
+  },
+  {
+   "quote": "`toggleCompare()` (line 130) is an empty dead function.",
+   "valid": true,
+   "why": "Script defines empty toggleCompare, never used."
+  },
+  {
+   "quote": "Stray destructive dialog and error messages shown at rest, lines 114 to 120.",
+   "valid": true,
+   "why": "Confirm dialog and error paragraphs are rendered unhidden."
+  },
+  {
+   "quote": "it is not in a `<form>`, so Enter does nothing and nothing posts.",
+   "valid": true,
+   "why": "Input and button are not inside a form element."
+  },
+  {
+   "quote": "Two different primary button styles (F4/F15).",
+   "valid": true,
+   "why": "Plan buttons, submit and dialog buttons are styled inconsistently."
+  },
+  {
+   "quote": "Annual plans are billed once a year\" (line 121) conflicts with the intro \"billed monthly\"",
+   "valid": true,
+   "why": "Fine print mentions annual billing while page says monthly only."
+  },
+  {
+   "quote": "Pick the perfect Package\" (Title Case, empty promise, \"perfect\" and a stray capital)",
+   "valid": true,
+   "why": "Headline is vague with odd capitalization."
+  },
+  {
+   "quote": "`.fineprint` 11px `#777` (about 4.5:1 and under the 12px floor)",
+   "valid": true,
+   "why": "Fine print is small and borderline contrast."
+  },
+  {
+   "quote": "Header links are `href=\"#\"` for Sign in (line 64)",
+   "valid": true,
+   "why": "Sign in link goes to a dead hash."
+  },
+  {
+   "quote": "No `:active` or `:disabled` states on any control (26b)",
+   "valid": true,
+   "why": "No such styles exist in the CSS."
+  },
+  {
+   "quote": "It also repeats the first list item.",
+   "valid": true,
+   "why": "Feature-line repeats '100 reconciliations per month' from the list."
+  },
+  {
+   "quote": "The table also lists only three rows while the plans differ on seats and volume",
+   "valid": true,
+   "why": "Comparison omits seats and reconciliation limits."
+  },
+  {
+   "quote": "and make it actually dismiss (no handler exists).",
+   "valid": true,
+   "why": "Banner close button has no click handler."
+  },
+  {
+   "quote": "Screen word budget exceeded (Floor 58).",
+   "valid": true,
+   "why": "Real run-on About paragraph, though word-budget framing is soft."
+  },
+  {
+   "quote": "People with low vision cannot enlarge prices that are set at 12px.",
+   "valid": false,
+   "why": "Prices are 32px; only list items are 12px."
+  }
+ ]
+}

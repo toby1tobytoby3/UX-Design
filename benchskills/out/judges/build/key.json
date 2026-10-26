@@ -1,7 +1,12 @@
 {
- "A": "baseline",
+ "A": "ui-ux-pro-max-r2",
  "B": "ui-ux-pro-max",
- "C": "taste-skill",
- "D": "hallmark",
- "E": "frontend-design"
+ "C": "frontend-design-r2",
+ "D": "hallmark-r2",
+ "E": "baseline",
+ "F": "baseline-r2",
+ "G": "frontend-design",
+ "H": "taste-skill",
+ "I": "hallmark",
+ "J": "taste-skill-r2"
 }

@@ -1,0 +1,1893 @@
+{
+ "url": "index.html",
+ "at": "2026-10-26T14:58:05.984Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.83,
+    0.89,
+    0.85,
+    1,
+    0.91
+   ],
+   "motion": {
+    "elements": 36,
+    "css": 1,
+    "transitions": 34,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 4270,
+     "screens": 4.7,
+     "words": 349,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 17,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 4,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 4,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "LEDGERLY PRICING",
+     "words": 2,
+     "chars": 16,
+     "lines": 2,
+     "size": 268.8,
+     "vw": 18.7,
+     "font": "Libre Franklin",
+     "weight": 700,
+     "tracking": -0.035,
+     "leading": 0.84,
+     "upper": true,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.96,
+     "top": 112,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "LEDGERLY PRICING",
+     "words": 2,
+     "lines": 2,
+     "size": 268.8,
+     "font": "Libre Franklin"
+    },
+    "headings": [
+     {
+      "text": "LEDGERLY PRICING",
+      "words": 2,
+      "chars": 16,
+      "lines": 2,
+      "size": 268.8,
+      "vw": 18.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 0.84,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 112,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Plans and prices",
+      "words": 3,
+      "chars": 16,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 1086,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "149",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.28,
+      "top": 1194,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "59",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.28,
+      "top": 1314,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "19",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.28,
+      "top": 1434,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "Compare plans",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.48,
+      "top": 2063,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Common questions",
+      "words": 2,
+      "chars": 16,
+      "lines": 2,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.31,
+      "top": 2997,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "LEDGERLY",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 145.7,
+      "vw": 10.1,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.04,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.51,
+      "top": 4013,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 8,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Source Serif 4",
+       "share": 0.52,
+       "mono": false
+      },
+      {
+       "family": "Libre Franklin",
+       "share": 0.48,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      18,
+      19,
+      26,
+      68,
+      146,
+      269
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Source Serif 4",
+      "size": 19,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 9.8
+     },
+     "measureChars": 31,
+     "max": {
+      "size": 268.8,
+      "vw": 18.7,
+      "font": "Libre Franklin",
+      "text": "Ledgerly"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#a6b3bc",
+     "bodyBgHsl": {
+      "h": 205,
+      "s": 0.14,
+      "l": 0.69
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#a6b3bc",
+       "top": 0,
+       "hsl": {
+        "h": 205,
+        "s": 0.14,
+        "l": 0.69
+       }
+      },
+      {
+       "color": "#2c3620",
+       "top": 971,
+       "hsl": {
+        "h": 87,
+        "s": 0.26,
+        "l": 0.17
+       }
+      },
+      {
+       "color": "#d6c4b8",
+       "top": 1841,
+       "hsl": {
+        "h": 24,
+        "s": 0.27,
+        "l": 0.78
+       }
+      },
+      {
+       "color": "#b7c8be",
+       "top": 2839,
+       "hsl": {
+        "h": 145,
+        "s": 0.13,
+        "l": 0.75
+       }
+      },
+      {
+       "color": "#e3e2da",
+       "top": 3649,
+       "hsl": {
+        "h": 53,
+        "s": 0.14,
+        "l": 0.87
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1c1c1c",
+       "share": 0.83
+      },
+      {
+       "color": "#e3e2da",
+       "share": 0.09
+      },
+      {
+       "color": "#38424a",
+       "share": 0.07
+      },
+      {
+       "color": "#2c3620",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#2c3620",
+      "hsl": {
+       "h": 87,
+       "s": 0.26,
+       "l": 0.17
+      },
+      "fg": "#1c1c1c"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": 0,
+     "height": 64,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Start free trial"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 4,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 1366
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 5,
+     "fixed": true,
+     "height": 56,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "libre franklin",
+     "source serif 4"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 4270,
+    "margins": {
+     "left": 32,
+     "right": 48
+    },
+    "sections": [
+     {
+      "sel": "section#top.ch.ch-hero",
+      "tag": "section",
+      "top": 0,
+      "height": 971,
+      "words": 77,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Ledgerly",
+       "size": 269,
+       "tag": "h1"
+      },
+      "left": 32,
+      "right": 34,
+      "textLeft": 32,
+      "textRight": 34,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plans.ch.ch-plans",
+      "tag": "section",
+      "top": 971,
+      "height": 870,
+      "words": 57,
+      "media": 0,
+      "middle": 201,
+      "heading": {
+       "text": "Plans and prices",
+       "size": 68,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 196,
+      "textLeft": 32,
+      "textRight": 196,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#compare.ch.ch-compare",
+      "tag": "section",
+      "top": 1841,
+      "height": 998,
+      "words": 74,
+      "media": 0,
+      "middle": 218,
+      "heading": {
+       "text": "Compare plans",
+       "size": 68,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 48,
+      "textLeft": 32,
+      "textRight": 48,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#faq.ch.ch-faq",
+      "tag": "section",
+      "top": 2839,
+      "height": 810,
+      "words": 120,
+      "media": 0,
+      "middle": 48,
+      "heading": {
+       "text": "Common questions",
+       "size": 68,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 404,
+      "textLeft": 32,
+      "textRight": 404,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": true
+     },
+     {
+      "sel": "footer.board-wrap",
+      "tag": "footer",
+      "top": 3649,
+      "height": 621,
+      "words": 45,
+      "media": 0,
+      "middle": 120,
+      "heading": {
+       "text": "Ledgerly",
+       "size": 146,
+       "tag": "p"
+      },
+      "left": 56,
+      "right": 56,
+      "textLeft": 56,
+      "textRight": 58,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 2716,
+      "height": 280
+     }
+    ],
+    "h1s": [
+     {
+      "text": "LEDGERLY PRICING",
+      "size": 269,
+      "top": 112,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 32,
+      "n": 6
+     },
+     {
+      "x": 517,
+      "n": 6
+     },
+     {
+      "x": 60,
+      "n": 1
+     },
+     {
+      "x": 983,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 14,
+    "bodySize": 19,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.04,
+    "voidBox": {
+     "x": 1140,
+     "y": 420,
+     "w": 300,
+     "h": 180
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 6,
+   "filled": [
+    0.65,
+    0.78,
+    1,
+    0.96,
+    0.87,
+    0.91
+   ],
+   "motion": {
+    "elements": 36,
+    "css": 1,
+    "transitions": 34,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 5586,
+     "screens": 5.5,
+     "words": 349,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 17,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 4,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 4,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "LEDGERLY PRICING",
+     "words": 2,
+     "chars": 16,
+     "lines": 2,
+     "size": 143.3,
+     "vw": 18.7,
+     "font": "Libre Franklin",
+     "weight": 700,
+     "tracking": -0.035,
+     "leading": 0.84,
+     "upper": true,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.96,
+     "top": 87,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "LEDGERLY PRICING",
+     "words": 2,
+     "lines": 2,
+     "size": 143.3,
+     "font": "Libre Franklin"
+    },
+    "headings": [
+     {
+      "text": "LEDGERLY PRICING",
+      "words": 2,
+      "chars": 16,
+      "lines": 2,
+      "size": 143.3,
+      "vw": 18.7,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 0.84,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 87,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Plans and prices",
+      "words": 3,
+      "chars": 16,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 1012,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "19",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.72,
+      "top": 1250,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "59",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.72,
+      "top": 1606,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "149",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.72,
+      "top": 1996,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "Compare plans",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 2522,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Common questions",
+      "words": 2,
+      "chars": 16,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 3546,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "LEDGERLY",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 115.9,
+      "vw": 15.1,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.04,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 5129,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 8,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Source Serif 4",
+       "share": 0.52,
+       "mono": false
+      },
+      {
+       "family": "Libre Franklin",
+       "share": 0.48,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      18,
+      23,
+      49,
+      116,
+      143
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": {
+      "font": "Source Serif 4",
+      "size": 17.9,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 9.8
+     },
+     "measureChars": 32,
+     "max": {
+      "size": 143.3,
+      "vw": 18.7,
+      "font": "Libre Franklin",
+      "text": "Ledgerly"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#a6b3bc",
+     "bodyBgHsl": {
+      "h": 205,
+      "s": 0.14,
+      "l": 0.69
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#a6b3bc",
+       "top": 0,
+       "hsl": {
+        "h": 205,
+        "s": 0.14,
+        "l": 0.69
+       }
+      },
+      {
+       "color": "#2c3620",
+       "top": 940,
+       "hsl": {
+        "h": 87,
+        "s": 0.26,
+        "l": 0.17
+       }
+      },
+      {
+       "color": "#b7c8be",
+       "top": 1541,
+       "hsl": {
+        "h": 145,
+        "s": 0.13,
+        "l": 0.75
+       }
+      },
+      {
+       "color": "#d6c4b8",
+       "top": 1930,
+       "hsl": {
+        "h": 24,
+        "s": 0.27,
+        "l": 0.78
+       }
+      },
+      {
+       "color": "#e3e2da",
+       "top": 4539,
+       "hsl": {
+        "h": 53,
+        "s": 0.14,
+        "l": 0.87
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1c1c1c",
+       "share": 0.83
+      },
+      {
+       "color": "#e3e2da",
+       "share": 0.09
+      },
+      {
+       "color": "#38424a",
+       "share": 0.07
+      },
+      {
+       "color": "#2c3620",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#2c3620",
+      "hsl": {
+       "h": 87,
+       "s": 0.26,
+       "l": 0.17
+      },
+      "fg": "#1c1c1c"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": 0,
+     "height": 64,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Start free trial"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 4,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 5,
+     "fixed": true,
+     "height": 56,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "libre franklin",
+     "source serif 4"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 5586,
+    "margins": {
+     "left": 17,
+     "right": 33
+    },
+    "sections": [
+     {
+      "sel": "section#top.ch.ch-hero",
+      "tag": "section",
+      "top": 0,
+      "height": 940,
+      "words": 77,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Ledgerly",
+       "size": 143,
+       "tag": "h1"
+      },
+      "left": 17,
+      "right": 18,
+      "textLeft": 17,
+      "textRight": 18,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plans.ch.ch-plans",
+      "tag": "section",
+      "top": 940,
+      "height": 1510,
+      "words": 57,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Plans and prices",
+       "size": 49,
+       "tag": "h2"
+      },
+      "left": 17,
+      "right": 307,
+      "textLeft": 17,
+      "textRight": 307,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#compare.ch.ch-compare",
+      "tag": "section",
+      "top": 2450,
+      "height": 1024,
+      "words": 74,
+      "media": 0,
+      "middle": 65,
+      "heading": {
+       "text": "Compare plans",
+       "size": 49,
+       "tag": "h2"
+      },
+      "left": 17,
+      "right": 33,
+      "textLeft": 17,
+      "textRight": 33,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#faq.ch.ch-faq",
+      "tag": "section",
+      "top": 3474,
+      "height": 1065,
+      "words": 120,
+      "media": 0,
+      "middle": 81,
+      "heading": {
+       "text": "Common questions",
+       "size": 49,
+       "tag": "h2"
+      },
+      "left": 17,
+      "right": 33,
+      "textLeft": 17,
+      "textRight": 33,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.board-wrap",
+      "tag": "footer",
+      "top": 4539,
+      "height": 1048,
+      "words": 45,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Invoice reconciliation for small accounting teams.",
+       "size": 23,
+       "tag": "h2"
+      },
+      "left": 41,
+      "right": 41,
+      "textLeft": 41,
+      "textRight": 49,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "LEDGERLY PRICING",
+      "size": 143,
+      "top": 87,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 41,
+      "n": 8
+     },
+     {
+      "x": 17,
+      "n": 6
+     }
+    ],
+    "leftBlocks": 14,
+    "bodySize": 18,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 7,
+   "filled": [
+    0.74,
+    0.64,
+    1,
+    0.95,
+    1,
+    0.91,
+    0.96
+   ],
+   "motion": {
+    "elements": 36,
+    "css": 1,
+    "transitions": 34,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 5634,
+     "screens": 6.7,
+     "words": 346,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 17,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 4,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 4,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "LEDGERLY PRICING",
+     "words": 2,
+     "chars": 16,
+     "lines": 2,
+     "size": 69.9,
+     "vw": 17.9,
+     "font": "Libre Franklin",
+     "weight": 700,
+     "tracking": -0.035,
+     "leading": 0.84,
+     "upper": true,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.92,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "LEDGERLY PRICING",
+     "words": 2,
+     "lines": 2,
+     "size": 69.9,
+     "font": "Libre Franklin"
+    },
+    "headings": [
+     {
+      "text": "LEDGERLY PRICING",
+      "words": 2,
+      "chars": 16,
+      "lines": 2,
+      "size": 69.9,
+      "vw": 17.9,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 0.84,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 80,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Plans and prices",
+      "words": 3,
+      "chars": 16,
+      "lines": 1,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 1152,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "19",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 1445,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "59",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 1805,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "149",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 2197,
+      "tag": "span",
+      "kind": "statement"
+     },
+     {
+      "text": "Compare plans",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2705,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Common questions",
+      "words": 2,
+      "chars": 16,
+      "lines": 2,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3710,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "LEDGERLY",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 53.8,
+      "vw": 13.8,
+      "font": "Libre Franklin",
+      "weight": 700,
+      "tracking": -0.04,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.7,
+      "top": 5328,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 8,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Source Serif 4",
+       "share": 0.52,
+       "mono": false
+      },
+      {
+       "family": "Libre Franklin",
+       "share": 0.48,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      15,
+      17,
+      18,
+      20,
+      44,
+      54,
+      70
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Source Serif 4",
+      "size": 17,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 9.8
+     },
+     "measureChars": 32,
+     "max": {
+      "size": 69.9,
+      "vw": 17.9,
+      "font": "Libre Franklin",
+      "text": "Ledgerly"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#a6b3bc",
+     "bodyBgHsl": {
+      "h": 205,
+      "s": 0.14,
+      "l": 0.69
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#a6b3bc",
+       "top": 0,
+       "hsl": {
+        "h": 205,
+        "s": 0.14,
+        "l": 0.69
+       }
+      },
+      {
+       "color": "#2c3620",
+       "top": 1080,
+       "hsl": {
+        "h": 87,
+        "s": 0.26,
+        "l": 0.17
+       }
+      },
+      {
+       "color": "#b7c8be",
+       "top": 1743,
+       "hsl": {
+        "h": 145,
+        "s": 0.13,
+        "l": 0.75
+       }
+      },
+      {
+       "color": "#d6c4b8",
+       "top": 2134,
+       "hsl": {
+        "h": 24,
+        "s": 0.27,
+        "l": 0.78
+       }
+      },
+      {
+       "color": "#f6f7f6",
+       "top": 3838,
+       "hsl": {
+        "h": 120,
+        "s": 0.06,
+        "l": 0.97
+       }
+      },
+      {
+       "color": "#e3e2da",
+       "top": 4720,
+       "hsl": {
+        "h": 53,
+        "s": 0.14,
+        "l": 0.87
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1c1c1c",
+       "share": 0.83
+      },
+      {
+       "color": "#e3e2da",
+       "share": 0.09
+      },
+      {
+       "color": "#38424a",
+       "share": 0.07
+      },
+      {
+       "color": "#2c3620",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#2c3620",
+      "hsl": {
+       "h": 87,
+       "s": 0.26,
+       "l": 0.17
+      },
+      "fg": "#1c1c1c"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": 0,
+     "height": 64,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Start free trial"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 4,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 56,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "libre franklin",
+     "source serif 4"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 5634,
+    "margins": {
+     "left": 16,
+     "right": 32
+    },
+    "sections": [
+     {
+      "sel": "section#top.ch.ch-hero",
+      "tag": "section",
+      "top": 0,
+      "height": 1080,
+      "words": 77,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Ledgerly",
+       "size": 70,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 17,
+      "textLeft": 16,
+      "textRight": 17,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plans.ch.ch-plans",
+      "tag": "section",
+      "top": 1080,
+      "height": 1553,
+      "words": 57,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Plans and prices",
+       "size": 44,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 51,
+      "textLeft": 16,
+      "textRight": 51,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#compare.ch.ch-compare",
+      "tag": "section",
+      "top": 2633,
+      "height": 1005,
+      "words": 74,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Compare plans",
+       "size": 44,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 22,
+      "textLeft": 16,
+      "textRight": 22,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#faq.ch.ch-faq",
+      "tag": "section",
+      "top": 3638,
+      "height": 1082,
+      "words": 120,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Common questions",
+       "size": 44,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 32,
+      "textLeft": 16,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.board-wrap",
+      "tag": "footer",
+      "top": 4720,
+      "height": 914,
+      "words": 45,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Invoice reconciliation for small accounting teams.",
+       "size": 20,
+       "tag": "h2"
+      },
+      "left": 36,
+      "right": 36,
+      "textLeft": 36,
+      "textRight": 43,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "LEDGERLY PRICING",
+      "size": 70,
+      "top": 80,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 36,
+      "n": 8
+     },
+     {
+      "x": 16,
+      "n": 6
+     }
+    ],
+    "leftBlocks": 14,
+    "bodySize": 17,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "no-real-pictures",
+   "width": 1440,
+   "message": "Only 0 real photograph(s) or clip(s); the rest are interface fragments.",
+   "fix": "Add two or more real pictures of the customer's world from scripts/assets.mjs, not stock of people at laptops."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The margins differ: 32px on the left, 48px on the right, at 1440px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/home/user/UX-Design/benchskills/out/build/taste-skill-r2/.taste-skill/inspect/desktop-fold.jpg",
+   "pages": [
+    "/home/user/UX-Design/benchskills/out/build/taste-skill-r2/.taste-skill/inspect/desktop-page-01.jpg",
+    "/home/user/UX-Design/benchskills/out/build/taste-skill-r2/.taste-skill/inspect/desktop-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/home/user/UX-Design/benchskills/out/build/taste-skill-r2/.taste-skill/inspect/tablet-fold.jpg",
+   "pages": [
+    "/home/user/UX-Design/benchskills/out/build/taste-skill-r2/.taste-skill/inspect/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/home/user/UX-Design/benchskills/out/build/taste-skill-r2/.taste-skill/inspect/mobile-fold.jpg",
+   "pages": [
+    "/home/user/UX-Design/benchskills/out/build/taste-skill-r2/.taste-skill/inspect/mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

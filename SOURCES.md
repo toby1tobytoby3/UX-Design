@@ -164,11 +164,11 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 
 | Source | Score | Default look | Interactivity | Coverage | Accessibility | Performance | React/Next fit | Bundle size | Licence & health | Bench tasks | Lib KB gz | Evidence | Licence |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| [UI UX Pro Max](sources/ui-ux-pro-max/source.md) | **7.5** | 3 | 3 | 3 | 3 | 5 | 5 | 4 | 4 | 2/2 | – | page 13/14 checks, jury 3.88; review 28/31 seeded defects | MIT |
-| [Anthropic frontend-design](sources/anthropic-frontend-design/source.md) | **7.3** | 3 | 2 | 3 | 3 | 5 | 3 | 5 | 5 | 1/1 | – | page 13/14 checks, jury 3.63 | Apache-2.0 |
-| [Hallmark](sources/hallmark/source.md) | **7.3** | 4 | 5 | 3 | 3 | 4 | 3 | 3 | 4 | 2/2 | – | page 13/14 checks, jury 4.38; review 30/31 seeded defects | MIT |
+| [UI UX Pro Max](sources/ui-ux-pro-max/source.md) | **7.5** | 3 | 3 | 3 | 3 | 5 | 5 | 4 | 4 | 2/2 | – | page 13/14 checks, jury 3.75; review 28/31 seeded defects | MIT |
+| [Anthropic frontend-design](sources/anthropic-frontend-design/source.md) | **7.3** | 3 | 2 | 3 | 3 | 5 | 3 | 5 | 5 | 1/1 | – | page 13/14 checks, jury 3.88 | Apache-2.0 |
 | [Interface Skills (better-* review and polish skills)](sources/interface-skills/source.md) | **7.3** | 4 | 3 | 3 | 3 | 4 | 5 | 2 | 5 | 1/1 | – | review 27/31 seeded defects | MIT |
-| [Taste Skill (design-taste-frontend)](sources/taste-skill/source.md) | **6.5** | 2 | 5 | 3 | 3 | 3 | 3 | 3 | 4 | 2/2 | – | page 14/14 checks, jury 2.88; review 28/31 seeded defects | MIT |
+| [Hallmark](sources/hallmark/source.md) | **7** | 3 | 5 | 3 | 3 | 4 | 3 | 3 | 4 | 2/2 | – | page 13/14 checks, jury 4.25; review 30/31 seeded defects | MIT |
+| [Taste Skill (design-taste-frontend)](sources/taste-skill/source.md) | **6.5** | 2 | 5 | 3 | 3 | 3 | 3 | 3 | 4 | 2/2 | – | page 14/14 checks, jury 2.5; review 28/31 seeded defects | MIT |
 | [Archify](sources/archify/source.md) | **5.8** | 1 | 5 | 2 | 1 | 5 | 2 | 3 | 4 | 1/1 | – | diagram 9/12 checks, jury 1.75 | Apache-2.0 |
 | [Diagram Design](sources/diagram-design/source.md) | **5.5** | 2 | 3 | 2 | 1 | 3 | 3 | 3 | 5 | 1/1 | – | diagram 10/12 checks, jury 3.63 | MIT |
 
@@ -176,8 +176,8 @@ the best fit: read the category guide in `guides/` to match a source to the job.
 
 - **UI UX Pro Max**: You want named, sourced UX rules as a checklist, or a starting palette, font pairing and style for a product type, in a stack it knows (React, Next, Tailwind, shadcn, Vue, Svelte, Flutter, SwiftUI).
 - **Anthropic frontend-design**: You want a cheap nudge away from template output on any page and will check accessibility, forms and tables yourself.
-- **Hallmark**: Building a new marketing page or screen that must not look generated, or auditing a page against a floor of checkable rules (tokens only, visible focus, reduced motion, no invented facts, mobile layout).
 - **Interface Skills (better-* review and polish skills)**: You want a structured review of a built screen or a pull request (better-interface, interface-review) or the domain skills on their own (better-accessibility, better-colors, better-typography, better-layout, better-writing, better-ui).
+- **Hallmark**: Building a new marketing page or screen that must not look generated, or auditing a page against a floor of checkable rules (tokens only, visible focus, reduced motion, no invented facts, mobile layout).
 - **Taste Skill (design-taste-frontend)**: A landing or brand page where a point of view matters more than conversion clarity and you can supply or fetch real imagery (it finds credited open-archive pictures).
 - **Archify**: You are mapping a real codebase or system and want a checked, explorable diagram with source links, and a viewer on a laptop is enough.
 - **Diagram Design**: You need a branded diagram of a type the skill has a reference for (swimlane, sequence, ER, quadrant, Wardley, service blueprint, journey) and can accept fine print, or you are importing from draw.io, Mermaid or Excalidraw.

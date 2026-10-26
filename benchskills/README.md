@@ -26,6 +26,8 @@ node fetch.mjs                           # pins every non-vendored skill at its 
 3. **Judge blind.** `node run.mjs jury-prep build|diagram` copies the screenshots under shuffled labels
    (`out/judges/<track>/blind/`, key in `key.json`). Two fresh agents rate each label 1-5 on four dimensions and write
    `judge-1.json`, `judge-2.json` (`ratings`, `rank`). They see images only.
+   A repeat run uses the same brief and a fresh agent with output in `out/<track>/<id>-r2/`. Rate every page of a track in one jury round
+   (`jury-prep` takes every folder), so first and repeat runs share judges. If Playwright's own browser is missing, set `CHROMIUM_PATH`.
 4. **Merge.** `node run.mjs results` writes `results.json` (the control sits under `_baseline`) and
    `sources/<slug>/bench.jpg`; `npm run catalog` attaches it to each source profile.
 
@@ -44,8 +46,10 @@ serious axe violation · a text alternative · no infinite animation under reduc
 no console errors · self-contained (fonts from Google Fonts at most).
 
 ## Limits (read before trusting a score)
-- **One run per skill per track.** Agents vary; a one-point rubric difference is noise. The control shows what the
-  model manages unaided on the same day.
+- **Two runs per skill per track for builders and reviewers** (the diagram skills ran once). Agents vary: the control alone moved from 28 to 26
+  seeded defects and from 4.00 to 3.50 on the jury between runs, and Hallmark's first-run lead on look did not repeat. A one-point rubric
+  difference, or two or three defects, is noise. The control shows what the model manages unaided on the same day. Repeat runs live in
+  `out/<track>/<id>-r2`; `results.mjs` keeps them under `_repeats` and `score.mjs` pools them with the first run.
 - **The skill is followed by an agent that reads it,** not loaded by Claude Code's skill system. Anything depending
   on the harness (auto-triggering, slash commands) is not exercised.
 - **Network and keys.** Runs had no API keys and a restricted network. A step a skill could not complete is recorded

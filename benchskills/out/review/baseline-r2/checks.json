@@ -1,0 +1,59 @@
+{
+ "found": [
+  "D01",
+  "D02",
+  "D03",
+  "D04",
+  "D05",
+  "D06",
+  "D07",
+  "D08",
+  "D09",
+  "D10",
+  "D11",
+  "D12",
+  "D13",
+  "D14",
+  "D15",
+  "D16",
+  "D17",
+  "D18",
+  "D19",
+  "D20",
+  "D21",
+  "D22",
+  "D25",
+  "D26",
+  "D28",
+  "D30"
+ ],
+ "missed": [
+  "D23",
+  "D24",
+  "D27",
+  "D29",
+  "D31"
+ ],
+ "recall_pct": 84,
+ "by_category": {
+  "accessibility": "10/11",
+  "contrast": "3/3",
+  "layout": "5/5",
+  "typography": "3/3",
+  "writing": "3/5",
+  "polish": "2/4"
+ },
+ "by_severity": {
+  "high": "10/10",
+  "medium": "14/16",
+  "low": "2/5"
+ },
+ "scored_by": "blind scorer (quotes verified)",
+ "regex_found": 27,
+ "unverified_quotes": [],
+ "unlisted_valid": 11,
+ "unlisted_invalid": 1,
+ "hand_adjusted": [],
+ "report_chars": 12517,
+ "notes": null
+}

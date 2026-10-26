@@ -1,0 +1,79 @@
+{
+ "widths": {
+  "390": {
+   "axe_violations": 0,
+   "axe_rules": [],
+   "overflow_px": 0,
+   "console_errors": 0
+  },
+  "768": {
+   "axe_violations": 0,
+   "axe_rules": [],
+   "overflow_px": 0,
+   "console_errors": 0
+  },
+  "1280": {
+   "axe_violations": 0,
+   "axe_rules": [],
+   "overflow_px": 0,
+   "console_errors": 0
+  }
+ },
+ "targets": {
+  "n": 12,
+  "share_24": 1,
+  "share_44": 1
+ },
+ "min_font_px": 14,
+ "weight_kb": 57,
+ "external_hosts": [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com"
+ ],
+ "failed_requests": 0,
+ "hero": {
+  "h1_in_fold": true,
+  "cta_in_fold": false
+ },
+ "keyboard": {
+  "tabbable": 12,
+  "indicated": 12,
+  "no_indicator": []
+ },
+ "structure": {
+  "h1": 1,
+  "main": true,
+  "lang": true,
+  "positive_tabindex": 0
+ },
+ "content": {
+  "answers_visible": false,
+  "facts": 37,
+  "missing": [],
+  "present_pct": 100,
+  "cta_count": 4
+ },
+ "toggle": {
+  "found": true,
+  "keyboard": true,
+  "mouse": true,
+  "says_billed_annually": true
+ },
+ "faq": {
+  "found": true,
+  "native": true,
+  "focusable": true,
+  "keyboard": true
+ },
+ "reduced_motion": {
+  "infinite_animations": 0
+ },
+ "no_js": {
+  "plans_visible": true
+ },
+ "unsupported_claims": [],
+ "images": {
+  "imgs": 0,
+  "svg": 19
+ }
+}

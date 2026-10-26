@@ -33,6 +33,8 @@ and the plan-then-review pass forced real changes before any code was written (t
 palette were replaced by a ruled-ledger layout), but the skill says nothing concrete about accessibility, forms, tables or
 toggles. It is the lightest way to add design pressure, and it adds little beyond it.
 
+**Repeat run (26 Oct 2026).** Fresh agent, and both rounds' pages rated together by two new blind judges. Jury for the page: 3.88 then 4.13 (control 4.00 then 3.50); checks 13 of 14 then 12 (touch targets and first-screen call to action). Pooled cost 1.2 times the control's tokens. Level with the control.
+
 ## Scorecard (n = 1 run)
 | Criterion | Score | Evidence |
 |---|---|---|

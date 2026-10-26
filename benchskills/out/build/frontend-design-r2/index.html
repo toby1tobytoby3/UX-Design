@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerly pricing</title>
+<meta name="description" content="Ledgerly plans for small accounting teams: Starter, Team and Business. Every plan starts with a 14-day free trial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #ECF1ED;
+  --sheet: #F7FAF8;
+  --ink: #15212C;
+  --muted: #465850;
+  --rule: #A7B9AE;
+  --rule-soft: #D5E0D8;
+  --pen: #1E3CB8;
+  --pen-ink: #FFFFFF;
+  --gutter: clamp(16px, 4vw, 48px);
+  --font: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.5 6.2 12.2 13.5 3.8' fill='none' stroke='%231E3CB8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-optical-sizing: auto;
+}
+h1, h2, h3, p, ul, dl, dd, fieldset { margin: 0; padding: 0; }
+ul { list-style: none; }
+.wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: var(--gutter); }
+.sr {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--pen); outline-offset: 3px; }
+.skip {
+  position: absolute; left: var(--gutter); top: 8px; z-index: 10;
+  background: var(--ink); color: var(--paper); padding: 10px 14px; border-radius: 4px;
+  transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+
+/* header */
+.top { padding-block: 22px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.25rem; letter-spacing: -0.01em; text-decoration: none; }
+.brand svg { width: 26px; height: 26px; }
+
+/* hero */
+.hero { position: relative; padding-block: clamp(32px, 6vw, 72px) clamp(28px, 4vw, 48px); }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 35px, var(--rule-soft) 35px, var(--rule-soft) 36px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
+}
+.hero-wrap { position: relative; }
+h1 {
+  font-size: clamp(2.6rem, 7.2vw, 5.75rem);
+  font-weight: 720;
+  font-stretch: 86%;
+  letter-spacing: -0.028em;
+  line-height: 0.98;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+.lede { margin-top: 22px; max-width: 46ch; font-size: clamp(1.0625rem, 1.6vw, 1.25rem); color: var(--muted); line-height: 1.5; }
+
+/* billing toggle */
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-block: 8px 28px; }
+.billing { border: 0; display: inline-flex; border: 1.5px solid var(--ink); border-radius: 6px; overflow: hidden; background: var(--sheet); }
+.billing label { position: relative; display: block; cursor: pointer; }
+.billing input { position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; pointer-events: none; }
+.billing span {
+  display: block; padding: 11px 22px; min-width: 104px; text-align: center;
+  font-weight: 600; font-size: 1rem; line-height: 1.2;
+}
+.billing input:checked + span { background: var(--ink); color: var(--sheet); }
+.billing input:focus-visible + span { outline: 3px solid var(--pen); outline-offset: -3px; box-shadow: inset 0 0 0 5px var(--sheet); }
+.billing label:first-child { border-right: 1.5px solid var(--ink); }
+.save { color: var(--muted); font-size: 1rem; }
+
+/* plans: one ruled sheet, three columns */
+.sheet {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  background: var(--sheet);
+  border-top: 3px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+}
+.plan { padding: clamp(24px, 3vw, 40px) clamp(20px, 3vw, 36px) clamp(28px, 3.4vw, 44px); }
+.plan + .plan { border-left: 1px solid var(--rule); }
+.plan h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+.price { margin-top: 22px; display: flex; align-items: baseline; gap: 4px; }
+.price .cur { font-size: 1.75rem; font-weight: 600; align-self: flex-start; margin-top: 0.55rem; }
+.price .amt {
+  font-size: clamp(3.75rem, 6.4vw, 5.5rem); font-weight: 700; font-stretch: 84%;
+  letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums lining-nums;
+}
+.total { display: block; height: 6px; margin-top: 10px; border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform-origin: left center; }
+.terms { margin-top: 10px; color: var(--muted); font-size: 0.975rem; line-height: 1.35; min-height: 2.7em; }
+.terms .bill { display: block; }
+.terms .bill[hidden] { display: block; visibility: hidden; }
+.btn {
+  display: block; width: 100%; margin-top: 18px; padding: 15px 20px; border-radius: 6px;
+  background: var(--pen); color: var(--pen-ink); text-align: center; text-decoration: none;
+  font-weight: 650; font-size: 1.0625rem; line-height: 1.2; border: 1.5px solid var(--pen);
+}
+.btn:hover { background: #162E8F; border-color: #162E8F; }
+.btn:focus-visible { outline-offset: 4px; }
+.features { margin-top: 26px; border-top: 1px solid var(--rule); }
+.features li {
+  position: relative; padding: 11px 0 11px 30px; border-bottom: 1px solid var(--rule-soft);
+  line-height: 1.35;
+}
+.features li::before {
+  content: ""; position: absolute; left: 0; top: 13px; width: 17px; height: 17px;
+  background: var(--tick) center / contain no-repeat;
+}
+
+/* sections */
+section.block { padding-block: clamp(56px, 8vw, 104px) 0; }
+h2.title { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 720; font-stretch: 88%; letter-spacing: -0.025em; line-height: 1.05; }
+
+/* comparison */
+.compare { margin-top: 28px; width: 100%; border-collapse: collapse; background: var(--sheet); border-top: 3px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
+.compare th, .compare td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--rule-soft); vertical-align: top; line-height: 1.3; }
+.compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: 0; }
+.compare thead th { font-size: 1.0625rem; font-weight: 700; border-bottom: 1.5px solid var(--rule); padding-block: 16px; }
+.compare tbody th { font-weight: 500; width: 34%; }
+.compare th:first-child, .compare td:first-child { padding-left: clamp(12px, 2.4vw, 28px); }
+.compare td + td, .compare th + th, .compare td + th { border-left: 1px solid var(--rule-soft); }
+.compare .no { color: var(--muted); }
+.compare .yes::before {
+  content: ""; display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -1px;
+  background: var(--tick) center / contain no-repeat;
+}
+
+/* faq */
+.faq-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 24px clamp(24px, 5vw, 72px); align-items: start; }
+.faq { border-top: 3px solid var(--ink); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;
+  padding: 20px 0; font-size: 1.1875rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.005em;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: none; width: 14px; height: 14px; margin-top: 6px;
+  background:
+    linear-gradient(var(--ink), var(--ink)) center / 100% 2px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 2px 100% no-repeat;
+  transition: transform .2s ease;
+}
+.faq details[open] summary::after { background: linear-gradient(var(--ink), var(--ink)) center / 100% 2px no-repeat; transform: rotate(180deg); }
+.faq summary:focus-visible { outline-offset: 2px; }
+.faq .answer { padding: 0 34px 22px 0; max-width: 62ch; color: var(--muted); }
+
+footer { margin-top: clamp(64px, 9vw, 120px); padding-block: 28px 40px; border-top: 1.5px solid var(--ink); color: var(--muted); font-size: 0.975rem; }
+
+/* one load moment: the ledger total rules are drawn in */
+@media (prefers-reduced-motion: no-preference) {
+  .total { animation: draw .9s cubic-bezier(.2,.7,.2,1) both; }
+  .plan:nth-child(2) .total { animation-delay: .12s; }
+  .plan:nth-child(3) .total { animation-delay: .24s; }
+  @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq summary::after { transition: none; }
+}
+
+/* tablet and phone */
+@media (max-width: 900px) {
+  .sheet { grid-template-columns: 1fr; }
+  .plan + .plan { border-left: 0; border-top: 1px solid var(--rule); }
+  .plan { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(24px, 5vw, 48px); align-items: start; }
+  .plan h2, .plan .pricing { grid-column: 1; }
+  .plan .features { grid-column: 2; grid-row: 1 / span 3; margin-top: 4px; }
+  .faq-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .plan { display: block; }
+  .plan .features { margin-top: 22px; }
+  .billing { display: flex; width: 100%; }
+  .billing label { flex: 1; }
+  .billing span { min-width: 0; padding-inline: 12px; }
+  .compare { font-size: 0.875rem; table-layout: fixed; }
+  .compare th, .compare td { padding: 12px 5px; }
+  .compare thead th { font-size: 0.875rem; }
+  .compare th:first-child, .compare td:first-child { padding-left: 12px; }
+  .compare tbody th, .compare thead th:first-child { width: 34%; }
+  .compare .yes::before { display: none; }
+  .faq summary { font-size: 1.125rem; }
+  .faq .answer { padding-right: 0; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#plans">Skip to plans</a>
+
+<header class="top wrap">
+  <a class="brand" href="#" aria-label="Ledgerly">
+    <svg viewBox="0 0 26 26" aria-hidden="true"><rect x="1.5" y="1.5" width="23" height="23" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 13.5 11 18l8.5-10" fill="none" stroke="#1E3CB8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Ledgerly
+  </a>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <div class="wrap hero-wrap">
+      <h1>Pricing for small accounting teams</h1>
+      <p class="lede">Ledgerly matches bank statements to the ledger. Every plan starts with a 14-day free trial, and no card is needed to begin.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="controls">
+      <fieldset class="billing">
+        <legend class="sr">Billing period</legend>
+        <label><input type="radio" name="period" value="monthly" checked><span>Monthly</span></label>
+        <label><input type="radio" name="period" value="annual"><span>Annual</span></label>
+      </fieldset>
+      <p class="save">Annual billing is 20% less.</p>
+    </div>
+    <p class="sr" id="period-status" role="status" aria-live="polite"></p>
+
+    <section id="plans" aria-label="Plans" tabindex="-1">
+      <div class="sheet">
+        <article class="plan">
+          <h2>Starter</h2>
+          <div class="pricing">
+            <p class="price"><span class="cur" aria-hidden="true">$</span><span class="amt" data-monthly="19" data-annual="15.20">19</span><span class="sr"> per month</span></p>
+            <span class="total" aria-hidden="true"></span>
+            <p class="terms"><span aria-hidden="true">per month</span><span class="bill" hidden>billed annually</span></p>
+            <a class="btn" href="#trial-starter">Start free trial<span class="sr"> on the Starter plan</span></a>
+          </div>
+          <ul class="features">
+            <li>1 seat</li>
+            <li>100 reconciliations per month</li>
+            <li>Email support</li>
+          </ul>
+        </article>
+
+        <article class="plan">
+          <h2>Team</h2>
+          <div class="pricing">
+            <p class="price"><span class="cur" aria-hidden="true">$</span><span class="amt" data-monthly="59" data-annual="47.20">59</span><span class="sr"> per month</span></p>
+            <span class="total" aria-hidden="true"></span>
+            <p class="terms"><span aria-hidden="true">per month</span><span class="bill" hidden>billed annually</span></p>
+            <a class="btn" href="#trial-team">Start free trial<span class="sr"> on the Team plan</span></a>
+          </div>
+          <ul class="features">
+            <li>5 seats</li>
+            <li>Unlimited reconciliations</li>
+            <li>Shared matching rules</li>
+            <li>Email support</li>
+          </ul>
+        </article>
+
+        <article class="plan">
+          <h2>Business</h2>
+          <div class="pricing">
+            <p class="price"><span class="cur" aria-hidden="true">$</span><span class="amt" data-monthly="149" data-annual="119.20">149</span><span class="sr"> per month</span></p>
+            <span class="total" aria-hidden="true"></span>
+            <p class="terms"><span aria-hidden="true">per month</span><span class="bill" hidden>billed annually</span></p>
+            <a class="btn" href="#trial-business">Start free trial<span class="sr"> on the Business plan</span></a>
+          </div>
+          <ul class="features">
+            <li>15 seats</li>
+            <li>Unlimited reconciliations</li>
+            <li>Shared matching rules</li>
+            <li>SSO</li>
+            <li>Audit log</li>
+            <li>Priority support</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="compare-title">
+      <h2 class="title" id="compare-title">Compare plans</h2>
+      <table class="compare">
+        <thead>
+          <tr><th scope="col"><span class="sr">Feature</span></th><th scope="col">Starter</th><th scope="col">Team</th><th scope="col">Business</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Seats</th><td>1</td><td>5</td><td>15</td></tr>
+          <tr><th scope="row">Reconciliations per month</th><td>100</td><td>Unlimited</td><td>Unlimited</td></tr>
+          <tr><th scope="row">Bank connections</th><td>1</td><td>5</td><td>20</td></tr>
+          <tr><th scope="row">Shared matching rules</th><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><th scope="row">Export to CSV and PDF</th><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><th scope="row">SSO</th><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+          <tr><th scope="row">Audit log</th><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+          <tr><th scope="row">Support</th><td>Email</td><td>Email</td><td>Priority</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block" aria-labelledby="faq-title">
+      <div class="faq-grid">
+        <h2 class="title" id="faq-title">Questions about plans and billing</h2>
+        <div class="faq">
+          <details>
+            <summary>Can I change plans later?</summary>
+            <p class="answer">Yes. Upgrade or downgrade at any time; the change applies from your next billing date.</p>
+          </details>
+          <details>
+            <summary>Is there a free trial?</summary>
+            <p class="answer">Yes. Every plan starts with a 14-day free trial, and no card is needed to begin.</p>
+          </details>
+          <details>
+            <summary>What counts as a reconciliation?</summary>
+            <p class="answer">One bank statement matched against your ledger for one account in one month.</p>
+          </details>
+          <details>
+            <summary>How does annual billing work?</summary>
+            <p class="answer">You are charged once a year at 20% less than twelve monthly payments.</p>
+          </details>
+          <details>
+            <summary>Do you offer refunds?</summary>
+            <p class="answer">Yes. Ask within 30 days of your first charge and we refund it in full.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Ledgerly: invoice reconciliation for small accounting teams.</div>
+</footer>
+
+<script>
+(function () {
+  var radios = document.querySelectorAll('input[name="period"]');
+  var amts = document.querySelectorAll('.amt');
+  var bills = document.querySelectorAll('.bill');
+  var status = document.getElementById('period-status');
+  function apply(period) {
+    var annual = period === 'annual';
+    amts.forEach(function (a) { a.textContent = annual ? a.dataset.annual : a.dataset.monthly; });
+    bills.forEach(function (b) { b.hidden = !annual; });
+    status.textContent = annual
+      ? 'Showing annual prices per month, billed annually.'
+      : 'Showing monthly prices.';
+  }
+  radios.forEach(function (r) {
+    r.addEventListener('change', function () { if (r.checked) apply(r.value); });
+  });
+  var checked = document.querySelector('input[name="period"]:checked');
+  if (checked) { checked.checked = true; }
+})();
+</script>
+</body>
+</html>
